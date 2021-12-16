@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed');
+/*@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');*/
+
+@charset "utf-8";
+/* CSS Document */
+
+input[type="text"]{
+		border-top: none !important;
+		border-right: none !important;
+		border-left: none !important;
+		border-bottom: 1px solid #000 !important;
+		box-shadow: none !important;
+		-webkit-box-shadow: none !important;
+		-moz-box-shadow: none !important;
+		-moz-transition: none !important;
+		-webkit-transition: none !important;
+}
+.form-group .form-control{border-radius:0px;}
+
+h4{font-weight: 700;}
+.reciept{
+border:2px solid #000;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+.label-text{
+	padding-top: 7px;
+	font-size: 14px;
+}
+.text-value{
+	border-bottom: 1px solid #000;
+	padding: 6px 12px;
+	font-size: 14px;
+}
+.tophedar h2{font-family: 'Roboto', sans-serif; font-weight:bold; font-size:22px; text-align:center; border-bottom:2px solid #000; padding-bottom:28px;}
+.secondhedar{ float: left; width:100%; border-bottom:2px solid #000; padding-bottom:20px; padding-top:10px;}
+.secondhedar h4{font-family: 'Roboto', sans-serif; font-weight:bold;font-size: 16px;}
+.secondhedar h5{font-family: 'Roboto', sans-serif; font-size:14px;}
+.innar-receipt{margin-top:50px;}
+.innar-receipt label{font-family: 'Roboto', sans-serif; font-size:18px;}
+.innar-receipt .form-control{font-size:18px;}
+.innar-receipt .form-control{padding-left:0px;}
+.mar-top{margin-top:90px;}
+.webtex-trusttex{margin-top:100px; margin-left: 15px;}
+.webtex h4{font-family: 'Roboto', sans-serif; font-size:20px; font-weight:bold;}
+.webtex h3{font-family: 'Roboto Condensed', sans-serif;
+ font-size:15px; font-weight:bold; margin-top:-8px;}
+.border h3{float: left; font-family: 'Roboto Condensed', sans-serif;
+ font-size:15px; font-weight:bold; border-top:2px solid #000; padding-top:10px;margin-top:0px;}
+.footer h4{font-family: 'Roboto', sans-serif; 
+ font-size:15px; font-weight:bold; border-top:2px solid #000; 
+	margin-top:30px; padding-top:20px;padding-bottom:20px; text-align: center;line-height: 1.5}
+.thankstext h3{font-size:15px; font-family: 'Roboto', sans-serif; font-weight:bold;
+margin-left:15px; margin-top:50px; line-height:30px;}

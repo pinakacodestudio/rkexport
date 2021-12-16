@@ -1,0 +1,165 @@
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Store_location extends Admin_Controller {
+
+    public $viewData = array();
+
+    function __construct() {
+
+        parent::__construct();
+        $this->viewData = $this->getAdminSettings('submenu', 'Store_location');
+        $this->load->model('Store_location_model', 'Store_location');
+
+        
+    }
+
+    public function index() {
+        $this->checkAdminAccessModule('submenu','view',$this->viewData['submenuvisibility']);
+        $this->viewData['title'] = "Store_location";
+        $this->viewData['module'] = "store_location/store_location";
+        $this->viewData['outletdetailsdata'] = $this->Outletdetails->get_all_listdata();
+        $this->admin_headerlib->add_javascript("Outletdetails", "pages/outletdetails.js");
+        $this->load->view(ADMINFOLDER . 'template', $this->viewData);
+    }
+
+    public function outletdetailsadd() {
+        $this->checkAdminAccessModule('submenu','add',$this->viewData['submenuvisibility']);
+        $this->viewData['title'] = "Add Outletdetails";
+        $this->viewData['module'] = "outletdetails/Addoutletdetails";
+        
+        $this->admin_headerlib->add_plugin("form-select2","form-select2/select2.css");
+        $this->admin_headerlib->add_javascript_plugins("form-select2","form-select2/select2.min.js");
+        $this->admin_headerlib->add_bottom_javascripts("Outletdetails", "pages/addoutletdetails.js");
+        $this->load->view(ADMINFOLDER . 'template', $this->viewData);
+    }
+
+    public function addOutletdetails() {
+        $PostData = $this->input->post();
+
+        $createddate = $this->general_model->getCurrentDateTime();
+        $addedby = $this->session->userdata(base_url() . 'ADMINID');
+
+        /*$this->Outletdetails->_where = ("email='" . trim($PostData['email']) . "'");
+        $Count = $this->Outletdetails->CountRecords();
+
+        if ($Count == 0) {
+            $this->Outletdetails->_where = ("mobileno='" . trim($PostData['mobileno']) . "'");
+            $Count = $this->Outletdetails->CountRecords();
+
+            if ($Count == 0) {*/
+                $insertdata = array(
+                    "name" => $PostData['name'],
+                    "contactperson" => $PostData['contactperson'],
+                    "email" => $PostData['email'],
+                    "mobileno" => $PostData['mobileno'],
+                    "address" => $PostData['address'],
+                    "cityid" => $PostData['cityid'],
+                    "latitude" => $PostData['latitude'],
+                    "longitude" => $PostData['longitude'],
+                    "link" => urlencode($PostData['link']),
+                    "status" => $PostData['status'],
+                    "createddate" => $createddate,
+                    "modifieddate" => $createddate,
+                    "addedby" => $addedby,
+                    "modifiedby" => $addedby
+                );
+                $insertdata = array_map('trim', $insertdata);
+                $Add = $this->Outletdetails->Add($insertdata);
+                if ($Add) {
+                    echo 1;
+                } else {
+                    echo 0;
+                }
+            /*}else{
+                echo 3;
+            }
+        } else {
+            echo 2;
+        }*/
+    }
+
+    public function outletdetailsedit($Outletdetailsid) {
+        $this->checkAdminAccessModule('submenu','edit',$this->viewData['submenuvisibility']);
+        $this->viewData['title'] = "Edit Outletdetails";
+        $this->viewData['module'] = "outletdetails/Addoutletdetails";
+        $this->viewData['action'] = "1"; //Edit
+
+        $this->Outletdetails->_where = array('id' => $Outletdetailsid);
+        $this->viewData['outletdetailsdata'] = $this->Outletdetails->getRecordsByID();
+
+        $this->admin_headerlib->add_plugin("form-select2","form-select2/select2.css");
+        $this->admin_headerlib->add_javascript_plugins("form-select2","form-select2/select2.min.js");
+        $this->admin_headerlib->add_bottom_javascripts("Outletdetails", "pages/addoutletdetails.js");
+        $this->load->view(ADMINFOLDER . 'template', $this->viewData);
+    }
+
+    public function updateoutletdetails() {
+
+        $PostData = $this->input->post();
+
+        $OutletdetailsID = $PostData['outletdetailsid'];
+        $modifieddate = $this->general_model->getCurrentDateTime();
+        $modifiedby = $this->session->userdata(base_url() . 'ADMINID');
+
+        /*$this->Outletdetails->_where = ("id!=" . $OutletdetailsID . " AND email='" . trim($PostData['email']) . "'");
+        $Count = $this->Outletdetails->CountRecords();
+
+        if ($Count == 0) {
+
+            $this->Outletdetails->_where = ("id!=" . $OutletdetailsID . " AND email='" . trim($PostData['email']) . "'");
+            $Count = $this->Outletdetails->CountRecords();
+
+            if ($Count == 0) {*/
+                $updatedata = array(
+                    "name" => $PostData['name'],
+                    "contactperson" => $PostData['contactperson'],
+                    "email" => $PostData['email'],
+                    "mobileno" => $PostData['mobileno'],
+                    "address" => $PostData['address'],
+                    "cityid" => $PostData['cityid'],
+                    "latitude" => $PostData['latitude'],
+                    "longitude" => $PostData['longitude'],
+                    "link" => urlencode($PostData['link']),
+                    "status" => $PostData['status'],
+                    "modifieddate" => $modifieddate,
+                    "modifiedby" => $modifiedby
+                );
+                $this->Outletdetails->_where = array('id' => $OutletdetailsID);
+                $this->Outletdetails->Edit($updatedata);
+                echo 1;
+            /*}else{
+                echo 3;
+            }
+            
+        } else {
+            echo 2;
+        }*/
+    }
+
+    public function outletdetailsenabledisable() {
+        $this->checkAdminAccessModule('submenu','edit',$this->viewData['submenuvisibility']);
+        $PostData = $this->input->post();
+
+        $modifieddate = $this->general_model->getCurrentDateTime();
+        $updatedata = array("status" => $PostData['val'], "modifieddate" => $modifieddate, "modifiedby" => $this->session->userdata(base_url() . 'ADMINID'));
+        $this->Outletdetails->_where = array("id" => $PostData['id']);
+        $this->Outletdetails->Edit($updatedata);
+
+        echo $PostData['id'];
+    }
+
+    public function deletemuloutletdetails(){
+        $PostData = $this->input->post();
+        $ids = explode(",",$PostData['ids']);
+        $count = 0;
+        $ADMINID = $this->session->userdata(base_url().'ADMINID');
+        foreach($ids as $row){
+            $this->db->where('id', $row);
+            $this->db->delete(tbl_outletdetails);
+        }
+    }
+}
+
+?>

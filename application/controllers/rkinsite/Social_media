@@ -1,0 +1,26 @@
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Social_media extends Admin_Controller {
+
+    public $viewData = array();
+
+    function __construct() {
+        parent::__construct();
+        $this->viewData = $this->getAdminSettings('submenu', 'Social-media');
+        $this->load->model('Social_media_model', 'Social-media');
+    }
+
+    public function index() {
+      $this->checkAdminAccessModule('submenu','view',$this->viewData['submenuvisibility']);
+      $this->viewData['title'] = "Socialmedia";
+      $this->viewData['module'] = "socialmedia/Socialmedia";
+      $this->viewData['socialmediadata'] = $this->Socialmedia->get_all_listdata('id','DESC');
+      
+      $this->admin_headerlib->add_javascript("Socialmedia", "pages/socialmedia.js");
+      $this->load->view(ADMINFOLDER . 'template', $this->viewData);
+    }
+
+}
+?>
