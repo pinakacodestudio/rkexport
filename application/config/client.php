@@ -10,3 +10,13 @@ $client['dbconnectionreader'] = 'localhost';
 $client['dbconnectionwriter'] = 'localhost';
 $portaldetail['export.rkinfotechindia.com'] = $client;
 //end - preview
+
+//start - preview
+$client['folder'] = 'export';
+$client['dbname'] = 'rkexport';
+$client['dbuser'] = 'root';
+$client['dbpassword'] = '';
+$client['dbconnectionreader'] = 'localhost';
+$client['dbconnectionwriter'] = 'localhost';
+$portaldetail['localhost'] = $client;
+//end - preview
