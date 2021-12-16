@@ -33,7 +33,7 @@ define("ADMINFOLDER", "rkinsite/");
 define("CHANNELFOLDER", "channel/");
 define("MEMBERFRONTFOLDER", "member/");
 	
-define('DOMAIN_URL', 'http://' . $_SERVER['HTTP_HOST'].'/');
+define('DOMAIN_URL', 'http://' . $_SERVER['HTTP_HOST'].'/rkexport/');
 define('DOMAIN_PREFIX', substr(rtrim(ltrim($_SERVER['HTTP_HOST'],'www.'),'.com'),0,3));
 
 /* DEFINE CONSTANTS FOR ADMIN */

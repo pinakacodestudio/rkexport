@@ -12,7 +12,7 @@ class Dashboard extends Admin_Controller {
 	}
 	public function index(){
 
-        $this->viewData['size'] = $this->Dashboard->folderSize("uploaded/".CLIENT_FOLDER);
+        //$this->viewData['size'] = $this->Dashboard->folderSize("uploaded/".CLIENT_FOLDER);
         //echo $size;exit;
 
         if($this->viewData['mainmenuvisibility']['managelog'] == 1){
