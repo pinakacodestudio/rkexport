@@ -49,7 +49,7 @@ function resetdata(){
   
       var formData = new FormData($('#addcurrency')[0]);
       if(ACTION==0){
-        var uurl = SITE_URL+"Currency_rate/currencyrate_add";
+        var uurl = SITE_URL+"Currency-rate/currencyrate-add";
         
         $.ajax({
           url: uurl,
@@ -92,7 +92,7 @@ function resetdata(){
           processData: false
         });
       }else{
-        var uurl = SITE_URL+"Currency_rate/update_currency_rate";
+        var uurl = SITE_URL+"Currency-rate/update-currency-rate";
         
         $.ajax({
           url: uurl,

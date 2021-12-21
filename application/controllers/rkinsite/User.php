@@ -10,6 +10,7 @@ class User extends Admin_Controller {
 		$this->load->model('User_model','User');
 	}
 	public function index(){
+		
 		$this->checkAdminAccessModule('submenu','view',$this->viewData['submenuvisibility']);
 		$this->viewData['title'] = "Employee";
 		$this->viewData['module'] = "user/User";
