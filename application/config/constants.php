@@ -776,6 +776,8 @@ define("tbl_employeeleave","employeeleave");
 //add ext
 define("tbl_currencyrate","currencyrate");
 define("tbl_paymenttype","paymenttype");
+define("tbl_commission","commission");
+define("tab_transporttype","transporttype");
 
 /* EMAIL CONFIGURATION CONSTANTS */
 define("EMAIL_CONFIG", serialize(array(
