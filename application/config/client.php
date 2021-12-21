@@ -12,11 +12,21 @@ $portaldetail['export.rkinfotechindia.com'] = $client;
 //end - preview
 
 //start - preview
-$client['folder'] = 'export';
+$client['folder'] = 'rkexport';
 $client['dbname'] = 'rkexport';
 $client['dbuser'] = 'root';
 $client['dbpassword'] = '';
 $client['dbconnectionreader'] = 'localhost';
 $client['dbconnectionwriter'] = 'localhost';
 $portaldetail['localhost'] = $client;
+//end - preview
+
+//start - preview
+$client['folder'] = '';
+$client['dbname'] = 'jjasani_rkexport';
+$client['dbuser'] = 'jjasani_rkexportuser';
+$client['dbpassword'] = 'w&b?lhv)[F2o';
+$client['dbconnectionreader'] = 'localhost';
+$client['dbconnectionwriter'] = 'localhost';
+$portaldetail['rkexport.jjasani.com'] = $client;
 //end - preview
