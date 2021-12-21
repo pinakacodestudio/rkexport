@@ -2333,3 +2333,578 @@ FROM `frontendmenu` as `fm`
 LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
 WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
 ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:32 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:33 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:33 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:33 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:33 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:33 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:33 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:34 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:34 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:34 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:34 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:26:34 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:03 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:03 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:03 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:03 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:03 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:04 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:04 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:04 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:04 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:04 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:04 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:05 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:05 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:05 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:05 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:05 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:06 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:06 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:06 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:06 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:06 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:32:07 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:23 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:24 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:24 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:25 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:25 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:25 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:25 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:25 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:26 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:37 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:37 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:38 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:38 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:38 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:39 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:39 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:39 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:33:39 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:18 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:18 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:19 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:20 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:20 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:20 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:20 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:20 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:21 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:35 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:35 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:36 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:36 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:36 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:36 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:36 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:36 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:37 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:39 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:39 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:39 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:40 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:40 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:41 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:41 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:41 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:41 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:46 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:46 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:46 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:47 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:47 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:47 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:47 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:47 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:35:48 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:36:52 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:36:52 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:36:53 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:36:53 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:36:53 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:36:54 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:36:54 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:36:54 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:36:55 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:02 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:02 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:02 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:02 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:03 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:03 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:03 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:03 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:03 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:10 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:10 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:11 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:11 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:11 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:12 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:12 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:12 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
+ERROR - 2021-12-21 18:37:13 --> Query error: Table 'rkexport.frontendmenu' doesn't exist - Invalid query: SELECT `fm`.`id`, `fm`.`name`, IF(fm.url='', `mwc`.`slug`, fm.url) as url, `fm`.`menuicon`, `fm`.`coverimage`, IFNULL((SELECT 1 FROM frontendsubmenu as fsm WHERE fsm.frontendmenuid=fm.id AND fsm.status=1 LIMIT 1), 0) as submenuavailable
+FROM `frontendmenu` as `fm`
+LEFT JOIN `managewebsitecontent` as `mwc` ON `mwc`.`frontendmenuid`=`fm`.`id` AND `mwc`.`frontendsubmenuid`=0
+WHERE `fm`.`status` = 1 AND `fm`.`channelid` = '0' AND `fm`.`memberid` = '0'
+ORDER BY `fm`.`priority` ASC
