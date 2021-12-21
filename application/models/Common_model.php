@@ -250,7 +250,7 @@ class Common_model extends CI_Model {
 		}
 	}
 
-	function mail_attachment($filename, $path, $mailto, $from_mail, $from_name, $replyto, $subjectArr = array() , $message= array(),$tempId,$channelid=0,$memberid=0) {
+	function mail_attachment($filename, $path, $mailto, $from_mail, $from_name, $replyto, $subjectArr = array() , $message= array(),$tempId=0,$channelid=0,$memberid=0) {
         
         $this->load->library('email');
         $getTemplate = $this->GetEmailTemplateByID($tempId,$channelid,$memberid);

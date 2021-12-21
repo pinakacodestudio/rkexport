@@ -767,6 +767,9 @@ define("tbl_testingrdmapping","testingrdmapping");
 define("tbl_orderinvoiceextrachargesmapping","orderinvoiceextrachargesmapping");
 define("tbl_leavepaidunpaidhistory","leavepaidunpaidhistory");
 define("tbl_employeeleave","employeeleave");
+//add ext
+define("tbl_currencyrate","currencyrate");
+define("tbl_paymenttype","paymenttype");
 
 /* EMAIL CONFIGURATION CONSTANTS */
 define("EMAIL_CONFIG", serialize(array(
