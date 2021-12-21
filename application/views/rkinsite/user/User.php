@@ -84,7 +84,7 @@
                           <?php }else{?>
                           <a href="#" onclick="deleterow(<?=$row['id']; ?>,'<?php echo base_url(); ?><?php echo ADMINFOLDER; ?>user/check-user-use','User','<?php echo base_url(); ?><?php echo ADMINFOLDER; ?>user/delete-mul-user')"  class="<?=delete_class?> m-n" title="<?=delete_title?>"><?=stripslashes(delete_text);?></a>
                           <?php } }?>
-                        
+                          <a href="<?php echo base_url().ADMINFOLDER?>user/use_view_page/<?=$row['id']?>" class="<?=edit_class;?> m-n" title="VIEW"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         </td>
                         <td>
                           <div class="checkbox">

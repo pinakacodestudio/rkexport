@@ -476,6 +476,25 @@ class User extends Admin_Controller {
 		}
 		echo $count;
 	}
+	public function use_view_page($id){
+		$list = $this->User->get_datatables();
+		print_r($list);
+	
+		exit;
+		$this->checkAdminAccessModule('submenu','delete',$this->viewData['submenuvisibility']);
+		$PostData = $this->input->post();
+		$ids = explode(",",$PostData['ids']);
+		$ADMINID = $this->session->userdata[base_url().'ADMINID'];
+		$count = 0;
+		foreach($ids as $row){
+			$query = $this->readdb->query("SELECT id FROM ".tbl_user." WHERE id=$row AND (id = 1 OR id = $ADMINID)");
+
+			if($query->num_rows() > 0){
+				$count++;
+			}
+		}
+		echo $count;
+	}
 	public function delete_mul_user(){
 		$PostData = $this->input->post();
 		$ids = explode(",",$PostData['ids']);

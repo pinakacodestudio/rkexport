@@ -229,5 +229,19 @@ class User_model extends Common_model {
 			return array();
 		}
 	}
+	function get_data_tables($id){
+
+		// $query = $this->readdb->select("id,channelid,workforchannelid,name,email,mobileno,address")
+		// 			->from(tbl_smsverification." as sv")
+		// 			->where("memberid = '".$memberid."' AND type=".$type)
+		// 			->order_by("sv.id DESC")
+		// 			->limit(1)
+		// 			->get();
+		// if($query->num_rows() == 1){
+		// 	return $query->row_array();
+		// }else{
+		// 	return array();
+		// }
+	}
 	
 }
