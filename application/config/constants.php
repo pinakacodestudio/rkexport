@@ -772,6 +772,7 @@ define("tbl_currencyrate","currencyrate");
 define("tbl_paymenttype","paymenttype");
 define("tbl_commission","commission");
 define("tab_transporttype","transporttype");
+define("tab_expensetype","expensetype");
 
 /* EMAIL CONFIGURATION CONSTANTS */
 define("EMAIL_CONFIG", serialize(array(
