@@ -3,6 +3,7 @@
 	var profileimgpath = '<?php echo PROFILE;?>';
 	var defaultprofileimgpath = '<?php echo DEFAULT_PROFILE;?>';
 </script>
+
 <div class="page-content">
     <div class="page-heading">            
         <h1><?php if(isset($userdata)){ echo 'Edit'; }else{ echo 'Add'; } ?> <?=$this->session->userdata(base_url().'submenuname')?></h1>                    
@@ -31,6 +32,13 @@
 									<div class="col-md-12">
 										<label class="control-label" for="name">Name <span class="mandatoryfield">*</span></label>
 										<input id="name" class="form-control" name="name" value="<?php if(isset($userdata)){ echo $userdata['name']; } ?>" type="text" tabindex="1" onkeypress="return onlyAlphabets(event)">
+									</div>
+								</div>
+								<?php print_r($userdata) ?>
+								<div class="form-group" id="partycord_div">
+									<div class="col-md-12">
+										<label class="control-label" for="partycord">Party Cord<span class="mandatoryfield">*</span></label>
+										<input id="partycord" class="form-control" name="partycord" value="<?php if(isset($userdata)){ echo $userdata['partycord']; } ?>" type="text" tabindex="1" onkeypress="return onlyAlphabets(event)">
 									</div>
 								</div>
 								<div class="form-group" id="email_div">
@@ -68,6 +76,29 @@
 										</select>
 									</div>
 								</div>
+							
+								<div class="form-group" id="userrole_div">
+									<div class="col-sm-12">
+										<label class="control-label" for="branchid">Branch Name<span class="mandatoryfield">*</span></label>
+										<select id="branchid" name="branchid" class="selectpicker form-control" data-select-on-tab="true" data-size="5" tabindex="8">
+											<option value="0">Select Branch</option>
+											<?php foreach($Branchdata as $Branch){ ?>
+											<option value="<?php echo $Branch['id']; ?>" <?php if(isset($userdata)){ if($userdata['branchid'] == $Branch['id']){ echo 'selected'; } }  ?>><?php echo $Branch['branchname']; ?></option>
+											<?php } ?>
+										</select>
+									</div>
+								</div>
+								<div class="form-group" id="userrole_div">
+									<div class="col-sm-12">
+										<label class="control-label">Gender<span class="mandatoryfield">*</span></label><br>
+										<label class="radio-inline">
+										<input type="radio" name="gender" value="1" <?php if(isset($userdata['gender'])){ if($userdata['gender']==1){echo 'checked';}} ?> >Man
+										</label>
+										<label class="radio-inline">
+										<input type="radio" name="gender" value="0" <?php if(isset($userdata['gender'])){ if($userdata['gender']!=1){echo 'checked';}} ?>>Woman
+										</label>
+									</div>
+								</div>
 								<?php //if(!isset($userdata)){ ?>
 								<div class="form-group" id="password_div">
 									<div class="col-md-12">
@@ -82,7 +113,7 @@
 										</div>
 									</div>
 								</div>
-								<?php //} ?>
+								<?php 	//} 	exit;?>
 								<div class="form-group" id="designationid_div">
 									<div class="col-md-12">
 										<label class="control-label" for="designationid">Designation </label>
@@ -105,6 +136,53 @@
 												<?php echo ucwords($reporting['name']);?></option>
 											<?php } ?>
 										</select>  
+									</div>
+								</div>
+								<div class="form-group" id="City_div">
+									<div class="col-sm-12">
+										<label class="control-label" for="city">City </label>
+										<select class="form-control selectpicker" id="city" name="cityid" data-live-search="true" data-select-on-tab="true" data-size="5">
+											<option value="0">Select City</option>
+											<?php foreach ($Citydata as $cityrow) { ?>        
+												<option value="<?php echo $cityrow['id'];?>" <?php if(!empty($userdata))
+												{if($userdata['cityid']==$cityrow['id']){echo "selected";}} ?> >
+												<?php echo ucwords($cityrow['name']);?></option>
+											<?php } ?>
+										</select>  
+									</div>
+								</div>
+								
+								
+								<div class="form-group" id="State_div">
+									<div class="col-sm-12">
+										<label class="control-label" for="State">State </label>
+										<select class="form-control selectpicker" id="State" name="stateid" data-live-search="true" data-select-on-tab="true" data-size="5">
+											<option value="0">Select State</option>
+											<?php foreach ($statedata as $stateidrow) { ?>        
+												<option value="<?php echo $stateidrow['id'];?>" <?php if(!empty($userdata))
+												{if($userdata['cityid']==$stateidrow['id']){echo "selected";}} ?> >
+												<?php echo ucwords($stateidrow['name']);?></option>
+											<?php } ?>
+										</select>  
+									</div>
+								</div>
+								<div class="form-group" id="Country_div">
+									<div class="col-sm-12">
+										<label class="control-label" for="Country">Country</label>
+										<select class="form-control selectpicker" id="Country" name="countryid" data-live-search="true" data-select-on-tab="true" data-size="5">
+											<option value="0">Select Country</option>
+											<?php foreach ($Countrydata as $Countryrow) { ?>        
+												<option value="<?php echo $Countryrow['id'];?>" <?php if(!empty($userdata))
+												{if($userdata['cityid']==$Countryrow['id']){echo "selected";}} ?> >
+												<?php echo ucwords($Countryrow['name']);?></option>
+											<?php } ?>
+										</select>  
+									</div>
+								</div>
+								<div class="form-group" id="address_div">
+									<div class="col-sm-12">
+										<label>Address</label>
+										<textarea class="form-control" id="address" name="address" rows="3"><?php if(isset($userdata)){ echo $userdata['address']; } ?></textarea>
 									</div>
 								</div>
 								<!-- <div class="form-group mt-xl">

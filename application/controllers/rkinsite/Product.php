@@ -81,6 +81,7 @@ class  Product extends Admin_Controller
                 }
             }
 
+            
             $productcombination = array();
             if ($datarow->isuniversal == 0 && $datarow->variantid != '') {
                 $variantdata = $this->Product_combination->getProductVariantDetails($datarow->id, $datarow->variantid);

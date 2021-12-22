@@ -777,8 +777,9 @@ define("tbl_employeeleave","employeeleave");
 define("tbl_currencyrate","currencyrate");
 define("tbl_paymenttype","paymenttype");
 define("tbl_commission","commission");
-define("tab_transporttype","transporttype");
-define("tab_expensetype","expensetype");
+define("tbl_transporttype","transporttype");
+define("tbl_expensetype","expensetype");
+define("tbl_branch","branch");
 
 /* EMAIL CONFIGURATION CONSTANTS */
 define("EMAIL_CONFIG", serialize(array(

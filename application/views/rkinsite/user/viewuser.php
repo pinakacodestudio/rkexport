@@ -19,14 +19,14 @@
     <div class="row">
       <div class="col-md-2">
       <?php 
-                          if($userdata['image']==''){
-                            
-                              $profileimg = '<img src="'.DEFAULT_PROFILE.'Male-Avatar.png" class="thumbwidth img-circle" style="width: 100px;height: 100px">';
-                          }else{
-                            $profileimg = '<img src="'.PROFILE.$userdata['image'].'" class="thumbwidth img-circle" style="width: 100px;height: 100px">';  
-                          }
-                          echo $profileimg;
-                        ?>
+            if($userdata['image']==''){
+              
+                $profileimg = '<img src="'.DEFAULT_PROFILE.'Male-Avatar.png" class="thumbwidth img-circle" style="width: 100px;height: 100px">';
+            }else{
+              $profileimg = '<img src="'.PROFILE.$userdata['image'].'" class="thumbwidth img-circle" style="width: 100px;height: 100px">';  
+            }
+            echo $profileimg;
+          ?>
       </div>
       <div class="col-md-10">
         <h5><b><?php echo ucfirst($userdata['ename']); ?></b></h5>

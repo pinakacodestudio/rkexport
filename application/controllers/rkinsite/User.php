@@ -30,6 +30,7 @@ class User extends Admin_Controller {
 		$this->load->view(ADMINFOLDER.'template',$this->viewData);
 	}
 	public function user_add() {
+		
 		$this->checkAdminAccessModule('submenu','add',$this->viewData['submenuvisibility']);
 		$this->viewData['title'] = "Add Employee";
 		$this->viewData['module'] = "user/Add_user";
@@ -50,6 +51,18 @@ class User extends Admin_Controller {
 		$this->load->model('Designation_model','Designation');
 		$this->viewData['designationdata'] = $this->Designation->getActiveDesignationList();
 
+		$this->load->model('Branch_model','Branch');
+		$this->viewData['Branchdata'] = $this->Branch->getRecordByID();
+
+		$this->load->model('City_model','City');
+		$this->viewData['Citydata'] = $this->City->getRecordByID();
+		
+		$this->load->model('Province_model','Province');
+		$this->viewData['statedata'] = $this->Province->getRecordByID();
+
+		$this->load->model('Country_model','Country');
+		$this->viewData['Countrydata'] = $this->Country->getRecordByID();
+		
 		$where=array();
 		if (isset($this->viewData['submenuvisibility']['submenuviewalldata']) && strpos($this->viewData['submenuvisibility']['submenuviewalldata'], ',' . $this->session->userdata[base_url() . 'ADMINUSERTYPE'] . ',') === false) {
 			$where = array('(reportingto='.$this->session->userdata(base_url().'ADMINID')." or id=".$this->session->userdata(base_url().'ADMINID').")"=>null);
@@ -74,17 +87,26 @@ class User extends Admin_Controller {
 		*/
 
 		$PostData = $this->input->post();
-		//print_r($PostData);exit;
+		// print_r($PostData);exit;
 
 		$name = trim($PostData['name']);
 		$email = trim($PostData['email']);
 		$mobileno = trim($PostData['mobileno']);
 		$password = trim($PostData['password']);
-		$userroleid = trim($PostData['userroleid']);
 		$designationid = (isset($PostData['designationid']))?$PostData['designationid']:0;
 		$workforchannelid = (!empty($PostData['workforchannelid']))?implode(",",$PostData['workforchannelid']):"";
+		$userroleid = trim($PostData['userroleid']);
+		$partycord = trim($PostData['partycord']);
 		$reportingto=$PostData['reportingto'];
+
+		$gender = trim($PostData['gender']);
+		$branchid = trim($PostData['branchid']);
+		$partycord = trim($PostData['partycord']);
 		$status = trim($PostData['status']);
+		$address = trim($PostData['address']);
+		$cityid = trim($PostData['cityid']);
+		$countryid = trim($PostData['countryid']);
+		$stateid = trim($PostData['stateid']);
 
 		if(CRM==1){
 			$newtransferinquiry = trim($PostData['newtransferinquiry']);
@@ -155,7 +177,18 @@ class User extends Admin_Controller {
 								"createddate"=>$createddate,
 								"modifieddate"=>$createddate,
 								"addedby"=>$addedby,
-								"modifiedby"=>$addedby);
+								"modifiedby"=>$addedby,
+								"reportingto"=>$reportingto,
+
+								"gender" => $gender,
+								"status" => $status,
+								"address" => $address,
+								"cityid" => $cityid,
+								"partycord" => $partycord,
+								"branchid" => $branchid,
+								"countryid" => $countryid,
+								"stateid" => $stateid,
+							);
 			
 			$UserRegID = $this->User->Add($insertdata);
 
@@ -197,6 +230,18 @@ class User extends Admin_Controller {
 		$this->load->model('Designation_model','Designation');
 		$this->viewData['designationdata'] = $this->Designation->getActiveDesignationList();
 
+		$this->load->model('Branch_model','Branch');
+		$this->viewData['Branchdata'] = $this->Branch->getRecordByID();
+
+		$this->load->model('City_model','City');
+		$this->viewData['Citydata'] = $this->City->getRecordByID();
+
+		$this->load->model('Province_model','Province');
+		$this->viewData['statedata'] = $this->Province->getRecordByID();
+
+		$this->load->model('Country_model','Country');
+		$this->viewData['Countrydata'] = $this->Country->getRecordByID();
+
 		$where=array();
 		if (isset($this->viewData['submenuvisibility']['submenuviewalldata']) && strpos($this->viewData['submenuvisibility']['submenuviewalldata'], ',' . $this->session->userdata[base_url() . 'ADMINUSERTYPE'] . ',') === false) {
 			$where = array('(reportingto='.$this->session->userdata(base_url().'ADMINID')." or id=".$this->session->userdata(base_url().'ADMINID').")"=>null);
@@ -223,6 +268,7 @@ class User extends Admin_Controller {
 			exit();
 		}
 
+		// print_r($this->input->post());exit;
 		$UserID = trim($PostData['userid']);
 		$name = trim($PostData['name']);
 		$email = trim($PostData['email']);
@@ -231,8 +277,17 @@ class User extends Admin_Controller {
 		$userroleid = trim($PostData['userroleid']);
 		$designationid = (isset($PostData['designationid']))?$PostData['designationid']:0;
 		$workforchannelid = (!empty($PostData['workforchannelid']))?implode(",",$PostData['workforchannelid']):"";
-		$reportingto=$PostData['reportingto'];
-		
+		$reportingto=trim($PostData['reportingto']);
+		$gender = trim($PostData['gender']);
+		$partycord = trim($PostData['partycord']);
+		$status = trim($PostData['status']);
+		$address = trim($PostData['address']);
+		$cityid = trim($PostData['cityid']);
+		$branchid = trim($PostData['branchid']);
+
+		$countryid = trim($PostData['countryid']);
+		$stateid = trim($PostData['stateid']);
+
 		if(CRM==1){
 			$newtransferinquiry = trim($PostData['newtransferinquiry']);
 			$subemployeenotification = trim($PostData['subemployeenotification']);
@@ -307,7 +362,16 @@ class User extends Admin_Controller {
 								'workforchannelid'=>$workforchannelid,
 								"status"=>$status,
 								"modifieddate"=>$modifieddate,
-								"modifiedby"=>$modifiedby);
+								"modifiedby"=>$modifiedby,
+								"gender" => $gender,
+								"status" => $status,
+								"address" => $address,
+								"cityid" => $cityid,
+								"partycord" => $partycord,
+								"branchid" => $branchid,
+								"countryid" => $countryid,
+								"stateid" => $stateid,
+							);
 
 			$this->User->_where = array("id"=>$UserID);
 			$this->User->Edit($updatedata);
@@ -476,25 +540,7 @@ class User extends Admin_Controller {
 		}
 		echo $count;
 	}
-	public function use_view_page($id){
-		$list = $this->User->get_datatables();
-		print_r($list);
-	
-		exit;
-		$this->checkAdminAccessModule('submenu','delete',$this->viewData['submenuvisibility']);
-		$PostData = $this->input->post();
-		$ids = explode(",",$PostData['ids']);
-		$ADMINID = $this->session->userdata[base_url().'ADMINID'];
-		$count = 0;
-		foreach($ids as $row){
-			$query = $this->readdb->query("SELECT id FROM ".tbl_user." WHERE id=$row AND (id = 1 OR id = $ADMINID)");
 
-			if($query->num_rows() > 0){
-				$count++;
-			}
-		}
-		echo $count;
-	}
 	public function delete_mul_user(){
 		$PostData = $this->input->post();
 		$ids = explode(",",$PostData['ids']);
@@ -528,7 +574,7 @@ class User extends Admin_Controller {
 	public function viewuser($id)
     {
         // $this->viewData['userdata'] = $this->User->getUserDataByIDjoin($id);
-				$this->load->model('Leave_model','Leave');
+		$this->load->model('Leave_model','Leave');
         $this->viewData['leavedata'] = $this->Leave->getLeave($id);
         // $this->viewData['expensedata'] = $this->Expense->getExpense($id);
         $this->viewData['designationdata'] = $this->Designation->getDesignation($id);
@@ -553,4 +599,23 @@ class User extends Admin_Controller {
         $this->admin_headerlib->add_plugin("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.css");
         $this->load->view(ADMINFOLDER.'template', $this->viewData);
     }
+
+	public function use_view_page($id){
+		$this->checkAdminAccessModule('submenu','view',$this->viewData['submenuvisibility']);
+		$this->viewData['title'] = "Employee View";
+		$this->viewData['module'] = "user/Userviewpage";
+		$this->viewData['list'] = $this->User->get_data_tables($id);
+
+		$ADMINUSERTYPE = $this->session->userdata(base_url().'ADMINUSERTYPE');
+		$ADMINID = $this->session->userdata(base_url().'ADMINID');
+
+		if($this->viewData['submenuvisibility']['managelog'] == 1){
+			$this->general_model->addActionLog(4,'Employee Detail view','View employee detail.');
+        }	
+		
+		$this->admin_headerlib->add_javascript("user","pages/userview.js");
+		$this->load->view(ADMINFOLDER.'template',$this->viewData);
+		
+
+	}
 }
