@@ -97,18 +97,16 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="col-md-3">
-                    Username
+                    Party Cord
                     </div>
                     <div class="col-md-3 br2">
                     &nbsp;
                     </div>
                     <div class="col-md-3">
                     State
-
-
                     </div>
                     <div class="col-md-3">
-                    &nbsp;
+                    <?=$list['statename']?>
                     </div>
                   </div>
                 </div>
@@ -125,17 +123,18 @@
 
                     </div>
                     <div class="col-md-3">
-                    &nbsp;
+                    <?=$list['countryname']?>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12">
                     <div class="col-md-3">
-                    Party Cord
+                  
                     </div>
                     <div class="col-md-3 br2">
                     <?=$list['partycord'] ?>
+               
                     </div>
                     <div class="col-md-3">
                     Join Date
@@ -152,7 +151,7 @@
                     Branch Name
                     </div>
                     <div class="col-md-3 br2">
-                    &nbsp;
+                    <?=$list['branchname'] ?>
                     </div>
                     <div class="col-md-3">
                     Birth Date

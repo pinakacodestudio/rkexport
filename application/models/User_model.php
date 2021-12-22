@@ -182,7 +182,7 @@ class User_model extends Common_model {
 
 
 	function getUserDataByID($ID){
-		$query = $this->readdb->select("id,name,image,email,mobileno,password,status,roleid,reportingto,newtransferinquiry,followupstatuschange,inquirystatuschange,subemployeenotification,myeodstatus,teameodstatus,eodmailsending,inquiryreportmailsending,sidebarcount,designationid,workforchannelid,status,address,cityid,partycord,branchid,gender")
+		$query = $this->readdb->select("id,name,image,email,mobileno,password,status,roleid,reportingto,newtransferinquiry,followupstatuschange,inquirystatuschange,subemployeenotification,myeodstatus,teameodstatus,eodmailsending,inquiryreportmailsending,sidebarcount,designationid,workforchannelid,status,address,cityid,partycord,branchid,gender,countryid,stateid")
 							->from($this->_table)
 							->where("id='".$ID."'")
 							->get();
@@ -233,12 +233,13 @@ class User_model extends Common_model {
 	}
 	function get_data_tables($id){
 		// id,workforchannelid,name,email,mobileno,address,workforchannelid,cityid,reportingto,code,designationid,
-		$query = $this->readdb->select("t1.*,t2.name as designationname,t2.status,t3.name as cityname,t4.branchname as branchname")
+		$query = $this->readdb->select("t1.*,t2.name as designationname,t2.status,t3.name as cityname,t4.branchname as branchname,t5.name as statename,t6.name as countryname")
 					->from(tbl_user." as t1")
 					->join(tbl_designation.' as t2', 't1.designationid = t2.id', 'left')
 					->join(tbl_city.' as t3', 't1.cityid = t3.id', 'left')
 					->join(tbl_branch.' as t4', 't1.branchid = t4.id', 'left')
-					->join(tbl_province.' as t5', 't1.stateid = t4.id', 'left')
+					->join(tbl_province.' as t5', 't1.stateid = t5.id', 'left')
+					->join(tbl_country.' as t6', 't1.countryid = t6.id', 'left')
 					->where("t1.id=",$id)
 					->where("t2.status=",1)
 					->order_by("t1.id DESC")

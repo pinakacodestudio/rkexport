@@ -15,7 +15,7 @@ class Commission extends Admin_Controller
     {
 
         $this->viewData['title'] = "Currency Rate";
-        $this->viewData['module'] = "Commission/commission";
+        $this->viewData['module'] = "commission/Commission";
 
         if ($this->viewData['submenuvisibility']['managelog'] == 1) {
             $this->general_model->addActionLog(4, 'Currency Rate', 'View currency rate.');

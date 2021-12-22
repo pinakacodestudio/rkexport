@@ -34,7 +34,7 @@
 										<input id="name" class="form-control" name="name" value="<?php if(isset($userdata)){ echo $userdata['name']; } ?>" type="text" tabindex="1" onkeypress="return onlyAlphabets(event)">
 									</div>
 								</div>
-								<?php print_r($userdata) ?>
+						
 								<div class="form-group" id="partycord_div">
 									<div class="col-md-12">
 										<label class="control-label" for="partycord">Party Cord<span class="mandatoryfield">*</span></label>
@@ -160,7 +160,7 @@
 											<option value="0">Select State</option>
 											<?php foreach ($statedata as $stateidrow) { ?>        
 												<option value="<?php echo $stateidrow['id'];?>" <?php if(!empty($userdata))
-												{if($userdata['cityid']==$stateidrow['id']){echo "selected";}} ?> >
+												{if($userdata['stateid']==$stateidrow['id']){echo "selected";}} ?> >
 												<?php echo ucwords($stateidrow['name']);?></option>
 											<?php } ?>
 										</select>  
@@ -173,7 +173,7 @@
 											<option value="0">Select Country</option>
 											<?php foreach ($Countrydata as $Countryrow) { ?>        
 												<option value="<?php echo $Countryrow['id'];?>" <?php if(!empty($userdata))
-												{if($userdata['cityid']==$Countryrow['id']){echo "selected";}} ?> >
+												{if($userdata['countryid']==$Countryrow['id']){echo "selected";}} ?> >
 												<?php echo ucwords($Countryrow['name']);?></option>
 											<?php } ?>
 										</select>  
