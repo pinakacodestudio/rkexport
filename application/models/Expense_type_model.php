@@ -3,7 +3,7 @@
 class Expense_type_model extends Common_model {
 
 	//put your code here
-	public $_table = tab_expensetype;
+	public $_table = tbl_expensetype;
 	public $_fields = "*";
 	public $_where = array();
 	public $_except_fields = array();

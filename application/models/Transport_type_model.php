@@ -3,7 +3,7 @@
 class Transport_type_model extends Common_model {
 
 	//put your code here
-	public $_table = tab_transporttype;
+	public $_table = tbl_transporttype;
 	public $_fields = "*";
 	public $_where = array();
 	public $_except_fields = array();
