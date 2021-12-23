@@ -780,6 +780,7 @@ define("tbl_commission","commission");
 define("tbl_transporttype","transporttype");
 define("tbl_expensetype","expensetype");
 define("tbl_branch","branch");
+define("tbl_company","company");
 
 /* EMAIL CONFIGURATION CONSTANTS */
 define("EMAIL_CONFIG", serialize(array(

@@ -95,6 +95,12 @@ class Party extends Admin_Controller {
         $this->load->model('Country_model','Country');
         $this->viewData['countrydata'] = $this->Country->getActivecountrylist();
 
+        $this->load->model('Department_model','Department');
+		$this->viewData['Departmentdata'] = $this->Department->getRecordByID();
+     
+        $this->load->model('Company_model','Companymodel');
+        $this->viewData['Companydata'] = $this->Companymodel->getRecordByID();
+       
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_plugin("form-select2","form-select2/select2.css");
         $this->admin_headerlib->add_javascript_plugins("form-select2","form-select2/select2.min.js");

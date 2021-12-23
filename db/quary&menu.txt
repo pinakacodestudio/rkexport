@@ -1,0 +1,20 @@
+Select Main Menu : systam setting
+Sub Menu Name : Transport Type
+Menu Priority : 3
+Menu Url : Transport-type
+
+
+Select Main Menu : systam setting
+Sub Menu Name : Expense Type
+Menu Priority : 9
+Menu Url : Expense-type
+
+
+=====================================================
+
+=====================================================
+quary
+=====================================================
+ALTER TABLE `user` ADD `departmentid` INT NULL AFTER `stateid`;
+
+ALTER TABLE `user` ADD `joindate` DATE NULL AFTER `departmentid`, ADD `birthdate` DATE NULL AFTER `joindate`, ADD `anniversarydate` DATE NULL AFTER `birthdate`;

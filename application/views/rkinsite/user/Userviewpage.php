@@ -23,11 +23,8 @@
         <?php $this->load->view(ADMINFOLDER.'includes/menu_header');?>
     </div>
 
-     
-   <?php print_r($list); ?>
       <div class="container-fluid">
         <div data-widget-group="group1">
-   
               <div class="panel panel-default border-panel">
                 <div class="panel-heading">
                 <div class="row">
@@ -84,7 +81,7 @@
                     Department
                     </div>
                     <div class="col-md-3 br2">
-                    &nbsp;
+                    <?=$list['departmentname']?>
                     </div>
                     <div class="col-md-3">
                     City
@@ -100,7 +97,7 @@
                     Party Cord
                     </div>
                     <div class="col-md-3 br2">
-                    &nbsp;
+                    <?=$list['partycord'];?>
                     </div>
                     <div class="col-md-3">
                     State
@@ -113,10 +110,10 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="col-md-3">
-                    Password
+                    Branch Name
                     </div>
                     <div class="col-md-3 br2">
-                    &nbsp;
+                    <?=$list['branchname'] ?>
                     </div>
                     <div class="col-md-3">
                     Country
@@ -130,10 +127,10 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="col-md-3">
-                  
+                    &nbsp;
                     </div>
                     <div class="col-md-3 br2">
-                    <?=$list['partycord'] ?>
+                    &nbsp;
                
                     </div>
                     <div class="col-md-3">
@@ -141,23 +138,23 @@
 
                     </div>
                     <div class="col-md-3">
-                    &nbsp;
+                    <?php if(isset($list)){ echo $this->general_model->displaydate($list['joindate']); }?>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12">
                     <div class="col-md-3">
-                    Branch Name
+                    &nbsp;
                     </div>
                     <div class="col-md-3 br2">
-                    <?=$list['branchname'] ?>
+                    &nbsp;
                     </div>
                     <div class="col-md-3">
                     Birth Date
                     </div>
                     <div class="col-md-3">
-                    &nbsp;
+                    <?php if(isset($list)){ echo $this->general_model->displaydate($list['birthdate']); }?>
                     </div>
                   </div>
                 </div>
@@ -171,7 +168,7 @@
                     Anniversary Date
                     </div>
                     <div class="col-md-3">
-                    &nbsp;
+                    <?php if(isset($list)){ echo $this->general_model->displaydate($list['anniversarydate']); }?>
                     </div>
                   </div>
                 </div>

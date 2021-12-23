@@ -62,7 +62,10 @@ class User extends Admin_Controller {
 
 		$this->load->model('Country_model','Country');
 		$this->viewData['Countrydata'] = $this->Country->getRecordByID();
-		
+
+		$this->load->model('Department_model','Department');
+		$this->viewData['Departmentdata'] = $this->Department->getRecordByID();
+	
 		$where=array();
 		if (isset($this->viewData['submenuvisibility']['submenuviewalldata']) && strpos($this->viewData['submenuvisibility']['submenuviewalldata'], ',' . $this->session->userdata[base_url() . 'ADMINUSERTYPE'] . ',') === false) {
 			$where = array('(reportingto='.$this->session->userdata(base_url().'ADMINID')." or id=".$this->session->userdata(base_url().'ADMINID').")"=>null);
@@ -107,6 +110,8 @@ class User extends Admin_Controller {
 		$cityid = trim($PostData['cityid']);
 		$countryid = trim($PostData['countryid']);
 		$stateid = trim($PostData['stateid']);
+		$departmentid = trim($PostData['Departmentid']);
+	
 
 		if(CRM==1){
 			$newtransferinquiry = trim($PostData['newtransferinquiry']);
@@ -188,6 +193,10 @@ class User extends Admin_Controller {
 								"branchid" => $branchid,
 								"countryid" => $countryid,
 								"stateid" => $stateid,
+								"departmentid" => $departmentid,
+								"anniversarydate" => $this->general_model->convertdate($PostData['anniversarydate']),
+								"joindate" => $this->general_model->convertdate($PostData['joindate']),
+								"birthdate" => $this->general_model->convertdate($PostData['birthdate']),
 							);
 			
 			$UserRegID = $this->User->Add($insertdata);
@@ -242,6 +251,9 @@ class User extends Admin_Controller {
 		$this->load->model('Country_model','Country');
 		$this->viewData['Countrydata'] = $this->Country->getRecordByID();
 
+		$this->load->model('Department_model','Department');
+		$this->viewData['Departmentdata'] = $this->Department->getRecordByID();
+
 		$where=array();
 		if (isset($this->viewData['submenuvisibility']['submenuviewalldata']) && strpos($this->viewData['submenuvisibility']['submenuviewalldata'], ',' . $this->session->userdata[base_url() . 'ADMINUSERTYPE'] . ',') === false) {
 			$where = array('(reportingto='.$this->session->userdata(base_url().'ADMINID')." or id=".$this->session->userdata(base_url().'ADMINID').")"=>null);
@@ -287,7 +299,11 @@ class User extends Admin_Controller {
 
 		$countryid = trim($PostData['countryid']);
 		$stateid = trim($PostData['stateid']);
+		$departmentid = trim($PostData['Departmentid']);
 
+		// $anniversarydate = trim($PostData['anniversarydate']);
+		// $joindate = trim($PostData['joindate']);
+		// $birthdate = trim($PostData['birthdate']);
 		if(CRM==1){
 			$newtransferinquiry = trim($PostData['newtransferinquiry']);
 			$subemployeenotification = trim($PostData['subemployeenotification']);
@@ -371,6 +387,10 @@ class User extends Admin_Controller {
 								"branchid" => $branchid,
 								"countryid" => $countryid,
 								"stateid" => $stateid,
+								"departmentid" => $departmentid,
+								"anniversarydate" => $this->general_model->convertdate($PostData['anniversarydate']),
+								"joindate" => $this->general_model->convertdate($PostData['joindate']),
+								"birthdate" => $this->general_model->convertdate($PostData['birthdate']),
 							);
 
 			$this->User->_where = array("id"=>$UserID);

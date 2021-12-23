@@ -49,24 +49,6 @@
                     <div class="panel-body pt-xs">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group" id="firstname_div">
-                                    <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
-                                    <div class="col-md-8">
-                                        <input id="firstname" type="text" name="firstname" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['firstname']; } ?>" onkeypress="return onlyAlphabets(event)">
-                                    </div>
-                                </div>
-                                <div class="form-group" id="middlename_div">
-                                    <label for="middlename" class="col-md-4 control-label">Middle Name <span class="mandatoryfield"> *</span></label>
-                                    <div class="col-md-8">
-                                        <input id="middlename" type="text" name="middlename" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['middlename']; } ?>" onkeypress="return onlyAlphabets(event)">
-                                    </div>
-                                </div>
-                                <div class="form-group" id="lastname_div">
-                                    <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
-                                    <div class="col-md-8">
-                                        <input id="lastname" type="text" name="lastname" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['lastname']; } ?>" onkeypress="return onlyAlphabets(event)">
-                                    </div>
-                                </div>
                                 <div class="form-group" id="partycode_div">
                                     <label for="partycode" class="col-md-4 control-label">Party Code <span class="mandatoryfield"> *</span></label>
                                     <div class="col-md-8">
@@ -76,18 +58,6 @@
                                         <div class="col-md-2 col-xs-2 pr-n pt-sm">
                                             <a href="javascript:void(0)" class="stepy-finish btn-primary btn btn-raised" title="Generate Party Code" onclick="$('#partycode').val(randString(10))"><i class="fa fa-refresh" aria-hidden="true"></i></a>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="form-group" id="birthdate_div">
-                                    <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
-                                    <div class="col-md-8">
-                                        <input id="birthdate" type="text" name="birthdate" class="form-control" value="<?php if (isset($partydata) && $partydata['birthdate']!="0000-00-00") { echo $this->general_model->displaydate($partydata['birthdate']); } ?>" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group" id="anniversarydate_div">
-                                    <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
-                                    <div class="col-md-8">
-                                        <input id="anniversarydate" type="text" name="anniversarydate" class="form-control" value="<?php if (isset($partydata) && $partydata['anniversarydate']!="0000-00-00") { echo $this->general_model->displaydate($partydata['anniversarydate']); } ?>" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -104,48 +74,21 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group" id="email_div">
-                                    <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield"> *</span></label>
-                                    <div class="col-md-8">
-                                        <input id="email" type="text" name="email" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['email']; } ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group" id="contactno1_div">
-                                    <label for="contactno1" class="col-md-4 control-label">Contact No. 1 <span class="mandatoryfield"> *</span></label>
-                                    <div class="col-md-8">
-                                        <input id="contactno1" type="text" name="contactno1" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="<?php if (isset($partydata)) { echo $partydata['contactno1']; } ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group" id="contactno2_div">
-                                    <label for="contactno2" class="col-md-4 control-label">Contact No. 2</label>
-                                    <div class="col-md-8">
-                                        <input id="contactno2" type="text" name="contactno2" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="<?php if (isset($partydata)) { echo $partydata['contactno2']; } ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group" id="education_div">
-                                    <label for="education" class="col-md-4 control-label">Education</label>
-                                    <div class="col-md-8">
-                                        <input id="education" type="text" name="education" data-provide="education" value="<?php if (isset($partydata)) { echo $partydata['education']; } ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="focusedinput" class="col-md-4 col-xs-2 control-label">Gender</label>
-                                    <div class="col-md-6">
-                                        <div class="col-md-4 col-xs-2" style="padding-left: 0px; margin-left: 0px;">
-                                            <div class="radio">
-                                                <input type="radio" name="gender" id="male" value="0" <?php if (isset($partydata) && $partydata['gender'] == 0) { echo 'checked'; } else { echo 'checked'; } ?>>
-                                                <label for="male">Male</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-xs-2">
-                                            <div class="radio">
-                                                <input type="radio" name="gender" id="female" value="1" <?php if (isset($partydata) && $partydata['gender'] == 1) { echo 'checked'; } ?>>
-                                                <label for="female">Female</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
+                            <!-- <div class="col-md-6">
+                                <div class="form-group" id="partytype_div">
+                                    <label for="partytypeid" class="col-md-4 control-label">Party Type <span class="mandatoryfield"> *</span></label>
+                                    <div class="col-md-8">
+                                        <select id="partytypeid" name="partytypeid" class="selectpicker form-control" data-live-search="true" data-size="5">
+                                            <option value="0">Select Party Type</option>
+                                            <?php //foreach ($Companydata as $Companyrow) { ?>
+                                                <option value="<?// echo $partytype['id']; ?>" <?php //if (isset($Companyrow) && $Companyrow['partytypeid'] == $Companyrow['id']) { echo "selected"; } ?>><?php //echo $Companyrow['partytype']; ?>
+                                                </option>
+                                            <?php //} ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> -->
                         </div> 
                         <div class="row">
                             <div class="col-md-6">
@@ -178,51 +121,36 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">  
-                                <div class="form-group" id="address_div">
-                                    <label for="adderss" class="col-md-4 control-label">Address</label>
-                                    <div class="col-md-8">
-                                        <textarea class="form-control" id="address" name="address"><?php if (isset($partydata)) { echo $partydata['address']; } ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group" id="allowforlogin_div">
-                                    <label class="col-md-4 col-xs-5 col-sm-3 control-label p-n"><b><u><span class="allowlogin" style="<?php if(isset($partydata) && $partydata['allowforlogin'] == 0){ echo "display:none;"; } ?>">Fill Below Login Details</span></u></b></label>
-                                    <div class="col-md-8 col-xs-7 col-sm-5">
-                                        <div class="checkbox">
-                                            <input id="allowforlogin" type="checkbox" value="1" name="allowforlogin" class="checkradios" <?php if (isset($partydata) && $partydata['allowforlogin'] == 1) { echo 'checked'; } ?>>
-                                            <label for="allowforlogin">Allow for Login</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group allowlogin" id="employeerole_div" style="<?php if(isset($partydata) && $partydata['allowforlogin'] == 0){ echo "display:none;"; } ?>">
-                                    <label for="employeerole" class="col-md-4 control-label">Employee Role <span class="mandatoryfield"> *</span></label>
-                                    <div class="col-md-8">
-                                        <div class="col-md-12 p-n">
-                                        <select id="employeerole" name="employeerole" class="selectpicker form-control" data-live-search="true" data-size="5">
-                                            <option value="0">Select Employee Role</option>
-                                                <?php foreach ($userroledata as $emprole) { ?>
-                                                    <option value="<?php echo $emprole['id']; ?>" <?php if (isset($partydata) && $partydata['empolyeeroleid'] == $emprole['id']) { echo "selected"; } ?>><?php echo $emprole['role']; ?>
-                                                    </option>
-                                                <?php } ?>
-                                        </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group allowlogin" id="password_div" style="<?php if(isset($partydata) && $partydata['allowforlogin'] == 0){ echo "display:none;"; } ?>">
-                                    <label for="password" class="col-md-4 control-label">Password <span class="mandatoryfield"> *</span></label>
-                                    <div class="col-md-8">
-                                        <div class="col-md-10 col-xs-10 p-n">
-                                            <input id="password" type="text" name="password" value="<?php if(isset($partydata)){ echo $this->general_model->decryptIt($partydata['password']); } ?>" class="form-control">
-                                        </div>
-                                        <div class="col-md-2 col-xs-2 pr-n pt-sm">
-                                            <a href="javascript:void(0)" class="stepy-finish btn-primary btn btn-raised" title="Generate Password" onclick="$('#password').val(randomPassword())"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>                   
                     </div>
+                        <div class="col-md-4">  
+                            <div class="form-group" id="address_div">
+                                <label for="adderss" class="col-md-4 control-label">Billing Address</label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" id="address" name="address"><?php if (isset($partydata)) { echo $partydata['address']; } ?></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">  
+                            <div class="form-group" id="address_div">
+                                <label for="adderss" class="col-md-4 control-label">Shipping Address</label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" id="address" name="address"><?php if (isset($partydata)) { echo $partydata['address']; } ?></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">  
+                            <div class="form-group" id="address_div">
+                                <label for="adderss" class="col-md-4 control-label">courier Address</label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" id="address" name="address"><?php if (isset($partydata)) { echo $partydata['address']; } ?></textarea>
+                                </div>
+                            </div>
+                        </div>
                 </div>   
+
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default border-panel" id="commonpanel">
@@ -432,6 +360,64 @@
                                         </div>
                                         <?php } ?>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default border-panel" id="commonpanel">
+                            <div class="panel-heading"><h2>Contect Detail</h2></div>
+                            <div class="panel-body no-padding">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6 pl-sm pr-sm visible-md visible-lg">
+                                            <div class="form-group" id="firstname_div">
+                                                <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
+                                                <div class="col-md-8">
+                                                    <input id="firstname" type="text" name="firstname" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['firstname']; } ?>" onkeypress="return onlyAlphabets(event)">
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="form-group" id="lastname_div">
+                                                <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
+                                                <div class="col-md-8">
+                                                    <input id="lastname" type="text" name="lastname" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['lastname']; } ?>" onkeypress="return onlyAlphabets(event)">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" id="contactno1_div">
+                                                <label for="contactno1" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
+                                                <div class="col-md-8">
+                                                    <input id="contactno1" type="text" name="contactno1" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="<?php if (isset($partydata)) { echo $partydata['contactno1']; } ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" id="birthdate_div">
+                                                <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
+                                                <div class="col-md-8">
+                                                    <input id="birthdate" type="text" name="birthdate" class="form-control" value="<?php if (isset($partydata) && $partydata['birthdate']!="0000-00-00") { echo $this->general_model->displaydate($partydata['birthdate']); } ?>" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="anniversarydate_div">
+                                                <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
+                                                <div class="col-md-8">
+                                                    <input id="anniversarydate" type="text" name="anniversarydate" class="form-control" value="<?php if (isset($partydata) && $partydata['anniversarydate']!="0000-00-00") { echo $this->general_model->displaydate($partydata['anniversarydate']); } ?>" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" id="email_div">
+                                                <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield"> *</span></label>
+                                                <div class="col-md-8">
+                                                    <input id="email" type="text" name="email" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['email']; } ?>">
+                                                </div>
+                                            </div>
+                               111111
+
+                                        </div>
+                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>

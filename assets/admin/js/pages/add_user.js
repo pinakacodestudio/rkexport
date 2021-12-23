@@ -1,5 +1,39 @@
 $(document).ready(function() {
   
+  
+  $('#joindate').datepicker({
+    todayHighlight: true,
+    format: 'dd/mm/yyyy',
+    orientation: 'top',
+    autoclose: true,
+    todayBtn: "linked"
+});
+$("#old_receipt_div").hide();
+
+  $('#birthdate').datepicker({
+    todayHighlight: true,
+    format: 'dd/mm/yyyy',
+    orientation: 'top',
+    autoclose: true,
+    todayBtn: "linked"
+});
+
+$("#old_receipt_div").hide();
+  $('#anniversarydate').datepicker({
+    todayHighlight: true,
+    format: 'dd/mm/yyyy',
+    orientation: 'top',
+    autoclose: true,
+    todayBtn: "linked"
+});
+$("#old_receipt_div").hide();
+
+
+
+$('#remove').click(function(){
+   $('#removeoldreceipt').val('1');
+});
+
   if($('#oldprofileimage').val()!=''){
     var $imageupload = $('.imageupload');
     $imageupload.imageupload({

@@ -63,6 +63,41 @@
 										</select>
 									</div>
 								</div>
+								
+
+								<div class="form-group" id="Department_div">
+									<div class="col-sm-12">
+										<label class="control-label" for="Department">Department <a href="<?php echo base_url().ADMINFOLDER?>Department" class="stepy-finish btn-primary btn btn-raised" target="_blank" title="VIEW"><i class="fa fa-plus" aria-hidden="true"></i></a></label>
+										<select class="form-control selectpicker" id="Department" name="Departmentid" data-live-search="true" data-select-on-tab="true" data-size="5">
+											<option value="0">Select Department</option>
+											<?php foreach ($Departmentdata as $Departmentrow) { ?>        
+												<option value="<?php echo $Departmentrow['id'];?>" <?php if(!empty($userdata))
+												{if($userdata['departmentid']==$Departmentrow['id']){echo "selected";}} ?> >
+												<?php echo ucwords($Departmentrow['name']);?></option>
+											<?php } ?>
+										</select>  
+										
+									</div>
+									
+								</div>
+								<div class="form-group" id="date_div">
+									<div class="col-sm-12">
+										<label class="control-label" for="date">Join Date </label>
+										    <input id="joindate" name="joindate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['joindate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
+									</div>
+								</div>
+								<div class="form-group" id="date_div">
+									<div class="col-sm-12">
+										<label class="control-label" for="date">Birth Date </label>
+										    <input id="birthdate" name="birthdate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['birthdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
+									</div>
+								</div>
+								<div class="form-group" id="date_div">
+									<div class="col-sm-12">
+										<label class="control-label" for="anniversarydate">Anniversary Date </label>
+										    <input id="anniversarydate" name="anniversarydate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['anniversarydate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
+									</div>
+								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group" id="userrole_div">
@@ -79,7 +114,7 @@
 							
 								<div class="form-group" id="userrole_div">
 									<div class="col-sm-12">
-										<label class="control-label" for="branchid">Branch Name<span class="mandatoryfield">*</span></label>
+										<label class="control-label" for="branchid">Branch Name <span class="mandatoryfield">*</span><a href="<?php echo base_url().ADMINFOLDER?>branch" class="stepy-finish btn-primary btn btn-raised" target="_blank" title="VIEW"><i class="fa fa-plus" aria-hidden="true"></i></a></label>
 										<select id="branchid" name="branchid" class="selectpicker form-control" data-select-on-tab="true" data-size="5" tabindex="8">
 											<option value="0">Select Branch</option>
 											<?php foreach($Branchdata as $Branch){ ?>
