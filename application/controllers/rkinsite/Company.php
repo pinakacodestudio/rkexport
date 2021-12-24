@@ -169,10 +169,8 @@ class Company extends Admin_Controller
         $count = 0;
         foreach ($ids as $row) {
             if ($this->viewData['submenuvisibility']['managelog'] == 1) {
-
                 $this->company->_where = array("id" => $row);
                 $data = $this->company->getRecordsById();
-
                 $this->general_model->addActionLog(3, 'Additional Rights', 'Delete ' . $data['name'] . ' additional rights.');
             }
             $this->company->Delete(array("id" => $row));

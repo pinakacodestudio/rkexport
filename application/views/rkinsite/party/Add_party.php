@@ -376,7 +376,7 @@ var cityid = '<?php if(isset($partydata)) { echo $partydata['cityid']; }else { e
 
                                         <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                         <div class="form-group" id="email_div">
-                                            <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield"> *</span></label>
+                                            <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
                                             <div class="col-md-7">
                                                 <input id="email" type="text" name="email" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['email']; } ?>">
                                             </div>
