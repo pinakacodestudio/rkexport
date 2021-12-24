@@ -98,4 +98,14 @@ class Province_model extends Common_model {
 		$query = $this->readdb->get();
 		return $query->num_rows();
 	}
+
+	function getstate($postData){
+		$response = array();
+		$this->db->select('id,name as statename');
+		$this->db->where('countryid', $postData['country']);
+		$q = $this->db->get(tbl_province);
+		$response = $q->result_array();
+		return $response;
+	  }
+
 }

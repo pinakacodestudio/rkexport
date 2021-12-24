@@ -14,7 +14,7 @@ class Company extends Admin_Controller
     public function index()
     {
         $this->viewData['title'] = "Company";
-        $this->viewData['module'] = "Company/Company";
+        $this->viewData['module'] = "company/Company";
 
         if ($this->viewData['submenuvisibility']['managelog'] == 1) {
             $this->general_model->addActionLog(4, 'Company', 'View Company.');
