@@ -169,8 +169,8 @@ function addNewDocument() {
 
 }
 function contect_addNewDocument() {
-  var rowcount = parseInt($(".countdocuments:last").attr("id").match(/\d+/)) + 1;
-  var datahtml = '<div class="col-sm-12 countdocuments pl-sm pr-sm" id="countdocuments' + rowcount + '">\
+  var rowcount = parseInt($(".conect_countdocuments:last").attr("id").match(/\d+/)) + 1;
+  var datahtml = '<div class="col-sm-12 conect_countdocuments pl-sm pr-sm" id="conect_countdocuments' + rowcount + '">\
                       <input type="hidden" name="documentid['+ rowcount + ']" value="" id="documentid' + rowcount + '">\
                       <div class="col-md-5 col-sm-5">\
                           <div class="form-group" id="documentnumber'+ rowcount + '_div">\
