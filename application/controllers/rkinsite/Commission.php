@@ -1,27 +1,27 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Currency_rate extends Admin_Controller
+class Commission extends Admin_Controller
 {
 
     public $viewData = array();
     public function __construct()
     {
         parent::__construct();
-        $this->viewData = $this->getAdminSettings('submenu', 'Currency_rate');
-        $this->load->model('Currency_rate_model', 'Currency_rate');
+        $this->viewData = $this->getAdminSettings('submenu', 'commission');
+        $this->load->model('Commission_model', 'commission');
     }
     public function index()
     {
 
-        $this->viewData['title'] = "Currency Rate";
-        $this->viewData['module'] = "currency_rate/Currency_rate";
+        $this->viewData['title'] = "Commission";
+        $this->viewData['module'] = "Commission/commission";
 
         if ($this->viewData['submenuvisibility']['managelog'] == 1) {
-            $this->general_model->addActionLog(4, 'Currency Rate', 'View currency rate.');
+            $this->general_model->addActionLog(4, 'Commission', 'View Commission.');
         }
 
-        $this->admin_headerlib->add_javascript("currency_rate", "pages/currency_rate.js");
+        $this->admin_headerlib->add_javascript("commission", "pages/commission.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
     public function listing()
@@ -31,7 +31,7 @@ class Currency_rate extends Admin_Controller
         $delete = explode(',', $this->viewData['submenuvisibility']['submenudelete']);
         $rollid = $this->session->userdata[base_url() . 'ADMINUSERTYPE'];
         $createddate = $this->general_model->getCurrentDateTime();
-        $list = $this->Currency_rate->get_datatables();
+        $list = $this->commission->get_datatables();
 
         $data = array();
         $counter = $_POST['start'];
@@ -42,50 +42,49 @@ class Currency_rate extends Admin_Controller
             $checkbox = '';
             //Edit Button
             if (in_array($rollid, $edit)) {
-                $actions .= '<a class="' . edit_class . '" href="' . ADMIN_URL . 'currency-rate/edit_currency_rate/' . $datarow->id . '/' . '" title="' . edit_title . '">' . edit_text . '</a>';
+                $actions .= '<a class="' . edit_class . '" href="' . ADMIN_URL . 'Commission/edit_commission/' . $datarow->id . '/' . '" title="' . edit_title . '">' . edit_text . '</a>';
             }
             //Delete and Enable/Disable Button
             if (in_array($rollid, $delete)) {
-                $actions .= '<a class="' . delete_class . '" href="javascript:void(0)" title="' . delete_title . '" onclick=deleterow(' . $datarow->id . ',"","currency-rate","' . ADMIN_URL . 'currency-rate/delete-mul-currency-rate") >' . delete_text . '</a>';
+                $actions .= '<a class="' . delete_class . '" href="javascript:void(0)" title="' . delete_title . '" onclick=deleterow(' . $datarow->id . ',"","commission","' . ADMIN_URL . 'Commission/delete-mul-commission") >' . delete_text . '</a>';
 
                 $checkbox = '<div class="checkbox"><input id="deletecheck' . $datarow->id . '" onchange="singlecheck(this.id)" type="checkbox" value="' . $datarow->id . '" name="deletecheck' . $datarow->id . '" class="checkradios">
                             <label for="deletecheck' . $datarow->id . '"></label></div>';
             }
 
             $row[] = ++$counter;
-            $row[] = $datarow->currency;
-            $row[] = $datarow->value;
+            $row[] = $datarow->commission_type;
             $row[] = $datarow->date;
             $row[] = $actions;
-            $row[] = $checkbox;
+            $row[] = $checkbox; 
             $data[] = $row;
         }
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Currency_rate->count_all(),
-            "recordsFiltered" => $this->Currency_rate->count_filtered(),
+            "recordsTotal" => $this->commission->count_all(),
+            "recordsFiltered" => $this->commission->count_filtered(),
             "data" => $data,
         );
         echo json_encode($output);
     }
-    public function add_Currency_rate()
+    public function add_commission()
     {
 
         $this->viewData['title'] = "Add Additional Rights";
-        $this->viewData['module'] = "currency_rate/Add_Currency_rate";
+        $this->viewData['module'] = "commission/Add_commission";
 
-        $this->admin_headerlib->add_javascript("add_Currency_rate", "pages/add_Currency_rate.js");
+        $this->admin_headerlib->add_javascript("add_commission", "pages/add_commission.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
-    public function edit_Currency_rate($id)
+    public function edit_commission($id)
     {
 
-        $this->viewData['title'] = "Edit Currency Rate";
-        $this->viewData['module'] = "currency_rate/Add_Currency_rate";
+        $this->viewData['title'] = "Edit Commission";
+        $this->viewData['module'] = "commission/Add_commission";
         $this->viewData['action'] = "1"; //Edit
 
-        $this->viewData['currencydata'] = $this->Currency_rate->getcurrencyDataByID($id);
-        $this->admin_headerlib->add_javascript("add_Currency_rate", "pages/add_Currency_rate.js");
+        $this->viewData['commissiondata'] = $this->commission->getcommissionDataByID($id);
+        $this->admin_headerlib->add_javascript("add_commission", "pages/add_commission.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
 
     }
@@ -93,23 +92,19 @@ class Currency_rate extends Admin_Controller
     {
 
         $PostData = $this->input->post();
-
         $createddate = $this->general_model->getCurrentDateTime();
         $addedby = $this->session->userdata(base_url() . 'ADMINID');
 
-        $currency = $PostData['currency'];
-        $value = $PostData['value'];
-
-        $this->form_validation->set_rules('currency', 'Currency', 'required');
-        $this->form_validation->set_rules('value', 'value', 'required');
+        $commission_type = $PostData['commission_type'];
+      
+        $this->form_validation->set_rules('commission_type', 'Commission Type', 'required');
 
         $json = array();
         if ($this->form_validation->run() == false) {
             $validationError = implode('<br>', $this->form_validation->error_array());
             $json = array('error' => 3, 'message' => $validationError);
         } else {
-            $insertdata = array("currency" => $currency,
-                "value" => $value,
+            $insertdata = array("commission_type" => $commission_type,
                 "date" => $this->general_model->convertdate($PostData['date']),
                 "createddate" => $createddate,
                 "addedby" => $addedby,
@@ -117,7 +112,7 @@ class Currency_rate extends Admin_Controller
                 "modifiedby" => $addedby);
 
             $insertdata = array_map('trim', $insertdata);
-            $Add = $this->Currency_rate->Add($insertdata);
+            $Add = $this->commission->Add($insertdata);
             if ($Add) {
                 if ($this->viewData['submenuvisibility']['managelog'] == 1) {
                     $this->general_model->addActionLog(1, 'Currency Rate', 'Currency Rate.');
@@ -130,18 +125,16 @@ class Currency_rate extends Admin_Controller
         }
         echo json_encode($json);
     }
-    public function update_currency_rate()
+    public function update_commission()
     {
         $PostData = $this->input->post();
         $modifieddate = $this->general_model->getCurrentDateTime();
         $modifiedby = $this->session->userdata(base_url() . 'ADMINID');
 
-        $rightsid = $PostData['rightsid'];
-        $currency = $PostData['currency'];
-        $value = $PostData['value'];
+        $id = $PostData['id'];
+        $commission_type = $PostData['commission_type'];
 
-        $this->form_validation->set_rules('currency', 'Currency', 'required');
-        $this->form_validation->set_rules('value', 'Value', 'required');
+        $this->form_validation->set_rules('commission_type', 'Commission Type', 'required');
 
         $json = array();
         if ($this->form_validation->run() == false) {
@@ -149,19 +142,17 @@ class Currency_rate extends Admin_Controller
             $json = array('error' => 3, 'message' => $validationError);
         } else {
 
-            $updatedata = array("currency" => $currency,
-                "value" => $value,
+            $updatedata = array("commission_type" => $commission_type,
                 "date" => $this->general_model->convertdate($PostData['date']),
                 "modifieddate" => $modifieddate,
                 "modifiedby" => $modifiedby);
-
             $updatedata = array_map('trim', $updatedata);
 
-            $this->Currency_rate->_where = array("id" => $rightsid);
-            $Edit = $this->Currency_rate->Edit($updatedata);
+            $this->commission->_where = array("id" => $id);
+            $Edit = $this->commission->Edit($updatedata);
             if ($Edit) {
                 if ($this->viewData['submenuvisibility']['managelog'] == 1) {
-                    $this->general_model->addActionLog(2, 'Currency Rate', 'Edit ' . $currency . ' currency rate.');
+                    $this->general_model->addActionLog(2, 'Commission Type', 'Edit ' . $commission_type . ' commission type.');
                 }
                 $json = array('error' => 1); //Rights successfully updated.
             } else {
@@ -171,7 +162,7 @@ class Currency_rate extends Admin_Controller
         }
         echo json_encode($json);
     }
-    public function delete_mul_currency_rate()
+    public function delete_mul_commission()
     {
         $PostData = $this->input->post();
         $ids = explode(",", $PostData['ids']);
@@ -179,12 +170,12 @@ class Currency_rate extends Admin_Controller
         foreach ($ids as $row) {
             if ($this->viewData['submenuvisibility']['managelog'] == 1) {
 
-                $this->Currency_rate->_where = array("id" => $row);
-                $data = $this->Currency_rate->getRecordsById();
+                $this->commission->_where = array("id" => $row);
+                $data = $this->commission->getRecordsById();
 
                 $this->general_model->addActionLog(3, 'Additional Rights', 'Delete ' . $data['name'] . ' additional rights.');
             }
-            $this->Currency_rate->Delete(array("id" => $row));
+            $this->commission->Delete(array("id" => $row));
         }
     }
 }
