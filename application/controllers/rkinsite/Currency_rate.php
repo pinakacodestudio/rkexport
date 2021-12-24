@@ -72,20 +72,20 @@ class Currency_rate extends Admin_Controller
     {
 
         $this->viewData['title'] = "Add Additional Rights";
-        $this->viewData['module'] = "currency_rate/Add_Currency_rate";
+        $this->viewData['module'] = "currency_rate/Add_currency_rate";
 
-        $this->admin_headerlib->add_javascript("add_Currency_rate", "pages/add_Currency_rate.js");
+        $this->admin_headerlib->add_javascript("add_currency_rate", "pages/add_currency_rate.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
     public function edit_Currency_rate($id)
     {
 
         $this->viewData['title'] = "Edit Currency Rate";
-        $this->viewData['module'] = "currency_rate/Add_Currency_rate";
+        $this->viewData['module'] = "currency_rate/Add_currency_rate";
         $this->viewData['action'] = "1"; //Edit
 
         $this->viewData['currencydata'] = $this->Currency_rate->getcurrencyDataByID($id);
-        $this->admin_headerlib->add_javascript("add_Currency_rate", "pages/add_Currency_rate.js");
+        $this->admin_headerlib->add_javascript("add_currency_rate", "pages/add_currency_rate.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
 
     }
