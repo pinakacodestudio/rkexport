@@ -105,7 +105,7 @@
                       <th>Category</th>  
                       <th>Brand</th>  
                       <th class="text-right">Price (<?=CURRENCY_CODE?>)</th>
-                      <th class="text-right">Stock</th>
+                      <!-- <th class="text-right">Stock</th> -->
                       <!-- <th class="width8 text-right">Discount (%)</th> -->
                       <th class="width8 text-right">Priority</th>
                       <th class="width8">Actions</th>

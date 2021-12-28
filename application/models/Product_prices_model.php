@@ -8,13 +8,10 @@ class Product_prices_model extends Common_model {
 	public $_where = array();
 	public $_except_fields = array();
 	public $_order = "";
-
 	function __construct() {
 		parent::__construct();
 	}
-
 	public function getPriceDetailByIdAndType($referenceid,$referencetype){
-
 		$this->readdb->select("id,quantity,discount");
 		if($referencetype==0){
 			$this->readdb->select("price");
@@ -39,7 +36,6 @@ class Product_prices_model extends Common_model {
 							->where("pp.productid=".$productid." AND (pp.id='".$priceid."' OR '".$priceid."'='')")
 							->limit(1)
 							->get();
-
 		return $query->row_array();
 	}
 	public function getChannelBasicPriceByChannelID($productid,$priceid,$channelid){
@@ -64,7 +60,6 @@ class Product_prices_model extends Common_model {
 
 		return $query->result_array();
 	}
-
 	public function getProductBasicQuantityPriceDataByPriceID($channelid,$priceid,$productid){
 
 		$query = $this->readdb->select("pbqp.id,pbqp.salesprice as price,pbqp.quantity,pbqp.discount")
@@ -91,7 +86,7 @@ class Product_prices_model extends Common_model {
 
 	public function getProductpriceByProductID($productid){
 		
-		$query = $this->readdb->select("id,price,stock,pointsforseller,pointsforbuyer,unitid,sku,barcode,minimumorderqty,maximumorderqty,		 minimumstocklimit,weight,pricetype,minimumsalesprice,
+		$query = $this->readdb->select("id,price,stock,pointsforseller,pointsforbuyer,unitid,sku,barcode,minimumorderqty,maximumorderqty,minimumstocklimit,weight,pricetype,minimumsalesprice,
 							
 				IF(IFNULL((SELECT count(pbp.id) FROM ".tbl_productbasicpricemapping." as pbp WHERE pbp.productid=pp.productid AND pbp.productpriceid=pp.id GROUP BY productpriceid),0)>0,0,1) as addpriceinpricelist,
 

@@ -172,8 +172,10 @@
 		
 		if($str){
 			if($upload==1){
+				
 				$ci = get_instance();
 				if (ALLOWS3==1) {
+					
 					$ci->load->library('aws');
 					$ci->aws->verifyawscredentials();
 					//$keyName = "profileimage/".$FileNM;
@@ -193,8 +195,10 @@
 							return 2;//file not uploaded
 						}
 						$SourceFile = $localdestination.$FileNM;
+					
 					}else{
 						$SourceFile = $_FILES[$ElementFileName]['tmp_name'];
+						
 					}
 					if ($filecompress==1 && !empty($localdestination)){
 						compress($localdestination.$FileNM,$localdestination.$FileNM,FILE_COMPRESSION);
@@ -250,6 +254,7 @@
 					}
 					
 				}else{
+					
 					$ci->load->library('upload');
 					if(!is_dir($destination)){
 						@mkdir($destination);
@@ -828,4 +833,3 @@
 		
 		return $destination;
 	}
-?>

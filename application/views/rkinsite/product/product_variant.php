@@ -69,12 +69,12 @@
                                 <input type="hidden" name="singlequantitypricesid[<?=$k?>]" value="<?=($p['pricetype']==0 && !empty($p['productquantitypricesdata'])?$p['productquantitypricesdata'][0]['id']:"")?>">
                             </div>
                           </div>
-                          <div class="col-md-1 pr-xs pl-xs" style="<?=($p['pricetype']==1?"display: none;":"")?>">
+                          <!-- <div class="col-md-1 pr-xs pl-xs" style="<?=($p['pricetype']==1?"display: none;":"")?>">
                             <div class="form-group text-right" for="discount<?=$k?>" id="discount_div<?=$k?>">
                                 <label class="control-label" for="discount<?=$k?>">Disc. (%)</label>
                                 <input type="text" id="discount<?=$k?>" onkeypress="return decimal_number_validation(event,this.value)" class="form-control discount" name="discount[<?=$k?>]" value="<?=($p['pricetype']==0 && !empty($p['productquantitypricesdata'])?$p['productquantitypricesdata'][0]['discount']:"")?>" onkeyup="return onlypercentage(this.id)">
                             </div>
-                          </div>
+                          </div> -->
                           <div class="col-md-1 pr-xs pl-xs">
                             <div class="form-group" for="stock" id="stock_div<?=$k?>">
                                <label class="control-label" for="stock<?=$k?>"> Stock
@@ -82,7 +82,7 @@
                                <input type="text" id="stock<?=$k?>" onkeypress="return isNumber(event)" class="form-control stocks" placeholder="Stock" name="stock[<?=$k?>]" value="<?=$p['stock']?>">
                             </div>
                           </div>
-                          <div class="col-md-2 pr-xs pl-xs">
+                          <!-- <div class="col-md-2 pr-xs pl-xs">
                             <div class="form-group" for="pointsforseller" id="pointsforseller_div<?=$k?>">
                                <label class="control-label" for="pointsforseller<?=$k?>">Points for Seller</label>
                                <input type="text" id="pointsforseller<?=$k?>" onkeypress="return isNumber(event)" class="form-control pointsforseller" placeholder="" name="pointsforseller[<?=$k?>]" value="<?=($p['pointsforseller']>0)?$p['pointsforseller']:''?>">
@@ -93,8 +93,8 @@
                                <label class="control-label" for="pointsforbuyer<?=$k?>">Points for Buyer</label>
                                <input type="text" id="pointsforbuyer<?=$k?>" onkeypress="return isNumber(event)" class="form-control pointsforbuyer" placeholder="" name="pointsforbuyer[<?=$k?>]" value="<?=($p['pointsforbuyer']>0)?$p['pointsforbuyer']:''?>">
                             </div>
-                          </div>
-                          <div class="col-md-2 pr-xs pl-xs">
+                          </div> -->
+                          <!-- <div class="col-md-2 pr-xs pl-xs">
                             <div class="form-group" for="sku" id="sku_div<?=$k?>">
                                <label class="control-label" for="sku<?=$k?>">SKU
                                <span class="mandatoryfield"> * </span></label>
@@ -112,7 +112,8 @@
                               <button type="button" class="btn btn-raised btn-primary btn-sm pull-right stickey-addnewpricebtn" id="addnewprice"><i class="fa fa-plus"></i> ADD NEW PRICE</button>
                             </div>
                           <?php } ?>
-                        </div>
+                        </div> -->
+                        <div class='clearfix'></div>
                         <div class="row m-n">
                           <div class="col-md-2 pr-xs pl-xs">
                             <div class="form-group" id="minimumstocklimit_div<?=$k?>">
@@ -267,7 +268,7 @@
                           <?php } ?>
                         </div>
                         <div class="row">
-                          <div class="col-md-6 pr-xs pl-xs">
+                          <!-- <div class="col-md-6 pr-xs pl-xs">
                             <div class="form-group">
                               <label for="focusedinput" class="col-sm-3 control-label pt-xs">Price Type</label>
                               <div class="col-sm-9">
@@ -285,8 +286,8 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <?php if($p['addpriceinpricelist']==1){ ?>
+                          </div> -->
+                          <!-- <?php if($p['addpriceinpricelist']==1){ ?>
                             <div class="col-md-6 p-n" id="addpriceinpricelist_div<?=$k?>">
                               <div class="form-group">
                                 <div class="col-sm-8">
@@ -297,13 +298,13 @@
                                 </div>
                               </div>
                             </div>
-                          <?php } ?>
+                          <?php } ?> -->
                         </div>
                             
                         <div class="row" id="multiplepricesection<?=$k?>" style="<?=($p['pricetype']==0?"display: none;":"")?>">
                           <div class="col-md-12"><hr></div>
                           <div class="col-md-12 p-n">
-                            <div id="headingmultipleprice_<?=$k?>_1" class="col-md-6 headingmultipleprice<?=$k?>">
+                            <div id="headingmultipleprice_<?=$k?>_1" class="co l-md-6 headingmultipleprice<?=$k?>">
                               <div class="col-md-4 pr-xs pl-xs">
                                 <div class="form-group">
                                   <label class="control-label" for="variantprice_<?=$k?>_1">Price <span class="mandatoryfield">*</span></label>

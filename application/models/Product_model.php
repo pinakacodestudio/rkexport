@@ -552,10 +552,10 @@ class Product_model extends Common_model {
         return $productdata;
 	}
 	function getProductDataByID($ID){
-		$query = $this->readdb->select("p.id,p.name,p.shortdescription,p.description,p.slug,p.isuniversal,p.hsncodeid,
+		$query = $this->readdb->select("p.id,p.name,p.importerProductName,p.supplierProductName,p.installationcost,p.shortdescription,p.description,p.slug,p.isuniversal,p.hsncodeid,
 									p.metatitle,p.metakeyword,p.metadescription,p.status,
 									p.categoryid,p.priority,p.pointsforseller,p.pointsforbuyer,p.producttype,p.brandid,p.pointspriority,p.catalogfile,p.commingsoon,
-									IFNULL((SELECT GROUP_CONCAT(relatedproductid) FROM ".tbl_relatedproduct." as rp WHERE rp.productid=p.id),0) as relatedproductid,p.returnpolicytitle,p.returnpolicydescription,p.replacementpolicytitle,p.replacementpolicydescription,p.productdisplayonfront,p.quantitytype,
+									p.returnpolicytitle,p.returnpolicydescription,p.replacementpolicytitle,p.replacementpolicydescription,p.productdisplayonfront,p.quantitytype,
 									(SELECT name FROM ".tbl_productcategory." WHERE id=p.categoryid) as category,
 									IFNULL((SELECT GROUP_CONCAT(tagid) FROM ".tbl_producttagmapping." WHERE productid=p.id),'') as tagid,
 									p.createddate,
@@ -2044,7 +2044,6 @@ class Product_model extends Common_model {
 					
 					(SELECT min(pqp.price) FROM ".tbl_productquantityprices." as pqp WHERE pqp.productpricesid IN (SELECT id FROM ".tbl_productprices." as pp where pp.productid=p.id))  as minprice
 				");
-					
 		if(isset($PostData['sectionid'])){
 			$this->readdb->select('ps.id as psid');
 			$this->_datatableorder = array("productpriority"=>"asc");

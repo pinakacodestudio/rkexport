@@ -54,7 +54,7 @@ class  Product extends Admin_Controller
             $varianthtml = '';
             $productname = '';
 
-            $actions .= '<a href="' . ADMIN_URL . 'product/view-product/' . $datarow->id . '/' . '" class="' . view_class . '" title="' . view_title . '" target="_blank">' . view_text . '</a>';
+            // $actions .= '<a href="' . ADMIN_URL . 'product/view-product/' . $datarow->id . '/' . '" class="' . view_class . '" title="' . view_title . '" target="_blank">' . view_text . '</a>';
 
             if (in_array($rollid, $edit)) {
                 $actions .= '<a class="' . edit_class . '" href="' . ADMIN_URL . 'product/product-edit/' . $datarow->id . '/' . '" title="' . edit_title . '">' . edit_text . '</a>';
@@ -106,13 +106,13 @@ class  Product extends Admin_Controller
 
                 $productcombinationarr = $this->Product_combination->getProductcombinationWithStock($datarow->id);
 
-                if (STOCK_MANAGE_BY == 0) {
-                    $ProductStock = $this->Stock->getAdminProductStock($datarow->id, 1);
-                    $keynm = 'openingstock';
-                } else {
-                    $ProductStock = $this->Stock->getAdminProductFIFOStock($datarow->id, 1);
-                    $keynm = 'openingstock';
-                }
+                // if (STOCK_MANAGE_BY == 0) {
+                //     $ProductStock = $this->Stock->getAdminProductStock($datarow->id, 1);
+                //     $keynm = 'openingstock';
+                // } else {
+                //     $ProductStock = $this->Stock->getAdminProductFIFOStock($datarow->id, 1);
+                //     $keynm = 'openingstock';
+                // }
 
                 if (count($productcombinationarr)) {
                     $html = '<div id="variant' . $datarow->id . '" style="display:none;">
@@ -132,16 +132,16 @@ class  Product extends Admin_Controller
 
                     foreach ($productcombinationarr as $pc) {
 
-                        $html .= '<tr>';
-                        $key = array_search($pc['priceid'], array_column($ProductStock, 'priceid'));
+                        // $html .= '<tr>';
+                        // $key = array_search($pc['priceid'], array_column($ProductStock, 'priceid'));
 
-                        $stock = 0;
-                        if (!empty($ProductStock)) {
-                            $key = array_search($pc['priceid'], array_column($ProductStock, 'priceid'));
-                            if (trim($key) != "" && isset($ProductStock[$key][$keynm])) {
-                                $stock = (int)$ProductStock[$key][$keynm];
-                            }
-                        }
+                        // $stock = 0;
+                        // if (!empty($ProductStock)) {
+                        //     $key = array_search($pc['priceid'], array_column($ProductStock, 'priceid'));
+                        //     if (trim($key) != "" && isset($ProductStock[$key][$keynm])) {
+                        //         $stock = (int)$ProductStock[$key][$keynm];
+                        //     }
+                        // }
 
                         $pricesArray = explode(",", $pc['productprice']);
                         $qtyArray = explode(",", $pc['productqty']);
@@ -159,9 +159,8 @@ class  Product extends Admin_Controller
                             }
                             $priceHTML .= '<p>' . CURRENCY_CODE . (!empty($rowval) ? numberFormat($rowval, 2, ',') : '0.00') . ' ' . $qtyArray[$prkey] . ($datarow->quantitytype == 0 ? "+" : "") . ' Qty' . $discounthtml . '</p>';
                         }
-
+                        // <td>' . $stock . '</td>
                         $html .= '<td>' . $priceHTML . '</td>
-                                    <td>' . $stock . '</td>
                                     <td>' . (int)$pc['pointsforseller'] . '</td>
                                     <td>' . (int)$pc['pointsforbuyer'] . '</td>';
 
@@ -182,7 +181,7 @@ class  Product extends Admin_Controller
             } else {
                 $productname = ucwords($datarow->name);
             }
-
+            $productdetail='';
             if ($datarow->productimage != "" && file_exists(PRODUCT_PATH . $datarow->productimage)) {
                 $productdetail = '<img class="pull-left thumbwidth" src="' . PRODUCT . $datarow->productimage . '" style="margin-right: 10px;"><div class="" style="display: flex;">' . $productname . '</div>';
             } else if (PRODUCTDEFAULTIMAGE != "" && file_exists(PRODUCT_PATH . PRODUCTDEFAULTIMAGE)) {
@@ -215,14 +214,14 @@ class  Product extends Admin_Controller
             $row[] = $datarow->brandname;
             $row[] = $price;
 
-            if (STOCK_MANAGE_BY == 0) {
-                $productdata = $this->Stock->getAdminProductStock($datarow->id, 0);
-                $stock = (!empty($productdata) ? $productdata[0]['openingstock'] : 0);
-            } else {
-                $productdata = $this->Stock->getAdminProductFIFOStock($datarow->id, 0);
-                $stock = (!empty($productdata[0]['openingstock']) ? $productdata[0]['openingstock'] : 0);
-            }
-            $row[] = "<span class='pull-right'>" . $stock . "</span>";
+            // if (STOCK_MANAGE_BY == 0) {
+            //     $productdata = $this->Stock->getAdminProductStock($datarow->id, 0);
+            //     $stock = (!empty($productdata) ? $productdata[0]['openingstock'] : 0);
+            // } else {
+            //     $productdata = $this->Stock->getAdminProductFIFOStock($datarow->id, 0);
+            //     $stock = (!empty($productdata[0]['openingstock']) ? $productdata[0]['openingstock'] : 0);
+            // }
+            // $row[] = "<span class='pull-right'>" . $stock . "</span>";
 
             // $row[] = "<span class='pull-right'>".number_format($datarow->discount, 2, '.', '')."</span>";
             $row[] = "<span class='pull-right'>" . $datarow->priority . "</span>";
@@ -287,12 +286,9 @@ class  Product extends Admin_Controller
         $this->viewData['module'] = "product/add_product";
         $this->viewData['action'] = '1';
         $this->viewData['VIEW_STATUS'] = "1";
-
         // $this->Product->_where=array("id"=>$id);
         $this->viewData['productdata'] = $this->Product->getProductDataByID($id);
-
         $this->load->model("Product_prices_model", "Product_prices");
-
         if ($this->viewData['productdata']['barcode'] == '') {
             duplicate:
             $barcode = rand(1000000000, 9999999999);
@@ -348,6 +344,9 @@ class  Product extends Admin_Controller
         $this->load->model("Related_product_model", "Related_product");
         
         $productname = isset($PostData['productname']) ? trim($PostData['productname']) : '';
+        $importerproductname = isset($PostData['importerproductname']) ? trim($PostData['importerproductname']) : '';
+        $supplierproductname = isset($PostData['supplierproductname']) ? trim($PostData['supplierproductname']) : '';
+        $installationcost=isset($PostData['installationcost']) ? trim($PostData['installationcost']) : '0';
         $slug = isset($PostData['productslug']) ? trim($PostData['productslug']) : '';
         $shortdescription = isset($PostData['shortdescription']) ? trim($PostData['shortdescription']) : '';
 
@@ -421,7 +420,7 @@ class  Product extends Admin_Controller
                 exit;
             }
         }
-        $this->Product->_where = 'y(name="' . $productname . '" OR slug="' . $slug . '")';
+        $this->Product->_where = '(name="' . $productname . '" OR slug="' . $slug . '")';
         $sqlname = $this->Product->getRecordsByID();
 
         if (empty($sqlname)) {
@@ -430,6 +429,9 @@ class  Product extends Admin_Controller
                 'categoryid' => $categoryid,
                 'brandid' => $brandid,
                 'name' => $productname,
+                'importerProductName'=>$importerproductname,
+                'supplierProductName'=>$supplierproductname,
+                'installationcost'=>$installationcost,
                 'slug' => $slug,
                 'shortdescription' => $shortdescription,
                 'description' => $description,
@@ -443,7 +445,7 @@ class  Product extends Admin_Controller
                 'addedby' => $addedby,
                 'modififedby' => $modifiedby
             );
-
+           
             $insertid = $this->Product->add($InsertData);
 
             if ($insertid != 0) {
@@ -523,6 +525,9 @@ class  Product extends Admin_Controller
 
         $productid = isset($PostData['productid']) ? trim($PostData['productid']) : '';
         $productname = isset($PostData['productname']) ? trim($PostData['productname']) : '';
+        $importerproductname = isset($PostData['importerproductname']) ? trim($PostData['importerproductname']) : '';
+        $supplierproductname = isset($PostData['supplierproductname']) ? trim($PostData['supplierproductname']) : '';
+        $installationcost=isset($PostData['installationcost']) ? trim($PostData['installationcost']) : '0';
         $slug = isset($PostData['productslug']) ? trim($PostData['productslug']) : '';
         $shortdescription = isset($PostData['shortdescription']) ? trim($PostData['shortdescription']) : '';
         $description = isset($PostData['description']) ? trim($PostData['description']) : '';
@@ -537,15 +542,15 @@ class  Product extends Admin_Controller
         $categoryid = isset($PostData['categoryid']) ? trim($PostData['categoryid']) : '';
         $brandid = $PostData['brandid'];
         $unitid = $PostData['unitid'];
-        $producttype = $PostData['producttype'];
+        //$producttype = $PostData['producttype'];
         $sku = $PostData['sku'];
         $weight = isset($PostData['weight']) ? $PostData['weight'] : 0;
         $minimumstocklimit = $PostData['minimumstocklimit'];
-        $minimumsalesprice = $PostData['minimumsalesprice'];
-        $minimumorderqty = $PostData['minimumorderqty'];
-        $maximumorderqty = $PostData['maximumorderqty'];
+        // $minimumsalesprice = $PostData['minimumsalesprice'];
+        // $minimumorderqty = $PostData['minimumorderqty'];
+        // $maximumorderqty = $PostData['maximumorderqty'];
         $productdisplayonfront = (isset($PostData['productdisplayonfront']) ? 1 : 0);
-        $quantitytype = $PostData['quantitytype'];
+        //$quantitytype = $PostData['quantitytype'];
 
         $returnpolicytitle = isset($PostData['returnpolicytitle']) ? trim($PostData['returnpolicytitle']) : '';
         $returnpolicydescription = isset($PostData['returnpolicydescription']) ? trim($PostData['returnpolicydescription']) : '';
@@ -566,7 +571,7 @@ class  Product extends Admin_Controller
         }
         $barcode = ($isuniversal == 1 ? $PostData['barcode'] : '');
         $commingsoon = isset($PostData['commingsoon']) ? $PostData['commingsoon'] : '0';
-        $pricetype = $PostData['pricetype'];
+        //$pricetype = $PostData['pricetype'];
         $productpricesid = isset($PostData['productpricesid']) ? trim($PostData['productpricesid']) : '';
         
         if ($isuniversal == 1) {
@@ -600,54 +605,54 @@ class  Product extends Admin_Controller
                 }
             }
         }
-        $oldcatalogfile = trim($PostData['oldcatalogfile']);
-        $catalogfile = $oldcatalogfile;
-        $compress = 0;
-        if (isset($_FILES['catalogfile']['name']) && $_FILES['catalogfile']['name'] != '' && $oldcatalogfile != '') {
-            if ($_FILES["catalogfile"]['size'] != '' && $_FILES["catalogfile"]['size'] >= UPLOAD_MAX_FILE_SIZE_CATALOG) {
-                echo 5;    // CATALOG FILE SIZE IS LARGE
-                exit;
-            }
-            if ($_FILES["catalogfile"]['type'] != 'application/pdf') {
-                $compress = 1;
-            }
+        // $oldcatalogfile = trim($PostData['oldcatalogfile']);
+        // $catalogfile = $oldcatalogfile;
+        // $compress = 0;
+        // if (isset($_FILES['catalogfile']['name']) && $_FILES['catalogfile']['name'] != '' && $oldcatalogfile != '') {
+        //     if ($_FILES["catalogfile"]['size'] != '' && $_FILES["catalogfile"]['size'] >= UPLOAD_MAX_FILE_SIZE_CATALOG) {
+        //         echo 5;    // CATALOG FILE SIZE IS LARGE
+        //         exit;
+        //     }
+        //     if ($_FILES["catalogfile"]['type'] != 'application/pdf') {
+        //         $compress = 1;
+        //     }
 
-            $catalogfile = reuploadfile('catalogfile', 'CATALOG_IMGPDF', $oldcatalogfile, CATALOG_PATH, "*", '', $compress, CATALOG_LOCAL_PATH);
-            if ($catalogfile !== 0) {
-                if ($catalogfile == 2) {
-                    echo 7; //catalog file not uploaded
-                    exit;
-                }
-            } else {
-                echo 6; //INVALID TYPE
-                exit;
-            }
-        } else if (isset($_FILES['catalogfile']['name']) && $_FILES['catalogfile']['name'] != '' && $oldcatalogfile == '') {
-            if ($_FILES["catalogfile"]['type'] != 'application/pdf') {
-                $compress = 1;
-            }
-            if ($_FILES["catalogfile"]['size'] != '' && $_FILES["catalogfile"]['size'] >= UPLOAD_MAX_FILE_SIZE_CATALOG) {
-                echo 5;    // CATALOG FILE SIZE IS LARGE
-                exit;
-            }
-            $catalogfile = uploadFile('catalogfile', 'CATALOG_IMGPDF', CATALOG_PATH, '*', '', $compress, CATALOG_LOCAL_PATH);
-            if ($catalogfile !== 0) {
-                if ($catalogfile == 2) {
-                    echo 7; //catalog file not uploaded
-                    exit;
-                }
-            } else {
-                echo 6; //INVALID TYPE
-                exit;
-            }
-        } else if (isset($_FILES['catalogfile']['name']) && $_FILES['catalogfile']['name'] == '') {
-            if ($oldcatalogfile != '' && $PostData['isvalidcatalogfile'] == 0) {
-                unlinkfile("CATALOG_IMGPDF", $oldcatalogfile, CATALOG_PATH);
-                $catalogfile = '';
-            } else if ($oldcatalogfile == '') {
-                $catalogfile = '';
-            }
-        }
+        //     $catalogfile = reuploadfile('catalogfile', 'CATALOG_IMGPDF', $oldcatalogfile, CATALOG_PATH, "*", '', $compress, CATALOG_LOCAL_PATH);
+        //     if ($catalogfile !== 0) {
+        //         if ($catalogfile == 2) {
+        //             echo 7; //catalog file not uploaded
+        //             exit;
+        //         }
+        //     } else {
+        //         echo 6; //INVALID TYPE
+        //         exit;
+        //     }
+        // } else if (isset($_FILES['catalogfile']['name']) && $_FILES['catalogfile']['name'] != '' && $oldcatalogfile == '') {
+        //     if ($_FILES["catalogfile"]['type'] != 'application/pdf') {
+        //         $compress = 1;
+        //     }
+        //     if ($_FILES["catalogfile"]['size'] != '' && $_FILES["catalogfile"]['size'] >= UPLOAD_MAX_FILE_SIZE_CATALOG) {
+        //         echo 5;    // CATALOG FILE SIZE IS LARGE
+        //         exit;
+        //     }
+        //     $catalogfile = uploadFile('catalogfile', 'CATALOG_IMGPDF', CATALOG_PATH, '*', '', $compress, CATALOG_LOCAL_PATH);
+        //     if ($catalogfile !== 0) {
+        //         if ($catalogfile == 2) {
+        //             echo 7; //catalog file not uploaded
+        //             exit;
+        //         }
+        //     } else {
+        //         echo 6; //INVALID TYPE
+        //         exit;
+        //     }
+        // } else if (isset($_FILES['catalogfile']['name']) && $_FILES['catalogfile']['name'] == '') {
+        //     if ($oldcatalogfile != '' && $PostData['isvalidcatalogfile'] == 0) {
+        //         unlinkfile("CATALOG_IMGPDF", $oldcatalogfile, CATALOG_PATH);
+        //         $catalogfile = '';
+        //     } else if ($oldcatalogfile == '') {
+        //         $catalogfile = '';
+        //     }
+        // }
 
         // print_r($PostData); exit;
         if (empty($sqlname)) {
@@ -655,6 +660,8 @@ class  Product extends Admin_Controller
                 'categoryid' => $categoryid,
                 'brandid' => $brandid,
                 'name' => $productname,
+                'importerProductName'=>$importerproductname,
+                'supplierProductName'=>$supplierproductname,
                 'slug' => $slug,
                 'shortdescription' => $shortdescription,
                 'description' => $description,
@@ -664,16 +671,17 @@ class  Product extends Admin_Controller
                 'metatitle' => $metatitle,
                 'metakeyword' => $metakeyword,
                 'metadescription' => $metadescription,
+                'installationcost'=>$installationcost,
                 'priority' => $priority,
                 'commingsoon' => $commingsoon,
-                'producttype' => $producttype,
-                'catalogfile' => $catalogfile,
+                //'producttype' => $producttype,
+                //'catalogfile' => $catalogfile,
                 'returnpolicytitle' => $returnpolicytitle,
                 'returnpolicydescription' => $returnpolicydescription,
                 'replacementpolicytitle' => $replacementpolicytitle,
                 'replacementpolicydescription' => $replacementpolicydescription,
                 'productdisplayonfront' => $productdisplayonfront,
-                'quantitytype' => $quantitytype,
+               // 'quantitytype' => $quantitytype,
                 'status' => $status,
                 'modifeddate' => $modifieddate,
                 'modififedby' => $modifiedby
@@ -688,17 +696,15 @@ class  Product extends Admin_Controller
                 $updatedata["stock"] = $stock;
                 $updatedata["barcode"] = $barcode;
                 $updatedata["sku"] = $sku;
-                $updatedata['minimumstocklimit'] = $minimumstocklimit;
-                $updatedata['minimumsalesprice'] = $minimumsalesprice;
-                $updatedata["minimumorderqty"] = $minimumorderqty;
-                $updatedata["maximumorderqty"] = $maximumorderqty;
-                $updatedata["pricetype"] = $pricetype;
+                // $updatedata['minimumstocklimit'] = $minimumstocklimit;
+                // $updatedata['minimumsalesprice'] = $minimumsalesprice;
+                // $updatedata["minimumorderqty"] = $minimumorderqty;
+                // $updatedata["maximumorderqty"] = $maximumorderqty;
+                // $updatedata["pricetype"] = $pricetype;
             }
             $updatedata["weight"] = $weight;
             $updatedata["unitid"] = $unitid;
-
             //print_r($updatedata);exit;
-
             $this->Product_prices->_where = array('productid' => $productid);
             $this->Product_prices->Edit($updatedata);
 
@@ -709,37 +715,37 @@ class  Product extends Admin_Controller
 
                 $InsertMultiplePriceData = $UpdateMultiplePriceData = $UpdatedProductQuantityPrice = array();
 
-                if ($pricetype == 1) {
-                    if (!empty($variantpricearray)) {
-                        foreach ($variantpricearray as $k => $variantprice) {
+                // if ($pricetype == 1) {
+                //     if (!empty($variantpricearray)) {
+                //         foreach ($variantpricearray as $k => $variantprice) {
 
-                            $productquantitypricesid = isset($PostData['productquantitypricesid'][$k]) ? $PostData['productquantitypricesid'][$k] : "";
+                //             $productquantitypricesid = isset($PostData['productquantitypricesid'][$k]) ? $PostData['productquantitypricesid'][$k] : "";
 
-                            if ($variantprice > 0 && $variantqtyarray[$k] > 0) {
+                //             if ($variantprice > 0 && $variantqtyarray[$k] > 0) {
 
-                                if (!empty($productquantitypricesid)) {
+                //                 if (!empty($productquantitypricesid)) {
 
-                                    $UpdateMultiplePriceData[] = array(
-                                        "id" => $productquantitypricesid,
-                                        "price" => $variantprice,
-                                        "quantity" => $variantqtyarray[$k],
-                                        "discount" => $variantdiscpercentarray[$k]
-                                    );
+                //                     $UpdateMultiplePriceData[] = array(
+                //                         "id" => $productquantitypricesid,
+                //                         "price" => $variantprice,
+                //                         "quantity" => $variantqtyarray[$k],
+                //                         "discount" => $variantdiscpercentarray[$k]
+                //                     );
 
-                                    $UpdatedProductQuantityPrice[] = $productquantitypricesid;
-                                } else {
+                //                     $UpdatedProductQuantityPrice[] = $productquantitypricesid;
+                //                 } else {
 
-                                    $InsertMultiplePriceData[] = array(
-                                        "productpricesid" => $productpricesid,
-                                        "price" => $variantprice,
-                                        "quantity" => $variantqtyarray[$k],
-                                        "discount" => $variantdiscpercentarray[$k]
-                                    );
-                                }
-                            }
-                        }
-                    }
-                } else {
+                //                     $InsertMultiplePriceData[] = array(
+                //                         "productpricesid" => $productpricesid,
+                //                         "price" => $variantprice,
+                //                         "quantity" => $variantqtyarray[$k],
+                //                         "discount" => $variantdiscpercentarray[$k]
+                //                     );
+                //                 }
+                //             }
+                //         }
+                //     }
+                // } else {
                     $productquantitypricesid = !empty($PostData['singlequantitypricesid']) ? $PostData['singlequantitypricesid'] : "";
 
                     if ($PostData['price'] > 0) {
@@ -763,7 +769,7 @@ class  Product extends Admin_Controller
                             );
                         }
                     }
-                }
+            //    }
 
                 $priceqtydata = $this->Product_prices->getProductQuantityPriceDataByPriceID($productpricesid);
                 if (!empty($priceqtydata)) {
@@ -1346,14 +1352,13 @@ class  Product extends Admin_Controller
                 }
             }
 
-            $this->load->model("Related_product_model", "Related_product");
-            $this->Related_product->Delete(array('productid' => $row));
+            // $this->load->model("Related_product_model", "Related_product");
+            // $this->Related_product->Delete(array('productid' => $row));
 
             $this->Product->_table = tbl_product;
             $this->Product->_fields = "name";
             $this->Product->_where = array("id" => $row);
             $productdata = $this->Product->getRecordsById();
-
             if ($this->viewData['submenuvisibility']['managelog'] == 1) {
                 $this->general_model->addActionLog(3, 'Product', "Delete " . ucfirst($productdata['name']) . ' product.');
             }
@@ -1366,34 +1371,34 @@ class  Product extends Admin_Controller
         $PostData = $this->input->post();
         $count = 0;
         $ids = explode(",", $PostData['ids']);
-        foreach ($ids as $row) {
-            $this->readdb->select('productid');
-            $this->readdb->from(tbl_orderproducts);
-            $where = array("productid" => $row);
-            $this->readdb->where($where);
-            $query = $this->readdb->get();
-            if ($query->num_rows() > 0) {
-                $count++;
-            }
+        // foreach ($ids as $row) {
+        //     $this->readdb->select('productid');
+        //     $this->readdb->from(tbl_orderproducts);
+        //     $where = array("productid" => $row);
+        //     $this->readdb->where($where);
+        //     $query = $this->readdb->get();
+        //     if ($query->num_rows() > 0) {
+        //         $count++;
+        //     }
 
-            $this->readdb->select('productid');
-            $this->readdb->from(tbl_cart);
-            $where = array("productid" => $row);
-            $this->readdb->where($where);
-            $query = $this->readdb->get();
-            if ($query->num_rows() > 0) {
-                $count++;
-            }
+        //     $this->readdb->select('productid');
+        //     $this->readdb->from(tbl_cart);
+        //     $where = array("productid" => $row);
+        //     $this->readdb->where($where);
+        //     $query = $this->readdb->get();
+        //     if ($query->num_rows() > 0) {
+        //         $count++;
+        //     }
 
-            $this->readdb->select('productid');
-            $this->readdb->from(tbl_quotationproducts);
-            $where = array("productid" => $row);
-            $this->readdb->where($where);
-            $query = $this->readdb->get();
-            if ($query->num_rows() > 0) {
-                $count++;
-            }
-        }
+        //     $this->readdb->select('productid');
+        //     $this->readdb->from(tbl_quotationproducts);
+        //     $where = array("productid" => $row);
+        //     $this->readdb->where($where);
+        //     $query = $this->readdb->get();
+        //     if ($query->num_rows() > 0) {
+        //         $count++;
+        //     }
+        // }
         echo $count;
     }
 

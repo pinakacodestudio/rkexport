@@ -97,7 +97,7 @@
                           <label for="no">No</label>
                           </div>
                         </div>
-                      </div>
+                      </div> 
                     </div>
                     <div class="form-group">
                       <label for="focusedinput" class="col-sm-4 control-label"></label>

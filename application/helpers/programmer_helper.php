@@ -402,14 +402,13 @@ if (!function_exists('sendPushNotification')) {
 		/* Code Ends for sending Push Notification */
 	}
 }
-
 if (!function_exists('numberFormat')) {
 	function numberFormat($number,$decimals=0,$thousands_sep=",") {
 		
 		if($thousands_sep==","){
 			setlocale(LC_MONETARY,"en_IN");
 		}
-        return money_format("%!.".$decimals."n", (int)$number);
+        return (int)$number;
 	}
 
 }

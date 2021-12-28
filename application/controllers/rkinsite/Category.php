@@ -42,7 +42,7 @@ class Category extends Admin_Controller {
         $counter = $_POST['start'];
         $pokemon_doc = new DOMDocument();
         $internalErrors = libxml_use_internal_errors(true);
-
+ 
         foreach ($list as $datarow) {         
             $row = array();
             $actions = '';

@@ -104,6 +104,22 @@
                                                   </div>
                                               </div>
                                           </div>
+                                          <div class="col-md-6 p-n">
+                                              <div class="form-group" id="productname_div">
+                                                  <label class="col-sm-3 control-label" for="productname">Importet Product Name </label>
+                                                  <div class="col-md-8">
+                                                      <input type="text" id="importerproductname" class="form-control" name="importerproductname" value="<?php if (isset($productdata)) { echo $productdata['importerProductName']; } ?>">
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6 p-n">
+                                              <div class="form-group" id="productname_div">
+                                                  <label class="col-sm-3 control-label" for="productname">Supplier Product Name </label>
+                                                  <div class="col-md-8">
+                                                      <input type="text" id="supplierproductname" class="form-control" name="supplierproductname" value="<?php if (isset($productdata)) { echo $productdata['supplierProductName']; } ?>">
+                                                  </div>
+                                              </div>
+                                          </div>
                                       </div>
                                       <div class="col-md-12 p-n">
                                           <div class="col-md-6 p-n">
@@ -116,6 +132,14 @@
                                                               <option value="<?= $brand['id'] ?>" <?= ((isset($productdata) && $productdata['brandid'] == $brand['id']) ? 'selected' : "") ?>><?= $brand['name'] ?></option>
                                                           <?php } ?>
                                                       </select>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6 p-n">
+                                              <div class="form-group" id="productname_div">
+                                                  <label class="col-sm-3 control-label" for="productname">Installation Cost</label>
+                                                  <div class="col-md-8">
+                                                      <input type="number" id="installationcost" class="form-control" name="installationcost" value="<?php if (isset($productdata)) { echo $productdata['installationcost']; } ?>">
                                                   </div>
                                               </div>
                                           </div>

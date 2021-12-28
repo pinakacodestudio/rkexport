@@ -154,11 +154,13 @@ class Category_model extends Common_model {
 	}
 	function get_datatables($MEMBERID=0,$CHANNELID=0) {
 		$this->_get_datatables_query($MEMBERID,$CHANNELID);
+		
 		if($_POST['length'] != -1) {
 			$this->readdb->limit($_POST['length'], $_POST['start']);
 			$query = $this->readdb->get();
 			return $query->result();
 		}
+		
 	}
 
 	function _get_datatables_query($MEMBERID,$CHANNELID){
@@ -204,7 +206,7 @@ class Category_model extends Common_model {
 		}else{
 			$this->readdb->where("pc1.memberid='".$MEMBERID."' AND pc1.channelid='".$CHANNELID."'");
 		}
-		$this->readdb->group_by("p.categoryid");
+		$this->readdb->group_by("pc1.id");
 		$i = 0;
 
 		if($_POST['search']['value']) { 

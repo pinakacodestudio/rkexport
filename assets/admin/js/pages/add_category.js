@@ -1,36 +1,38 @@
 $(document).ready(function() {
 
-    if($('#oldfileimage').val() != ''){
+    if ($('#oldfileimage').val() != '') {
         var $imageupload = $('#fileImg');
         $imageupload.imageupload({
             url: SITE_URL,
             type: '1',
-            maxFileSizeKb : UPLOAD_MAX_FILE_SIZE,
-            allowedFormats: [ 'jpg', 'jpeg', 'png','ico']
+            maxFileSizeKb: UPLOAD_MAX_FILE_SIZE,
+            allowedFormats: ['jpg', 'jpeg', 'png', 'ico']
         });
-    }else{
+    } else {
         var $imageupload = $('#fileImg');
         $imageupload.imageupload({
-          url: SITE_URL,
-          type: '0',
-          maxFileSizeKb : UPLOAD_MAX_FILE_SIZE,
-          allowedFormats: [ 'jpg', 'jpeg', 'png','ico']
+            url: SITE_URL,
+            type: '0',
+            maxFileSizeKb: UPLOAD_MAX_FILE_SIZE,
+            allowedFormats: ['jpg', 'jpeg', 'png', 'ico']
         });
     }
 
-    $('#remove').click(function(){
+    $('#remove').click(function() {
         $('#removeimg').val('1');
     });
-    $("#categoryslug").keyup(function (e) {
+    $("#categoryslug").keyup(function(e) {
         $("#categoryslug").val(($("#categoryslug").val()).toLowerCase());
     });
-      
+
 });
-function setslug(name){
+
+function setslug(name) {
     $('#categoryslug').val(name.toLowerCase().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-'));
-  }
+}
+
 function validation() {
-   
+
     $('input[type="text"]').removeClass("has-not-error");
     $('input[type="text"]').removeClass("has-error");
 
@@ -49,29 +51,29 @@ function validation() {
     //var isvalidimage = 0;
 
     PNotify.removeAll();
-    if(name=="") {
+    if (name == "") {
         $("#name_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please enter category name !',styling: 'fontawesome',delay: '3000',type: 'error'});
+        new PNotify({ title: 'Please enter category name !', styling: 'fontawesome', delay: '3000', type: 'error' });
     } else {
-        if(name.length < 2) {
+        if (name.length < 2) {
             $("#name_div").addClass("has-error is-focused");
-            new PNotify({title: 'Category name required minimum 2 characters !',styling: 'fontawesome',delay: '3000',type: 'error'});
+            new PNotify({ title: 'Category name required minimum 2 characters !', styling: 'fontawesome', delay: '3000', type: 'error' });
         } else {
             $("#name").addClass("has-not-error");
             isvalidname = 1;
         }
     }
-    if(categoryslug == ''){
+    if (categoryslug == '') {
         $("#categoryslug_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please enter category link !',styling: 'fontawesome',delay: '3000',type: 'error'});
+        new PNotify({ title: 'Please enter category link !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidcategoryslug = 0;
-    }else { 
-        if(categoryslug.length<2){
+    } else {
+        if (categoryslug.length < 2) {
             $("#categoryslug_div").addClass("has-error is-focused");
-            new PNotify({title: "Category link require minimum 2 characters !",styling: 'fontawesome',delay: '3000',type: 'error'});
+            new PNotify({ title: "Category link require minimum 2 characters !", styling: 'fontawesome', delay: '3000', type: 'error' });
             isvalidcategoryslug = 0;
-        }else{
-            isvalidcategoryslug = 1;  
+        } else {
+            isvalidcategoryslug = 1;
         }
     }
     /* if(ACTION == 0){
@@ -93,43 +95,42 @@ function validation() {
             isvalidimage = 1;  
         }
    } */
-    if(isvalidname == 1 && isvalidcategoryslug == 1){
+    if (isvalidname == 1 && isvalidcategoryslug == 1) {
         var formData = new FormData($('#form-category')[0]);
 
-        if(ACTION == 0){ // INSERT
+        if (ACTION == 0) { // INSERT
             var baseurl = SITE_URL + 'category/category-add';
             $.ajax({
-                
+
                 url: baseurl,
                 type: 'POST',
                 data: formData,
-                //async: false,
-                beforeSend: function(){
+                //async: false, 
+                beforeSend: function() {
                     $('.mask').show();
                     $('#loader').show();
                 },
-                success: function(response){
+                success: function(response) {
                     var data = JSON.parse(response);
-                    if(data['error']==1){
-                        new PNotify({title: 'Category successfully added.',styling: 'fontawesome',delay: '3000',type: 'success'});
-                        setTimeout(function() { window.location = SITE_URL + "category";}, 500);
-                    }else if(data['error']==2) {
-                        new PNotify({title: 'Category already exist !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                    }else if(data['error']==3) {
-                        new PNotify({title: 'Image does not Uploaded.',styling: 'fontawesome',delay: '3000',type: 'error'});
-                    }else if(data['error']==4) {
-                        new PNotify({title: 'Image type does not valid !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                    }else if(data['error']==5) {
-                        new PNotify({title: data['message'],styling: 'fontawesome',delay: '3000',type: 'error'});
-                    }else if(data['error']==6) {
-                        new PNotify({title: 'File is too large (max size ' + formatBytes(UPLOAD_MAX_FILE_SIZE)+')!',styling: 'fontawesome',delay: '3000',type: 'error'});
-                    }else if(data['error']==0) {
-                        new PNotify({title: 'Category not added !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                    if (data['error'] == 1) {
+                        new PNotify({ title: 'Category successfully added.', styling: 'fontawesome', delay: '3000', type: 'success' });
+                        setTimeout(function() { window.location = SITE_URL + "category"; }, 500);
+                    } else if (data['error'] == 2) {
+                        new PNotify({ title: 'Category already exist !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                    } else if (data['error'] == 3) {
+                        new PNotify({ title: 'Image does not Uploaded.', styling: 'fontawesome', delay: '3000', type: 'error' });
+                    } else if (data['error'] == 4) {
+                        new PNotify({ title: 'Image type does not valid !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                    } else if (data['error'] == 5) {
+                        new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
+                    } else if (data['error'] == 6) {
+                        new PNotify({ title: 'File is too large (max size ' + formatBytes(UPLOAD_MAX_FILE_SIZE) + ')!', styling: 'fontawesome', delay: '3000', type: 'error' });
+                    } else if (data['error'] == 0) {
+                        new PNotify({ title: 'Category not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
-                error: function(xhr) {
-                },
-                complete: function(){
+                error: function(xhr) {},
+                complete: function() {
                     $('.mask').hide();
                     $('#loader').hide();
                 },
@@ -138,39 +139,38 @@ function validation() {
                 processData: false
             });
         } else {
-                 // MODIFY
+            // MODIFY
             var baseurl = SITE_URL + 'category/update-category';
             $.ajax({
                 url: baseurl,
                 type: 'POST',
                 data: formData,
-                beforeSend: function(){
+                beforeSend: function() {
                     $('.mask').show();
                     $('#loader').show();
                 },
-                success: function(response){
+                success: function(response) {
                     var data = JSON.parse(response);
-                    if(data['error']==1){
-                        new PNotify({title: 'Category successfully updated.',styling: 'fontawesome',delay: '3000',type: 'success'});
-                    
-                        setTimeout(function() { window.location = SITE_URL + "category";}, 500);
-                    }  else if(data['error']==2){
-                        new PNotify({title: 'Category already exist !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                    } else if(data['error']==3){
-                        new PNotify({title: 'Image does not Uploaded.',styling: 'fontawesome',delay: '3000',type: 'error'});
-                    } else if(data['error']==4){
-                        new PNotify({title: 'Image type does not valid !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                    } else if(data['error']==5){
-                        new PNotify({title: data['message'],styling: 'fontawesome',delay: '3000',type: 'error'});
-                    } else if(data['error']==6) {
-                        new PNotify({title: 'Sorry, Your file is too large. Only '+size+' is allowed !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                    }else if(data['error']==0){
-                        new PNotify({title: 'Category not updated !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                    if (data['error'] == 1) {
+                        new PNotify({ title: 'Category successfully updated.', styling: 'fontawesome', delay: '3000', type: 'success' });
+
+                        setTimeout(function() { window.location = SITE_URL + "category"; }, 500);
+                    } else if (data['error'] == 2) {
+                        new PNotify({ title: 'Category already exist !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                    } else if (data['error'] == 3) {
+                        new PNotify({ title: 'Image does not Uploaded.', styling: 'fontawesome', delay: '3000', type: 'error' });
+                    } else if (data['error'] == 4) {
+                        new PNotify({ title: 'Image type does not valid !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                    } else if (data['error'] == 5) {
+                        new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
+                    } else if (data['error'] == 6) {
+                        new PNotify({ title: 'Sorry, Your file is too large. Only ' + size + ' is allowed !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                    } else if (data['error'] == 0) {
+                        new PNotify({ title: 'Category not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
-                error: function(xhr) {
-                },
-                complete: function(){
+                error: function(xhr) {},
+                complete: function() {
                     $('.mask').hide();
                     $('#loader').hide();
                 },
@@ -178,14 +178,14 @@ function validation() {
                 contentType: false,
                 processData: false
             });
-        }        
+        }
     }
 }
 
 function resetdata() {
     $("#name_div").removeClass("has-error is-focused");
     $("#categoryslug_div").removeClass("has-error is-focused");
-    if(ACTION==0){
+    if (ACTION == 0) {
         $('.selectpicker').selectpicker('refresh');
         $('#name').val("");
         $('#categoryslug').val('');
