@@ -472,6 +472,7 @@ class  Product extends Admin_Controller
                 
                 $Imageextensions = array("bmp", "bm", "gif", "ico", "jfif", "jfif-tbnl", "jpe", "jpeg", "jpg", "pbm", "png", "svf", "tif", "tiff", "wbmp", "x-png");
 
+           
                 foreach ($_FILES as $key => $value) {
                     $id = preg_replace('/[^0-9]/', '', $key);
                     if (isset($_FILES['productfile' . $id]['name']) && $_FILES['productfile' . $id]['name'] != '' && strpos($key, 'productfile') !== false) {

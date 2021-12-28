@@ -499,7 +499,6 @@ class User extends Admin_Controller {
         	$removeoldImage = trim($PostData['removeoldImage']);
 
         	if($_FILES["image"]['name'] != ''){
-
 				$image = reuploadfile('image', 'PROFILE', $oldprofileimage, PROFILE_PATH, "jpeg|png|jpg|JPEG|PNG|JPG", '', 1, PROFILE_LOCAL_PATH);
 				if($image !== 0){
 					if($image==2){
