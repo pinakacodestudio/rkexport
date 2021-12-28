@@ -80,6 +80,11 @@ class MY_Controller extends CI_Controller {
         define("PRODUCT_PATH", $location."product/");
         define("PRODUCT_LOCAL_PATH", $localfolderlocation."product/");
         define("PRODUCT_IMAGE", $FILE_URL."product/");
+
+        define("PARTY", $FILE_URL."party/");
+        define("PARTY_PATH", $location."party/");
+        define("PARTY_LOCAL_PATH", $localfolderlocation."party/");
+        define("PARTY_IMAGE", $FILE_URL."party/");
         
         define("ADVERTISEMENT", $FILE_URL."advertisement/");
         define("ADVERTISEMENT_PATH", $location."advertisement/");

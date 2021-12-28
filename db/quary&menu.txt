@@ -20,3 +20,6 @@ quary
 ALTER TABLE `user` ADD `departmentid` INT NULL AFTER `stateid`;
 
 ALTER TABLE `user` ADD `joindate` DATE NULL AFTER `departmentid`, ADD `birthdate` DATE NULL AFTER `joindate`, ADD `anniversarydate` DATE NULL AFTER `birthdate`;
+
+============25-des-2021==========================================
+CREATE TABLE `rkexport`.`party_contact` ( `id` INT NOT NULL AUTO_INCREMENT , `firstname` VARCHAR(50) NULL , `lastname` VARCHAR(50) NULL , `contactno` VARCHAR(20) NULL , `birthdate` DATE NULL , `anniversarydate` DATE NULL , `email` VARCHAR(20) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

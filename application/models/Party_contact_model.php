@@ -1,14 +1,14 @@
 <?php
 
-class Party_model extends Common_model {
+class Party_contact_model extends Common_model {
 
 	//put your code here
-	public $_table = tbl_party;
+	public $_table = tbl_party_contact;
 	public $_fields = "*";
 	public $_where = array();
     public $_except_fields = array();
-    public $column_order = array(null,'p.websitename','pt.partytype','p.contactno1','c.name','p.createddate'); //set column field database for datatable orderable
-    public $column_search = array('p.websitename','p.partycode','p.contactno1','pt.partytype','(IFNULL(c.name,""))','DATE_FORMAT(p.createddate , "%d %b %Y %H:%i %p")'); //set column field database for datatable searchable 
+    public $column_order = array(null,'p.firstname','pt.partytype','p.contactno1','c.name','p.createddate'); //set column field database for datatable orderable
+    public $column_search = array('p.firstname','p.middlename','p.lastname','p.partycode','p.contactno1','pt.partytype','(IFNULL(c.name,""))','DATE_FORMAT(p.createddate , "%d %b %Y %H:%i %p")'); //set column field database for datatable searchable 
 	public $order = array('p.id' => 'DESC'); // default order  
 	
     public $col_order_doc = array(null,'dt.documenttype','d.documentnumber','d.fromdate','d.duedate');
@@ -62,10 +62,12 @@ class Party_model extends Common_model {
 	
 	function getPartyDataByID($ID){
         
-        $query = $this->readdb->select("p.id,p.websitename,p.partycode,p.partytypeid,p.cityid,p.provinceid,p.gst,p.pan,p.partycode,p.countryid,p.billingaddress,p.shippingaddress,courieraddress,p.openingdate,p.openingamount,p.companyid")
-		->from($this->_table." as p")
-		->where("p.id", $ID)
-		->get();
+        $query = $this->readdb->select("p.id,p.firstname,p.middlename,p.lastname,p.partycode,p.partytypeid,p.email,p.empolyeeroleid,p.contactno1,p.contactno2,p.gender,p.birthdate,p.anniversarydate,p.education,p.address,p.cityid,p.provinceid,
+            IFNULL((SELECT countryid FROM ".tbl_province." WHERE id=p.provinceid),0) as countryid,p.allowforlogin,p.password
+        ")
+                            ->from($this->_table." as p")
+                            ->where("p.id", $ID)
+							->get();
 		
 		if ($query->num_rows() == 1) {
 			return $query->row_array();
@@ -75,18 +77,19 @@ class Party_model extends Common_model {
 	}
 	function getPartyDetailById($partyid){
         
-        $query = $this->readdb->select("p.id,p.websitename,p.partycode,pt.partytype,p.partytypeid,ur.role,p.email,p.birthdate,p.anniversarydate,p.education,p.address,p.cityid,p.provinceid,
+        $query = $this->readdb->select("p.id,p.firstname,p.middlename,p.lastname,p.partycode,pt.partytype,p.partytypeid,ur.role,p.email,p.contactno1,p.contactno2,p.gender,p.birthdate,p.anniversarydate,p.education,p.address,p.cityid,p.provinceid,
 			IFNULL((SELECT countryid FROM ".tbl_province." WHERE id=p.provinceid),0) as countryid,p.allowforlogin,p.password,
 			IFNULL(ct.name,'') as cityname,IFNULL(pr.name,'') as provincename,IFNULL(cn.name,'') as countryname,
+
         ")
-		->from($this->_table." as p")
-		->join(tbl_partytype." as pt","pt.id=p.partytypeid","INNER")
-		->join(tbl_userrole." as ur","ur.id=p.empolyeeroleid","LEFT")
-		->join(tbl_city." as ct","ct.id=p.cityid","LEFT")
-		->join(tbl_province." as pr","pr.id=p.provinceid","LEFT")
-		->join(tbl_country." as cn","cn.id=pr.countryid","LEFT")
-		->where("p.id", $partyid)
-		->get();
+							->from($this->_table." as p")
+							->join(tbl_partytype." as pt","pt.id=p.partytypeid","INNER")
+							->join(tbl_userrole." as ur","ur.id=p.empolyeeroleid","LEFT")
+							->join(tbl_city." as ct","ct.id=p.cityid","LEFT")
+							->join(tbl_province." as pr","pr.id=p.provinceid","LEFT")
+							->join(tbl_country." as cn","cn.id=pr.countryid","LEFT")
+                            ->where("p.id", $partyid)
+							->get();
 		
 		$json=array();
 		if ($query->num_rows() == 1) {
@@ -129,10 +132,10 @@ class Party_model extends Common_model {
 			$where = "1=1";
 		}
 
-		$query = $this->readdb->select("id,websitename,partycode")
+		$query = $this->readdb->select("id,CONCAT(firstname,' ',middlename,' ',lastname,' (',partycode,')') as name,partycode")
 							->from($this->_table)
 							->where($where)
-							->order_by("websitename","ASC")
+							->order_by("firstname","ASC")
 							->get();
 		
 		return $query->result_array();
@@ -158,12 +161,15 @@ class Party_model extends Common_model {
         $partytypeid = (isset($_REQUEST['partytypeid']))?$_REQUEST['partytypeid']:0;
         $cityid = (isset($_REQUEST['cityid']))?$_REQUEST['cityid']:0;
         
-        $this->readdb->select('p.id,p.websitename,p.partycode,pt.partytype as partytypename,p.cityid,p.provinceid,p.createddate,p.companyid,t4.companyname,(select contactno from '.tbl_party_contact.' where id=p.id LIMIT 1) as contactdetails,c.name as cityname');
+        $this->readdb->select("p.id,p.firstname,p.middlename,p.lastname,p.partycode,
+                pt.partytype,p.email,p.contactno1,p.contactno2,p.empolyeeroleid,
+                p.gender,p.birthdate,p.anniversarydate,p.education,p.address,p.cityid,p.provinceid,p.createddate,
+                IFNULL(c.name,'') as cityname
+        ");
 
         $this->readdb->from($this->_table." as p");
-        $this->readdb->join(tbl_partytype." as pt","p.partytypeid=pt.id","LEFT");
-        $this->readdb->join(tbl_city." as c","p.cityid=c.id","LEFT");
-        $this->readdb->join(tbl_company." as t4","p.companyid=t4.id","LEFT");
+        $this->readdb->join(tbl_partytype." as pt","pt.id=p.partytypeid","INNER");
+        $this->readdb->join(tbl_city." as c","c.id=p.cityid","LEFT");
         $this->readdb->where("(p.partytypeid=".$partytypeid." OR ".$partytypeid."=0)");
         $this->readdb->where("(p.cityid=".$cityid." OR ".$cityid."=0)");
         
@@ -204,7 +210,7 @@ class Party_model extends Common_model {
         
         $partyid = (isset($_REQUEST['partyid']))?$_REQUEST['partyid']:0;
         
-		$this->readdb->select("d.id,d.referencetype,d.	,d.documenttypeid,
+		$this->readdb->select("d.id,d.referencetype,d.referenceid,d.documenttypeid,
 				d.documentnumber,d.fromdate,d.duedate,d.documentfile,dt.documenttype,dt.documenttype
 		");
 
@@ -299,7 +305,7 @@ class Party_model extends Common_model {
 		$fromdate = $this->general_model->convertdate($_REQUEST['fromdate']);
 		$todate = $this->general_model->convertdate($_REQUEST['todate']);
         
-		$this->readdb->select("v.createddate,av.createddate");
+		$this->readdb->select("v.createddate,v.vehiclename,v.vehicleno,av.createddate");
 		$this->readdb->from(tbl_assignvehicle." as av");
 		$this->readdb->join(tbl_vehicle." as v","v.id=av.vehicleid","INNER");
 		$this->readdb->join(tbl_site." as s","s.id=av.siteid","INNER");
@@ -338,10 +344,8 @@ class Party_model extends Common_model {
 		}
 	}
 
-
 	function get_datatables($listtype="") {
 		if($listtype=="documents"){
-			
 			$this->_get_datatables_query_document();
 		}else if($listtype=="assignedsite"){
 			$this->_get_datatables_query_assignedsite();
@@ -388,8 +392,10 @@ class Party_model extends Common_model {
         $cityid = (isset($_REQUEST['cityid']))?$_REQUEST['cityid']:0;
         $partytypeid = (isset($_REQUEST['partytypeid']))?$_REQUEST['partytypeid']:0;
         
-        $this->readdb->select("p.id,p.websitename,
-                pt.partytype,p.email,ur.role,p.birthdate,p.anniversarydate,p.address,p.cityid,p.provinceid,pr.countryid,p.createddate,IFNULL(c.name,'') as cityname,IFNULL(pr.name,'') as provincename,IFNULL(cn.name,'') as countryname,
+        $this->readdb->select("p.id,CONCAT(p.firstname,' ',p.middlename,' ',p.lastname,' (',p.partycode,')') as partyname,
+                pt.partytype,p.email,p.contactno1,p.contactno2,p.empolyeeroleid,ur.role,p.password,
+                p.gender,p.birthdate,p.anniversarydate,p.education,p.address,p.cityid,p.provinceid,pr.countryid,p.createddate,
+                IFNULL(c.name,'') as cityname,IFNULL(pr.name,'') as provincename,IFNULL(cn.name,'') as countryname,
         ");
 
         $this->readdb->from($this->_table." as p");
@@ -403,6 +409,13 @@ class Party_model extends Common_model {
 		$this->readdb->order_by('p.id','DESC');
 		$query=$this->readdb->get();
 		
+		return $query->result();
+	}
+	function getpartycontactdatadataByID($ID){
+		$query = $this->readdb->select("t1.id,t1.firstname,t1.lastname,t1.contactno,t1.birthdate,t1.anniversarydate,t1.email")
+		->from(tbl_party_contact." as t1")
+		->where("t1.party_id", $ID)
+		->get();
 		return $query->result();
 	}
 }

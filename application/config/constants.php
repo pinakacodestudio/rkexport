@@ -781,6 +781,8 @@ define("tbl_transporttype","transporttype");
 define("tbl_expensetype","expensetype");
 define("tbl_branch","branch");
 define("tbl_company","company");
+define("tbl_party_contact","party_contact");
+define("tbl_party_doc","party_doc");
 
 /* EMAIL CONFIGURATION CONSTANTS */
 define("EMAIL_CONFIG", serialize(array(

@@ -12,7 +12,7 @@ $portaldetail['export.rkinfotechindia.com'] = $client;
 //end - preview
 
 //start - preview
-$client['folder'] = 'rkexport';
+$client['folder'] = 'export';
 $client['dbname'] = 'rkexport';
 $client['dbuser'] = 'root';
 $client['dbpassword'] = '';
