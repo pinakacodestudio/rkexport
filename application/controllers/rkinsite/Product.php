@@ -224,9 +224,11 @@ class  Product extends Admin_Controller
             // $row[] = "<span class='pull-right'>" . $stock . "</span>";
 
             // $row[] = "<span class='pull-right'>".number_format($datarow->discount, 2, '.', '')."</span>";
+            
             $row[] = "<span class='pull-right'>" . $datarow->priority . "</span>";
             $row[] = $actions;
             $row[] = $checkbox;
+            
             $data[] = $row;
         }
 
@@ -383,6 +385,7 @@ class  Product extends Admin_Controller
                 exit;
             }
         }
+        
         if (!is_dir(PRODUCT_PATH)) {
             @mkdir(PRODUCT_PATH);
         }
