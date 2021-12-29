@@ -1,5 +1,6 @@
 
 <div class="col-md-12 countdocuments" id="countdocuments">
+<input type="hidden" name="doc_id_<?=$id?>" value="" id="doc_id_<?=$id?>">
     <div class="col-md-5 col-sm-5">
         <div class="form-group" id="documentnumber1_div">
             <div class="col-md-12 pr-xs pl-xs">

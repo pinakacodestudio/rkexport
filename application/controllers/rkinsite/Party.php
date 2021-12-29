@@ -145,6 +145,7 @@ class Party extends Admin_Controller
 
     public function party_add()
     {
+        $pid="";
         $createddate = $this->general_model->getCurrentDateTime();
         $addedby = $this->session->userdata(base_url().'ADMINID');
         $PostData = $this->input->post();
@@ -188,6 +189,7 @@ class Party extends Admin_Controller
     
         $insertdata = array_map('trim', $insertdata);
         $party_id = $this->Party->Add($insertdata);
+        $pid=$party_id;
         for($i=1;$i<=$cloopcount;$i++):
             $data = $this->input->post(); 
             $firstname = $this->input->post('firstname_'.$i);
@@ -274,6 +276,7 @@ class Party extends Admin_Controller
 
     public function update_party()
     {
+        $pid="";
         $PostData = $this->input->post();
         echo '<pre>';
         // print_r($PostData); exit;
@@ -283,6 +286,7 @@ class Party extends Admin_Controller
    
         $cloopcount = $PostData['cloopcount'];
        
+        $partyid = $PostData['partyid'];
         $websitename = $PostData['websitename'];
         $companyid = $PostData['companyid'];
         $gst = $PostData['gst'];
@@ -297,7 +301,7 @@ class Party extends Admin_Controller
         $openingdate = ($PostData['openingdate'] != "") ? $this->general_model->convertdate($PostData['openingdate']) : "";
         $openingamount = $PostData['openingamount'];
         $json = array();
-       
+        $pid=$partyid;
         $insertdata = array(
             "websitename" => $websitename,
             "companyid" => $companyid,
@@ -312,30 +316,123 @@ class Party extends Admin_Controller
             "courieraddress" => $courieraddress,
             "openingdate" => $openingdate,
             "openingamount" => $openingamount,
-            "createddate" => $createddate,
             "modifieddate" => $createddate,
-            "addedby" => $addedby,
             "modifiedby" => $addedby,
         );
 
-      
+        echo 1111111;
         $this->Party->_where = array("id"=>$PostData['partyid']);
         $party_id = $this->Party->Edit($insertdata);
-     
+        echo "<br>";
+        print_r($PostData['partyid']);
+        echo "<br>";
+        print_r($insertdata);
+        echo "<br>";
+        print_r($party_id);
+   
+            for($i=1;$i<=$cloopcount;$i++):
+                echo 333333;
+                $data = $this->input->post(); 
+                $firstname = $this->input->post('firstname_'.$i);
+                $lastname = $this->input->post('lastname_'.$i);
+                $contactno = $this->input->post('contactno_'.$i);
+                $birthdate = $this->input->post('birthdate_'.$i);
+                $anniversarydate = $this->input->post('anniversarydate_'.$i);
+                $email = $this->input->post('email_'.$i);
+                echo 6666666;
+                echo $contectid = $this->input->post('contectid_'.$i);
+                if($contectid!=0 or $contectid !='')
+                  {
+                        $insertdata2 = array(
+                            'firstname'=>$firstname,
+                            'lastname'=>$lastname,
+                            'contactno'=> $contactno,
+                            'birthdate'=> $this->general_model->convertdate($birthdate),
+                            'anniversarydate'=>$this->general_model->convertdate($anniversarydate),
+                            'email'=>$email,
+                            'modifieddate' => $createddate,
+                            'modifiedby' => $addedby,
+                        );
+                        echo 777777;
+                        // $this->load->model('Party_contact_model', 'Party_contact');
+                        // $PartycontactId = $this->Party_contact->Add($insertdata2);
+
+                        $this->Party_contact->_where = array("id"=>$contectid);
+                        $party_id = $this->Party_contact->Edit($insertdata2);
+                        echo "<br>";
+                        echo 2222222;
+                        echo "<br>";
+                        print_r($party_id);
+                        echo "<br>";
+                        print_r($insertdata2);
+                  }else{
+                        $insertdata2 = array(
+                            'party_id'=>$pid,
+                            'firstname'=>$firstname,
+                            'lastname'=>$lastname,
+                            'contactno'=> $contactno,
+                            'birthdate'=> $this->general_model->convertdate($birthdate),
+                            'anniversarydate'=>$this->general_model->convertdate($anniversarydate),
+                            'email'=>$email,
+                            'createddate' => $createddate,
+                            'modifieddate' => $createddate,
+                            'addedby' => $addedby,
+                            'modifiedby' => $addedby,
+                        );
+                
+                        $this->load->model('Party_contact_model', 'Party_contact');
+                        $PartycontactId = $this->Party_contact->Add($insertdata2);
+
+                  }
+            endfor;
+       
+      
+
+            echo "<br>";
+            echo 1212121212121;
         if ($party_id) {
             $cloopcount = $PostData['cloopcount'];
             $insertDocumentData = array();
             $this->load->model('Party_doc_model', 'Party_doc');
-            print_r($PostData);
+           
+            echo "<br>";
+            echo 1313131313131313;
             if (!empty($_FILES)) {
                 foreach ($_FILES as $key => $value) {
                     $id = preg_replace('/[^0-9]/', '', $key);
                     
-                    $documentnumber = $PostData['documentname_'.$id];
-                    $doc_id = $PostData['doc_id_'.$id];
+                    echo "<br>";
+                    echo 11414141414141;
+                    echo "<br>";
+
+                    echo $documentnumber = $PostData['documentname_'.$id];
+                    echo "<br>";
+                    echo $doc_id = $PostData['doc_id_'.$id];
                  
+                    echo "<br>";
+                    echo 1515151515151;
+                    echo "<br>";
+
+                    if($doc_id!=0 or $doc_id!=''){
+                        $insertdata3 = array(
+                            "doc_name" => $documentnumber,
+                        );
+                        $this->Party_doc->_where = array("id"=>$doc_id);
+                        $party_id = $this->Party_doc->Edit($insertdata3);
+                    }else{
+                        $insertdata3 = array(
+                            "party_id" => $pid,
+                            "doc" => $file,
+                        );
+                        $this->Party_doc->Add($insertdata3);
+                    }
+
+
                     if (isset($_FILES['docfile_' . $id]['name']) && $_FILES['docfile_' . $id]['name'] != '' && strpos($key, 'docfile_') !== false) {
 
+                        echo "<br>";
+                        echo 161611616161616;
+                        echo "<br>";
                         $temp = explode('.', $_FILES['docfile_' . $id]['name']);
                         $extension = end($temp);
                         $type = 0;
@@ -354,15 +451,22 @@ class Party extends Admin_Controller
                                 echo 3; //image not uploaded
                                 exit;
                             }
-                            $insertdata3 = array(
-                                "party_id" => $party_id,
-                                "doc" => $file,
-                                "doc_name" => $documentnumber,
-                            );
-                         
-                            $this->Party_doc->_where = array("id"=>$doc_id);
-                            $party_id = $this->Party_doc->Edit($insertdata3);
-                           
+
+
+                            if($doc_id!=0 or $doc_id!=''){
+                                $insertdata4 = array(
+                                    "doc" => $file,
+                                );
+                                $this->Party_doc->_where = array("id"=>$doc_id);
+                                $party_id = $this->Party_doc->Edit($insertdata4);
+                            }else{
+                                $insertdata4 = array(
+                                    "party_id" => $pid,
+                                    "doc" => $file,
+                                );
+                                $this->Party_doc->Add($insertdata4);
+                            }
+                       
                         } else {
                             echo 3; //INVALID image TYPE
                             exit;
@@ -371,39 +475,11 @@ class Party extends Admin_Controller
                         $file = '';
                     }
                 }
-                exit;
+               
             }
         }
-            for($i=1;$i<=$cloopcount;$i++):
-                $data = $this->input->post(); 
-                $firstname = $this->input->post('firstname_'.$i);
-                $lastname = $this->input->post('lastname_'.$i);
-                $contactno = $this->input->post('contactno_'.$i);
-                $birthdate = $this->input->post('birthdate_'.$i);
-                $anniversarydate = $this->input->post('anniversarydate_'.$i);
-                $email = $this->input->post('email_'.$i);
-                $contectid = $this->input->post('contectid_'.$i);
-                if($contectid ==0 or $contectid =='')
-                  {
-                        $insertdata2 = array(
-                            'party_id'=>$party_id,
-                            'firstname'=>$firstname,
-                            'lastname'=>$lastname,
-                            'contactno'=> $contactno,
-                            'birthdate'=> $this->general_model->convertdate($birthdate),
-                            'anniversarydate'=>$this->general_model->convertdate($anniversarydate),
-                            'email'=>$email,
-                            'createddate' => $createddate,
-                            'modifieddate' => $createddate,
-                            'addedby' => $addedby,
-                            'modifiedby' => $addedby,
-                        );
-                  
-                        $this->load->model('Party_contact_model', 'Party_contact');
-                        $PartycontactId = $this->Party_contact->Add($insertdata2);
-                  }
-            endfor;
-       
+        echo "ok";
+        exit;
         $json = array(1);
         echo json_encode($json);
     }
