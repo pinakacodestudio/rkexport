@@ -508,12 +508,15 @@ function checkvalidation() {
 			// new PNotify({title: 'Please select different variants for price '+(parseInt($(this).attr("div-id"))+1)+'!',styling: 'fontawesome',delay: '3000',type: 'error'});
 		}
 		varval = $(this).val();
+	
 		variantids_arr.push(varval);
 	});
 	allvariant_arr.push(variantids_arr);
-	samevariant = 0;
-	$.each(allvariant_arr, function( index, value ) {
+	
 
+	samevariant = 0;
+	console.log(allvariant_arr);
+	$.each(allvariant_arr, function( index, value ) {
 		$.each(allvariant_arr, function( index1, value1 ) {
 			if(index!=index1){
 				if(arr_diff(value,value1).length==0){
@@ -559,10 +562,14 @@ function checkvalidation() {
 			$('.countmultipleprice'+divid).each(function(index){
 				var id = parseInt($(this).attr('id').split("_")[2]);
 				var eleID = "_"+divid+"_"+id;
+
 				var variantprice = $("#variantprice"+eleID).val();
 				var variantqty = $("#variantqty"+eleID).val();
 				
+				alert(variantprice);
+
 				if((variantprice!="" && variantprice!=0) || (variantqty!="" && variantqty!=0) || parseInt(id)==parseInt(firstRowId)){
+					alert(firstRowId);
 					if(variantprice==0){
 						$("#variantprice_div"+eleID).addClass("has-error is-focused");
 						new PNotify({title: 'Please enter '+(c)+' variant '+(index+1)+' price !',styling: 'fontawesome',delay: '3000',type: 'error'});
@@ -609,6 +616,7 @@ function checkvalidation() {
 		}
 		c++;
 	});
+
 	var input_barcode = $('.barcode');
 	var values = [];
 	for(j=0;j<input_barcode.length;j++) {
