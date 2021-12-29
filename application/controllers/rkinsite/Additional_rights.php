@@ -106,9 +106,7 @@ class Additional_rights extends Admin_Controller {
         	$json = array('error'=>3, 'message'=>$validationError);
 	    }else{
             
-            if(!in_array($slug,$this->Additionalrights)){
-                $json = array('error'=>4); //This rights not available in portal. 
-            }else{
+         
                 $this->Additional_rights->_where = ("name='".$name."'");
                 $Count = $this->Additional_rights->CountRecords();
                 
@@ -135,7 +133,7 @@ class Additional_rights extends Admin_Controller {
                 }else{
                     $json = array('error'=>2); //Rights already exist.
                 }
-            }
+     
 			
 		}
 		echo json_encode($json);

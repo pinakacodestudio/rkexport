@@ -7,7 +7,7 @@ function resetdata(){
   
       $('html, body').animate({scrollTop:0},'slow');
     }else{
-      $('#name').val('');
+      $('#expense_type').val('');
      
       $('html, body').animate({scrollTop:0},'slow');
     }

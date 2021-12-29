@@ -1,9 +1,4 @@
-/* function setslug(name){
-    $('#slug').val(name.toLowerCase().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-'));
-}
-$("#slug").keyup(function (e) {
-    $("#slug").val(($("#slug").val()).toLowerCase());
-}); */
+
 function resetdata(){
 
     $("#name_div").removeClass("has-error is-focused");
@@ -12,7 +7,7 @@ function resetdata(){
   
       $('html, body').animate({scrollTop:0},'slow');
     }else{
-      $('#name').val('');
+      $('#payment_type').val('');
      
       $('html, body').animate({scrollTop:0},'slow');
     }
@@ -21,8 +16,6 @@ function resetdata(){
   function checkvalidation(addtype=0){
     
     var name = $('#payment_type').val().trim();
- 
-    
     var isvalidname  = 0;
     
     PNotify.removeAll();
