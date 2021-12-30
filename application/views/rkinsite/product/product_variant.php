@@ -47,6 +47,7 @@
                   }
                   ?>
                   <?php
+                 
                   if(count($productprices)>0){
                   ?>
                       <?php foreach ($productprices as $k=>$p) {
