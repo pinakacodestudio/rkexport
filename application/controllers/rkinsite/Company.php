@@ -17,7 +17,7 @@ class Company extends Admin_Controller
         $this->viewData['module'] = "company/Company";
 
         if ($this->viewData['submenuvisibility']['managelog'] == 1) {
-            $this->general_model->addActionLog(4, 'Company', 'View Company.');
+            $this->general_model->addActionLog(4, 'Company Type', 'View Company Type.');
         }
 
         $this->admin_headerlib->add_javascript("company", "pages/company.js");
@@ -68,7 +68,7 @@ class Company extends Admin_Controller
     public function add_company()
     {
 
-        $this->viewData['title'] = "Add Additional Rights";
+        $this->viewData['title'] = "Add Company Type";
         $this->viewData['module'] = "company/Add_company";
 
         $this->admin_headerlib->add_javascript("add_company", "pages/add_company.js");
@@ -114,7 +114,7 @@ class Company extends Admin_Controller
             $Add = $this->company->Add($insertdata);
             if ($Add) {
                 if ($this->viewData['submenuvisibility']['managelog'] == 1) {
-                    $this->general_model->addActionLog(1, 'Company', 'Company.');
+                    $this->general_model->addActionLog(1, 'Company Type', 'Company Type Add.');
                 }
                 $json = array('error' => 1); //Rights successfully added.
             } else {
@@ -171,7 +171,7 @@ class Company extends Admin_Controller
             if ($this->viewData['submenuvisibility']['managelog'] == 1) {
                 $this->company->_where = array("id" => $row);
                 $data = $this->company->getRecordsById();
-                $this->general_model->addActionLog(3, 'Additional Rights', 'Delete ' . $data['name'] . ' additional rights.');
+                $this->general_model->addActionLog(3, 'Company Type', 'Delete ' . $data['name'] . ' Company Type.');
             }
             $this->company->Delete(array("id" => $row));
         }

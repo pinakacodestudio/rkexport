@@ -806,6 +806,7 @@ define("EMPTY_PARAMETER", "Fields are missing");
 define("EMPTY_DATA", "No Data Available");
 define('EMPTY_SEARCH', 'No Result Found');
 define('USER_NOT_FOUND', 'User Not Available');
+define('DROPDOWN_PRODUCT_LIST', '0');
 
 define('EARN_BY_PURCHASE_ORDER', 'Earn by Purchase Order');
 define('EARN_BY_SALES_ORDER', 'Earn by Sales Order');

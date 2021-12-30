@@ -268,17 +268,7 @@ class Expense extends Admin_Controller{
         foreach ($ids as $row) {
             $this->Expense->Delete(array('id'=>$row));
         }
-        // $this->Expense->_where = "id=".$row;
-        // $ExpenseData = $this->Expense->getRecordsByID();
-        // if(count($ExpenseData)>0)
-        // {
-        // if($ExpenseData['receipt']!="")
-        // {
-        //     unlinkfile('RECEIPT', $ExpenseData['receipt']);
-        // }
-        // }
-        // $this->db->where('id', $row);
-        // $this->db->delete(tbl_expense);
+  
     }
     public function update_status()
     {
@@ -294,49 +284,5 @@ class Expense extends Admin_Controller{
             echo 0;
         }
     }
-  
-  
-    /**/
-  //      $this->Expense->_table = (tbl_user);
-  //      $this->Expense->_fields="reportingto,name";
-  //      $this->Expense->_where = 'id='.$PostData['employeeid'];
-  //      $reportingtoemployee = $this->Expense->getRecordsByID();
-     
-  //      if(count($reportingtoemployee)>0)
-  //      {
-
-  //         $fcmquery = $this->db->query("SELECT * FROM ".tbl_fcmdata." WHERE employeeid=".$reportingtoemployee['reportingto']);
-  //         $this->load->model('Common_model','FCMData');
-  //         $employeearr = $androidfcmid = $iosfcmid = array();
-  //         if($fcmquery->num_rows() > 0)
-  //         {
-  //             $type = 10;
-  //             $msg = "New Expense Added";
-  //             $pushMessage = '{"type":"'.$type.'", "message":"'.$msg.'"}';
-  //             $description = "New Expense Added by ".$reportingtoemployee['name'];
-  //             $employeearr[] = $reportingtoemployee['reportingto'];
-              
-  //             foreach ($fcmquery->result_array() as $fcmrow) {
-  //                 if(trim($fcmrow['fcm'])!=='' && $fcmrow['devicetype']==1){
-  //                     $androidfcmid[] = $fcmrow['fcm'];
-  //                 }else if(trim($fcmrow['fcm'])!=='' && $fcmrow['devicetype']==2){
-  //                     $iosfcmid[] = $fcmrow['fcm'];
-  //                 }
-  //             }
-  //             if(!empty($androidfcmid)){
-  //                 $this->FCMData->sendFcmNotification($type, $pushMessage,implode(",",$employeearr) ,$androidfcmid ,0,$description,1);
-  //             }
-  //             if(!empty($iosfcmid)){
-  //                 $this->FCMData->sendFcmNotification($type, $pushMessage,implode(",",$employeearr) ,$iosfcmid ,0,$description,2);
-  //             }
-
-  //             $notificationdata = array('employeeid' => implode(",",$employeearr),
-  //               'message' => $pushMessage,
-  //               'type' => $type,
-  //               'description'=> $description,
-  //               'createddate' => $createddate);
-  //           $insertfcmnotification = $this->db->insert(tbl_notification, $notificationdata);
-  //         }
-  //      }
-  // /**/
+ 
 }

@@ -18,9 +18,12 @@ class Commission extends Admin_Controller
         $this->viewData['module'] = "commission/Commission";
 
         if ($this->viewData['submenuvisibility']['managelog'] == 1) {
-            $this->general_model->addActionLog(4, 'Commission', 'View Commission.');
+            $this->general_model->addActionLog(4, 'Commission Type', 'View Commission.');
         }
 
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
+        $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_javascript("commission", "pages/commission.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
@@ -72,7 +75,9 @@ class Commission extends Admin_Controller
 
         $this->viewData['title'] = "Add Additional Rights";
         $this->viewData['module'] = "commission/Add_commission";
-
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
+        $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_javascript("add_commission", "pages/add_commission.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
@@ -82,7 +87,9 @@ class Commission extends Admin_Controller
         $this->viewData['title'] = "Edit Commission";
         $this->viewData['module'] = "commission/Add_commission";
         $this->viewData['action'] = "1"; //Edit
-
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
+        $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->viewData['commissiondata'] = $this->commission->getcommissionDataByID($id);
         $this->admin_headerlib->add_javascript("add_commission", "pages/add_commission.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
@@ -115,7 +122,7 @@ class Commission extends Admin_Controller
             $Add = $this->commission->Add($insertdata);
             if ($Add) {
                 if ($this->viewData['submenuvisibility']['managelog'] == 1) {
-                    $this->general_model->addActionLog(1, 'Currency Rate', 'Currency Rate.');
+                    $this->general_model->addActionLog(1, 'Commission Type', 'Commission Type Add.');
                 }
                 $json = array('error' => 1); //Rights successfully added.
             } else {
@@ -173,7 +180,7 @@ class Commission extends Admin_Controller
                 $this->commission->_where = array("id" => $row);
                 $data = $this->commission->getRecordsById();
 
-                $this->general_model->addActionLog(3, 'Additional Rights', 'Delete ' . $data['name'] . ' additional rights.');
+                $this->general_model->addActionLog(3, 'Commission Type', 'Delete ' . $data['name'] . ' additional rights.');
             }
             $this->commission->Delete(array("id" => $row));
         }

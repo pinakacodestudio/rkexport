@@ -80,18 +80,18 @@ class Stock_general_voucher extends Admin_Controller {
     }
  
     public function add_stock_general_voucher() {
-
+   
         $this->checkAdminAccessModule('submenu', 'add', $this->viewData['submenuvisibility']);
         $this->viewData['title'] = "Add Stock General Voucher";
         $this->viewData['module'] = "stock_general_voucher/Add_stock_general_voucher";   
         $this->viewData['VIEW_STATUS'] = "0";
-        
+  
         $this->load->model('Product_model', 'Product');
-        $this->viewData['productdata'] = $this->Product->getAllProductList();
-        
+        $this->viewData['productlistdata'] = $this->Product->getAllProductList();
+
         $this->load->model('Narration_model', 'Narration');
         $this->viewData['narrationdata'] = $this->Narration->getActiveNarration();
-
+      
         $this->viewData['voucherno'] = $this->general_model->generateTransactionPrefixByType(4);
         
         $this->admin_headerlib->add_javascript("bootstrap-toggle.min","bootstrap-toggle.min.js");
@@ -104,7 +104,7 @@ class Stock_general_voucher extends Admin_Controller {
         $this->load->view(ADMINFOLDER.'template',$this->viewData);
     }
     public function stock_general_voucher_add() {
-        
+  
         $PostData = $this->input->post();
         $createddate = $this->general_model->getCurrentDateTime();
         $addedby = $this->session->userdata(base_url().'ADMINID');
@@ -203,12 +203,12 @@ class Stock_general_voucher extends Admin_Controller {
         $this->viewData['module'] = "stock_general_voucher/Add_stock_general_voucher";
         $this->viewData['VIEW_STATUS'] = "1";
         $this->viewData['action'] = "1"; //Edit
-        
-        $this->load->model('Product_model', 'Product');
-        $this->viewData['productdata'] = $this->Product->getAllProductList();
 
         $this->load->model('Narration_model', 'Narration');
         $this->viewData['narrationdata'] = $this->Narration->getActiveNarration();
+
+        $this->load->model('Product_model', 'Product');
+        $this->viewData['productlistdata'] = $this->Product->getAllProductList();
 
         $this->viewData['stockgeneralvoucherdata'] = $this->Stock_general_voucher->getStockGeneralVoucherDataByID($id);
         if(empty($this->viewData['stockgeneralvoucherdata'])){

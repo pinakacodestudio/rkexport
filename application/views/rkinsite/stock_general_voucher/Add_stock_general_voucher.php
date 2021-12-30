@@ -1,7 +1,8 @@
+
 <?php 
 $PRODUCT_DATA = '';
-if(!empty($productdata)){
-    foreach($productdata as $product){
+if(!empty($productlistdata)){
+    foreach($productlistdata as $product){
         $productname = str_replace("'","&apos;",$product['name']);
         if(DROPDOWN_PRODUCT_LIST==0){
             $PRODUCT_DATA .= '<option value="'.$product['id'].'">'.$productname.'</option>';
@@ -16,12 +17,15 @@ if(!empty($productdata)){
     } 
 } 
 
+
+
 $NARRATION_DATA = '';
 if(!empty($narrationdata)){
     foreach($narrationdata as $narration){ 
         $NARRATION_DATA .= '<option value="'.$narration['id'].'">'.$narration['narration'].'</option>';
     }
-}?>
+}
+?>
 <script>
     var PRODUCT_DATA = '<?=$PRODUCT_DATA?>';
     var NARRATION_DATA = '<?=$NARRATION_DATA?>';
@@ -39,7 +43,7 @@ if(!empty($narrationdata)){
         </small>
     </div>
     <div class="container-fluid">
-                                     
+                     
       <div data-widget-group="group1">
         <div class="row">
           <div class="col-md-12">
@@ -119,6 +123,7 @@ if(!empty($narrationdata)){
                                 </div>
                             </div>
                         </div>
+                
                         <?php if(!empty($stockgeneralvoucherdata) && !empty($stockgeneralvoucherproductdata)) { ?>
                             <?php for ($i=0; $i < count($stockgeneralvoucherproductdata); $i++) { ?>
                                 <div class="row countproducts" id="countproducts<?=($i+1)?>">
@@ -130,10 +135,13 @@ if(!empty($narrationdata)){
                                             <div class="col-sm-12">
                                                 <select id="productid<?=($i+1)?>" name="productid[]" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="8" div-id="<?=($i+1)?>">
                                                     <option value="0">Select Product</option>
+                                                    
                                                     <?php
-                                                    if(!empty($productdata)){
-                                                        foreach($productdata as $product){ 
 
+                                                    if(!empty($productlistdata)){
+                                                 
+                                                        foreach($productlistdata as $product){ 
+                                                           
                                                             $productname = str_replace("'","&apos;",$product['name']);
                                                             if(DROPDOWN_PRODUCT_LIST==0){ ?>
 
@@ -162,6 +170,34 @@ if(!empty($narrationdata)){
                                             <div class="col-md-12">
                                                 <select id="priceid<?=($i+1)?>" name="priceid[]" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="<?=($i+1)?>">
                                                     <option value="0">Select Variant</option>
+
+                                                    <?php
+
+
+                                                    if(!empty($narrationdata)){
+                                                 
+                                                 foreach($narrationdata as $narration){ 
+                                                    
+                                                     $narration = str_replace("'","&apos;",$product['name']);
+                                                     if(DROPDOWN_PRODUCT_LIST==0){ ?>
+
+                                                         <option value="<?=$narration['id']?>" <?=($stockgeneralvoucherproductdata[$i]['productid']==$product['id']?"selected":"")?>><?=$narration['name']?></option>
+
+                                                     <?php }else{
+
+                                                         if($product['productimage']!="" && file_exists(PRODUCT_PATH.$product['productimage'])){
+                                                             $img = $product['productimage'];
+                                                         }else{
+                                                             $img = PRODUCTDEFAULTIMAGE;
+                                                         }
+                                                         ?>
+
+                                                         <option data-content="<?php if(!empty($product['productimage'])){?><img src='<?=PRODUCT.$img?>' style='width:40px'> <?php } echo $productname; ?> " value="<?php echo $product['id']; ?>" <?=($stockgeneralvoucherproductdata[$i]['productid']==$product['id']?"selected":"")?>><?php echo $productname; ?></option>
+                                                     
+                                                     <?php } ?>
+                                             <?php } 
+                                             } ?>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -247,6 +283,9 @@ if(!empty($narrationdata)){
                                             <select id="productid1" name="productid[]" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="8" div-id="1">
                                                 <option value="0">Select Product</option>
                                                 <?=$PRODUCT_DATA?>
+                                                
+                                              
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -256,6 +295,7 @@ if(!empty($narrationdata)){
                                         <div class="col-md-12">
                                             <select id="priceid1" name="priceid[]" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
                                                 <option value="0">Select Variant</option>
+                                                <?=$NARRATION_DATA?>
                                             </select>
                                         </div>
                                     </div>

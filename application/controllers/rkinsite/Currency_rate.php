@@ -20,7 +20,9 @@ class Currency_rate extends Admin_Controller
         if ($this->viewData['submenuvisibility']['managelog'] == 1) {
             $this->general_model->addActionLog(4, 'Currency Rate', 'View currency rate.');
         }
-
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
+        $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_javascript("currency_rate", "pages/currency_rate.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
@@ -71,9 +73,12 @@ class Currency_rate extends Admin_Controller
     public function add_Currency_rate()
     {
 
-        $this->viewData['title'] = "Add Additional Rights";
+        $this->viewData['title'] = "Add Currency Rate";
         $this->viewData['module'] = "currency_rate/Add_currency_rate";
 
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
+        $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_javascript("add_currency_rate", "pages/add_currency_rate.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
@@ -85,6 +90,9 @@ class Currency_rate extends Admin_Controller
         $this->viewData['action'] = "1"; //Edit
 
         $this->viewData['currencydata'] = $this->Currency_rate->getcurrencyDataByID($id);
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
+        $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_javascript("add_currency_rate", "pages/add_currency_rate.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
 
@@ -108,23 +116,31 @@ class Currency_rate extends Admin_Controller
             $validationError = implode('<br>', $this->form_validation->error_array());
             $json = array('error' => 3, 'message' => $validationError);
         } else {
-            $insertdata = array("currency" => $currency,
-                "value" => $value,
-                "date" => $this->general_model->convertdate($PostData['date']),
-                "createddate" => $createddate,
-                "addedby" => $addedby,
-                "modifieddate" => $createddate,
-                "modifiedby" => $addedby);
 
-            $insertdata = array_map('trim', $insertdata);
-            $Add = $this->Currency_rate->Add($insertdata);
-            if ($Add) {
-                if ($this->viewData['submenuvisibility']['managelog'] == 1) {
-                    $this->general_model->addActionLog(1, 'Currency Rate', 'Currency Rate.');
+            $this->Currency_rate->_where = ("currency='".$currency."'");
+            $Count = $this->Currency_rate->CountRecords();
+          
+            if($Count==0){
+                $insertdata = array("currency" => $currency,
+                    "value" => $value,
+                    "date" => $this->general_model->convertdate($PostData['date']),
+                    "createddate" => $createddate,
+                    "addedby" => $addedby,
+                    "modifieddate" => $createddate,
+                    "modifiedby" => $addedby);
+    
+                $insertdata = array_map('trim', $insertdata);
+                $Add = $this->Currency_rate->Add($insertdata);
+                if ($Add) {
+                    if ($this->viewData['submenuvisibility']['managelog'] == 1) {
+                        $this->general_model->addActionLog(1, 'Currency Rate', 'Currency Rate Add.');
+                    }
+                    $json = array('error' => 1); //Rights successfully added.
+                } else {
+                    $json = array('error' => 0); //Rights not added.
                 }
-                $json = array('error' => 1); //Rights successfully added.
-            } else {
-                $json = array('error' => 0); //Rights not added.
+            }else{
+                $json = array('error' => 2);
             }
 
         }
@@ -161,7 +177,7 @@ class Currency_rate extends Admin_Controller
             $Edit = $this->Currency_rate->Edit($updatedata);
             if ($Edit) {
                 if ($this->viewData['submenuvisibility']['managelog'] == 1) {
-                    $this->general_model->addActionLog(2, 'Currency Rate', 'Edit ' . $currency . ' currency rate.');
+                    $this->general_model->addActionLog(2, 'Currency Rate', 'Currency Rate Edit ' . $currency . ' currency rate.');
                 }
                 $json = array('error' => 1); //Rights successfully updated.
             } else {
@@ -182,7 +198,7 @@ class Currency_rate extends Admin_Controller
                 $this->Currency_rate->_where = array("id" => $row);
                 $data = $this->Currency_rate->getRecordsById();
 
-                $this->general_model->addActionLog(3, 'Additional Rights', 'Delete ' . $data['name'] . ' additional rights.');
+                $this->general_model->addActionLog(3, 'Currency Rate', 'Currency Rate Delete ' . $data['name'] . ' Currency Rate.');
             }
             $this->Currency_rate->Delete(array("id" => $row));
         }

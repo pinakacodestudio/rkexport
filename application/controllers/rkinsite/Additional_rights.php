@@ -109,7 +109,7 @@ class Additional_rights extends Admin_Controller {
          
                 $this->Additional_rights->_where = ("name='".$name."'");
                 $Count = $this->Additional_rights->CountRecords();
-                
+
                 if($Count==0){
                     
                     $insertdata = array("name"=>$name,

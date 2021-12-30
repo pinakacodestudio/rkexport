@@ -11,11 +11,11 @@ class Expense_type extends Admin_Controller {
 	}
 	public function index() {
 
-		$this->viewData['title'] = "Transport Type";
+		$this->viewData['title'] = "Expense Type";
 		$this->viewData['module'] = "expense_type/Expense_type";
 
         if($this->viewData['submenuvisibility']['managelog'] == 1){
-            $this->general_model->addActionLog(4,'Transport Type','View payment type.');
+            $this->general_model->addActionLog(4,'Expense Type','View payment type.');
 		}
 
 		$this->admin_headerlib->add_javascript("expense_type","pages/expense_type.js");
@@ -65,14 +65,14 @@ class Expense_type extends Admin_Controller {
 	}
 	public function add_expense_type() {
     
-		$this->viewData['title'] = "Add Additional Rights";
+		$this->viewData['title'] = "Add Expense Type";
 		$this->viewData['module'] = "expense_type/Add_expense_type";
 		$this->admin_headerlib->add_javascript("add_expense_type","pages/add_expense_type.js");
 		$this->load->view(ADMINFOLDER.'template',$this->viewData);
 	}
 	public function edit_expense_type($id) {
 		
-		$this->viewData['title'] = "Edit Additional Rights";
+		$this->viewData['title'] = "Edit Expense Type";
 		$this->viewData['module'] = "expense_type/Add_expense_type";
 		$this->viewData['action'] = "1";//Edit
 
@@ -115,7 +115,7 @@ class Expense_type extends Admin_Controller {
                     $Add = $this->Expense_type->Add($insertdata);
                     if($Add){
                         if($this->viewData['submenuvisibility']['managelog'] == 1){
-                            $this->general_model->addActionLog(1,'Additional Rights','Add new additional rights.');
+                            $this->general_model->addActionLog(1,'Expense Type','Add new Expense Type.');
                         }
                         $json = array('error'=>1); //Rights successfully added.
                     }else{
@@ -138,7 +138,7 @@ class Expense_type extends Admin_Controller {
 		$id = $PostData['id'];
 		$expense_type = $PostData['expense_type'];
 
-		$this->form_validation->set_rules('expense_type', 'Transport Type', 'required');
+		$this->form_validation->set_rules('expense_type', 'Expense Type', 'required');
         
 
 		$json = array();
@@ -164,7 +164,7 @@ class Expense_type extends Admin_Controller {
                     $Edit = $this->Expense_type->Edit($updatedata);
                     if ($Edit) {
                         if($this->viewData['submenuvisibility']['managelog'] == 1){
-                            $this->general_model->addActionLog(2,'Transport Type','Edit '.$expense_type.' payment type.');
+                            $this->general_model->addActionLog(2,'Expense Type','Edit '.$expense_type.' payment type.');
                         }
                         $json = array('error'=>1); //Rights successfully updated.
                     } else {
@@ -187,7 +187,7 @@ class Expense_type extends Admin_Controller {
                 $this->Expense_type->_where = array("id"=>$row);
                 $data = $this->Expense_type->getRecordsById();
             
-                $this->general_model->addActionLog(3,'Additional Rights','Delete '.$data['name'].' additional rights.');
+                $this->general_model->addActionLog(3,'Expense Type','Delete '.$data['name'].' Expense Type.');
             }
   			$this->Expense_type->Delete(array("id"=>$row));
 		}
