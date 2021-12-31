@@ -213,14 +213,14 @@
                                         $cloopdoc = $cloopdoc + 1;
                                         $doc_id = $row->id;
                                         $doc=$row->doc;
-                                        $doc_name = $row->doc_name;
+                                        $docname = $row->docname;
                                     ?>
                               <div class="col-md-12 countdocuments pl-sm pr-sm" id="countdocuments">
                                  <input type="hidden" name="doc_id_<?=$cloopdoc?>" value="<?=$doc_id?>" id="doc_id">
                                  <div class="col-md-5 col-sm-4">
                                     <div class="form-group" id="documentname_div">
                                        <div class="col-md-12 pr-xs pl-xs">
-                                          <input id="documentname" name="documentname_<?=$cloopdoc?>" placeholder="Enter Document Number" class="form-control documentrow documentnumber" value="<?=$doc_name?>">
+                                          <input id="documentname" name="documentname_<?=$cloopdoc?>" placeholder="Enter Document Number" class="form-control documentrow documentnumber" value="<?=$docname?>">
                                        </div>
                                     </div>
                                  </div>

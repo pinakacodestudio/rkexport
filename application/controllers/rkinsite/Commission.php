@@ -56,7 +56,7 @@ class Commission extends Admin_Controller
             }
 
             $row[] = ++$counter;
-            $row[] = $datarow->commission_type;
+            $row[] = $datarow->commission;
             $row[] = $datarow->date;
             $row[] = $actions;
             $row[] = $checkbox; 
@@ -102,16 +102,16 @@ class Commission extends Admin_Controller
         $createddate = $this->general_model->getCurrentDateTime();
         $addedby = $this->session->userdata(base_url() . 'ADMINID');
 
-        $commission_type = $PostData['commission_type'];
+        $commission = $PostData['commission'];
       
-        $this->form_validation->set_rules('commission_type', 'Commission Type', 'required');
+        $this->form_validation->set_rules('commission', 'Commission Type', 'required');
 
         $json = array();
         if ($this->form_validation->run() == false) {
             $validationError = implode('<br>', $this->form_validation->error_array());
             $json = array('error' => 3, 'message' => $validationError);
         } else {
-            $insertdata = array("commission_type" => $commission_type,
+            $insertdata = array("commission" => $commission,
                 "date" => $this->general_model->convertdate($PostData['date']),
                 "createddate" => $createddate,
                 "addedby" => $addedby,
@@ -139,9 +139,9 @@ class Commission extends Admin_Controller
         $modifiedby = $this->session->userdata(base_url() . 'ADMINID');
 
         $id = $PostData['id'];
-        $commission_type = $PostData['commission_type'];
+        $commission = $PostData['commission'];
 
-        $this->form_validation->set_rules('commission_type', 'Commission Type', 'required');
+        $this->form_validation->set_rules('commission', 'Commission Type', 'required');
 
         $json = array();
         if ($this->form_validation->run() == false) {
@@ -149,7 +149,7 @@ class Commission extends Admin_Controller
             $json = array('error' => 3, 'message' => $validationError);
         } else {
 
-            $updatedata = array("commission_type" => $commission_type,
+            $updatedata = array("commission" => $commission,
                 "date" => $this->general_model->convertdate($PostData['date']),
                 "modifieddate" => $modifieddate,
                 "modifiedby" => $modifiedby);
@@ -159,7 +159,7 @@ class Commission extends Admin_Controller
             $Edit = $this->commission->Edit($updatedata);
             if ($Edit) {
                 if ($this->viewData['submenuvisibility']['managelog'] == 1) {
-                    $this->general_model->addActionLog(2, 'Commission Type', 'Edit ' . $commission_type . ' commission type.');
+                    $this->general_model->addActionLog(2, 'Commission Type', 'Edit ' . $commission . ' commission type.');
                 }
                 $json = array('error' => 1); //Rights successfully updated.
             } else {
@@ -173,6 +173,7 @@ class Commission extends Admin_Controller
     {
         $PostData = $this->input->post();
         $ids = explode(",", $PostData['ids']);
+      
         $count = 0;
         foreach ($ids as $row) {
             if ($this->viewData['submenuvisibility']['managelog'] == 1) {

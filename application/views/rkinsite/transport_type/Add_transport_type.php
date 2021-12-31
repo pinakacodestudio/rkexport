@@ -22,10 +22,10 @@
 					<form class="form-horizontal" id="transporttypeform">
 						<input type="hidden" name="id" value="<?php if(isset($additionalrightsrow)){ echo $additionalrightsrow['id']; } ?>">
 						
-						<div class="form-group" id="payment_type_div">
-							<label for="transport_type" class="col-sm-4 control-label">Name <span class="mandatoryfield">*</span></label>
+						<div class="form-group" id="paymenttype_div">
+							<label for="type" class="col-sm-4 control-label">Transport Type <span class="mandatoryfield">*</span></label>
 							<div class="col-sm-6">
-								<input id="transport_type" type="text" name="transport_type" value="<?php if(!empty($additionalrightsrow)){ echo $additionalrightsrow['transport_type']; } ?>" class="form-control">
+								<input id="type" type="text" name="type" value="<?php if(!empty($additionalrightsrow)){ echo $additionalrightsrow['type']; } ?>" class="form-control">
 							</div>
 						</div>
 						

@@ -26,7 +26,7 @@
 						<div class="form-group" id="commission_div">
 							<label for="commission" class="col-sm-4 control-label">Commission Type <span class="mandatoryfield">*</span></label>
 							<div class="col-sm-6">
-								<input id="commission_type" type="text" name="commission_type" value="<?php if(!empty($commissiondata)){ echo $commissiondata['commission_type']; } ?>" class="form-control">
+								<input id="commission" type="text" name="commission" value="<?php if(!empty($commissiondata)){ echo $commissiondata['commission']; } ?>" class="form-control">
 							</div>
 						</div>
 

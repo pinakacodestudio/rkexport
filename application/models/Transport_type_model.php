@@ -8,15 +8,15 @@ class Transport_type_model extends Common_model {
 	public $_where = array();
 	public $_except_fields = array();
 	public $_order = array('id' => 'DESC');
-	public $column_order = array('id', 'transport_type');
-    public $column_search = array('transport_type');
+	public $column_order = array('id', 'type');
+    public $column_search = array('type');
 	
 	function __construct() {
 		parent::__construct();
 	}
 	
 	function getAdditionalrightsDataByID($ID){
-		$query = $this->readdb->select("id,transport_type")
+		$query = $this->readdb->select("id,type")
 							->from($this->_table)
 							->where("id", $ID)
 							->get();
@@ -28,7 +28,7 @@ class Transport_type_model extends Common_model {
 		}	
     }
     function getAdditionalrightsList() {
-        $query = $this->readdb->select("id,transport_type")
+        $query = $this->readdb->select("id,type")
 							->from($this->_table)
 							->get();
 		
@@ -48,7 +48,7 @@ class Transport_type_model extends Common_model {
 	    }
     }
 	function _get_datatables_query(){  
-        $this->readdb->select("id,transport_type,createddate,modifieddate");
+        $this->readdb->select("id,type,createddate,modifieddate");
         $this->readdb->from($this->_table." as ar");
         $i = 0;
         foreach ($this->column_search as $item) // loop column 

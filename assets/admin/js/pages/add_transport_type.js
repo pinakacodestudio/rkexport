@@ -1,34 +1,34 @@
 function resetdata() {
 
-    $("#transport_type_div").removeClass("has-error is-focused");
+    $("#type_div").removeClass("has-error is-focused");
 
     if (ACTION == 1) {
 
         $('html, body').animate({ scrollTop: 0 }, 'slow');
     } else {
-        $('#transport_type').val('');
+        $('#type').val('');
 
         $('html, body').animate({ scrollTop: 0 }, 'slow');
     }
 }
 
 function checkvalidation(addtype = 0) {
-    var name = $('#transport_type').val().trim();
+    var name = $('#type').val().trim();
     var isvalidname = 0;
     PNotify.removeAll();
     if (name == '') {
-        $("#transport_type_div").addClass("has-error is-focused");
+        $("#type_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please enter payment type !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidname = 0;
     } else {
-        $("#transport_type_div").removeClass("has-error is-focused");
+        $("#type_div").removeClass("has-error is-focused");
         isvalidname = 1;
     }
 
     if (isvalidname == 1) {
         var formData = new FormData($('#transporttypeform')[0]);
         if (ACTION == 0) {
-            var uurl = SITE_URL + "transport_type/transport_type_add";
+            var uurl = SITE_URL + "Transport_type/transport_type_add";
             $.ajax({
                 url: uurl,
                 type: 'POST',

@@ -21,10 +21,10 @@
 					<form class="form-horizontal" id="paymenttypeform">
 						<input type="hidden" name="id" value="<?php if(isset($additionalrightsrow)){ echo $additionalrightsrow['id']; } ?>">
 						
-						<div class="form-group" id="payment_type_div">
-							<label for="payment_type" class="col-sm-4 control-label">Name <span class="mandatoryfield">*</span></label>
+						<div class="form-group" id="paymenttype_div">
+							<label for="paymenttype" class="col-sm-4 control-label">Name <span class="mandatoryfield">*</span></label>
 							<div class="col-sm-6">
-								<input id="payment_type" type="text" name="payment_type" value="<?php if(!empty($additionalrightsrow)){ echo $additionalrightsrow['payment_type']; } ?>" class="form-control">
+								<input id="paymenttype" type="text" name="paymenttype" value="<?php if(!empty($additionalrightsrow)){ echo $additionalrightsrow['paymenttype']; } ?>" class="form-control">
 							</div>
 						</div>
 						

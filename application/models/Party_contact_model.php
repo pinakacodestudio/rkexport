@@ -3,7 +3,7 @@
 class Party_contact_model extends Common_model {
 
 	//put your code here
-	public $_table = tbl_party_contact;
+	public $_table = tbl_partycontact;
 	public $_fields = "*";
 	public $_where = array();
     public $_except_fields = array();
@@ -413,8 +413,8 @@ class Party_contact_model extends Common_model {
 	}
 	function getpartycontactdatadataByID($ID){
 		$query = $this->readdb->select("t1.id,t1.firstname,t1.lastname,t1.contactno,t1.birthdate,t1.anniversarydate,t1.email")
-		->from(tbl_party_contact." as t1")
-		->where("t1.party_id", $ID)
+		->from(tbl_partycontact." as t1")
+		->where("t1.partyid", $ID)
 		->get();
 		return $query->result();
 	}

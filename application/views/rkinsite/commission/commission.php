@@ -19,7 +19,7 @@
                   <?php
                     }if(strpos(trim($submenuvisibility['submenudelete']),$this->session->userdata[base_url().'ADMINUSERTYPE']) !== false){
                   ?>
-                  <a class="<?=deletebtn_class;?>" href="javascript:void(0)" onclick="checkmultipledelete('','Currency Rate','<?php echo ADMIN_URL; ?>Currency-rate/delete-mul-currency-rate')" title=<?=deletebtn_title?>><?=deletebtn_text;?></a>
+                  <a class="<?=deletebtn_class;?>" href="javascript:void(0)" onclick="checkmultipledelete('','Commission','<?php echo ADMIN_URL; ?>Commission/delete-mul-commission')" title=<?=deletebtn_title?>><?=deletebtn_text;?></a>
                   <?php } ?>
                 </div>
               </div>

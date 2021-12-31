@@ -188,8 +188,8 @@ class Party extends Admin_Controller
 
     
         $insertdata = array_map('trim', $insertdata);
-        $party_id = $this->Party->Add($insertdata);
-        $pid=$party_id;
+        $partyid = $this->Party->Add($insertdata);
+        $pid=$partyid;
         for($i=1;$i<=$cloopcount;$i++):
             $data = $this->input->post(); 
             $firstname = $this->input->post('firstname_'.$i);
@@ -202,7 +202,7 @@ class Party extends Admin_Controller
             if($contectid ==0 or $contectid =='')
               {
                     $insertdata2 = array(
-                        'party_id'=>$party_id,
+                        'partyid'=>$partyid,
                         'firstname'=>$firstname,
                         'lastname'=>$lastname,
                         'contactno'=> $contactno,
@@ -220,7 +220,7 @@ class Party extends Admin_Controller
               }
         endfor;
   
-        if ($party_id) {
+        if ($partyid) {
             $cloopcount = $PostData['cloopcount'];
             $insertDocumentData = array();
             $this->load->model('Party_doc_model', 'Party_doc');
@@ -252,9 +252,9 @@ class Party extends Admin_Controller
                                 exit;
                             }
                             $insertdata3 = array(
-                                "party_id" => $party_id,
+                                "partyid" => $partyid,
                                 "doc" => $file,
-                                "doc_name" => $documentnumber,
+                                "docname" => $documentnumber,
                             );
                  
 
@@ -322,13 +322,13 @@ class Party extends Admin_Controller
 
         echo 1111111;
         $this->Party->_where = array("id"=>$PostData['partyid']);
-        $party_id = $this->Party->Edit($insertdata);
+        $partyid = $this->Party->Edit($insertdata);
         echo "<br>";
         print_r($PostData['partyid']);
         echo "<br>";
         print_r($insertdata);
         echo "<br>";
-        print_r($party_id);
+        print_r($partyid);
    
             for($i=1;$i<=$cloopcount;$i++):
                 echo 333333;
@@ -358,16 +358,16 @@ class Party extends Admin_Controller
                         // $PartycontactId = $this->Party_contact->Add($insertdata2);
 
                         $this->Party_contact->_where = array("id"=>$contectid);
-                        $party_id = $this->Party_contact->Edit($insertdata2);
+                        $partyid = $this->Party_contact->Edit($insertdata2);
                         echo "<br>";
                         echo 2222222;
                         echo "<br>";
-                        print_r($party_id);
+                        print_r($partyid);
                         echo "<br>";
                         print_r($insertdata2);
                   }else{
                         $insertdata2 = array(
-                            'party_id'=>$pid,
+                            'partyid'=>$pid,
                             'firstname'=>$firstname,
                             'lastname'=>$lastname,
                             'contactno'=> $contactno,
@@ -390,7 +390,7 @@ class Party extends Admin_Controller
 
             echo "<br>";
             echo 1212121212121;
-        if ($party_id) {
+        if ($partyid) {
             $cloopcount = $PostData['cloopcount'];
             $insertDocumentData = array();
             $this->load->model('Party_doc_model', 'Party_doc');
@@ -415,13 +415,13 @@ class Party extends Admin_Controller
 
                     if($doc_id!=0 or $doc_id!=''){
                         $insertdata3 = array(
-                            "doc_name" => $documentnumber,
+                            "docname" => $documentnumber,
                         );
                         $this->Party_doc->_where = array("id"=>$doc_id);
-                        $party_id = $this->Party_doc->Edit($insertdata3);
+                        $partyid = $this->Party_doc->Edit($insertdata3);
                     }else{
                         $insertdata3 = array(
-                            "party_id" => $pid,
+                            "partyid" => $pid,
                             "doc" => $file,
                         );
                         $this->Party_doc->Add($insertdata3);
@@ -458,10 +458,10 @@ class Party extends Admin_Controller
                                     "doc" => $file,
                                 );
                                 $this->Party_doc->_where = array("id"=>$doc_id);
-                                $party_id = $this->Party_doc->Edit($insertdata4);
+                                $partyid = $this->Party_doc->Edit($insertdata4);
                             }else{
                                 $insertdata4 = array(
-                                    "party_id" => $pid,
+                                    "partyid" => $pid,
                                     "doc" => $file,
                                 );
                                 $this->Party_doc->Add($insertdata4);

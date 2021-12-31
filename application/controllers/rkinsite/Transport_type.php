@@ -50,7 +50,7 @@ class Transport_type extends Admin_Controller {
             
             
         	$row[] = ++$counter;
-            $row[] = $datarow->transport_type;
+            $row[] = $datarow->type;
             $row[] = $actions;
             $row[] = $checkbox;
             $data[] = $row;
@@ -92,21 +92,21 @@ class Transport_type extends Admin_Controller {
 		$addedby = $this->session->userdata(base_url().'ADMINID');
 		
 		
-		$transport_type = $PostData['transport_type'];
+		$type = $PostData['type'];
 
-        $this->form_validation->set_rules('transport_type', 'Transport Type', 'required');
+        $this->form_validation->set_rules('type', 'Transport Type', 'required');
 		
 		$json = array();
         if ($this->form_validation->run() == FALSE) {
         	$validationError = implode('<br>', $this->form_validation->error_array());
         	$json = array('error'=>3, 'message'=>$validationError);
 	    }else{
-                $this->Transport_type->_where = ("transport_type='".$transport_type."'");
+                $this->Transport_type->_where = ("type='".$type."'");
                 $Count = $this->Transport_type->CountRecords();
                 
                 if($Count==0){
                     
-                    $insertdata = array("transport_type"=>$transport_type,
+                    $insertdata = array("type"=>$type,
                                 "createddate"=>$createddate,
                                 "addedby"=>$addedby,
                                 "modifieddate"=>$createddate,
@@ -137,9 +137,9 @@ class Transport_type extends Admin_Controller {
 		$modifiedby = $this->session->userdata(base_url().'ADMINID');
 
 		$id = $PostData['id'];
-		$transport_type = $PostData['transport_type'];
+		$type = $PostData['type'];
 
-		$this->form_validation->set_rules('transport_type', 'Transport Type', 'required');
+		$this->form_validation->set_rules('type', 'Transport Type', 'required');
         
 
 		$json = array();
@@ -148,13 +148,13 @@ class Transport_type extends Admin_Controller {
         	$json = array('error'=>3, 'message'=>$validationError);
 	    }else{
          
-                $this->Transport_type->_where = ("id!=".$id." AND transport_type='".$transport_type."'");
+                $this->Transport_type->_where = ("id!=".$id." AND type='".$type."'");
 
                 $Count = $this->Transport_type->CountRecords();
             
                 if ($Count==0) {
                     $updatedata = array(
-                        "transport_type"=>$transport_type,
+                        "type"=>$type,
                         "modifieddate"=>$modifieddate,
                         "modifiedby"=>$modifiedby
                     );
@@ -165,7 +165,7 @@ class Transport_type extends Admin_Controller {
                     $Edit = $this->Transport_type->Edit($updatedata);
                     if ($Edit) {
                         if($this->viewData['submenuvisibility']['managelog'] == 1){
-                            $this->general_model->addActionLog(2,'Transport Type','Edit '.$transport_type.' payment type.');
+                            $this->general_model->addActionLog(2,'Transport Type','Edit '.$type.' payment type.');
                         }
                         $json = array('error'=>1); //Rights successfully updated.
                     } else {

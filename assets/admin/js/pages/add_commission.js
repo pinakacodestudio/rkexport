@@ -4,7 +4,7 @@ function resetdata() {
     if (ACTION == 1) {
         $('html, body').animate({ scrollTop: 0 }, 'slow');
     } else {
-        $('#commission_type').val('');
+        $('#commission').val('');
         $('#date').val('');
         $('html, body').animate({ scrollTop: 0 }, 'slow');
     }
@@ -25,24 +25,24 @@ $('#remove').click(function() {
 
 function checkvalidation(addtype = 0) {
 
-    var commission_type = $('#commission_type').val().trim();
+    var commission = $('#commission').val().trim();
     var date = $('#date').val().trim();
 
-    var isvalidcommission_type = isvaliddate = 0;
+    var isvalidcommission = isvaliddate = 0;
 
     PNotify.removeAll();
 
-    if (commission_type == '') {
+    if (commission == '') {
         $("#currency_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please enter Currency !', styling: 'fontawesome', delay: '3000', type: 'error' });
-        isvalidcommission_type = 0;
+        isvalidcommission = 0;
     } else {
         $("#currency_div").removeClass("has-error is-focused");
-        isvalidcommission_type = 1;
+        isvalidcommission = 1;
     }
 
 
-    if (isvalidcommission_type == 1) {
+    if (isvalidcommission == 1) {
 
         var formData = new FormData($('#addcommissionform')[0]);
         if (ACTION == 0) {

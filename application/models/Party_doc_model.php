@@ -3,7 +3,7 @@
 class Party_doc_model extends Common_model {
 
 	//put your code here
-	public $_table = tbl_party_doc;
+	public $_table = tbl_partydoc;
 	public $_fields = "*";
 	public $_where = array();
     public $_except_fields = array();
@@ -413,9 +413,9 @@ class Party_doc_model extends Common_model {
 	}
 	function getparty_docdataByID($ID){
         
-		$query = $this->readdb->select("t1.id,t1.party_id,t1.doc,t1.doc_name")
-		->from(tbl_party_doc." as t1")
-		->where("t1.party_id", $ID)
+		$query = $this->readdb->select("t1.id,t1.partyid,t1.doc,t1.docname")
+		->from(tbl_partydoc." as t1")
+		->where("t1.partyid", $ID)
 		->get();
 		return $query->result();
 		

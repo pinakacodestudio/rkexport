@@ -8,15 +8,15 @@ class Payment_type_model extends Common_model {
 	public $_where = array();
 	public $_except_fields = array();
 	public $_order = array('id' => 'DESC');
-	public $column_order = array('id', 'payment_type');
-    public $column_search = array('payment_type');
+	public $column_order = array('id', 'paymenttype');
+    public $column_search = array('paymenttype');
 	
 	function __construct() {
 		parent::__construct();
 	}
 	
 	function getAdditionalrightsDataByID($ID){
-		$query = $this->readdb->select("id,payment_type")
+		$query = $this->readdb->select("id,paymenttype")
 							->from($this->_table)
 							->where("id", $ID)
 							->get();
@@ -28,7 +28,7 @@ class Payment_type_model extends Common_model {
 		}	
     }
     function getAdditionalrightsList() {
-        $query = $this->readdb->select("id,payment_type")
+        $query = $this->readdb->select("id,paymenttype")
 							->from($this->_table)
 							->get();
 		
@@ -48,7 +48,7 @@ class Payment_type_model extends Common_model {
 	    }
     }
 	function _get_datatables_query(){  
-        $this->readdb->select("id,payment_type,createddate,modifieddate");
+        $this->readdb->select("id,paymenttype,createddate,modifieddate");
         $this->readdb->from($this->_table." as ar");
         $i = 0;
         foreach ($this->column_search as $item) // loop column 

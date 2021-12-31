@@ -50,7 +50,7 @@ class Payment_type extends Admin_Controller {
             
             
         	$row[] = ++$counter;
-            $row[] = $datarow->payment_type;
+            $row[] = $datarow->paymenttype;
             $row[] = $actions;
             $row[] = $checkbox;
             $data[] = $row;
@@ -92,7 +92,7 @@ class Payment_type extends Admin_Controller {
 		$addedby = $this->session->userdata(base_url().'ADMINID');
 		
 		
-		$payment_type = $PostData['payment_type'];
+		$paymenttype = $PostData['paymenttype'];
 
         $this->form_validation->set_rules('payment_type', 'Payment Type', 'required');
 		
@@ -103,12 +103,12 @@ class Payment_type extends Admin_Controller {
 	    }else{
             
          
-                $this->Payment_type->_where = ("payment_type='".$payment_type."'");
+                $this->Payment_type->_where = ("paymenttype='".$paymenttype."'");
                 $Count = $this->Payment_type->CountRecords();
                 
                 if($Count==0){
                     
-                    $insertdata = array("payment_type"=>$payment_type,
+                    $insertdata = array("paymenttype"=>$paymenttype,
                                 "createddate"=>$createddate,
                                 "addedby"=>$addedby,
                                 "modifieddate"=>$createddate,
@@ -139,7 +139,7 @@ class Payment_type extends Admin_Controller {
 		$modifiedby = $this->session->userdata(base_url().'ADMINID');
 
 		$id = $PostData['id'];
-		$payment_type = $PostData['payment_type'];
+		$paymenttype = $PostData['paymenttype'];
 
 		$this->form_validation->set_rules('payment_type', 'Payment Type', 'required');
         
@@ -150,13 +150,13 @@ class Payment_type extends Admin_Controller {
         	$json = array('error'=>3, 'message'=>$validationError);
 	    }else{
          
-                $this->Payment_type->_where = ("id!=".$id." AND payment_type='".$payment_type."'");
+                $this->Payment_type->_where = ("id!=".$id." AND paymenttype='".$paymenttype."'");
 
                 $Count = $this->Payment_type->CountRecords();
             
                 if ($Count==0) {
                     $updatedata = array(
-                        "payment_type"=>$payment_type,
+                        "paymenttype"=>$paymenttype,
                         "modifieddate"=>$modifieddate,
                         "modifiedby"=>$modifiedby
                     );
@@ -167,7 +167,7 @@ class Payment_type extends Admin_Controller {
                     $Edit = $this->Payment_type->Edit($updatedata);
                     if ($Edit) {
                         if($this->viewData['submenuvisibility']['managelog'] == 1){
-                            $this->general_model->addActionLog(2,'Payment Type','Edit '.$payment_type.' payment type.');
+                            $this->general_model->addActionLog(2,'Payment Type','Edit '.$paymenttype.' payment type.');
                         }
                         $json = array('error'=>1); //Rights successfully updated.
                     } else {

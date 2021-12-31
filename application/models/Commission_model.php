@@ -16,7 +16,7 @@ class Commission_model extends Common_model {
 	}
 	
 	function getcommissionDataByID($ID){
-		$query = $this->readdb->select("id,commission_type,date,createddate,modifieddate,addedby,modifiedby")
+		$query = $this->readdb->select("id,commission,date,createddate,modifieddate,addedby,modifiedby")
 							->from($this->_table)
 							->where("id", $ID)
 							->get();
@@ -28,7 +28,7 @@ class Commission_model extends Common_model {
 		}	
     }
     function getAdditionalrightsList() {
-        $query = $this->readdb->select("id,commission_type")
+        $query = $this->readdb->select("id,commission")
 							->from($this->_table)
 							->get();
 		
@@ -49,7 +49,7 @@ class Commission_model extends Common_model {
     }
 	function _get_datatables_query(){  
 
-        $this->readdb->select("id,commission_type,date,modifieddate,createddate,modifiedby,createddate,addedby");
+        $this->readdb->select("id,commission,date,modifieddate,createddate,modifiedby,createddate,addedby");
         $this->readdb->from($this->_table." as ar");
         $i = 0;
         foreach ($this->column_search as $item) // loop column 

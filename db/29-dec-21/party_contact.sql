@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `party_contact` (
   `id` int(11) NOT NULL,
-  `party_id` int(11) NOT NULL,
+  `partyid` int(11) NOT NULL,
   `firstname` varchar(50) DEFAULT NULL,
   `lastname` varchar(50) DEFAULT NULL,
   `contactno` varchar(20) DEFAULT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE `party_contact` (
 -- Dumping data for table `party_contact`
 --
 
-INSERT INTO `party_contact` (`id`, `party_id`, `firstname`, `lastname`, `contactno`, `birthdate`, `anniversarydate`, `email`, `createddate`, `modifieddate`, `addedby`, `modifiedby`) VALUES
+INSERT INTO `party_contact` (`id`, `partyid`, `firstname`, `lastname`, `contactno`, `birthdate`, `anniversarydate`, `email`, `createddate`, `modifieddate`, `addedby`, `modifiedby`) VALUES
 (1, 1, 'kmp9jpLy6D', 'Jay', '6417991886', '2003-12-25', '2021-12-20', 'cmNKSDJKCNSK@gmail.c', '2021-12-28', '2021-12-28', 18, 18),
 (2, 2, 'kmp9jpLy6D', 'Jay', '6417991886', '2003-12-25', '2021-12-20', 'cmNKSDJKCNSK@gmail.c', '2021-12-28', '2021-12-28', 18, 18),
 (3, 3, 'kmp9jpLy6D', 'Jay', '6417991886', '2003-12-25', '2021-12-20', 'cmNKSDJKCNSK@gmail.c', '2021-12-28', '2021-12-28', 18, 18),

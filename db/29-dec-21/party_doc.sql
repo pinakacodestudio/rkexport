@@ -29,16 +29,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `party_doc` (
   `id` int(11) NOT NULL,
-  `party_id` int(11) DEFAULT NULL,
+  `partyid` int(11) DEFAULT NULL,
   `doc` varchar(250) DEFAULT NULL,
-  `doc_name` varchar(50) DEFAULT NULL
+  `docname` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `party_doc`
 --
 
-INSERT INTO `party_doc` (`id`, `party_id`, `doc`, `doc_name`) VALUES
+INSERT INTO `party_doc` (`id`, `partyid`, `doc`, `docname`) VALUES
 (1, 18, 'test1640693576.png', '7461347696'),
 (2, 19, 'test1640693618.png', '7461347696'),
 (3, 20, 'test1640693698.png', '746134769612'),
