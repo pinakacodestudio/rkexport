@@ -5492,8 +5492,8 @@ class Product_model extends Common_model {
                 $productdata = $this->Stock->getAdminProductStock($row['id'],0);
                 $currentstock = (!empty($productdata)?$productdata[0]['openingstock']:0);
             }else{
-                $productdata = $this->Stock->getAdminProductFIFOStock($row['id'],0);
-                $currentstock = (!empty($productdata[0]['openingstock'])?$productdata[0]['openingstock']:0);
+                // $productdata = $this->Stock->getAdminProductFIFOStock($row['id'],0);
+                // $currentstock = (!empty($productdata[0]['openingstock'])?$productdata[0]['openingstock']:0);
             }
             $pricesdata = $this->Product_prices->getProductQuantityPriceDataByPriceID($row['priceId'],array("id"=>"ASC"));
 
@@ -5508,9 +5508,9 @@ class Product_model extends Common_model {
 			$data[] = array_merge(array('priceid'=>$row['priceid'],
 							'productname'=>$row['productname'],
 							'variantname'=>$row['variantname'],
-							'stock'=>$currentstock,
-							'sku'=>$row['sku'],
-							'barcode'=>$row['barcode'],
+							// 'stock'=>$currentstock,
+							// 'sku'=>$row['sku'],
+							// 'barcode'=>$row['barcode'],
 							'minimumorderqty'=>$row['minimumorderqty'],
 							'maximumorderqty'=>$row['maximumorderqty'],
 							'minimumstocklimit'=>$row['minimumstocklimit'],

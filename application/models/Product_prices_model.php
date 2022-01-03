@@ -86,16 +86,14 @@ class Product_prices_model extends Common_model {
 
 	public function getProductpriceByProductID($productid){
 		
-		$query = $this->readdb->select("id,price,stock,pointsforseller,pointsforbuyer,unitid,sku,barcode,minimumorderqty,maximumorderqty,minimumstocklimit,weight,pricetype,minimumsalesprice,
-							
-				IF(IFNULL((SELECT count(pbp.id) FROM ".tbl_productbasicpricemapping." as pbp WHERE pbp.productid=pp.productid AND pbp.productpriceid=pp.id GROUP BY productpriceid),0)>0,0,1) as addpriceinpricelist,
+		$query = $this->readdb->select("id,price,stock,pointsforseller,pointsforbuyer,unitid,sku,barcode,minimumorderqty,maximumorderqty,minimumstocklimit,weight,pricetype,installationcharge,minimumsalesprice,					
+		IF(IFNULL((SELECT count(pbp.id) FROM ".tbl_productbasicpricemapping." as pbp WHERE pbp.productid=pp.productid AND pbp.productpriceid=pp.id GROUP BY productpriceid),0)>0,0,1) as addpriceinpricelist,
+		IFNULL((SELECT GROUP_CONCAT(v.value) FROM ".tbl_productcombination." as pc INNER JOIN ".tbl_variant." as v on v.id=pc.variantid WHERE pc.priceid=pp.id),'-') as variantname
 
-				IFNULL((SELECT GROUP_CONCAT(v.value) FROM ".tbl_productcombination." as pc INNER JOIN ".tbl_variant." as v on v.id=pc.variantid WHERE pc.priceid=pp.id),'-') as variantname
-
-			")
-							->from($this->_table." as pp")
-							->where("pp.productid=".$productid)
-							->get();
+	")
+		->from($this->_table." as pp")
+		->where("pp.productid=".$productid)
+		->get();
 
 		return $query->result_array();
 	}

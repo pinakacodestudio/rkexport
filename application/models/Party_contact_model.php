@@ -412,7 +412,7 @@ class Party_contact_model extends Common_model {
 		return $query->result();
 	}
 	function getpartycontactdatadataByID($ID){
-		$query = $this->readdb->select("t1.id,t1.firstname,t1.lastname,t1.contactno,t1.birthdate,t1.anniversarydate,t1.email")
+		$query = $this->readdb->select("t1.id,t1.firstname,t1.lastname,t1.contactno,t1.birthdate,t1.anniversarydate,t1.email,t1.partyid")
 		->from(tbl_partycontact." as t1")
 		->where("t1.partyid", $ID)
 		->get();

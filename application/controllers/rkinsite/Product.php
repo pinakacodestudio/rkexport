@@ -579,9 +579,7 @@ class  Product extends Admin_Controller
         $productpricesid = isset($PostData['productpricesid']) ? trim($PostData['productpricesid']) : '';
         
         if ($isuniversal == 1) {
-
             $this->Product->removeVariantInUpdateProduct($productid);
-
             $Count = $this->Product->CheckProductSKUAvailable($sku, $productid, 1);
             if ($Count > 0) {
                 echo 8;
@@ -658,7 +656,7 @@ class  Product extends Admin_Controller
         //     }
         // }
 
-        // print_r($PostData); exit;
+
         if (empty($sqlname)) {
             $updateData = array(
                 'categoryid' => $categoryid,
@@ -708,7 +706,7 @@ class  Product extends Admin_Controller
             }
             $updatedata["weight"] = $weight;
             $updatedata["unitid"] = $unitid;
-            //print_r($updatedata);exit;
+
             $this->Product_prices->_where = array('productid' => $productid);
             $this->Product_prices->Edit($updatedata);
 
@@ -1039,6 +1037,7 @@ class  Product extends Admin_Controller
                 "minimumsalesprice" => $price['minimumsalesprice'],
                 "weight" => $price['weight'],
                 "pricetype" => $price['pricetype'],
+                "installationcharge" => $price['installationcharge'],
                 "productquantitypricesdata" => $productquantitypricesdata
             );
         }
@@ -1058,7 +1057,7 @@ class  Product extends Admin_Controller
 
         $this->load->model("Attribute_model", "Attribute");
         $this->viewData['attributedata'] = $this->Attribute->getActiveAttribute();
-        // echo "<pre>"; print_r($this->viewData['productprices']); exit;
+  
         $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
         $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_bottom_javascripts("product", "pages/product_variant.js");
@@ -1069,7 +1068,9 @@ class  Product extends Admin_Controller
     {
 
         $PostData = $this->input->post();
-        // print_r($PostData); exit;
+        // echo '<pre>';
+        // print_r($PostData); 
+        // exit;
         $this->load->model("Product_prices_model", "Product_prices");
         $this->load->model("Product_combination_model", "Product_combination");
         $this->load->model("Member_model", "Member");
@@ -1079,43 +1080,45 @@ class  Product extends Admin_Controller
 
         $insert_variant_arr = $update_variant_arr = $delete_variant_arr = $update_price = $priceid_arr = $final_delete_arr = $insert_member_product_variant_arr = $InsertMultiplePriceData = $UpdateMultiplePriceData = $UpdatedProductQuantityPrice = array();
 
-        foreach ($PostData['priceid'] as $k => $v) {
-            if ($v == 0) {
-                $Count = $this->Product->CheckProductSKUAvailable($PostData['sku'][$k]);
-                if ($Count > 0) {
-                    echo json_encode(array("error" => 2, "index" => ($k + 1)));
-                    exit;
-                }
-            } else {
-                $Count = $this->Product->CheckProductSKUAvailable($PostData['sku'][$k], $v);
-                if ($Count > 0) {
-                    echo json_encode(array("error" => 2, "index" => ($k + 1)));
-                    exit;
-                }
-            }
-        }
+        // foreach ($PostData['priceid'] as $k => $v) {
+        //     if ($v == 0) {
+        //         $Count = $this->Product->CheckProductSKUAvailable($PostData['sku'][$k]);
+        //         if ($Count > 0) {
+        //             echo json_encode(array("error" => 2, "index" => ($k + 1)));
+        //             exit;
+        //         }
+        //     } else {
+        //         $Count = $this->Product->CheckProductSKUAvailable($PostData['sku'][$k], $v);
+        //         if ($Count > 0) {
+        //             echo json_encode(array("error" => 2, "index" => ($k + 1)));
+        //             exit;
+        //         }
+        //     }
+        // }
 
         $productid = $PostData['productid'];
         $producttype = $PostData['producttype'];
 
+      
         foreach ($PostData['priceid'] as $key => $row) {
-
-            $pricetype = $PostData['pricetype' . $key];
-
+            // echo '<pre>';
+            // print_r($PostData);
+            // exit;
+            // $pricetype = $PostData['pricetype' . $key];
             if ($row == 0) {
+              
                 $insertpricedata = array(
                     "productid" => $PostData['productid'],
-                    /* "price"=>$price, */
                     "stock" => $PostData['stock'][$key],
                     "pointsforseller" => $PostData['pointsforseller'][$key],
                     "pointsforbuyer" => $PostData['pointsforbuyer'][$key],
-                    "sku" => $PostData['sku'][$key],
+                    // "sku" => $PostData['sku'][$key],
                     "weight" => $PostData['weight'][$key],
                     "barcode" => $PostData['barcode'][$key],
                     "minimumorderqty" => $PostData['minimumorderqty'][$key],
                     "maximumorderqty" => $PostData['maximumorderqty'][$key],
                     "minimumstocklimit" => $PostData['minimumstocklimit'][$key],
-                    "pricetype" => $pricetype,
+                    // "pricetype" => $pricetype,
                     "minimumsalesprice" => $PostData['minimumsalesprice'][$key],
                 );
                 $row = $this->Product_prices->Add($insertpricedata);
@@ -1159,6 +1162,7 @@ class  Product extends Admin_Controller
                 }
                 $priceid_arr[] = $row;
             } else {
+              
                 foreach ($PostData['variantid'][$key] as $variantkey => $variantrow) {
                     if (isset($PostData['availablevariantid'][$key][$variantkey])) {
                         $update_variant_arr[] = array("priceid" => $row, "variantid" => $variantrow, "id" => $PostData['availablevariantid'][$key][$variantkey]);
@@ -1167,111 +1171,115 @@ class  Product extends Admin_Controller
                         $insert_variant_arr[] = array("priceid" => $row, "variantid" => $variantrow);
                     }
                 }
+               
                 $update_price[] = array(
                     "id" => $row,
                     /* "price"=>$price, */
                     "stock" => (int)$PostData['stock'][$key],
-                    "pointsforseller" => $PostData['pointsforseller'][$key],
-                    "pointsforbuyer" => $PostData['pointsforbuyer'][$key],
-                    "sku" => $PostData['sku'][$key],
+                    // "pointsforseller" => $PostData['pointsforseller'][$key],
+                    // "pointsforbuyer" => $PostData['pointsforbuyer'][$key],
+                    //"sku" => $PostData['sku'][$key],
                     "weight" => $PostData['weight'][$key],
-                    "barcode" => $PostData['barcode'][$key],
+                    // "barcode" => $PostData['barcode'][$key],
                     "minimumorderqty" => $PostData['minimumorderqty'][$key],
                     "maximumorderqty" => $PostData['maximumorderqty'][$key],
                     "minimumstocklimit" => $PostData['minimumstocklimit'][$key],
-                    "pricetype" => $pricetype,
-                    "minimumsalesprice" => $PostData['minimumsalesprice'][$key],
+                    "installationcharge" => $PostData['installationcharge'][$key],
+                    // "pricetype" => $pricetype,
+                    // "minimumsalesprice" => $PostData['minimumsalesprice'][$key],
                 );
 
-                if ($pricetype == 1) {
-                    if (!empty($PostData['variantprice'][$key])) {
-                        foreach ($PostData['variantprice'][$key] as $pricekey => $prices) {
+                // if ($pricetype == 1) {
+                //     if (!empty($PostData['variantprice'][$key])) {
+                //         foreach ($PostData['variantprice'][$key] as $pricekey => $prices) {
 
-                            $productquantitypricesid = isset($PostData['productquantitypricesid'][$key][$pricekey]) ? $PostData['productquantitypricesid'][$key][$pricekey] : "";
+                //             $productquantitypricesid = isset($PostData['productquantitypricesid'][$key][$pricekey]) ? $PostData['productquantitypricesid'][$key][$pricekey] : "";
 
-                            if ($prices > 0 && $PostData['variantqty'][$key][$pricekey] > 0) {
+                //             if ($prices > 0 && $PostData['variantqty'][$key][$pricekey] > 0) {
 
-                                if (!empty($productquantitypricesid)) {
+                //                 if (!empty($productquantitypricesid)) {
 
-                                    $UpdateMultiplePriceData[] = array(
-                                        "id" => $productquantitypricesid,
-                                        "price" => $prices,
-                                        "quantity" => $PostData['variantqty'][$key][$pricekey],
-                                        "discount" => $PostData['variantdiscpercent'][$key][$pricekey]
-                                    );
+                //                     $UpdateMultiplePriceData[] = array(
+                //                         "id" => $productquantitypricesid,
+                //                         "price" => $prices,
+                //                         "quantity" => $PostData['variantqty'][$key][$pricekey],
+                //                         "discount" => $PostData['variantdiscpercent'][$key][$pricekey]
+                //                     );
 
-                                    $UpdatedProductQuantityPrice[] = $productquantitypricesid;
-                                } else {
+                //                     $UpdatedProductQuantityPrice[] = $productquantitypricesid;
+                //                 } else {
 
-                                    $InsertMultiplePriceData[] = array(
-                                        "productpricesid" => $row,
-                                        "price" => $prices,
-                                        "quantity" => $PostData['variantqty'][$key][$pricekey],
-                                        "discount" => $PostData['variantdiscpercent'][$key][$pricekey]
-                                    );
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    $productquantitypricesid = !empty($PostData['singlequantitypricesid'][$key]) ? $PostData['singlequantitypricesid'][$key] : "";
+                //                     $InsertMultiplePriceData[] = array(
+                //                         "productpricesid" => $row,
+                //                         "price" => $prices,
+                //                         "quantity" => $PostData['variantqty'][$key][$pricekey],
+                //                         "discount" => $PostData['variantdiscpercent'][$key][$pricekey]
+                //                     );
+                //                 }
+                //             }
+                //         }
+                //     }
+                // } else {
+                //     $productquantitypricesid = !empty($PostData['singlequantitypricesid'][$key]) ? $PostData['singlequantitypricesid'][$key] : "";
 
-                    if ($PostData['price'][$key] > 0) {
+                //     if ($PostData['price'][$key] > 0) {
 
-                        if (!empty($productquantitypricesid)) {
+                //         if (!empty($productquantitypricesid)) {
 
-                            $UpdateMultiplePriceData[] = array(
-                                "id" => $productquantitypricesid,
-                                "price" => $PostData['price'][$key],
-                                "discount" => $PostData['discount'][$key],
-                            );
+                //             $UpdateMultiplePriceData[] = array(
+                //                 "id" => $productquantitypricesid,
+                //                 "price" => $PostData['price'][$key],
+                //                 "discount" => $PostData['discount'][$key],
+                //             );
 
-                            $UpdatedProductQuantityPrice[] = $productquantitypricesid;
-                        } else {
+                //             $UpdatedProductQuantityPrice[] = $productquantitypricesid;
+                //         } else {
 
-                            $InsertMultiplePriceData[] = array(
-                                "productpricesid" => $row,
-                                "price" => $PostData['price'][$key],
-                                "quantity" => 1,
-                                "discount" => $PostData['discount'][$key],
-                            );
-                        }
-                    }
-                }
+                //             $InsertMultiplePriceData[] = array(
+                //                 "productpricesid" => $row,
+                //                 "price" => $PostData['price'][$key],
+                //                 "quantity" => 1,
+                //                 "discount" => $PostData['discount'][$key],
+                //             );
+                //         }
+                //     }
+                // }
                 $priceid_arr[] = $row;
             }
         }
-        if (count($priceid_arr) > 0) {
-            $deleteprices = $this->Product_prices->getProductprices(array("id not in(" . implode(",", $priceid_arr) . ")" => null, "productid" => $PostData['productid']));
-            if (count($deleteprices) > 0) {
-                foreach ($deleteprices as $dp) {
-                    $this->Product_combination->Delete(array("priceid" => $dp['id']));
-                    $final_delete_arr[] = $dp['id'];
-                }
-            }
-            if (count($final_delete_arr) > 0) {
-                $this->Product_prices->_table = tbl_productprices;
-                $this->Product_prices->Delete(array("id in (" . implode(",", $final_delete_arr) . ")" => null));
 
-                $this->Member->Delete(array("priceid in (" . implode(",", $final_delete_arr) . ")" => null));
+      
+        // if (count($priceid_arr) > 0) {
+        //     $deleteprices = $this->Product_prices->getProductprices(array("id not in(" . implode(",", $priceid_arr) . ")" => null, "productid" => $PostData['productid']));
+        //     if (count($deleteprices) > 0) {
+        //         foreach ($deleteprices as $dp) {
+        //             $this->Product_combination->Delete(array("priceid" => $dp['id']));
+        //             $final_delete_arr[] = $dp['id'];
+        //         }
+        //     }
+        //     if (count($final_delete_arr) > 0) {
+        //         $this->Product_prices->_table = tbl_productprices;
+        //         $this->Product_prices->Delete(array("id in (" . implode(",", $final_delete_arr) . ")" => null));
 
-                $this->Product_prices->_table = tbl_productquantityprices;
-                $this->Product_prices->Delete(array("productpricesid IN (" . implode(",", $final_delete_arr) . ")" => null));
-            }
-            foreach ($priceid_arr as $priceid) {
+        //         $this->Member->Delete(array("priceid in (" . implode(",", $final_delete_arr) . ")" => null));
 
-                $priceqtydata = $this->Product_prices->getProductQuantityPriceDataByPriceID($priceid);
-                if (!empty($priceqtydata)) {
-                    $priceqtyids = array_column($priceqtydata, "id");
-                    $resultId = array_diff($priceqtyids, $UpdatedProductQuantityPrice);
+        //         $this->Product_prices->_table = tbl_productquantityprices;
+        //         $this->Product_prices->Delete(array("productpricesid IN (" . implode(",", $final_delete_arr) . ")" => null));
+        //     }
+        //     foreach ($priceid_arr as $priceid) {
 
-                    if (!empty($resultId)) {
-                        $this->Product_prices->_table = tbl_productquantityprices;
-                        $this->Product_prices->Delete(array("id IN (" . implode(",", $resultId) . ")" => null));
-                    }
-                }
-            }
-        }
+        //         $priceqtydata = $this->Product_prices->getProductQuantityPriceDataByPriceID($priceid);
+        //         if (!empty($priceqtydata)) {
+        //             $priceqtyids = array_column($priceqtydata, "id");
+        //             $resultId = array_diff($priceqtyids, $UpdatedProductQuantityPrice);
+
+        //             if (!empty($resultId)) {
+        //                 $this->Product_prices->_table = tbl_productquantityprices;
+        //                 $this->Product_prices->Delete(array("id IN (" . implode(",", $resultId) . ")" => null));
+        //             }
+        //         }
+        //     }
+        // }
         // print_r($delete_variant_arr);exit();
         if (count($delete_variant_arr) > 0) {
             foreach ($delete_variant_arr as $dvk => $dv) {
@@ -1524,7 +1532,7 @@ class  Product extends Admin_Controller
             $this->general_model->addActionLog(4, 'Product', "View " . ucfirst($this->viewData['productdata']['name']) . ' product detail.');
         }
 
-        // echo "<pre>";print_r($this->viewData['productcombination']);exit();
+
         $this->admin_headerlib->add_javascript_plugins("html5gallery", "html5gallery/html5gallery.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
@@ -1733,23 +1741,17 @@ class  Product extends Admin_Controller
     public function importproduct()
     {
         $PostData = $this->input->post();
-        //print_r($PostData);exit;
-        //print_r($_FILES);exit;
-
         $addedby = $this->session->userdata(base_url() . 'ADMINID');
         $createddate = $this->general_model->getCurrentDateTime();
-
         $totalrowcount = $totalinserted = 0;
-
         $FileNM = $ErrorFileNM = 0;
-
+        
+        
         if ($_FILES["attachment"]['name'] != '') {
 
             $FileNM = uploadFile('attachment', 'IMPORT_FILE', IMPORT_PATH, "ods|xl|xlc|xls|xlsx");
-
             if ($FileNM !== 0) {
                 if ($FileNM == 2) {
-
                     $file_info_arr = array(
                         "channelid" => 0,
                         "memberid" => 0,
@@ -1765,12 +1767,12 @@ class  Product extends Admin_Controller
                     );
                     $this->load->model("Import_excel_model", "Import_excel");
                     $this->Import_excel->add($file_info_arr);
-
                     echo 3; //image not uploaded
                     exit;
                 }
             } else {
 
+               
                 /* $file_info_arr = array(
                     "channelid" => 0,
                     "memberid" => 0,
@@ -1790,16 +1792,18 @@ class  Product extends Admin_Controller
                 echo 2; //INVALID ATTACHMENT FILE
                 exit; */
             }
-
+            
+            
             $insertproductdata = $insertproductimagedata = $insertproductimagewithiddata = $updateproductdata = $insertproductpricesdata = $insertproductpriceswithvariantdata = $updateproductpricesdata = $variantarr = $insertproductcombination = $removeproductcombination = $InsertMultiplePriceData = $insertMultiPriceDataWithVariant = $UpdateMultiplePriceData = $UpdatedProductQuantityPrice = $DB_Productquantityprice_ID = array();
+            
             $file_data = $this->upload->data();
             $file_path =  IMPORT_PATH . $FileNM;
 
+            
             $this->load->library('excel');
             $inputFileType = PHPExcel_IOFactory::identify($file_path);
             $objReader = PHPExcel_IOFactory::createReader($inputFileType);     //For excel 2003 
             //$objReader= PHPExcel_IOFactory::createReader('Excel2007');    // For excel 2007     
-
             //Set to read only
             $objReader->setReadDataOnly(true);
 
@@ -1820,9 +1824,7 @@ class  Product extends Admin_Controller
             $PriceobjWorksheet = $objPHPExcel->getSheetByName('Price');
             $pricetotalrows = $objPHPExcel->getSheetByName('Price')->getHighestRow();   //Count Number of rows avalable in excel
 
-            // print_r($producttotalrows);exit;
-            //print_r($objWorksheet);
-
+           
             $column0 = $ProductobjWorksheet->getCellByColumnAndRow(0, 1)->getValue();
             $column1 = $ProductobjWorksheet->getCellByColumnAndRow(1, 1)->getValue();
             $column2 = $ProductobjWorksheet->getCellByColumnAndRow(2, 1)->getValue();
@@ -1842,14 +1844,16 @@ class  Product extends Admin_Controller
             $column16 = $ProductobjWorksheet->getCellByColumnAndRow(16, 1)->getValue();
             $column17 = $ProductobjWorksheet->getCellByColumnAndRow(17, 1)->getValue();
 
+          
+
             if (
                 $column0 == "Category Name *" && $column1 == "Product Name *" && $column2 == "Link" && $column3 == "Short Description" && $column4 == "Description *" && $column5 == "Hsn Code(%)" &&
                 $column6 == "Priority *" && $column7 == "Brand" && $column8 == "Image" && $column9 == "Quantity Type (1=>Range Base,0=>Multiplication)" && $column10 == "Points For Seller" && $column11 == "Points For Buyer" && $column12 == "Tag" &&
                 $column13 == "Product Display on Front or Not" && $column14 == "Activate (1=>Yes,0=>No)" && $column15 == "Meta Title" && $column16 == "Meta Keywords" && $column17 == "Meta Description"
             ) {
-
                 if ($producttotalrows > 1) {
 
+                
                     $column0 = $PriceobjWorksheet->getCellByColumnAndRow(0, 1)->getValue();
                     $column1 = $PriceobjWorksheet->getCellByColumnAndRow(1, 1)->getValue();
                     $column2 = $PriceobjWorksheet->getCellByColumnAndRow(2, 1)->getValue();
@@ -1897,16 +1901,17 @@ class  Product extends Admin_Controller
 
                     $column41 = $PriceobjWorksheet->getCellByColumnAndRow(41, 1)->getValue();
 
+                    
                     if (
                         $column0 == "Product Code" && $column1 == "Product Name *" && $column2 == "Variant" &&
                         $column3 == "Stock" && $column4 == "SKU *" && $column5 == "Barcode" &&
-                        $column6 == "Minimum Order Quantity" && $column7 == "Maximum Order Quantity" &&
-                        $column8 == "Minimum Stock Limit" && $column9 == "Weight (kg)" &&
+                        $column6 == "Minimum Order Quantity" && $column7 == "Maximum Order Quantity" &&$column8 == "Minimum Stock Limit" && $column9 == "Weight (kg)" &&
                         $column10 == "Add Price In Price List (1=>Yes, 0=>No)" &&
                         $column11 == "Price Type (0=>Single Quantity, 1=>Multiple Quantity)" &&
-                        
-                        $column12 == "Price 1 *" && $column13 == "Quantity 1 *" && $column14 == "Discount 1 (%)" &&
-                        $column15 == "Price 2" && $column16 == "Quantity 2" && $column17 == "Discount 2 (%)" &&
+                        $column12 == "Price 1" &&
+                        $column13 == "Quantity 1" &&
+                        $column14 == "Discount 1 (%)" &&
+                        $column15 == "Price 2" && $column16 == "Quantity 2" && $column17 == "Discount 2 (%)" && 
                         $column18 == "Price 3" && $column19 == "Quantity 3" && $column20 == "Discount 3 (%)" &&
                         $column21 == "Price 4" && $column22 == "Quantity 4" && $column23 == "Discount 4 (%)" &&
                         $column24 == "Price 5" && $column25 == "Quantity 5" && $column26 == "Discount 5 (%)" &&
@@ -1917,6 +1922,9 @@ class  Product extends Admin_Controller
                         $column39 == "Price 10" && $column40 == "Quantity 10" && $column41 == "Discount 10 (%)"
 
                     ) {
+                        
+              
+                        
                         $error = array();
                         $ProductSheeterror = array();
                         $PriceSheeterror = array();
@@ -1983,8 +1991,9 @@ class  Product extends Admin_Controller
                         $pricetotalrowserrorcoount = 2;
 
                         $getvariants = $noofproductimport = 0;
+                      
                         for ($i = 2; $i <= $producttotalrows; $i++) {
-
+                           
                             $createddate = $this->general_model->getCurrentDateTime();
 
                             $category = trim($ProductobjWorksheet->getCellByColumnAndRow(0, $i)->getValue());
@@ -2064,6 +2073,7 @@ class  Product extends Admin_Controller
 
                             $PricesArrayPricesheetArr = $QuantityArrayPricesheetArr = $DiscountArrayPricesheetArr = array();
 
+                           
                             $PricesArrayPricesheetArr['1'] = $PriceobjWorksheet->SingleColumnDataArray(12,'2',$producttotalrows+1);
                             $QuantityArrayPricesheetArr['1'] = $PriceobjWorksheet->SingleColumnDataArray(13,'2',$producttotalrows+1);
                             $DiscountArrayPricesheetArr['1'] = $PriceobjWorksheet->SingleColumnDataArray(14,'2',$producttotalrows+1);
@@ -2104,12 +2114,20 @@ class  Product extends Admin_Controller
                             $QuantityArrayPricesheetArr['10'] = $PriceobjWorksheet->SingleColumnDataArray(40,'2',$producttotalrows+1);
                             $DiscountArrayPricesheetArr['10'] = $PriceobjWorksheet->SingleColumnDataArray(41,'2',$producttotalrows+1);
                                 
-                            
+                          
+                           
                             if(in_array($productname,$ProductnamePricesheetArr)){
                                 $productdatafromprice = array_keys($ProductnamePricesheetArr,$productname);
                                 $updateIsUniversal = $updateIsUniversalwithiddata = $barcodearray = $skuarray = array();
+                                echo '<pre>';
+                               
+                                for ($pp = 0; $pp < count($productdatafromprice); $pp++) {
 
-                                for ($pp = 0; $pp <= count($productdatafromprice); $pp++) {
+                                    // print_r($pp);
+                                    // echo '<pre>';
+                                    // echo '<br>';
+                                    // print_r($productdatafromprice);
+                                   
                                     $ProductCodePricesheet = $ProductCodePricesheetArr[$productdatafromprice[$pp]];
                                     $ProductnamePricesheet = $ProductnamePricesheetArr[$productdatafromprice[$pp]];
                                     $VariantnamePricesheet = $VariantnamePricesheetArr[$productdatafromprice[$pp]];
@@ -2125,46 +2143,47 @@ class  Product extends Admin_Controller
 
                                     $PricesArrayPricesheet = $QuantityArrayPricesheet = $DiscountArrayPricesheet = array();
 
-                                    $PricesArrayPricesheet['1']=$$PricesArrayPricesheetArr['1'][$productdatafromprice[$pp]];
-                                    $QuantityArrayPricesheet['1']=$$QuantityArrayPricesheetArr['1'][$productdatafromprice[$pp]];
-                                    $DiscountArrayPricesheet['1']=$$DiscountArrayPricesheetArr['1'][$productdatafromprice[$pp]];
+                                    $PricesArrayPricesheet['1']=$PricesArrayPricesheetArr['1'][$productdatafromprice[$pp]];
+                                    $QuantityArrayPricesheet['1']=$QuantityArrayPricesheetArr['1'][$productdatafromprice[$pp]];
+                                    $DiscountArrayPricesheet['1']=$DiscountArrayPricesheetArr['1'][$productdatafromprice[$pp]];
 
-                                    $PricesArrayPricesheet['2']=$$PricesArrayPricesheetArr['2'][$productdatafromprice[$pp]];
-                                    $QuantityArrayPricesheet['2']=$$QuantityArrayPricesheetArr['2'][$productdatafromprice[$pp]];
-                                    $DiscountArrayPricesheet['2']=$$DiscountArrayPricesheetArr['2'][$productdatafromprice[$pp]];
+                                    $PricesArrayPricesheet['2']=$PricesArrayPricesheetArr['2'][$productdatafromprice[$pp]];
+                                    $QuantityArrayPricesheet['2']=$QuantityArrayPricesheetArr['2'][$productdatafromprice[$pp]];
+                                    $DiscountArrayPricesheet['2']=$DiscountArrayPricesheetArr['2'][$productdatafromprice[$pp]];
 
-                                    $PricesArrayPricesheet['3']=$$PricesArrayPricesheetArr['3'][$productdatafromprice[$pp]];
-                                    $QuantityArrayPricesheet['3']=$$QuantityArrayPricesheetArr['3'][$productdatafromprice[$pp]];
-                                    $DiscountArrayPricesheet['3']=$$DiscountArrayPricesheetArr['3'][$productdatafromprice[$pp]];
+                                    $PricesArrayPricesheet['3']=$PricesArrayPricesheetArr['3'][$productdatafromprice[$pp]];
+                                    $QuantityArrayPricesheet['3']=$QuantityArrayPricesheetArr['3'][$productdatafromprice[$pp]];
+                                    $DiscountArrayPricesheet['3']=$DiscountArrayPricesheetArr['3'][$productdatafromprice[$pp]];
 
-                                    $PricesArrayPricesheet['4']=$$PricesArrayPricesheetArr['4'][$productdatafromprice[$pp]];
-                                    $QuantityArrayPricesheet['4']=$$QuantityArrayPricesheetArr['4'][$productdatafromprice[$pp]];
-                                    $DiscountArrayPricesheet['4']=$$DiscountArrayPricesheetArr['4'][$productdatafromprice[$pp]];
+                                    $PricesArrayPricesheet['4']=$PricesArrayPricesheetArr['4'][$productdatafromprice[$pp]];
+                                    $QuantityArrayPricesheet['4']=$QuantityArrayPricesheetArr['4'][$productdatafromprice[$pp]];
+                                    $DiscountArrayPricesheet['4']=$DiscountArrayPricesheetArr['4'][$productdatafromprice[$pp]];
 
-                                    $PricesArrayPricesheet['5']=$$PricesArrayPricesheetArr['5'][$productdatafromprice[$pp]];
-                                    $QuantityArrayPricesheet['5']=$$QuantityArrayPricesheetArr['5'][$productdatafromprice[$pp]];
-                                    $DiscountArrayPricesheet['5']=$$DiscountArrayPricesheetArr['5'][$productdatafromprice[$pp]];
+                                    $PricesArrayPricesheet['5']=$PricesArrayPricesheetArr['5'][$productdatafromprice[$pp]];
+                                    $QuantityArrayPricesheet['5']=$QuantityArrayPricesheetArr['5'][$productdatafromprice[$pp]];
+                                    $DiscountArrayPricesheet['5']=$DiscountArrayPricesheetArr['5'][$productdatafromprice[$pp]];
 
-                                    $PricesArrayPricesheet['6']=$$PricesArrayPricesheetArr['6'][$productdatafromprice[$pp]];
-                                    $QuantityArrayPricesheet['6']=$$QuantityArrayPricesheetArr['6'][$productdatafromprice[$pp]];
-                                    $DiscountArrayPricesheet['6']=$$DiscountArrayPricesheetArr['6'][$productdatafromprice[$pp]];
+                                    $PricesArrayPricesheet['6']=$PricesArrayPricesheetArr['6'][$productdatafromprice[$pp]];
+                                    $QuantityArrayPricesheet['6']=$QuantityArrayPricesheetArr['6'][$productdatafromprice[$pp]];
+                                    $DiscountArrayPricesheet['6']=$DiscountArrayPricesheetArr['6'][$productdatafromprice[$pp]];
 
-                                    $PricesArrayPricesheet['7']=$$PricesArrayPricesheetArr['7'][$productdatafromprice[$pp]];
-                                    $QuantityArrayPricesheet['7']=$$QuantityArrayPricesheetArr['7'][$productdatafromprice[$pp]];
-                                    $DiscountArrayPricesheet['7']=$$DiscountArrayPricesheetArr['7'][$productdatafromprice[$pp]];
+                                    $PricesArrayPricesheet['7']=$PricesArrayPricesheetArr['7'][$productdatafromprice[$pp]];
+                                    $QuantityArrayPricesheet['7']=$QuantityArrayPricesheetArr['7'][$productdatafromprice[$pp]];
+                                    $DiscountArrayPricesheet['7']=$DiscountArrayPricesheetArr['7'][$productdatafromprice[$pp]];
 
-                                    $PricesArrayPricesheet['8']=$$PricesArrayPricesheetArr['8'][$productdatafromprice[$pp]];
-                                    $QuantityArrayPricesheet['8']=$$QuantityArrayPricesheetArr['8'][$productdatafromprice[$pp]];
-                                    $DiscountArrayPricesheet['8']=$$DiscountArrayPricesheetArr['8'][$productdatafromprice[$pp]];
+                                    $PricesArrayPricesheet['8']=$PricesArrayPricesheetArr['8'][$productdatafromprice[$pp]];
+                                    $QuantityArrayPricesheet['8']=$QuantityArrayPricesheetArr['8'][$productdatafromprice[$pp]];
+                                    $DiscountArrayPricesheet['8']=$DiscountArrayPricesheetArr['8'][$productdatafromprice[$pp]];
 
-                                    $PricesArrayPricesheet['9']=$$PricesArrayPricesheetArr['9'][$productdatafromprice[$pp]];
-                                    $QuantityArrayPricesheet['9']=$$QuantityArrayPricesheetArr['9'][$productdatafromprice[$pp]];
-                                    $DiscountArrayPricesheet['9']=$$DiscountArrayPricesheetArr['9'][$productdatafromprice[$pp]];
+                                    $PricesArrayPricesheet['9']=$PricesArrayPricesheetArr['9'][$productdatafromprice[$pp]];
+                                    $QuantityArrayPricesheet['9']=$QuantityArrayPricesheetArr['9'][$productdatafromprice[$pp]];
+                                    $DiscountArrayPricesheet['9']=$DiscountArrayPricesheetArr['9'][$productdatafromprice[$pp]];
 
-                                    $PricesArrayPricesheet['10']=$$PricesArrayPricesheetArr['10'][$productdatafromprice[$pp]];
-                                    $QuantityArrayPricesheet['10']=$$QuantityArrayPricesheetArr['10'][$productdatafromprice[$pp]];
-                                    $DiscountArrayPricesheet['10']=$$DiscountArrayPricesheetArr['10'][$productdatafromprice[$pp]];
+                                    $PricesArrayPricesheet['10']=$PricesArrayPricesheetArr['10'][$productdatafromprice[$pp]];
+                                    $QuantityArrayPricesheet['10']=$QuantityArrayPricesheetArr['10'][$productdatafromprice[$pp]];
+                                    $DiscountArrayPricesheet['10']=$DiscountArrayPricesheetArr['10'][$productdatafromprice[$pp]];
 
+                                    
                                     if (!empty($ProductCodePricesheet) || !empty($ProductnamePricesheet) || !empty($VariantnamePricesheet) || !empty($stockPricesheet) || !empty($skuPricesheet) || !empty($barcodePricesheet)) {
 
                                         if(empty($ProductnamePricesheet)){
@@ -2240,10 +2259,16 @@ class  Product extends Admin_Controller
 
 
                                 }
-                            }
-                            pre($productdatafromprice);
 
+                               
+                            }
+
+                         
+                          
+                            // pre($productdatafromprice);
                             $isvalid = 1;
+                          
+                          
                             if (empty($category)) {
                                 // echo "Row no. " . $i . " product category is empty !";
                                 $ProductSheeterror[] = "Row no. " . $i . " product category is empty !";
@@ -2310,6 +2335,8 @@ class  Product extends Admin_Controller
                                 }
                             }
 
+                            
+                            
                             if ($isvalid) {
                                 if (empty($slug)) {
                                     $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $productname)));
@@ -2384,7 +2411,12 @@ class  Product extends Admin_Controller
                                 $this->Product->_where = array('name' => $productname, "slug" => $slug);
                                 $productData = $this->Product->getRecordsByID();
 
+
+                               
                                 if (!empty($productData)) {
+
+                        
+
                                     $productid = $productData['id'];
 
                                     $UpdateData = array(
@@ -2459,6 +2491,9 @@ class  Product extends Admin_Controller
                                         $this->Product_tag->Delete(array('productid' => $productid, 'tagid IN (' . implode(",", $RemoveIagMappingIds) . ')' => null));
                                     }
                                 } else {
+
+                                
+
                                     $InsertData = array(
                                         'categoryid' => $categoryid,
                                         'name' => $productname,
@@ -2519,7 +2554,8 @@ class  Product extends Admin_Controller
                                 $NewProductSheeterror[] = array($category,$productname,$slug,$shortdescription,$description,$hsncode,$priority,$brand,$image,$quantitytype,$pointsforseller,$pointsforbuyer,$tag,$productdisplayonfront,$status,$metatitle,$metakeyword,$metadescription);
                             }
                         }
-
+                     
+                       
                         $totalproduct = $productcount + $noofproductimport;
                         if ($productcount >= NOOFPRODUCT) {
                             $error[] = 1;
@@ -2533,11 +2569,14 @@ class  Product extends Admin_Controller
                             }
                         }
 
+                        
                         $updateIsUniversal = $updateIsUniversalwithiddata = $barcodearray = $skuarray = array();
+                       
                         for ($i = 2; $i <= $pricetotalrows; $i++) {
                             $productcode = trim($PriceobjWorksheet->getCellByColumnAndRow(0, $i)->getValue());
                             $productname = trim($PriceobjWorksheet->getCellByColumnAndRow(1, $i)->getValue());
                             $variantname = trim($PriceobjWorksheet->getCellByColumnAndRow(2, $i)->getValue());
+                            
                             $stock = trim($PriceobjWorksheet->getCellByColumnAndRow(3, $i)->getValue());
                             $stock = (!empty($stock)) ? $stock : 0;
                             $sku = trim($PriceobjWorksheet->getCellByColumnAndRow(4, $i)->getValue());
@@ -2606,7 +2645,10 @@ class  Product extends Admin_Controller
                             //$productpriceid = array_filter(explode('|',$productcode));
                             $isvalid = 1;
 
+                        
                             if (!empty($productcode) || !empty($productname) || !empty($variantname) || !empty($price) || !empty($stock) || !empty($sku) || !empty($barcode)) {
+
+                                
                                 if (empty($productname)) {
                                     // echo "Row no. " . $i . " product name is empty !";
                                     $PriceSheeterror[] = "Row no. " . $i . " product name is empty !";
@@ -2669,6 +2711,7 @@ class  Product extends Admin_Controller
                                         }
                                     }
                                 }
+                                
                                 if ($PricesArray[1] == "" || $PricesArray[1] == 0) {
                                     // echo "Row no. " . $i . " product price 1 is empty !";
                                     $PriceSheeterror[] = "Row no. " . $i . " product price 1 is empty !";
@@ -2685,14 +2728,22 @@ class  Product extends Admin_Controller
                                 if(in_array($productname,$NewProductSheeterror)){
                                     $isvalid = 0;
                                 }
-
+                     
+                               
                                 if ($isvalid){
+                                  
+                                  
                                     if (!empty($variantname)) {
                                         $variant = explode('|', $variantname);
                                         $variant = array_map('trim', $variant);
 
-                                        $variant_diff = array_diff($variant, $variantnamearr);
+                                      
+                                        $variant_diff = array_diff($variant,$variantnamearr);
+
+                                     
                                         if (!empty($variant_diff)) {
+
+                                        
                                             foreach ($variant_diff as $val) {
                                                 $attributeid = 0;
                                                 $variantarray = explode('#', $val);
@@ -2747,6 +2798,9 @@ class  Product extends Admin_Controller
                                                 }
                                             }
                                         }
+                                      
+
+                                        
                                         if (!empty($productcode) && in_array($productcode, $productpricenamearr)) { //EDIT
                                             $productd = $productpriceproductidarr[array_search($productcode, $productpricenamearr)];
                                             $productpriceid = $productpriceidarr[array_search($productcode, $productpricenamearr)];
@@ -2798,6 +2852,7 @@ class  Product extends Admin_Controller
                                             //UPDATE MULTIPLE PRICE
                                             $dbpricedata = $this->Product_prices->getProductQuantityPriceDataByPriceID($productpriceid, array("id" => "ASC"));
 
+                                            
                                             $isUpdateCount = !empty($dbpricedata) ? ($pricetype == 1 ? count($dbpricedata) : 1) : 0;
                                             if (!empty($dbpricedata)) {
                                                 foreach ($dbpricedata as $kp => $dbprice) {
@@ -2835,6 +2890,8 @@ class  Product extends Admin_Controller
                                                     }
                                                 }
                                             }
+
+                                            
                                             if ($pricetype == 1) {
                                                 foreach ($PricesArray as $ksp => $sheetprice) {
                                                     if (!empty($sheetprice) && !empty($QuantityArray[$ksp])) {
@@ -2877,6 +2934,7 @@ class  Product extends Admin_Controller
                                                 }
                                             }
                                         } else { //ADD
+                                            
                                             $variantarr[] = $variantname;
                                             if (in_array($productname, $productnamearr)) {
                                                 $productid = (int)$productidarr[array_search($productname, $productnamearr)];
@@ -2896,7 +2954,10 @@ class  Product extends Admin_Controller
                                                 'minimumstocklimit' => $minimumstocklimit,
                                                 'productid' => $productid
                                             );
+
+                                            
                                             if ($pricetype == 1) {
+                                                
                                                 for ($p = 1; $p <= 10; $p++) {
 
                                                     if (!empty($PricesArray[$p]) && !empty($QuantityArray[$p])) {
@@ -2923,6 +2984,8 @@ class  Product extends Admin_Controller
                                             }
                                         }
                                     } else {
+
+                                        
                                         if (!empty($productcode) && in_array($productcode, $productpricenamearr)) { //EDIT
                                             $productd = $productpriceproductidarr[array_search($productcode, $productpricenamearr)];
                                             $productpriceid = $productpriceidarr[array_search($productcode, $productpricenamearr)];
@@ -3214,24 +3277,37 @@ class  Product extends Admin_Controller
                                         }
                                     }
 
-                                    /* 
+                                    
                                     if($addpriceinpricelist==1){
                                     }
                                     if($addpriceinpricelist==1){
-                                        // $channeltype = ($producttype==0?'all':"onlyvendor"); 
-                                        $channeldata = $this->Channel->getChannelList('all');
-                
+                                        // $channeltype = ($producttype==0?'all':"onlyvendor");
+                                        
+                                        $query = $this->readdb->select("id,name,color,productpriceid,pricetype,channelid,allowproduct,minimumqty,maximumqty")
+                                        ->from(tbl_channel)
+                                        ->where('1=1')
+                                        ->order_by("priority ASC")
+                                        ->get();
+
+                                      
+
+                                        if ($query->num_rows() > 0) {
+                                            $query = $query->result_array();
+                                            $channeldata = $query;
+                                        }
+                                        // $channeldata = $query;
+                                        // $channeldata = $this->Channel->getChannelList('all');
                                         if(!empty($channeldata)){
+                                            print_r($channeldata);
                                             foreach($channeldata as $channel){
-                                                
-                                                $InsertPriceList =  array('productid' => $productid,
-                                                                        'productpriceid'=>$productpricesid,
-                                                                        'pricetype' => $pricetype,
-                                                                        'channelid' => $channel['id'],
-                                                                        'allowproduct' => 1,
-                                                                        'minimumqty' => $minimumorderqty,                              
-                                                                        'maximumqty' => $maximumorderqty
-                                                                    );
+                                $InsertPriceList =  array('productid' => $productid,
+                                                        'productpriceid'=>$productpricesid,
+                                                        'pricetype' => $pricetype,
+                                                        'channelid' => $channel['id'],
+                                                        'allowproduct' => 1,
+                                                        'minimumqty' => $minimumorderqty,                            
+                                                        'maximumqty' => $maximumorderqty
+                                                    );
             
                                                 $this->Price_list->_table = tbl_productbasicpricemapping;
                                                 $productbasicpricemappingid = $this->Price_list->Add($InsertPriceList);   
@@ -3259,10 +3335,12 @@ class  Product extends Admin_Controller
                                                 }
                                             }
                                         }
-                                    } */
+                                    }
                                     $barcodearray[] = $barcode;
                                     $skuarray[] = $sku;
                                 }else{
+                                 
+                                   
                                     $NewPriceSheeterror[] = array($productcode,$productname,$variantname,$stock,$sku,$barcode,$minimumorderqty,$maximumorderqty,$minimumstocklimit,$weight,$addpriceinpricelist,$pricetype,$PricesArray['1'],$QuantityArray['1'],$DiscountArray['1'],$PricesArray['2'],$QuantityArray['2'],$DiscountArray['2'],$PricesArray['3'],$QuantityArray['3'],$DiscountArray['3'],$PricesArray['4'],$QuantityArray['4'],$DiscountArray['4'],$PricesArray['5'],$QuantityArray['5'],$DiscountArray['5'],$PricesArray['6'],$QuantityArray['6'],$DiscountArray['6'],$PricesArray['7'],$QuantityArray['7'],$DiscountArray['7'],$PricesArray['8'],$QuantityArray['8'],$DiscountArray['8'],$PricesArray['9'],$QuantityArray['9'],$DiscountArray['9'],$PricesArray['10'],$QuantityArray['10'],$DiscountArray['10']);
                                 }
                             }
@@ -3558,6 +3636,7 @@ class  Product extends Admin_Controller
 
                         }
                     } else {
+                       
                         $file_info_arr = array(
                             "channelid" => 0,
                             "memberid" => 0,
@@ -3575,7 +3654,7 @@ class  Product extends Admin_Controller
                         $this->Import_excel->add($file_info_arr);
                         echo 4;
                         // unlinkfile('', $FileNM, IMPORT_PATH);
-                        exit;
+                      
                     }
                 } else {
                     $file_info_arr = array(
@@ -3615,7 +3694,7 @@ class  Product extends Admin_Controller
                 $this->Import_excel->add($file_info_arr);
                 echo 4;
                 // unlinkfile('', $FileNM, IMPORT_PATH);
-                exit;
+               
             }
         }
     }
@@ -3644,7 +3723,6 @@ class  Product extends Admin_Controller
     }
     public function uploadproductfile()
     {
-
         $this->Product->_fields = "filename";
         $this->Product->_table = tbl_productimage;
         $this->Product->_order = 'id';

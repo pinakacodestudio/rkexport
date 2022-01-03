@@ -2,7 +2,7 @@
 <div class="panel-heading"><h2>Contect Detail <?=$id?></h2></div>   
 <div class="row">
         <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-        <input type="hidden" name="contectid_<?=$id?>" value="" id="contectid_<?=$id?>">
+        <input type="hidden" name="contectid_<?=$id?>" value="0" id="contectid_<?=$id?>">
             <div class="form-group" id="firstname_div">
                 <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
                 <div class="col-md-7">
@@ -31,7 +31,7 @@
             <div class="form-group" id="birthdate_div">
                 <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
                 <div class="col-md-7">
-                    <input id="birthdate" type="text" name="birthdate_<?=$id?>" class="form-control" value="<?php if (isset($partydata) && $partydata['birthdate'] != "0000-00-00") {echo $this->general_model->displaydate($partydata['birthdate']);}?>" readonly>
+                    <input id="birthdate" type="text" name="birthdate_<?=$id?>" class="form-control date" value="<?php if (isset($partydata) && $partydata['birthdate'] != "0000-00-00") {echo $this->general_model->displaydate($partydata['birthdate']);}?>" readonly>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
             <div class="form-group" id="anniversarydate_div">
                 <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
                 <div class="col-md-7">
-                    <input id="anniversarydate" type="text" name="anniversarydate_<?=$id?>" class="form-control" value="<?php if (isset($partydata) && $partydata['anniversarydate'] != "0000-00-00") {echo $this->general_model->displaydate($partydata['anniversarydate']);}?>" readonly>
+                    <input id="anniversarydate" type="text" name="anniversarydate_<?=$id?>" class="form-control date" value="<?php if (isset($partydata) && $partydata['anniversarydate'] != "0000-00-00") {echo $this->general_model->displaydate($partydata['anniversarydate']);}?>" readonly>
                 </div>
             </div>
         </div>

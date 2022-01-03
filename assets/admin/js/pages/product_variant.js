@@ -665,14 +665,17 @@ function checkvalidation() {
             },
             success: function(response) {
                 var obj = JSON.parse(response);
+
                 if (obj['error'] == 1) {
                     new PNotify({ title: "Product variant successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
                     setTimeout(function() { window.location = SITE_URL + "product"; }, 1500);
-                } else if (obj['error'] == 2) {
-                    new PNotify({ title: obj['index'] + ' product variant SKU already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                 } else {
                     new PNotify({ title: "Product variant not added !", styling: 'fontawesome', delay: '3000', type: 'error' });
                 }
+                //else if (obj['error'] == 2) {
+                //     new PNotify({ title: obj['index'] + ' product variant SKU already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                // }
+
             },
             error: function(xhr) {
                 //alert(xhr.responseText);

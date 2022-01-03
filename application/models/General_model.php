@@ -474,8 +474,11 @@ class General_model extends CI_Model {
     }
     function exporttoexcelwithmultiplesheet($data, $headerstyle, $title, $headings, $filename,$destination='')
     {
+  
+      
         $this->load->library('excel');
 
+       
         foreach($title as $index => $titlerow){
             if($index!=0){
                 $this->excel->createSheet();
@@ -497,7 +500,8 @@ class General_model extends CI_Model {
 
             $this->excel->getActiveSheet()->fromArray($data[$index], null, 'A2');
         }
-        
+       
+       
         if (ob_get_contents()) ob_end_clean();
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
@@ -505,14 +509,15 @@ class General_model extends CI_Model {
         
         //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
         //if you want to save it as .XLSX Excel 2007 format
-        
+       
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         
         //force user to download the Excel file without writing it to server's HD
         // if (ob_get_contents()) ob_end_clean();
         // ob_start();
         // $objWriter->save('php://output');
-
+      
+      
         if(!empty($destination)){
             if(!is_dir($destination)){
                 @mkdir($destination);
@@ -526,6 +531,8 @@ class General_model extends CI_Model {
             $objWriter->save('php://output');
         }
 
+     
+      
     }
 
     function saveModuleWiseFiltersOnSession($Ctrl, $type='') {

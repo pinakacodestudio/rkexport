@@ -784,6 +784,10 @@ define("tbl_company","company");
 define("tbl_partycontact","partycontact");
 define("tbl_partydoc","partydoc");
 
+//import time constant erro 
+define("REWARDSPOINTS","1");
+define("NOOFPRODUCT","1");
+
 /* EMAIL CONFIGURATION CONSTANTS */
 define("EMAIL_CONFIG", serialize(array(
 	'protocol' => 'mail',

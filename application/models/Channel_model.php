@@ -137,6 +137,7 @@ class Channel_model extends Common_model {
 							->order_by("priority ASC")
 							->get();
 		
+							
 		if ($query->num_rows() > 0) {
 			return $query->result_array();
 		}else {

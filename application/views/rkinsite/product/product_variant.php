@@ -160,7 +160,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-2 pr-xs pl-xs">
+                          <!-- <div class="col-md-2 pr-xs pl-xs">
                             <div class="form-group" id="barcode_div<?=$k?>">
                               <label class="control-label" for="barcode<?=$k?>">Barcode <span class="mandatoryfield"> * </span></label>
                               <div class="col-md-12 p-n">
@@ -173,15 +173,22 @@
                                 </div>
                               </div>
                             </div>
+                          </div> -->
+                          <div class="col-md-2 pr-xs pl-xs">
+                            <div class="form-group" id="installationcharge_div<?=$k?>">
+                               <label class="control-label" for="installationcharge<?=$k?>">Installation Charge</label>
+                               <input type="text" id="installationcharge<?=$k?>" class="form-control installationcharge" name="installationcharge[<?=$k?>]" value="<?=$p['installationcharge']?>">
+                            </div>
                           </div>
-                          <div class="col-md-4 pr-xs pl-xs pt-sm">
+                          
+                          <!-- <div class="col-md-4 pr-xs pl-xs pt-sm">
                             <div class="form-group text-center" id="barcodeimage_div<?=$k?>">
                               <label class="control-label"></label>
                               <div class="col-sm-12 pt-sm p-n">
                                   <img id="barcodeimg<?=$k?>" src="<?=ADMIN_URL.'product/set_barcode/'.$p['barcode'];?>" style="max-width: 100%;">
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                         </div>
                         <div class="row m-n">
                           <?php if(isset($productcombination[$p['id']])){ ?>
@@ -399,6 +406,12 @@
                                 <button type="button" class="btn btn-danger btn-raised btn-sm remove_variantprice<?=$k?>" onclick="removevariantprice(<?=$k?>,1)" style="display:none;"><i class="fa fa-minus"></i></button>
                                 <button type="button" class="btn btn-primary btn-raised btn-sm add_variantprice<?=$k?>" onclick="addnewvariantprice(<?=$k?>)"><i class="fa fa-plus"></i></button>
                               </div> 
+                              <div class="col-md-2 pr-xs pl-xs">
+                            <div class="form-group" id="minimumstocklimit_div<?=$k?>">
+                               <label class="control-label" for="minimumstocklimit<?=$k?>">Min. Stock Limit</label>
+                               <input type="text" id="minimumstocklimit<?=$k?>" class="form-control minimumstocklimit" name="minimumstocklimit[<?=$k?>]" value="<?=$p['minimumstocklimit']?>" onkeypress="return isNumber(event)" maxlength="4">
+                            </div>
+                          </div>
                             </div>
                           <?php } ?>
 
@@ -649,6 +662,12 @@
                               <button type="button" class="btn btn-danger btn-raised btn-sm remove_variantprice0" onclick="removevariantprice(0,1)" style="display:none;"><i class="fa fa-minus"></i></button>
                               <button type="button" class="btn btn-primary btn-raised btn-sm add_variantprice0" onclick="addnewvariantprice(0)"><i class="fa fa-plus"></i></button>
                             </div> 
+                            <div class="col-md-2 pr-xs pl-xs">
+                            <div class="form-group" id="minimumstocklimit_div<?=$k?>">
+                               <label class="control-label" for="minimumstocklimit<?=$k?>">Min. Stock Limit</label>
+                               <input type="text" id="minimumstocklimit<?=$k?>" class="form-control minimumstocklimit" name="minimumstocklimit[<?=$k?>]" value="<?=$p['minimumstocklimit']?>" onkeypress="return isNumber(event)" maxlength="4">
+                            </div>
+                          </div>
                           </div>
                         </div>
                       </div>
@@ -656,20 +675,35 @@
                   }
                   ?>
                   </div>
-                  <div class="col-md-12">
+                  
+                  <!-- <div class="col-md-12">
                     <div class="form-group">
                       <label for="focusedinput" class="col-sm-5 control-label"></label>
                       <div class="col-sm-6">
                           <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
                       </div>
                     </div>
+                  </div> -->
+                  <div class="form-group">
+                  <label for="focusedinput" class="col-sm-5 control-label"></label>
+                      <?php if (!empty($productdata)) {?>
+                          <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
+                          <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
+                      <?php } else {?>
+                          <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="ADD" class="btn btn-primary btn-raised">
+                         
+                      <?php }?>
+                    
+                      <a class="<?=cancellink_class;?>" href="<?=ADMIN_URL?>product" title=<?=cancellink_title?>><?=cancellink_text?></a>
                   </div>
                 </form>
               </div>
-        </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     </div> <!-- .container-fluid -->
+   
+                        
