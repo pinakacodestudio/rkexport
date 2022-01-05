@@ -115,13 +115,12 @@ $(document).ready(function() {
         autoclose: true,
         todayBtn: "linked"
     });
-    $('.date').datepicker({
-        todayHighlight: true,
-        format: 'dd/mm/yyyy',
-        orientation: 'top',
-        autoclose: true,
-        todayBtn: "linked"
+
+
+    $('body').on('focus', ".date", function() {
+        $(this).datepicker();
     });
+
     $("#old_receipt_div").hide();
     $('#remove').click(function() {
         $('#removeoldreceipt').val('1');

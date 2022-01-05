@@ -75,8 +75,8 @@ class Party_model extends Common_model {
 	}
 	function getPartyDetailById($partyid){
         
-        $query = $this->readdb->select("p.id,p.websitename,p.partycode,pt.partytype,p.partytypeid,ur.role,p.email,p.birthdate,p.anniversarydate,p.education,p.address,p.cityid,p.provinceid,
-			IFNULL((SELECT countryid FROM ".tbl_province." WHERE id=p.provinceid),0) as countryid,p.allowforlogin,p.password,
+        $query = $this->readdb->select("p.id,p.websitename,p.partycode,pt.partytype,p.partytypeid,ur.role,p.address,p.cityid,p.provinceid,p.empolyeeroleid,
+			IFNULL((SELECT countryid FROM ".tbl_province." WHERE id=p.provinceid),0) as countryid,t8.email,t8.birthdate,t8.anniversarydate,
 			IFNULL(ct.name,'') as cityname,IFNULL(pr.name,'') as provincename,IFNULL(cn.name,'') as countryname,
         ")
 		->from($this->_table." as p")
@@ -85,6 +85,8 @@ class Party_model extends Common_model {
 		->join(tbl_city." as ct","ct.id=p.cityid","LEFT")
 		->join(tbl_province." as pr","pr.id=p.provinceid","LEFT")
 		->join(tbl_country." as cn","cn.id=pr.countryid","LEFT")
+		->join(tbl_partydoc." as t7","p.id=t7.partyid","LEFT")
+		->join(tbl_partycontact." as t8","p.id=t8.partyid","LEFT")
 		->where("p.id", $partyid)
 		->get();
 		

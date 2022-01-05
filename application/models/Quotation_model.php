@@ -199,14 +199,14 @@ class Quotation_model extends Common_model {
                                     q.quotationamount,q.discountpercentage,
                                     q.discountamount,q.taxamount,q.globaldiscount,
                                     CAST((q.payableamount + IFNULL((SELECT SUM(amount) FROM ".tbl_extrachargemapping." WHERE referenceid=q.id AND type=1),0)) AS DECIMAL(14,2)) as payableamount,q.couponcodeamount,q.addquotationtype,
-                                    q.resonforrejection,
-                                    IFNULL(buyer.name, '') as buyername
+                                    q.resonforrejection
                                 
                                 ")
                             
+                                // ,IFNULL(buyer.name, '') as buyername
                         ->from($this->_table." as q")
-                        ->join(tbl_member." as buyer","buyer.id=q.memberid","LEFT")
-                        ->join(tbl_member." as seller","seller.id=q.sellermemberid","LEFT")
+                        // ->join(tbl_member." as buyer","buyer.id=q.memberid","LEFT")
+                        // ->join(tbl_member." as seller","seller.id=q.sellermemberid","LEFT")
                         ->where($where)
                         ->group_by('q.quotationid')
                         ->order_by('q.id DESC')

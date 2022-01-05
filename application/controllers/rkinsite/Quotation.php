@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+// defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Quotation extends Admin_Controller {
 
@@ -7,12 +7,13 @@ class Quotation extends Admin_Controller {
     function __construct(){
         parent::__construct();
         $this->load->model('Quotation_model', 'Quotation');
-        //$this->load->model('Product_file_model', 'Product_file');
+        $this->load->model('Product_file_model', 'Product_file');
         
         $this->load->model('Side_navigation_model');
         $this->viewData = $this->getAdminSettings('submenu', 'Quotation');
     }
     public function index() {
+    
         $this->viewData['title'] = "Quotation";
         $this->viewData['module'] = "quotation/Quotation";
         $this->viewData['VIEW_STATUS'] = "1";
@@ -169,6 +170,7 @@ class Quotation extends Admin_Controller {
         $this->viewData['multiplememberchannel'] = "1";
         $ADMINID = $this->session->userdata[base_url().'ADMINID'];
 
+        
         if($id!=""){
             /* Add Duplicate Quotation */
             $this->viewData['quotationdata'] = $this->Quotation->getQuotationDataById($id,'sales');
@@ -176,48 +178,16 @@ class Quotation extends Admin_Controller {
             $this->viewData['ExtraChargesData'] = $this->Quotation->getExtraChargesDataByReferenceID($id);
             $this->viewData['isduplicate'] = "1";
         }
-
-        $this->load->model('Member_model', 'Member');
-        $this->viewData['memberdata'] = $this->Member->getMemberOnFirstLevelUnderCompany();
+       
         $this->viewData['channelsetting'] = array('partialpayment'=>1);
-        // $this->viewData['quotationid'] = time().$ADMINID.rand(10,99).rand(10,99);
-        
         $this->viewData['quotationid'] = $this->general_model->generateTransactionPrefixByType(0);
-        
-        /* $this->load->model('System_configuration_model', 'System_configuration');
-        $discount = $this->System_configuration->getsetting();
-        if($discount['discountonbill']==1){
-            $startdate = $discount['discountonbillstartdate'];
-            $enddate = $discount['discountonbillenddate'];
-            $currentdate = $this->general_model->getCurrentDate();
-            $this->viewData['gstondiscount']= $discount['gstondiscount'];
 
-            if($startdate=='0000-00-00' && $enddate=='0000-00-00'){
-                $this->viewData['discountonbillminamount'] = $discount['discountonbillminamount'];
-                if($discount['discountonbilltype']==1){
-                    $this->viewData['globaldiscountper']= $discount['discountonbillvalue'];
-                }else {
-                    $this->viewData['globaldiscountamount']= $discount['discountonbillvalue'];
-                }
-            }else{
-                if($currentdate >= $startdate && $currentdate <= $enddate){
-                    $this->viewData['discountonbillminamount'] = $discount['discountonbillminamount'];
-                    if($discount['discountonbilltype']==1){
-                        $this->viewData['globaldiscountper']= $discount['discountonbillvalue'];
-                    }else {
-                        $this->viewData['globaldiscountamount']= $discount['discountonbillvalue'];
-                    }
-                }
-            }
-        } */
-        
-        $this->load->model('Extra_charges_model', 'Extra_charges');
-        $this->viewData['extrachargesdata'] = $this->Extra_charges->getMemberActiveExtraCharges();
+        $this->load->model('Party_model','Party');
+		$this->viewData['Partydata'] = $this->Party->getRecordByID();
 
-        $this->load->model('Cash_or_bank_model', 'Cash_or_bank');
-        $this->viewData['cashorbankdata'] = $this->Cash_or_bank->getBankAccountsByMember(0);
-        $this->viewData['defaultbankdata'] = $this->Cash_or_bank->getDefaultBankAccount(0);
-        
+        $this->load->model('User_model','User');
+		$this->viewData['Employedata'] = $this->User->getRecordByID();
+
         $this->load->model("Country_model","Country");
         $this->viewData['countrydata'] = $this->Country->getCountry();
         $this->viewData['countrycodedata'] = $this->Country->getCountrycode();
@@ -237,10 +207,10 @@ class Quotation extends Admin_Controller {
         $this->admin_headerlib->add_javascript("add_quotation", "pages/add_quotation.js");
         $this->load->view(ADMINFOLDER.'template',$this->viewData);
     }
+
     public function add_quotation() {
 
         $PostData = $this->input->post();
-        // print_r($PostData); exit;
         $createddate = $this->general_model->getCurrentDateTime();
         $addedby = $this->session->userdata(base_url().'ADMINID');
         $ADMINID = $this->session->userdata(base_url().'ADMINID');
@@ -1329,5 +1299,17 @@ class Quotation extends Admin_Controller {
         } else {
             echo json_encode(array("error"=>0));
         }
+    }
+
+    public function addnewproductitemcloop($id)
+    {
+        $params = array('id' => $id);
+        $this->load->view('rkinsite/quotation/itemproduct.php', $params);
+    }
+
+    public function addprodocitem($id)
+    {
+        $params = array('id' => $id);
+        $this->load->view('rkinsite/party/itemdoc.php', $params);
     }
 }

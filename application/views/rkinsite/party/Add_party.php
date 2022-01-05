@@ -306,7 +306,7 @@
                      <div class="panel-body">
                         <div class="row" id="addtarget">
                            <?php 
-                              $cloopdoc = 0;
+                              $cloopcount = 0;
                               $i=0;
                               if(isset($party_contactdata[0]->id ) && !empty($party_contactdata[0]->id ))  {
                                   foreach ($party_contactdata as $row)
@@ -314,7 +314,7 @@
                                       // echo '<pre>';
                                       // print_r($row);
                                       $i++;
-                                      $cloopdoc = $cloopdoc + 1;
+                                      $cloopcount = $cloopcount + 1;
                                       $con_id = $row->id;
                                       $firstname = $row->firstname;
                                       $lastname = $row->lastname;
@@ -324,12 +324,12 @@
                                       $email = $row->email;
                                     
                                       ?>
-                           <input type="hidden" name="contectid_<?=$cloop?>" value="<?=$con_id?>" id="contectid_<?=$cloop?>">
+                           <input type="hidden" name="contectid_<?=$cloopcount?>" value="<?=$con_id?>" id="contectid_<?=$cloopcount?>">
                            <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                               <div class="form-group" id="firstname_div">
                                  <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
                                  <div class="col-md-7">
-                                    <input id="firstname" type="text" name="firstname_<?=$cloop?>" class="form-control" value="<?=$firstname?>">
+                                    <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="<?=$firstname?>">
                                  </div>
                               </div>
                            </div>
@@ -337,7 +337,7 @@
                               <div class="form-group" id="lastname_div">
                                  <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
                                  <div class="col-md-7">
-                                    <input id="lastname" type="text" name="lastname_<?=$cloop?>" class="form-control" value="<?php if (isset($partydata)) { echo $lastname; } ?>">
+                                    <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="<?php if (isset($partydata)) { echo $lastname; } ?>">
                                  </div>
                               </div>
                            </div>
@@ -345,7 +345,7 @@
                               <div class="form-group" id="contactno_div">
                                  <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
                                  <div class="col-md-7">
-                                    <input id="contactno" type="text" name="contactno_<?=$cloop?>" class="form-control"  value="<?php if (isset($partydata)) { echo $contactno; } ?>">
+                                    <input id="contactno" type="text" name="contactno_<?=$cloopcount?>" class="form-control"  value="<?php if (isset($partydata)) { echo $contactno; } ?>">
                                  </div>
                               </div>
                            </div>
@@ -353,7 +353,7 @@
                               <div class="form-group" id="birthdate_div">
                                  <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
                                  <div class="col-md-7">
-                                    <input id="birthdate" type="text" name="birthdate_<?=$cloop?>" class="form-control" value="<?php if (isset($birthdate) && $birthdate!="0000-00-00") { echo $this->general_model->displaydate($birthdate); } ?>" readonly>
+                                    <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control" value="<?php if (isset($birthdate) && $birthdate!="0000-00-00") { echo $this->general_model->displaydate($birthdate); } ?>" readonly>
                                  </div>
                               </div>
                            </div>
@@ -361,7 +361,7 @@
                               <div class="form-group" id="anniversarydate_div">
                                  <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
                                  <div class="col-md-7">
-                                    <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloop?>" class="form-control" value="<?php if (isset($anniversarydate) && $anniversarydate!="0000-00-00") { echo $this->general_model->displaydate($anniversarydate); } ?>" readonly>
+                                    <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control" value="<?php if (isset($anniversarydate) && $anniversarydate!="0000-00-00") { echo $this->general_model->displaydate($anniversarydate); } ?>" readonly>
                                  </div>
                               </div>
                            </div>
@@ -369,13 +369,13 @@
                               <div class="form-group" id="email_div">
                                  <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
                                  <div class="col-md-7">
-                                    <input id="email" type="text" name="email_<?=$cloop?>" class="form-control" value="<?php if (isset($email)) { echo $email; } ?>">
+                                    <input id="email" type="text" name="email_<?=$cloopcount?>" class="form-control" value="<?php if (isset($email)) { echo $email; } ?>">
                                  </div>
                               </div>
                            </div>
                         </div>
-                        <input type="hidden" name="cloop" id="cloop" value="<?php echo $cloop; ?>">
-                        <input type="hidden" name="cloopcount" id="cloopcount" value="1">
+                        <input type="hidden" name="cloopcount" id="cloopcount" value="<?php echo $cloopcount; ?>">
+                    
                         <div class="clearfix" style="margin-bottom: 30px;"></div>
                        
                         <div class="clearfix"></div>
@@ -383,16 +383,16 @@
                            }
                            }else {
                                $count = 1;
-                               $cloop_contect = 0;
-                               while ($count > $cloop_contect) {
-                                   $cloop_contect = $cloop_contect + 1;
+                               $cloopcount = 0;
+                               while ($count > $cloopcount) {
+                                   $cloopcount = $cloopcount + 1;
                            ?>
-                        <input type="hidden" name="contectid_<?=$cloop_contect?>" value="" id="contectid_<?=$cloop_contect?>">
+                        <input type="hidden" name="contectid_<?=$cloopcount?>" value="" id="contectid_<?=$cloopcount?>">
                         <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                            <div class="form-group" id="firstname_div">
                               <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
                               <div class="col-md-7">
-                                 <input id="firstname" type="text" name="firstname_<?=$cloop_contect?>" class="form-control" value="">
+                                 <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="">
                               </div>
                            </div>
                         </div>
@@ -400,7 +400,7 @@
                            <div class="form-group" id="lastname_div">
                               <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
                               <div class="col-md-7">
-                                 <input id="lastname" type="text" name="lastname_<?=$cloop_contect?>" class="form-control" value="">
+                                 <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="">
                               </div>
                            </div>
                         </div>
@@ -408,7 +408,7 @@
                            <div class="form-group" id="contactno_div">
                               <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
                               <div class="col-md-7">
-                                 <input id="contactno" type="text" name="contactno_<?=$cloop_contect?>" class="form-control"  value="">
+                                 <input id="contactno" type="text" name="contactno_<?=$cloopcount?>" class="form-control"  value="">
                               </div>
                            </div>
                         </div>
@@ -416,7 +416,7 @@
                            <div class="form-group" id="birthdate_div">
                               <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
                               <div class="col-md-7">
-                                 <input id="birthdate" type="text" name="birthdate_<?=$cloop_contect?>" class="form-control" value="" readonly>
+                                 <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control" value="" readonly>
                               </div>
                            </div>
                         </div>
@@ -424,7 +424,7 @@
                            <div class="form-group" id="anniversarydate_div">
                               <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
                               <div class="col-md-7">
-                                 <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloop_contect?>" class="form-control" value="" readonly>
+                                 <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control" value="" readonly>
                               </div>
                            </div>
                         </div>
@@ -432,15 +432,15 @@
                            <div class="form-group" id="email_div">
                               <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
                               <div class="col-md-7">
-                                 <input id="email" type="text" name="email_<?=$cloop_contect?>" class="form-control" value="">
+                                 <input id="email" type="text" name="email_<?=$cloopcount?>" class="form-control" value="">
                               </div>
                            </div>
                         </div>
                         
                      </div>
                      
-                     <input type="hidden" name="cloop_contect" id="cloop_contect" value="<?php echo $cloop_contect; ?>">
-                     <input type="hidden" name="cloopcount" id="cloopcount" value="1">
+                     <input type="hidden" name="cloopcount" id="cloopcount" value="<?php echo $cloopcount; ?>">
+                     
                    
                     
                      <div class="clearfix"></div>
@@ -519,20 +519,20 @@
 <script>
    $(".addpro").click(function() {
    
-       var count = $('#cloop').val();
-       count++;
-       $('#cloop').val(count);
+       var count1 = $('#cloopcount').val();
+       count1++;
+       $('#cloopcount').val(count1);
        // CentreStock/cloop
-       $.get('<?= base_url('rkinsite/Party/cloop/')?>' + count, null, function(result) {
+       $.get('<?= base_url('rkinsite/Party/cloop/')?>' + count1, null, function(result) {
            $("#addtarget").append(result); // Or whatever you need to insert the result
        }, 'html');
    
    });
    $(".addprodocitem").click(function() {
-       var count = $('#cloop').val();
-       count++;
-       $('#cloop').val(count);
-       $.get('<?= base_url('rkinsite/Party/addprodocitem/')?>' + count, null, function(result) {
+       var count2 = $('#cloopdoc').val();
+       count2++;
+       $('#cloopdoc').val(count2);
+       $.get('<?= base_url('rkinsite/Party/addprodocitem/')?>' + count2, null, function(result) {
            $("#adddocrow").append(result); 
        }, 'html');
    });

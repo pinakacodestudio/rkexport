@@ -788,6 +788,11 @@ define("tbl_partydoc","partydoc");
 define("REWARDSPOINTS","1");
 define("NOOFPRODUCT","1");
 
+//Quotation 
+define("VENDORCHANNELID","1");
+define("GUESTCHANNELID","1");
+
+
 /* EMAIL CONFIGURATION CONSTANTS */
 define("EMAIL_CONFIG", serialize(array(
 	'protocol' => 'mail',

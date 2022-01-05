@@ -32,3 +32,12 @@ ALTER TABLE `productprices` ADD `installationcharge` DECIMAL(10,2) NULL DEFAULT 
 
 ===========================================03-jan-22=======================================
 CREATE TABLE `rkexport`.`channel` ( `id` INT NOT NULL AUTO_INCREMENT ,  `name` VARCHAR(50) NULL ,  `color` VARCHAR(10) NULL ,  `priority` INT NULL ,    PRIMARY KEY  (`id`)) ENGINE = InnoDB;
+
+
+
+CREATE TABLE `rkexport`.`quotation` ( `id` INT NOT NULL AUTO_INCREMENT , `quotationid` INT NULL , `status` TINYINT NULL DEFAULT '0' , `quotationamount` DECIMAL(10,2) NULL , `discountpercentage` INT NULL , `discountamount` INT NULL , `taxamount` DECIMAL(10,2) NULL , `globaldiscount` INT(10,2) NULL , `couponcodeamount` INT(10,2) NULL , `addquotationtype` INT NULL , `resonforrejection` INT NULL , `buyer` INT NULL , `memberid` INT NULL , `createddate` DATETIME NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+==================
+quotation
+quotationproducts

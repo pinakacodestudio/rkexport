@@ -4,28 +4,29 @@
     <div class="col-md-5 col-sm-5">
         <div class="form-group" id="documentnumber1_div">
             <div class="col-md-12 pr-xs pl-xs">
-                <input id="documentnumber_<?=$id?>" name="documentnumber_<?=$id?>" placeholder="Enter Document Number" class="form-control documentrow documentnumber">
+                <input id="documentname_<?=$id?>" name="documentname_<?=$id?>" placeholder="Enter Document Number" class="form-control documentrow documentnumber">
             </div>
         </div>
     </div>
     <div class="col-md-5 col-sm-5">
-        <div class="form-group" id="docfile1_div">
+        <div class="form-group" id="docfile_div">
             <div class="col-md-12 pr-xs pl-xs">
-                <input type="hidden" id="isvaliddocfile1" value="0">
-                <input type="hidden" name="olddocfile" id="olddocfile1" value="">
+                <input type="hidden" id="isvaliddocfile" value="0">
+                <input type="hidden" name="olddocfile_<?=$id?>" id="olddocfile" value="">
                 <div class="input-group" id="fileupload1">
                     <span class="input-group-btn" style="padding: 0 0px 0px 0px;">
                         <span class="btn btn-primary btn-raised btn-file"><i
                                 class="fa fa-upload"></i>
                             <input type="file" name="docfile_<?=$id?>"
-                                class="docfile" id="docfile_<?=$id?>"
-                                accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),'docfile1')">
+                                class="docfile" id="docfile"
+                                accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),'docfile')">
                         </span>
                     </span>
-                    <input type="text" readonly="" id="Filetext1"
-                        class="form-control documentrow docfile" placeholder="Enter File" name="Filetextdocfile[1]" value="">
+                    <input type="text" readonly="" id="Filetextdocfile"
+                        class="form-control documentrow" placeholder="Enter File" name="Filetextdocfile_<?=$id?>" value="">
                 </div>
             </div>
         </div>
     </div>
+    
 </div>
