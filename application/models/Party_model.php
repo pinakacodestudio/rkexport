@@ -75,6 +75,45 @@ class Party_model extends Common_model {
 	}
 	function getPartyDetailById($partyid){
         
+		// id,p.websitename,p.partycode,p.partytypeid,p.cityid,p.provinceid,p.empolyeeroleid,t8.email,t8.birthdate,t8.anniversarydate,['0']empolyeeroleid
+        $query = $this->readdb->select("p.*,t7.*,t8.*,t9.partytype,t10.role,t11.name as cityname,t12.name as provincename,t13.name as countryname")
+		->from($this->_table." as p")
+		->join(tbl_partydoc." as t7","p.id=t7.partyid","LEFT")
+		->join(tbl_partycontact." as t8","p.id=t8.partyid","LEFT")
+		->join(tbl_partytype." as t9","p.partytypeid=t9.id","LEFT")
+		->join(tbl_userrole." as t10","p.empolyeeroleid=t10.id","LEFT")
+		->join(tbl_city." as t11","p.cityid=t11.id","LEFT")
+		->join(tbl_province." as t12","p.provinceid=t12.id","LEFT")
+		->join(tbl_country." as t13","p.countryid=t13.id","LEFT")
+		->where("p.id", $partyid)
+		->get();
+		return $query->result_array();
+	}
+	function getPartycontectDetailById($partyid){
+        $query = $this->readdb->select("*")
+		->from(tbl_partycontact)
+		->where("partyid", $partyid)
+		->get();
+		return $query->result_array();
+	}
+    function getPartyDocumentsByPartyID($partyid){
+        
+        $query = $this->readdb->select("d.id,d.documenttypeid,d.documentnumber,d.fromdate,d.duedate,d.licencetype,d.documentfile")
+							->from(tbl_document." as d")
+                            ->join(tbl_documenttype." as dt","dt.id=d.documenttypeid","INNER")
+                            ->where("d.referencetype=1 AND d.referenceid=".$partyid)
+                            ->get();
+                            
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		}else {
+			return array();
+		}	
+    }
+
+	/*
+	function getPartyDetailById($partyid){
+        
         $query = $this->readdb->select("p.id,p.websitename,p.partycode,pt.partytype,p.partytypeid,ur.role,p.address,p.cityid,p.provinceid,p.empolyeeroleid,
 			IFNULL((SELECT countryid FROM ".tbl_province." WHERE id=p.provinceid),0) as countryid,t8.email,t8.birthdate,t8.anniversarydate,
 			IFNULL(ct.name,'') as cityname,IFNULL(pr.name,'') as provincename,IFNULL(cn.name,'') as countryname,
@@ -114,7 +153,7 @@ class Party_model extends Common_model {
 			return array();
 		}	
     }
-
+	*/ 
 	function getActiveParty($type=''){
 		$patytypedata = array();
 		if($type!=''){

@@ -53,7 +53,7 @@ class Party extends Admin_Controller
 
                 $checkbox = '<div class="checkbox"><input value="' . $datarow->id . '" type="checkbox" class="checkradios" name="check' . $datarow->id . '" id="check' . $datarow->id . '" onchange="singlecheck(this.id)"><label for="check' . $datarow->id . '"></label></div>';
             }
-            $Action .= '<a class="' . view_class . '" href="' . ADMIN_URL . 'party/view-party/' . $datarow->id . '#personaldetails" title=' . view_title . ' target="_blank">' . view_text . '</a>';
+            $Action .= '<a class="' . view_class . '" href="' . ADMIN_URL . 'party/view-party/' . $datarow->id . '" title=' . view_title . ' target="_blank">' . view_text . '</a>';
 
             $row[] = ++$counter;
             $row[] = $datarow->companyname;
@@ -100,20 +100,23 @@ class Party extends Admin_Controller
     }
     public function edit_party($partyid)
     {
-
         $this->viewData['title'] = "Edit Party";
         $this->viewData['module'] = "party/Add_party";
         $this->viewData['action'] = "1"; //Edit
+       
 
         $this->load->model('Party_doc_model', 'Party_doc');
         $this->viewData['party_docdata'] = $this->Party_doc->getparty_docdataByID($partyid);
 
         $this->load->model('party_contact_model', 'party_contact');
         $this->viewData['party_contactdata'] = $this->party_contact->getpartycontactdatadataByID($partyid);
+
         $this->viewData['partydata'] = $this->Party->getPartyDataByID($partyid);
         if (empty($this->viewData['partydata'])) {
             redirect(ADMINFOLDER . "pagenotfound");
         }
+
+
 
         $this->load->model('Country_model', 'Country');
         $this->viewData['countrydata'] = $this->Country->getActivecountrylist();
@@ -133,6 +136,7 @@ class Party extends Admin_Controller
         $this->load->model('Country_model', 'Country');
         $this->viewData['countrydata'] = $this->Country->getActivecountrylist();
 
+      
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
         $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
@@ -449,23 +453,27 @@ class Party extends Admin_Controller
 
     public function view_party($partyid)
     {
+      
         $this->checkAdminAccessModule('submenu', 'view', $this->viewData['submenuvisibility']);
         $this->viewData['title'] = "View Party";
         $this->viewData['module'] = "party/View_party";
-
         $this->viewData['partydata'] = $this->Party->getPartyDetailById($partyid);
-
+        $this->viewData['partycontectdata'] = $this->Party->getPartycontectDetailById($partyid);
+        $this->viewData['eid']=$partyid;
+       
+      
         if (empty($this->viewData['partydata'])) {
             redirect(ADMINFOLDER . "pagenotfound");
         }
+  
+        // $this->load->model('Document_type_model', 'Document_type');
+        // $this->viewData['documenttypedata'] = $this->Document_type->getActiveDocumentType();
 
-        $this->load->model('Document_type_model', 'Document_type');
-        $this->viewData['documenttypedata'] = $this->Document_type->getActiveDocumentType();
-
-        $this->load->model('City_model', 'City');
-        $this->viewData['sitecitydata'] = $this->City->getActiveCityOnAssignedSiteByParty($partyid);
+        // $this->load->model('City_model', 'City');
+        // $this->viewData['sitecitydata'] = $this->City->getActiveCityOnAssignedSiteByParty($partyid);
 
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
+
 
         $this->admin_headerlib->add_javascript("view_party", "pages/view_party.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
