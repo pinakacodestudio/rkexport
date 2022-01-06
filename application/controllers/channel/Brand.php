@@ -283,28 +283,8 @@ class Brand extends Channel_Controller {
     public function check_brand_use() {
          $PostData = $this->input->post();
          $count = 0;
-         $ids = explode(",",$PostData['ids']);
-         foreach($ids as $row){
-            
-            $this->readdb->select('brandid');
-            $this->readdb->from(tbl_product);
-            $where = array("brandid"=>$row);
-            $this->readdb->where($where);
-            $query = $this->readdb->get();
-            if($query->num_rows() > 0){
-              $count++;
-            }
-
-            $this->readdb->select('brandid');
-            $this->readdb->from(tbl_news);
-            $where = array("brandid"=>$row);
-            $this->readdb->where($where);
-            $query = $this->readdb->get();
-            if($query->num_rows() > 0){
-              $count++;
-            }
-
-        }
+        
+         
         echo $count;
     }
 
@@ -331,22 +311,7 @@ class Brand extends Channel_Controller {
         foreach ($ids as $row) {
             // get essay id
             $checkuse = 0;
-            $this->readdb->select('brandid');
-            $this->readdb->from(tbl_product);
-            $where = array("brandid"=>$row);
-            $this->readdb->where($where);
-            $query = $this->readdb->get();
-            if($query->num_rows() > 0){
-                $checkuse++;
-            }
-            $this->readdb->select('brandid');
-            $this->readdb->from(tbl_news);
-            $where = array("brandid"=>$row);
-            $this->readdb->where($where);
-            $query = $this->readdb->get();
-            if($query->num_rows() > 0){
-              $checkuse++;
-            }
+            
 
             if($checkuse == 0){
 
