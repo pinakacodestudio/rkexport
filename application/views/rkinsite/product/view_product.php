@@ -29,7 +29,7 @@
             </ol>
     	</small>
     </div>
-
+	<?php $productsections='';?>
     <div class="container-fluid">
                                     
     <div data-widget-group="group1">

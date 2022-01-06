@@ -1482,18 +1482,19 @@ class  Product extends Admin_Controller
             $ProductStock = $this->Stock->getAdminProductStock($id, 1);
             $keynm = 'openingstock';
         } else {
-            $productdata = $this->Stock->getAdminProductFIFOStock($id, 0);
-            $stock = (!empty($productdata[0]['openingstock']) ? $productdata[0]['openingstock'] : 0);
+            $stock ='';
+            // $productdata = $this->Stock->getAdminProductFIFOStock($id, 0);
+            // $stock = (!empty($productdata[0]['openingstock']) ? $productdata[0]['openingstock'] : 0);
 
-            $ProductStock = $this->Stock->getAdminProductFIFOStock($id, 1);
-            $keynm = 'openingstock';
+            // $ProductStock = $this->Stock->getAdminProductFIFOStock($id, 1);
+            // $keynm = 'openingstock';
         }
         $this->viewData['productdata']['universalstock'] = $stock;
 
         $this->load->model("Product_combination_model", "Product_combination");
         $this->viewData['productcombination'] = array();
         $productcombination = $this->Product_combination->getProductcombinationByProductIDWithValue($id);
-
+ 
         foreach ($productcombination as $pc) {
             $stock = 0;
             if (!empty($ProductStock)) {
@@ -1525,7 +1526,8 @@ class  Product extends Admin_Controller
         }
 
         $this->load->model("Related_product_model", "Related_product");
-        $relatedproducts = $this->Related_product->getRelatedProducts($id);
+        // $relatedproducts = $this->Related_product->getRelatedProducts($id);
+        $relatedproducts = '';
         $this->viewData['relatedproducts'] = !empty($relatedproducts) ? implode(", ", array_column($relatedproducts, 'productname')) : "";
 
         if ($this->viewData['submenuvisibility']['managelog'] == 1) {
