@@ -272,6 +272,7 @@ class Brand extends Admin_Controller {
     }
 
     public function check_brand_use() {
+        exit;
          $PostData = $this->input->post();
          $count = 0;
          $ids = explode(",",$PostData['ids']);
@@ -319,7 +320,6 @@ class Brand extends Admin_Controller {
     }
 
     public function delete_mul_brand() {
-
         $this->checkAdminAccessModule('submenu', 'delete', $this->viewData['submenuvisibility']);
         $PostData = $this->input->post();
         $ids = explode(",", $PostData['ids']);
@@ -328,29 +328,29 @@ class Brand extends Admin_Controller {
         foreach ($ids as $row) {
             // get essay id
             $checkuse = 0;
-            $this->readdb->select('brandid');
-            $this->readdb->from(tbl_product);
-            $where = array("brandid"=>$row);
-            $this->readdb->where($where);
-            $query = $this->readdb->get();
-            if($query->num_rows() > 0){
-                $checkuse++;
-            }
-            $this->readdb->select('brandid');
-            $this->readdb->from(tbl_news);
-            $where = array("brandid"=>$row);
-            $this->readdb->where($where);
-            $query = $this->readdb->get();
-            if($query->num_rows() > 0){
-              $checkuse++;
-            }
-
+            // $this->readdb->select('brandid');
+            // $this->readdb->from(tbl_product);
+            // $where = array("brandid"=>$row);
+            // $this->readdb->where($where);
+            // $query = $this->readdb->get();
+            // if($query->num_rows() > 0){
+            //     $checkuse++;
+            // }
+            // $this->readdb->select('brandid');
+            // $this->readdb->from(tbl_news);
+            // $where = array("brandid"=>$row);
+            // $this->readdb->where($where);
+            // $query = $this->readdb->get();
+            // if($query->num_rows() > 0){
+            //   $checkuse++;
+            // }
+           
             if($checkuse == 0){
-
+              
                 $this->Brand->_fields = 'id,name,image';
                 $this->Brand->_where = array('id'=>$row);
-                $branddata = $this->Brand->getRecordsByID();
-    
+                 $branddata = $this->Brand->getRecordsByID();
+               
                 if(!empty($branddata)){
                     unlinkfile('BRAND', $branddata['image'], BRAND_PATH);
                     // Delete from essay data table

@@ -19,12 +19,16 @@ if(!empty($productlistdata)){
 
 
 
+
 $NARRATION_DATA = '';
 if(!empty($narrationdata)){
     foreach($narrationdata as $narration){ 
         $NARRATION_DATA .= '<option value="'.$narration['id'].'">'.$narration['narration'].'</option>';
     }
 }
+
+print_r($PRODUCT_DATA);
+print_r($NARRATION_DATA);
 ?>
 <script>
     var PRODUCT_DATA = '<?=$PRODUCT_DATA?>';

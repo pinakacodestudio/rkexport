@@ -899,23 +899,24 @@ function checkvalidation() {
     }
 
     // if (HSNCODE_IS_COMPULSARY == 1) {
-    //     if (hsncodeid == 0) {
-    //         $("#hsncode_div").addClass("has-error is-focused");
-    //         new PNotify({ title: 'Please select HSN code !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    //         isvalidhsncodeid = 0;
-    //     } else {
-    //         $("#hsncode_div").removeClass("has-error is-focused");
-    //     }
+    if (hsncodeid == 0) {
+        $("#hsncode_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please select HSN code !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        isvalidhsncodeid = 0;
+    } else {
+        $("#hsncode_div").removeClass("has-error is-focused");
+    }
     // }
     // if (PRODUCT_UNIT_IS_OPTIONAL == 0) {
-    //     if (unitid == 0) {
-    //         $("#unit_div").addClass("has-error is-focused");
-    //         new PNotify({ title: 'Please select unit !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    //         isvalidunitid = 0;
-    //     } else {
-    //         $("#unit_div").removeClass("has-error is-focused");
-    //     }
+    if (unitid == 0) {
+        $("#unit_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please select unit !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        isvalidunitid = 0;
+    } else {
+        $("#unit_div").removeClass("has-error is-focused");
+    }
     // }
+
     if (shortdescription == '') {
         $("#shortdescription_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please enter short description !', styling: 'fontawesome', delay: '3000', type: 'error' });

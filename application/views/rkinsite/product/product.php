@@ -88,7 +88,7 @@
                   <a class="<?=qrcode_class?>" href="<?=ADMIN_URL?>product/qr-code" title="<?=qrcode_title?>"><?=qrcode_text?></a>
                   <?php if (in_array("import-to-excel",$this->viewData['submenuvisibility']['assignadditionalrights'])){ ?>
                   <a class="<?=importbtn_class;?>" href="javascript:void(0)" onclick="importproduct()" title="<?=importbtn_title?>"><?=importbtn_text;?></a>
-                  <a class="<?=assignproductbtn_class;?>" href="javascript:void(0)" onclick="assignproduct()" title="<?=assignproductbtn_title?>"><?=assignproductbtn_text;?></a>
+                  <!-- <a class="<?php //assignproductbtn_class;?>" href="javascript:void(0)" onclick="assignproduct()" title="<?php//assignproductbtn_title?>"><?php //assignproductbtn_text;?></a> -->
                   <?php } if (in_array("upload-image",$this->viewData['submenuvisibility']['assignadditionalrights'])){ ?>
                   <a class="<?=uploadproductimagebtn_class;?>" href="javascript:void(0)" onclick="uploadproductfile()" title="<?=uploadproductimagebtn_title?>"><?=uploadproductimagebtn_text;?></a>
                   <?php } if (in_array("export-to-excel",$this->viewData['submenuvisibility']['assignadditionalrights'])){ ?>

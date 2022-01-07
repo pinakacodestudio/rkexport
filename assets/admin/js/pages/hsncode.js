@@ -1,16 +1,21 @@
-
 $(document).ready(function() {
     $('#hsncodetable').DataTable({
         "language": {
             "lengthMenu": "_MENU_"
         },
-        "columnDefs": [ {
-          "targets": [-1,-2],
-          "orderable": false
-        } ],
+        "pageLength": 50,
+        "scrollCollapse": true,
+        "scrollY": "500px",
+        "order": [], //Initial no order.
+        'serverSide': true, //Feature control DataTables' server-side processing mode.
+        // Load data for the table's content from an Ajax source
+        "columnDefs": [{
+            "targets": [-1, -2],
+            "orderable": false
+        }],
         responsive: true,
     });
-    $('.dataTables_filter input').attr('placeholder','Search...');
+    $('.dataTables_filter input').attr('placeholder', 'Search...');
 
 
     //DOM Manipulation to move datatable elements integrate to panel

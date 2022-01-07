@@ -93,9 +93,9 @@
                         <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>stock-general-voucher/add-stock-general-voucher" title=<?=addbtn_title?>><?=addbtn_text;?></a>
                     <?php } if(strpos($submenuvisibility['submenudelete'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){ ?>
                         <a class="<?=deletebtn_class;?> delete-btn-align" href="javascript:void(0)" onclick="checkmultipledelete('','Stock General Voucher','<?php echo ADMIN_URL; ?>stock-general-voucher/delete-mul-stock-general-voucher')" title=<?=deletebtn_title?>><?=deletebtn_text;?></a>
-                    <?php } if (in_array("import-to-excel",$this->viewData['submenuvisibility']['assignadditionalrights'])){ ?>
-                      <a class="<?=importbtn_class;?>" href="javascript:void(0)" onclick="importstockgeneralvoucher()" title="<?=importbtn_title?>"><?=importbtn_text;?></a>
-                    <?php } ?>
+                    <?php }// if (in_array("import-to-excel",$this->viewData['submenuvisibility']['assignadditionalrights'])){ ?>
+                      <!-- <a class="<?php //echo importbtn_class;?>" href="javascript:void(0)" onclick="importstockgeneralvoucher()" title="<?php //echo importbtn_title?>"><?php //echo importbtn_text;?></a> -->
+                    <?php //} ?>
                 </div>
               </div>
               <div class="panel-body no-padding">

@@ -684,7 +684,13 @@
                       </div>
                     </div>
                   </div> -->
-                  <div class="form-group">
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
                   <label for="focusedinput" class="col-sm-5 control-label"></label>
                       <?php if (!empty($productdata)) {?>
                           <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
@@ -697,12 +703,7 @@
                       <a class="<?=cancellink_class;?>" href="<?=ADMIN_URL?>product" title=<?=cancellink_title?>><?=cancellink_text?></a>
                   </div>
                 </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+       </div>
 
     </div> <!-- .container-fluid -->
    
