@@ -3792,8 +3792,9 @@ class  Product extends Admin_Controller
     public function getVariantByProductIdForAdmin()
     {
         $PostData = $this->input->post();
-
+      
         $productdata = $this->Product->getVariantByProductIdForAdmin($PostData['productid']);
+        print_r( $productdata);exit;
         echo json_encode($productdata);
     }
     public function getactiveproduct()

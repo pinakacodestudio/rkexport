@@ -18,7 +18,7 @@ function checkvalidation(addtype = 0) {
     PNotify.removeAll();
     if (name == '') {
         $("#type_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter payment type !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please enter Transport Type !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidname = 0;
     } else {
         $("#type_div").removeClass("has-error is-focused");
@@ -41,20 +41,20 @@ function checkvalidation(addtype = 0) {
                 success: function(response) {
                     var data = JSON.parse(response);
                     if (data['error'] == 1) {
-                        new PNotify({ title: "Payment Type successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
+                        new PNotify({ title: "Transport Type successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
                         if (addtype == 1) {
                             resetdata();
                         } else {
                             setTimeout(function() { window.location = SITE_URL + "Transport_type"; }, 500);
                         }
                     } else if (data['error'] == 2) {
-                        new PNotify({ title: 'Payment Type already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Transport Type already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 4) {
-                        new PNotify({ title: 'This Payment Type not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'This Transport Type not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else {
-                        new PNotify({ title: 'Payment Type not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Transport Type not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
                 error: function(xhr) {
@@ -83,16 +83,16 @@ function checkvalidation(addtype = 0) {
                 success: function(response) {
                     var data = JSON.parse(response);
                     if (data['error'] == 1) {
-                        new PNotify({ title: "Payment Type successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
+                        new PNotify({ title: "Transport Type successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
                         setTimeout(function() { window.location = SITE_URL + "transport-type"; }, 1500);
                     } else if (data['error'] == 2) {
-                        new PNotify({ title: 'Payment Type already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Transport Type already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 4) {
-                        new PNotify({ title: 'This Payment Type not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'This Transport Type not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else {
-                        new PNotify({ title: 'Payment Type not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Transport Type not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
                 error: function(xhr) {

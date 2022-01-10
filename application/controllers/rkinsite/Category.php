@@ -38,6 +38,8 @@ class Category extends Admin_Controller {
         $rollid = $this->session->userdata[base_url().'ADMINUSERTYPE'];
         $createddate = $this->general_model->getCurrentDateTime();
         $list = $this->Category->get_datatables();
+        // echo '<pre>';
+        // print_r($list);exit;
         $data = array();       
         $counter = $_POST['start'];
         $pokemon_doc = new DOMDocument();
@@ -65,10 +67,7 @@ class Category extends Admin_Controller {
 
             $row['DT_RowId'] = $datarow->id;
             $row[] = ++$counter;
-            $row[] = $datarow->name;
-            $row[] = $datarow->maincategoryname;
-
-            $row[] = $datarow->date;  
+            $row[] = $datarow->name; 
             $row[] = $actions;
             $row[] = $checkbox;
             $data[] = $row;

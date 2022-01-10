@@ -4656,22 +4656,18 @@ class Product_model extends Common_model {
 	function getVariantByProductIdForAdmin($productid){
 		
 		$query = $this->readdb->select("pp.id,
-										CONCAT(pp.price,' ',IFNULL((SELECT CONCAT('[',GROUP_CONCAT(v.value),']') FROM ".tbl_productcombination." as pc 
-											INNER JOIN ".tbl_variant." as v ON v.id=pc.variantid WHERE pc.priceid=pp.id)
-											,'')) as memberprice,
+					CONCAT(pp.price,' ',IFNULL((SELECT CONCAT('[',GROUP_CONCAT(v.value),']') FROM ".tbl_productcombination." as pc INNER JOIN ".tbl_variant." as v ON v.id=pc.variantid WHERE pc.priceid=pp.id),'')) as memberprice,
 
-										IF(p.isuniversal=0,IFNULL((SELECT GROUP_CONCAT(v.value SEPARATOR ', ') FROM ".tbl_productcombination." as pc 
-											INNER JOIN ".tbl_variant." as v ON v.id=pc.variantid WHERE pc.priceid=pp.id)
-											,''),(SELECT IF(min(price)=max(price),min(price),CONCAT(min(price),' - ',max(price))) FROM ".tbl_productquantityprices." WHERE productpricesid=pp.id)) as variantname,
+					IF(p.isuniversal=0,IFNULL((SELECT GROUP_CONCAT(v.value SEPARATOR ', ') FROM ".tbl_productcombination." as pc INNER JOIN ".tbl_variant." as v ON v.id=pc.variantid WHERE pc.priceid=pp.id),''),(SELECT IF(min(price)=max(price),min(price),CONCAT(min(price),' - ',max(price))) FROM ".tbl_productquantityprices." WHERE productpricesid=pp.id)) as variantname,
 
-										IFNULL((SELECT integratedtax FROM ".tbl_hsncode." WHERE id=p.hsncodeid),0) as tax,p.isuniversal,
+					IFNULL((SELECT integratedtax FROM ".tbl_hsncode." WHERE id=p.hsncodeid),0) as tax,p.isuniversal,
 
-										IFNULL((SELECT min(price) FROM ".tbl_productquantityprices." WHERE productpricesid=pp.id AND price>0),0) as price
-									")
-								->from(tbl_product." as p")
-								->join(tbl_productprices." as pp","pp.productid=p.id","INNER")
-								->where("p.id",$productid)
-								->get();
+					IFNULL((SELECT min(price) FROM ".tbl_productquantityprices." WHERE productpricesid=pp.id AND price>0),0) as price")
+					->from(tbl_product." as p")
+					->join(tbl_productprices." as pp","pp.productid=p.id","INNER")
+					->join(tbl_variant." as v2","pc.variantid=v2.id","LEFT")
+					->where("p.id",$productid)
+					->get();
 		return $query->result_array();
 	}
 

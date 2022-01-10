@@ -94,9 +94,10 @@ class Payment_type extends Admin_Controller {
 		
 		$paymenttype = $PostData['paymenttype'];
 
-        $this->form_validation->set_rules('payment_type', 'Payment Type', 'required');
+        $this->form_validation->set_rules('paymenttype', 'Payment Type', 'required');
 		
 		$json = array();
+
         if ($this->form_validation->run() == FALSE) {
         	$validationError = implode('<br>', $this->form_validation->error_array());
         	$json = array('error'=>3, 'message'=>$validationError);
@@ -141,7 +142,7 @@ class Payment_type extends Admin_Controller {
 		$id = $PostData['id'];
 		$paymenttype = $PostData['paymenttype'];
 
-		$this->form_validation->set_rules('payment_type', 'Payment Type', 'required');
+		$this->form_validation->set_rules('paymenttype', 'Payment Type', 'required');
         
 
 		$json = array();

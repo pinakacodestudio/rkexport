@@ -5,10 +5,21 @@ $('#date').datepicker({
     autoclose: true,
     todayBtn: "linked"
 });
+$('#anniversarydate').datepicker({
+    todayHighlight: true,
+    format: 'dd/mm/yyyy',
+    orientation: 'top',
+    autoclose: true,
+    todayBtn: "linked"
+});
 $("#old_receipt_div").hide();
 
 $('#remove').click(function() {
     $('#removeoldreceipt').val('1');
+});
+
+$('body').on('focus', ".date", function() {
+    $(this).datepicker();
 });
 
 function resetdata() {

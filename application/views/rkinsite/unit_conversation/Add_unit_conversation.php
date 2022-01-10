@@ -63,9 +63,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group" id="inputunitvalue_div">
-                                        <label for="inputunitvalue" class="col-md-4 control-label">Input Unit Value <span class="mandatoryfield">*</span></label>
+                                        <label for="inputunitvalue" class="col-md-4 control-label">Input Unit Value <span class="mandatoryfield"></span></label>
                                         <div class="col-sm-4">
-                                            <input type="text" id="inputunitvalue" name="inputunitvalue" class="form-control" value="<?php if(isset($unitconversationdata)){ echo number_format($unitconversationdata['inputunitvalue'],'2','.',''); }else{ echo 1; } ?>" onkeypress="return decimal_number_validation(event, this.value)" readonly>
+                                            <input type="text" id="inputunitvalue" name="inputunitvalue" class="form-control" value="<?php if(isset($unitconversationdata)){ echo number_format($unitconversationdata['inputunitvalue'],'2','.',''); }else{ echo 1; } ?>" onkeypress="return decimal_number_validation(event, this.value)">
                                         </div>
                                     </div>
                                     <hr>
@@ -87,6 +87,23 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="focusedinput" class="col-md-3 control-label">Activate</label>
+                                        <div class="col-md-6">
+                                            <div class="col-md-3 col-xs-4" style="padding-left: 0px;">
+                                                <div class="radio">
+                                                <input type="radio" name="status" id="yes" value="1" <?php if(isset($narrationdata) && $narrationdata['status']==1){ echo 'checked'; }else{ echo 'checked'; }?>>
+                                                <label for="yes">Yes</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-xs-4">
+                                                <div class="radio">
+                                                <input type="radio" name="status" id="no" value="0" <?php if(isset($narrationdata) && $narrationdata['status']==0){ echo 'checked'; }?>>
+                                                <label for="no">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-md-4 control-label"></label>
                                         <div class="col-md-8">
                                             <?php if(!empty($unitconversationdata)){ ?>
@@ -99,6 +116,7 @@
                                             <a class="<?=cancellink_class;?>" href="<?=ADMIN_URL.$this->session->userdata(base_url().'submenuurl')?>" title=<?=cancellink_title?>><?=cancellink_text?></a>
                                         </div>
                                     </div>
+                                    
                                 </div>
                                 <div class="col-sm-12">
                                 </div>

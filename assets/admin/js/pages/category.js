@@ -46,24 +46,7 @@ $(document).ready(function() {
 
     $('.panel-footer').append($(".dataTable+.row"));
     $('.dataTables_paginate>ul.pagination').addClass("pull-right pagination-md");
-    // $(function() {
-    //     $('.panel-heading.filter-panel').click(function() {
-    //         $(this).find('.button-icon span').html($(this).find('.button-icon span').text() == 'keyboard_arrow_down' ? 'keyboard_arrow_up' : 'keyboard_arrow_down');
-    //         //$(this).children().toggleClass(" ");
-    //         $(this).next().slideToggle({ duration: 200 });
-    //         $(this).toggleClass('panel-collapsed');
-    //         return false;
-    //     });
-    // });
 
-    /* $('#categoryid').on('change', function (e) {
-
-        if(this.value != ""){
-            $('#btntype').show();
-        }else{
-            $('#btntype').hide();
-        }
-    }); */
 });
 
 

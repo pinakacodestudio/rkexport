@@ -7,6 +7,14 @@ birthyear = today.getFullYear() - 18;
 today = dd + '/' + mm + '/' + yyyy;
 dateofbirth = dd + '/' + mm + '/' + birthyear;
 
+function removedata(id) {
+    $('#' + id).remove();
+}
+
+function removecontectpaertion(id) {
+    $('#' + id).remove();
+}
+
 $(document).ready(function() {
     var edit_country = $('#edit_country').val();
     $('#countryid').val(edit_country).trigger('change')
@@ -461,4 +469,5 @@ function checkvalidation(addtype = 0) {
             });
         }
     }
+
 }

@@ -36,6 +36,17 @@ class Unit_conversation extends Admin_Controller {
             $row = array();
             $actions = $checkbox = $image ='';
             
+            if (in_array($rollid, $edit)) {
+              
+
+
+                if ($datarow->status == 1) {
+                    $actions .= '<span id="span' . $datarow->id . '"><a href="javascript:void(0)" onclick="enabledisable(0,' . $datarow->id . ',\'' . ADMIN_URL . 'Unit_conversation/unit_enable_disable\',\'' . disable_title . '\',\'' . disable_class . '\',\'' . enable_class . '\',\'' . disable_title . '\',\'' . enable_title . '\',\'' . disable_text . '\',\'' . enable_text . '\')" class="' . disable_class . '" title="' . disable_title . '">' . stripslashes(disable_text) . '</a></span>';
+                } else {
+                    $actions .= '<span id="span' . $datarow->id . '"><a href="javascript:void(0)" onclick="enabledisable(1,' . $datarow->id . ',\'' . ADMIN_URL . 'Unit_conversation/unit_enable_disable\',\'' . enable_title . '\',\'' . disable_class . '\',\'' . enable_class . '\',\'' . disable_title . '\',\'' . enable_title . '\',\'' . disable_text . '\',\'' . enable_text . '\')" class="' . enable_class . '" title="' . enable_title . '">' . stripslashes(enable_text) . '</a></span>';
+                }
+            }
+
             if(in_array($rollid, $edit)) {
                 $actions .= '<a class="'.edit_class.'" href="'.ADMIN_URL.'unit-conversation/unit-conversation-edit/'. $datarow->id.'/'.'" title="'.edit_title.'">'.edit_text.'</a>';
             }
@@ -47,11 +58,6 @@ class Unit_conversation extends Admin_Controller {
             
             $row[] = ++$counter;
             $row[] = $datarow->productname!=""?ucwords($datarow->productname):"-";
-            $row[] = $datarow->inputunitname;
-            $row[] = numberFormat($datarow->inputunitvalue,'2',',');
-            $row[] = $datarow->outputunitname;
-            $row[] = numberFormat($datarow->outputunitvalue,'2',',');
-            $row[] = $this->general_model->displaydatetime($datarow->createddate);  
             $row[] = $actions;
             $row[] = $checkbox;
             $data[] = $row;
@@ -92,6 +98,7 @@ class Unit_conversation extends Admin_Controller {
         $inputunitvalue = $PostData['inputunitvalue'];
         $outputunitid = trim($PostData['outputunitid']);
         $outputunitvalue = $PostData['outputunitvalue'];
+        $status = $PostData['status'];
      
         $this->form_validation->set_rules('inputunitid', 'input unit', 'callback_dropdowncheck['.$inputunitid.']');
         $this->form_validation->set_rules('inputunitvalue', 'input unit value', 'required',array("required"=>"Please enter input unit value !"));
@@ -120,7 +127,8 @@ class Unit_conversation extends Admin_Controller {
                                     'createddate' => $createddate,
                                     'addedby' => $addedby,                              
                                     'modifieddate' => $createddate,                             
-                                    'modifiedby' => $addedby 
+                                    'modifiedby' => $addedby,
+                                    'status' => $status,
                                 );
             
                 $UnitConversationID = $this->Unit_conversation->Add($InsertData);
@@ -290,6 +298,27 @@ class Unit_conversation extends Admin_Controller {
             $this->Unit_conversation->edit_batch($updatedata, 'id');
         }
         echo 1;
+    }
+
+    
+    public function unit_enable_disable()
+    {
+        $this->checkAdminAccessModule('submenu', 'edit', $this->viewData['submenuvisibility']);
+        $PostData = $this->input->post();
+
+        $modifieddate = $this->general_model->getCurrentDateTime();
+        $updatedata = array("status" => $PostData['val'], "modifieddate" => $modifieddate, "modifiedby" => $this->session->userdata(base_url() . 'ADMINUSERTYPE'));
+        $this->Unit_conversation->_table = tbl_unitconversation;
+        $this->Unit_conversation->_where = array("id" => $PostData['id']);
+        $this->Unit_conversation->Edit($updatedata);
+
+        if ($this->viewData['submenuvisibility']['managelog'] == 1) {
+            $this->Unit_conversation->_where = array("id" => $PostData['id']);
+            $data = $this->Unit_conversation->getRecordsById();
+            $msg = ($PostData['val'] == 0 ? "Disable" : "Enable") . " " . $data['id'] . ' Unit conversation.';
+            $this->general_model->addActionLog(2, 'Unit conversation', $msg);
+        }
+        echo $PostData['id'];
     }
     
 }?>

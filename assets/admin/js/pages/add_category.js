@@ -76,25 +76,7 @@ function validation() {
             isvalidcategoryslug = 1;
         }
     }
-    /* if(ACTION == 0){
-        if(fileimage==""){
-            $('.imageupload img').css({"border":"1px solid #FFB9BD"});
-            new PNotify({title: 'Please select image !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        }else{
-            $('.imageupload img').css({"border":"1px solid #f1f1f1"}); 
-            isvalidimage = 1;  
-        }
-   }
 
-   if(ACTION == 1){
-        if(fileimage=="" && oldfileimage==""){
-            $('.imageupload img').css({"border":"1px solid #FFB9BD"});
-            new PNotify({title: 'Please select  valid image !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        }else{
-            $('.imageupload img').css({"border":"1px solid #f1f1f1"}); 
-            isvalidimage = 1;  
-        }
-   } */
     if (isvalidname == 1 && isvalidcategoryslug == 1) {
         var formData = new FormData($('#form-category')[0]);
 

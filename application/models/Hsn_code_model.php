@@ -8,8 +8,8 @@ class Hsn_code_model extends Common_model {
 	public $_where = array();
 	public $_except_fields = array();
 	public $order = array('id' => 'DESC'); // default order 
-	public $column_order = array(null,'channel','membername','h.hsncode','h.integratedtax','h.integratedtax','h.integratedtax','h.description'); //set column field database for datatable orderable
-	public $column_search = array('IFNULL(c.name,"Company")','m.name','h.hsncode','h.integratedtax','h.description'); //set column field database for datatable searchable 
+	public $column_order = array(null,'h.hsncode','h.integratedtax','h.integratedtax','h.integratedtax','h.description'); //set column field database for datatable orderable
+	public $column_search = array('h.hsncode','h.integratedtax','h.description'); //set column field database for datatable searchable 
 
 	function __construct() {
 		parent::__construct();

@@ -33,8 +33,6 @@
                   <tr>
                     <th>Sr. No.</th>
                     <th>Category Name</th>
-                    <th>Main Category Name</th>
-                    <th>Date</th>
                     <th>Actions</th>
                     <th class="width5">
                       <div class="checkbox">

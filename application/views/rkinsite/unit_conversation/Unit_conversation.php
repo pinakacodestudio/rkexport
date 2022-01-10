@@ -27,13 +27,8 @@
                     <tr>
                       <th class="width8">Sr. No.</th>
                       <th>Product Name</th> 
-                      <th>Input Unit Name</th> 
-                      <th>Input Unit Value</th> 
-                      <th>Output Unit Name</th> 
-                      <th>Output Unit Value</th> 
-                      <th class="width15">Entry Date</th>
                       <th class="width12">Actions</th>
-                      <th class="width5">
+                      <th class="width8">
                         <div class="checkbox">
                           <input id="deletecheckall" onchange="allchecked()" type="checkbox" value="all">
                           <label for="deletecheckall"></label>

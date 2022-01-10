@@ -26,9 +26,6 @@ if(!empty($narrationdata)){
         $NARRATION_DATA .= '<option value="'.$narration['id'].'">'.$narration['narration'].'</option>';
     }
 }
-
-print_r($PRODUCT_DATA);
-print_r($NARRATION_DATA);
 ?>
 <script>
     var PRODUCT_DATA = '<?=$PRODUCT_DATA?>';
@@ -173,21 +170,19 @@ print_r($NARRATION_DATA);
                                         <div class="form-group" id="price<?=($i+1)?>_div">
                                             <div class="col-md-12">
                                                 <select id="priceid<?=($i+1)?>" name="priceid[]" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="<?=($i+1)?>">
-                                                    <option value="0">Select Variant</option>
+                                                    <option value="0">Select Variant111</option>
 
-                                                    <?php
-
-
+                                                    <?php 
                                                     if(!empty($narrationdata)){
-                                                 
+                                             
                                                  foreach($narrationdata as $narration){ 
-                                                    
                                                      $narration = str_replace("'","&apos;",$product['name']);
                                                      if(DROPDOWN_PRODUCT_LIST==0){ ?>
-
+                                                     
                                                          <option value="<?=$narration['id']?>" <?=($stockgeneralvoucherproductdata[$i]['productid']==$product['id']?"selected":"")?>><?=$narration['name']?></option>
-
                                                      <?php }else{
+
+
 
                                                          if($product['productimage']!="" && file_exists(PRODUCT_PATH.$product['productimage'])){
                                                              $img = $product['productimage'];
@@ -195,13 +190,11 @@ print_r($NARRATION_DATA);
                                                              $img = PRODUCTDEFAULTIMAGE;
                                                          }
                                                          ?>
-
-                                                         <option data-content="<?php if(!empty($product['productimage'])){?><img src='<?=PRODUCT.$img?>' style='width:40px'> <?php } echo $productname; ?> " value="<?php echo $product['id']; ?>" <?=($stockgeneralvoucherproductdata[$i]['productid']==$product['id']?"selected":"")?>><?php echo $productname; ?></option>
-                                                     
+                                                         
+                                                         <option data-content="<?php if(!empty($product['productimage'])){?><img src='<?=PRODUCT.$img?>' style='width:40px'> <?php } echo $productname; ?> " value="<?php echo $product['id']; ?>" <?=($stockgeneralvoucherproductdata[$i]['productid']==$product['id']?"selected":"")?>><?php echo $productname; ?>1</option>
                                                      <?php } ?>
                                              <?php } 
                                              } ?>
-
                                                 </select>
                                             </div>
                                         </div>
@@ -287,9 +280,6 @@ print_r($NARRATION_DATA);
                                             <select id="productid1" name="productid[]" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="8" div-id="1">
                                                 <option value="0">Select Product</option>
                                                 <?=$PRODUCT_DATA?>
-                                                
-                                              
-                                                
                                             </select>
                                         </div>
                                     </div>

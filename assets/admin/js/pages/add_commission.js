@@ -34,7 +34,7 @@ function checkvalidation(addtype = 0) {
 
     if (commission == '') {
         $("#currency_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter Currency !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please enter Commission !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidcommission = 0;
     } else {
         $("#currency_div").removeClass("has-error is-focused");
@@ -60,7 +60,7 @@ function checkvalidation(addtype = 0) {
                 success: function(response) {
                     var data = JSON.parse(response);
                     if (data['error'] == 1) {
-                        new PNotify({ title: "Rights successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
+                        new PNotify({ title: "Commission successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
                         if (addtype == 1) {
                             resetdata();
                         } else {
@@ -68,13 +68,13 @@ function checkvalidation(addtype = 0) {
                         }
 
                     } else if (data['error'] == 2) {
-                        new PNotify({ title: 'Rights already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Commission already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 4) {
-                        new PNotify({ title: 'This rights not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'This Commission not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else {
-                        new PNotify({ title: 'Rights not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Commission not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
                 error: function(xhr) {
@@ -109,9 +109,9 @@ function checkvalidation(addtype = 0) {
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 4) {
-                        new PNotify({ title: 'This rights not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'This Commission not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else {
-                        new PNotify({ title: 'Rights not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Commission not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
                 error: function(xhr) {

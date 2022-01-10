@@ -11,9 +11,8 @@
     </small>
     </div>
 
-    <div class="container-fluid">
-                                    
-        <div data-widget-group="group1">
+    <div class="container-fluid">         
+      <div data-widget-group="group1">
       <div class="row">
         <div class="col-md-12">
           <div class="panel panel-default border-panel">
@@ -22,17 +21,7 @@
                 <form class="form-horizontal" id="form-category">
                   <input type="hidden" name="categoryid" value="<?php if(isset($categorydata)){ echo $categorydata['id']; } ?>">
                   <div class="form-body">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="maincategoryid">Choose Section <span class="mandatoryfield"></span></label>
-                        <div class="col-sm-8"> 
-                            <select class="form-control selectpicker" id="maincategoryid" name="maincategoryid" data-live-search="true" data-select-on-tab="true" data-size="5" tabindex="8">
-                                  <option value="0">Select Main Category</option>
-                                <?php foreach($maincategorydata as $row){ ?>
-                                <option value="<?php echo $row['id']; ?>" <?php if(isset($categorydata)){ if($row['id'] == $categorydata['maincategoryid']){ echo 'selected'; } } ?>><?php echo $row['name']; ?></option>  
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
+                    
                     <div class="form-group" id="name_div">
                       <label class="col-md-4 control-label" for="name">Category Name <span class="mandatoryfield">*</span></label>
                       <div class="col-md-8">

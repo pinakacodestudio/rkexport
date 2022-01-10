@@ -51,7 +51,7 @@
                       <label for="focusedinput" class="col-md-4 col-sm-3 col-xs-1 control-label"></label>
                       <div class="col-md-8 col-xs-11 col-xs-offset-1 col-sm-8">
                         <?php if(!empty($partytypedata)){ ?>
-                          <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
+                          <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="UPDATE" class="btn btn-primary btn-raised">
                           <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & NEW" class="btn btn-primary btn-raised">
                           <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
                         <?php }else{ ?>

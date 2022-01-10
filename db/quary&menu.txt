@@ -41,3 +41,6 @@ CREATE TABLE `rkexport`.`quotation` ( `id` INT NOT NULL AUTO_INCREMENT , `quotat
 ==================
 quotation
 quotationproducts
+
+=========================================08-jan-22============================
+ALTER TABLE `unitconversation` ADD `status` INT NULL AFTER `outputunitvalue`;

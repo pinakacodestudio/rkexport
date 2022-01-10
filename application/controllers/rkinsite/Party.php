@@ -332,44 +332,43 @@ class Party extends Admin_Controller
             $email = $this->input->post('email_' . $i);
 
             $contectid = $this->input->post('contectid_' . $i);
+            if($firstname!=''){
+                if ($contectid != 0) {
+                    $insertdata2 = array(
+                        'firstname' => $firstname,
+                        'lastname' => $lastname,
+                        'contactno' => $contactno,
+                        'birthdate' => $this->general_model->convertdate($birthdate),
+                        'anniversarydate' => $this->general_model->convertdate($anniversarydate),
+                        'email' => $email,
+                        'modifieddate' => $createddate,
+                        'modifiedby' => $addedby,
+                    );
 
-            if ($contectid != 0) {
-                $insertdata2 = array(
-                    'firstname' => $firstname,
-                    'lastname' => $lastname,
-                    'contactno' => $contactno,
-                    'birthdate' => $this->general_model->convertdate($birthdate),
-                    'anniversarydate' => $this->general_model->convertdate($anniversarydate),
-                    'email' => $email,
-                    'modifieddate' => $createddate,
-                    'modifiedby' => $addedby,
-                );
-                // $this->load->model('Party_contact_model', 'Party_contact');
-                // $PartycontactId = $this->Party_contact->Add($insertdata2);
+                    $this->Party_contact->_where = array("id" => $contectid);
+                    $partyid = $this->Party_contact->Edit($insertdata2);
 
-                $this->Party_contact->_where = array("id" => $contectid);
-                $partyid = $this->Party_contact->Edit($insertdata2);
-
-            } else {
-                $insertdata2 = array(
-                    'partyid' => $pid,
-                    'firstname' => $firstname,
-                    'lastname' => $lastname,
-                    'contactno' => $contactno,
-                    'birthdate' => $this->general_model->convertdate($birthdate),
-                    'anniversarydate' => $this->general_model->convertdate($anniversarydate),
-                    'email' => $email,
-                    'createddate' => $createddate,
-                    'modifieddate' => $createddate,
-                    'addedby' => $addedby,
-                    'modifiedby' => $addedby,
-                );
-              
-                $this->load->model('Party_contact_model', 'Party_contact');
-                $PartycontactId = $this->Party_contact->Add($insertdata2);
-
+                } else {
+                    $insertdata2 = array(
+                        'partyid' => $pid,
+                        'firstname' => $firstname,
+                        'lastname' => $lastname,
+                        'contactno' => $contactno,
+                        'birthdate' => $this->general_model->convertdate($birthdate),
+                        'anniversarydate' => $this->general_model->convertdate($anniversarydate),
+                        'email' => $email,
+                        'createddate' => $createddate,
+                        'modifieddate' => $createddate,
+                        'addedby' => $addedby,
+                        'modifiedby' => $addedby,
+                    );
+                
+                    $this->load->model('Party_contact_model', 'Party_contact');
+                    $PartycontactId = $this->Party_contact->Add($insertdata2);
+                }
             }
-        endfor;
+
+            endfor;
 
         $cloopdoc = $PostData['cloopdoc'];
         $insertDocumentData = array();
@@ -381,66 +380,54 @@ class Party extends Admin_Controller
                 $id = preg_replace('/[^0-9]/', '', $key);
                 $documentnumber = $PostData['documentname_'.$id];
                 $doc_id = $PostData['doc_id_' . $id];
-                // if ($doc_id != 0) {
-                //     $insertdata3 = array(
-                //         "docname" => $documentnumber,
-                //     );
-                //     $this->Party_doc->_where = array("id" => $doc_id);
-                //     $partyid = $this->Party_doc->Edit($insertdata3);
-                // } else {
-                //     $insertdata3 = array(
-                //         "partyid" => $pid,
-                //         "docname" => $documentnumber,
-                //     );
-                //     $this->Party_doc->Add($insertdata3);
-                // }
 
-                if (isset($_FILES['docfile_' . $id]['name']) && $_FILES['docfile_' . $id]['name'] != '' && strpos($key, 'docfile_') !== false) {
-
-                    $temp = explode('.', $_FILES['docfile_' . $id]['name']);
-                    $extension = end($temp);
-                    $type = 0;
-                    $image_width = $image_height = '';
-                    $Imageextensions = array("bmp", "bm", "gif", "ico", "jfif", "jfif-tbnl", "jpe", "jpeg", "jpg", "pbm", "png", "svf", "tif", "tiff", "wbmp", "x-png");
-                    if (in_array($extension, $Imageextensions, true)) {
-                        $type = 1;
-                        $image_width = PRODUCT_IMG_WIDTH;
-                        $image_height = PRODUCT_IMG_HEIGHT;
-                    }
-
-                     $file = uploadFile('docfile_' . $id, 'DOCUMENT', PARTY_PATH, '*', '', 1, PARTY_LOCAL_PATH, $image_width, $image_height);
-
-                    if ($file !== 0) {
-                        if ($file == 2) {
-                            echo 3; //image not uploaded
+                if($documentnumber != ''){
+                    if (isset($_FILES['docfile_' . $id]['name']) && $_FILES['docfile_' . $id]['name'] != '' && strpos($key, 'docfile_') !== false) {
+    
+                        $temp = explode('.', $_FILES['docfile_' . $id]['name']);
+                        $extension = end($temp);
+                        $type = 0;
+                        $image_width = $image_height = '';
+                        $Imageextensions = array("bmp", "bm", "gif", "ico", "jfif", "jfif-tbnl", "jpe", "jpeg", "jpg", "pbm", "png", "svf", "tif", "tiff", "wbmp", "x-png");
+                        if (in_array($extension, $Imageextensions, true)) {
+                            $type = 1;
+                            $image_width = PRODUCT_IMG_WIDTH;
+                            $image_height = PRODUCT_IMG_HEIGHT;
+                        }
+    
+                            $file = uploadFile('docfile_' . $id, 'DOCUMENT', PARTY_PATH, '*', '', 1, PARTY_LOCAL_PATH, $image_width, $image_height);
+    
+                        if ($file !== 0) {
+                            if ($file == 2) {
+                                echo 3; //image not uploaded
+                                exit;
+                            }
+    
+                            if ($doc_id != 0) {
+                                $insertdata4 = array(
+                                    "docname" => $documentnumber,
+                                    "doc" => $file,
+                                );
+                                $this->Party_doc->_where = array("id" => $doc_id);
+                                $partyid = $this->Party_doc->Edit($insertdata4);
+                            } else {
+                                
+                                $insertdata4 = array(
+                                    "partyid" => $pid,
+                                    "docname" => $documentnumber,
+                                    "doc" => $file,
+                                );
+                                $this->Party_doc->Add($insertdata4);
+                            }
+    
+                        } else {
+                            echo 3; //INVALID image TYPE
                             exit;
                         }
-
-                        if ($doc_id != 0) {
-                            $insertdata4 = array(
-                                "docname" => $documentnumber,
-                                "doc" => $file,
-                            );
-                            $this->Party_doc->_where = array("id" => $doc_id);
-                            $partyid = $this->Party_doc->Edit($insertdata4);
-                        } else {
-                           
-                            $insertdata4 = array(
-                                "partyid" => $pid,
-                                "docname" => $documentnumber,
-                                "doc" => $file,
-                            );
-                            $this->Party_doc->Add($insertdata4);
-                        }
-
                     } else {
-                        echo 3; //INVALID image TYPE
-                        exit;
+                        $file = '';
                     }
-                } else {
-                    $file = '';
                 }
-
             }
           
             $json = 1;

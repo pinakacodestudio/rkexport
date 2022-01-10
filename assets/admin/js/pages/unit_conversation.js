@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    
+
     oTable = $('#unitconversationtable').DataTable({
         "language": {
             "lengthMenu": "_MENU_"
@@ -7,32 +7,32 @@ $(document).ready(function() {
         "pageLength": 10,
         "columnDefs": [{
             'orderable': false,
-            'targets': [0,-1,-2]
-        },{ targets: [3,5], className: "text-right" }],
+            'targets': [0, -1, -2]
+        }],
         "order": [], //Initial no order.
-        'serverSide': true,//Feature control DataTables' server-side processing mode.
+        'serverSide': true, //Feature control DataTables' server-side processing mode.
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": SITE_URL+"unit-conversation/listing",
+            "url": SITE_URL + "unit-conversation/listing",
             "type": "POST",
-            "data": function ( data ) {
-               
+            "data": function(data) {
+
             },
-            beforeSend: function(){
+            beforeSend: function() {
                 $('.mask').show();
                 $('#loader').show();
             },
             error: function(xhr) {
-            //alert(xhr.responseText);
+                //alert(xhr.responseText);
             },
-            complete: function(e){
+            complete: function(e) {
                 $('.mask').hide();
                 $('#loader').hide();
             },
         },
     });
 
-    $('.dataTables_filter input').attr('placeholder','Search...');
+    $('.dataTables_filter input').attr('placeholder', 'Search...');
 
     //DOM Manipulation to move datatable elements integrate to panel
     $('.panel-ctrls.panel-tbl').append($('.dataTables_filter').addClass("pull-right")).find("label").addClass("panel-ctrls-center");
@@ -44,6 +44,6 @@ $(document).ready(function() {
 });
 
 
-function applyFilter(){
+function applyFilter() {
     oTable.ajax.reload();
 }
