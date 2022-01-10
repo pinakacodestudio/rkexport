@@ -36,10 +36,11 @@ class Unit_conversation extends Admin_Controller {
             $row = array();
             $actions = $checkbox = $image ='';
             
+            if(in_array($rollid, $edit)) {
+                $actions .= '<a class="'.edit_class.'" href="'.ADMIN_URL.'unit-conversation/unit-conversation-edit/'. $datarow->id.'/'.'" title="'.edit_title.'">'.edit_text.'</a>';
+            }
+
             if (in_array($rollid, $edit)) {
-              
-
-
                 if ($datarow->status == 1) {
                     $actions .= '<span id="span' . $datarow->id . '"><a href="javascript:void(0)" onclick="enabledisable(0,' . $datarow->id . ',\'' . ADMIN_URL . 'Unit_conversation/unit_enable_disable\',\'' . disable_title . '\',\'' . disable_class . '\',\'' . enable_class . '\',\'' . disable_title . '\',\'' . enable_title . '\',\'' . disable_text . '\',\'' . enable_text . '\')" class="' . disable_class . '" title="' . disable_title . '">' . stripslashes(disable_text) . '</a></span>';
                 } else {
@@ -47,9 +48,7 @@ class Unit_conversation extends Admin_Controller {
                 }
             }
 
-            if(in_array($rollid, $edit)) {
-                $actions .= '<a class="'.edit_class.'" href="'.ADMIN_URL.'unit-conversation/unit-conversation-edit/'. $datarow->id.'/'.'" title="'.edit_title.'">'.edit_text.'</a>';
-            }
+          
             if(in_array($rollid, $delete)) {
                 $actions.='<a class="'.delete_class.'" href="javascript:void(0)" title="'.delete_title.'" onclick=deleterow('.$datarow->id.',"'.ADMIN_URL.'unit-conversation/check-unit-conversation-use","Unit&nbsp;Conversation","'.ADMIN_URL.'unit-conversation/delete-mul-unit-conversation") >'.delete_text.'</a>';
 

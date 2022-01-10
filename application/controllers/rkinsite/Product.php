@@ -54,7 +54,6 @@ class  Product extends Admin_Controller
             $varianthtml = '';
             $productname = '';
 
-            // $actions .= '<a href="' . ADMIN_URL . 'product/view-product/' . $datarow->id . '/' . '" class="' . view_class . '" title="' . view_title . '" target="_blank">' . view_text . '</a>';
 
             if (in_array($rollid, $edit)) {
                 $actions .= '<a class="' . edit_class . '" href="' . ADMIN_URL . 'product/product-edit/' . $datarow->id . '/' . '" title="' . edit_title . '">' . edit_text . '</a>';
@@ -67,7 +66,6 @@ class  Product extends Admin_Controller
                 }
             }
 
-            // $actions .= '<a class="'.DOWNLOAD_CLASS.'" href="'.ADMIN_URL.'customer/download-invoice/'.$datarow->id.'" title="'.DOWNLOAD_TITLE.'" >'.DOWNLOAD_TEXT.'</a>';
 
             if (in_array($rollid, $delete)) {
                 $actions .= '<a class="' . delete_class . '" href="javascript:void(0)" title="' . delete_title . '" onclick=deleterow(' . $datarow->id . ',"' . ADMIN_URL . 'product/check-product-use","Product","' . ADMIN_URL . 'product/delete-mul-product","producttable") >' . delete_text . '</a>';
@@ -106,14 +104,6 @@ class  Product extends Admin_Controller
 
                 $productcombinationarr = $this->Product_combination->getProductcombinationWithStock($datarow->id);
 
-                // if (STOCK_MANAGE_BY == 0) {
-                //     $ProductStock = $this->Stock->getAdminProductStock($datarow->id, 1);
-                //     $keynm = 'openingstock';
-                // } else {
-                //     $ProductStock = $this->Stock->getAdminProductFIFOStock($datarow->id, 1);
-                //     $keynm = 'openingstock';
-                // }
-
                 if (count($productcombinationarr)) {
                     $html = '<div id="variant' . $datarow->id . '" style="display:none;">
                             <table class="table table-hover table-bordered">
@@ -131,22 +121,9 @@ class  Product extends Admin_Controller
 
 
                     foreach ($productcombinationarr as $pc) {
-
-                        // $html .= '<tr>';
-                        // $key = array_search($pc['priceid'], array_column($ProductStock, 'priceid'));
-
-                        // $stock = 0;
-                        // if (!empty($ProductStock)) {
-                        //     $key = array_search($pc['priceid'], array_column($ProductStock, 'priceid'));
-                        //     if (trim($key) != "" && isset($ProductStock[$key][$keynm])) {
-                        //         $stock = (int)$ProductStock[$key][$keynm];
-                        //     }
-                        // }
-
                         $pricesArray = explode(",", $pc['productprice']);
                         $qtyArray = explode(",", $pc['productqty']);
                         $discArray = explode(",", $pc['productdisc']);
-
                         $priceHTML = "";
                         foreach ($pricesArray as $prkey => $rowval) {
 
@@ -159,7 +136,7 @@ class  Product extends Admin_Controller
                             }
                             $priceHTML .= '<p>' . CURRENCY_CODE . (!empty($rowval) ? numberFormat($rowval, 2, ',') : '0.00') . ' ' . $qtyArray[$prkey] . ($datarow->quantitytype == 0 ? "+" : "") . ' Qty' . $discounthtml . '</p>';
                         }
-                        // <td>' . $stock . '</td>
+                      
                         $html .= '<td>' . $priceHTML . '</td>
                                     <td>' . (int)$pc['pointsforseller'] . '</td>
                                     <td>' . (int)$pc['pointsforbuyer'] . '</td>';
@@ -188,16 +165,7 @@ class  Product extends Admin_Controller
                 $productdetail = '<img class="pull-left thumbwidth" src="' . PRODUCT . PRODUCTDEFAULTIMAGE . '" style="margin-right: 10px;"><div class="" style="display: flex;">' . $productname . '</div>';
             }
 
-            /* if($datarow->isuniversal==0){
-                if(number_format($datarow->minprice,2,'.','') == number_format($datarow->maxprice,2,'.','')){
-                    $price = number_format($datarow->minprice, 2, '.', ',');
-                }else{
-                    $price = number_format($datarow->minprice, 2, '.', ',')." - ".number_format($datarow->maxprice, 2, '.', ',');
-                }
-                $price = "<a href='javascript:void(0)' onclick='viewvariantdetails(".$datarow->id.",\"".ucwords($datarow->name)."\")'><span class='pull-right'>".$price."</span></a>";
-            }else{
-                $price = "<span class='pull-right'>".number_format($datarow->price, 2, '.', ',')."</span>";
-            } */
+           
             if (number_format($datarow->minprice, 2, '.', '') == number_format($datarow->maxprice, 2, '.', '')) {
                 $price = number_format($datarow->minprice, 2, '.', ',');
             } else {
@@ -209,22 +177,10 @@ class  Product extends Admin_Controller
             }
 
             $row[] = ++$counter;
-            $row[] = $productdetail;
+            $row[] = $productname;
             $row[] = $datarow->categoryname;
             $row[] = $datarow->brandname;
             $row[] = $price;
-
-            // if (STOCK_MANAGE_BY == 0) {
-            //     $productdata = $this->Stock->getAdminProductStock($datarow->id, 0);
-            //     $stock = (!empty($productdata) ? $productdata[0]['openingstock'] : 0);
-            // } else {
-            //     $productdata = $this->Stock->getAdminProductFIFOStock($datarow->id, 0);
-            //     $stock = (!empty($productdata[0]['openingstock']) ? $productdata[0]['openingstock'] : 0);
-            // }
-            // $row[] = "<span class='pull-right'>" . $stock . "</span>";
-
-            // $row[] = "<span class='pull-right'>".number_format($datarow->discount, 2, '.', '')."</span>";
-            
             $row[] = "<span class='pull-right'>" . $datarow->priority . "</span>";
             $row[] = $actions;
             $row[] = $checkbox;
@@ -249,7 +205,7 @@ class  Product extends Admin_Controller
         $this->viewData['module'] = "product/add_product";
         $this->viewData['VIEW_STATUS'] = "0";
         $this->viewData['maincategorydata'] = $this->Product->getmaincategory();
-
+        
         duplicate:
         $barcode = rand(1000000000, 9999999999);
 
@@ -3792,9 +3748,7 @@ class  Product extends Admin_Controller
     public function getVariantByProductIdForAdmin()
     {
         $PostData = $this->input->post();
-      
         $productdata = $this->Product->getVariantByProductIdForAdmin($PostData['productid']);
-        print_r( $productdata);exit;
         echo json_encode($productdata);
     }
     public function getactiveproduct()

@@ -8,8 +8,8 @@ class Currency_rate_model extends Common_model {
 	public $_where = array();
 	public $_except_fields = array();
 	public $_order = array('id' => 'DESC');
-	public $column_order = array('id', 'name');
-    public $column_search = array('name');
+	public $column_order = array(null, 'currency','value','date');
+    public $column_search = array('currency','value','date');
 	
 	function __construct() {
 		parent::__construct();

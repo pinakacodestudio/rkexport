@@ -20,7 +20,7 @@ class Currency_rate extends Admin_Controller
         if ($this->viewData['submenuvisibility']['managelog'] == 1) {
             $this->general_model->addActionLog(4, 'Currency Rate', 'View currency rate.');
         }
-        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-p", "bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
         $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_javascript("currency_rate", "pages/currency_rate.js");
