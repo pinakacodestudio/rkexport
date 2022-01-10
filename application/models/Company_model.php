@@ -8,8 +8,8 @@ class Company_model extends Common_model {
 	public $_where = array();
 	public $_except_fields = array();
 	public $order = array('id' => 'DESC');
-	public $column_order = array('id', 'name');
-    public $column_search = array('name');
+	public $column_order = array('id', 'companyname');
+    public $column_search = array('companyname');
 	
 	function __construct() {
 		parent::__construct();

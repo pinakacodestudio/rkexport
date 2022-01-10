@@ -311,8 +311,6 @@
                               if(isset($party_contactdata[0]->id ) && !empty($party_contactdata[0]->id ))  {
                                   foreach ($party_contactdata as $row)
                                   {
-                                      // echo '<pre>';
-                                      // print_r($row);
                                       $i++;
                                       $cloopcount = $cloopcount + 1;
                                       $con_id = $row->id;

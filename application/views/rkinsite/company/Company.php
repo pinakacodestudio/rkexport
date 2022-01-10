@@ -29,7 +29,7 @@
                     <tr>
                       <th class="width8">Sr.No.</th>
                       <th>Company Type</th>
-                      <th>Date</th>
+                      <th>Email</th>
                       <th class="width15">Action</th>
                       <th class="width5">
                         <div class="checkbox">

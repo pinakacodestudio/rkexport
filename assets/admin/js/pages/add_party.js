@@ -126,7 +126,13 @@ $(document).ready(function() {
 
 
     $('body').on('focus', ".date", function() {
-        $(this).datepicker();
+        $(this).datepicker({
+            todayHighlight: true,
+            format: 'dd/mm/yyyy',
+            orientation: "top left",
+            endDate: dateofbirth,
+            clearBtn: true,
+        });
     });
 
     $("#old_receipt_div").hide();
@@ -135,8 +141,7 @@ $(document).ready(function() {
     });
 
     $(".selectpicker").selectpicker("refresh");
-    // getprovince($('#countryid').val());
-    // getcity($('#provinceid').val());
+
     $('#countryid').on('change', function(e) {
 
         $('#provinceid')
@@ -266,11 +271,6 @@ function addNewDocument() {
 }
 
 function removeDocument(rowid) {
-
-    /* if(ACTION==1 && $('#productprocesscertificatesid'+rowid).val()!=null){
-        var removeproductprocesscertificatesid = $('#removeproductprocesscertificatesid').val();
-        $('#removeproductprocesscertificatesid').val(removeproductprocesscertificatesid+','+$('#productprocesscertificatesid'+rowid).val());
-    } */
     $("#countdocuments" + rowid).remove();
 
     $(".add_btn:last").show();
@@ -330,9 +330,7 @@ function checkvalidation(addtype = 0) {
 
     var websitename = $("#websitename").val().trim();
     var companyid = $("#companyid").val().trim();
-
-
-
+    alert(companyid);
     var isvalidwebsitename = isvalidcompanyid = isvalidgst = isvalidpartycode = isvalidpan = isvalidemail = isvalidcontactno = isvalidpartytypeid = isvalidaddress = isvalidcountryid = isvalidstateid = isvalidcityid = isvalidbillingaddress = isvalidshippingaddress = isvalidcourieraddress = isvalidfirstname = isvalidlastname = isvalidbirthdate = isvalidanniversarydate = 0;
 
     var isvalidwebsitename = 1;
@@ -346,7 +344,9 @@ function checkvalidation(addtype = 0) {
         isvalidwebsitename = 1;
     }
 
-    if (companyid == '') {
+
+
+    if (companyid == '' || companyid == 0) {
         $("#companyid_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please Select Company!', styling: 'fontawesome', delay: '3000', type: 'error' });
     } else {
@@ -417,9 +417,7 @@ function checkvalidation(addtype = 0) {
                         new PNotify({ title: 'Party not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
-                error: function(xhr) {
-                    //alert(xhr.responseText);
-                },
+                error: function(xhr) {},
                 complete: function() {
                     $('.mask').hide();
                     $('#loader').hide();
@@ -456,9 +454,7 @@ function checkvalidation(addtype = 0) {
                         new PNotify({ title: 'Party not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
-                error: function(xhr) {
-                    //alert(xhr.responseText);
-                },
+                error: function(xhr) {},
                 complete: function() {
                     $('.mask').hide();
                     $('#loader').hide();
