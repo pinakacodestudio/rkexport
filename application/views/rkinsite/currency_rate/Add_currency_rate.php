@@ -39,7 +39,7 @@
 						<div class="form-group" id="date_div">
 							<label for="date" class="col-md-4 control-label">Date <span class="mandatoryfield">*</span></label>
 							<div class="col-md-6">
-								<input id="date" name="date"  type="text" class="form-control col-sm-6" value="<?php if(isset($currencydata)){ echo $this->general_model->displaydate($currencydata['date']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" >
+								<input id="date" name="date"  type="text" class="form-control col-sm-6" value="<?php if(isset($currencydata)){ echo $this->general_model->displaydate($currencydata['date']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
 							</div>
 						</div>
 

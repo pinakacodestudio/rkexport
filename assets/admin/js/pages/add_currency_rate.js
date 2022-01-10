@@ -1,26 +1,23 @@
-$('#date').datepicker({
-    todayHighlight: true,
-    format: 'dd/mm/yyyy',
-    orientation: 'top',
-    autoclose: true,
-    todayBtn: "linked"
+$(document).ready(function() {
+    $('#date').datepicker({
+        todayHighlight: true,
+        format: 'dd/mm/yyyy',
+        orientation: 'top',
+        autoclose: true,
+        todayBtn: "linked"
+    });
+
 });
-$('#anniversarydate').datepicker({
-    todayHighlight: true,
-    format: 'dd/mm/yyyy',
-    orientation: 'top',
-    autoclose: true,
-    todayBtn: "linked"
-});
+
 $("#old_receipt_div").hide();
 
 $('#remove').click(function() {
     $('#removeoldreceipt').val('1');
 });
 
-$('body').on('focus', ".date", function() {
-    $(this).datepicker();
-});
+// $('body').on('focus', ".date", function() {
+//     $(this).datepicker();
+// });
 
 function resetdata() {
 
@@ -42,8 +39,9 @@ function checkvalidation(addtype = 0) {
 
     var currency = $('#currency').val().trim();
     var value = $('#value').val().trim();
+    var date = $('#date').val().trim();
 
-    var isvalidcurrency = isvalidvalue = 0;
+    var isvalidcurrency = isvalidvalue = isvaliddate = 0;
 
     PNotify.removeAll();
 
@@ -63,8 +61,16 @@ function checkvalidation(addtype = 0) {
         $("#value_div").removeClass("has-error is-focused");
         isvalidvalue = 1;
     }
+    if (date == '') {
+        $("#date_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please enter Date !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        isvaliddate = 0;
+    } else {
+        $("#date_div").removeClass("has-error is-focused");
+        isvaliddate = 1;
+    }
 
-    if (isvalidcurrency == 1 && isvalidvalue == 1) {
+    if (isvalidcurrency == 1 && isvalidvalue == 1 && isvaliddate == 1) {
 
         var formData = new FormData($('#addcurrency')[0]);
         if (ACTION == 0) {
