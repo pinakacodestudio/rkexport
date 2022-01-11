@@ -173,7 +173,7 @@ class Category_model extends Common_model {
 			$memberspecificproduct = (!empty($channeldata['memberspecificproduct']))?$channeldata['memberspecificproduct']:0;
 			$currentsellerid = (!empty($channeldata['currentsellerid']))?$channeldata['currentsellerid']:0;
 		}
-		$this->readdb->select('pc1.id,pc1.name,DATE_FORMAT(pc1.createddate, "%d/%m/%Y %H:%i:%s") as date,pc1.status,pc1.name as maincategoryname,pc1.priority,pc1.addedby,pc1.usertype');
+		$this->readdb->select('pc1.id,pc1.name,DATE_FORMAT(pc1.createddate, "%d/%m/%Y %H:%i:%s") as date,pc1.status,pc1.name as maincategoryname,pc1.priority,pc1.addedby,pc1.usertype,pc1.createddate');
 		$this->readdb->from($this->_table." as pc1");
 		$this->readdb->join(tbl_product." as p","p.categoryid=pc1.id","LEFT");
 		$this->readdb->where("(pc1.maincategoryid='".$maincategoryid."' OR '".$maincategoryid."'='')");

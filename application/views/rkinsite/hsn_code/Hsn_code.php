@@ -36,6 +36,7 @@
                       <th class="text-right width8">SGST (%)</th>
                       <th class="text-right width8">CGST (%)</th>
                       <th>Description</th>
+                      <th class="width15">Entry Date</th>
                       <th class="width15">Action</th>
                       <th class="width5">
                         <div class="checkbox">

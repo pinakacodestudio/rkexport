@@ -51,6 +51,7 @@ class Payment_type extends Admin_Controller {
             
         	$row[] = ++$counter;
             $row[] = $datarow->paymenttype;
+            $row[] = $this->general_model->displaydatetime($datarow->createddate);
             $row[] = $actions;
             $row[] = $checkbox;
             $data[] = $row;

@@ -2,7 +2,7 @@ var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
-birthyear = today.getFullYear() - 18;
+birthyear = today.getFullYear() - 15;
 
 today = dd + '/' + mm + '/' + yyyy;
 dateofbirth = dd + '/' + mm + '/' + birthyear;
@@ -50,6 +50,7 @@ $(document).ready(function() {
     }
 
     function getcity() {
+
         if (edit_cityid) {
             var uurl = base_url + "rkinsite/Party/getcity";
             $.ajax({
@@ -65,7 +66,7 @@ $(document).ready(function() {
                     $('#cityid').html(option);
                     $(".selectpicker").selectpicker("refresh");
                     $('#cityid').val(edit_cityid).trigger('change');
-                    
+                  
                 }
             });
         }
@@ -145,34 +146,32 @@ $(document).ready(function() {
 
     $('#countryid').on('change', function(e) {
 
-        $('#provinceid')
-            .find('option')
-            .remove()
-            .end()
-            .append('<option value="">Select Province</option>')
-            .val('0');
-        $('#cityid')
-            .find('option')
-            .remove()
-            .end()
-            .append('<option value="">Select City</option>')
-            .val('0');
-        $('#provinceid').selectpicker('refresh');
-        $('#cityid').selectpicker('refresh');
-        getprovince(this.value);
+        // $('#provinceid')
+        //     .find('option')
+        //     .remove()
+        //     .end()
+        //     .append('<option value="">Select Province</option>')
+        //     .val('0');
+        // $('#cityid')
+        //     .find('option')
+        //     .remove()
+        //     .end()
+        //     .append('<option value="">Select City</option>')
+        //     .val('0');
+        // $('#provinceid').selectpicker('refresh');
+        // $('#cityid').selectpicker('refresh');
+        // getprovince(this.value);
     });
     $('#provinceid').on('change', function(e) {
-
-        $('#cityid')
-            .find('option')
-            .remove()
-            .end()
-            .append('<option value="">Select City</option>')
-            .val('0');
-        $('#cityid').selectpicker('refresh');
-        getcity(this.value);
+        // $('#cityid')
+        //     .find('option')
+        //     .remove()
+        //     .end()
+        //     .append('<option value="">Select City</option>')
+        //     .val('0');
+        // $('#cityid').selectpicker('refresh');
+        // getcity(this.value);
     });
-
     $('.fromdate,.duedate').datepicker({
         todayHighlight: true,
         format: 'dd/mm/yyyy',
@@ -180,7 +179,6 @@ $(document).ready(function() {
         orientation: "top left",
         clearBtn: true,
     });
-
     $('#birthdate').datepicker({
         todayHighlight: true,
         format: 'dd/mm/yyyy',
@@ -293,6 +291,7 @@ function resetdata() {
     $("#address_div").removeClass("has-error is-focused");
     $("#password_div").removeClass("has-error is-focused");
     $("#employeerole_div").removeClass("has-error is-focused");
+    $("#partycode_div").removeClass("has-error is-focused");
 
     if (ACTION == 1) {
         $('#websitename').focus();
@@ -331,9 +330,9 @@ function checkvalidation(addtype = 0) {
 
     var websitename = $("#websitename").val().trim();
     var companyid = $("#companyid").val().trim();
+    var partycode = $("#partycode").val().trim();
     //alert(companyid);
-    var isvalidwebsitename = isvalidcompanyid = isvalidgst = isvalidpartycode = isvalidpan = isvalidemail = isvalidcontactno = isvalidpartytypeid = isvalidaddress = isvalidcountryid = isvalidstateid = isvalidcityid = isvalidbillingaddress = isvalidshippingaddress = isvalidcourieraddress = isvalidfirstname = isvalidlastname = isvalidbirthdate = isvalidanniversarydate = 0;
-
+    var isvalidwebsitename = isvalidcompanyid = isvalidgst = isvalidpartycode = isvalidpan = isvalidemail = isvalidcontactno = isvalidpartytypeid = isvalidaddress = isvalidcountryid = isvalidstateid = isvalidcityid = isvalidbillingaddress = isvalidshippingaddress = isvalidcourieraddress = isvalidfirstname = isvalidlastname = isvalidbirthdate = isvalidanniversarydate = isvalidpartycode = 0;
     var isvalidwebsitename = 1;
 
     PNotify.removeAll();
@@ -353,6 +352,14 @@ function checkvalidation(addtype = 0) {
     } else {
         $("#companyid_div").removeClass("has-error is-focused");
         isvalidcompanyid = 1;
+    }
+
+    if (partycord == '' ) {
+        $("#partycode_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please Select Party Cord!', styling: 'fontawesome', delay: '3000', type: 'error' });
+    } else {
+        $("#partycode_div").removeClass("has-error is-focused");
+        isvalidpartycode = 1;
     }
 
     if (gst == '') {

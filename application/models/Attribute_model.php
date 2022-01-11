@@ -54,7 +54,7 @@ class Attribute_model extends Common_model {
 		
 		
 		//echo $ADMINUSERTYPE;exit;
-		$this->readdb->select("DISTINCT(a.id),IFNULL(variantname,'') as variantname,a.priority,a.addedby,a.usertype");
+		$this->readdb->select("DISTINCT(a.id),IFNULL(variantname,'') as variantname,a.priority,a.addedby,a.usertype,a.createddate");
 		$this->readdb->from($this->_table." as a");
 		
 		if($MEMBERID!=0 && channel_memberspecificproduct==1){

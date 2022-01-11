@@ -34,6 +34,7 @@
                     <tr>            
                       <th class="width8">Sr.No.</th>
                       <th>Attribute</th>
+                      <th class="width12">Entry Date</th>
                       <th class="width12">Action</th>
                       <th class="width5">
                         <div class="checkbox">

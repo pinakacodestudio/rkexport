@@ -99,12 +99,12 @@ class User extends Admin_Controller {
 		$designationid = (isset($PostData['designationid']))?$PostData['designationid']:0;
 		$workforchannelid = (!empty($PostData['workforchannelid']))?implode(",",$PostData['workforchannelid']):"";
 		$userroleid = trim($PostData['userroleid']);
-		$partycord = trim($PostData['partycord']);
+		$partycode = trim($PostData['partycode']);
 		$reportingto=$PostData['reportingto'];
 
 		$gender = trim($PostData['gender']);
 		$branchid = trim($PostData['branchid']);
-		$partycord = trim($PostData['partycord']);
+		$partycode = trim($PostData['partycode']);
 		$status = trim($PostData['status']);
 		$address = trim($PostData['address']);
 		$cityid = trim($PostData['cityid']);
@@ -189,7 +189,7 @@ class User extends Admin_Controller {
 								"status" => $status,
 								"address" => $address,
 								"cityid" => $cityid,
-								"partycord" => $partycord,
+								"partycode" => $partycode,
 								"branchid" => $branchid,
 								"countryid" => $countryid,
 								"stateid" => $stateid,
@@ -221,6 +221,7 @@ class User extends Admin_Controller {
 		$this->viewData['module'] = "user/Add_user";
 		$this->viewData['action'] = "1";
 
+		
 		$this->viewData['userdata'] = $this->User->getUserDataByID($id);
 
 		$ADMINID = $this->session->userdata(base_url().'ADMINID');
@@ -291,7 +292,7 @@ class User extends Admin_Controller {
 		$workforchannelid = (!empty($PostData['workforchannelid']))?implode(",",$PostData['workforchannelid']):"";
 		$reportingto=trim($PostData['reportingto']);
 		$gender = trim($PostData['gender']);
-		$partycord = trim($PostData['partycord']);
+		$partycode = trim($PostData['partycode']);
 		$status = trim($PostData['status']);
 		$address = trim($PostData['address']);
 		$cityid = trim($PostData['cityid']);
@@ -383,7 +384,7 @@ class User extends Admin_Controller {
 								"status" => $status,
 								"address" => $address,
 								"cityid" => $cityid,
-								"partycord" => $partycord,
+								"partycode" => $partycode,
 								"branchid" => $branchid,
 								"countryid" => $countryid,
 								"stateid" => $stateid,

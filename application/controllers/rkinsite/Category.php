@@ -69,6 +69,7 @@ class Category extends Admin_Controller {
             $row['DT_RowId'] = $datarow->id;
             $row[] = ++$counter;
             $row[] = $datarow->name; 
+            $row[] = $this->general_model->displaydatetime($datarow->createddate);
             $row[] = $actions;
             $row[] = $checkbox;
             $data[] = $row;

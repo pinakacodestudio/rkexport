@@ -58,6 +58,7 @@ class Commission extends Admin_Controller
             $row[] = ++$counter;
             $row[] = $datarow->commission;
             $row[] = $this->general_model->displaydate($datarow->date);
+            $row[] = $this->general_model->displaydatetime($datarow->createddate);
             $row[] = $actions;
             $row[] = $checkbox; 
             $data[] = $row;

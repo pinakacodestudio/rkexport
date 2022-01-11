@@ -54,7 +54,7 @@ class Variant_model extends Common_model {
 
 		$attributeid = (isset($_REQUEST['attributeid']))?$_REQUEST['attributeid']:0;
 		
-		$this->readdb->select("DISTINCT(v.id),IFNULL(variantname,'') as variantname,value,v.priority,v.usertype,v.addedby");
+		$this->readdb->select("DISTINCT(v.id),IFNULL(variantname,'') as variantname,value,v.priority,v.usertype,v.addedby,v.createddate");
 		$this->readdb->from($this->_table." as v");
 		$this->readdb->join(tbl_attribute." as a","a.id=v.attributeid AND (a.id=".$attributeid." OR ".$attributeid."=0)");
 		

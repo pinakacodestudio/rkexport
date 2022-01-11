@@ -182,10 +182,10 @@ class User_model extends Common_model {
 
 
 	function getUserDataByID($ID){
-		$query = $this->readdb->select("id,name,image,email,mobileno,password,status,roleid,reportingto,newtransferinquiry,followupstatuschange,inquirystatuschange,subemployeenotification,myeodstatus,teameodstatus,eodmailsending,inquiryreportmailsending,sidebarcount,designationid,workforchannelid,status,address,cityid,partycord,branchid,gender,countryid,stateid,departmentid,joindate,birthdate,anniversarydate")
-							->from($this->_table)
-							->where("id='".$ID."'")
-							->get();
+		$query = $this->readdb->select("id,name,image,email,mobileno,password,status,roleid,reportingto,newtransferinquiry,followupstatuschange,inquirystatuschange,subemployeenotification,myeodstatus,teameodstatus,eodmailsending,inquiryreportmailsending,sidebarcount,designationid,workforchannelid,status,address,cityid,partycode,branchid,gender,countryid,stateid,departmentid,joindate,birthdate,anniversarydate")
+		->from($this->_table)
+		->where("id='".$ID."'")
+		->get();
 							
 		if ($query->num_rows() == 1) {
 			return $query->row_array();

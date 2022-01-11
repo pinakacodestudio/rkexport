@@ -27,6 +27,7 @@
                     <tr>
                       <th class="width8">Sr. No.</th>
                       <th>Product Name</th> 
+                      <th class="width12">Entry Date</th>
                       <th class="width12">Actions</th>
                       <th class="width8">
                         <div class="checkbox">

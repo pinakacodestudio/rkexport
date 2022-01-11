@@ -53,6 +53,7 @@ class Company extends Admin_Controller
             $row[] = ++$counter;
             $row[] = $datarow->companyname;
             $row[] = $datarow->email;
+            $row[] = $this->general_model->displaydatetime($datarow->createddate);
             $row[] = $actions;
             $row[] = $checkbox; 
             $data[] = $row;

@@ -47,22 +47,23 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="focusedinput" class="col-md-4 col-sm-3 col-xs-1 control-label"></label>
-                      <div class="col-md-8 col-xs-11 col-xs-offset-1 col-sm-8">
-                        <?php if(!empty($partytypedata)){ ?>
-                          <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="UPDATE" class="btn btn-primary btn-raised">
-                          <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & NEW" class="btn btn-primary btn-raised">
-                          <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
-                        <?php }else{ ?>
-                          <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="ADD" class="btn btn-primary btn-raised">
-                          <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="ADD & NEW" class="btn btn-primary btn-raised">
-                          <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
-                        <?php } ?>
-                        <a class="<?=cancellink_class;?>" href="<?=ADMIN_URL.$this->session->userdata(base_url().'submenuurl')?>" title=<?=cancellink_title?>><?=cancellink_text?></a>
+
+                   
+                      <div class="form-group">
+                        <label for="focusedinput" class="col-sm-4 control-label"></label>
+                        <div class="col-sm-6">
+                          <?php if(isset($additionalrightsrow)){ ?>
+                            <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="UPDATE" class="btn btn-primary btn-raised">
+                            <input type="reset" name="reset" value="RESET" class="btn btn-primary btn-raised" onclick="resetdata()">
+                          <?php }else{ ?>
+                            <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="ADD" class="btn btn-primary btn-raised">
+                            <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="ADD & ADD NEW" class="btn btn-primary btn-raised">
+                            <input type="reset" name="reset" value="RESET" class="btn btn-primary btn-raised" onclick="resetdata()">
+                          <?php } ?>
+                          <a class="<?=cancellink_class;?>" href="<?=ADMIN_URL.$this->session->userdata(base_url().'submenuurl')?>" title=<?=cancellink_title?>><?=cancellink_text?></a>
+                        </div>
                       </div>
-                    </div>
-                  </div>
+
                 </form>
               </div>
             </div>

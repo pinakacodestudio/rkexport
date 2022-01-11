@@ -33,7 +33,8 @@
                   <tr>
                     <th>Sr. No.</th>
                     <th>Category Name</th>
-                    <th>Actions</th>
+                    <th class="width12">Entry Date</th>
+                    <th class="width12">Actions</th>
                     <th class="width5">
                       <div class="checkbox">
                         <input id="deletecheckall" onchange="allchecked()" type="checkbox" value="all">

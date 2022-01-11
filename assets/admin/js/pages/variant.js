@@ -40,6 +40,7 @@ $(document).ready(function() {
             { "data": "row" },
             { "data": "value" },
             { "data": "variantname" },
+            { "data": "createddate" },
             { "data": "action" },
             { "data": "checkbox" },
         ]

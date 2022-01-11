@@ -34,11 +34,11 @@
 										<input id="name" class="form-control" name="name" value="<?php if(isset($userdata)){ echo $userdata['name']; } ?>" type="text" tabindex="1" onkeypress="return onlyAlphabets(event)">
 									</div>
 								</div>
-						
-								<div class="form-group" id="partycord_div">
+		
+								<div class="form-group" id="partycode_div">
 									<div class="col-md-12">
-										<label class="control-label" for="partycord">Party Cord<span class="mandatoryfield">*</span></label>
-										<input id="partycord" class="form-control" name="partycord" value="<?php if(isset($userdata)){ echo $userdata['partycord']; } ?>" type="text" tabindex="1" onkeypress="return onlyAlphabets(event)">
+										<label class="control-label" for="partycode">Party Cord<span class="mandatoryfield">*</span></label>
+										<input id="partycode" class="form-control" name="partycode" value="<?php if(isset($userdata)){ echo $userdata['partycode']; } ?>" type="text" tabindex="1" onkeypress="return onlyAlphabets(event)">
 									</div>
 								</div>
 								<div class="form-group" id="email_div">
@@ -86,18 +86,14 @@
 										    <input id="joindate" name="joindate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['joindate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
 									</div>
 								</div>
-								<div class="form-group" id="date_div">
+								<div class="form-group" id="address_div">
 									<div class="col-sm-12">
-										<label class="control-label" for="date">Birth Date </label>
-										    <input id="birthdate" name="birthdate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['birthdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
+										<label>Address</label>
+										<textarea class="form-control" id="address" name="address" rows="3"><?php if(isset($userdata)){ echo $userdata['address']; } ?></textarea>
 									</div>
 								</div>
-								<div class="form-group" id="date_div">
-									<div class="col-sm-12">
-										<label class="control-label" for="anniversarydate">Anniversary Date </label>
-										    <input id="anniversarydate" name="anniversarydate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['anniversarydate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
-									</div>
-								</div>
+								
+								
 							</div>
 							<div class="col-md-4">
 								<div class="form-group" id="userrole_div">
@@ -127,14 +123,14 @@
 									<div class="col-sm-12">
 										<label class="control-label">Gender<span class="mandatoryfield">*</span></label><br>
 										<label class="radio-inline">
-										<input type="radio" name="gender" value="1" <?php if(isset($userdata['gender'])){ if($userdata['gender']==1){echo 'checked';}} ?> >Man
+										<input type="radio" name="gender" value="1" <?php if(isset($userdata['gender'])){ if($userdata['gender']==1){echo 'checked';}} ?> >Male
 										</label>
 										<label class="radio-inline">
-										<input type="radio" name="gender" value="0" <?php if(isset($userdata['gender'])){ if($userdata['gender']!=1){echo 'checked';}} ?>>Woman
+										<input type="radio" name="gender" value="0" <?php if(isset($userdata['gender'])){ if($userdata['gender']!=1){echo 'checked';}} ?>>Female
 										</label>
 									</div>
 								</div>
-								<?php //if(!isset($userdata)){ ?>
+							
 								<div class="form-group" id="password_div">
 									<div class="col-md-12">
 										<label class="control-label" for="password">Password <span class="mandatoryfield">*</span></label>
@@ -148,7 +144,7 @@
 										</div>
 									</div>
 								</div>
-								<?php 	//} 	exit;?>
+								
 								<div class="form-group" id="designationid_div">
 									<div class="col-md-12">
 										<label class="control-label" for="designationid">Designation </label>
@@ -173,53 +169,14 @@
 										</select>  
 									</div>
 								</div>
-								<div class="form-group" id="City_div">
+								<div class="form-group" id="date_div">
 									<div class="col-sm-12">
-										<label class="control-label" for="city">City </label>
-										<select class="form-control selectpicker" id="city" name="cityid" data-live-search="true" data-select-on-tab="true" data-size="5">
-											<option value="0">Select City</option>
-											<?php foreach ($Citydata as $cityrow) { ?>        
-												<option value="<?php echo $cityrow['id'];?>" <?php if(!empty($userdata))
-												{if($userdata['cityid']==$cityrow['id']){echo "selected";}} ?> >
-												<?php echo ucwords($cityrow['name']);?></option>
-											<?php } ?>
-										</select>  
+										<label class="control-label" for="date">Birth Date </label>
+										    <input id="birthdate" name="birthdate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['birthdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
 									</div>
 								</div>
+							
 								
-								
-								<div class="form-group" id="State_div">
-									<div class="col-sm-12">
-										<label class="control-label" for="State">State </label>
-										<select class="form-control selectpicker" id="State" name="stateid" data-live-search="true" data-select-on-tab="true" data-size="5">
-											<option value="0">Select State</option>
-											<?php foreach ($statedata as $stateidrow) { ?>        
-												<option value="<?php echo $stateidrow['id'];?>" <?php if(!empty($userdata))
-												{if($userdata['stateid']==$stateidrow['id']){echo "selected";}} ?> >
-												<?php echo ucwords($stateidrow['name']);?></option>
-											<?php } ?>
-										</select>  
-									</div>
-								</div>
-								<div class="form-group" id="Country_div">
-									<div class="col-sm-12">
-										<label class="control-label" for="Country">Country</label>
-										<select class="form-control selectpicker" id="Country" name="countryid" data-live-search="true" data-select-on-tab="true" data-size="5">
-											<option value="0">Select Country</option>
-											<?php foreach ($Countrydata as $Countryrow) { ?>        
-												<option value="<?php echo $Countryrow['id'];?>" <?php if(!empty($userdata))
-												{if($userdata['countryid']==$Countryrow['id']){echo "selected";}} ?> >
-												<?php echo ucwords($Countryrow['name']);?></option>
-											<?php } ?>
-										</select>  
-									</div>
-								</div>
-								<div class="form-group" id="address_div">
-									<div class="col-sm-12">
-										<label>Address</label>
-										<textarea class="form-control" id="address" name="address" rows="3"><?php if(isset($userdata)){ echo $userdata['address']; } ?></textarea>
-									</div>
-								</div>
 								<!-- <div class="form-group mt-xl">
 									<label for="focusedinput" class="col-md-4 control-label">Activate</label>
 									<div class="col-md-8">
@@ -239,38 +196,83 @@
 								</div> -->
 							</div>
 							<div class="col-md-4">
-								<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Profile Image</label>
-									<div class="col-md-8 mt-md">
-										<input type="hidden" name="oldprofileimage" id="oldprofileimage" value="<?php if(isset($userdata)){ echo $userdata['image']; }?>">
-										<input type="hidden" name="removeoldImage" id="removeoldImage" value="0">
-										<?php if(isset($userdata) && $userdata['image']!=''){ ?>
-		            						<div class="imageupload" id="profileimage">
-								                <div class="file-tab"><img src="<?php echo PROFILE.$userdata['image']; ?>" alt="Image preview" class="thumbnail" style="max-width: 150px; max-height: 150px">
-								                    <label id="profileimagelabel" class="btn btn-sm btn-primary btn-raised btn-file">
-								                        <span id="profileimagebtn">Change</span>
-								                        <!-- The file is stored here. -->
-								                        <input type="file" name="image" id="image" accept=".bmp,.bm,.gif,.ico,.jfif,.jfif-tbnl,.jpe,.jpeg,.jpg,.pbm,.png,.svf,.tif,.tiff,.wbmp,.x-png">
-								                    </label>
-								                    <button type="button" class="btn btn-sm btn-danger btn-raised" id="remove" style="display: inline-block;">Remove</button>
-								                </div>
-		            						</div>
-		            					<?php }else{ ?>
-		            						<!-- <script type="text/javascript"> var ACTION = 0;</script> -->
-		            						<div class="imageupload">
-								                <div class="file-tab">
-								                	<img src="" alt="Image preview" class="thumbnail" style="max-width: 150px; max-height: 150px;">
-								                    <label id="logolabel" class="btn btn-sm btn-primary btn-raised btn-file">
-								                        <span id="profileimagebtn">Select Image</span>
-								                        <input type="file" name="image" id="image" accept=".bmp,.bm,.gif,.ico,.jfif,.jfif-tbnl,.jpe,.jpeg,.jpg,.pbm,.png,.svf,.tif,.tiff,.wbmp,.x-png">
-								                    </label>
-								                    <button type="button" class="btn btn-sm btn-danger btn-raised" id="remove">Remove</button>
-								                </div>
-		            						</div>
-		            					<?php } ?>
+									<div class="form-group">
+										<label for="focusedinput" class="col-md-4 control-label">Profile Image</label>
+										<div class="col-md-8 mt-md">
+											<input type="hidden" name="oldprofileimage" id="oldprofileimage" value="<?php if(isset($userdata)){ echo $userdata['image']; }?>">
+											<input type="hidden" name="removeoldImage" id="removeoldImage" value="0">
+											<?php if(isset($userdata) && $userdata['image']!=''){ ?>
+												<div class="imageupload" id="profileimage">
+													<div class="file-tab"><img src="<?php echo PROFILE.$userdata['image']; ?>" alt="Image preview" class="thumbnail" style="max-width: 150px; max-height: 150px">
+														<label id="profileimagelabel" class="btn btn-sm btn-primary btn-raised btn-file">
+															<span id="profileimagebtn">Change</span>
+															<!-- The file is stored here. -->
+															<input type="file" name="image" id="image" accept=".bmp,.bm,.gif,.ico,.jfif,.jfif-tbnl,.jpe,.jpeg,.jpg,.pbm,.png,.svf,.tif,.tiff,.wbmp,.x-png">
+														</label>
+														<button type="button" class="btn btn-sm btn-danger btn-raised" id="remove" style="display: inline-block;">Remove</button>
+													</div>
+												</div>
+											<?php }else{ ?>
+												<!-- <script type="text/javascript"> var ACTION = 0;</script> -->
+												<div class="imageupload">
+													<div class="file-tab">
+														<img src="" alt="Image preview" class="thumbnail" style="max-width: 150px; max-height: 150px;">
+														<label id="logolabel" class="btn btn-sm btn-primary btn-raised btn-file">
+															<span id="profileimagebtn">Select Image</span>
+															<input type="file" name="image" id="image" accept=".bmp,.bm,.gif,.ico,.jfif,.jfif-tbnl,.jpe,.jpeg,.jpg,.pbm,.png,.svf,.tif,.tiff,.wbmp,.x-png">
+														</label>
+														<button type="button" class="btn btn-sm btn-danger btn-raised" id="remove">Remove</button>
+													</div>
+												</div>
+											<?php } ?>
+										</div>
+									</div>
+								    <div class="form-group" id="Country_div">
+										<div class="col-sm-12">
+											<label class="control-label" for="Country">Country</label>
+											<select class="form-control selectpicker" id="Country" name="countryid" data-live-search="true" data-select-on-tab="true" data-size="5">
+												<option value="0">Select Country</option>
+												<?php foreach ($Countrydata as $Countryrow) { ?>        
+													<option value="<?php echo $Countryrow['id'];?>" <?php if(!empty($userdata))
+													{if($userdata['countryid']==$Countryrow['id']){echo "selected";}} ?> >
+													<?php echo ucwords($Countryrow['name']);?></option>
+												<?php } ?>
+											</select>  
+										</div>
+									</div>
+									<div class="form-group" id="State_div">
+										<div class="col-sm-12">
+											<label class="control-label" for="State">State </label>
+											<select class="form-control selectpicker" id="State" name="stateid" data-live-search="true" data-select-on-tab="true" data-size="5">
+												<option value="0">Select State</option>
+												<?php foreach ($statedata as $stateidrow) { ?>        
+													<option value="<?php echo $stateidrow['id'];?>" <?php if(!empty($userdata))
+													{if($userdata['stateid']==$stateidrow['id']){echo "selected";}} ?> >
+													<?php echo ucwords($stateidrow['name']);?></option>
+												<?php } ?>
+											</select>  
+										</div>
+									</div>
+									<div class="form-group" id="City_div">
+										<div class="col-sm-12">
+											<label class="control-label" for="city">City </label>
+											<select class="form-control selectpicker" id="city" name="cityid" data-live-search="true" data-select-on-tab="true" data-size="5">
+												<option value="0">Select City</option>
+												<?php foreach ($Citydata as $cityrow) { ?>        
+													<option value="<?php echo $cityrow['id'];?>" <?php if(!empty($userdata))
+													{if($userdata['cityid']==$cityrow['id']){echo "selected";}} ?> >
+													<?php echo ucwords($cityrow['name']);?></option>
+												<?php } ?>
+											</select>  
+										</div>
+									</div>
+									<div class="form-group" id="date_div">
+									<div class="col-sm-12">
+										<label class="control-label" for="anniversarydate">Anniversary Date </label>
+										    <input id="anniversarydate" name="anniversarydate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['anniversarydate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
 									</div>
 								</div>
-								
+									
 							</div>
 						</div>
 						<?php if(CRM==1){ ?>

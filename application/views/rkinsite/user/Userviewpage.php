@@ -97,7 +97,7 @@
                     Party Cord
                     </div>
                     <div class="col-md-3 br2">
-                    <?=$list['partycord'];?>
+                    <?=$list['partycode'];?>
                     </div>
                     <div class="col-md-3">
                     State

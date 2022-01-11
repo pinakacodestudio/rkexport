@@ -62,6 +62,7 @@ class Extra_charges extends Admin_Controller {
             $row[] = ($datarow->amounttype==1)?"Amount":"Percentage";
             $row[] = number_format($datarow->defaultamount,2,'.',',');
             $row[] = $datarow->chargetypename;
+            $row[] = $this->general_model->displaydatetime($datarow->createddate);
             $row[] = $Action;
             $row[] = $Checkbox;
 			

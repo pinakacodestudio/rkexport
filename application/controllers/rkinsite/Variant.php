@@ -46,7 +46,7 @@ class Variant extends Admin_Controller {
 			if(strpos($this->viewData['submenuvisibility']['submenudelete'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){                
                 $Action.='<a class="'.delete_class.'" href="javascript:void(0)" title="'.delete_title.'" onclick=deleterow('.$Variant->id.',"'.ADMIN_URL.'variant/check-variant-use","variant","'.ADMIN_URL.'variant/delete-mul-variant","varianttable") >'.delete_text.'</a>';
             }
-			
+			$row['createddate'] = $this->general_model->displaydatetime($Variant->createddate);
 			$row['action'] = $Action;
 			$row['checkbox'] = '<span style="display: none;">'.$Variant->priority.'</span><div class="checkbox">
 								<input id="deletecheck'.$Variant->id.'" onchange="singlecheck(this.id)" type="checkbox" value="'.$Variant->id.'" name="deletecheck'.$Variant->id.'" class="checkradios">

@@ -182,6 +182,7 @@ class  Product extends Admin_Controller
             $row[] = $datarow->brandname;
             $row[] = $price;
             $row[] = "<span class='pull-right'>" . $datarow->priority . "</span>";
+            $row[] = $this->general_model->displaydatetime($datarow->createddate);
             $row[] = $actions;
             $row[] = $checkbox;
             

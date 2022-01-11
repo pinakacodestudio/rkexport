@@ -49,6 +49,7 @@
 								<a class="<?=cancellink_class;?>" href="<?=ADMIN_URL.$this->session->userdata(base_url().'submenuurl')?>" title=<?=cancellink_title?>><?=cancellink_text?></a>
 							</div>
 						</div>
+						
 					</form>
 				</div>
 				</div>

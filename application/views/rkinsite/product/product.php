@@ -106,6 +106,7 @@
                       <th>Brand</th>  
                       <th class="text-right">Price (<?=CURRENCY_CODE?>)</th>
                       <th class="width8 text-right">Priority</th>
+                      <th class="width8 text-right">Entry Date</th>
                       <th class="width8">Actions</th>
                       <th class="width5">
                         <div class="checkbox">

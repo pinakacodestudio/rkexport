@@ -31,7 +31,8 @@
                       <th>Currency</th>
                       <th>Value</th>
                       <th>Date</th>
-                      <th class="width15">Action</th>
+                      <th class="width15">Entry Date</th>
+                      <th class="width12">Action</th>
                       <th class="width5">
                         <div class="checkbox">
                           <input id="deletecheckall" onchange="allchecked()" type="checkbox" value="all">

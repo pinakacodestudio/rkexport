@@ -36,6 +36,7 @@ class Attribute extends Admin_Controller {
 			$row['DT_RowId'] = $Attribute->id;
 			$row['row'] = ++$counter;
 			$row['variantname'] = $Attribute->variantname;
+			$row['createddate'] = $this->general_model->displaydatetime($Attribute->createddate);
 			
 			$Action='';
 

@@ -63,6 +63,7 @@ class Hsn_code extends Admin_Controller {
             $row[] = "<span class='pull-right'>".number_format($hsncode->integratedtax/2,2,'.',',')."</span>";
             $row[] = "<span class='pull-right'>".number_format($hsncode->integratedtax/2,2,'.',',')."</span>";
             $row[] = ucfirst($hsncode->description);
+            $row[] = $this->general_model->displaydatetime($hsncode->createddate);
             $row[] = $Action;
             $row[] = $Checkbox;
 			

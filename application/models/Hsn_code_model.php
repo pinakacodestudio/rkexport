@@ -64,8 +64,7 @@ class Hsn_code_model extends Common_model {
 		$channelid = (isset($_REQUEST['channelid']))?$_REQUEST['channelid']:'';
 		$memberid = isset($_REQUEST['memberid'])?$_REQUEST['memberid']:'0';
 
-		$this->readdb->select("h.id,h.channelid,h.memberid,h.description,h.hsncode,h.integratedtax,h.status,h.type
-					");
+		$this->readdb->select("h.id,h.channelid,h.memberid,h.description,h.hsncode,h.integratedtax,h.status,h.type,h.createddate");
 		
 		$this->readdb->from($this->_table." as h");
 		

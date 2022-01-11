@@ -36,6 +36,7 @@
                       <th>Amount Type</th>
                       <th class="text-right">Default Amount</th>
                       <th>Type</th>
+                      <th class="width8 text-right">Entry Date</th>
                       <th width="13%">Action</th>
                       <th class="width5">
                         <div class="checkbox">

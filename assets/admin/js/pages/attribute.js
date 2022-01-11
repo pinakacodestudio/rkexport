@@ -24,6 +24,7 @@ $(document).ready(function() {
         "columns": [
             { "data": "row" },
             { "data": "variantname" },
+            { "data": "createddate" },
             { "data": "action" },
             { "data": "checkbox" },
         ]

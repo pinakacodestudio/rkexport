@@ -33,7 +33,7 @@ class Extra_charges_model extends Common_model {
 		
 		$this->readdb->select("ec.id,ec.hsncodeid,ec.name,ec.amounttype,ec.defaultamount,ec.type,ec.status,
             IFNULL(CONCAT(h.hsncode,' (',h.integratedtax,'%)'),'-')  as hsncode,
-			ec.chargetype,
+			ec.chargetype,ec.createddate,
 			IF(ec.chargetype=0,'Overall','Pcs Wise') as chargetypename
         ");
 		$this->readdb->from($this->_table." as ec");
