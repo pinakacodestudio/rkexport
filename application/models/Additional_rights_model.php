@@ -8,7 +8,7 @@ class Additional_rights_model extends Common_model {
 	public $_where = array();
 	public $_except_fields = array();
 	public $_order = array('id' => 'DESC');
-	public $column_order = array(null, 'name','slug');
+	public $column_order = array(null, 'name','slug','createddate');
     public $column_search = array('name');
 	
 	function __construct() {

@@ -26,14 +26,14 @@
 						<div class="form-group" id="commission_div">
 							<label for="commission" class="col-sm-4 control-label">Commission Type <span class="mandatoryfield">*</span></label>
 							<div class="col-sm-6">
-								<input id="commission" type="text" name="commission" value="<?php if(!empty($commissiondata)){ echo $commissiondata['commission']; } ?>" class="form-control">
+								<input id="commission" onkeypress="return isNumber(event)" type="text" name="commission" value="<?php if(!empty($commissiondata)){ echo $commissiondata['commission']; } ?>" class="form-control">
 							</div>
 						</div>
 
 						<div class="form-group" id="date_div">
 							<label for="date" class="col-md-4 control-label">Date <span class="mandatoryfield">*</span></label>
 							<div class="col-md-6">
-								<input id="date" name="date"  type="text" class="form-control col-sm-6" value="<?php if(isset($commissiondata)){ echo $this->general_model->displaydate($commissiondata['date']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" >
+								<input id="date" name="date"  type="text" class="form-control col-sm-6" value="<?php if(isset($commissiondata)){ echo $this->general_model->displaydate($commissiondata['date']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
 							</div>
 						</div>
 

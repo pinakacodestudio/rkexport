@@ -42,9 +42,9 @@ class Unit_conversation extends Admin_Controller {
 
             if (in_array($rollid, $edit)) {
                 if ($datarow->status == 1) {
-                    $actions .= '<span id="span' . $datarow->id . '"><a href="javascript:void(0)" onclick="enabledisable(0,' . $datarow->id . ',\'' . ADMIN_URL . 'Unit_conversation/unit_enable_disable\',\'' . disable_title . '\',\'' . disable_class . '\',\'' . enable_class . '\',\'' . disable_title . '\',\'' . enable_title . '\',\'' . disable_text . '\',\'' . enable_text . '\')" class="' . disable_class . '" title="' . disable_title . '">' . stripslashes(disable_text) . '</a></span>';
+                    $actions .= '<span id="span' . $datarow->id . '"><a href="javascript:void(0)" onclick="enabledisable(0,' . $datarow->id . ',\'' . ADMIN_URL . 'Unit_conversation/unit_enable_disable\',\'' . disable_title . '\',\'' . disable_class . '\',\'' . enable_class . '\',\'' . disable_title . '\',\'' . enable_title . '\',\'' . disable_text . '\',\'' . enable_text . '\')" class="' . enable_class . '" title="' . enable_title . '">' . stripslashes(enable_text) . '</a></span>';
                 } else {
-                    $actions .= '<span id="span' . $datarow->id . '"><a href="javascript:void(0)" onclick="enabledisable(1,' . $datarow->id . ',\'' . ADMIN_URL . 'Unit_conversation/unit_enable_disable\',\'' . enable_title . '\',\'' . disable_class . '\',\'' . enable_class . '\',\'' . disable_title . '\',\'' . enable_title . '\',\'' . disable_text . '\',\'' . enable_text . '\')" class="' . enable_class . '" title="' . enable_title . '">' . stripslashes(enable_text) . '</a></span>';
+                    $actions .= '<span id="span' . $datarow->id . '"><a href="javascript:void(0)" onclick="enabledisable(1,' . $datarow->id . ',\'' . ADMIN_URL . 'Unit_conversation/unit_enable_disable\',\'' . enable_title  . '\',\'' . disable_class . '\',\'' . enable_class . '\',\'' . disable_title . '\',\'' . enable_title . '\',\'' . disable_text . '\',\'' . enable_text . '\')" class="' . disable_class . '" title="' . disable_title . '">' . stripslashes(disable_text) . '</a></span>';
                 }
             }
 

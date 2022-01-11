@@ -20,7 +20,7 @@
                   <?php
                     }if(strpos(trim($submenuvisibility['submenudelete']),$this->session->userdata[base_url().'ADMINUSERTYPE']) !== false){
                   ?>
-                  <a class="<?=deletebtn_class;?>" href="javascript:void(0)" onclick="checkmultipledelete('','Additional Rights','<?php echo ADMIN_URL; ?>payment-type/delete-mul-payment-type')" title=<?=deletebtn_title?>><?=deletebtn_text;?></a>
+                  <a class="<?=deletebtn_class;?>" href="javascript:void(0)" onclick="checkmultipledelete('','Payment Method','<?php echo ADMIN_URL; ?>payment-type/delete-mul-payment-type')" title=<?=deletebtn_title?>><?=deletebtn_text;?></a>
                   <?php } ?>
                 </div>
               </div>

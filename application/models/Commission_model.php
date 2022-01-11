@@ -8,8 +8,8 @@ class Commission_model extends Common_model {
 	public $_where = array();
 	public $_except_fields = array();
 	public $_order = array('id' => 'DESC');
-	public $column_order = array('id','commission');
-    public $column_search = array('commission');
+	public $column_order = array(null,'commission','date');
+    public $column_search = array('commission,date');
 	
 	function __construct() {
 		parent::__construct();
@@ -75,7 +75,7 @@ class Commission_model extends Common_model {
         
         if(isset($_POST['order'])) { // here order processing
             $this->readdb->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-           
+         
         }else if(isset($this->_order)) {
             $order = $this->_order;
             $this->readdb->order_by(key($order), $order[key($order)]);

@@ -57,7 +57,7 @@ class Currency_rate extends Admin_Controller
             $row[] = ++$counter;
             $row[] = $datarow->currency;
             $row[] = $datarow->value;
-            $row[] = $datarow->date;
+            $row[] = $this->general_model->displaydate($datarow->date);
             $row[] = $actions;
             $row[] = $checkbox;
             $data[] = $row;

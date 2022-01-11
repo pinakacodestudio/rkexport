@@ -12,7 +12,7 @@ $(document).ready(function() {
         "pageLength": 50,
         "columnDefs": [{
           'orderable': false,
-          'targets': [-1,-2]
+          'targets': [-1,-2,-3]
         }],
         drawCallback: function () {
           loadpopover();

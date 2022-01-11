@@ -32,7 +32,7 @@
 						<div class="form-group" id="value_div">
 							<label for="value" class="col-sm-4 control-label">Value <span class="mandatoryfield">*</span></label>
 							<div class="col-sm-6">
-								<input id="value" type="text" name="value" value="<?php if(!empty($currencydata)){ echo $currencydata['value']; } ?>" class="form-control">
+								<input id="value" onkeypress="return isNumber(event)" type="text" name="value" value="<?php if(!empty($currencydata)){ echo $currencydata['value']; } ?>" class="form-control">
 							</div>
 						</div>
 

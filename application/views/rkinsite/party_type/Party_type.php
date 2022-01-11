@@ -57,13 +57,15 @@
                             <a class="<?= edit_class; ?> m-n" href="<?= ADMIN_URL ?>party-type/edit-party-type/<?php echo $row['id']; ?>" title=<?= edit_title ?>><?= edit_text; ?></a>
                             <?php if ($row['status'] == 1) { ?>
                               <?php if ($row['id'] != 1 && $row['id'] != 2 && $row['id'] != 3) { ?>
-                                <span id="span<?= $row['id']; ?>"><a href="javascript:void(0)" onclick="enabledisable(0,<?= $row['id']; ?>,'<?= ADMIN_URL; ?>party-type/party-type-enable-disable','<?= disable_title ?>','<?= disable_class ?>','<?= enable_class ?>','<?= disable_title ?>','<?= enable_title ?>','<?= disable_text ?>','<?= enable_text ?>')" class="<?= disable_class ?> m-n" title="<?= disable_title ?>"><?= stripslashes(disable_text) ?></a></span>
+                                  <span id="span<?= $row['id']; ?>"><a href="javascript:void(0)" onclick="enabledisable(0,<?= $row['id']; ?>,'<?= ADMIN_URL; ?>party-type/party-type-enable-disable','<?=  disable_title ?>','<?= disable_class ?>','<?= enable_class ?>','<?= disable_title ?>','<?= enable_title ?>','<?= disable_text ?>','<?= enable_text ?>')" class="<?= enable_class ?> m-n" title="<?= enable_title ?>"><?= stripslashes(enable_text) ?></a></span>
+
                               <?php } else { ?>
-                                <span><a href="javascript:void(0)" class="btn btn-default btn-raised btn-sm m-n" title="<?= disable_title ?>"><?= stripslashes(disable_text) ?></a></span>
+                                <span><a href="javascript:void(0)" class="btn btn-default btn-raised btn-sm m-n" title="<?= disable_title ?>"><?= stripslashes(enable_text) ?></a></span>
                               <?php } ?>
                             <?php } else { ?>
-                              <span id="span<?= $row['id']; ?>"><a href="javascript:void(0)" onclick="enabledisable(1,<?= $row['id']; ?>,'<?= ADMIN_URL; ?>party-type/party-type-enable-disable','<?= enable_title ?>','<?= disable_class ?>','<?= enable_class ?>','<?= disable_title ?>','<?= enable_title ?>','<?= disable_text ?>','<?= enable_text ?>')" class="<?= enable_class ?> m-n" title="<?= enable_title ?>"><?= stripslashes(enable_text) ?></a></span>
-                            <?php } ?>
+
+                              <span id="span<?= $row['id']; ?>"><a href="javascript:void(0)" onclick="enabledisable(1,<?= $row['id']; ?>,'<?= ADMIN_URL; ?>party-type/party-type-enable-disable','<?=enable_title ?>','<?= disable_class ?>','<?= enable_class ?>','<?= disable_title ?>','<?= enable_title ?>','<?= disable_text ?>','<?= enable_text ?>')" class="<?= disable_class ?> m-n" title="<?= disable_title ?>"><?= stripslashes(disable_text) ?></a></span>
+                              <?php } ?>
 
                           <?php }
                           if (strpos($submenuvisibility['submenudelete'], ',' . $this->session->userdata[base_url() . 'ADMINUSERTYPE'] . ',') !== false) { ?>

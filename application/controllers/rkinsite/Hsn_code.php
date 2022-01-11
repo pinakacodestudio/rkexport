@@ -40,10 +40,12 @@ class Hsn_code extends Admin_Controller {
             
             if(strpos($this->viewData['submenuvisibility']['submenuedit'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){
                 if($hsncode->status==1){
-                    $Action .= '<span id="span'.$hsncode->id.'"><a href="javascript:void(0)" onclick="enabledisable(0,'.$hsncode->id.',\''.ADMIN_URL.'hsn-code/hsn-code-enable-disable\',\''.disable_title.'\',\''.disable_class.'\',\''.enable_class.'\',\''.disable_title.'\',\''.enable_title.'\',\''.disable_text.'\',\''.enable_text.'\')" class="'.disable_class.'" title="'.disable_title.'">'.stripslashes(disable_text).'</a></span>';
+                    $Action .='<span id="span'.$hsncode->id.'"><a href="javascript:void(0)" onclick="enabledisable(0,'.$hsncode->id.',\''.ADMIN_URL.'hsn-code/hsn-code-enable-disable\',\''.disable_title.'\',\''.disable_class.'\',\''.enable_class.'\',\''.disable_title.'\',\''.enable_title.'\',\''.disable_text.'\',\''.enable_text.'\')" class="'.enable_class.'" title="'.enable_title.'">'.stripslashes(enable_text).'</a></span>';
+
+                    
                 }
                 else{
-                    $Action .='<span id="span'.$hsncode->id.'"><a href="javascript:void(0)" onclick="enabledisable(1,'.$hsncode->id.',\''.ADMIN_URL.'hsn-code/hsn-code-enable-disable\',\''.enable_title.'\',\''.disable_class.'\',\''.enable_class.'\',\''.disable_title.'\',\''.enable_title.'\',\''.disable_text.'\',\''.enable_text.'\')" class="'.enable_class.'" title="'.enable_title.'">'.stripslashes(enable_text).'</a></span>';
+                    $Action .= '<span id="span'.$hsncode->id.'"><a href="javascript:void(0)" onclick="enabledisable(1,'.$hsncode->id.',\''.ADMIN_URL.'hsn-code/hsn-code-enable-disable\',\''.enable_title.'\',\''.disable_class.'\',\''.enable_class.'\',\''.disable_title.'\',\''.enable_title.'\',\''.disable_text.'\',\''.enable_text.'\')" class="'.disable_class.'" title="'.disable_title.'">'.stripslashes(disable_text).'</a></span>';
                 }
             }
 			
