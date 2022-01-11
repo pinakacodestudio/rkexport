@@ -366,6 +366,9 @@ class Party extends Admin_Controller
                     $this->load->model('Party_contact_model', 'Party_contact');
                     $PartycontactId = $this->Party_contact->Add($insertdata2);
                 }
+            }else if($contectid != ""){
+
+                $this->Party_contact->Delete(array("id" => $contectid));
             }
 
             endfor;
@@ -429,6 +432,17 @@ class Party extends Admin_Controller
                     }
                 }
             }
+
+            for ($i = 1; $i <= $cloopdoc; $i++):
+
+                $docdata = $this->input->post('documentname_' . $i);
+                $docid = $this->input->post('doc_id_' . $i);
+
+                if($docid != "" && $docdata == ""){
+                    $this->Party_doc->Delete(array("id" => $docid));                 
+                }
+
+            endfor;
           
             $json = 1;
 

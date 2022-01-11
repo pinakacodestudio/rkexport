@@ -1,10 +1,9 @@
 <div class="data" id="contectrowdelete_<?=$id?>">
-    <div class="clearfix"></div>
-    <div class="panel-heading" >
-        <h2>Contect Detail </h2>
-                <button type="button" style="float:right; margin:10px 19px 0px 0px;" onclick="removecontectpaertion('contectrowdelete_<?=$id?>')" class="addprodocitem btn-danger">Remove</button>
-    </div>   
+    
     <div class="row">
+    <button type="button" style="float:right; margin:10px 19px 0px 0px;" onclick="removecontectpaertion('contectrowdelete_<?=$id?>')" class="addprodocitem btn-danger">Remove</button>
+    <div class="clearfix"></div>
+
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
             <input type="hidden" name="contectid_<?=$id?>" value="0" id="contectid_<?=$id?>">
                 <div class="form-group" id="firstname_div">

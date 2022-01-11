@@ -41,7 +41,7 @@ $(document).ready(function() {
                 });
                 $('#stateid').html(option);
                 $(".selectpicker").selectpicker("refresh");
-
+                
                 $('#stateid').val(edit_provinceid).trigger('change')
                 getcity();
             }
@@ -64,7 +64,8 @@ $(document).ready(function() {
                     });
                     $('#cityid').html(option);
                     $(".selectpicker").selectpicker("refresh");
-                    $('#cityid').val(edit_cityid).trigger('change')
+                    $('#cityid').val(edit_cityid).trigger('change');
+                    
                 }
             });
         }
@@ -330,7 +331,7 @@ function checkvalidation(addtype = 0) {
 
     var websitename = $("#websitename").val().trim();
     var companyid = $("#companyid").val().trim();
-    alert(companyid);
+    //alert(companyid);
     var isvalidwebsitename = isvalidcompanyid = isvalidgst = isvalidpartycode = isvalidpan = isvalidemail = isvalidcontactno = isvalidpartytypeid = isvalidaddress = isvalidcountryid = isvalidstateid = isvalidcityid = isvalidbillingaddress = isvalidshippingaddress = isvalidcourieraddress = isvalidfirstname = isvalidlastname = isvalidbirthdate = isvalidanniversarydate = 0;
 
     var isvalidwebsitename = 1;

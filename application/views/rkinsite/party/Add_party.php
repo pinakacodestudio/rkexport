@@ -217,6 +217,7 @@
                                     ?>
                               <div class="col-md-12 countdocuments pl-sm pr-sm" id="countdocuments">
                                  <input type="hidden" name="doc_id_<?=$cloopdoc?>" value="<?=$doc_id?>" id="doc_id">
+                                 <div id="docrowdelete_<?=$cloopdoc?>">
                                  <div class="col-md-5 col-sm-4">
                                     <div class="form-group" id="documentname_div">
                                        <div class="col-md-12 pr-xs pl-xs">
@@ -244,6 +245,12 @@
                                        </div>
                                     </div>
                                  </div>
+                                 <div class="col-md-2 col-sm-2">
+                                    <div class="form-group" style="float:left; margin:13px 50px 20px 20px;">
+                                          <button type="button" onclick="removedata('docrowdelete_<?=$cloopdoc?>')" class="btn-danger"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                 </div>
+                                    </div>
                               </div>
                               <?php
                                  }
@@ -301,10 +308,12 @@
                <div class="col-md-12">
                   <div class="panel panel-default border-panel" id="conect_countdocuments1">
                      <div class="panel-heading">
-                        <h2>Contect Detail</h2>
+                        <h2>Contact Detail</h2>
                      </div>
                      <div class="panel-body">
-                        <div class="row" id="addtarget">
+                        <div id="addtarget">
+                           <div class="row">
+                           
                            <?php 
                               $cloopcount = 0;
                               $i=0;
@@ -322,7 +331,13 @@
                                       $email = $row->email;
                                     
                                       ?>
-                           <input type="hidden" name="contectid_<?=$cloopcount?>" value="<?=$con_id?>" id="contectid_<?=$cloopcount?>">
+                                       <input type="hidden" name="contectid_<?=$cloopcount?>" value="<?=$con_id?>" id="contectid_<?=$cloopcount?>">
+                                       <div class="data" id="contectrowdelete_<?=$cloopcount?>">
+                                       
+                                       <button type="button" style="float:right; margin:10px 19px 0px 0px;" onclick="removecontectpaertion('contectrowdelete_<?=$cloopcount?>')" class="btn-danger">Remove</button>
+                                      <div class="clearfix"></div>
+                          
+                           
                            <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                               <div class="form-group" id="firstname_div">
                                  <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
@@ -371,9 +386,10 @@
                                  </div>
                               </div>
                            </div>
-                        </div>
-                        <input type="hidden" name="cloopcount" id="cloopcount" value="<?php echo $cloopcount; ?>">
-                    
+                           
+                                  </div>
+                        
+                      
                         <div class="clearfix" style="margin-bottom: 30px;"></div>
                        
                         <div class="clearfix"></div>
@@ -436,16 +452,19 @@
                         </div>
                         
                      </div>
+                     </div>
                      
-                     <input type="hidden" name="cloopcount" id="cloopcount" value="<?php echo $cloopcount; ?>">
-                     
-                   
                     
                      <div class="clearfix"></div>
                      <?php
                         }
                         } 
                         ?>
+                        <input type="hidden" name="cloopcount" id="cloopcount" value="<?php echo $cloopcount; ?>">
+                     
+                  </div>
+                  </div>
+                   
                         <div class="form-group" style="float:left; margin:0px 50px 20px 50px;">
                            <button type="button" class="addpro btn-primary">Add
                            Data</button>
