@@ -15,12 +15,14 @@ function resetdata() {
 
     $('#yes').prop("checked", true);
   }
-  $('html, body').animate({scrollTop: 0}, 'slow');
+  if(MODALVIEW == 0){
+    $('html, body').animate({scrollTop:0},'slow');  
+  }
 }
 
-function checkvalidation(addtype=0){
+function checkvalidationpartytype(addtype=0){
   
-    var name = $("#partytype").val().trim();
+    var name = $("#partytype").val();
     var isvalidname = 0;
     
     PNotify.removeAll();
@@ -50,13 +52,22 @@ function checkvalidation(addtype=0){
             $('#loader').show();
           },
           success: function(response){
-            if(response==1){
+            var data = JSON.parse(response);
+            if(data['error']==1){
               new PNotify({title: "Party type successfully added.",styling: 'fontawesome',delay: '3000',type: 'success'});
-              if(addtype==1){
+              if(MODALVIEW == 1){
                 resetdata();
-              }else{
-                setTimeout(function() { window.location=SITE_URL+"party-type"; }, 1500);
-              }
+                $("#addpartytypeModal").modal("hide");
+                $("#partytypeid option").first().after("<option value='"+data['tyid']+"' selected>"+data['ptname']+"</option>");
+                $("#partytypeid").selectpicker('refresh');
+            }else{
+                if(addtype==1){
+                    resetdata();
+                }else{
+                    setTimeout(function() { window.location = SITE_URL + "party-type";}, 1500);
+                }
+            }
+
             }else if(response==2){
               new PNotify({title: "Party type already exists !",styling: 'fontawesome',delay: '3000',type: 'error'});
               $("#name_div").addClass("has-error is-focused");

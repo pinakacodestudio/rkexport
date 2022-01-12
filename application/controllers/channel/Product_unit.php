@@ -272,6 +272,7 @@ class Product_unit extends Channel_Controller {
         $this->viewData['module'] = "product_unit/Add_product_unit";   
         $this->viewData['modalview'] = "1";
         echo $this->load->view(CHANNELFOLDER.'product_unit/Add_product_unit',$this->viewData,true);
+
     }
     
 }?>

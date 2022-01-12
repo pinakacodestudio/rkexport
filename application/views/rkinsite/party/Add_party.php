@@ -71,7 +71,7 @@
                               </select>
                            </div>
                            <div class="col-md-1 p-n" style="padding-top: 5px !important;">
-                              <a href="javascript:void(0)" onclick="addunit()" class="btn btn-primary btn-raised p-xs"><i class="material-icons" title="Add Unit">add</i></a>
+                              <a href="javascript:void(0)" onclick="addcountry()" class="btn btn-primary btn-raised p-xs"><i class="material-icons" title="Add Unit">add</i></a>
                            </div>
                         </div>
                      </div>
@@ -86,16 +86,16 @@
                      </div>
                      <div class="col-md-6">
                         <div class="form-group" id="pan_div">
-                           <label class="col-md-4 col-sm-4 control-label" for="pan">Pan Number<span class="mandatoryfield"></span></label>
-                           <div class="col-md-8 col-sm-8">
+                           <label class="col-md-3 col-sm-3 control-label" for="pan">Pan Number<span class="mandatoryfield"></span></label>
+                           <div class="col-md-9 col-sm-9">
                               <input type="text" id="pan" class="form-control" name="pan" value="<?php if(isset($partydata)){ echo $partydata['pan']; }  ?>">
                            </div>
                         </div>
                      </div>
                      <div class="col-md-6">
                         <div class="form-group" id="partycode_div">
-                           <label for="partycode" class="col-md-4 control-label">Party Code<span class="mandatoryfield">*</span></label>
-                           <div class="col-md-8">
+                           <label for="partycode" class="col-md-3 control-label">Party Code<span class="mandatoryfield">*</span></label>
+                           <div class="col-md-9">
                               <div class="col-md-10 col-xs-10 p-n">
                                  <input id="partycode" type="text" name="partycode" value="<?php if(isset($partydata)){ echo $partydata['partycode']; } ?>" class="form-control">
                               </div>
@@ -107,7 +107,7 @@
                      </div>
                      <div class="col-md-6">
                         <div class="form-group" id="partytypeid_div">
-                           <label for="partytypeid" class="col-md-4 control-label">Party Type <span class="mandatoryfield"> *</span></label>
+                           <label for="partytypeid" class="col-md-3 control-label">Party Type <span class="mandatoryfield"> *</span></label>
                            <div class="col-md-8">
                               <select id="partytypeid" name="partytypeid" class="selectpicker form-control" data-live-search="true" data-size="5">
                                  <option value="0">Select Party Type</option>
@@ -116,6 +116,9 @@
                                  </option>
                                  <?php } ?>
                               </select>
+                           </div>
+                           <div class="col-md-1 p-n" style="padding-top: 5px !important;">
+                              <a href="javascript:void(0)" onclick="addpartytype()" class="btn btn-primary btn-raised p-xs"><i class="material-icons" title="Add Unit">add</i></a>
                            </div>
                         </div>
                      </div>
@@ -136,8 +139,8 @@
                      </div>
                      <div class="col-md-6">
                         <div class="form-group" id="password_div">
-                           <label for="password" class="col-md-4 control-label">Password</label>
-                           <div class="col-md-8">
+                           <label for="password" class="col-md-3 control-label">Password</label>
+                           <div class="col-md-9">
                            <input id="password" type="text" name="password" class="form-control" tabindex="7" value="<?php if(isset($partydata)){ echo $this->general_model->decryptIt($partydata['password']); } ?>">
                            
                            </div>
@@ -566,6 +569,19 @@
           </div>
       </div>
 <!-- model code -->
+<!-- model code -->
+      <div class="modal addunit" id="addpartytypeModal" style="overflow-y: auto;">
+          <div class="modal-dialog" role="document" style="width: 600px;">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span></button>
+                      <h4 class="modal-title" id="post_title">Add Party Type</h4>
+                  </div>
+                  <div class="modal-body2 no-padding"></div>
+              </div>
+          </div>
+      </div>
+<!-- model code -->
 </div>
 <script>
    $(".addpro").click(function() {
@@ -588,32 +604,56 @@
        }, 'html');
    });
 
-   function addunit() {
+   function addcountry() {
+      var uurl = SITE_URL + "Company/addcompanymodal";
+      $.ajax({
+         url: uurl,
+         type: 'POST',
+         //async: false,
+         beforeSend: function() {
+            $('.mask').show();
+            $('#loader').show();
+         },
+         success: function(response) {
+            $("#addcompanyModal").modal("show");
+            $(".modal-body").html(response);
+            include('<?=ADMIN_JS_URL?>pages/Add_company.js', function() {
+            });
+         },
+         error: function(xhr) {
+            //alert(xhr.responseText);
+         },
+         complete: function() {
+            $('.mask').hide();
+            $('#loader').hide();
+         },
 
-var uurl = SITE_URL + "Company/addcompanymodal";
+      });
+   }
+   function addpartytype() {
+      var uurl = SITE_URL + "Party_type/addpartytypemodal";
+      $.ajax({
+         url: uurl,
+         type: 'POST',
+         //async: false,
+         beforeSend: function() {
+            $('.mask').show();
+            $('#loader').show();
+         },
+         success: function(response) {
+            $("#addpartytypeModal").modal("show");
+            $(".modal-body2").html(response);
+            include('<?=ADMIN_JS_URL?>pages/add_party_type.js', function() {
+            });
+         },
+         error: function(xhr) {
+            //alert(xhr.responseText);
+         },
+         complete: function() {
+            $('.mask').hide();
+            $('#loader').hide();
+         },
 
-$.ajax({
-    url: uurl,
-    type: 'POST',
-    //async: false,
-    beforeSend: function() {
-        $('.mask').show();
-        $('#loader').show();
-    },
-    success: function(response) {
-        $("#addcompanyModal").modal("show");
-        $(".modal-body").html(response);
-        include('<?=ADMIN_JS_URL?>pages/Add_company.js', function() {
-        });
-    },
-    error: function(xhr) {
-        //alert(xhr.responseText);
-    },
-    complete: function() {
-        $('.mask').hide();
-        $('#loader').hide();
-    },
-
-});
-}
+      });
+   }
 </script>

@@ -649,11 +649,11 @@ if ($productfile[$i]['type'] == 1) {
 
               $('#productfiledata_div').append($.html);
               /*
-                      var last_id=$(".add_remove_btn:last").attr("id");
+                var last_id=$(".add_remove_btn:last").attr("id");
 
-                      $("#"+(parseInt(last_id)-1)).attr("onclick","removeproductfile("+(parseInt(last_id)-1)+")");
-                      $("#"+(parseInt(last_id)-1)).children(":first-child").attr("class","fa fa-minus");
-                    $("#"+(parseInt(last_id)-1)).children(":first-child").text(""); */
+                $("#"+(parseInt(last_id)-1)).attr("onclick","removeproductfile("+(parseInt(last_id)-1)+")");
+                $("#"+(parseInt(last_id)-1)).children(":first-child").attr("class","fa fa-minus");
+                $("#"+(parseInt(last_id)-1)).children(":first-child").text(""); */
 
               // if($(".add_remove_btn:nth-last-child(2)").length)
               // {
@@ -708,9 +708,7 @@ if ($productfile[$i]['type'] == 1) {
               success: function(response) {
                   $("#addunitModal").modal("show");
                   $(".modal-body").html(response);
-
                   include('<?=ADMIN_JS_URL?>pages/add_product_unit.js', function() {
-                     
                   });
               },
               error: function(xhr) {

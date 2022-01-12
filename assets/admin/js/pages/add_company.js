@@ -71,16 +71,13 @@ function checkvalidationcompany(addtype = 0) {
                 },
                 success: function(response) {
                     var data = JSON.parse(response);
-                    console.log(data);
-                
                     if (data['error'] == 1) {
                         new PNotify({ title: "Company successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
                         if(MODALVIEW == 1){
                             resetdata();
                             $("#addcompanyModal").modal("hide");
-                           
-                            $("#unitid option").first().after("<option value='"+data['unitid']+"' selected>"+data['name']+"</option>");
-                            $("#unitid").selectpicker('refresh');
+                            $("#companyid option").first().after("<option value='"+data['cid']+"' selected>"+data['cname']+"</option>");
+                            $("#companyid").selectpicker('refresh');
                          
                         }else{
                             if(addtype==1){

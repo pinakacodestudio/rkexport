@@ -117,7 +117,7 @@ class Company extends Admin_Controller
                 if ($this->viewData['submenuvisibility']['managelog'] == 1) {
                     $this->general_model->addActionLog(1, 'Company Type', 'Company Type Add.');
                 }
-                $json = array('error' => 1); //Rights successfully added.
+                $json = array('error' => 1,'cid'=>$Add,'cname'=>$companyname); //Rights successfully added.
             } else {
                 $json = array('error' => 0); //Rights not added.
             }

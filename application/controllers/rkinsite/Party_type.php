@@ -73,7 +73,8 @@ class Party_type extends Admin_Controller{
                 if($this->viewData['submenuvisibility']['managelog'] == 1){
                     $this->general_model->addActionLog(1,'Party Type','Add new '.$PostData['partytype'].' party type.');
                 }
-                echo 1;
+				$json = array('error'=>1,'ptid'=>$Add,'ptname'=>$PostData['partytype'],'status'=>$PostData['status']);
+				echo json_encode($json);
             }else{
                 echo 0;
             }
@@ -180,6 +181,13 @@ class Party_type extends Admin_Controller{
 			}
 		}
 	}
-    
+
+	public function addpartytypemodal() {
+        $this->checkAdminAccessModule('submenu','add',$this->viewData['submenuvisibility']);
+        $this->viewData['title'] = "Add Party Type";
+        $this->viewData['module'] = "party_type/Add_party_type"; 
+        $this->viewData['modalview'] = "1";
+        echo $this->load->view('rkinsite/party_type/Add_party_type',$this->viewData,true);
+    }
 }
 ?>
