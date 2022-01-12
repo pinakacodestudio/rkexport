@@ -267,14 +267,11 @@ class Product_unit extends Channel_Controller {
     }
 
     public function addunitformodal() {
-    
         $this->checkAdminAccessModule('submenu','add',$this->viewData['submenuvisibility']);
         $this->viewData['title'] = "Add Product Unit";
         $this->viewData['module'] = "product_unit/Add_product_unit";   
         $this->viewData['modalview'] = "1";
-        
         echo $this->load->view(CHANNELFOLDER.'product_unit/Add_product_unit',$this->viewData,true);
-    
-      }
+    }
     
 }?>

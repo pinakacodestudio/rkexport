@@ -62,7 +62,7 @@ class Party_model extends Common_model {
 	
 	function getPartyDataByID($ID){
         
-        $query = $this->readdb->select("p.id,p.websitename,p.partycode,p.partytypeid,p.cityid,p.provinceid,p.gst,p.pan,p.partycode,p.countryid,p.billingaddress,p.shippingaddress,courieraddress,p.openingdate,p.openingamount,p.companyid")
+        $query = $this->readdb->select("p.id,p.websitename,p.partycode,p.partytypeid,p.cityid,p.provinceid,p.gst,p.pan,p.partycode,p.countryid,p.billingaddress,p.shippingaddress,courieraddress,p.openingdate,p.openingamount,p.companyid,p.password")
 		->from($this->_table." as p")
 		->where("p.id", $ID)
 		->get();

@@ -271,20 +271,15 @@ function checkvalidation(addtype=0) {
             }else {
                 $("#product"+id+"_div").removeClass("has-error is-focused");
             }
-            if($("#priceid"+id).val() == "" || $("#priceid"+id+" option:selected").text() == "Select Variant"){
-                $("#price"+id+"_div").addClass("has-error is-focused");
-                new PNotify({title: 'Please select '+(c)+' price !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                isvalidpriceid = 0;
-            }else {
-                $("#price"+id+"_div").removeClass("has-error is-focused");
-            }
-            if($("#price"+id).val() == ""){
-                $("#productprice"+id+"_div").addClass("has-error is-focused");
-                new PNotify({title: 'Please enter '+(c)+' price !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                isvalidprice = 0;
-            }else {
-                $("#productprice"+id+"_div").removeClass("has-error is-focused");
-            }
+
+            // if($("#priceid"+id).val() == "" || $("#priceid"+id+" option:selected").text() == "Select Variant"){
+            //     $("#price"+id+"_div").addClass("has-error is-focused");
+            //     new PNotify({title: 'Please select '+(c)+' price !',styling: 'fontawesome',delay: '3000',type: 'error'});
+            //     isvalidpriceid = 0;
+            // }else {
+            //     $("#price"+id+"_div").removeClass("has-error is-focused");
+            // }
+
             if($("#qty"+id).val() == 0){
                 $("#qty"+id+"_div").addClass("has-error is-focused");
                 new PNotify({title: 'Please select '+(c)+' quantity !',styling: 'fontawesome',delay: '3000',type: 'error'});
@@ -292,6 +287,16 @@ function checkvalidation(addtype=0) {
             }else {
                 $("#qty"+id+"_div").removeClass("has-error is-focused");
             }
+            
+            if($("#price"+id).val() == ""){
+                $("#productprice"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please enter '+(c)+' price !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidprice = 0;
+            }else {
+                $("#productprice"+id+"_div").removeClass("has-error is-focused");
+            }
+
+          
         } else{
             $("#product"+id+"_div").removeClass("has-error is-focused");
             $("#price"+id+"_div").removeClass("has-error is-focused");

@@ -177,4 +177,12 @@ class Company extends Admin_Controller
             $this->company->Delete(array("id" => $row));
         }
     }
+
+    public function addcompanymodal() {
+        $this->checkAdminAccessModule('submenu','add',$this->viewData['submenuvisibility']);
+        $this->viewData['title'] = "Add Company";
+        $this->viewData['module'] = "company/Add_company"; 
+        $this->viewData['modalview'] = "1";
+        echo $this->load->view('rkinsite/company/Add_company',$this->viewData,true);
+    }
 }

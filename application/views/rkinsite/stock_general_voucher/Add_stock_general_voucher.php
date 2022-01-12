@@ -77,7 +77,7 @@ if(!empty($narrationdata)){
                             <div class="col-sm-3 pl-xs pr-xs">
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                    <label class="control-label">Select Product</label>
+                                    <label class="control-label">Select Product <span class="mandatoryfield">*</span></label>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@ if(!empty($narrationdata)){
                             <div class="col-sm-1 pl-xs pr-xs">
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <label class="control-label">Price</label>
+                                        <label class="control-label">Price <span class="mandatoryfield">*</span></label>
                                     </div>
                                 </div>
                             </div>

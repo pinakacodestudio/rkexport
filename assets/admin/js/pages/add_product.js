@@ -846,12 +846,12 @@ function checkvalidation() {
 
     var checkuniversal = $('#checkuniversal').is(':checked') ? 1 : 0;
 
-    var barcode = $("#barcode").val().trim();
+    // var barcode = $("#barcode").val().trim();
     var sku = $("#sku").val().trim();
     var isvalidproductname = isvalidproductslug = isvalidshortdescription = isvaliddescription = isvalidcategoryid = 0;
 
-    var isvalidpriority = isvalidstock = isvalidprice = isvalidcheckuniversal = isvalidfiletext = isvalidprices = isvalidcatalogfile = isvalidbarcode = isvalidsku = isvalidmultipleprice = isvalidmultiplepriceqty = isvalidhsncodeid = isvalidunitid = 1;
-
+    var isvalidpriority = isvalidstock = isvalidprice = isvalidcheckuniversal = isvalidfiletext = isvalidprices = isvalidcatalogfile = isvalidsku = isvalidmultipleprice = isvalidmultiplepriceqty = isvalidhsncodeid = isvalidunitid = 1;
+    // = isvalidbarcode 
     PNotify.removeAll();
 
 
@@ -876,9 +876,28 @@ function checkvalidation() {
             isvalidproductname = 1;
         }
     }
+
+    // if (HSNCODE_IS_COMPULSARY == 1) {
+        if (hsncodeid == 0) {
+            $("#hsncode_div").addClass("has-error is-focused");
+            new PNotify({ title: 'Please select HSN code !', styling: 'fontawesome', delay: '3000', type: 'error' });
+            isvalidhsncodeid = 0;
+        } else {
+            $("#hsncode_div").removeClass("has-error is-focused");
+        }
+    // }
+    if (priority == '') {
+        $("#priority_div").addClass("has-error is-focused");
+        new PNotify({ title: "Please enter valid priority !", styling: 'fontawesome', delay: '3000', type: 'error' });
+        isvalidpriority = 0;
+    } else {
+        $("#priority_div").removeClass("has-error is-focused");
+        isvalidpriority = 1;
+    }
+
     if (productslug == '') {
         $("#productslug_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter product link !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please enter link !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidproductslug = 0;
     } else {
         if (productslug.length < 3) {
@@ -889,24 +908,9 @@ function checkvalidation() {
             isvalidproductslug = 1;
         }
     }
-    if (priority == '') {
-        $("#priority_div").addClass("has-error is-focused");
-        new PNotify({ title: "Please enter valid priority !", styling: 'fontawesome', delay: '3000', type: 'error' });
-        isvalidpriority = 0;
-    } else {
-        $("#priority_div").removeClass("has-error is-focused");
-        isvalidpriority = 1;
-    }
+   
 
-    // if (HSNCODE_IS_COMPULSARY == 1) {
-    if (hsncodeid == 0) {
-        $("#hsncode_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please select HSN code !', styling: 'fontawesome', delay: '3000', type: 'error' });
-        isvalidhsncodeid = 0;
-    } else {
-        $("#hsncode_div").removeClass("has-error is-focused");
-    }
-    // }
+
     // if (PRODUCT_UNIT_IS_OPTIONAL == 0) {
     if (unitid == 0) {
         $("#unit_div").addClass("has-error is-focused");
@@ -916,6 +920,31 @@ function checkvalidation() {
         $("#unit_div").removeClass("has-error is-focused");
     }
     // }
+
+    if (ACTION == 0) {
+        if (checkuniversal == 0) {
+            var allprices = prices.split(',');
+            if (prices.trim() != '') {
+                $.each(allprices, function(index, value) {
+                        if (isNaN(value)) {
+                            new PNotify({ title: "Please enter valid price", styling: 'fontawesome', delay: '3000', type: 'error' });
+                            isvalidprices = 0;
+                        }
+                    })
+                    /*$.each(allprices, function( index, value ) {
+                      if(isNaN(value)){
+                        new PNotify({title: "Please entet valid price",styling: 'fontawesome',delay: '3000',type: 'error'});
+                        isvalidprices = 0;
+                      }​
+                    })*/
+                $('#s2id_prices > ul').css({ "background-color": "#FFF", "border": "1px solid #cccccc" });
+            } else {
+                $('#s2id_prices > ul').css({ "background-color": "#FFECED", "border": "1px solid #FFB9BD" });
+                new PNotify({ title: "Enter minimum one product price", styling: 'fontawesome', delay: '3000', type: 'error' });
+                isvalidprices = 0;
+            }
+        }
+    }
 
     if (shortdescription == '') {
         $("#shortdescription_div").addClass("has-error is-focused");
@@ -949,13 +978,6 @@ function checkvalidation() {
     }
 
     if (checkuniversal == 1) {
-        if (sku == "") {
-            $("#sku_div").addClass("has-error is-focused");
-            new PNotify({ title: 'Please enter SKU !', styling: 'fontawesome', delay: '3000', type: 'error' });
-            isvalidsku = 0;
-        } else {
-            $("#sku_div").removeClass("has-error is-focused");
-        }
 
         if (stock == '') {
             $("#stock_div").addClass("has-error is-focused");
@@ -964,13 +986,23 @@ function checkvalidation() {
         } else {
             isvalidstock = 1;
         }
-        if (barcode == "") {
-            $("#barcode_div").addClass("has-error is-focused");
-            new PNotify({ title: 'Please enter or generate barcode !', styling: 'fontawesome', delay: '3000', type: 'error' });
-            isvalidbarcode = 0;
+        
+        if (sku == "") {
+            $("#sku_div").addClass("has-error is-focused");
+            new PNotify({ title: 'Please enter SKU !', styling: 'fontawesome', delay: '3000', type: 'error' });
+            isvalidsku = 0;
         } else {
-            $("#barcode_div").removeClass("has-error is-focused");
+            $("#sku_div").removeClass("has-error is-focused");
         }
+
+      
+        // if (barcode == "") {
+        //     $("#barcode_div").addClass("has-error is-focused");
+        //     new PNotify({ title: 'Please enter or generate barcode !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        //     isvalidbarcode = 0;
+        // } else {
+        //     $("#barcode_div").removeClass("has-error is-focused");
+        // }
 
         if ($("#singleqty").is(":checked")) {
             if (price == "") {
@@ -1010,30 +1042,7 @@ function checkvalidation() {
         }
     }
 
-    if (ACTION == 0) {
-        if (checkuniversal == 0) {
-            var allprices = prices.split(',');
-            if (prices.trim() != '') {
-                $.each(allprices, function(index, value) {
-                        if (isNaN(value)) {
-                            new PNotify({ title: "Please enter valid price", styling: 'fontawesome', delay: '3000', type: 'error' });
-                            isvalidprices = 0;
-                        }
-                    })
-                    /*$.each(allprices, function( index, value ) {
-                      if(isNaN(value)){
-                        new PNotify({title: "Please entet valid price",styling: 'fontawesome',delay: '3000',type: 'error'});
-                        isvalidprices = 0;
-                      }​
-                    })*/
-                $('#s2id_prices > ul').css({ "background-color": "#FFF", "border": "1px solid #cccccc" });
-            } else {
-                $('#s2id_prices > ul').css({ "background-color": "#FFECED", "border": "1px solid #FFB9BD" });
-                new PNotify({ title: "Enter minimum one product price", styling: 'fontawesome', delay: '3000', type: 'error' });
-                isvalidprices = 0;
-            }
-        }
-    }
+
 
 
     var i = 1;

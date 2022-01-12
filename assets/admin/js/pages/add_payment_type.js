@@ -25,7 +25,7 @@ function checkvalidation(addtype = 0) {
     if (name == '') {
 
         $("#paymenttype_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter Payment Method !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please enter payment method !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidname = 0;
     } else {
 

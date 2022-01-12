@@ -47,7 +47,7 @@ function checkvalidation(addtype = 0) {
 
     if (currency == '') {
         $("#currency_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter Currency !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please enter currency !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidcurrency = 0;
     } else {
         $("#currency_div").removeClass("has-error is-focused");
@@ -88,7 +88,7 @@ function checkvalidation(addtype = 0) {
                 success: function(response) {
                     var data = JSON.parse(response);
                     if (data['error'] == 1) {
-                        new PNotify({ title: "Currency Rate successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
+                        new PNotify({ title: "currency Rate successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
                         if (addtype == 1) {
                             resetdata();
                         } else {
@@ -96,13 +96,13 @@ function checkvalidation(addtype = 0) {
                         }
 
                     } else if (data['error'] == 2) {
-                        new PNotify({ title: 'Currency Rate already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'currency Rate already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 4) {
-                        new PNotify({ title: 'This Currency Rate not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'This currency Rate not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else {
-                        new PNotify({ title: 'Currency Rate not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'currency Rate not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
                 error: function(xhr) {
@@ -137,9 +137,9 @@ function checkvalidation(addtype = 0) {
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 4) {
-                        new PNotify({ title: 'This Currency Rate not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'This currency Rate not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else {
-                        new PNotify({ title: 'Currency Rate not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'currency Rate not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
                 error: function(xhr) {

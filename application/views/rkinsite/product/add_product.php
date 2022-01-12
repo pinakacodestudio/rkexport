@@ -147,15 +147,15 @@
                                       <div class="col-md-12 p-n">
                                           <hr>
                                       </div>
-                                      <div class="col-md-12 p-n">
+                                      <div class="col-md-12 ">
                                           <div class="col-md-6 p-n">
                                               <div class="col-sm-3">
                                                   <div class="form-group" id="checkuniversal_div">
                                                       <div class="checkbox col-sm-12 col-xs-6 control-label pl-xs mt-sm">
                                                           <input type="checkbox" name="checkuniversal" id="checkuniversal" value="1" <?php if (isset($productdata) && $productdata['isuniversal'] == 1) {
-    echo 'checked';
-}?>>
-                                                          <label style="font-size: 14px;" for="checkuniversal">Universal Price </label>
+                                                                echo 'checked';
+                                                          }?>>
+                                                          <label style="font-size: 14px;" for="checkuniversal">Universal Price</label>
                                                       </div>
                                                   </div>
                                               </div>
@@ -213,6 +213,15 @@
                                               </div>
                                           </div>
                                           <div class="col-md-6 p-n">
+                                              <div class="form-group" id="weight_div" style="display:none;">
+                                                  <label for="weight" class="col-sm-3 control-label">Weight (kg)</label>
+                                                  <div class="col-sm-8">
+                                                      <input type="text" id="weight" onkeypress="return decimal_number_validation(event,this.value,6,3)" class="form-control" name="weight" value="<?php if (isset($productdata)) {echo $productdata['weight'];}?>">
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <?php /*
+                                          <div class="col-md-6 p-n">
                                               <div class="form-group" id="barcode_div" style="display:none;">
                                                   <label class="col-md-3 control-label" for="barcode">Barcode <span class="mandatoryfield"> * </span></label>
                                                   <div class="col-md-8">
@@ -226,7 +235,7 @@
                                                       <a href="javascript:void(0)" class="stepy-finish btn-primary btn btn-raised" title="Generate Barcode" onclick="generateBarcode()" style="padding: 8px 12px;"><i class="fa fa-refresh" aria-hidden="true"></i></a>
                                                   </div>
                                               </div>
-                                          </div>
+                                          </div> */?>
                                       </div>
                                       <div class="col-md-12 p-n">
                                           <div class="col-md-6 p-n">
@@ -234,21 +243,12 @@
                                                   <label class="col-md-3 control-label" for="sku">SKU <span class="mandatoryfield"> * </span></label>
                                                   <div class="col-md-8">
                                                       <input type="text" id="sku" name="sku" class="form-control" value="<?php if (isset($productdata)) {
-    echo $productdata['sku'];
-}?>">
+                                                            echo $productdata['sku'];
+                                                        }?>">
                                                   </div>
                                               </div>
                                           </div>
-                                          <div class="col-md-6 p-n">
-                                              <div class="form-group" id="barcodeimage_div" style="display:none;">
-                                                  <label class="col-md-3 control-label"></label>
-                                                  <div class="col-sm-9 pt-sm p-n">
-                                                      <img id="barcodeimg" src="<?=ADMIN_URL . 'product/set_barcode/' . $barcode;?>" style="max-width: 100%;">
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="col-md-12 p-n">
+
                                           <div class="col-md-6 p-n">
                                               <div class="form-group" id="minimumstocklimit_div" style="display:none;">
                                                   <label class="col-md-3 control-label" for="minimumstocklimit">Min. Stock Limit</label>
@@ -257,14 +257,21 @@
                                                   </div>
                                               </div>
                                           </div>
+
+                                          <?php /*
                                           <div class="col-md-6 p-n">
-                                              <div class="form-group" id="weight_div" style="display:none;">
-                                                  <label for="weight" class="col-sm-3 control-label">Weight (kg)</label>
-                                                  <div class="col-sm-8">
-                                                      <input type="text" id="weight" onkeypress="return decimal_number_validation(event,this.value,6,3)" class="form-control" name="weight" value="<?php if (isset($productdata)) {echo $productdata['weight'];}?>">
+                                              <div class="form-group" id="barcodeimage_div" style="display:none;">
+                                                  <label class="col-md-3 control-label"></label>
+                                                  <div class="col-sm-9 pt-sm p-n">
+                                                      <img id="barcodeimg" src="<?=ADMIN_URL . 'product/set_barcode/' . $barcode;?>" style="max-width: 100%;">
                                                   </div>
                                               </div>
                                           </div>
+                                          */?>
+                                      </div>
+                                      <div class="col-md-12 p-n">
+                                          
+                                          
                                       </div>
                                       <div class="row" id="multiplepricesection" style="display: none;">
                                           <div class="col-md-12 p-n">
@@ -410,9 +417,9 @@
                                               <div id="description_div">
                                                   <div class="col-sm-12">
                                                       <?php $data['controlname'] = "description";
-if (isset($productdata) && !empty($productdata)) {
-    $data['controldata'] = $productdata['description'];
-}?>
+                                                        if (isset($productdata) && !empty($productdata)) {
+                                                            $data['controldata'] = $productdata['description'];
+                                                        }?>
                                                       <?php $this->load->view(ADMINFOLDER . 'includes/ckeditor', $data);?>
                                                   </div>
                                               </div>
@@ -703,9 +710,7 @@ if ($productfile[$i]['type'] == 1) {
                   $(".modal-body").html(response);
 
                   include('<?=ADMIN_JS_URL?>pages/add_product_unit.js', function() {
-                      $(document).ready(function() {
-                          $('.selectpicker').selectpicker('refresh');
-                      });
+                     
                   });
               },
               error: function(xhr) {

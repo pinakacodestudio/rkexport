@@ -18,13 +18,6 @@ function checkvalidation(){
   var isvalidattributeidid = isvalidname = 0 ;
   
   PNotify.removeAll();
-  if(name == ''){
-    $("#variant_div").addClass("has-error is-focused");
-    new PNotify({title: 'Please enter variant name !',styling: 'fontawesome',delay: '3000',type: 'error'});
-    isvalidname = 0;
-  }else {
-    isvalidname = 1;
-  }
   if(attributeid == 0){
     $("#attribute_div").addClass("has-error is-focused");
     new PNotify({title: 'Please select attribute !',styling: 'fontawesome',delay: '3000',type: 'error'});
@@ -33,6 +26,15 @@ function checkvalidation(){
     $("#attribute_div").removeClass("has-error is-focused");
     isvalidattributeidid = 1;
   }
+  
+  if(name == ''){
+    $("#variant_div").addClass("has-error is-focused");
+    new PNotify({title: 'Please enter variant name !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    isvalidname = 0;
+  }else {
+    isvalidname = 1;
+  }
+
 
   if(isvalidname == 1 && isvalidattributeidid == 1){
 

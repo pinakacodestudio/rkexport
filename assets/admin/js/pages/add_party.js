@@ -326,13 +326,35 @@ function resetdata() {
     $('html, body').animate({ scrollTop: 0 }, 'slow');
 }
 
+function include(filename, onload) {
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.src = filename;
+    script.type = 'text/javascript';
+    script.onload = script.onreadystatechange = function() {
+        if (script.readyState) {
+            if (script.readyState === 'complete' || script.readyState === 'loaded') {
+                script.onreadystatechange = null;
+                onload();
+            }
+        } else {
+            onload();
+        }
+    };
+    head.appendChild(script);
+}
+
 function checkvalidation(addtype = 0) {
 
     var websitename = $("#websitename").val().trim();
     var companyid = $("#companyid").val().trim();
     var partycode = $("#partycode").val().trim();
-    //alert(companyid);
-    var isvalidwebsitename = isvalidcompanyid = isvalidgst = isvalidpartycode = isvalidpan = isvalidemail = isvalidcontactno = isvalidpartytypeid = isvalidaddress = isvalidcountryid = isvalidstateid = isvalidcityid = isvalidbillingaddress = isvalidshippingaddress = isvalidcourieraddress = isvalidfirstname = isvalidlastname = isvalidbirthdate = isvalidanniversarydate = isvalidpartycode = 0;
+    var partytypeid = $("#partytypeid").val().trim();
+    var openingdate = $("#openingdate").val().trim();
+    var openingamount = $("#openingamount").val().trim();
+
+   
+    var isvalidwebsitename = isvalidcompanyid = isvalidgst = isvalidpartycode = isvalidpan = isvalidemail = isvalidcontactno = isvalidpartytypeid = isvalidaddress = isvalidcountryid = isvalidstateid = isvalidcityid = isvalidbillingaddress = isvalidshippingaddress = isvalidcourieraddress = isvalidfirstname = isvalidlastname = isvalidbirthdate = isvalidanniversarydate  = isvalidopeningdate = isvalidopeningamount = 0;
     var isvalidwebsitename = 1;
 
     PNotify.removeAll();
@@ -344,22 +366,12 @@ function checkvalidation(addtype = 0) {
         isvalidwebsitename = 1;
     }
 
-
-
     if (companyid == '' || companyid == 0) {
         $("#companyid_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please Select Company!', styling: 'fontawesome', delay: '3000', type: 'error' });
     } else {
         $("#companyid_div").removeClass("has-error is-focused");
         isvalidcompanyid = 1;
-    }
-
-    if (partycord == '' ) {
-        $("#partycode_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please Select Party Cord!', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#partycode_div").removeClass("has-error is-focused");
-        isvalidpartycode = 1;
     }
 
     if (gst == '') {
@@ -384,6 +396,16 @@ function checkvalidation(addtype = 0) {
         isvalidpartycode = 1;
     }
 
+    if (partytypeid == '' || partytypeid == 0) {
+        $("#partytypeid_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please enter party type !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    }else {
+        $("#partytypeid_div").removeClass("has-error is-focused");
+        isvalidpartytypeid = 1;
+    }
+
+   
+
     if (pan == 0) {
         $("#partytype_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please Enter Pan !', styling: 'fontawesome', delay: '3000', type: 'error' });
@@ -396,8 +418,26 @@ function checkvalidation(addtype = 0) {
         $("#email_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please enter email !', styling: 'fontawesome', delay: '3000', type: 'error' });
     }
+
+    if (openingdate == '') {
+        $("#openingdate_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please enter opening date !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    }else {
+        $("#openingdate_div").removeClass("has-error is-focused");
+        isvalidpartytypeid = 1;
+    }
+
+    if (openingamount == '') {
+        $("#openingamount_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please enter opening amount !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    }else {
+        $("#openingamount_div").removeClass("has-error is-focused");
+        isvalidopeningamount = 1;
+    }
+
+   
     var c = 1;
-    if (isvalidwebsitename == 1) {
+    if (isvalidwebsitename && isvalidpartycode && isvalidpartytypeid && isvalidcompanyid  &&isvalidopeningdate == 1) {
         var formData = new FormData($('#party-form')[0]);
         if (ACTION == 0) {
             var uurl = SITE_URL + "party/party-add";

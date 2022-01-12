@@ -24,15 +24,11 @@ class Attribute extends Admin_Controller {
 	}
 
 	public function listing() {
-
-		
-		
 		$list = $this->Attribute->get_datatables();
 		$data = array();
 		$counter = $_POST['start'];
 		foreach ($list as $Attribute) {
 			$row = array();
-			
 			$row['DT_RowId'] = $Attribute->id;
 			$row['row'] = ++$counter;
 			$row['variantname'] = $Attribute->variantname;
@@ -55,6 +51,7 @@ class Attribute extends Admin_Controller {
 						</div>';
 			$data[] = $row;
 		}
+
 		$output = array(
 						"draw" => $_POST['draw'],
 						"recordsTotal" => $this->Attribute->count_all(),

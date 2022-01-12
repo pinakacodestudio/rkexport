@@ -36,7 +36,7 @@ function checkvalidation(addtype = 0) {
 
     if (commission == '') {
         $("#currency_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter Commission !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please enter commission !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidcommission = 0;
     } else {
         $("#currency_div").removeClass("has-error is-focused");

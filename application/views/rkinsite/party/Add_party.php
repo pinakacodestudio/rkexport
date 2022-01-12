@@ -57,9 +57,9 @@
                         </div>
                      </div>
                      <div class="col-md-6">
-                        <div class="form-group" id="partytype_div">
+                        <div class="form-group" id="companyid_div">
                        
-                           <label for="companyid" class="col-md-4 control-label">Company <span class="mandatoryfield"> *</span></label>
+                           <label for="companyid" class="col-md-3 control-label">Company <span class="mandatoryfield"> *</span></label>
                            <div class="col-md-8">
                               <select id="companyid" name="companyid" class="selectpicker form-control" data-live-search="true" data-size="5">
                                  <option value="0">Select Company</option>
@@ -69,6 +69,9 @@
                                  </option>
                                  <?php } ?>
                               </select>
+                           </div>
+                           <div class="col-md-1 p-n" style="padding-top: 5px !important;">
+                              <a href="javascript:void(0)" onclick="addunit()" class="btn btn-primary btn-raised p-xs"><i class="material-icons" title="Add Unit">add</i></a>
                            </div>
                         </div>
                      </div>
@@ -91,7 +94,7 @@
                      </div>
                      <div class="col-md-6">
                         <div class="form-group" id="partycode_div">
-                           <label for="partycode" class="col-md-4 control-label">Party Code<span class="mandatoryfield"> *</span></label>
+                           <label for="partycode" class="col-md-4 control-label">Party Code<span class="mandatoryfield">*</span></label>
                            <div class="col-md-8">
                               <div class="col-md-10 col-xs-10 p-n">
                                  <input id="partycode" type="text" name="partycode" value="<?php if(isset($partydata)){ echo $partydata['partycode']; } ?>" class="form-control">
@@ -103,7 +106,7 @@
                         </div>
                      </div>
                      <div class="col-md-6">
-                        <div class="form-group" id="partytype_div">
+                        <div class="form-group" id="partytypeid_div">
                            <label for="partytypeid" class="col-md-4 control-label">Party Type <span class="mandatoryfield"> *</span></label>
                            <div class="col-md-8">
                               <select id="partytypeid" name="partytypeid" class="selectpicker form-control" data-live-search="true" data-size="5">
@@ -116,8 +119,7 @@
                            </div>
                         </div>
                      </div>
-                  </div>
-                  <div class="row">
+                     <div class="clearfix"></div>
                      <div class="col-md-6">
                         <div class="form-group" id="country_div">
                            <label for="countryid" class="col-md-4 control-label">Country</label>
@@ -131,6 +133,21 @@
                               </select>
                            </div>
                         </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="form-group" id="password_div">
+                           <label for="password" class="col-md-4 control-label">Password</label>
+                           <div class="col-md-8">
+                           <input id="password" type="text" name="password" class="form-control" tabindex="7" value="<?php if(isset($partydata)){ echo $this->general_model->decryptIt($partydata['password']); } ?>">
+                           
+                           </div>
+                        </div>
+                     </div>
+
+                  </div>
+                  <div class="row">
+                     <div class="col-md-6">
+                        
                         <div class="form-group" id="state_div">
                            <label for="stateid" class="col-md-4 control-label">State</label>
                            <div class="col-md-8">
@@ -474,64 +491,81 @@
             </div>
       </div>
       <div class="row">
-      <div class="col-md-12">
+   <div class="col-md-12">
       <div class="panel panel-default border-panel" id="commonpanel">
-      <div class="panel-heading"><h2>Balance Details</h2></div>
-      <div class="panel-body no-padding">
-      <div class="row" style="padding: 10px;">
-      <div class="col-md-6">
-      <div class="form-group" id="openingdate_div">
-      <label for="openingdate" class="col-md-5 control-label">Opening Balance Date<span class="mandatoryfield"> *</span></label>
-      <div class="col-md-7">
-      <input id="openingdate" type="text" name="openingdate" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['openingdate']; } ?>" onkeypress="return onlyAlphabets(event)">
+         <div class="panel-heading">
+            <h2>Balance Details</h2>
+         </div>
+         <div class="panel-body no-padding">
+            <div class="row" style="padding: 10px;">
+               <div class="col-md-6">
+                  <div class="form-group" id="openingdate_div">
+                     <label for="openingdate" class="col-md-5 control-label">Opening Balance Date<span class="mandatoryfield"> *</span></label>
+                     <div class="col-md-7">
+                        <input id="openingdate" type="text" name="openingdate" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['openingdate']; } ?>" onkeypress="return onlyAlphabets(event)">
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6 mr-5">
+                  <div class="form-group" id="openingamount_div">
+                     <label for="openingamount" class="col-md-5 control-label">Opening Balance Amount<span class="mandatoryfield"> *</span></label>
+                     <div class="col-md-7">
+                        <input id="openingamount" type="text" name="openingamount" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['openingamount']; } ?>">
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
-      </div>
-      </div>
-      <div class="col-md-6 mr-5">
-      <div class="form-group" id="openingamount_div">
-      <label for="openingamount" class="col-md-5 control-label">Opening  Balance Amount<span class="mandatoryfield"> *</span></label>
-      <div class="col-md-7">
-      <input id="openingamount" type="text" name="openingamount" class="form-control" value="<?php if (isset($partydata)) { echo $partydata['openingamount']; } ?>">
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      <div class="row">
-      <div class="col-md-12 col-xs-12">
-      <div class="panel panel-default border-panel">
-      <div class="panel-heading"><h2>Actions</h2></div>
-      <div class="panel-body">
-      <div class="row">
-      <div class="form-group text-center">
-      <div class="col-md-12 col-xs-12">
-      <?php if (!empty($partydata)) { ?>
-      <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
-      <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & NEW" class="btn btn-primary btn-raised">
-      <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
-      <?php } else { ?>
-      <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="ADD" class="btn btn-primary btn-raised">
-      <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="ADD & NEW" class="btn btn-primary btn-raised">
-      <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
-      <?php } ?>
-      <a class="<?= cancellink_class; ?>" href="<?= ADMIN_URL.$this->session->userdata(base_url() . 'submenuurl')?>" title=<?= cancellink_title ?>><?= cancellink_text ?></a>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      <input type="hidden" name="edit_country" id="edit_country" value="<?php if (isset($partydata)) { echo $partydata['countryid']; } ?>">
-      <input type="hidden" name="edit_provinceid" id="edit_provinceid" value="<?php if (isset($partydata)) { echo $partydata['provinceid']; } ?>">
-      <input type="hidden" name="edit_cityid" id="edit_cityid" value="<?php if (isset($partydata)) { echo $partydata['cityid']; } ?>">
-      </form>
-     
    </div>
 </div>
+<div class="row">
+   <div class="col-md-12 col-xs-12">
+      <div class="panel panel-default border-panel">
+         <div class="panel-heading">
+            <h2>Actions</h2>
+         </div>
+         <div class="panel-body">
+            <div class="row">
+               <div class="form-group text-center">
+                  <div class="col-md-12 col-xs-12">
+                     <?php if (!empty($partydata)) { ?>
+                     <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
+                     <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & NEW" class="btn btn-primary btn-raised">
+                     <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
+                     <?php } else { ?>
+                     <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
+                     <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & NEW" class="btn btn-primary btn-raised">
+                     <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
+                     <?php } ?>
+                     <a class="<?= cancellink_class; ?>" href="<?= ADMIN_URL.$this->session->userdata(base_url() . 'submenuurl')?>" title=<?= cancellink_title ?>><?= cancellink_text ?></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<input type="hidden" name="edit_country" id="edit_country" value="<?php if (isset($partydata)) { echo $partydata['countryid']; } ?>">
+<input type="hidden" name="edit_provinceid" id="edit_provinceid" value="<?php if (isset($partydata)) { echo $partydata['provinceid']; } ?>">
+<input type="hidden" name="edit_cityid" id="edit_cityid" value="<?php if (isset($partydata)) { echo $partydata['cityid']; } ?>">
+</form>
+</div>
+</div>
+
+<!-- model code -->
+      <div class="modal addunit" id="addcompanyModal" style="overflow-y: auto;">
+          <div class="modal-dialog" role="document" style="width: 600px;">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span></button>
+                      <h4 class="modal-title" id="post_title">Add Company</h4>
+                  </div>
+                  <div class="modal-body no-padding"></div>
+              </div>
+          </div>
+      </div>
+<!-- model code -->
 </div>
 <script>
    $(".addpro").click(function() {
@@ -553,4 +587,33 @@
            $("#adddocrow").append(result); 
        }, 'html');
    });
+
+   function addunit() {
+
+var uurl = SITE_URL + "Company/addcompanymodal";
+
+$.ajax({
+    url: uurl,
+    type: 'POST',
+    //async: false,
+    beforeSend: function() {
+        $('.mask').show();
+        $('#loader').show();
+    },
+    success: function(response) {
+        $("#addcompanyModal").modal("show");
+        $(".modal-body").html(response);
+        include('<?=ADMIN_JS_URL?>pages/Add_company.js', function() {
+        });
+    },
+    error: function(xhr) {
+        //alert(xhr.responseText);
+    },
+    complete: function() {
+        $('.mask').hide();
+        $('#loader').hide();
+    },
+
+});
+}
 </script>

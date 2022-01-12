@@ -160,6 +160,7 @@ class Party extends Admin_Controller
         $partytypeid = $PostData['partytypeid'];
         $countryid = $PostData['countryid'];
         $stateid = $PostData['stateid'];
+        $password = $PostData['password'];
         $cityid = $PostData['cityid'];
         $billingaddress = $PostData['billingaddress'];
         $shippingaddress = $PostData['shippingaddress'];
@@ -175,6 +176,7 @@ class Party extends Admin_Controller
             "pan" => $pan,
             "partycode" => $partycode,
             "partytypeid" => $partytypeid,
+            "password" => $password,
             "countryid" => $countryid,
             "provinceid" => $stateid,
             "cityid" => $cityid,
@@ -286,6 +288,7 @@ class Party extends Admin_Controller
         $partycode = $PostData['partycode'];
         $gst = $PostData['gst'];
         $pan = $PostData['pan'];
+        $password = $PostData['password'];
         $partytypeid = $PostData['partytypeid'];
         $countryid = $PostData['countryid'];
         $stateid = $PostData['stateid'];
@@ -304,6 +307,7 @@ class Party extends Admin_Controller
             "gst" => $gst,
             "pan" => $pan,
             "partytypeid" => $partytypeid,
+            "password" => $this->general_model->encryptIt($password),
             "countryid" => $countryid,
             "provinceid" => $stateid,
             "cityid" => $cityid,
@@ -716,17 +720,22 @@ class Party extends Admin_Controller
 
     public function cloop($id)
     {
-       
         $params = array('id' => $id);
-        // $query = "select * from " . TBL_MEDICINE . " where isdelete=0 and id > 1";
-        // $params['data'] = $this->Queries->get_tab_list($query, 'id', 'medicine');
         $this->load->view('rkinsite/party/item.php', $params);
     }
 
     public function addprodocitem($id)
     {
-
         $params = array('id' => $id);
-        $this->load->view('rkinsite/party/itemdoc.php', $params);
+        $this->load->view(CHANNELFOLDER.'party/itemdoc.php', $params);
     }
+
+    public function addunitformodal() {
+        $this->checkAdminAccessModule('submenu','add',$this->viewData['submenuvisibility']);
+        $this->viewData['title'] = "Add Product Unit";
+        $this->viewData['module'] = "product_unit/Add_product_unit";   
+        $this->viewData['modalview'] = "1";
+        echo $this->load->view(CHANNELFOLDER.'product_unit/Add_product_unit',$this->viewData,true);
+    }
+
 }   

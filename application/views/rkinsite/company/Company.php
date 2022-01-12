@@ -30,7 +30,7 @@
                       <th class="width8">Sr.No.</th>
                       <th>Company Type</th>
                       <th>Email</th>
-                      <th class="width15 text-right">Entry Date</th>
+                      <th class="width15z text-right">Entry Date</th>
                       <th class="width15">Action</th>
                       <th class="width5">
                         <div class="checkbox">
