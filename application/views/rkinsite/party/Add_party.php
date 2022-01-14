@@ -92,19 +92,26 @@
                            </div>
                         </div>
                      </div>
+                     <?php /*
                      <div class="col-md-6">
                         <div class="form-group" id="partycode_div">
-                           <label for="partycode" class="col-md-3 control-label">Party Code<span class="mandatoryfield">*</span></label>
-                           <div class="col-md-9">
-                              <div class="col-md-10 col-xs-10 p-n">
-                                 <input id="partycode" type="text" name="partycode" value="<?php if(isset($partydata)){ echo $partydata['partycode']; } ?>" class="form-control">
-                              </div>
-                              <div class="col-md-2 col-xs-2 pr-n pt-sm">
-                                 <a href="javascript:void(0)" class="stepy-finish btn-primary btn btn-raised" title="Generate Party Code" onclick="$('#partycode').val(randString(10))"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                              </div>
+                           <label class="col-md-3 col-sm-3 control-label" for="partycode">Party Code<span class="mandatoryfield">*</span></label>
+                           <div class="col-md-9 col-sm-9">
+                              <input type="text" id="partycode" class="form-control" name="pan" value="<?php if(isset($partydata)){ echo $partydata['partycode']; } ?>">
                            </div>
                         </div>
                      </div>
+                     */?>
+                     <div class="col-md-6">
+                        <div class="form-group" id="partycode_div">
+                           <label for="partycode" class="col-md-4 col-sm-4 control-label">Party Code<span class="mandatoryfield"></span></label>
+                           <div class="col-md-8">
+                                 <input id="partycode" type="text" name="partycode" value="<?php if(isset($partydata)){ echo $partydata['partycode']; } ?>" class="form-control">
+                            
+                           </div>
+                        </div>
+                     </div>
+
                      <div class="col-md-6">
                         <div class="form-group" id="partytypeid_div">
                            <label for="partytypeid" class="col-md-3 control-label">Party Type <span class="mandatoryfield"> *</span></label>
@@ -137,14 +144,10 @@
                            </div>
                         </div>
                      </div>
+                     
                      <div class="col-md-6">
-                        <div class="form-group" id="password_div">
-                           <label for="password" class="col-md-3 control-label">Password</label>
-                           <div class="col-md-9">
-                           <input id="password" type="text" name="password" class="form-control" tabindex="7" value="<?php if(isset($partydata)){ echo $this->general_model->decryptIt($partydata['password']); } ?>">
-                           
-                           </div>
-                        </div>
+                        <input type="checkbox" value="1" class="" style="margin-left:22px;" id="checkbox4" /> <label> Is Login</label>
+                        
                      </div>
 
                   </div>
@@ -168,6 +171,14 @@
                            </div>
                         </div>
                      </div>
+                     <div class="col-md-6">
+                        <div class="form-group" id="password_div">
+                           <label for="password" class="col-md-3 control-label">Password</label>
+                           <div class="col-md-9">
+                           <input id="password" type="text" name="password" class="form-control" tabindex="7" value="<?php if(isset($partydata)){ echo $this->general_model->decryptIt($partydata['password']); } ?>">
+                           </div>
+                        </div>
+                     </div>
                   </div>
                </div>
                <div class="col-md-4">
@@ -184,6 +195,9 @@
                      <div class="col-md-8">
                         <textarea class="form-control" id="shippingaddress" name="shippingaddress"><?php if (isset($partydata)) { echo $partydata['shippingaddress']; } ?></textarea>
                      </div>
+                     <div class="col-md-12">
+                        <input type="checkbox" class="" style="margin-left:22px;" id="checkbox1" /> Same As Billing Address
+                     </div>
                   </div>
                </div>
                <div class="col-md-4">
@@ -192,6 +206,13 @@
                      <div class="col-md-8">
                         <textarea class="form-control" id="courieraddress" name="courieraddress"><?php if (isset($partydata)) { echo $partydata['courieraddress']; } ?></textarea>
                      </div>
+                     <div class="col-md-12">
+                        <input type="checkbox" class="" style="margin-left:22px;" id="checkbox2" /> Same As Billing Address
+                     </div>
+                     <div class="col-md-12 mt-5">
+                        <input type="checkbox" class="" style="margin-left:22px;" id="checkbox3" /> Same As Shipping Address
+                     </div>
+
                   </div>
                </div>
             </div>
@@ -317,7 +338,7 @@
                            </div>
                         </div>
                         <div class="form-group" style="float:left; margin:0px 50px 20px 20px;">
-                            <button type="button" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
+                            <button type="button"  onclick="addnewproduct()" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
                         </div>
                               <input type="hidden" name="cloopdoc" id="cloopdoc" value="<?php echo $cloopdoc; ?>">
                      </div>
@@ -584,25 +605,25 @@
 <!-- model code -->
 </div>
 <script>
-   $(".addpro").click(function() {
+   // $(".addpro").click(function() {
    
-       var count1 = $('#cloopcount').val();
-       count1++;
-       $('#cloopcount').val(count1);
-       // CentreStock/cloop
-       $.get('<?= base_url('rkinsite/Party/cloop/')?>' + count1, null, function(result) {
-           $("#addtarget").append(result); // Or whatever you need to insert the result
-       }, 'html');
+   //     var count1 = $('#cloopcount').val();
+   //     count1++;
+   //     $('#cloopcount').val(count1);
+   //     // CentreStock/cloop
+   //     $.get('<?php //echo base_url('rkinsite/Party/cloop/')?>' + count1, null, function(result) {
+   //         $("#addtarget").append(result); // Or whatever you need to insert the result
+   //     }, 'html');
    
-   });
-   $(".addprodocitem").click(function() {
-       var count2 = $('#cloopdoc').val();
-       count2++;
-       $('#cloopdoc').val(count2);
-       $.get('<?= base_url('rkinsite/Party/addprodocitem/')?>' + count2, null, function(result) {
-           $("#adddocrow").append(result); 
-       }, 'html');
-   });
+   // });
+   // $(".addprodocitem").click(function() {
+   //     var count2 = $('#cloopdoc').val();
+   //     count2++;
+   //     $('#cloopdoc').val(count2);
+   //     $.get('<?php //echo base_url('rkinsite/Party/addprodocitem/')?>' + count2, null, function(result) {
+   //         $("#adddocrow").append(result); 
+   //     }, 'html');
+   // });
 
    function addcountry() {
       var uurl = SITE_URL + "Company/addcompanymodal";
@@ -656,4 +677,69 @@
 
       });
    }
+   $(document).ready(function() {
+      $('#checkbox1').on('change', function() {
+         var checked = this.checked
+         
+         if(checked==true){
+            var billingaddress = $('#billingaddress').val();
+            var shippingaddress = $('#shippingaddress').val(billingaddress);
+           
+         }else if(checked==false){
+            $('#shippingaddress').val('');
+         }
+         
+      });
+      $('#checkbox2').on('change', function() {
+         var checked = this.checked
+         
+         if(checked==true){
+            var billingaddress = $('#billingaddress').val();
+            $('#courieraddress').val(billingaddress);
+         }else if(checked==false){
+            $('#courieraddress').val('');
+         }
+         
+      });
+      $('#checkbox3').on('change', function() {
+         var checked = this.checked
+         if(checked==true){
+            var shippingaddress = $('#shippingaddress').val();
+            $('#courieraddress').val(shippingaddress);
+         }else if(checked==false){
+            $('#courieraddress').val('');
+         }
+      });
+
+      $("#password_div").hide();
+      $('#checkbox4').on('change', function() {
+         var checked = this.checked
+         if(checked==true){
+            $("#password_div").show();
+         }else if(checked==false){
+            $("#password_div").hide();
+         }
+      });
+
+      $('#checkbox3').on('change', function() {
+         var checked = this.checked
+         if(checked==true){
+            $( "#checkbox2" ).prop( "checked", false );
+            $( "#checkbox3" ).prop( "checked", true );
+         }else if(checked==false){
+            $( "#checkbox3" ).prop( "checked", false );
+            
+         }
+      });
+      $('#checkbox2').on('change', function() {
+         var checked = this.checked
+         if(checked==true){
+            $( "#checkbox3" ).prop( "checked", false );
+         }
+      });
+
+
+     
+   });
+
 </script>

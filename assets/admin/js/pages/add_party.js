@@ -15,16 +15,13 @@ function removecontectpaertion(id) {
     $('#' + id).remove();
 }
 
-$(document).ready(function() {
+
+$(document).ready(function () {
     var edit_country = $('#edit_country').val();
     $('#countryid').val(edit_country).trigger('change')
     var base_url = $('#base_url').val();
     var edit_provinceid = $('#edit_provinceid').val();
     var edit_cityid = $('#edit_cityid').val();
-
-
-
-
     if (edit_provinceid != '') {
 
         var uurl = base_url + "rkinsite/Party/getstate";
@@ -34,14 +31,14 @@ $(document).ready(function() {
             method: 'post',
             data: { country: edit_country },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 var option = ' <option value="0">Select State</option>';
-                $.each(response, function(index, data) {
+                $.each(response, function (index, data) {
                     option += '<option value="' + data['id'] + '">' + data['statename'] + '</option>';
                 });
                 $('#stateid').html(option);
                 $(".selectpicker").selectpicker("refresh");
-                
+
                 $('#stateid').val(edit_provinceid).trigger('change')
                 getcity();
             }
@@ -58,21 +55,21 @@ $(document).ready(function() {
                 method: 'post',
                 data: { stat: edit_provinceid },
                 dataType: 'json',
-                success: function(response) {
+                success: function (response) {
                     var option = ' <option value="0">Select Ctiy</option>';
-                    $.each(response, function(index, data) {
+                    $.each(response, function (index, data) {
                         option += '<option value="' + data['id'] + '">' + data['cityname'] + '</option>';
                     });
                     $('#cityid').html(option);
                     $(".selectpicker").selectpicker("refresh");
                     $('#cityid').val(edit_cityid).trigger('change');
-                  
+
                 }
             });
         }
     }
 
-    $('.countryid').change(function() {
+    $('.countryid').change(function () {
         var country = $(this).val();
         var uurl = base_url + "rkinsite/Party/getstate";
 
@@ -82,9 +79,9 @@ $(document).ready(function() {
             method: 'post',
             data: { country: country },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 var option = ' <option value="0">Select State</option>';
-                $.each(response, function(index, data) {
+                $.each(response, function (index, data) {
                     option += '<option value="' + data['id'] + '">' + data['statename'] + '</option>';
                 });
                 $('#stateid').html(option);
@@ -96,7 +93,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#stateid').change(function() {
+    $('#stateid').change(function () {
         var stat = $(this).val();
         var uurl = base_url + "rkinsite/Party/getcity";
 
@@ -106,9 +103,9 @@ $(document).ready(function() {
             method: 'post',
             data: { stat: stat },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 var option = ' <option value="0">Select City</option>';
-                $.each(response, function(index, data) {
+                $.each(response, function (index, data) {
                     option += '<option value="' + data['id'] + '">' + data['cityname'] + '</option>';
                 });
                 $('#cityid').html(option);
@@ -127,7 +124,7 @@ $(document).ready(function() {
     });
 
 
-    $('body').on('focus', ".date", function() {
+    $('body').on('focus', ".date", function () {
         $(this).datepicker({
             todayHighlight: true,
             format: 'dd/mm/yyyy',
@@ -138,13 +135,13 @@ $(document).ready(function() {
     });
 
     $("#old_receipt_div").hide();
-    $('#remove').click(function() {
+    $('#remove').click(function () {
         $('#removeoldreceipt').val('1');
     });
 
     $(".selectpicker").selectpicker("refresh");
 
-    $('#countryid').on('change', function(e) {
+    $('#countryid').on('change', function (e) {
 
         // $('#provinceid')
         //     .find('option')
@@ -162,7 +159,7 @@ $(document).ready(function() {
         // $('#cityid').selectpicker('refresh');
         // getprovince(this.value);
     });
-    $('#provinceid').on('change', function(e) {
+    $('#provinceid').on('change', function (e) {
         // $('#cityid')
         //     .find('option')
         //     .remove()
@@ -197,7 +194,6 @@ $(document).ready(function() {
     $(".add_btn").hide();
     $(".add_btn:last").show();
 });
-
 function validdocumentfile(obj, element) {
     var val = obj.val();
     var id = obj.attr('id').match(/\d+/);
@@ -225,113 +221,12 @@ function validdocumentfile(obj, element) {
     }
 }
 
-function addNewDocument() {
-
-    var cloopcount = $("#cloopcount").val();
-    cloopcount++;
-    $("#cloopcount").val(cloopcount);
-    var rowcount = parseInt($(".countdocuments:last").attr("id").match(/\d+/)) + 1;
-    var datahtml = '<div class="col-sm-12 countdocuments pl-sm pr-sm" id="countdocuments' + rowcount + '">\
-                      <input type="hidden" name="documentid[' + rowcount + ']" value="" id="documentid' + rowcount + '">\
-                      <div class="col-md-5 col-sm-5">\
-                          <div class="form-group" id="documentnumber' + rowcount + '_div">\
-                              <div class="col-sm-12 pr-xs pl-xs">\
-                                  <input id="documentnumber' + rowcount + '" name="documentnumber[' + rowcount + ']" placeholder="Enter Document Number" class="form-control documentnumber">\
-                              </div>\
-                          </div>\
-                      </div>\
-                      <div class="col-md-5 col-sm-5">\
-                          <div class="form-group" id="docfile' + rowcount + '_div">\
-                              <div class="col-sm-12 pr-xs pl-xs">\
-                                  <input type="hidden" id="isvaliddocfile' + rowcount + '" value="0">\
-                                  <input type="hidden" name="olddocfile[' + rowcount + ']" id="olddocfile' + rowcount + '" value="">\
-                                  <div class="input-group" id="fileupload' + rowcount + '">\
-                                      <span class="input-group-btn" style="padding: 0 0px 0px 0px;">\
-                                          <span class="btn btn-primary btn-raised btn-file">\
-                                          <i class="fa fa-upload"></i>\
-                                              <input type="file" name="docfile' + rowcount + '" class="docfile" id="docfile' + rowcount + '" accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),&apos;docfile' + rowcount + '&apos;)">\
-                                          </span>\
-                                      </span>\
-                                      <input type="text" readonly="" placeholder="Enter File" id="Filetextdocfile' + rowcount + '" class="form-control docfile" name="Filetextdocfile[' + rowcount + ']" value="">\
-                                  </div>\
-                              </div>\
-                          </div>\
-                      </div>\
-                      <div class="col-md-1 addrowbutton pt-md pr-xs">\
-                          <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(' + rowcount + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
-                          <button type="button" class="btn btn-primary btn-raised add_btn m-n" onclick="addNewDocument()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
-                      </div>\
-                  </div>';
-
-    $(".remove_btn:first").show();
-    $(".add_btn:last").hide();
-    $("#countdocuments" + (rowcount - 1)).after(datahtml);
-
-}
-
-function removeDocument(rowid) {
-    $("#countdocuments" + rowid).remove();
-
-    $(".add_btn:last").show();
-    if ($(".remove_btn:visible").length == 1) {
-        $(".remove_btn:first").hide();
-    }
-}
-
-function resetdata() {
-
-    $("#websitename_div").removeClass("has-error is-focused");
-    $("#companyid_div").removeClass("has-error is-focused");
-    $("#gst_div").removeClass("has-error is-focused");
-    $("#partycode_div").removeClass("has-error is-focused");
-    $("#partytype_div").removeClass("has-error is-focused");
-    $("#email_div").removeClass("has-error is-focused");
-    $("#contactno_div").removeClass("has-error is-focused");
-    $("#partytypeid_div").removeClass("has-error is-focused");
-    $("#address_div").removeClass("has-error is-focused");
-    $("#password_div").removeClass("has-error is-focused");
-    $("#employeerole_div").removeClass("has-error is-focused");
-    $("#partycode_div").removeClass("has-error is-focused");
-
-    if (ACTION == 1) {
-        $('#websitename').focus();
-        $('#websitename_div').addClass('is-focused');
-
-    } else {
-        $("#websitename").val('').focus();
-        $('#websitename_div').addClass('is-focused');
-
-        $("#companyid,#gst,#partycode,#email,#contactno,#partytypeid,#birthdate,#anniversarydate,#address,#password").val('');
-        $("#pan,#countryid,#provinceid,#cityid,#employeerole").val('0');
-        $("#male").prop("checked", true);
-        $('#allowforlogin').prop("checked", false);
-        $(".allowlogin").hide();
-        $("#education").select2("val", "");
-
-        $(".countdocuments:not(:first)").remove();
-        var divid = parseInt($(".countdocuments:first").attr("id").match(/\d+/));
-
-        $('#documenttypeid' + divid + ',#licencetype' + divid + ',#isvaliddocfile' + divid).val("0");
-        $('#documentnumber' + divid + ',#fromdate' + divid + ',#duedate' + divid + ',#olddocfile' + divid + ',#Filetextdocfile' + divid).val("");
-
-        $('#documenttype' + divid + '_div').removeClass("has-error is-focused");
-        $('#documentnumber' + divid + '_div').removeClass("has-error is-focused");
-        $('#docfile' + divid + '_div').removeClass("has-error is-focused");
-
-        $('.add_btn:first').show();
-        $('.remove_btn').hide();
-
-        $(".selectpicker").selectpicker("refresh");
-    }
-    $('html, body').animate({ scrollTop: 0 }, 'slow');
-}
-
 function include(filename, onload) {
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
     script.src = filename;
     script.type = 'text/javascript';
-    script.onload = script.onreadystatechange = function() {
+    script.onload = script.onreadystatechange = function () {
         if (script.readyState) {
             if (script.readyState === 'complete' || script.readyState === 'loaded') {
                 script.onreadystatechange = null;
@@ -343,6 +238,39 @@ function include(filename, onload) {
     };
     head.appendChild(script);
 }
+function removeproduct(divid) {
+
+    $("#countdocuments" + divid).remove();
+
+    $(".add_btn:last").show();
+    if ($(".remove_btn:visible").length == 1) {
+        $(".remove_btn:first").hide();
+    }
+}
+function resetdata() {
+    $("#voucherno_div").removeClass("has-error is-focused");
+    $("#voucherdate_div").removeClass("has-error is-focused");
+
+    if (ACTION == 0) {
+        if (latestvoucherno != "") {
+            $("#voucherno").val(latestvoucherno);
+        }
+        $('#narrationid').val('0');
+        $(".countdocuments:not(:first)").remove();
+        var divid = parseInt($(".countdocuments:first").attr("id").match(/\d+/));
+
+        $('#productid' + divid + ',#priceid' + divid).val("0");
+        $('#qty' + divid).val("1");
+        $('#price' + divid + ',#totalprice' + divid).val("");
+        getproductprice(divid);
+
+        $('.add_btn:first').show();
+        $('.remove_btn').hide();
+
+        $(".selectpicker").selectpicker('refresh');
+    }
+    $('html, body').animate({ scrollTop: 0 }, 'slow');
+}
 
 function checkvalidation(addtype = 0) {
 
@@ -352,10 +280,18 @@ function checkvalidation(addtype = 0) {
     var partytypeid = $("#partytypeid").val().trim();
     var openingdate = $("#openingdate").val().trim();
     var openingamount = $("#openingamount").val().trim();
+    var password = $("#password").val().trim();
+    // var checkbox4 = $("#checkbox4").val().trim();
 
-   
-    var isvalidwebsitename = isvalidcompanyid = isvalidgst = isvalidpartycode = isvalidpan = isvalidemail = isvalidcontactno = isvalidpartytypeid = isvalidaddress = isvalidcountryid = isvalidstateid = isvalidcityid = isvalidbillingaddress = isvalidshippingaddress = isvalidcourieraddress = isvalidfirstname = isvalidlastname = isvalidbirthdate = isvalidanniversarydate  = isvalidopeningdate = isvalidopeningamount = 0;
-    var isvalidwebsitename = 1;
+    if ($('#checkbox4').is(":checked")) {
+        checkbox4 = 3;
+    } else {
+        checkbox4 = 0;
+    }
+
+
+    var isvalidwebsitename = isvalidcompanyid = isvalidpartycode = isvalidpartytypeid = isvalidopeningdate = isvalidopeningamount = isvalidpassword = 0;
+
 
     PNotify.removeAll();
     if (websitename == '') {
@@ -399,12 +335,12 @@ function checkvalidation(addtype = 0) {
     if (partytypeid == '' || partytypeid == 0) {
         $("#partytypeid_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please enter party type !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    }else {
+    } else {
         $("#partytypeid_div").removeClass("has-error is-focused");
         isvalidpartytypeid = 1;
     }
 
-   
+
 
     if (pan == 0) {
         $("#partytype_div").addClass("has-error is-focused");
@@ -422,22 +358,35 @@ function checkvalidation(addtype = 0) {
     if (openingdate == '') {
         $("#openingdate_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please enter opening date !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    }else {
+    } else {
         $("#openingdate_div").removeClass("has-error is-focused");
-        isvalidpartytypeid = 1;
+        isvalidopeningdate = 1;
     }
 
     if (openingamount == '') {
         $("#openingamount_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please enter opening amount !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    }else {
+    } else {
         $("#openingamount_div").removeClass("has-error is-focused");
         isvalidopeningamount = 1;
     }
+    isvalidpassword = 1;
 
-   
+    if (checkbox4 == 3) {
+        isvalidpassword = 0;
+        if (password == '') {
+            $("#password_div").addClass("has-error is-focused");
+            new PNotify({ title: 'Please enter password !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        } else {
+            $("#password_div").removeClass("has-error is-focused");
+            isvalidpassword = 1;
+        }
+    }
+
+
+
     var c = 1;
-    if (isvalidwebsitename && isvalidpartycode && isvalidpartytypeid && isvalidcompanyid  &&isvalidopeningdate == 1) {
+    if (isvalidwebsitename && isvalidpartycode && isvalidpartytypeid && isvalidcompanyid && isvalidopeningamount && isvalidpassword == 1) {
         var formData = new FormData($('#party-form')[0]);
         if (ACTION == 0) {
             var uurl = SITE_URL + "party/party-add";
@@ -445,18 +394,18 @@ function checkvalidation(addtype = 0) {
                 url: uurl,
                 type: 'POST',
                 data: formData,
-                beforeSend: function() {
+                beforeSend: function () {
                     $('.mask').show();
                     $('#loader').show();
                 },
-                success: function(response) {
+                success: function (response) {
                     alert(response);
                     if (response == 1) {
                         new PNotify({ title: "Party successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
                         if (addtype == 1) {
                             resetdata();
                         } else {
-                            setTimeout(function() { window.location = SITE_URL + "Party"; }, 1500);
+                            setTimeout(function () { window.location = SITE_URL + "Party"; }, 1500);
                         }
                     } else if (response == 2) {
                         new PNotify({ title: "Party code or email or contact number already exists !", styling: 'fontawesome', delay: '3000', type: 'error' });
@@ -465,8 +414,8 @@ function checkvalidation(addtype = 0) {
                         new PNotify({ title: 'Party not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
-                error: function(xhr) {},
-                complete: function() {
+                error: function (xhr) { },
+                complete: function () {
                     $('.mask').hide();
                     $('#loader').hide();
                 },
@@ -483,18 +432,18 @@ function checkvalidation(addtype = 0) {
                 type: 'POST',
                 data: formData,
                 //async: false,
-                beforeSend: function() {
+                beforeSend: function () {
                     $('.mask').show();
                     $('#loader').show();
                 },
-                success: function(response) {
+                success: function (response) {
                     var data = JSON.parse(response);
                     if (response == 1) {
                         new PNotify({ title: "Party successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
                         if (addtype == 1) {
-                            setTimeout(function() { window.location = SITE_URL + "party/add-party"; }, 1500);
+                            setTimeout(function () { window.location = SITE_URL + "party/add-party"; }, 1500);
                         } else {
-                            setTimeout(function() { window.location = SITE_URL + "party"; }, 1500);
+                            setTimeout(function () { window.location = SITE_URL + "party"; }, 1500);
                         }
                     } else if (response == 2) {
                         new PNotify({ title: "Party code or email or contact number already exists !", styling: 'fontawesome', delay: '3000', type: 'error' });
@@ -502,8 +451,8 @@ function checkvalidation(addtype = 0) {
                         new PNotify({ title: 'Party not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
-                error: function(xhr) {},
-                complete: function() {
+                error: function (xhr) { },
+                complete: function () {
                     $('.mask').hide();
                     $('#loader').hide();
                 },
@@ -514,4 +463,55 @@ function checkvalidation(addtype = 0) {
         }
     }
 
+}
+
+function addnewproduct() {
+    var cloopdoc = $("#cloopdoc").val();
+    cloopdoc++;
+    $("#cloopdoc").val(cloopdoc);
+    var datahtml = '<div class="col-md-12">\
+    <div class="col-sm-12 countdocuments pl-sm pr-sm" id="countdocuments' + cloopdoc + '">\
+                      <input type="hidden" name="doc_id_' + cloopdoc + '" value="0" id="doc_id_' + cloopdoc + '">\
+                      <div class="col-md-5 col-sm-5">\
+                          <div class="form-group" id="documentnumber_' + cloopdoc + '">\
+                              <div class="col-sm-12 pr-xs pl-xs">\
+                                  <input id="documentname_' + cloopdoc + '" name="documentname_' + cloopdoc + '" placeholder="Enter Document Name" class="form-control documentnumber">\
+                              </div>\
+                          </div>\
+                      </div>\
+                      <div class="col-md-5 col-sm-5">\
+                          <div class="form-group" id="docfile' + cloopdoc + '">\
+                              <div class="col-sm-12 pr-xs pl-xs">\
+                                  <input type="hidden" id="isvaliddocfile' + cloopdoc + '" value="0">\
+                                  <input type="hidden" name="olddocfile[' + cloopdoc + ']" id="olddocfile' + cloopdoc + '" value="">\
+                                  <div class="input-group" id="fileupload' + cloopdoc + '">\
+                                      <span class="input-group-btn" style="padding: 0 0px 0px 0px;">\
+                                          <span class="btn btn-primary btn-raised btn-file">\
+                                          <i class="fa fa-upload"></i>\
+                                              <input type="file" name="olddocfile_' + cloopdoc + '" class="docfile" id="olddocfile_' + cloopdoc + '" accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),&apos;docfile' + cloopdoc + '&apos;)">\
+                                          </span>\
+                                      </span>\
+                                      <input type="text" readonly="" placeholder="Enter File" id="Filetextdocfile' + cloopdoc + '" class="form-control docfile" name="Filetextdocfile[' + cloopdoc + ']" value="">\
+                                  </div>\
+                              </div>\
+                          </div>\
+                      </div>\
+                      <div class="col-md-1 addrowbutton pt-md pr-xs">\
+                          <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(' + cloopdoc + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
+                      </div>\
+                      </div>\
+                  </div>';
+
+    $("#adddocrow").append(datahtml);
+
+}
+
+function removeDocument(divid) {
+
+    $("#countdocuments" + divid).remove();
+
+    $(".add_btn:last").show();
+    if ($(".remove_btn:visible").length == 1) {
+        $(".remove_btn:first").hide();
+    }
 }

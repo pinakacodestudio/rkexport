@@ -194,6 +194,8 @@ class Party extends Admin_Controller
         $insertdata = array_map('trim', $insertdata);
         $partyid = $this->Party->Add($insertdata);
         $pid = $partyid;
+
+      
         for ($i = 1; $i <= $cloopcount; $i++):
             $data = $this->input->post();
             $firstname = $this->input->post('firstname_' . $i);
@@ -229,6 +231,7 @@ class Party extends Admin_Controller
 
         if (!empty($_FILES)) {
             foreach ($_FILES as $key => $value) {
+              
                 $id = preg_replace('/[^0-9]/', '', $key);
                 $documentnumber = $PostData['documentname_' . $id];
 
@@ -253,11 +256,12 @@ class Party extends Admin_Controller
                             exit;
                         }
                         $insertdata3 = array(
-                            "partyid" => $partyid,
+                            "partyid" => $pid,
                             "doc" => $file,
                             "docname" => $documentnumber,
                         );
-
+                        echo '<pre>';
+                        print_r($insertdata3);
                         $this->Party_doc->add($insertdata3);
                     } else {
                         echo 3; //INVALID image TYPE
@@ -380,7 +384,7 @@ class Party extends Admin_Controller
         $cloopdoc = $PostData['cloopdoc'];
         $insertDocumentData = array();
         $this->load->model('Party_doc_model', 'Party_doc');
-
+    
         if (!empty($_FILES)) {
             foreach ($_FILES as $key => $value) {
               
@@ -402,7 +406,7 @@ class Party extends Admin_Controller
                             $image_height = PRODUCT_IMG_HEIGHT;
                         }
     
-                            $file = uploadFile('docfile_' . $id, 'DOCUMENT', PARTY_PATH, '*', '', 1, PARTY_LOCAL_PATH, $image_width, $image_height);
+                           echo $file = uploadFile('docfile_' . $id, 'DOCUMENT', PARTY_PATH, '*', '', 1, PARTY_LOCAL_PATH, $image_width, $image_height);
     
                         if ($file !== 0) {
                             if ($file == 2) {
@@ -435,6 +439,7 @@ class Party extends Admin_Controller
                         $file = '';
                     }
                 }
+                
             }
 
             for ($i = 1; $i <= $cloopdoc; $i++):
@@ -727,15 +732,15 @@ class Party extends Admin_Controller
     public function addprodocitem($id)
     {
         $params = array('id' => $id);
-        $this->load->view(CHANNELFOLDER.'party/itemdoc.php', $params);
+        $this->load->view(ADMINFOLDER.'party/itemdoc.php', $params);
     }
 
-    public function addunitformodal() {
-        $this->checkAdminAccessModule('submenu','add',$this->viewData['submenuvisibility']);
-        $this->viewData['title'] = "Add Product Unit";
-        $this->viewData['module'] = "product_unit/Add_product_unit";   
-        $this->viewData['modalview'] = "1";
-        echo $this->load->view(CHANNELFOLDER.'product_unit/Add_product_unit',$this->viewData,true);
-    }
+    // public function addunitformodal() {
+    //     $this->checkAdminAccessModule('submenu','add',$this->viewData['submenuvisibility']);
+    //     $this->viewData['title'] = "Add Product Unit";
+    //     $this->viewData['module'] = "product_unit/Add_product_unit";   
+    //     $this->viewData['modalview'] = "1";
+    //     echo $this->load->view(CHANNELFOLDER.'product_unit/Add_product_unit',$this->viewData,true);
+    // }
 
 }   

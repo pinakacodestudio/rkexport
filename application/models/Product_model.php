@@ -23,10 +23,10 @@ class Product_model extends Common_model {
 	
 		$query = $this->readdb->select('p.id,p.name,pp.id as priceid,pp.price,
 		IFNULL((SELECT integratedtax FROM '.tbl_hsncode.' WHERE id=p.hsncodeid),0) as tax')
-							->from(tbl_productprices." as pp")
-							->join($this->_table." as p","pp.productid=p.id","INNER")
-                            ->where("pp.sku='".$sku."' AND p.producttype=0 AND p.status=1")
-							->get();
+		->from(tbl_productprices." as pp")
+		->join($this->_table." as p","pp.productid=p.id","INNER")
+		->where("pp.sku='".$sku."' AND p.producttype=0 AND p.status=1")
+		->get();
 							
         return $query->row_array();
 	}

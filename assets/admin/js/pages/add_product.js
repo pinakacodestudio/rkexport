@@ -1079,7 +1079,7 @@ function checkvalidation() {
         $('#catalogfile_div').removeClass("has-error is-focused");
     }
 
-    if (isvalidproductname == 1 && isvalidproductslug == 1 && isvalidshortdescription == 1 && isvaliddescription == 1 && isvalidcategoryid == 1 && isvalidhsncodeid == 1 && isvalidcheckuniversal == 1 && isvalidprice == 1 && isvalidfiletext == 1 && isvalidpriority == 1 && isvalidprices == 1 && isvalidstock == 1 && isvalidcatalogfile == 1 && isvalidbarcode == 1 && isvalidsku == 1 && isvalidmultipleprice == 1 && isvalidmultiplepriceqty == 1 && isvalidunitid == 1) {
+    if (isvalidproductname == 1 && isvalidproductslug == 1 && isvalidshortdescription == 1 && isvaliddescription == 1 && isvalidcategoryid == 1 && isvalidhsncodeid == 1 && isvalidcheckuniversal == 1 && isvalidprice == 1 && isvalidfiletext == 1 && isvalidpriority == 1 && isvalidprices == 1 && isvalidstock == 1 && isvalidcatalogfile == 1  && isvalidmultipleprice == 1 && isvalidmultiplepriceqty == 1 && isvalidunitid == 1) {
 
         var formData = new FormData($('#productform')[0]);
         if (ACTION == 0) {
