@@ -152,6 +152,7 @@ class Party extends Admin_Controller
         $PostData = $this->input->post();
         $cloopcount = $PostData['cloopcount'];
 
+       
         $websitename = $PostData['websitename'];
         $companyid = $PostData['companyid'];
         $partycode = $PostData['partycode'];
@@ -167,6 +168,7 @@ class Party extends Admin_Controller
         $courieraddress = $PostData['courieraddress'];
         $openingdate = ($PostData['openingdate'] != "") ? $this->general_model->convertdate($PostData['openingdate']) : "";
         $openingamount = $PostData['openingamount'];
+        $cloopdoc = $PostData['cloopdoc'];
         $json = array();
 
         $insertdata = array(
@@ -229,58 +231,73 @@ class Party extends Admin_Controller
         $insertDocumentData = array();
         $this->load->model('Party_doc_model', 'Party_doc');
 
+
+    
         if (!empty($_FILES)) {
-            foreach ($_FILES as $key => $value) {
-              
-                $id = preg_replace('/[^0-9]/', '', $key);
-                $documentnumber = $PostData['documentname_' . $id];
 
-                if (isset($_FILES['docfile_' . $id]['name']) && $_FILES['docfile_' . $id]['name'] != '' && strpos($key, 'docfile_') !== false) {
 
-                    $temp = explode('.', $_FILES['docfile_' . $id]['name']);
+            for ($i = 1; $i <= $cloopdoc; $i++):
+       
+                $data = $this->input->post();
+                $doc_id = $this->input->post('doc_id_' . $i);
+                $documentname = $this->input->post('documentname_' . $i);
+            
+                if(isset($_FILES['olddocfile_' . $i])){
+
+                    $temp = explode('.', $_FILES['olddocfile_' . $i]['name']);
                     $extension = end($temp);
+    
                     $type = 0;
                     $image_width = $image_height = '';
                     $Imageextensions = array("bmp", "bm", "gif", "ico", "jfif", "jfif-tbnl", "jpe", "jpeg", "jpg", "pbm", "png", "svf", "tif", "tiff", "wbmp", "x-png");
+    
                     if (in_array($extension, $Imageextensions, true)) {
                         $type = 1;
                         $image_width = PRODUCT_IMG_WIDTH;
                         $image_height = PRODUCT_IMG_HEIGHT;
                     }
-
-                    $file = uploadFile('docfile_' . $id, 'DOCUMENT', PARTY_PATH, '*', '', 1, PARTY_LOCAL_PATH, $image_width, $image_height);
-
-                    if ($file !== 0) {
-                        if ($file == 2) {
-                            echo 3; //image not uploaded
-                            exit;
+    
+                    $file = uploadFile('olddocfile_' . $i, 'DOCUMENT', PARTY_PATH, '*', '', 1, PARTY_LOCAL_PATH, $image_width, $image_height);
+    
+                        if ($doc_id != 0) {
+                            $insertdata2 = array(
+                                'docname' => $documentname,
+                                'doc' => $file,
+                                'modifieddate' => $createddate,
+                                'modifiedby' => $addedby,
+                            );
+        
+                            $this->Party_doc->_where = array("id" => $doc_id);
+                            $partyid = $this->Party_doc->Edit($insertdata2);
+        
+                        } else {
+                            $insertdata2 = array(
+                                "partyid" => $pid,
+                                'docname' => $documentname,
+                                'doc' => $file,
+                                'modifieddate' => $createddate,
+                                'modifiedby' => $addedby,
+                                'createddate' => $createddate,
+                                'modifieddate' => $createddate,
+                                'addedby' => $addedby,
+                                'modifiedby' => $addedby,
+                            );
+                        
+                            $PartycontactId = $this->Party_doc->Add($insertdata2);
                         }
-                        $insertdata3 = array(
-                            "partyid" => $pid,
-                            "doc" => $file,
-                            "docname" => $documentnumber,
-                        );
-                        echo '<pre>';
-                        print_r($insertdata3);
-                        $this->Party_doc->add($insertdata3);
-                    } else {
-                        echo 3; //INVALID image TYPE
-                        exit;
-                    }
-                } else {
-                    $file = '';
+                   
+                        $json = 1;
                 }
+                endfor;
             }
-            $json = 1;
-        }
-        echo json_encode($json);
+        echo json_encode($json);        
     }
 
     public function update_party()
     {
         $pid = "";
         $PostData = $this->input->post();
-
+    
         $createddate = $this->general_model->getCurrentDateTime();
         $addedby = $this->session->userdata(base_url() . 'ADMINID');
 
@@ -386,72 +403,88 @@ class Party extends Admin_Controller
         $this->load->model('Party_doc_model', 'Party_doc');
     
         if (!empty($_FILES)) {
-            foreach ($_FILES as $key => $value) {
-              
-                $id = preg_replace('/[^0-9]/', '', $key);
-                $documentnumber = $PostData['documentname_'.$id];
-                $doc_id = $PostData['doc_id_' . $id];
 
-                if($documentnumber != ''){
-                    if (isset($_FILES['docfile_' . $id]['name']) && $_FILES['docfile_' . $id]['name'] != '' && strpos($key, 'docfile_') !== false) {
-    
-                        $temp = explode('.', $_FILES['docfile_' . $id]['name']);
-                        $extension = end($temp);
-                        $type = 0;
-                        $image_width = $image_height = '';
-                        $Imageextensions = array("bmp", "bm", "gif", "ico", "jfif", "jfif-tbnl", "jpe", "jpeg", "jpg", "pbm", "png", "svf", "tif", "tiff", "wbmp", "x-png");
-                        if (in_array($extension, $Imageextensions, true)) {
-                            $type = 1;
-                            $image_width = PRODUCT_IMG_WIDTH;
-                            $image_height = PRODUCT_IMG_HEIGHT;
-                        }
-    
-                           echo $file = uploadFile('docfile_' . $id, 'DOCUMENT', PARTY_PATH, '*', '', 1, PARTY_LOCAL_PATH, $image_width, $image_height);
-    
-                        if ($file !== 0) {
-                            if ($file == 2) {
-                                echo 3; //image not uploaded
-                                exit;
-                            }
-    
-                            if ($doc_id != 0) {
-                                $insertdata4 = array(
-                                    "docname" => $documentnumber,
-                                    "doc" => $file,
-                                );
-                                $this->Party_doc->_where = array("id" => $doc_id);
-                                $partyid = $this->Party_doc->Edit($insertdata4);
-                            } else {
-                                
-                                $insertdata4 = array(
-                                    "partyid" => $pid,
-                                    "docname" => $documentnumber,
-                                    "doc" => $file,
-                                );
-                                $this->Party_doc->Add($insertdata4);
-                            }
-    
-                        } else {
-                            echo 3; //INVALID image TYPE
-                            exit;
-                        }
-                    } else {
-                        $file = '';
-                    }
-                }
-                
-            }
 
             for ($i = 1; $i <= $cloopdoc; $i++):
-
-                $docdata = $this->input->post('documentname_' . $i);
-                $docid = $this->input->post('doc_id_' . $i);
-
-                if($docid != "" && $docdata == ""){
-                    $this->Party_doc->Delete(array("id" => $docid));                 
+       
+                $data = $this->input->post();
+            
+                 $doc_id = $this->input->post('doc_id_' . $i);
+            
+                 $documentname = $this->input->post('documentname_' . $i);
+                if($documentname==''){
+                     $doc_id;  
+                     
+                     $this->Party_doc->Delete(array("id"=>$doc_id));                 
                 }
+                if(isset($_FILES['olddocfile_' . $i])){
+                        
+        
+                        if($_FILES['olddocfile_' . $i]['name']!=''){
+                            $temp = explode('.', $_FILES['olddocfile_' . $i]['name']);
+                            $extension = end($temp);
 
+                            $type = 0;
+                            $image_width = $image_height = '';
+                            $Imageextensions = array("bmp", "bm", "gif", "ico", "jfif", "jfif-tbnl", "jpe", "jpeg", "jpg", "pbm", "png", "svf", "tif", "tiff", "wbmp", "x-png");
+
+                            if (in_array($extension, $Imageextensions, true)) {
+                                $type = 1;
+                                $image_width = PRODUCT_IMG_WIDTH;
+                                $image_height = PRODUCT_IMG_HEIGHT;
+                            }
+
+                            $file = uploadFile('olddocfile_' . $i, 'DOCUMENT', PARTY_PATH, '*', '', 1, PARTY_LOCAL_PATH, $image_width, $image_height);
+
+                           
+
+                            if ($doc_id != 0) {
+                                $insertdata2 = array(
+                                    'docname' => $documentname,
+                                    'doc' => $file,
+                                    'modifieddate' => $createddate,
+                                    'modifiedby' => $addedby,
+                                );
+            
+                                $this->Party_doc->_where = array("id" => $doc_id);
+                                $partyid = $this->Party_doc->Edit($insertdata2);
+            
+                            } else {
+                               
+                                $insertdata2 = array(
+                                    "partyid" => $pid,
+                                    'docname' => $documentname,
+                                    'doc' => $file,
+                                    'modifieddate' => $createddate,
+                                    'modifiedby' => $addedby,
+                                    'createddate' => $createddate,
+                                    'modifieddate' => $createddate,
+                                    'addedby' => $addedby,
+                                    'modifiedby' => $addedby,
+                                );
+                            
+                                 $PartycontactId = $this->Party_doc->Add($insertdata2);
+
+                               
+                            }
+                            
+                        }
+                
+                    }
+                   
             endfor;
+
+         
+                for ($i = 1; $i <= $cloopdoc; $i++):
+
+                    $docdata = $this->input->post('documentname_' . $i);
+                    $docid = $this->input->post('doc_id_' . $i);
+
+                    if($docid != "" && $docdata == ""){
+                        $this->Party_doc->Delete(array("id" => $docid));                 
+                    }
+
+                endfor;
           
             $json = 1;
 

@@ -245,54 +245,56 @@
                            <div class="col-md-12">
                               <?php 
                                  $cloopdoc = 0;
+                                 $doc_id='';
+                                 $doc='';
+                                 $docname='';
                                  $i=0;
-                                 
+                                
                                  if(isset($party_docdata[0]->id ) && !empty($party_docdata[0]->id ))  {
                                      foreach ($party_docdata as $row)
                                     {
-                                        $i++;
-                                        $cloopdoc = $cloopdoc + 1;
-                                        $doc_id = $row->id;
-                                        $doc=$row->doc;
-                                        $docname = $row->docname;
+                                       $i++;
+                                       $cloopdoc = $cloopdoc + 1;
+                                       $doc_id = $row->id;
+                                       $doc=$row->doc;
+                                       $docname = $row->docname;
                                     ?>
-                              <div class="col-md-12 countdocuments pl-sm pr-sm" id="countdocuments">
-                                 <input type="hidden" name="doc_id_<?=$cloopdoc?>" value="<?=$doc_id?>" id="doc_id">
-                                 <div id="docrowdelete_<?=$cloopdoc?>">
-                                 <div class="col-md-5 col-sm-4">
-                                    <div class="form-group" id="documentname_div">
-                                       <div class="col-md-12 pr-xs pl-xs">
-                                          <input id="documentname" name="documentname_<?=$cloopdoc?>" placeholder="Enter Document Number" class="form-control documentrow documentnumber" value="<?=$docname?>">
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="col-md-5 col-sm-4">
-                                    <div class="form-group" id="docfile_div">
-                                       <div class="col-md-12 pr-xs pl-xs">
-                                          <input type="hidden" id="isvaliddocfile" value=""> 
-                                          <input type="hidden" name="olddocfile_<?=$cloopdoc?>" id="olddocfile" value=""> 
-                                          <div class="input-group" id="fileupload">
-                                             <span class="input-group-btn" style="padding: 0 0px 0px 0px;">
-                                             <span class="btn btn-primary btn-raised btn-file"><i
-                                                class="fa fa-upload"></i>
-                                             <input type="file" name="docfile_<?=$cloopdoc?>"
-                                                class="docfile" id="docfile"
-                                                accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),'docfile')">
-                                             </span>
-                                             </span>
-                                             <input type="text" readonly="" id="Filetextdocfile"
-                                                class="form-control documentrow" placeholder="Enter File" name="Filetextdocfile_<?=$cloopdoc?>" value="<?=$doc?>">
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="col-md-2 col-sm-2">
-                                    <div class="form-group" style="float:left; margin:13px 50px 20px 20px;">
-                                          <button type="button" onclick="removedata('docrowdelete_<?=$cloopdoc?>')" class="btn-danger"><i class="fa fa-minus"></i></button>
-                                    </div>
-                                 </div>
-                                    </div>
+                          
+
+                     <input type="hidden" name="doc_id_<?=$cloopdoc?>" value="<?=$doc_id?>" id="doc_id_<?=$cloopdoc?>">
+                     <div class="col-md-12">
+                        <div class="col-sm-12 countdocuments pl-sm pr-sm" id="countdocuments<?=$cloopdoc?>">
+                      
+                      <div class="col-md-5 col-sm-5">
+                          <div class="form-group" id="documentnumber_<?=$cloopdoc?>">
+                              <div class="col-sm-12 pr-xs pl-xs">
+                                  <input id="documentname_<?=$cloopdoc?>" value="<?=$docname?>" name="documentname_<?=$cloopdoc?>" placeholder="Enter Document Name" class="form-control documentnumber">
                               </div>
+                          </div>
+                      </div>
+                      <div class="col-md-5 col-sm-5">
+                          <div class="form-group" id="docfile<?=$cloopdoc?>">
+                              <div class="col-sm-12 pr-xs pl-xs">
+                                  <input type="hidden" id="isvaliddocfile<?=$cloopdoc?>" value="0">
+                                  <input type="hidden" name="olddocfile_<?=$cloopdoc?>" id="olddocfile<?=$cloopdoc?>" value="">
+                                  <div class="input-group" id="fileupload<?=$cloopdoc?>">
+                                      <span class="input-group-btn" style="padding: 0 0px 0px 0px;">
+                                          <span class="btn btn-primary btn-raised btn-file">
+                                          <i class="fa fa-upload"></i>
+                                              <input type="file" name="olddocfile_<?=$cloopdoc?>" class="docfile" id="olddocfile_<?=$cloopdoc?>" accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),&apos;docfile<?=$cloopdoc?>&apos;)">
+                                          </span>
+                                      </span>
+                                      <input type="text" readonly="" placeholder="Enter File" id="Filetextdocfile<?=$cloopdoc?>" class="form-control docfile" name="Filetextdocfile_<?=$cloopdoc?>" value="<?=$doc?>">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-1 addrowbutton pt-md pr-xs">
+                          <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(<?=$cloopdoc?>)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
+                      </div>
+                      </div>
+                  </div>
+
                               <?php
                                  }
                                  }else {
@@ -379,54 +381,54 @@
                                       <div class="clearfix"></div>
                           
                            
-                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                              <div class="form-group" id="firstname_div">
-                                 <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
-                                 <div class="col-md-7">
-                                    <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="<?=$firstname?>">
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                              <div class="form-group" id="lastname_div">
-                                 <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
-                                 <div class="col-md-7">
-                                    <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="<?php if (isset($partydata)) { echo $lastname; } ?>">
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                              <div class="form-group" id="contactno_div">
-                                 <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
-                                 <div class="col-md-7">
-                                    <input id="contactno" type="text" name="contactno_<?=$cloopcount?>" class="form-control"  value="<?php if (isset($partydata)) { echo $contactno; } ?>">
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                              <div class="form-group" id="birthdate_div">
-                                 <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
-                                 <div class="col-md-7">
-                                    <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control" value="<?php if (isset($birthdate) && $birthdate!="0000-00-00") { echo $this->general_model->displaydate($birthdate); } ?>" readonly>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                              <div class="form-group" id="anniversarydate_div">
-                                 <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
-                                 <div class="col-md-7">
-                                    <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control" value="<?php if (isset($anniversarydate) && $anniversarydate!="0000-00-00") { echo $this->general_model->displaydate($anniversarydate); } ?>" readonly>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                              <div class="form-group" id="email_div">
-                                 <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
-                                 <div class="col-md-7">
-                                    <input id="email" type="text" name="email_<?=$cloopcount?>" class="form-control" value="<?php if (isset($email)) { echo $email; } ?>">
-                                 </div>
-                              </div>
-                           </div>
+                                    <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                                       <div class="form-group" id="firstname_div">
+                                          <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
+                                          <div class="col-md-7">
+                                             <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="<?=$firstname?>">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                                       <div class="form-group" id="lastname_div">
+                                          <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
+                                          <div class="col-md-7">
+                                             <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="<?php if (isset($partydata)) { echo $lastname; } ?>">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                                       <div class="form-group" id="contactno_div">
+                                          <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
+                                          <div class="col-md-7">
+                                             <input id="contactno" type="text" name="contactno_<?=$cloopcount?>" class="form-control"  value="<?php if (isset($partydata)) { echo $contactno; } ?>">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                                       <div class="form-group" id="birthdate_div">
+                                          <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
+                                          <div class="col-md-7">
+                                             <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control" value="<?php if (isset($birthdate) && $birthdate!="0000-00-00") { echo $this->general_model->displaydate($birthdate); } ?>" readonly>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                                       <div class="form-group" id="anniversarydate_div">
+                                          <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
+                                          <div class="col-md-7">
+                                             <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control" value="<?php if (isset($anniversarydate) && $anniversarydate!="0000-00-00") { echo $this->general_model->displaydate($anniversarydate); } ?>" readonly>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                                       <div class="form-group" id="email_div">
+                                          <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
+                                          <div class="col-md-7">
+                                             <input id="email" type="text" name="email_<?=$cloopcount?>" class="form-control" value="<?php if (isset($email)) { echo $email; } ?>">
+                                          </div>
+                                       </div>
+                                    </div>
                            
                                   </div>
                         
@@ -743,3 +745,4 @@
    });
 
 </script>
+
