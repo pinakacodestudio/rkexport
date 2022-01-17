@@ -33,7 +33,7 @@ $(document).ready(function() {
       drawCallback: function () {
         loadpopover();
       },
-      "pageLength": 50,
+      "pageLength": 10,
       /* "scrollCollapse": true,
       "scrollY": "500px", */
       "columnDefs": [{

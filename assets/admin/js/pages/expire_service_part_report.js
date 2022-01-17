@@ -10,7 +10,7 @@ $(document).ready(function () {
         "language": {
             "lengthMenu": "_MENU_"
         },
-        "pageLength": 50,
+        "pageLength": 10,
         "columnDefs": [{targets: [-2],className: "text-right"}],
         "order": [], //Initial no order.
         'serverSide': true,//Feature control DataTables' server-side processing mode.

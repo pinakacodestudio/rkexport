@@ -8,7 +8,7 @@ $(document).ready(function() {
         "language": {
           "lengthMenu": "_MENU_"
         },
-        "pageLength": 50,
+        "pageLength": 10,
         "columnDefs": [{
           'orderable': false,
           'targets': [0,2,-1]

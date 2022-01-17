@@ -10,7 +10,7 @@ $(document).ready(function() {
           "lengthMenu": "_MENU_"
         },
         
-        "pageLength": 50,
+        "pageLength": 10,
         "columnDefs": [{
           'orderable': false,
           'targets': [0,-1,-2,-3]

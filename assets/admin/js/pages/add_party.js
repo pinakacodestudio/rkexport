@@ -296,7 +296,7 @@ function checkvalidation(addtype = 0) {
     PNotify.removeAll();
     if (websitename == '') {
         $("#websitename_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter Website Name !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please enter website name !', styling: 'fontawesome', delay: '3000', type: 'error' });
     } else {
         $("#websitename_div").removeClass("has-error is-focused");
         isvalidwebsitename = 1;
@@ -304,7 +304,7 @@ function checkvalidation(addtype = 0) {
 
     if (companyid == '' || companyid == 0) {
         $("#companyid_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please Select Company!', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please select company!', styling: 'fontawesome', delay: '3000', type: 'error' });
     } else {
         $("#companyid_div").removeClass("has-error is-focused");
         isvalidcompanyid = 1;
@@ -312,7 +312,7 @@ function checkvalidation(addtype = 0) {
 
     if (gst == '') {
         $("#gst_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter Gst !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please enter GST !', styling: 'fontawesome', delay: '3000', type: 'error' });
     } else if (gst.length < 10) {
         $("#gst_div").addClass("has-error is-focused");
         new PNotify({ title: 'require minimum 14 characters !', styling: 'fontawesome', delay: '3000', type: 'error' });
@@ -344,7 +344,7 @@ function checkvalidation(addtype = 0) {
 
     if (pan == 0) {
         $("#partytype_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please Enter Pan !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please enter pan !', styling: 'fontawesome', delay: '3000', type: 'error' });
     } else {
         $("#partytype_div").removeClass("has-error is-focused");
         isvalidpan = 1;
@@ -469,7 +469,7 @@ function addnewproduct() {
     cloopdoc++;
     $("#cloopdoc").val(cloopdoc);
     var datahtml = '<div class="col-md-12">\
-    <div class="col-sm-12 countdocuments pl-sm pr-sm" id="countdocuments' + cloopdoc + '">\
+    <div class="col-sm-6 countdocuments pl-sm pr-sm" id="countdocuments' + cloopdoc + '">\
                       <input type="hidden" name="doc_id_' + cloopdoc + '" value="0" id="doc_id_' + cloopdoc + '">\
                       <div class="col-md-5 col-sm-5">\
                           <div class="form-group" id="documentnumber_' + cloopdoc + '">\

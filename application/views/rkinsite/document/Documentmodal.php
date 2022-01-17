@@ -252,7 +252,7 @@ function validfile(obj,element,elethis){
             $("#isvalid"+element).val('0');
             $("#"+element+'_div').addClass("has-error is-focused");
             
-            new PNotify({title: 'Accept only Image and PDF Files !',styling: 'fontawesome',delay: '3000',type: 'error'});
+            new PNotify({title: 'Accept only image and pdf Files !',styling: 'fontawesome',delay: '3000',type: 'error'});
         break;
     }
     }else{

@@ -28,7 +28,7 @@
                 <table id="paymenttypetable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th class="width8">Sr.No.</th>
+                      <th class="width8">Sr. No.</th>
                       <th>Name</th>
                       <th class="width15">Entry Date</th>
                       <th class="width12">Action</th>

@@ -184,7 +184,7 @@ function getproductwisesalesdata(){
           },
           
           "destroy": true,
-          "pageLength": 50,
+          "pageLength": 10,
          /*  "scrollCollapse": true,
           "scrollY":        "500px",
           "scrollX":        true, */

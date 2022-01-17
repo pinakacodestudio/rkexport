@@ -18,7 +18,7 @@ class Payment_type extends Admin_Controller {
             $this->general_model->addActionLog(4,'Payment Type','View payment type.');
 		}
 
-		$this->admin_headerlib->add_javascript("payment_type","pages/paymenttype.js");
+		$this->admin_headerlib->add_javascript("payment_type","pages/payment_type.js");
 		$this->load->view(ADMINFOLDER.'template',$this->viewData);
 	}
 	public function listing() {
@@ -66,7 +66,7 @@ class Payment_type extends Admin_Controller {
 	}
 	public function add_payment_type() {
 		
-		$this->viewData['title'] = "Add Additional Rights";
+		$this->viewData['title'] = "Add Payment Type";
 		$this->viewData['module'] = "payment_type/Add_payment_type";
 
 		$this->admin_headerlib->add_javascript("add_payment_type","pages/add_payment_type.js");
@@ -74,7 +74,7 @@ class Payment_type extends Admin_Controller {
 	}
 	public function edit_payment_type($id) {
 		
-		$this->viewData['title'] = "Edit Additional Rights";
+		$this->viewData['title'] = "Edit Payment Type";
 		$this->viewData['module'] = "payment_type/Add_payment_type";
 		$this->viewData['action'] = "1";//Edit
 
@@ -120,7 +120,7 @@ class Payment_type extends Admin_Controller {
                     $Add = $this->Payment_type->Add($insertdata);
                     if($Add){
                         if($this->viewData['submenuvisibility']['managelog'] == 1){
-                            $this->general_model->addActionLog(1,'Additional Rights','Add new additional rights.');
+                            $this->general_model->addActionLog(1,'Additional Rights','Add new payment type.');
                         }
                         $json = array('error'=>1); //Rights successfully added.
                     }else{
@@ -192,7 +192,7 @@ class Payment_type extends Admin_Controller {
                 $this->Payment_type->_where = array("id"=>$row);
                 $data = $this->Payment_type->getRecordsById();
             
-                $this->general_model->addActionLog(3,'Additional Rights','Delete '.$data['name'].' additional rights.');
+                $this->general_model->addActionLog(3,'Payment Type','Delete '.$data['name'].' payment type.');
             }
   			$this->Payment_type->Delete(array("id"=>$row));
 		}

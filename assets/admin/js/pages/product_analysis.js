@@ -56,7 +56,7 @@ function getproductanalysisdata(){
                 },
                 
                 "destroy": true,
-                "pageLength": 50,
+                "pageLength": 10,
                 "columnDefs": [{
                     'orderable': false,
                     'targets': []

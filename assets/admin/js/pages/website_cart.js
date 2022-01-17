@@ -9,7 +9,7 @@ $(document).ready(function() {
         drawCallback: function () {
           loadpopover();
         },
-        "pageLength": 50,
+        "pageLength": 10,
         "columnDefs": [{
           'orderable': false,
           'targets': [0,-2]

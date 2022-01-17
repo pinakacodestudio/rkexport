@@ -225,7 +225,7 @@
                      <div class="panel-body no-padding">
                         <div class="row" id="adddocrow">
                            <div class="col-md-12">
-                              <div class="col-md-12 pl-sm pr-sm visible-md visible-lg">
+                              <div class="col-md-6 pl-sm pr-sm visible-md visible-lg">
                                  <div class="col-md-5">
                                     <div class="form-group">
                                        <div class="col-md-12 pl-xs pr-xs">
@@ -303,7 +303,7 @@
                                      while ($count > $cloopdoc) {
                                          $cloopdoc = $cloopdoc + 1;
                                  ?>
-                              <div class="col-md-12 countdocuments pl-sm pr-sm" id="countdocuments">
+                              <div class="col-md-6 countdocuments pl-sm pr-sm" id="countdocuments">
                                  <div class="col-md-5 col-sm-5">
                                      <div class="form-group" id="documentnumber1_div">
                                          <div class="col-md-12 pr-xs pl-xs">
@@ -515,7 +515,6 @@
                   </div>
                </div>
             </div>
-      </div>
       <div class="row">
    <div class="col-md-12">
       <div class="panel panel-default border-panel" id="commonpanel">
