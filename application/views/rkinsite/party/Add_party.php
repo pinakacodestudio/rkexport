@@ -326,7 +326,7 @@
                                                      </span>
                                                  </span>
                                                  <input type="text" readonly="" id="Filetext_<?=$cloopdoc?>"
-                                                     class="form-control documentrow docfile" placeholder="Enter File" name="Filetextdocfile" value="">
+                                                     class="form-control documentrow docfile" placeholder="Enter File" name="Filetextdocfile_<?=$cloopdoc?>" value="">
                                              </div>
                                          </div>
                                      </div>
@@ -509,7 +509,7 @@
                   </div>
                    
                         <div class="form-group" style="float:left; margin:0px 50px 20px 50px;">
-                           <button type="button" class="addpro btn-primary">Add
+                           <button type="button" class="addpro btn-primary" onclick="addnewcontect()">Add
                            Data</button>
                         </div>
                   </div>

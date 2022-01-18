@@ -506,18 +506,18 @@ function addnewproduct() {
 }
 function addnewcontect() {
     var cloopcount2 = $("#cloopcount").val();
-    cloopcount++;
-    $("#cloopcount").val(cloopcount);
-    var datahtml = '<div class="data" id="contectrowdelete_<?=$id?>">\
+    cloopcount2++;
+    $("#cloopcount").val(cloopcount2);
+    var datahtml2 = '<div class="data" id="contectrowdelete_' + cloopcount2 + '">\
     <div class="row">\
-    <button type="button" style="float:right; margin:10px 19px 0px 0px;" onclick="removecontectpaertion("contectrowdelete_'+ cloopdoc +'" )" class="addprodocitem btn-danger">Remove</button>\
+    <button type="button" style="float:right; margin:10px 19px 0px 0px;" onclick="removecontectpaertion("contectrowdelete_'+ cloopcount2 +'" )" class="addprodocitem btn-danger">Remove</button>\
     <div class="clearfix"></div>\
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
-            <input type="hidden" name="contectid_<?=$id?>" value="0" id="contectid_<?=$id?>">\
+            <input type="hidden" name="contectid_' + cloopcount2 + '" value="0" id="contectid_' + cloopcount2 + '">\
                 <div class="form-group" id="firstname_div">\
                     <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>\
                     <div class="col-md-7">\
-                        <input id="firstname" type="text" name="firstname_<?=$id?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
+                        <input id="firstname" type="text" name="firstname_' + cloopcount2 + '" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
                     </div>\
                 </div>\
             </div>\
@@ -525,7 +525,7 @@ function addnewcontect() {
                 <div class="form-group" id="lastname_div">\
                     <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>\
                     <div class="col-md-7">\
-                        <input id="lastname" type="text" name="lastname_<?=$id?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
+                        <input id="lastname" type="text" name="lastname_' + cloopcount2 + '" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
                     </div>\
                 </div>\
             </div>\
@@ -533,7 +533,7 @@ function addnewcontect() {
                 <div class="form-group" id="contactno_div">\
                     <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
                     <div class="col-md-7">\
-                        <input id="contactno" type="text" name="contactno_<?=$id?>" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="">\
+                        <input id="contactno" type="text" name="contactno_' + cloopcount2 + '" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="">\
                     </div>\
                 </div>\
             </div>\
@@ -541,7 +541,7 @@ function addnewcontect() {
                 <div class="form-group" id="birthdate_div">\
                     <label for="birthdate" class="col-md-4 control-label">Birth Date</label>\
                     <div class="col-md-7">\
-                        <input id="birthdate" type="text" name="birthdate_<?=$id?>" class="form-control date" value="" readonly>\
+                        <input id="birthdate" type="text" name="birthdate_' + cloopcount2 + '" class="form-control date" value="" readonly>\
                     </div>\
                 </div>\
             </div>\
@@ -549,7 +549,7 @@ function addnewcontect() {
                 <div class="form-group" id="anniversarydate_div">\
                     <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>\
                     <div class="col-md-7">\
-                        <input id="anniversarydate" type="text" name="anniversarydate_<?=$id?>" class="form-control date" value="" readonly>\
+                        <input id="anniversarydate" type="text" name="anniversarydate_' + cloopcount2 + '" class="form-control date" value="" readonly>\
                     </div>\
                 </div>\
             </div>\
@@ -557,14 +557,14 @@ function addnewcontect() {
                 <div class="form-group" id="email_div">\
                     <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>\
                     <div class="col-md-7">\
-                        <input id="email" type="text" name="email_<?=$id?>" class="form-control" value="">\
+                        <input id="email" type="text" name="email_' + cloopcount2 + '" class="form-control" value="">\
                     </div>\
                 </div>\
             </div>\
         </div>\
     </div>\
 </div>';
-    $("#adddocrow").append(datahtml);
+    $("#addtarget").append(datahtml2);
 }
 
 function removeDocument(divid) {

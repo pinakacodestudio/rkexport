@@ -147,6 +147,7 @@ class Party extends Admin_Controller
     public function party_add()
     {
         $pid = "";
+        $json = 0;
         $createddate = $this->general_model->getCurrentDateTime();
         $addedby = $this->session->userdata(base_url() . 'ADMINID');
         $PostData = $this->input->post();
@@ -192,7 +193,7 @@ class Party extends Admin_Controller
             "addedby" => $addedby,
             "modifiedby" => $addedby,
         );
-
+        $json = 1;
         $insertdata = array_map('trim', $insertdata);
         $partyid = $this->Party->Add($insertdata);
         $pid = $partyid;
@@ -221,7 +222,7 @@ class Party extends Admin_Controller
                     'addedby' => $addedby,
                     'modifiedby' => $addedby,
                 );
-
+                $json = 1;
                 $this->load->model('Party_contact_model', 'Party_contact');
                 $PartycontactId = $this->Party_contact->Add($insertdata2);
 
@@ -231,34 +232,29 @@ class Party extends Admin_Controller
         $insertDocumentData = array();
         $this->load->model('Party_doc_model', 'Party_doc');
 
-
+      
     
-        if (!empty($_FILES)) {
-
-
-            for ($i = 1; $i <= $cloopdoc; $i++):
        
+            for ($i = 1; $i <= $cloopdoc; $i++):
                 $data = $this->input->post();
                 $doc_id = $this->input->post('doc_id_' . $i);
                 $documentname = $this->input->post('documentname_' . $i);
-            
+               if($documentname==''){
+                $doc_id;  
+                $this->Party_doc->Delete(array("id"=>$doc_id));                 
+           }
                 if(isset($_FILES['olddocfile_' . $i])){
-
                     $temp = explode('.', $_FILES['olddocfile_' . $i]['name']);
                     $extension = end($temp);
-    
                     $type = 0;
                     $image_width = $image_height = '';
                     $Imageextensions = array("bmp", "bm", "gif", "ico", "jfif", "jfif-tbnl", "jpe", "jpeg", "jpg", "pbm", "png", "svf", "tif", "tiff", "wbmp", "x-png");
-    
                     if (in_array($extension, $Imageextensions, true)) {
                         $type = 1;
                         $image_width = PRODUCT_IMG_WIDTH;
                         $image_height = PRODUCT_IMG_HEIGHT;
                     }
-    
                     $file = uploadFile('olddocfile_' . $i, 'DOCUMENT', PARTY_PATH, '*', '', 1, PARTY_LOCAL_PATH, $image_width, $image_height);
-    
                         if ($doc_id != 0) {
                             $insertdata2 = array(
                                 'docname' => $documentname,
@@ -266,10 +262,9 @@ class Party extends Admin_Controller
                                 'modifieddate' => $createddate,
                                 'modifiedby' => $addedby,
                             );
-        
                             $this->Party_doc->_where = array("id" => $doc_id);
                             $partyid = $this->Party_doc->Edit($insertdata2);
-        
+                            $json = 1;
                         } else {
                             $insertdata2 = array(
                                 "partyid" => $pid,
@@ -282,15 +277,12 @@ class Party extends Admin_Controller
                                 'addedby' => $addedby,
                                 'modifiedby' => $addedby,
                             );
-                        
+                            $json = 1;
                             $PartycontactId = $this->Party_doc->Add($insertdata2);
                         }
-                   
-                        $json = 1;
                 }
-                endfor;
-            }
-        echo json_encode($json);        
+            endfor;
+        echo $json;        
     }
 
     public function update_party()
@@ -406,24 +398,17 @@ class Party extends Admin_Controller
 
 
             for ($i = 1; $i <= $cloopdoc; $i++):
-       
                 $data = $this->input->post();
-            
                  $doc_id = $this->input->post('doc_id_' . $i);
-            
                  $documentname = $this->input->post('documentname_' . $i);
                 if($documentname==''){
                      $doc_id;  
-                     
                      $this->Party_doc->Delete(array("id"=>$doc_id));                 
                 }
                 if(isset($_FILES['olddocfile_' . $i])){
-                        
-        
                         if($_FILES['olddocfile_' . $i]['name']!=''){
                             $temp = explode('.', $_FILES['olddocfile_' . $i]['name']);
                             $extension = end($temp);
-
                             $type = 0;
                             $image_width = $image_height = '';
                             $Imageextensions = array("bmp", "bm", "gif", "ico", "jfif", "jfif-tbnl", "jpe", "jpeg", "jpg", "pbm", "png", "svf", "tif", "tiff", "wbmp", "x-png");
@@ -435,9 +420,6 @@ class Party extends Admin_Controller
                             }
 
                             $file = uploadFile('olddocfile_' . $i, 'DOCUMENT', PARTY_PATH, '*', '', 1, PARTY_LOCAL_PATH, $image_width, $image_height);
-
-                           
-
                             if ($doc_id != 0) {
                                 $insertdata2 = array(
                                     'docname' => $documentname,
@@ -445,7 +427,6 @@ class Party extends Admin_Controller
                                     'modifieddate' => $createddate,
                                     'modifiedby' => $addedby,
                                 );
-            
                                 $this->Party_doc->_where = array("id" => $doc_id);
                                 $partyid = $this->Party_doc->Edit($insertdata2);
             
@@ -464,8 +445,6 @@ class Party extends Admin_Controller
                                 );
                             
                                  $PartycontactId = $this->Party_doc->Add($insertdata2);
-
-                               
                             }
                             
                         }
