@@ -176,10 +176,13 @@ class  Product extends Admin_Controller
                 }
             }
 
+            
+        
             $row[] = ++$counter;
             $row[] = $productname;
             $row[] = $datarow->categoryname;
             $row[] = $datarow->brandname;
+            $row[] = $datarow->stock;
             $row[] = $price;
             $row[] = "<span class='pull-right'>" . $datarow->priority . "</span>";
             $row[] = $this->general_model->displaydatetime($datarow->createddate);
@@ -3755,7 +3758,6 @@ class  Product extends Admin_Controller
     public function getactiveproduct()
     {
         $PostData = $this->input->post();
-
         if (isset($PostData["term"])) {
             $Productdata = $this->Product->searchproduct(1, $PostData["term"]);
         } else if (isset($PostData["ids"])) {

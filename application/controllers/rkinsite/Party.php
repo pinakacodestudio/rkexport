@@ -198,12 +198,14 @@ class Party extends Admin_Controller
         $partyid = $this->Party->Add($insertdata);
         $pid = $partyid;
 
-      
+        $contactno = $this->input->post('contactno');
+        $contactsnoarry= implode(',',$contactno);
+
         for ($i = 1; $i <= $cloopcount; $i++):
             $data = $this->input->post();
             $firstname = $this->input->post('firstname_' . $i);
             $lastname = $this->input->post('lastname_' . $i);
-            $contactno = $this->input->post('contactno_' . $i);
+           
             $birthdate = $this->input->post('birthdate_' . $i);
             $anniversarydate = $this->input->post('anniversarydate_' . $i);
             $email = $this->input->post('email_' . $i);
@@ -213,7 +215,7 @@ class Party extends Admin_Controller
                     'partyid' => $partyid,
                     'firstname' => $firstname,
                     'lastname' => $lastname,
-                    'contactno' => $contactno,
+                    'contactno' => $contactsnoarry,
                     'birthdate' => $this->general_model->convertdate($birthdate),
                     'anniversarydate' => $this->general_model->convertdate($anniversarydate),
                     'email' => $email,
@@ -232,17 +234,17 @@ class Party extends Admin_Controller
         $insertDocumentData = array();
         $this->load->model('Party_doc_model', 'Party_doc');
 
-      
-    
+       
        
             for ($i = 1; $i <= $cloopdoc; $i++):
                 $data = $this->input->post();
-                $doc_id = $this->input->post('doc_id_' . $i);
+             
                 $documentname = $this->input->post('documentname_' . $i);
                if($documentname==''){
-                $doc_id;  
-                $this->Party_doc->Delete(array("id"=>$doc_id));                 
-           }
+            
+                          
+                }
+
                 if(isset($_FILES['olddocfile_' . $i])){
                     $temp = explode('.', $_FILES['olddocfile_' . $i]['name']);
                     $extension = end($temp);
@@ -255,17 +257,7 @@ class Party extends Admin_Controller
                         $image_height = PRODUCT_IMG_HEIGHT;
                     }
                     $file = uploadFile('olddocfile_' . $i, 'DOCUMENT', PARTY_PATH, '*', '', 1, PARTY_LOCAL_PATH, $image_width, $image_height);
-                        if ($doc_id != 0) {
-                            $insertdata2 = array(
-                                'docname' => $documentname,
-                                'doc' => $file,
-                                'modifieddate' => $createddate,
-                                'modifiedby' => $addedby,
-                            );
-                            $this->Party_doc->_where = array("id" => $doc_id);
-                            $partyid = $this->Party_doc->Edit($insertdata2);
-                            $json = 1;
-                        } else {
+                      
                             $insertdata2 = array(
                                 "partyid" => $pid,
                                 'docname' => $documentname,
@@ -279,7 +271,7 @@ class Party extends Admin_Controller
                             );
                             $json = 1;
                             $PartycontactId = $this->Party_doc->Add($insertdata2);
-                        }
+                        
                 }
             endfor;
         echo $json;        
@@ -336,14 +328,15 @@ class Party extends Admin_Controller
         $this->Party->_where = array("id" => $PostData['partyid']);
         $partyid = $this->Party->Edit($insertdata4);
 
-  
-      
+        $contactno = $this->input->post('contactno');
+        $contactsnoarry= implode(',',$contactno);
         for ($i = 1; $i <= $cloopcount; $i++):
        
+           
+
             $data = $this->input->post();
             $firstname = $this->input->post('firstname_' . $i);
             $lastname = $this->input->post('lastname_' . $i);
-            $contactno = $this->input->post('contactno_' . $i);
             $birthdate = $this->input->post('birthdate_' . $i);
             $anniversarydate = $this->input->post('anniversarydate_' . $i);
             $email = $this->input->post('email_' . $i);
@@ -354,7 +347,7 @@ class Party extends Admin_Controller
                     $insertdata2 = array(
                         'firstname' => $firstname,
                         'lastname' => $lastname,
-                        'contactno' => $contactno,
+                        'contactno' => $contactsnoarry,
                         'birthdate' => $this->general_model->convertdate($birthdate),
                         'anniversarydate' => $this->general_model->convertdate($anniversarydate),
                         'email' => $email,
@@ -370,7 +363,7 @@ class Party extends Admin_Controller
                         'partyid' => $pid,
                         'firstname' => $firstname,
                         'lastname' => $lastname,
-                        'contactno' => $contactno,
+                        'contactno' => $contactsnoarry,
                         'birthdate' => $this->general_model->convertdate($birthdate),
                         'anniversarydate' => $this->general_model->convertdate($anniversarydate),
                         'email' => $email,

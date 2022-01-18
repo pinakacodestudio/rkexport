@@ -14,7 +14,7 @@ $(document).ready(function() {
         "scrollY": "500px", */
         "columnDefs": [{
             'orderable': false,
-            'targets': [0, 4, -1, -2]
+            'targets': [0,4,-1,-2,-3]
         }, { targets: 4, className: "text-right" }],
         "order": [], //Initial no order.
         'serverSide': true, //Feature control DataTables' server-side processing mode.

@@ -17,9 +17,9 @@ class Variant_model extends Common_model {
 	
 	function getVariantDataByID($ID){
 		$query = $this->readdb->select("id,attributeid,value,priority")
-							->from($this->_table)
-							->where("id", $ID)
-							->get();
+			->from($this->_table)
+			->where("id", $ID)
+			->get();
 		
 		if ($query->num_rows() == 1) {
 			return $query->row_array();
@@ -121,4 +121,19 @@ class Variant_model extends Common_model {
 		$this->readdb->from($this->_table);
 		return $this->readdb->count_all_results();
 	}
+
+	function getActiveVariant($channelid=0,$memberid=0){
+       
+        $query = $this->readdb->select("id,value")
+			->from($this->_table)
+			->where("channelid=".$channelid." AND memberid=".$memberid)
+			->order_by("value ASC")
+			->get();
+							
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		}else {
+			return array();
+		}
+    }
 }

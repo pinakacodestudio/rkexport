@@ -504,6 +504,22 @@ function addnewproduct() {
     $("#adddocrow").append(datahtml);
 
 }
+function addcontectfield() {
+    var cloopdoc = $("#cloopdoc").val();
+    cloopdoc++;
+    $("#cloopdoc").val(cloopdoc);
+    var datahtml = '<div class="col-md-12 pl-sm pr-sm visible-md visible-lg ">\
+    <div class="form-group" id="contactno_div">\
+       <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
+       <div class="col-md-7">\
+          <input id="contactno" type="text" name="contactno[]" class="form-control"  value="">\
+       </div>\
+    </div>\
+ </div>';
+
+    $(".addcontectfilelddata").append(datahtml);
+
+}
 function addnewcontect() {
     var cloopcount2 = $("#cloopcount").val();
     cloopcount2++;

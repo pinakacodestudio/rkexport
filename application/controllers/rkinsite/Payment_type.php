@@ -120,7 +120,7 @@ class Payment_type extends Admin_Controller {
                     $Add = $this->Payment_type->Add($insertdata);
                     if($Add){
                         if($this->viewData['submenuvisibility']['managelog'] == 1){
-                            $this->general_model->addActionLog(1,'Additional Rights','Add new payment type.');
+                            $this->general_model->addActionLog(1,'Payment Type','Add new payment type.');
                         }
                         $json = array('error'=>1); //Rights successfully added.
                     }else{

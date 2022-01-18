@@ -12,7 +12,7 @@ $(document).ready(function() {
         //"scrollY": "500px",
         "columnDefs": [{
             'orderable': false,
-            'targets': [0, -1, -2]
+            'targets': [0, -1, -2,-3]
         }],
         "order": [], //Initial no order.
         'serverSide': true, //Feature control DataTables' server-side processing mode.

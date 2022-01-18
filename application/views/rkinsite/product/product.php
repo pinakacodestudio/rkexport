@@ -106,6 +106,7 @@
                       <th class="width8">Brand</th>  
                       <th class="width8 text-right">Price (<?=CURRENCY_CODE?>)</th>
                       <th class="width8 text-right">Priority</th>
+                      <th class="width8 text-right">stock</th>
                       <th class="width12">Entry Date</th>
                       <th class="width8">Actions</th>
                       <th class="width5">

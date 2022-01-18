@@ -303,6 +303,7 @@
                                      while ($count > $cloopdoc) {
                                          $cloopdoc = $cloopdoc + 1;
                                  ?>
+                                 
                               <div class="col-md-6 countdocuments pl-sm pr-sm" id="countdocuments">
                                  <div class="col-md-5 col-sm-5">
                                      <div class="form-group" id="documentnumber1_div">
@@ -320,9 +321,9 @@
                                                  <span class="input-group-btn" style="padding: 0 0px 0px 0px;">
                                                      <span class="btn btn-primary btn-raised btn-file"><i
                                                              class="fa fa-upload"></i>
-                                                         <input type="file" name="docfile_<?=$cloopdoc?>"
+                                                         <input type="file" name="olddocfile_<?=$cloopdoc?>"
                                                              class="docfile" id="docfile1"
-                                                             accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),'docfile1')">
+                                                             accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),'olddocfile1')">
                                                      </span>
                                                  </span>
                                                  <input type="text" readonly="" id="Filetext_<?=$cloopdoc?>"
@@ -397,14 +398,29 @@
                                           </div>
                                        </div>
                                     </div>
-                                    <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                                       <div class="form-group" id="contactno_div">
-                                          <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
-                                          <div class="col-md-7">
-                                             <input id="contactno" type="text" name="contactno_<?=$cloopcount?>" class="form-control"  value="<?php if (isset($partydata)) { echo $contactno; } ?>">
-                                          </div>
-                                       </div>
-                                    </div>
+
+                                   <?php
+                                   $i=0;
+                                  $contactno=(explode(',',$contactno));
+                                   foreach($contactno as $item){ $i++; ?>
+                                     
+                                      <div class="col-md-4 pl-sm pr-sm visible-md visible-lg <?php if($i==1){
+                                       echo 'addcontectfilelddata';
+                                      } ?>">
+                                         <div class="form-group" id="contactno_div">
+                                            <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
+                                            <div class="col-md-7">
+                                               <input id="contactno" type="text" name="contactno[]" class="form-control"  value="<?=$item?>">
+                                            </div>
+                                            <?php if($i==1){ ?>
+                                             <div class="form-group col-md-1" style="float:left; margin:0px 50px 20px 20px;">
+                                               <button type="button"  onclick="addcontectfield()" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                          <?php } ?>
+                                        
+                                         </div>
+                                      </div>
+                                   <?php } ?>
                                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                        <div class="form-group" id="birthdate_div">
                                           <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
@@ -461,11 +477,14 @@
                               </div>
                            </div>
                         </div>
-                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata">
                            <div class="form-group" id="contactno_div">
                               <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
-                              <div class="col-md-7">
-                                 <input id="contactno" type="text" name="contactno_<?=$cloopcount?>" class="form-control"  value="">
+                              <div class="col-md-6">
+                                 <input id="contactno" type="text" name="contactno[]" class="form-control"  value="">
+                              </div>
+                              <div class="form-group col-md-1" style="float:left; margin:0px 50px 20px 20px;">
+                                 <button type="button"  onclick="addcontectfield()" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
                               </div>
                            </div>
                         </div>

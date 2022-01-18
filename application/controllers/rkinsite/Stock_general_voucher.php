@@ -91,7 +91,7 @@ class Stock_general_voucher extends Admin_Controller {
 
         $this->load->model('Narration_model', 'Narration');
         $this->viewData['narrationdata'] = $this->Narration->getActiveNarration();
-      
+
         $this->viewData['voucherno'] = $this->general_model->generateTransactionPrefixByType(4);
         
         $this->admin_headerlib->add_javascript("bootstrap-toggle.min","bootstrap-toggle.min.js");
@@ -747,4 +747,11 @@ class Stock_general_voucher extends Admin_Controller {
             }
         }
     }
-}?>
+
+    public function getvariantdata($productid) {
+        $this->load->model('Product_model', 'product');
+        $this->viewData['variantdata'] = $this->product->getVariantByProductIdForAdmin($productid);
+       
+    }
+}
+?>

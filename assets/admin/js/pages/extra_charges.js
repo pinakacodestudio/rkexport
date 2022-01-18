@@ -10,7 +10,7 @@ $(document).ready(function() {
       "scrollY": "500px",
       "columnDefs": [{
         'orderable': false,
-        'targets': [0,-1,-2]
+        'targets': [0,-1,-2,-3]
       },
       { targets: [6], className: "text-right" }],
       "order": [], //Initial no order.

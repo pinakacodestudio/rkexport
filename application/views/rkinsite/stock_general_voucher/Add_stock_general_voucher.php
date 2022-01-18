@@ -2,6 +2,7 @@
 <?php 
 $PRODUCT_DATA = '';
 if(!empty($productlistdata)){
+    
     foreach($productlistdata as $product){
         $productname = str_replace("'","&apos;",$product['name']);
         if(DROPDOWN_PRODUCT_LIST==0){
@@ -17,19 +18,24 @@ if(!empty($productlistdata)){
     } 
 } 
 
-
-
-
 $NARRATION_DATA = '';
 if(!empty($narrationdata)){
     foreach($narrationdata as $narration){ 
         $NARRATION_DATA .= '<option value="'.$narration['id'].'">'.$narration['narration'].'</option>';
     }
 }
+$VARIANTDATA_DATA = '';
+if(!empty($variantdata)){
+    foreach($variantdata as $variant){ 
+        $VARIANTDATA_DATA .= '<option value="'.$variant['id'].'">'.$variant['value'].'</option>';
+    }
+}
+
 ?>
 <script>
     var PRODUCT_DATA = '<?=$PRODUCT_DATA?>';
     var NARRATION_DATA = '<?=$NARRATION_DATA?>';
+    var VARIANTDATA_DATA = '<?=$VARIANTDATA_DATA?>';
 </script>
 <div class="page-content">
     <div class="page-heading">            
@@ -170,9 +176,10 @@ if(!empty($narrationdata)){
                                         <div class="form-group" id="price<?=($i+1)?>_div">
                                             <div class="col-md-12">
                                                 <select id="priceid<?=($i+1)?>" name="priceid[]" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="<?=($i+1)?>">
-                                                    <option value="0">Select Variant111</option>
+                                                    <option value="0">Select Variant</option>
 
                                                     <?php 
+                                                    
                                                     if(!empty($narrationdata)){
                                              
                                                  foreach($narrationdata as $narration){ 
@@ -289,7 +296,7 @@ if(!empty($narrationdata)){
                                         <div class="col-md-12">
                                             <select id="priceid1" name="priceid[]" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
                                                 <option value="0">Select Variant</option>
-                                                <?=$NARRATION_DATA?>
+                                                <?=$VARIANTDATA_DATA?>
                                             </select>
                                         </div>
                                     </div>

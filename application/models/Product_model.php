@@ -10,7 +10,7 @@ class Product_model extends Common_model {
 	public $_datatableorder = array('p.id' => 'DESC');
 
 	//set column field database for datatable orderable
-	public $column_order = array(null,'p.name','categoryname','brandname','price','p.priority');
+	public $column_order = array(null,'p.name','categoryname','brandname','price','p.priority','stock','discount');
 
 	//set column field database for datatable searchable 
 	public $column_search = array('p.name','(IFNULL((select name from '.tbl_productcategory.' where id=categoryid),"-"))','((select name from '.tbl_brand.' where id=p.brandid))','price','discount','p.priority');
@@ -2027,13 +2027,15 @@ class Product_model extends Common_model {
 		}
 
 	}
+
+	
 	function _get_datatables_query($MEMBERID,$CHANNELID){
 		$PostData = $this->input->post();
 		$categoryid = (!empty($_REQUEST['categoryid']))?implode(",",$_REQUEST['categoryid']):"";
 		$brandid = (!empty($_REQUEST['brandid']))?implode(",",$_REQUEST['brandid']):"";
         $producttype = (!empty($_REQUEST['producttype']))?$_REQUEST['producttype']:0;
 
-		$this->readdb->select('p.id,pp.id as priceid,pc.name as categoryname,p.name,description,
+		$this->readdb->select('p.id,pp.id as priceid,pc.name as categoryname,p.name,description,pp.stock,
 							IFNULL((select name from '.tbl_brand.' where id=p.brandid),"-") as brandname,
 							p.createddate,p.priority,p.status,isuniversal,
 							(SELECT GROUP_CONCAT(pc.variantid) FROM '.tbl_productcombination.' as pc INNER JOIN '.tbl_productprices.' as pp on pp.id=pc.priceid WHERE pp.productid=p.id) as variantid,p.quantitytype,
@@ -2048,9 +2050,11 @@ class Product_model extends Common_model {
 			$this->readdb->select('ps.id as psid');
 			$this->_datatableorder = array("productpriority"=>"asc");
 		}
+
+	
 		$this->readdb->from($this->_table." as p");
-		$this->readdb->join(tbl_productcategory." as pc","pc.id=p.categoryid","INNER");
-		$this->readdb->join(tbl_productprices." as pp","pp.productid=p.id","INNER");
+		$this->readdb->join(tbl_productcategory." as pc","pc.id=p.categoryid","LEFT");
+		$this->readdb->join(tbl_productprices." as pp","pp.productid=p.id","LEFT");
 		$this->readdb->where("p.memberid='".$MEMBERID."' AND p.channelid='".$CHANNELID."'");
 		$this->readdb->where("(FIND_IN_SET(p.categoryid, '".$categoryid."')>0 OR '".$categoryid."'='')");
 		$this->readdb->where("(FIND_IN_SET(p.brandid, '".$brandid."')>0 OR '".$brandid."'='')");
@@ -3994,7 +3998,7 @@ class Product_model extends Common_model {
 	   
 		$query = $this->readdb->select('id, name, isuniversal,IFNULL((select filename from '.tbl_productimage.' where productid=p.id limit 1),"'.PRODUCTDEFAULTIMAGE.'") as productimage')
 						->from($this->_table.' as p')
-						->where("memberid='".$MEMBERID."' AND channelid='".$CHANNELID."'")
+						->where("memberid='".$MEMBERID."' AND channelid='".$CHANNELID."' AND status=0")
 						->order_by('name ASC')
 						->get();
        
@@ -4658,7 +4662,8 @@ class Product_model extends Common_model {
 		$query = $this->readdb->select("pp.id,
 				CONCAT(pp.price,' ',IFNULL((SELECT CONCAT('[',GROUP_CONCAT(v.value),']') FROM ".tbl_productcombination." as pc INNER JOIN ".tbl_variant." as v ON v.id=pc.variantid WHERE pc.priceid=pp.id),'')) as memberprice,
 
-				IF(p.isuniversal=0,IFNULL((SELECT GROUP_CONCAT(v.value SEPARATOR ', ') FROM ".tbl_productcombination." as pc INNER JOIN ".tbl_variant." as v ON v.id=pc.variantid WHERE pc.priceid=pp.id),''),(SELECT IF(min(price)=max(price),min(price),CONCAT(min(price),' - ',max(price))) FROM ".tbl_productquantityprices." WHERE productpricesid=pp.id)) as variantname,
+				IF(p.isuniversal=0,IFNULL((SELECT GROUP_CONCAT(v.value SEPARATOR ', ') FROM ".tbl_productcombination." as pc INNER JOIN ".tbl_variant." as v ON v.id=pc.variantid WHERE pc.priceid=pp.id),''),
+				(SELECT IF(min(price)=max(price),min(price),CONCAT(min(price),' - ',max(price))) FROM ".tbl_productquantityprices." WHERE productpricesid=pp.id)) as variantname,
 
 				IFNULL((SELECT integratedtax FROM ".tbl_hsncode." WHERE id=p.hsncodeid),0) as tax,p.isuniversal,
 
@@ -4667,6 +4672,11 @@ class Product_model extends Common_model {
 				->join(tbl_productprices." as pp","pp.productid=p.id","INNER")
 				->where("p.id",$productid)
 				->get();
+
+			
+				echo $this->db->last_query();
+				
+
 		return $query->result_array();
 	}
 

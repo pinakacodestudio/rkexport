@@ -16,9 +16,9 @@ class Narration_model extends Common_model {
     function getNarrationDataByID($ID){
        
         $query = $this->readdb->select("id,narration,status")
-							->from($this->_table)
-							->where("id='".$ID."'")
-							->get();
+			->from($this->_table)
+			->where("id='".$ID."'")
+			->get();
 							
 		if ($query->num_rows() == 1) {
 			return $query->row_array();
