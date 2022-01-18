@@ -25,7 +25,7 @@ function checkvalidation(addtype = 0) {
     if (name == '') {
 
         $("#paymenttype_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter payment method !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please enter payment type !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidname = 0;
     } else {
 
@@ -51,20 +51,20 @@ function checkvalidation(addtype = 0) {
                 success: function(response) {
                     var data = JSON.parse(response);
                     if (data['error'] == 1) {
-                        new PNotify({ title: "Payment Method successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
+                        new PNotify({ title: "Payment type successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
                         if (addtype == 1) {
                             resetdata();
                         } else {
                             setTimeout(function() { window.location = SITE_URL + "payment-type"; }, 500);
                         }
                     } else if (data['error'] == 2) {
-                        new PNotify({ title: 'Payment Method already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Payment type already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 4) {
-                        new PNotify({ title: 'This Payment Method not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'This Payment type not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else {
-                        new PNotify({ title: 'Payment Method not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Payment type not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
                 error: function(xhr) {
@@ -93,16 +93,16 @@ function checkvalidation(addtype = 0) {
                 success: function(response) {
                     var data = JSON.parse(response);
                     if (data['error'] == 1) {
-                        new PNotify({ title: "Payment Method successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
+                        new PNotify({ title: "Payment type successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
                         setTimeout(function() { window.location = SITE_URL + "payment-type"; }, 1500);
                     } else if (data['error'] == 2) {
-                        new PNotify({ title: 'Payment Method already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Payment type already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 4) {
-                        new PNotify({ title: 'This Payment Method not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'This Payment type not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else {
-                        new PNotify({ title: 'Payment Method not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Payment type not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
                 error: function(xhr) {
