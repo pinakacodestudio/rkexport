@@ -15,10 +15,6 @@ $('#remove').click(function() {
     $('#removeoldreceipt').val('1');
 });
 
-// $('body').on('focus', ".date", function() {
-//     $(this).datepicker();
-// });
-
 function resetdata() {
 
     $("#currency_div").removeClass("has-error is-focused");

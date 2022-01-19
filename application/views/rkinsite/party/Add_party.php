@@ -261,39 +261,46 @@
                                     ?>
                           
 
-                     <input type="hidden" name="doc_id_<?=$cloopdoc?>" value="<?=$doc_id?>" id="doc_id_<?=$cloopdoc?>">
-                     <div class="col-md-12">
-                        <div class="col-sm-12 countdocuments pl-sm pr-sm" id="countdocuments<?=$cloopdoc?>">
-                      
-                      <div class="col-md-5 col-sm-5">
-                          <div class="form-group" id="documentnumber_<?=$cloopdoc?>">
-                              <div class="col-sm-12 pr-xs pl-xs">
-                                  <input id="documentname_<?=$cloopdoc?>" value="<?=$docname?>" name="documentname_<?=$cloopdoc?>" placeholder="Enter Document Name" class="form-control documentnumber">
+                                 <input type="hidden" name="doc_id_<?=$cloopdoc?>" value="<?=$doc_id?>" id="doc_id_<?=$cloopdoc?>">
+                                 
+                                    <div class="col-sm-6 countdocuments pl-sm pr-sm" id="countdocuments<?=$cloopdoc?>">
+                                    <div class="col-md-5 col-sm-5">
+                                       <div class="form-group" id="documentnumber_<?=$cloopdoc?>">
+                                             <div class="col-sm-12 pr-xs pl-xs">
+                                                <input id="documentname_<?=$cloopdoc?>" value="<?=$docname?>" name="documentname_<?=$cloopdoc?>" placeholder="Enter Document Name" class="form-control documentnumber">
+                                             </div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-5 col-sm-5">
+                                       <div class="form-group" id="docfile<?=$cloopdoc?>">
+                                             <div class="col-sm-12 pr-xs pl-xs">
+                                                <input type="hidden" id="isvaliddocfile<?=$cloopdoc?>" value="0">
+                                                <input type="hidden" name="olddocfile_<?=$cloopdoc?>" id="olddocfile<?=$cloopdoc?>" value="">
+                                                <div class="input-group" id="fileupload<?=$cloopdoc?>">
+                                                   <span class="input-group-btn" style="padding: 0 0px 0px 0px;">
+                                                         <span class="btn btn-primary btn-raised btn-file">
+                                                         <i class="fa fa-upload"></i>
+                                                            <input type="file" name="olddocfile_<?=$cloopdoc?>" class="docfile" id="olddocfile_<?=$cloopdoc?>" accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),&apos;docfile<?=$cloopdoc?>&apos;)">
+                                                         </span>
+                                                   </span>
+                                                   <input type="text" readonly="" placeholder="Enter File" id="Filetextdocfile<?=$cloopdoc?>" class="form-control docfile" name="Filetextdocfile_<?=$cloopdoc?>" value="<?=$doc?>">
+                                                </div>
+                                             </div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-1 addrowbutton pt-md pr-xs">
+                                       <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(<?=$cloopdoc?>)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
+                                       
+                                      
+                                    </div>
+                                    <div class="col-md-1 addrowbutton pt-md pr-xs">
+                                       <button type="button" class="btn btn-primary btn-raised remove_btn m-n" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
+                                       
+                                      
+                                    </div>
+
+                                  
                               </div>
-                          </div>
-                      </div>
-                      <div class="col-md-5 col-sm-5">
-                          <div class="form-group" id="docfile<?=$cloopdoc?>">
-                              <div class="col-sm-12 pr-xs pl-xs">
-                                  <input type="hidden" id="isvaliddocfile<?=$cloopdoc?>" value="0">
-                                  <input type="hidden" name="olddocfile_<?=$cloopdoc?>" id="olddocfile<?=$cloopdoc?>" value="">
-                                  <div class="input-group" id="fileupload<?=$cloopdoc?>">
-                                      <span class="input-group-btn" style="padding: 0 0px 0px 0px;">
-                                          <span class="btn btn-primary btn-raised btn-file">
-                                          <i class="fa fa-upload"></i>
-                                              <input type="file" name="olddocfile_<?=$cloopdoc?>" class="docfile" id="olddocfile_<?=$cloopdoc?>" accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),&apos;docfile<?=$cloopdoc?>&apos;)">
-                                          </span>
-                                      </span>
-                                      <input type="text" readonly="" placeholder="Enter File" id="Filetextdocfile<?=$cloopdoc?>" class="form-control docfile" name="Filetextdocfile_<?=$cloopdoc?>" value="<?=$doc?>">
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-1 addrowbutton pt-md pr-xs">
-                          <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(<?=$cloopdoc?>)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
-                      </div>
-                      </div>
-                  </div>
 
                               <?php
                                  }
@@ -332,6 +339,11 @@
                                          </div>
                                      </div>
                                  </div>
+                                 <div class="col-md-2 col-sm-2">
+                                    <div class="form-group" style="float:left; margin:15px 1px 0px 0px;">
+                                       <button type="button"  onclick="addnewproduct()" class="btn btn-primary btn-raised remove_btn m-n"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                 </div>
                                 
                                  </div>
                               <?php
@@ -340,9 +352,7 @@
                                  ?>
                            </div>
                         </div>
-                        <div class="form-group" style="float:left; margin:0px 50px 20px 20px;">
-                            <button type="button"  onclick="addnewproduct()" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
-                        </div>
+                        
                               <input type="hidden" name="cloopdoc" id="cloopdoc" value="<?php echo $cloopdoc; ?>">
                      </div>
                   </div>

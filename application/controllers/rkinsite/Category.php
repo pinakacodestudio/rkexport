@@ -111,7 +111,7 @@ class Category extends Admin_Controller {
         $modifieddate = $this->general_model->getCurrentDateTime();
      
         $this->form_validation->set_rules('name', 'category name', 'required|min_length[2]');
-        $this->form_validation->set_rules('categoryslug', 'category link', 'required|min_length[2]');
+       
         
         $json = array();
         if ($this->form_validation->run() == FALSE) {
@@ -119,43 +119,16 @@ class Category extends Admin_Controller {
         	$json = array('error'=>5, 'message'=>$validationError);
 	    }else{
 
-            if($_FILES["fileimage"]['name'] != ''){
-                if($_FILES["fileimage"]['size'] != '' && $_FILES["fileimage"]['size'] >= UPLOAD_MAX_FILE_SIZE){
-                    $json = array('error'=>6);	// IMAGE FILE SIZE IS LARGE
-                    echo json_encode($json);
-                    exit;
-                }
-                $image = uploadFile('fileimage', 'CATEGORY_PATH', CATEGORY_PATH, '*', "", 1, CATEGORY_LOCAL_PATH);
-                if($image !== 0){
-                    if($image==2){
-						$json = array('error'=>3);	// IMAGE NOT UPLOADED
-                        echo json_encode($json);
-                    	exit;
-					}
-                } else {
-                    $json = array('error'=>4); //INVALID IMAGE TYPE
-                    echo json_encode($json);
-                    exit;
-                }   
-            } else {
-                $image = '';
-            }
-
-            $this->Category->_where = 'maincategoryid="'.$maincategoryid.'" AND (name="'.$name.'" OR slug="'.$slug.'")';
+            $this->Category->_where = 'maincategoryid="'.$maincategoryid.'" AND (name="'.$name.'")';
             $sqlname = $this->Category->getRecordsByID();
 
             if(empty($sqlname)){
-                
                 $this->Category->_fields = "IFNULL(max(priority)+1,1) as maxpriority";
                 $this->Category->_where = ("maincategoryid='".$maincategoryid."'");
                 $category = $this->Category->getRecordsById();
-                
                 $maxpriority = (!empty($category))?$category['maxpriority']:1;
-                
                 $InsertData = array(
                                     'name' => $name,
-                                    'slug' => $slug,
-                                    'image'=>$image,
                                     'maincategoryid' => $maincategoryid, 
                                     'priority' => $maxpriority,
                                     'status' => $status,
@@ -164,9 +137,7 @@ class Category extends Admin_Controller {
                                     'modifieddate' => $modifieddate,                             
                                     'modifiedby' => $modifiedby 
                                 );
-            
                 $CategoryID = $this->Category->Add($InsertData);
-                
                 if($CategoryID != 0){
                     if($this->viewData['submenuvisibility']['managelog'] == 1){
                         $this->general_model->addActionLog(1,'Product Category','Add new '.$name.' product category.');
@@ -186,16 +157,13 @@ class Category extends Admin_Controller {
     public function category_edit($categoryid) {
         $this->checkAdminAccessModule('submenu', 'edit', $this->viewData['submenuvisibility']);
         $this->viewData['title'] = "Edit category";
-        //$this->viewData['sectiondata'] = $this->getsections();
         $this->viewData['module'] = "category/Add_category";
         $this->viewData['action'] = "1"; //Edit
         $this->viewData['VIEW_STATUS'] = "1";
-        // $this->viewData['sectionid'] = $sectionid; 
         $this->viewData['maincategorydata'] = $this->Category->getmaincategory();
 
         $this->Category->_where = array('id' => $categoryid);
         $this->viewData['categorydata'] = $this->Category->getRecordsByID();
-        //   print_R(  $this->viewData['categorydata']);exit;
         $this->admin_headerlib->add_javascript("topic","pages/add_category.js");
         $this->load->view(ADMINFOLDER.'template',$this->viewData);
     }
@@ -206,7 +174,7 @@ class Category extends Admin_Controller {
         $PostData = $this->input->post();
 
         $this->form_validation->set_rules('name', 'Name', 'required|min_length[2]');
-        $this->form_validation->set_rules('categoryslug', 'category link', 'required|min_length[2]');
+      
 
         $json = array();
         if ($this->form_validation->run() == FALSE) {
@@ -215,7 +183,6 @@ class Category extends Admin_Controller {
 	    }else{
 
             $name = isset($PostData['name']) ? trim($PostData['name']) : '';
-            $slug = isset($PostData['categoryslug']) ? trim($PostData['categoryslug']) : '';
             $id = isset($PostData['categoryid']) ? trim($PostData['categoryid']) : '';
             $maincategoryid = isset($PostData['maincategoryid']) ? trim($PostData['maincategoryid']) : '0';      
             $modifiedby = $this->session->userdata(base_url().'ADMINID');
@@ -223,39 +190,11 @@ class Category extends Admin_Controller {
             $status = $PostData['status'];
             $oldfileimage= isset($PostData['oldfileimage']) ? trim($PostData['oldfileimage']) : '';
             
-            $this->Category->_where = 'id!="'.$id.'" AND maincategoryid="'.$maincategoryid.'" AND (name="'.$name.'" OR slug="'.$slug.'")';// AND maincategoryid = ".$maincategoryid;
+            $this->Category->_where = 'id!="'.$id.'" AND maincategoryid="'.$maincategoryid.'" AND (name="'.$name.'")';// AND maincategoryid = ".$maincategoryid;
             $sqlname = $this->Category->getRecordsByID();
-            if($_FILES["fileimage"]['name'] != ''){
-
-                if($_FILES["fileimage"]['size'] != '' && $_FILES["fileimage"]['size'] >= UPLOAD_MAX_FILE_SIZE){
-                    $json = array('error'=>6);	// IMAGE FILE SIZE IS LARGE
-                    echo json_encode($json);
-                    exit;
-                }
-
-                $FLNM1 = reuploadFile('fileimage', 'CATEGORY_PATH',$oldfileimage, CATEGORY_PATH, '*', "", 1, CATEGORY_LOCAL_PATH);
-                if($FLNM1 !== 0){
-                    if($FLNM1==2){
-						$json = array('error'=>3); // IMAGE NOT UPLOADED
-                        echo json_encode($json);
-                        exit;
-					}
-                } else {
-                    $json = array('error'=>4); //INVALID IMAGE TYPE
-                    echo json_encode($json);
-                    exit;
-                }   
-            }elseif($PostData['removeimg']==1) {
-                unlinkfile('CATEGORY_PATH', $oldfileimage, CATEGORY_PATH);
-                $FLNM1 = "";
-            } 
-            else {
-                $FLNM1 =  $oldfileimage;
-            }
+            
             if(empty($sqlname)){
                 $updateData = array('name' => $name,
-                                    'slug' => $slug,
-                                    'image' => $FLNM1,
                                     'status'=>$status,
                                     'maincategoryid' => $maincategoryid, 
                                     'modifiedby' => $modifiedby,

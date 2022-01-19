@@ -7,7 +7,7 @@ class Expense_type extends Admin_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->viewData = $this->getAdminSettings('submenu','Expense_type');
-		$this->load->model('Expense_type_model','Expense_type');
+		$this->load->model('Expense_category_model','Expense_type');
 	}
 	public function index() {
 

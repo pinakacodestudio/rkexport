@@ -42,7 +42,7 @@ class Payment_type extends Admin_Controller {
             }
             //Delete and Enable/Disable Button
             if(in_array($rollid, $delete)) {
-                $actions.='<a class="'.delete_class.'" href="javascript:void(0)" title="'.delete_title.'" onclick=deleterow('.$datarow->id.',"","Additional-rights","'.ADMIN_URL.'payment_type/delete_mul_payment_type") >'.delete_text.'</a>';
+                $actions.='<a class="'.delete_class.'" href="javascript:void(0)" title="'.delete_title.'" onclick=deleterow('.$datarow->id.',"","Additional-rights","'.ADMIN_URL.'payment-type/delete-mul-payment-type") >'.delete_text.'</a>';
 
                 $checkbox = '<div class="checkbox"><input id="deletecheck'.$datarow->id.'" onchange="singlecheck(this.id)" type="checkbox" value="'.$datarow->id.'" name="deletecheck'.$datarow->id.'" class="checkradios">
                             <label for="deletecheck'.$datarow->id.'"></label></div>';

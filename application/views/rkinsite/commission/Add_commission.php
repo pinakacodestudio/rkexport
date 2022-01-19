@@ -26,7 +26,7 @@
 						<div class="form-group" id="commission_div">
 							<label for="commission" class="col-sm-4 control-label">Commission <span class="mandatoryfield">*</span></label>
 							<div class="col-sm-6">
-								<input id="commission" onkeypress="return isNumber(event)" type="text" name="commission" value="<?php if(!empty($commissiondata)){ echo $commissiondata['commission']; } ?>" class="form-control">
+								<input id="commission" onkeypress="return isNumberKey(this, event);" type="text" name="commission" value="<?php if(!empty($commissiondata)){ echo $commissiondata['commission']; } ?>" class="form-control">
 							</div>
 						</div>
 
@@ -61,3 +61,21 @@
 
     </div> <!-- .container-fluid -->
 </div> <!-- #page-content -->
+<script type="text/javascript">
+    function isNumberKey(txt, evt) {
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if (charCode == 46) {
+        //Check if the text already contains the . character
+        if (txt.value.indexOf('.') === -1) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        if (charCode > 31 &&
+          (charCode < 48 || charCode > 57))
+          return false;
+      }
+      return true;
+    }
+  </script>

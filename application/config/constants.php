@@ -778,7 +778,7 @@ define("tbl_currencyrate","currencyrate");
 define("tbl_paymenttype","paymenttype");
 define("tbl_commission","commission");
 define("tbl_transporttype","transporttype");
-define("tbl_expensetype","expensetype");
+define("tbl_expensetype","expensecategory");
 define("tbl_branch","branch");
 define("tbl_company","company");
 define("tbl_partycontact","partycontact");

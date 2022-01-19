@@ -18,7 +18,7 @@
                   <?php 
                     if (strpos($submenuvisibility['submenuadd'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){
                   ?>
-                  <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>user/user_add" title=<?=addbtn_title?>><?=addbtn_text;?></a>
+                  <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>user/user-add" title=<?=addbtn_title?>><?=addbtn_text;?></a>
                   <?php
                     }if(strpos($submenuvisibility['submenudelete'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){
                   ?>

@@ -28,8 +28,8 @@
                 <table id="transporttable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th class="width8">Sr.No.</th>
-                      <th>Name</th>
+                      <th class="width8">Sr. No.</th>
+                      <th>Transport Type</th>
                       <th class="width15 text-right">Entry Date</th>
                       <th class="width12">Action</th>
                       <th class="width5">

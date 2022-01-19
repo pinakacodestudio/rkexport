@@ -498,6 +498,9 @@ function addnewproduct() {
                       <div class="col-md-1 addrowbutton pt-md pr-xs">\
                           <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(' + cloopdoc + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
                       </div>\
+                      <div class="col-md-1 addrowbutton pt-md pr-xs">\
+                          <button type="button" class="btn btn-primary btn-raised remove_btn m-n" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
+                           </div>\
                       </div>\
                   </div>';
 

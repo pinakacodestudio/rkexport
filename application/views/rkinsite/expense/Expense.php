@@ -107,10 +107,10 @@
                       <th class="width18">Employee</th>
                       <th>Category</th>
                       <th>Date</th>
-                      <th>Amount</th>
+                      <th>Amount(₹)</th>
                       <th>Remarks</th>
                       <th>Status</th> 
-                      <th >Action</th>
+                      <th>Action</th>
                       <th class="width5">
                                 <div class="checkbox table-checkbox">
                                     <input id="deletecheckall" onchange="allchecked()" type="checkbox" value="all">

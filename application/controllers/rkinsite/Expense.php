@@ -30,20 +30,16 @@ class Expense extends Admin_Controller{
 
     public function listing(){
         $list = $this->Expense->get_datatables();
-       
         $data = array();
         $counter = $_POST['start'];
         foreach ($list as $Expense) {
             $row = array();
-
             $row[] = ++$counter;
-  
             $row[] = $Expense->employeename;
             $row[] = $Expense->expensecategoryname;
             $row[] = $this->general_model->displaydate($Expense->date);
             $row[] = "<span class='float-right'>".$Expense->amount."</span>";
             $row[] = $Expense->remarks;
-
             $Action = $Expensestatus='';
 
             $btn_cls=$sts_val=$active1=$active2=$active3="";
@@ -99,7 +95,7 @@ class Expense extends Admin_Controller{
         $output = array(
         "draw" => $_POST['draw'],
         "recordsTotal" => $this->Expense->count_all(),
-        //"recordsFiltered" => $this->Expense->count_filtered(),
+        // "recordsFiltered" => $this->Expense->count_filtered(),
         "data" => $data,
     );
         echo json_encode($output);
@@ -116,8 +112,12 @@ class Expense extends Admin_Controller{
         }
         $this->viewData['userdata'] = $this->User->getUserListData($where);
 
-        $this->Expensecategory->_where = array("status"=>1);
+        // $this->Expensecategory->_where = array("status"=>1);
+        // $this->viewData['expensecategory'] = $this->Expensecategory->getRecordByID();
+
+        $this->load->model('Expense_category_model', 'Expensecategory');
         $this->viewData['expensecategory'] = $this->Expensecategory->getRecordByID();
+
 
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_javascript("Expense", "pages/add_expense.js");
@@ -277,7 +277,6 @@ class Expense extends Admin_Controller{
         $updatedata=array_map('trim', $updatedata);
         $this->Expense->_where = array("id"=>$PostData['expenseid']);
         $Edit = $this->Expense->Edit($updatedata);
-        //$Edit = 1;
         if ($Edit) {
             echo 1;
         } else {

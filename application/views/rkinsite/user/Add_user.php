@@ -35,9 +35,9 @@
 									</div>
 								</div>
 		
-								<div class="form-group" id="partycode_div">
+								<div class="form-group" id="employeecode_div">
 									<div class="col-md-12">
-										<label class="control-label" for="partycode">Party Cord<span class="mandatoryfield">*</span></label>
+										<label class="control-label" for="partycode">Employee Code <span class="mandatoryfield">*</span></label>
 										<input id="partycode" class="form-control" name="partycode" value="<?php if(isset($userdata)){ echo $userdata['partycode']; } ?>" type="text" tabindex="1" onkeypress="return onlyAlphabets(event)">
 									</div>
 								</div>
@@ -108,7 +108,7 @@
 									</div>
 								</div>
 							
-								<div class="form-group" id="userrole_div">
+								<div class="form-group" id="branch_div">
 									<div class="col-sm-12">
 										<label class="control-label" for="branchid">Branch Name <span class="mandatoryfield">*</span><a href="<?php echo base_url().ADMINFOLDER?>branch" class="stepy-finish btn-primary btn btn-raised" target="_blank" title="VIEW"><i class="fa fa-plus" aria-hidden="true"></i></a></label>
 										<select id="branchid" name="branchid" class="selectpicker form-control" data-select-on-tab="true" data-size="5" tabindex="8">
@@ -121,9 +121,9 @@
 								</div>
 								<div class="form-group" id="userrole_div">
 									<div class="col-sm-12">
-										<label class="control-label">Gender<span class="mandatoryfield">*</span></label><br>
+										<label class="control-label">Gender <span class="mandatoryfield">*</span></label><br>
 										<label class="radio-inline">
-										<input type="radio" name="gender" value="1" <?php if(isset($userdata['gender'])){ if($userdata['gender']==1){echo 'checked';}} ?> >Male
+										<input type="radio" name="gender" value="1" checked <?php if(isset($userdata['gender'])){ if($userdata['gender']==1){echo 'checked';}} ?> >Male
 										</label>
 										<label class="radio-inline">
 										<input type="radio" name="gender" value="0" <?php if(isset($userdata['gender'])){ if($userdata['gender']!=1){echo 'checked';}} ?>>Female

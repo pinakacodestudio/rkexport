@@ -2,3 +2,8 @@ ALTER TABLE `user` CHANGE `partycord` `partycode` VARCHAR(30) CHARACTER SET utf8
 
 ---------------------
 ALTER TABLE `party` ADD `password` VARCHAR(50) NULL AFTER `pan`;
+
+--------------------------19-jan-22-----------------------------------
+RENAME TABLE `rkexport`.`expensetype` TO `rkexport`.`expensecategory`;
+ALTER TABLE `expensecategory` ADD `status` INT NULL AFTER `modifiedby`;
+ALTER TABLE `expensecategory` CHANGE `status` `status` INT(11) NULL DEFAULT '1';

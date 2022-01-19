@@ -54,10 +54,10 @@
                           <div class="form-group">
                             <div class="col-sm-12 text-center">
                               <?php if(!empty($productunitdata)){ ?>
-                                <input type="button" id="submit" onclick="checkvalidationunit()" name="submit" value="UPDATE" class="btn btn-primary btn-raised">
+                                <input type="button" id="submit" onclick="checkvalidationunit()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
                                 <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
                               <?php }else{ ?>
-                                <input type="button" id="submit" onclick="checkvalidationunit()" name="submit" value="ADD" class="btn btn-primary btn-raised">
+                                <input type="button" id="submit" onclick="checkvalidationunit()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
                                 <!-- <input type="button" id="submit" onclick="checkvalidationunit(1)" name="submit" value="SAVE & ADD NEW" class="btn btn-primary btn-raised"> -->
                                 <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
                                 

@@ -128,8 +128,10 @@ function checkvalidation(){
   var email = $("#email").val().trim();
   var password = $("#password").val();
   var userroleid = $("#userroleid").val();
+  var partycode = $("#partycode").val();
+  var branchid = $("#branchid").val();
 
-  var isvalidname = isvaliduserroleid = isvalidmobileno = isvalidemail = 0;
+  var isvalidname = isvaliduserroleid = isvalidmobileno = isvalidemail = isvalidpartycode = isvalidbranchid = 0;
   var isvalidpassword = 1;
 
   
@@ -147,22 +149,18 @@ function checkvalidation(){
       isvalidname = 1;
     }
   }
-  
- 
-  if(mobileno == ''){
-    $("#mobile_div").addClass("has-error is-focused");
-    new PNotify({title: 'Please enter mobile no. !',styling: 'fontawesome',delay: '3000',type: 'error'});
-    isvalidmobileno = 0;
+
+  if(partycode == ''){
+    $("#employeecode_div").addClass("has-error is-focused");
+    new PNotify({title: 'Please enter Employee Code !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    isvalidpartycode = 0;
   }else{
-    if(mobileno.length<10){
-      $("#mobileno_div").addClass("has-error is-focused");
-      new PNotify({title: 'Mobile no. allow minimum 10 digits !',styling: 'fontawesome',delay: '3000',type: 'error'});
-      isvalidmobileno = 0;
-    }else{
-      $("#mobile_div").removeClass("has-error is-focused");
-      isvalidmobileno = 1;
-    }
+      $("#employeecode_div").removeClass("has-error is-focused");
+      isvalidpartycode = 1;
+    
   }
+
+  
   if(email == ''){
     $("#email_div").addClass("has-error is-focused");
     new PNotify({title: 'Please enter email !',styling: 'fontawesome',delay: '3000',type: 'error'});
@@ -177,7 +175,40 @@ function checkvalidation(){
         isvalidemail = 1;
     }
   }
-  
+
+  if(mobileno == ''){
+    $("#mobile_div").addClass("has-error is-focused");
+    new PNotify({title: 'Please enter mobile no. !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    isvalidmobileno = 0;
+  }else{
+    if(mobileno.length<10){
+      $("#mobileno_div").addClass("has-error is-focused");
+      new PNotify({title: 'Mobile no. allow minimum 10 digits !',styling: 'fontawesome',delay: '3000',type: 'error'});
+      isvalidmobileno = 0;
+    }else{
+      $("#mobile_div").removeClass("has-error is-focused");
+      isvalidmobileno = 1;
+    }
+  }
+
+  if(userroleid == 0){
+    $("#userrole_div").addClass("has-error is-focused");
+    new PNotify({title: 'Please select employee role !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    isvaliduserroleid = 0;
+  }else { 
+    $("#userrole_div").removeClass("has-error is-focused");
+    isvaliduserroleid = 1;
+  }
+
+  if(branchid == '' || branchid==0){
+    $("#branch_div").addClass("has-error is-focused");
+    new PNotify({title: 'Please select branch !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    isvalidbranchid = 0;
+  }else{
+      $("#branch_div").removeClass("has-error is-focused");
+      isvalidbranchid = 1;
+    
+  }
   if(password==''){
     $("#password_div").addClass("has-error is-focused");
     new PNotify({title: 'Please enter password !',styling: 'fontawesome',delay: '3000',type: 'error'});
@@ -192,24 +223,10 @@ function checkvalidation(){
       isvalidpassword = 1;
     }
   }
-  
-  if(userroleid == 0){
-    $("#userrole_div").addClass("has-error is-focused");
-    new PNotify({title: 'Please select employee role !',styling: 'fontawesome',delay: '3000',type: 'error'});
-    isvaliduserroleid = 0;
-  }else { 
-    $("#userrole_div").removeClass("has-error is-focused");
-    isvaliduserroleid = 1;
-  }
-  
-  if(isvalidname==1 && isvalidmobileno==1 && isvalidemail==1 && isvalidpassword==1 && isvaliduserroleid == 1){
-
-  
+  if(isvalidname==1 && isvalidmobileno==1 && isvalidemail==1 && isvalidpassword==1 && isvaliduserroleid && isvalidpartycode==isvalidbranchid== 1){
     var formData = new FormData($('#userform')[0]);
     if(ACTION==0){
-
       var uurl = SITE_URL+"user/add-user";
-      
       $.ajax({
         url: uurl,
         type: 'POST',

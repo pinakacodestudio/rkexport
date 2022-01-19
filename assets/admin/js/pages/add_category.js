@@ -27,10 +27,6 @@ $(document).ready(function() {
 
 });
 
-function setslug(name) {
-    $('#categoryslug').val(name.toLowerCase().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-'));
-}
-
 function validation() {
 
     $('input[type="text"]').removeClass("has-not-error");
@@ -40,15 +36,8 @@ function validation() {
     $('#categoryid').removeClass("has-error");
 
     var name = $('#name').val().trim();
-    var categoryslug = $("#categoryslug").val().trim();
-    // var imagename = $('#imagename').val();
-    // var fileimage = $('#fileimage').val();
-    // var oldfileimage = $('#oldfileimage').val();
-    //var maincategoryid = $('#maincategoryid').val();
-
-    var isvalidname = isvalidcategoryslug = 0;
-    //var isvalimaincatid = 0;
-    //var isvalidimage = 0;
+    var isvalidname  = 0;
+ 
 
     PNotify.removeAll();
     if (name == "") {
@@ -63,21 +52,8 @@ function validation() {
             isvalidname = 1;
         }
     }
-    if (categoryslug == '') {
-        $("#categoryslug_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter category link !', styling: 'fontawesome', delay: '3000', type: 'error' });
-        isvalidcategoryslug = 0;
-    } else {
-        if (categoryslug.length < 2) {
-            $("#categoryslug_div").addClass("has-error is-focused");
-            new PNotify({ title: "Category link require minimum 2 characters !", styling: 'fontawesome', delay: '3000', type: 'error' });
-            isvalidcategoryslug = 0;
-        } else {
-            isvalidcategoryslug = 1;
-        }
-    }
-
-    if (isvalidname == 1 && isvalidcategoryslug == 1) {
+   
+    if (isvalidname == 1) {
         var formData = new FormData($('#form-category')[0]);
 
         if (ACTION == 0) { // INSERT

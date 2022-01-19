@@ -2,12 +2,12 @@
 	var profileimgpath = '<?php echo PROFILE; ?>';
 	var defaultprofileimgpath = '<?php echo DEFAULT_PROFILE; ?>';
 </script>
-<ol class="breadcrumb">
+<!-- <ol class="breadcrumb">
   <li class="breadcrumb-item"><a href="<?php echo base_url(); ?><?php echo ADMINFOLDER; ?>dashboard">Dashboard</a></li>
   <li class="breadcrumb-item"><a href="javascript:void(0)"><?=$this->session->userdata(base_url() . 'mainmenuname')?></a></li>
   <li class="breadcrumb-item"><a href="<?php echo base_url(); ?><?=$this->session->userdata(base_url() . 'submenuurl')?>"><?=$this->session->userdata(base_url() . 'submenuname')?></a></li>
   <li class="breadcrumb-item active">View <?=$this->session->userdata(base_url() . 'submenuname')?></li>
-</ol>
+</ol> -->
 <style>
 .datepicker1 {
     text-align: left !important;
@@ -34,12 +34,14 @@
                     </div>
                     <div class="col-md-3 br2">
                     <?=$list['name']?>
+                    <?php if($list['name']!=''){ echo $list['name']; }else{ echo "-";} ?>
                     </div>
                     <div class="col-md-3">
                     Mobil Number
                     </div>
                     <div class="col-md-3">
-                    <?=$list['mobileno']?>
+                    <?php if($list['mobileno']!=''){ echo $list['mobileno']; }else{ echo "-";} ?>
+                
                     </div>
                 </div>
               </div>
@@ -55,7 +57,8 @@
                     Email Id
                     </div>
                     <div class="col-md-3">
-                    <?=$list['email']?>
+                 
+                    <?php if($list['email']!=''){ echo $list['email']; }else{ echo "-";} ?>
                     </div>
                   </div>
                 </div>
@@ -65,13 +68,14 @@
                     Designation
                     </div>
                     <div class="col-md-3 br2">
-                   <?=$list['designationname']?>
+              
+                   <?php if($list['designationname']!=''){ echo $list['designationname']; }else{ echo "-";} ?>
                     </div>
                     <div class="col-md-3">
                     Address
                     </div>
                     <div class="col-md-3">
-                    <?=$list['address']?>
+                    <?php if($list['address']!=''){ echo $list['address']; }else{ echo "-";} ?>
                     </div>
                   </div>
                 </div>
@@ -81,13 +85,14 @@
                     Department
                     </div>
                     <div class="col-md-3 br2">
-                    <?=$list['departmentname']?>
+                   
+                    <?php if($list['departmentname']!=''){ echo $list['departmentname']; }else{ echo "-";} ?>
                     </div>
                     <div class="col-md-3">
                     City
                     </div>
                     <div class="col-md-3">
-                    <?=$list['cityname']?>
+                    <?php if($list['cityname']!=''){ echo $list['cityname']; }else{ echo "-";} ?>
                     </div>
                   </div>
                 </div>
@@ -97,13 +102,14 @@
                     Party Cord
                     </div>
                     <div class="col-md-3 br2">
-                    <?=$list['partycode'];?>
+             
+                    <?php if($list['partycode']!=''){ echo $list['partycode']; }else{ echo "-";} ?>
                     </div>
                     <div class="col-md-3">
                     State
                     </div>
                     <div class="col-md-3">
-                    <?=$list['statename']?>
+                    <?php if($list['statename']!=''){ echo $list['statename']; }else{ echo "-";} ?>
                     </div>
                   </div>
                 </div>
@@ -113,14 +119,16 @@
                     Branch Name
                     </div>
                     <div class="col-md-3 br2">
-                    <?=$list['branchname'] ?>
+                
+                    <?php if($list['branchname']!=''){ echo $list['branchname']; }else{ echo "-";} ?>
                     </div>
                     <div class="col-md-3">
                     Country
 
                     </div>
                     <div class="col-md-3">
-                    <?=$list['countryname']?>
+          
+                    <?php if($list['countryname']!=''){ echo $list['countryname']; }else{ echo "-";} ?>
                     </div>
                   </div>
                 </div>

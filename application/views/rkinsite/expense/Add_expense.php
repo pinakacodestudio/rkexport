@@ -42,12 +42,13 @@
 										<select class="selectpicker form-control" id="expensecategory" name="expensecategory"  data-size="5" data-select-on-tab="true" data-live-search="true">
 										<option value="0">Select Category</option>
 										<?php foreach($expensecategory as $ec){?>
-											<option value="<?php echo $ec['id']; ?>" <?php if(isset($expense_data)){ if($expense_data['expensecategoryid'] == $ec['id']){ echo 'selected'; } } ?>><?php echo $ec['name']; ?></option>
+											<?php print_r($ec);?>
+											<option value="<?php echo $ec['id']; ?>">
+											<?php echo $ec['expense_type']; ?></option>
 										<?php } ?>
 										</select>
 									</div>
 								</div>
-								
 							</div>
 						</div>
 						<div class="col-md-12 p-n">
@@ -104,58 +105,7 @@
 										</div>
 									</div>
 								</div>
-								<?php /*if(isset($expense_data)) { ?>
-      								<?php if($expense_data['receipt']!=""){ ?>
-										
-											<div class="form-group" id="receipt_download_div">
-												<label for="focusedinput" class="col-md-4 control-label">Attach Receipt </label>
-												<div class="col-md-8">
-													<div class="col-sm-4">
-														<button type="button" id="remove_old_receipt" class="btn btn-danger btn-raised">Delete</button>
-													</div>
-													<div class="col-sm-4">	
-														<a href="<?php echo EXPENSE_RECEIPT; ?><?php echo $expense_data['receipt'] ?>" class="btn btn-primary btn-raised" download="<?php echo $expense_data['receipt'] ?>">Download </a>
-													</div>
-												</div>
-											</div>
-								
-											<div class="form-group row" id="old_receipt_div">
-												<label for="focusedinput" class="col-md-4 control-label">Attach Receipt </label>
-												<div class="col-md-8">
-													<div class="input-group" id="fileupload1">
-                                            			<span class="input-group-btn" style="padding: 0 0px 0px 0px;">
-                                                		<span class="btn btn-primary btn-raised btn-sm btn-file">Browse...
-                                                			<input type="file" name="catalogfile"  id="catalogfile" >
-                                                		</span>
-														</span>  
-														<div class="col-sm-20">                                   
-                                                    		<input type="text" id="catalogfiletext" class="form-control" name="catalogfiletext" readonly >
-														</div>
-													</div>
-
-												</div>                                      
-											</div>
-									<?php }
-						 		}else{
-								?>
-									<div class="form-group row" id="receipt_div">
-										<label for="focusedinput" class="col-md-4 control-label">Attach Receipt </label>
-										<div class="col-md-8">
-											<div class="input-group" id="fileupload1">
-												<span class="input-group-btn" style="padding: 0 0px 0px 0px;">
-												<span class="btn btn-primary btn-raised btn-sm btn-file">Browse...
-													<input type="file" name="catalogfile"  id="catalogfile" >
-												</span>
-												</span>  
-												<div class="col-md-8">                                   
-													<input type="text" id="catalogfiletext" class="form-control" name="catalogfiletext" readonly >
-												</div>
-											</div>
-
-										</div>                                      
-									</div>
-									
-								<?php }*/ ?> 
+							
 							</div>
 							
 						</div>	

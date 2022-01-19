@@ -1,3 +1,9 @@
+const options = { 
+    day: '2-digit',
+    month: '2-digit', 
+    year: 'numeric', 
+  };
+
 function resetdata() {
     $("#name_div").removeClass("has-error is-focused");
     $("#slug_div").removeClass("has-error is-focused");
@@ -5,7 +11,7 @@ function resetdata() {
         $('html, body').animate({ scrollTop: 0 }, 'slow');
     } else {
         $('#commission').val('');
-        $('#date').val('');
+      
         $('html, body').animate({ scrollTop: 0 }, 'slow');
     }
 }
@@ -35,11 +41,11 @@ function checkvalidation(addtype = 0) {
     PNotify.removeAll();
 
     if (commission == '') {
-        $("#currency_div").addClass("has-error is-focused");
+        $("#commission_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please enter commission !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidcommission = 0;
     } else {
-        $("#currency_div").removeClass("has-error is-focused");
+        $("#commission_div").removeClass("has-error is-focused");
         isvalidcommission = 1;
     }
 
@@ -106,7 +112,7 @@ function checkvalidation(addtype = 0) {
                     console.log(response);
                     var data = JSON.parse(response);
                     if (data['error'] == 1) {
-                        new PNotify({ title: "successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
+                        new PNotify({ title: "Successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
                         setTimeout(function() { window.location = SITE_URL + "Commission"; }, 1500);
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });

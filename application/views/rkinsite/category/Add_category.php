@@ -28,49 +28,8 @@
                           <input type="text" id="name" class="form-control" name="name" value="<?php if(isset($categorydata)){ echo $categorydata['name']; } ?>" onkeyup="setslug(this.value);">
                       </div>
                     </div>
-                    <div class="form-group" id="categoryslug_div">
-                      <label class="col-sm-4 control-label" for="categoryslug">Link <span class="mandatoryfield"> * </span></label>
-                      <div class="col-md-8">
-                        <input type="text" id="categoryslug" class="form-control" name="categoryslug" value="<?php if(isset($categorydata)){ echo $categorydata['slug']; } ?>">
-                      </div>
-                    </div>
-                    <div class="form-group" id="image_div">
-                      <label class="col-md-4 control-label" for="fileImg">Image File</label>
-                      <div class="col-md-8">
-                        <input type="hidden" name="oldfileimage" id="oldfileimage" value="<?php if(isset($categorydata)){ echo $categorydata['image'];} ?>">
-                        <input type="hidden" name="removeimg" id="removeimg">
-                        <?php
-                            if(isset($categorydata) && $categorydata['image'] != ''){ 
-                        ?>
-                            <div class="imageupload" id="fileImg">
-                                <div class="file-tab">
-                                    <img src="<?php if(isset($categorydata)){ echo CATEGORY_IMAGE.$categorydata['image']; } ?>" alt="Image preview" class="thumbnail" style="max-width: 150px; max-height: 150px">
-                                    <label id="filelable" class="btn btn-primary btn-raised btn-sm btn-file">
-                                        <span id="fileimagebtn">Change</span>
-                                        <!-- The file is stored here. -->
-                                        <input type="file" name="fileimage" id="fileimage" accept=".bmp,.bm,.gif,.ico,.jfif,.jfif-tbnl,.jpe,.jpeg,.jpg,.pbm,.png,.svf,.tif,.tiff,.wbmp,.x-png">
-                                    </label>
-                                    <button type="button" class="btn btn-danger btn-raised btn-sm btn-file" id="remove">Remove</button>
-                                </div>
-                            </div>
-                        <?php
-                            } else {
-                        ?>
-                            <div class="imageupload" id="fileImg">
-                                <div class="file-tab">
-                                    <img src="" alt="Image preview" class="thumbnail" style="max-width: 150px; max-height: 150px">
-                                    <label id="logolabel" class="btn btn-primary btn-raised btn-sm btn-file">
-                                        <span id="fileimagebtn">Select Image</span>
-                                        <input type="file" name="fileimage" id="fileimage" accept=".bmp,.bm,.gif,.ico,.jfif,.jfif-tbnl,.jpe,.jpeg,.jpg,.pbm,.png,.svf,.tif,.tiff,.wbmp,.x-png">
-                                    </label>
-                                    <button type="button" class="btn btn-danger btn-raised btn-sm" id="remove">Remove</button>
-                                </div>
-                            </div>
-                        <?php
-                            }
-                        ?>
-                      </div>
-                    </div>
+                  
+                   
                     <div class="form-group">
                       <label for="focusedinput" class="col-md-4 control-label">Activate</label>
                       <div class="col-md-8">
@@ -92,10 +51,10 @@
                       <label for="focusedinput" class="col-sm-4 control-label"></label>
                       <div class="col-sm-8">
                         <?php if(!empty($categorydata)){ ?>
-                          <input type="button" id="submit" onclick="validation()" name="submit" value="UPDATE" class="btn btn-primary btn-raised">
+                          <input type="button" id="submit" onclick="validation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
                           <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
                         <?php }else{ ?>
-                          <input type="button" id="submit" onclick="validation()" name="submit" value="ADD" class="btn btn-info btn-raised">
+                          <input type="button" id="submit" onclick="validation()" name="submit" value="SAVE" class="btn btn-info btn-raised">
                           <input type="reset" name="reset" value="RESET" class="btn btn-primary btn-raised">
                         <?php } ?>
                         <a class="<?=cancellink_class;?>" href="<?=ADMIN_URL?>category" title=<?=cancellink_title?>><?=cancellink_text?></a>
