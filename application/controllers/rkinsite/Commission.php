@@ -45,7 +45,7 @@ class Commission extends Admin_Controller
             $checkbox = '';
             //Edit Button
             if (in_array($rollid, $edit)) {
-                $actions .= '<a class="' . edit_class . '" href="' . ADMIN_URL . 'Commission/edit_commission/' . $datarow->id . '/' . '" title="' . edit_title . '">' . edit_text . '</a>';
+                $actions .= '<a class="' . edit_class . '" href="' . ADMIN_URL . 'Commission/edit-commission/' . $datarow->id . '/' . '" title="' . edit_title . '">' . edit_text . '</a>';
             }
             //Delete and Enable/Disable Button
             if (in_array($rollid, $delete)) {
@@ -74,7 +74,7 @@ class Commission extends Admin_Controller
     public function add_commission()
     {
 
-        $this->viewData['title'] = "Add Additional Rights";
+        $this->viewData['title'] = "Add Commission";
         $this->viewData['module'] = "commission/Add_commission";
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");

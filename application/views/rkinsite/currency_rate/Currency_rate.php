@@ -27,7 +27,7 @@
                 <table id="additionalrightstable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th class="width8">Sr.No.</th>
+                      <th class="width8">Sr. No.</th>
                       <th>Currency</th>
                       <th>Value</th>
                       <th>Date</th>

@@ -27,8 +27,8 @@
                 <table id="commissiontable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th class="width8">Sr.No.</th>
-                      <th>Commission Type</th>
+                      <th class="width8">Sr. No.</th>
+                      <th>Commission</th>
                       <th>Date</th>
                       <th class="width15 text-right">Entry Date</th>
                       <th class="width12">Action</th>

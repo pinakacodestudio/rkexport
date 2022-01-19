@@ -24,7 +24,7 @@
 						<input type="hidden" name="id" value="<?php if(isset($commissiondata)){ echo $commissiondata['id']; } ?>">
 						
 						<div class="form-group" id="commission_div">
-							<label for="commission" class="col-sm-4 control-label">Commission Type <span class="mandatoryfield">*</span></label>
+							<label for="commission" class="col-sm-4 control-label">Commission <span class="mandatoryfield">*</span></label>
 							<div class="col-sm-6">
 								<input id="commission" onkeypress="return isNumber(event)" type="text" name="commission" value="<?php if(!empty($commissiondata)){ echo $commissiondata['commission']; } ?>" class="form-control">
 							</div>

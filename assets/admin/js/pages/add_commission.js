@@ -48,7 +48,7 @@ function checkvalidation(addtype = 0) {
 
         var formData = new FormData($('#addcommissionform')[0]);
         if (ACTION == 0) {
-            var uurl = SITE_URL + "Commission/currencyrate_add";
+            var uurl = SITE_URL + "Commission/currencyrate-add";
 
             $.ajax({
                 url: uurl,
@@ -91,7 +91,7 @@ function checkvalidation(addtype = 0) {
                 processData: false
             });
         } else {
-            var uurl = SITE_URL + "Commission/update_commission";
+            var uurl = SITE_URL + "Commission/update-commission";
 
             $.ajax({
                 url: uurl,

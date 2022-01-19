@@ -27,7 +27,10 @@ function checkvalidation(addtype = 0) {
         $("#paymenttype_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please enter payment type !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidname = 0;
-    } else {
+    }else if(name.length < 3){
+        $("#partytype_div").addClass("has-error is-focused");
+        new PNotify({title: 'Party type require minimum 3 character !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    }else {
 
         $("#paymenttype_div").removeClass("has-error is-focused");
         isvalidname = 1;
@@ -79,7 +82,7 @@ function checkvalidation(addtype = 0) {
                 processData: false
             });
         } else {
-            var uurl = SITE_URL + "payment-type/update_payment_type";
+            var uurl = SITE_URL + "payment-type/update-payment-type";
 
             $.ajax({
                 url: uurl,
