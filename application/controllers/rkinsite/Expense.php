@@ -71,11 +71,11 @@ class Expense extends Admin_Controller{
                 $row[] = $Expensestatus;
             }
             if (strpos($this->viewData['submenuvisibility']['submenuedit'], ','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false) {
-                $Action .= '<a class="'.edit_class.'" href="'.ADMIN_URL.'expense/edit_expense/'.$Expense->id.'" title='.edit_title.'>'.edit_text.'</a>';
+                $Action .= '<a class="'.edit_class.'" href="'.ADMIN_URL.'expense/edit-expense/'.$Expense->id.'" title='.edit_title.'>'.edit_text.'</a>';
             }
 
             if (strpos($this->viewData['submenuvisibility']['submenudelete'], ','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false) {
-                $Action.=' <a class="'.delete_class.'" href="javascript:void(0)" title="'.delete_title.'" onclick=deleterow('.$Expense->id.',"'.ADMIN_URL.'expense/check_expense_use","expense","'.ADMIN_URL.'expense/delete_mulexpense") >'.delete_text.'</a>';
+                $Action.=' <a class="'.delete_class.'" href="javascript:void(0)" title="'.delete_title.'" onclick=deleterow('.$Expense->id.',"'.ADMIN_URL.'expense/check-expense-use","expense","'.ADMIN_URL.'expense/delete_mulexpense") >'.delete_text.'</a>';
             }
 
     

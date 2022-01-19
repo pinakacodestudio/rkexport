@@ -26,7 +26,7 @@
 						<div class="form-group" id="commission_div">
 							<label for="commission" class="col-sm-4 control-label">Commission <span class="mandatoryfield">*</span></label>
 							<div class="col-sm-6">
-								<input id="commission" onkeypress="return isNumberKey(this, event);" type="text" name="commission" value="<?php if(!empty($commissiondata)){ echo $commissiondata['commission']; } ?>" class="form-control">
+								<input id="commission"  type="text" name="commission" value="<?php if(!empty($commissiondata)){ echo $commissiondata['commission']; } ?>" class="form-control" onkeypress="return decimal_number_validation(event,this.value);">
 							</div>
 						</div>
 

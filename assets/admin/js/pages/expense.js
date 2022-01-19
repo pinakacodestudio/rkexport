@@ -12,6 +12,11 @@ $(document).ready(function() {
       'orderable': false,
       'targets': [0,-1,-2]
     }],
+    drawCallback: function () {
+      loadpopover();
+    },
+    "order": [], //Initial no order.
+    'serverSide': true,
     //Initial no order.
     'serverSide': true,//Feature control DataTables' server-side processing mode.
     // Load data for the table's content from an Ajax source
