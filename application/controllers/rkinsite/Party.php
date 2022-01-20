@@ -116,8 +116,6 @@ class Party extends Admin_Controller
             redirect(ADMINFOLDER . "pagenotfound");
         }
 
-
-
         $this->load->model('Country_model', 'Country');
         $this->viewData['countrydata'] = $this->Country->getActivecountrylist();
 
@@ -152,7 +150,9 @@ class Party extends Admin_Controller
         $addedby = $this->session->userdata(base_url() . 'ADMINID');
         $PostData = $this->input->post();
         $cloopcount = $PostData['cloopcount'];
-
+        echo '<pre>';
+        print_r($PostData);
+   
        
         $websitename = $PostData['websitename'];
         $companyid = $PostData['companyid'];
@@ -198,8 +198,7 @@ class Party extends Admin_Controller
         $partyid = $this->Party->Add($insertdata);
         $pid = $partyid;
 
-        $contactno = $this->input->post('contactno');
-        $contactsnoarry= implode(',',$contactno);
+     
 
         for ($i = 1; $i <= $cloopcount; $i++):
             $data = $this->input->post();
@@ -210,6 +209,13 @@ class Party extends Admin_Controller
             $anniversarydate = $this->input->post('anniversarydate_' . $i);
             $email = $this->input->post('email_' . $i);
             $contectid = $this->input->post('contectid_' . $i);
+            $contactsnoarry ="";
+          
+            $contactno = $this->input->post('contactno'. $i);
+            $contactsnoarry= implode(',',$contactno);
+           
+           
+            print_r($data);
             if ($contectid == 0 or $contectid == '') {
                 $insertdata2 = array(
                     'partyid' => $partyid,
@@ -226,7 +232,7 @@ class Party extends Admin_Controller
                 );
                 $json = 1;
                 $this->load->model('Party_contact_model', 'Party_contact');
-                $PartycontactId = $this->Party_contact->Add($insertdata2);
+                 $PartycontactId = $this->Party_contact->Add($insertdata2);
 
             }
         endfor;

@@ -416,13 +416,13 @@
                                        echo 'addcontectfilelddata';
                                       } ?>">
                                          <div class="form-group" id="contactno_div">
-                                            <label for="contactno" class="col-md-3 control-label">Contact No <span class="mandatoryfield"> *</span></label>
+                                            <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
                                             <div class="col-md-6">
-                                               <input id="contactno" type="text" name="contactno[]" class="form-control"  value="<?=$item?>">
+                                               <input id="contactno" type="text" name="contactno_<?=$cloopcount?>[]" class="form-control"  value="<?=$item?>">
                                             </div>
                                             <?php if($i==1){ ?>
-                                             <div class="form-group col-md-1" style="float:left; margin:0px 50px 20px 20px;">
-                                               <button type="button"  onclick="addcontectfield()" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
+                                             <div class="form-group col-md-2">
+                                               <button type="button"  onclick="addcontectfield(<?=$cloopcount?>)" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
                                             </div>
                                           <?php } ?>
                                         
@@ -485,14 +485,14 @@
                               </div>
                            </div>
                         </div>
-                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata">
+                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata<?=$cloopcount?>">
                            <div class="form-group" id="contactno_div">
                               <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
                               <div class="col-md-6">
-                                 <input id="contactno" type="text" name="contactno[]" class="form-control"  value="">
+                                 <input id="contactno" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="">
                               </div>
                               <div class="form-group col-md-2">
-                                 <button type="button"  onclick="addcontectfield()" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
+                                 <button type="button"  onclick="addcontectfield(<?=$cloopcount?>)" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
                               </div>
                            </div>
                         </div>
@@ -529,8 +529,7 @@
                      <?php
                         }
                         } 
-                        ?>
-                        <input type="hidden" name="cloopcount" id="cloopcount" value="<?php echo $cloopcount; ?>">
+                        ?>                       
                      
                         </div>
                    
@@ -539,7 +538,7 @@
                            Data</button>
                         </div>
                   </div>
-
+                  <input type="hidden" name="cloopcount" id="cloopcount" value="<?php echo $cloopcount; ?>">
                   </div>
                   
                </div>

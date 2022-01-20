@@ -507,20 +507,20 @@ function addnewproduct() {
     $("#adddocrow").append(datahtml);
 
 }
-function addcontectfield() {
-    var cloopdoc = $("#cloopdoc").val();
-    cloopdoc++;
-    $("#cloopdoc").val(cloopdoc);
+function addcontectfield(id) {
+    // var cloopdoc = $("#cloopdoc").val();
+    // cloopdoc++;
+    // $("#cloopdoc").val(cloopdoc);
     var datahtml = '<div class="col-md-4 pl-sm pr-sm visible-md visible-lg ">\
     <div class="form-group" id="contactno_div">\
        <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
        <div class="col-md-7">\
-          <input id="contactno" type="text" name="contactno[]" class="form-control"  value="">\
+          <input id="contactno" type="text" name="contactno'+id+'[]" class="form-control"  value="">\
        </div>\
     </div>\
  </div>';
 
-    $(".addcontectfilelddata").after(datahtml);
+    $(".addcontectfilelddata"+id+"").after(datahtml);
 
 }
 function addnewcontect() {
@@ -548,11 +548,14 @@ function addnewcontect() {
                     </div>\
                 </div>\
             </div>\
-            <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
+            <div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata' + cloopcount2 + '">\
                 <div class="form-group" id="contactno_div">\
                     <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
-                    <div class="col-md-8">\
-                        <input id="contactno" type="text" name="contactno_' + cloopcount2 + '" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="">\
+                    <div class="col-md-6">\
+                        <input id="contactno" type="text" name="contactno' + cloopcount2 + '[]" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="">\
+                    </div>\
+                    <div class="form-group col-md-2">\
+                        <button type="button" onclick="addcontectfield(' + cloopcount2 + ')" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>\
                     </div>\
                 </div>\
             </div>\
