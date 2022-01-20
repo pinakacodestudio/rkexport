@@ -468,7 +468,7 @@ function addnewproduct() {
     var cloopdoc = $("#cloopdoc").val();
     cloopdoc++;
     $("#cloopdoc").val(cloopdoc);
-    var datahtml = '<div class="col-md-12">\
+    var datahtml = '\
     <div class="col-sm-6 countdocuments pl-sm pr-sm" id="countdocuments' + cloopdoc + '">\
                       <input type="hidden" name="doc_id_' + cloopdoc + '" value="0" id="doc_id_' + cloopdoc + '">\
                       <div class="col-md-5 col-sm-5">\
@@ -502,7 +502,7 @@ function addnewproduct() {
                           <button type="button" class="btn btn-primary btn-raised remove_btn m-n" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
                            </div>\
                       </div>\
-                  </div>';
+                  ';
 
     $("#adddocrow").append(datahtml);
 
@@ -511,7 +511,7 @@ function addcontectfield() {
     var cloopdoc = $("#cloopdoc").val();
     cloopdoc++;
     $("#cloopdoc").val(cloopdoc);
-    var datahtml = '<div class="col-md-12 pl-sm pr-sm visible-md visible-lg ">\
+    var datahtml = '<div class="col-md-4 pl-sm pr-sm visible-md visible-lg ">\
     <div class="form-group" id="contactno_div">\
        <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
        <div class="col-md-7">\
@@ -520,7 +520,7 @@ function addcontectfield() {
     </div>\
  </div>';
 
-    $(".addcontectfilelddata").append(datahtml);
+    $(".addcontectfilelddata").after(datahtml);
 
 }
 function addnewcontect() {
@@ -535,7 +535,7 @@ function addnewcontect() {
             <input type="hidden" name="contectid_' + cloopcount2 + '" value="0" id="contectid_' + cloopcount2 + '">\
                 <div class="form-group" id="firstname_div">\
                     <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>\
-                    <div class="col-md-7">\
+                    <div class="col-md-8">\
                         <input id="firstname" type="text" name="firstname_' + cloopcount2 + '" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
                     </div>\
                 </div>\
@@ -543,7 +543,7 @@ function addnewcontect() {
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
                 <div class="form-group" id="lastname_div">\
                     <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>\
-                    <div class="col-md-7">\
+                    <div class="col-md-8">\
                         <input id="lastname" type="text" name="lastname_' + cloopcount2 + '" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
                     </div>\
                 </div>\
@@ -551,7 +551,7 @@ function addnewcontect() {
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
                 <div class="form-group" id="contactno_div">\
                     <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
-                    <div class="col-md-7">\
+                    <div class="col-md-8">\
                         <input id="contactno" type="text" name="contactno_' + cloopcount2 + '" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="">\
                     </div>\
                 </div>\
@@ -559,7 +559,7 @@ function addnewcontect() {
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
                 <div class="form-group" id="birthdate_div">\
                     <label for="birthdate" class="col-md-4 control-label">Birth Date</label>\
-                    <div class="col-md-7">\
+                    <div class="col-md-8">\
                         <input id="birthdate" type="text" name="birthdate_' + cloopcount2 + '" class="form-control date" value="" readonly>\
                     </div>\
                 </div>\
@@ -567,7 +567,7 @@ function addnewcontect() {
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
                 <div class="form-group" id="anniversarydate_div">\
                     <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>\
-                    <div class="col-md-7">\
+                    <div class="col-md-8">\
                         <input id="anniversarydate" type="text" name="anniversarydate_' + cloopcount2 + '" class="form-control date" value="" readonly>\
                     </div>\
                 </div>\
@@ -575,7 +575,7 @@ function addnewcontect() {
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
                 <div class="form-group" id="email_div">\
                     <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>\
-                    <div class="col-md-7">\
+                    <div class="col-md-8">\
                         <input id="email" type="text" name="email_' + cloopcount2 + '" class="form-control" value="">\
                     </div>\
                 </div>\

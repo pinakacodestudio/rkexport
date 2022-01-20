@@ -222,7 +222,7 @@
                      <div class="panel-heading">
                         <h2>Document Detail</h2>
                      </div>
-                     <div class="panel-body no-padding">
+                     <div class="panel-body">
                         <div class="row" id="adddocrow">
                            <div class="col-md-12">
                               <div class="col-md-6 pl-sm pr-sm visible-md visible-lg">
@@ -242,7 +242,6 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="col-md-12">
                               <?php 
                                  $cloopdoc = 0;
                                  $doc_id='';
@@ -351,7 +350,6 @@
                                  } 
                                  ?>
                            </div>
-                        </div>
                         
                               <input type="hidden" name="cloopdoc" id="cloopdoc" value="<?php echo $cloopdoc; ?>">
                      </div>
@@ -418,8 +416,8 @@
                                        echo 'addcontectfilelddata';
                                       } ?>">
                                          <div class="form-group" id="contactno_div">
-                                            <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
-                                            <div class="col-md-7">
+                                            <label for="contactno" class="col-md-3 control-label">Contact No <span class="mandatoryfield"> *</span></label>
+                                            <div class="col-md-6">
                                                <input id="contactno" type="text" name="contactno[]" class="form-control"  value="<?=$item?>">
                                             </div>
                                             <?php if($i==1){ ?>
@@ -474,7 +472,7 @@
                         <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                            <div class="form-group" id="firstname_div">
                               <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
-                              <div class="col-md-7">
+                              <div class="col-md-8">
                                  <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="">
                               </div>
                            </div>
@@ -482,7 +480,7 @@
                         <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                            <div class="form-group" id="lastname_div">
                               <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
-                              <div class="col-md-7">
+                              <div class="col-md-8">
                                  <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="">
                               </div>
                            </div>
@@ -493,7 +491,7 @@
                               <div class="col-md-6">
                                  <input id="contactno" type="text" name="contactno[]" class="form-control"  value="">
                               </div>
-                              <div class="form-group col-md-1" style="float:left; margin:0px 50px 20px 20px;">
+                              <div class="form-group col-md-2">
                                  <button type="button"  onclick="addcontectfield()" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
                               </div>
                            </div>
@@ -501,7 +499,7 @@
                         <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                            <div class="form-group" id="birthdate_div">
                               <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
-                              <div class="col-md-7">
+                              <div class="col-md-8">
                                  <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control" value="" readonly>
                               </div>
                            </div>
@@ -509,7 +507,7 @@
                         <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                            <div class="form-group" id="anniversarydate_div">
                               <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
-                              <div class="col-md-7">
+                              <div class="col-md-8">
                                  <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control" value="" readonly>
                               </div>
                            </div>
@@ -517,7 +515,7 @@
                         <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                            <div class="form-group" id="email_div">
                               <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
-                              <div class="col-md-7">
+                              <div class="col-md-8">
                                  <input id="email" type="text" name="email_<?=$cloopcount?>" class="form-control" value="">
                               </div>
                            </div>
@@ -534,14 +532,16 @@
                         ?>
                         <input type="hidden" name="cloopcount" id="cloopcount" value="<?php echo $cloopcount; ?>">
                      
-                  </div>
-                  </div>
+                        </div>
                    
                         <div class="form-group" style="float:left; margin:0px 50px 20px 50px;">
                            <button type="button" class="addpro btn-primary" onclick="addnewcontect()">Add
                            Data</button>
                         </div>
                   </div>
+
+                  </div>
+                  
                </div>
             </div>
       <div class="row">
