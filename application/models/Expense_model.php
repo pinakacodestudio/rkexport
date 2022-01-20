@@ -29,7 +29,8 @@ class Expense_model extends Common_model {
 	}
 
 	function _get_datatables_query(){	
-		$this->db->select("e.id,employeeid,(select name from ".tbl_user." where id=employeeid)as employeename,expensecategoryid,(select expense_type from ".tbl_expensecategory." where id=expensecategoryid)as expensecategoryname,,date,reason,amount,remarks,e.status as estatus,receipt");
+		
+		$this->db->select("e.id,employeeid,(select name from ".tbl_user." where id=employeeid)as employeename,expensecategoryid,(select expense_type from ".tbl_expensecategory." where id=expensecategoryid)as expensecategoryname,date,reason,amount,remarks,e.status as estatus,receipt");
 	    $this->db->from($this->_table." as e");
 		$this->db->join(tbl_expensecategory." as ec",'e.expensecategoryid=ec.id');
 		
@@ -38,8 +39,10 @@ class Expense_model extends Common_model {
 
 		foreach ($this->column_search as $item) // loop column 
 		{
+	
 			if($_POST['search']['value']) // if datatable send POST for search
 			{
+			
 				$_POST['search']['value'] = trim($_POST['search']['value']);
 				if($i===0) // first loop
 				{
@@ -77,16 +80,18 @@ class Expense_model extends Common_model {
 		return $query->result();
 	}
 
+	function count_all() {
+		$this->readdb->from($this->_table);
+		return $this->readdb->count_all_results();
+	} 
+	
 	function count_filtered() {
 		$this->_get_datatables_query();
 		$query = $this->readdb->get();
 		return $query->num_rows();
 	}
 
-	function count_all() {
-		$this->readdb->from($this->_table);
-		return $this->readdb->count_all_results();
-	}
+	
 	
 }
 

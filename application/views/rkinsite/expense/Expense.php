@@ -120,7 +120,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <!-- <tr>            
+                    <?php /*
+                  <tr>            
                       <td class="width8">1</td>
                       <td>Product 1</td>
                       <td>p1</td>
@@ -155,7 +156,7 @@
                           </div>
                         </td>
                     </tr>
-                   -->
+                  */?>
                   </tbody>
                 </table>
               </div>

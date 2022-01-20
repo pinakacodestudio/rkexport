@@ -343,8 +343,9 @@ class Party extends Admin_Controller
             $contactsnoarry ="";
           
             $contactno = $this->input->post('contactno'. $i);
-        
-            $contactsnoarry= implode(',',$contactno);
+            if (!empty($contactno)){
+                $contactsnoarry= implode(',',$contactno);
+            }
 
             $contectid = $this->input->post('contectid_' . $i);
             if($firstname!=''){

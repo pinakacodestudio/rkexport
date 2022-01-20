@@ -2092,7 +2092,7 @@ class Product_model extends Common_model {
 		}
 		$this->readdb->group_by("p.id");
 		$i = 0;
-
+	
 		if($_POST['search']['value']) { 
 			foreach ($this->column_search as $item) { // loop column 
 				if($_POST['search']['value']) { // if datatable send POST for search

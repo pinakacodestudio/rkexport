@@ -15,13 +15,22 @@ function removecontectpaertion(id) {
     $('#' + id).remove();
 }
 
-
+var edit_cityid = $('#edit_cityid').val();
+function getcity() {
+  
+ 
+        if (edit_cityid) {
+            $(".selectpicker").selectpicker("refresh");
+            $('.editcityadd').selectpicker('val', edit_cityid);
+        }
+    }
 $(document).ready(function () {
     var edit_country = $('#edit_country').val();
-    $('#countryid').val(edit_country).trigger('change')
+    $('#countryid').val(edit_country).trigger('change');
     var base_url = $('#base_url').val();
     var edit_provinceid = $('#edit_provinceid').val();
-    var edit_cityid = $('#edit_cityid').val();
+    
+
     if (edit_provinceid != '') {
 
         var uurl = base_url + "rkinsite/Party/getstate";
@@ -38,36 +47,14 @@ $(document).ready(function () {
                 });
                 $('#stateid').html(option);
                 $(".selectpicker").selectpicker("refresh");
-
                 $('#stateid').val(edit_provinceid).trigger('change')
-                getcity();
+               
             }
         });
 
     }
 
-    function getcity() {
-
-        if (edit_cityid) {
-            var uurl = base_url + "rkinsite/Party/getcity";
-            $.ajax({
-                url: uurl,
-                method: 'post',
-                data: { stat: edit_provinceid },
-                dataType: 'json',
-                success: function (response) {
-                    var option = ' <option value="0">Select Ctiy</option>';
-                    $.each(response, function (index, data) {
-                        option += '<option value="' + data['id'] + '">' + data['cityname'] + '</option>';
-                    });
-                    $('#cityid').html(option);
-                    $(".selectpicker").selectpicker("refresh");
-                    $('#cityid').val(edit_cityid).trigger('change');
-
-                }
-            });
-        }
-    }
+   
 
     $('.countryid').change(function () {
         var country = $(this).val();
@@ -88,7 +75,7 @@ $(document).ready(function () {
                 $(".selectpicker").selectpicker("refresh");
 
                 $('#stateid').val(edit_country).trigger('change')
-
+      
             }
         });
     });
@@ -110,8 +97,10 @@ $(document).ready(function () {
                 });
                 $('#cityid').html(option);
                 $(".selectpicker").selectpicker("refresh");
+                getcity();
             }
         });
+
     });
 
 
@@ -507,29 +496,46 @@ function addnewproduct() {
     $("#adddocrow").append(datahtml);
 
 }
-function addcontectfield(id) {
-    // var cloopdoc = $("#cloopdoc").val();
-    // cloopdoc++;
-    // $("#cloopdoc").val(cloopdoc);
-    var datahtml = '<div class="col-md-4 pl-sm pr-sm visible-md visible-lg ">\
+function addcontectfield(id,countcontactno) {
+    var countcontactno = $("#countcontactno").val();
+    countcontactno++;
+    $("#countcontactno").val(countcontactno);
+    var datahtml = '<div class="col-md-4 pl-sm pr-sm visible-md visible-lg" id="contecremove'+countcontactno+'">\
     <div class="form-group" id="contactno_div">\
        <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
-       <div class="col-md-7">\
+       <div class="col-md-6">\
           <input id="contactno" type="text" name="contactno'+id+'[]" class="form-control"  value="">\
        </div>\
+        <div class="form-group col-md-3">\
+            <button type="button"  onclick="addcontectfield('+ id + ','+ countcontactno +')"  class="addprodocitem btn-primary btn-xs" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>\
+            <button type="button" class="btn-danger btn-xs" onclick="removecontect(' + countcontactno + ')"><i class="fa fa-minus"></i></button>\
+        </div>\
     </div>\
  </div>';
 
     $(".addcontectfilelddata"+id+"").after(datahtml);
 
 }
+
+function removecontect(divid) {
+    var countcontactno = $("#countcontactno").val();
+    countcontactno++;
+    $("#countcontactno").val(countcontactno);
+
+    $("#contecremove" + divid).remove();
+
+    $(".add_btn:last").show();
+    if ($(".remove_btn:visible").length == 1) {
+        $(".remove_btn:first").hide();
+    }
+}
+
 function addnewcontect() {
     var cloopcount2 = $("#cloopcount").val();
     cloopcount2++;
     $("#cloopcount").val(cloopcount2);
     var datahtml2 = '<div class="data" id="contectrowdelete_' + cloopcount2 + '">\
     <div class="row">\
-    <button type="button" style="float:right; margin:10px 19px 0px 0px;" onclick="removecontectpaertion("contectrowdelete_'+ cloopcount2 +'" )" class="addprodocitem btn-danger">Remove</button>\
     <div class="clearfix"></div>\
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
             <input type="hidden" name="contectid_' + cloopcount2 + '" value="0" id="contectid_' + cloopcount2 + '">\
@@ -581,6 +587,13 @@ function addnewcontect() {
                     <div class="col-md-8">\
                         <input id="email" type="text" name="email_' + cloopcount2 + '" class="form-control" value="">\
                     </div>\
+                </div>\
+            </div>\
+            <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
+                <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion(\'contectrowdelete_'+ cloopcount2 + '\')" class="btn-danger">Remove</button>\
+                <div class="form-group" style="float:left; margin:10px 19px 0px 5px;">\
+                <button type="button" class="addpro btn-primary" onclick="addnewcontect()">Add\
+                Data</button>\
                 </div>\
             </div>\
         </div>\

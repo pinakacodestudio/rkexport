@@ -27139,13 +27139,14 @@ th input[type="checkbox"]{
     top: 0px;
 }
 #loader {
-    left: 0px;
-    top: 0px;
+  left: 50%;
+  top: 50%;
     position: absolute;
     background: url(../../img/loader.gif)center center no-repeat;
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 100px;
     display: none;
+
 }
 .page-heading > small{
   font-size: 14px;

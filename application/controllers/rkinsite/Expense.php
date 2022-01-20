@@ -29,9 +29,13 @@ class Expense extends Admin_Controller{
     }
 
     public function listing(){
+        
         $list = $this->Expense->get_datatables();
         $data = array();
         $counter = $_POST['start'];
+        $pokemon_doc = new DOMDocument();
+
+     
         foreach ($list as $Expense) {
             $row = array();
             $row[] = ++$counter;
