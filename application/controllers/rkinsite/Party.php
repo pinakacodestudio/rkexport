@@ -150,9 +150,6 @@ class Party extends Admin_Controller
         $addedby = $this->session->userdata(base_url() . 'ADMINID');
         $PostData = $this->input->post();
         $cloopcount = $PostData['cloopcount'];
-        echo '<pre>';
-        print_r($PostData);
-   
        
         $websitename = $PostData['websitename'];
         $companyid = $PostData['companyid'];
@@ -214,8 +211,6 @@ class Party extends Admin_Controller
             $contactno = $this->input->post('contactno'. $i);
             $contactsnoarry= implode(',',$contactno);
            
-           
-            print_r($data);
             if ($contectid == 0 or $contectid == '') {
                 $insertdata2 = array(
                     'partyid' => $partyid,
@@ -334,8 +329,7 @@ class Party extends Admin_Controller
         $this->Party->_where = array("id" => $PostData['partyid']);
         $partyid = $this->Party->Edit($insertdata4);
 
-        $contactno = $this->input->post('contactno');
-        $contactsnoarry= implode(',',$contactno);
+    
         for ($i = 1; $i <= $cloopcount; $i++):
        
            
@@ -346,6 +340,11 @@ class Party extends Admin_Controller
             $birthdate = $this->input->post('birthdate_' . $i);
             $anniversarydate = $this->input->post('anniversarydate_' . $i);
             $email = $this->input->post('email_' . $i);
+            $contactsnoarry ="";
+          
+            $contactno = $this->input->post('contactno'. $i);
+        
+            $contactsnoarry= implode(',',$contactno);
 
             $contectid = $this->input->post('contectid_' . $i);
             if($firstname!=''){

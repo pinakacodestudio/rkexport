@@ -413,18 +413,19 @@
                                    foreach($contactno as $item){ $i++; ?>
                                      
                                       <div class="col-md-4 pl-sm pr-sm visible-md visible-lg <?php if($i==1){
-                                       echo 'addcontectfilelddata';
+                                       echo 'addcontectfilelddata'.$cloopcount;
                                       } ?>">
                                          <div class="form-group" id="contactno_div">
                                             <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
                                             <div class="col-md-6">
-                                               <input id="contactno" type="text" name="contactno_<?=$cloopcount?>[]" class="form-control"  value="<?=$item?>">
+                                               <input id="contactno" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="<?=$item?>">
                                             </div>
-                                            <?php if($i==1){ ?>
+                                          <?php if($i==1){ ?>
                                              <div class="form-group col-md-2">
-                                               <button type="button"  onclick="addcontectfield(<?=$cloopcount?>)" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
-                                            </div>
-                                          <?php } ?>
+                                                <button type="button"  onclick="addcontectfield(<?=$cloopcount?>)" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
+                                             </div>
+                                         <?php } ?>
+                                      
                                         
                                          </div>
                                       </div>
