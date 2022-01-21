@@ -1,0 +1,24 @@
+Purchase quotation 
+purchse order
+purchse invoice
+payment 
+
+
+
+Quotation 
+Quotation Detail
+order
+invoice
+Purchase Return
+Goods Received Notes
+payment
+
+
+
+Quotation Detail
+Purchase Return
+Goods Received Notes
+
+-----------------------------------------
+quotation view
+-2 feild missing(order,invoice)
