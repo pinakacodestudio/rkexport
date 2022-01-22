@@ -12,8 +12,8 @@ class Gstr2_report extends Admin_Controller {
     public function index() {
         $this->viewData['title'] = "GSTR2 Report";
         $this->viewData['module'] = "report/Gstr2_report";
-        
-       
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_javascript("gstr2-report", "pages/gstr2_report.js");
         $this->load->view(ADMINFOLDER.'template',$this->viewData);
     }
-}
+}  

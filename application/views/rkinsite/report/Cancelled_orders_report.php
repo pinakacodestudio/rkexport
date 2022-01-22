@@ -131,6 +131,14 @@
                     <div class="panel-body no-padding">
                         <div class="table-responsive">
                             <table id="cancelledordersreporttable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                               <thead>
+                                    <tr>            
+                                      <th class="width8">Sr. No.</th> 
+                                      <th>Party</th>
+                                      <th>Total Cancel Order</th>
+                                      <th>Year</th>
+                                    </tr>
+                            </thead>
                             </table>
                         </div>
                     </div>

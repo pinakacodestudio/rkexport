@@ -7,7 +7,7 @@ $(document).ready(function() {
       autoclose: true,
       todayBtn:"linked"
     });
-    $(function () {
+    $(function () { 
       $('.panel-heading.filter-panel').click(function() {
           $(this).find('.button-icon span').html($(this).find('.button-icon span').text() == 'keyboard_arrow_down' ? 'keyboard_arrow_up' : 'keyboard_arrow_down');
           //$(this).children().toggleClass(" ");

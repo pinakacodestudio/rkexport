@@ -3,7 +3,7 @@ $(document).ready(function() {
   
   oTable = $('#balancereporttable').DataTable
   ({
-    "language": {
+    "language": { 
       "lengthMenu": "_MENU_"
     },
     "pageLength": 10,
