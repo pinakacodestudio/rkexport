@@ -161,12 +161,12 @@
                   <a class="<?=printbtn_class;?>" href="javascript:void(0)" onclick="printreceiptreport()" title=<?=printbtn_title?>><?=printbtn_text?></a>
                   <?php } ?>
                 </div>
-              </div>
+              </div> 
               <div class="panel-body no-padding panel-vertical-scroll">
                 <table id="receiptreporttable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>            
-                      <th class="width8">Sr. No.</th>
+                      <th class="width8">Sr. No.</th> 
                       <th>Receiver <?=Member_label?></th>
                       <th>Payer <?=Member_label?></th>
                       <th>Order ID</th>

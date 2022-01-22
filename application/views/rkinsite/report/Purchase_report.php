@@ -6,7 +6,7 @@
       <?php $this->load->view(ADMINFOLDER.'includes/menu_header');?>
     </div>
     <div class="container-fluid">
-                                    
+
       <div data-widget-group="group1">
         <div class="row">
           <div class="col-md-12">
@@ -162,6 +162,13 @@
               </div>
               <div class="panel-body no-padding panel-vertical-scroll">
                 <table id="purchasereporttable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                   <thead>
+                    <tr>            
+                      <th class="width8">Sr. No.</th> 
+                      <th>Party</th>
+                      <th>Total Purchase</th>
+                    </tr>
+                  </thead>
                 </table>
               </div>
               <div class="panel-footer"></div>

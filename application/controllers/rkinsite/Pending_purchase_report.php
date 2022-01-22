@@ -12,8 +12,8 @@ class Pending_purchase_report extends Admin_Controller {
     public function index() {
         $this->viewData['title'] = "Pending Purchase Report";
         $this->viewData['module'] = "report/Pending_purchase_report";
-        
-
+          $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_javascript("pending-purchase-report", "pages/pending_purchase_report.js"); 
         $this->load->view(ADMINFOLDER.'template',$this->viewData);
     }
 }

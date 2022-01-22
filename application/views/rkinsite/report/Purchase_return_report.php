@@ -50,18 +50,7 @@
                               <select id="channelid" name="channelid" class="selectpicker form-control" data-select-on-tab="true" data-size="5" title="All Channel" data-live-search="true" >
                                 <option value="">All Channel</option>
                                 <option value="0">Company</option>
-                                <?php foreach($channeldata as $cd){
-                                    $selected = ""; 
-                                    if(!empty($this->session->userdata(base_url().'CHANNEL'))){ 
-                                      $arrChannel = explode(",",$this->session->userdata(base_url().'CHANNEL'));
-                                      if(in_array($cd['id'], $arrChannel)){ 
-                                        $selected = "selected"; 
-                                      } 
-                                    }
-                                  ?>
-                                <option value="<?php echo $cd['id']; ?>" <?php echo $selected; ?>><?php echo $cd['name']; ?></option>
-                                <?php } ?>
-                                
+                              
                               </select>
                             </div>
                           </div>
@@ -128,7 +117,7 @@
             <div class="panel panel-default border-panel">
               <div class="panel-heading">
                 <div class="col-md-6">
-                  <div class="panel-ctrls panel-tbl"></div>
+                  <div class="panel-ctrls panel-tbl"></div> 
                 </div>
                 <div class="col-md-6 form-group" style="text-align: right;">
                   <?php if (in_array("export-to-excel",$this->viewData['submenuvisibility']['assignadditionalrights'])){ ?>
@@ -142,6 +131,11 @@
               </div>
               <div class="panel-body no-padding panel-vertical-scroll">
                 <table id="purchasereturnreporttable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                  <tr>            
+                      <th class="width8">Sr. No.</th> 
+                      <th>Party</th>
+                      <th>Total Purchase Return </th>
+                    </tr>
                 </table>
               </div>
               <div class="panel-footer"></div>

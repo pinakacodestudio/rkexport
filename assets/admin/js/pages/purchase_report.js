@@ -2,9 +2,9 @@
 $(document).ready(function() {
     $('#datepicker-range').datepicker({
       todayHighlight: true,
-      format: 'dd/mm/yyyy',
+      format: 'dd/mm/yyyy', 
       autoclose: true,
-      todayBtn:"linked"
+      todayBtn:"linked" 
     });
     $(function () {
       $('.panel-heading.filter-panel').click(function() {

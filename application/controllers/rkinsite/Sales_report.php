@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Sales_report extends Admin_Controller {
 
-    public $viewData = array();
+    public $viewData = array(); 
     function __construct(){
         parent::__construct();
         $this->load->model('Sales_report_model', 'Sales_report');
