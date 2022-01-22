@@ -1,27 +1,27 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Purchase_report extends Admin_Controller {
+class Transaction_report extends Admin_Controller {
 
     public $viewData = array();
     function __construct(){
         parent::__construct();
-        $this->load->model('Purchase_report_model', 'Purchase_report');
+        $this->load->model('Transaction_report_model', 'Transaction_report');
         
-        $this->viewData = $this->getAdminSettings('submenu', 'Purchase_report');
+        $this->viewData = $this->getAdminSettings('submenu', 'Transaction_report');
     }
     public function index() {
-        $this->viewData['title'] = "Purchase Report";
-        $this->viewData['module'] = "report/Purchase_report";
-        
+        $this->viewData['title'] = "Transaction Report";
+        $this->viewData['module'] = "report/Transaction_report";
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
-        $this->admin_headerlib->add_javascript("purchase_report", "pages/purchase_report.js");
+        $this->admin_headerlib->add_javascript("Transaction_report", "pages/transaction_report.js");
         $this->load->view(ADMINFOLDER.'template',$this->viewData);
     }
+
     public function listing() {
 		
         $additionalrights = $this->viewData['submenuvisibility']['assignadditionalrights'];
-        $list = $this->Purchase_report->get_datatables();
+        $list = $this->Payment_receipt->get_datatables();
      
         $data = array();
 		$counter = $_POST['start'];
@@ -97,8 +97,8 @@ class Purchase_report extends Admin_Controller {
 		}
 		$output = array(
 						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->Purchase_report->count_all(),
-						"recordsFiltered" => $this->Purchase_report->count_filtered(),
+						"recordsTotal" => $this->Payment_receipt->count_all(),
+						"recordsFiltered" => $this->Payment_receipt->count_filtered(),
 						"data" => $data,
 				);
 		echo json_encode($output);

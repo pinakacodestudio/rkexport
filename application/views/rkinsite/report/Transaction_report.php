@@ -169,9 +169,10 @@
                       <th class="width8">Sr. No.</th>
                       <th>Party</th>
                       <th>Order ID</th>
-                      <th>Payment Date</th>
                       <th>Transaction ID</th>
                       <th>Payment Type</th>
+                      <th>Transaction Charge</th>
+                      <th>Payable Amount</th>
                       <th class="text-right">Total Amount </th>
                     </tr>
                   </thead>

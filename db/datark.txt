@@ -66,8 +66,9 @@ Amount
 Discount(%)
 Discount Amount
 Extra Amount 
-ContainerSupplay Date
+Container Supplay Date
 
+Extra charges 
 Remarks
 
 Invoice Summary
@@ -88,4 +89,26 @@ Amount
 Status
 Added By
 Action
+
+
+
+
+Purchasse No
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------
+mamber
 
