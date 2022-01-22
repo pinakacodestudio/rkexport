@@ -24,7 +24,7 @@ $(document).ready(function() {
         }
     });
     if(ACTION==1){
-        getPaymentReceiptInvoice();
+        getPurchaseInvoiceByVendor();
         
         $('select.invoiceid').each(function(){
             var divid = $(this).attr("id").match(/\d+/);
@@ -44,9 +44,9 @@ $(document).ready(function() {
             $("#remainingamount"+divid).val(parseFloat(remainingamount).toFixed(2));
         });
     }
-    /****MEMBER CHANGE EVENT****/
-    $('#memberid').on('change', function (e) {
-        getPaymentReceiptInvoice();
+    /****VENDOR CHANGE EVENT****/
+    $('#vendorid').on('change', function (e) {
+        getPurchaseInvoiceByVendor();
     });
 
     /****INVOICE CHANGE EVENT****/
@@ -111,49 +111,7 @@ function calculateamount(){
     });
     $("#amount").val(parseFloat(amount).toFixed(2));
 }
-/* function getMemberBankAccounts(){
-    $('#cashorbankid')
-        .find('option')
-        .remove()
-        .end()
-        .append('<option value="0">Select Cash / Bank Account</option>')
-        .val('0')
-    ;
-    
-    $('#cashorbankid').selectpicker('refresh');
-  
-    var memberid = $("#memberid").val();
-    
-    if(memberid!=0){
-      var uurl = SITE_URL+"cash-or-bank/getMemberBankAccounts";
-      
-      $.ajax({
-        url: uurl,
-        type: 'POST',
-        data: {memberid:String(memberid)},
-        dataType: 'json',
-        async: false,
-        success: function(response){
-                
-            for(var i = 0; i < response.length; i++) {
-    
-                $('#cashorbankid').append($('<option>', { 
-                    value: response[i]['id'],
-                    text : response[i]['bankname']
-                }));
-            }
-            if(cashorbankid!=0){
-                $('#cashorbankid').val(cashorbankid);
-            }
-        },
-        error: function(xhr) {
-        //alert(xhr.responseText);
-        },
-      });
-    }
-    $('#cashorbankid').selectpicker('refresh');
-} */
-function getPaymentReceiptInvoice(divid=""){
+function getPurchaseInvoiceByVendor(divid=""){
     
     var element = $('select.invoiceid');
     if(divid!=""){
@@ -168,15 +126,15 @@ function getPaymentReceiptInvoice(divid=""){
     
     element.selectpicker('refresh');
   
-    var memberid = (ACTION==0)?$("#memberid").val():MemberID;
+    var vendorid = (ACTION==0)?$("#vendorid").val():VendorID;
     var type = $("input[name='isagainstreference']:checked").val();
 
-    if(memberid!=0 && type == 1){
-      var uurl = SITE_URL+"invoice/getPaymentReceiptInvoice";
+    if(vendorid!=0 && type == 1){
+      var uurl = SITE_URL+"purchase-invoice/getPurchaseInvoiceByVendor";
      
-      var param = {memberid:String(memberid)}; 
+      var param = {vendorid:String(vendorid)}; 
       if(ACTION==1 && $("#paymentreceiptid").val()!=""){
-        param = {memberid:String(memberid),paymentreceiptid:String($("#paymentreceiptid").val())}
+        param = {vendorid:String(vendorid),paymentreceiptid:String($("#paymentreceiptid").val())}
       }
       $.ajax({
         url: uurl,
@@ -300,7 +258,7 @@ function removetransaction(rowid){
 
 function resetdata(){
  
-  $("#member_div").removeClass("has-error is-focused");
+  $("#vendor_div").removeClass("has-error is-focused");
   $("#transactiondate_div").removeClass("has-error is-focused");
   $("#paymentreceiptno_div").removeClass("has-error is-focused");
   $("#cashorbankid_div").removeClass("has-error is-focused");
@@ -309,12 +267,12 @@ function resetdata(){
 
   if(ACTION==0)
   {
-    $('#memberid').val(0);
+    $('#vendorid').val(0);
     $('#cashorbankid').val(0);
     $('#method').val(0);
     $('#amount').val('');
     $('#remarks').val('');
-    getPaymentReceiptInvoice();
+    getPurchaseInvoiceByVendor();
     $('.invoiceamount,.amountdue,.remainingamount').val('');
     var i=1;
     $('.countinvoice').each(function(){
@@ -337,7 +295,7 @@ function resetdata(){
 
 function checkvalidation(addtype=0){
 
-    var memberid = $("#memberid").val();
+    var vendorid = $("#vendorid").val();
     var transactiondate = $("#transactiondate").val();
     var paymentreceiptno = $("#paymentreceiptno").val().trim();
     var cashorbankid = $("#cashorbankid").val();    
@@ -345,16 +303,16 @@ function checkvalidation(addtype=0){
     var amount = $("#amount").val();    
     var isagainstreference = $("input[name=isagainstreference]:checked").val();    
   
-    var isvalidmemberid = isvalidtransactiondate = isvalidpaymentreceiptno = isvalidcashorbankid = isvalidmethod = isvalidamount = isvalidinvoiceid = isvalidinvoiceamount = isvalidduplicateinvoice = 1;
+    var isvalidvendorid = isvalidtransactiondate = isvalidpaymentreceiptno = isvalidcashorbankid = isvalidmethod = isvalidamount = isvalidinvoiceid = isvalidinvoiceamount = isvalidduplicateinvoice = 1;
 
     PNotify.removeAll();
     
-    if(memberid==0) {
-        $("#member_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please select '+member_label+' !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        isvalidmemberid = 0;
+    if(vendorid==0) {
+        $("#vendor_div").addClass("has-error is-focused");
+        new PNotify({title: 'Please select vendor !',styling: 'fontawesome',delay: '3000',type: 'error'});
+        isvalidvendorid = 0;
     } else {
-        $("#member_div").removeClass("has-error is-focused");
+        $("#vendor_div").removeClass("has-error is-focused");
     }
     if(transactiondate==""){
         $("#transactiondate_div").addClass("has-error is-focused");
@@ -445,11 +403,11 @@ function checkvalidation(addtype=0){
         }
     }
 
-    if(isvalidmemberid==1 && isvalidtransactiondate==1 && isvalidpaymentreceiptno==1 && isvalidcashorbankid==1 && isvalidmethod==1 && isvalidamount==1 && isvalidinvoiceid==1 && isvalidinvoiceamount==1 && isvalidduplicateinvoice == 1){
+    if(isvalidvendorid==1 && isvalidtransactiondate==1 && isvalidpaymentreceiptno==1 && isvalidcashorbankid==1 && isvalidmethod==1 && isvalidamount==1 && isvalidinvoiceid==1 && isvalidinvoiceamount==1 && isvalidduplicateinvoice == 1){
             
-        var formData = new FormData($('#paymentreceiptform')[0]);
+        var formData = new FormData($('#paymentform')[0]);
         if(ACTION == 0){    
-        var uurl = SITE_URL+"payment-receipt/add-payment-receipt";
+        var uurl = SITE_URL+"payment/add-payment";
         $.ajax({
             url: uurl,
             type: 'POST',
@@ -462,19 +420,19 @@ function checkvalidation(addtype=0){
             success: function(response){
             var data = JSON.parse(response);
             if(data['error']==1){
-                new PNotify({title: 'Payment / Receipt successfully added.',styling: 'fontawesome',delay: '3000',type: 'success'});
+                new PNotify({title: 'Payment successfully added.',styling: 'fontawesome',delay: '3000',type: 'success'});
                 if(addtype==1){
                     resetdata();
                     $('#paymentreceiptno').val(data['paymentreceiptno']);
                 }else{
-                    setTimeout(function() { window.location=SITE_URL+'payment-receipt'; }, 1500);
+                    setTimeout(function() { window.location=SITE_URL+'payment'; }, 1500);
                 }
             }else if(data['error']==2) {
-                new PNotify({title: 'Payment / Receipt account already exists !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                new PNotify({title: 'Payment account already exists !',styling: 'fontawesome',delay: '3000',type: 'error'});
             }else if(data['error']==3) {
                 new PNotify({title: data['message'],styling: 'fontawesome',delay: '3000',type: 'error'});
             } else {
-                new PNotify({title: 'Payment / Receipt not added !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                new PNotify({title: 'Payment not added !',styling: 'fontawesome',delay: '3000',type: 'error'});
             }
         },
             error: function(xhr) {
@@ -489,7 +447,7 @@ function checkvalidation(addtype=0){
             processData: false
         });
         }else{
-        var uurl = SITE_URL+"payment-receipt/update-payment-receipt";
+        var uurl = SITE_URL+"payment/update-payment";
             $.ajax({
                 url: uurl,
                 type: 'POST',
@@ -502,14 +460,14 @@ function checkvalidation(addtype=0){
                 success: function(response){
                 var data = JSON.parse(response);
                 if(data['error']==1){
-                    new PNotify({title: 'Payment / Receipt successfully updated.',styling: 'fontawesome',delay: '3000',type: 'success'});
-                    setTimeout(function() { window.location=SITE_URL+'payment-receipt'; }, 1500);
+                    new PNotify({title: 'Payment successfully updated.',styling: 'fontawesome',delay: '3000',type: 'success'});
+                    setTimeout(function() { window.location=SITE_URL+'payment'; }, 1500);
                 }else if(data['error']==2) {
-                    new PNotify({title: 'Payment / Receipt account already exists !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                    new PNotify({title: 'Payment account already exists !',styling: 'fontawesome',delay: '3000',type: 'error'});
                 }else if(data['error']==3) {
                     new PNotify({title: data['message'],styling: 'fontawesome',delay: '3000',type: 'error'});
                 } else {
-                    new PNotify({title: 'Payment / Receipt not updated !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                    new PNotify({title: 'Payment not updated !',styling: 'fontawesome',delay: '3000',type: 'error'});
                 }
             },
                 error: function(xhr) {

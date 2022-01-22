@@ -17,31 +17,29 @@ class Payment_receipt_model extends Common_model {
 	function getPaymentReceiptDetails($id){
 		
 		$paymentreceiptdata['paymentreceiptdetail'] = $paymentreceiptdata['paymentreceipttransaction'] = array();
-        
-		$query = $this->readdb->select("pr.id,pr.memberid,pr.sellermemberid,pr.cashorbankid,pr.sellercashorbankid,
-			pr.type, pr.paymentreceiptno,pr.transactiondate,pr.amount,pr.method,pr.remarks,pr.isagainstreference,pr.cancelreason,pr.status,pr.createddate,
-			IF(pr.isagainstreference=1,'Is Against Invoice','On Account') as transactiontype,
-		
-			buyer.name as membername,
-			buyer.mobile as mobileno,buyer.email,buyer.gstno,
-			CONCAT(ct.name,', ',p.name,', ',cn.name) as buyeraddress,
-			
-			IFNULL(seller.channelid,'') as sellerchannelid,
-			IFNULL(seller.name,'') as sellermembername,
-			IFNULL(seller.mobile,'') as sellermobileno,
-			IFNULL(seller.email,'') as selleremail,IFNULL(seller.gstno,'') as sellergstno,
-			IFNULL(CONCAT((SELECT name FROM ".tbl_city." WHERE id=seller.cityid),', ',(SELECT name FROM ".tbl_province." WHERE id IN (SELECT stateid FROM ".tbl_city." WHERE id=seller.cityid)),', ',(SELECT name FROM ".tbl_country." WHERE id IN (SELECT countryid FROM ".tbl_province." WHERE id IN (SELECT stateid FROM ".tbl_city." WHERE id=seller.cityid)))),'') as selleraddress,
-			
-			pr.amount as totalamount,
+        //pr.sellercashorbankid,pr.paymentreceiptno,pr.isagainstreference,pr.cancelreason,IF(pr.isagainstreference=1,'Is Against Invoice','On Account') as transactiontype,
+
+		//	buyer.name as membername,
+			// buyer.mobile as mobileno,buyer.email,buyer.gstno,
+			// CONCAT(ct.name,', ',p.name,', ',cn.name) as buyeraddress,
+			// IFNULL(seller.channelid,'') as sellerchannelid,
+			// IFNULL(seller.name,'') as sellermembername,
+			// IFNULL(seller.mobile,'') as sellermobileno,
+			// IFNULL(seller.email,'') as selleremail,IFNULL(seller.gstno,'') as sellergstno,
+
+			// IFNULL(CONCAT((SELECT name FROM ".tbl_city." WHERE id=seller.cityid),', ',(SELECT name FROM ".tbl_province." WHERE id IN (SELECT stateid FROM ".tbl_city." WHERE id=seller.cityid)),', ',(SELECT name FROM ".tbl_country." WHERE id IN (SELECT countryid FROM ".tbl_province." WHERE id IN (SELECT stateid FROM ".tbl_city." WHERE id=seller.cityid)))),'') as selleraddress,
+
+		$query = $this->readdb->select("pr.id,
+			pr.type, pr.transactiondate,pr.amount,pr.method,pr.remarks,pr.status,pr.createddate,pr.amount as totalamount,pr.partyid
                                    
 		")
 
                             ->from($this->_table." as pr")
-							->join(tbl_member." as buyer","buyer.id=pr.memberid","LEFT") 
-							->join(tbl_member." as seller","seller.id=pr.sellermemberid","LEFT") 
-                            ->join(tbl_city." as ct","ct.id=buyer.cityid","LEFT")
-                            ->join(tbl_province." as p","p.id=ct.stateid","LEFT")
-                            ->join(tbl_country." as cn","cn.id=p.countryid","LEFT")
+							// ->join(tbl_member." as buyer","buyer.id=pr.partyid","LEFT") 
+							// ->join(tbl_member." as seller","seller.id=pr.sellerpartyid","LEFT") 
+                            // ->join(tbl_city." as ct","ct.id=buyer.cityid","LEFT")
+                            // ->join(tbl_province." as p","p.id=ct.stateid","LEFT")
+                            // ->join(tbl_country." as cn","cn.id=p.countryid","LEFT")
                             ->where("pr.id=".$id)
                             ->get();
         $rowdata =  $query->row_array();
@@ -51,54 +49,54 @@ class Payment_receipt_model extends Common_model {
         }
 		
         $paymentreceiptdata['paymentreceiptdetail'] = array("id"=>$rowdata['id'],
-                                            "paymentreceiptno"=>ucwords($rowdata['paymentreceiptno']),
+                                            // "paymentreceiptno"=>ucwords($rowdata['paymentreceiptno']),
                                             "transactiondate"=>$this->general_model->displaydate($rowdata['transactiondate']),
-                                            "createddate"=>$this->general_model->displaydate($rowdata['createddate']),
-                                            "membername"=>ucwords($rowdata['membername']),
-											"memberid"=>$rowdata['memberid'],
-                                            "mobileno"=>$rowdata['mobileno'],
-                                            "email"=>$rowdata['email'],
-                                            "gstno"=>$rowdata['gstno'],
-                                            "buyeraddress"=>$rowdata['buyeraddress'],
+                                            // "createddate"=>$this->general_model->displaydate($rowdata['createddate']),
+                                            // "membername"=>ucwords($rowdata['membername']),
+											"partyid"=>$rowdata['partyid'],
+                                            // "mobileno"=>$rowdata['mobileno'],
+                                            // "email"=>$rowdata['email'],
+                                            // "gstno"=>$rowdata['gstno'],
+                                            // "buyeraddress"=>$rowdata['buyeraddress'],
                                             "status"=>$rowdata['status'],
 											"remarks"=>$rowdata['remarks'],
-											"sellerchannelid"=>$rowdata['sellerchannelid'],
-											"sellermemberid"=>$rowdata['sellermemberid'],
-                                            "sellermembername"=>$rowdata['sellermembername'],
-                                            "selleraddress"=>$rowdata['selleraddress'],
-                                            "sellermobileno"=>$rowdata['sellermobileno'],
-											"selleremail"=>$rowdata['selleremail'],
-											"sellergstno"=>$rowdata['sellergstno'],
+											// "sellerchannelid"=>$rowdata['sellerchannelid'],
+											// "sellerpartyid"=>$rowdata['sellerpartyid'],
+                                            // "sellermembername"=>$rowdata['sellermembername'],
+                                            // "selleraddress"=>$rowdata['selleraddress'],
+                                            // "sellermobileno"=>$rowdata['sellermobileno'],
+											// "selleremail"=>$rowdata['selleremail'],
+											// "sellergstno"=>$rowdata['sellergstno'],
 											"totalamount"=>$rowdata['totalamount'],
 											"method"=>$rowdata['method'],
-											"transactiontype"=>$rowdata['transactiontype'],
-											"isagainstreference"=>$rowdata['isagainstreference']
+											// "transactiontype"=>$rowdata['transactiontype'],
+											// "isagainstreference"=>$rowdata['isagainstreference']
                                             );
 
 		
-		if($rowdata['isagainstreference']==1){
+		// if($rowdata['isagainstreference']==1){
 
-			$query = $this->readdb->select("prt.id,prt.invoiceid,i.invoiceno,
+		// 	$query = $this->readdb->select("prt.id,prt.invoiceid,i.invoiceno,
 			
-			IFNULL((i.amount + i.taxamount - i.globaldiscount - i.couponcodeamount - IFNULL((SELECT SUM(redeemamount) FROM ".tbl_transactiondiscount." WHERE transactionid=i.id),0) + IFNULL((SELECT SUM(amount) FROM ".tbl_extrachargemapping." WHERE type=2 AND referenceid=i.id),0)),0) as invoiceamount,
-			prt.amount")
-								->from(tbl_paymentreceipttransactions." as prt")
-								->join(tbl_invoice." as i","i.id=prt.invoiceid","INNER")
-								->where("prt.paymentreceiptid=".$id)
-								->get();
+		// 	IFNULL((i.amount + i.taxamount - i.globaldiscount - i.couponcodeamount - IFNULL((SELECT SUM(redeemamount) FROM ".tbl_transactiondiscount." WHERE transactionid=i.id),0) + IFNULL((SELECT SUM(amount) FROM ".tbl_extrachargemapping." WHERE type=2 AND referenceid=i.id),0)),0) as invoiceamount,
+		// 	prt.amount")
+		// 						->from(tbl_paymentreceipttransactions." as prt")
+		// 						->join(tbl_invoice." as i","i.id=prt.invoiceid","INNER")
+		// 						->where("prt.paymentreceiptid=".$id)
+		// 						->get();
 								
-			$paymentreceiptdata['paymentreceipttransaction'] = $query->result_array();
-		}
+		// 	$paymentreceiptdata['paymentreceipttransaction'] = $query->result_array();
+		// }
 
-		$query = $this->readdb->select("prsh.id,prsh.paymentreceiptid,prsh.status,prsh.createddate as modifieddate,prsh.type,(IF(prsh.type=0,(SELECT CONCAT(name,' (','".COMPANY_CODE."',')') FROM ".tbl_user." WHERE id=prsh.addedby),(SELECT CONCAT(name,' (',membercode,')') FROM ".tbl_member." WHERE id=prsh.addedby))) as name,prsh.addedby as modifiedby,(IF(prsh.type=1,(SELECT channelid FROM ".tbl_member." WHERE id=prsh.addedby),0)) as channelid,
+		// $query = $this->readdb->select("prsh.id,prsh.paymentreceiptid,prsh.status,prsh.createddate as modifieddate,prsh.type,(IF(prsh.type=0,(SELECT CONCAT(name,' (','".COMPANY_CODE."',')') FROM ".tbl_user." WHERE id=prsh.addedby),(SELECT CONCAT(name,' (',membercode,')') FROM ".tbl_member." WHERE id=prsh.addedby))) as name,prsh.addedby as modifiedby,(IF(prsh.type=1,(SELECT channelid FROM ".tbl_member." WHERE id=prsh.addedby),0)) as channelid,
 		
-		IF(prsh.status=2,(SELECT cancelreason FROM ".tbl_paymentreceipt." WHERE id=prsh.paymentreceiptid),'') as reason
-		")
-						->from(tbl_paymentreceiptstatushistory." as prsh")
-						->where("prsh.paymentreceiptid=".$id)
-						->get();    
+		// IF(prsh.status=2,(SELECT cancelreason FROM ".tbl_paymentreceipt." WHERE id=prsh.paymentreceiptid),'') as reason
+		// ")
+		// ->from(tbl_paymentreceiptstatushistory." as prsh")
+		// ->where("prsh.paymentreceiptid=".$id)
+		// ->get();    
 								
-		$paymentreceiptdata['paymentreceiptstatushistory'] = $query->result_array();
+		// $paymentreceiptdata['paymentreceiptstatushistory'] = $query->result_array();
 
         return $paymentreceiptdata;
 	}
@@ -122,7 +120,7 @@ class Payment_receipt_model extends Common_model {
 								= 
 								IFNULL((SELECT SUM(prt.amount) 
 								FROM ".tbl_paymentreceipttransactions." as prt 
-								WHERE prt.invoiceid = i.id AND prt.paymentreceiptid IN (SELECT id FROM ".tbl_paymentreceipt." WHERE memberid=".$buyerid." AND sellermemberid=".$sellerid." AND isagainstreference=1 AND status=1)),0) 
+								WHERE prt.invoiceid = i.id AND prt.paymentreceiptid IN (SELECT id FROM ".tbl_paymentreceipt." WHERE partyid=".$buyerid." AND sellerpartyid=".$sellerid." AND isagainstreference=1 AND status=1)),0) 
 
 								")
 							->order_by("i.id", "DESC")
@@ -141,7 +139,7 @@ class Payment_receipt_model extends Common_model {
 	}
     function getPaymentReceiptDataById($ID){
         
-        $query=$this->readdb->select("id,memberid,sellermemberid,cashorbankid,paymentreceiptno,transactiondate,amount,method,remarks,type,status,isagainstreference")
+        $query=$this->readdb->select("id,partyid,sellerpartyid,paymentreceiptno,transactiondate,amount,method,remarks,type,status,isagainstreference")
 		->from($this->_table)
                             ->where("id", $ID)
                             ->get();
@@ -181,56 +179,51 @@ class Payment_receipt_model extends Common_model {
 	//LISTING DATA
 	function _get_datatables_query(){
         
-        $MEMBERID = $this->session->userdata(base_url() . 'MEMBERID');
-        $sellermemberid = (!is_null($MEMBERID))?$MEMBERID:0;
+        $partyid = $this->session->userdata(base_url() . 'partyid');
+        $sellerpartyid = (!is_null($partyid))?$partyid:0;
         
-        $memberid = (isset($_REQUEST['memberid']))?$_REQUEST['memberid']:-1;
+        $partyid = (isset($_REQUEST['partyid']))?$_REQUEST['partyid']:-1;
         $transactiontype = isset($_REQUEST['transactiontype'])?$_REQUEST['transactiontype']:0;
 		$startdate = $this->general_model->convertdate($_REQUEST['startdate']);
 		$enddate = $this->general_model->convertdate($_REQUEST['enddate']);
         $type = 2;
-        $where = "pr.sellermemberid=".$sellermemberid;
-        if(!is_null($MEMBERID)){
+        // $where = "pr.sellerpartyid=".$sellerpartyid;
+        if(!is_null($partyid)){
             if(isset($_REQUEST['type']) && $_REQUEST['type']=="purchase"){
-                $where = "pr.memberid=".$sellermemberid;
+                // $where = "pr.partyid=".$sellerpartyid;
                 $type = 1;
             }
         }
-        $this->readdb->select("pr.id,pr.memberid,pr.sellermemberid,pr.cashorbankid,pr.type,
-            pr.paymentreceiptno,pr.transactiondate,pr.amount,pr.method,pr.remarks,pr.status,
-			IF(pr.isagainstreference=1,'Is Against Invoice','On Account') as transactiontype,
-            IF(pr.type=1,'Payment','Receipt') as typename,
-            cb.name as bankname,cb.accountno,
+		// IFNULL(buyer.channelid,'0') as buyerchannelid,
+		// IFNULL(buyer.id,'') as buyerid,
+		// IFNULL(buyer.name,'') as buyername,
+		// IFNULL(buyer.membercode,'') as buyercode,
 
-            IFNULL(buyer.channelid,'0') as buyerchannelid,
-            IFNULL(buyer.id,'') as buyerid,
-            IFNULL(buyer.name,'') as buyername,
-            IFNULL(buyer.membercode,'') as buyercode,
-
-            IFNULL(seller.channelid,'0') as sellerchannelid,
-            IFNULL(seller.id,'') as sellerid,
-            IFNULL(seller.name,'Company') as sellername,
-			IFNULL(seller.membercode,'') as sellercode,
-			
-			IF(".$type."=2,IFNULL(buyer.name,''),IFNULL(seller.name,'Company')) as sortorderbymember,
+		// IFNULL(seller.channelid,'0') as sellerchannelid,
+		// IFNULL(seller.id,'') as sellerid,
+		// IFNULL(seller.name,'Company') as sellername,
+		// IFNULL(seller.membercode,'') as sellercode,
+		// cb.name as bankname,cb.accountno,
+        $this->readdb->select("pr.id,pr.type,
+            pr.paymentreceiptno,pr.transactiondate,pr.amount,pr.method,pr.remarks,pr.status
         ");
 		$this->readdb->from($this->_table." as pr");
-        $this->readdb->join(tbl_member." as buyer","buyer.id=pr.memberid","LEFT");
-        $this->readdb->join(tbl_member." as seller","seller.id=pr.sellermemberid","LEFT");
-        $this->readdb->join(tbl_cashorbank." as cb","cb.id=pr.cashorbankid","LEFT");
-		$this->readdb->where($where);
-		$this->readdb->where("pr.memberid!=0");
+        // $this->readdb->join(tbl_member." as buyer","buyer.id=pr.partyid","LEFT");
+        // $this->readdb->join(tbl_member." as seller","seller.id=pr.sellerpartyid","LEFT");
+        // $this->readdb->join(tbl_cashorbank." as cb","cb.id=pr.cashorbankid","LEFT");
+		// $this->readdb->where($where);
+		// $this->readdb->where("pr.partyid!=0");
 
         //FILTER TRANSACTION DATE
         $this->readdb->where("pr.transactiondate BETWEEN '".$startdate."' AND '".$enddate."'");
         //FILTER MEMBER
-        if(!is_null($MEMBERID) && isset($_REQUEST['type']) && $_REQUEST['type']=="purchase"){
-            $this->readdb->where("(pr.sellermemberid = '".$memberid."' OR '".$memberid."'=-1)");
-        }else{
-            $this->readdb->where("(pr.memberid = '".$memberid."' OR '".$memberid."'=-1)");
-        }
+        // if(!is_null($partyid) && isset($_REQUEST['type']) && $_REQUEST['type']=="purchase"){
+        //     // $this->readdb->where("(pr.sellerpartyid = '".$partyid."' OR '".$partyid."'=-1)");
+        // }else{
+        //     // $this->readdb->where("(pr.partyid = '".$partyid."' OR '".$partyid."'=-1)");
+        // }
         //FILTER BANK METHOD
-        $this->readdb->where("(pr.isagainstreference = '".$transactiontype."' OR '".$transactiontype."'=0)");
+        // $this->readdb->where("(pr.isagainstreference = '".$transactiontype."' OR '".$transactiontype."'=0)");
         
 		$i = 0;
 		foreach ($this->column_search as $item) // loop column 

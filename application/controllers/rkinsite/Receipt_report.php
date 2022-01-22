@@ -15,7 +15,8 @@ class Receipt_report extends Admin_Controller {
         $this->viewData['module'] = "report/Receipt_report";
         
         
-
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_javascript("sales_report", "pages/receipt_report.js");
         $this->load->view(ADMINFOLDER.'template',$this->viewData);
     }
 

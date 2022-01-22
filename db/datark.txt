@@ -1,0 +1,91 @@
+Select Party
+Inquiry No
+Order No
+Client PO No
+Po Date 
+
+Product Details
+Category
+product
+price
+qty
+discount(%)
+Amount
+Delivery
+
+Select Approx Delivery Date 
+Discount(%)
+Discount Amount 
+Remarks
+Total Summary 
+
+Document 
+Add Document Name 
+
+ 
+
+
+=======================
+
+Sr No
+Party
+Inquiry ID
+PO No
+Invoice Id
+Amount
+Status
+Added By
+Action
+
+
+
+
+==========Sales Invoice==============
+Party
+Sales Order
+Billing Address
+
+Invoice No
+Invoice Date
+Invoice Format
+Payment Due Date 
+
+Multiple Party Order
+
+Product Details
+----------------
+Party
+Category
+Product
+Price
+Qty
+Discount(%)
+Tax(%)
+Amount
+
+Discount(%)
+Discount Amount
+Extra Amount 
+ContainerSupplay Date
+
+Remarks
+
+Invoice Summary
+Product Total
+Tax Amount
+Discount Amount
+Round Off
+Amount Payable
+-----------------------
+index
+-----------------------
+Sr. No.
+Party
+Inquiry Id
+PO No
+Invoice Id
+Amount
+Status
+Added By
+Action
+

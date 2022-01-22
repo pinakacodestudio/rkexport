@@ -183,6 +183,7 @@
                                     <div class="clearfix"></div>
                                     <?php 
                                        $cloopcount = 0;
+                                       $extrachargescount = 0;
                                        $countcontactno = 0;
                                        $i=0;
                                        if(isset($party_contactdata[0]->id ) && !empty($party_contactdata[0]->id ))  {
@@ -257,6 +258,7 @@
                                  }else {
                                      $count = 1;
                                      $cloopcount = 0;
+                                     $extrachargescount = 0;
                                      $countcontactno = 0;
                                      while ($count > $cloopcount) {
                                          $cloopcount = $cloopcount + 1;
@@ -326,19 +328,21 @@
                   </div>
                   <input type="hidden" name="cloopcount" id="cloopcount" value="<?php echo $cloopcount; ?>">
                   <input type="hidden" name="countcontactno" id="countcontactno" value="<?=$countcontactno?>">
+                  <input type="hidden" name="extrachargescount" id="extrachargescount" value="<?=$extrachargescount?>">
                </div>
             </div>
 
 
 
-            <div class="row">
+                 <div class="row">
                         <div class="col-sm-4">
                            <div class="form-group" id="quotationdate_div">
                               <div class="col-sm-12">
-                                 <label for="quotationdate" class="control-label">Select Approx Delivery Date <span class="mandatoryfield">*</span></label>
+                                 <label for="quotationdate" class="control-label">Container Supplay Date <span class="mandatoryfield">*</span></label>
                                  <div class="input-group">
                                     <input id="quotationdate" type="text" name="quotationdate" value="" class="form-control" >
                                     <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
+                                    
                                  </div>
                               </div>
                            </div>
@@ -355,9 +359,23 @@
                         <div class="col-sm-4">
                            <div class="form-group" id="paymenttype_div">
                               <div class="col-sm-12">
-                                 <input type="hidden" name="oldpaymenttype" id="oldpaymenttype" value="">
                                  <label for="paymenttypeid" class="control-label">Discount Amount <span class="mandatoryfield">*</span></label>
                                  <input id="discount" type="text" name="discountamount" value="" class="form-control" >
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-sm-4" id="addnewextracharges">
+                           <div class="form-group">
+                              <div class="col-sm-5">
+                                 <label for="paymenttypeid" class="control-label">Extra charges <span class="mandatoryfield">*</span></label>
+                                 <input id="discount" type="text" name="discountamount" value="" class="form-control" >
+                              </div>
+                              <div class="col-sm-4">
+                                 
+                                 <input id="discount" type="text" name="discountamount" value="" class="form-control" style="margin-top: 30px;">
+                              </div>
+                              <div class="col-md-2 addrowbutton pt-md pr-xs" style="margin-top: 17px;">
+                                 <button type="button" class="btn btn-primary btn-raised remove_btn m-n" onclick="addnewextracharges()" style="padding: 3px 8px; "><i class="fa fa-plus"></i></button>
                               </div>
                            </div>
                         </div>
@@ -422,20 +440,6 @@
             
       </div>
    </div>
-
-
-
-
-
-
-
-
-                  
-                   
-
-
-
-
    <div class="row">
    <div class="col-md-12">
    <div class="panel panel-default border-panel" id="commonpanel">
@@ -575,10 +579,12 @@
    <div class="col-md-12 col-xs-12">
    <?php if (!empty($partydata)) { ?>
    <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
+   <input type="button" id="submit" onclick="checkvalidation(2)" name="submit" value="SAVE & PRINT" class="btn btn-primary btn-raised">
    <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & NEW" class="btn btn-primary btn-raised">
    <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
    <?php } else { ?>
    <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
+   <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & PRINT" class="btn btn-primary btn-raised">
    <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & NEW" class="btn btn-primary btn-raised">
    <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
    <?php } ?>

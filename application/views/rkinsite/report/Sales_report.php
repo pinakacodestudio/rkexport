@@ -40,14 +40,14 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
                               <label for="channelid" class="control-label">Purchase By</label>
                               <select id="channelid" name="channelid" class="selectpicker form-control" data-select-on-tab="true" data-size="5" title="All Channel" data-live-search="true" >
                                 <option value="">All Channel</option>
                                 <option value="0">Company</option>
-                                <?php foreach($channeldata as $cd){
+                                <?php /* foreach($channeldata as $cd){
                                     $selected = ""; 
                                     if(!empty($this->session->userdata(base_url().'CHANNEL'))){ 
                                       $arrChannel = explode(",",$this->session->userdata(base_url().'CHANNEL'));
@@ -57,24 +57,24 @@
                                     }
                                   ?>
                                 <option value="<?php echo $cd['id']; ?>" <?php echo $selected; ?>><?php echo $cd['name']; ?></option>
-                                <?php } ?>
+                                <?php } */?>
                                 
                               </select>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
-                              <label for="memberid" class="control-label">Select <?=Member_label?></label>
-                              <select id="memberid" name="memberid[]" multiple data-actions-box="true" title="All <?=Member_label?>"  class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
+                              <label for="memberid" class="control-label">Select Party</label>
+                              <select id="memberid" name="memberid[]" multiple data-actions-box="true" title="All Party" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
                               </select>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-12">
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
                               <label for="status" class="control-label">Select Status</label>
@@ -85,7 +85,7 @@
                               </select>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-2">
                           <div class="form-group mt-xl">
                             <div class="col-md-12 pl-xs pr-xs">
@@ -118,7 +118,18 @@
               </div>
               <div class="panel-body no-padding panel-vertical-scroll">
                 <table id="salesreporttable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                  
+                <thead>
+                  <tr>
+                    <th class="width8">Sr. No.</th>
+                    <th>Party</th>
+                    <th>Total Sales</th>
+                    <th>Date 1</th>
+                    <th>Date 2</th>
+                    <th>Date 3</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
                 </table>
               </div>
               <div class="panel-footer"></div>

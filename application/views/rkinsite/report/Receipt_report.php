@@ -40,14 +40,14 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
                               <label for="paidtochannelid" class="control-label">Receiver Channel</label>
                               <select id="paidtochannelid" name="paidtochannelid" class="selectpicker form-control" data-select-on-tab="true" data-size="5" title="All Channel" data-live-search="true" >
                                 <option value="">All Channel</option>
                                 <option value="0">Company</option>
-                                <?php foreach($channeldata as $cd){
+                                <?php /*foreach($channeldata as $cd){
                                     $selected = ""; 
                                     if(!empty($this->session->userdata(base_url().'CHANNEL'))){ 
                                       $arrChannel = explode(",",$this->session->userdata(base_url().'CHANNEL'));
@@ -57,22 +57,20 @@
                                     }
                                   ?>
                                 <option value="<?php echo $cd['id']; ?>" <?php echo $selected; ?>><?php echo $cd['name']; ?></option>
-                                <?php } ?>
+                                <?php } */?>
                               </select>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
-                              <label for="tomemberid" class="control-label">Select Receiver <?=Member_label?></label>
-                              <select id="tomemberid" name="tomemberid[]" multiple data-actions-box="true" title="All <?=Member_label?>"  class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
+                              <label for="tomemberid" class="control-label">Select Receiver party</label>
+                              <select id="tomemberid" name="tomemberid[]" multiple data-actions-box="true" title="All party"  class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
                               </select>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="col-md-12">
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
@@ -86,6 +84,10 @@
                             </div>
                           </div>
                         </div>
+                      </div>
+                      <div class="col-md-12">
+                        
+                        <?php /*
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
@@ -129,6 +131,7 @@
                             </div>
                           </div>
                         </div>
+                        */?>
                         <div class="col-md-2">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">

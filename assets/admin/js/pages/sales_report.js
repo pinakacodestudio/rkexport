@@ -2,7 +2,7 @@
 $(document).ready(function() {
     
     //list("ordertable","Order/listing",[0,-1]);
-    /* oTable = $('#salesreporttable').dataTable
+    oTable = $('#salesreporttable').dataTable
       ({
         "language": {
           "lengthMenu": "_MENU_"
@@ -47,8 +47,7 @@ $(document).ready(function() {
     $('.panel-ctrls.panel-tbl').append($('.dataTables_length').addClass("pull-left")).find("label").addClass("panel-ctrls-center");
 
     $('.panel-footer').append($(".dataTable+.row"));
-    $('.dataTables_paginate>ul.pagination').addClass("pull-right pagination-md"); */
-
+    $('.dataTables_paginate>ul.pagination').addClass("pull-right pagination-md"); 
     $('#datepicker-range').datepicker({
       todayHighlight: true,
       format: 'dd/mm/yyyy',

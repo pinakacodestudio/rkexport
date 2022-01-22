@@ -491,6 +491,29 @@ function addnewcontect() {
 </div>';
     $("#addtarget").append(datahtml2);
 }
+function addnewextracharges() {
+    var extrachargescount = $("#extrachargescount").val();
+    extrachargescount++;
+    $("#extrachargescount").val(extrachargescount);
+    var datahtml2 = '<div class="data" id="addnewextracharges_' + extrachargescount + '">\
+    <div class="row">\
+        <div class="col-sm-12">\
+            <div class="form-group" id="paymenttype_div">\
+            <div class="col-sm-5">\
+                <input id="discount" type="text" name="discountamount" value="" class="form-control" >\
+            </div>\
+            <div class="col-sm-4">\
+                <input id="discount" type="text" name="discountamount" value="" class="form-control" >\
+            </div>\
+            <div class="col-md-3 addrowbutton pt-md pr-xs" >\
+                <button type="button" class="btn btn-primary btn-raised remove_btn m-n" onclick="addnewextracharges('+extrachargescount+')" style="padding: 3px 8px; "><i class="fa fa-plus"></i></button>\
+                <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeextracharges(' + extrachargescount + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
+            </div>\
+            </div>\
+        </div>\
+    </div>';
+    $("#addnewextracharges").append(datahtml2);
+}
 function addnewproductdetails() {
     var cloopcount2 = $("#cloopcount").val();
     cloopcount2++;
@@ -550,6 +573,13 @@ function addnewproductdetails() {
     $("#addtarget").append(datahtml2);
 }
 
+function removeextracharges(divid) {
+    $("#addnewextracharges_" + divid).remove();
+    $(".add_btn:last").show();
+    if ($(".remove_btn:visible").length == 1) {
+        $(".remove_btn:first").hide();
+    }
+}
 function removeDocument(divid) {
     $("#countdocuments" + divid).remove();
     $(".add_btn:last").show();
