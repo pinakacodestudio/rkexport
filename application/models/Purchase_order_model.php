@@ -2,7 +2,7 @@
 
  class Purchase_order_model extends Common_model {
 
-    public $_table = tbl_orders;
+    public $_table = tbl_purchaseorders;
     public $_fields = "*";
     public $_where = array();
     public $_except_fields = array();
@@ -10,7 +10,7 @@
     
     public $column_order = array(null,'vendorname','o.orderid', 'o.orderdate','orderstatus','approvestatus','netamount');
         
-     public $column_search = array('seller.name','seller.membercode', 'o.orderid', 'o.orderdate','(payableamount + IFNULL((SELECT SUM(amount) FROM '.tbl_extrachargemapping.' WHERE referenceid=o.id AND type=0),0))');
+     public $column_search = array('seller.name','seller.partycode', 'o.orderid', 'o.orderdate','(payableamount + IFNULL((SELECT SUM(amount) FROM '.tbl_extrachargemapping.' WHERE referenceid=o.id AND type=0),0))');
 
     function __construct() {
         parent::__construct();
@@ -79,7 +79,7 @@
         $status = $_REQUEST['status'];
 
         $this->readdb->select("o.id,o.orderid,o.status,o.type,
-                        o.orderdate,o.createddate as date, o.memberid, 
+                        o.orderdate,o.createddate as date, o.partyid, 
                         seller.id as vendorid,seller.name as vendorname,seller.channelid as vendorchannelid,
                         seller.membercode as vendorcode,
                         (payableamount + IFNULL((SELECT SUM(amount) FROM ".tbl_extrachargemapping." WHERE referenceid=o.id AND type=0),0)) as netamount,approved,addordertype,
@@ -115,7 +115,7 @@
                 ");
 
         $this->readdb->from($this->_table." as o");
-        $this->readdb->join(tbl_member." as seller","seller.id=o.sellermemberid","LEFT");
+        $this->readdb->join(tbl_party." as seller","seller.id=o.sellerpartyid","LEFT");
         $this->readdb->join(tbl_memberaddress." as ma","ma.id=o.addressid","LEFT");
         $this->readdb->join(tbl_city." as ct","ct.id=ma.cityid","LEFT");
         $this->readdb->join(tbl_province." as pr","pr.id=ct.stateid","LEFT");
@@ -130,6 +130,7 @@
         }
 	    $this->readdb->where("(o.orderdate BETWEEN '".$startdate."' AND '".$enddate."') AND o.memberid=0 AND o.isdelete=0".$where);
         $this->readdb->group_by('o.orderid');
+
         $this->readdb->order_by(key($this->_order), $this->_order[key($this->_order)]);
         $query = $this->readdb->get();
         
@@ -304,18 +305,18 @@
     
     function _get_datatables_query(){  
         
-        // $sellermemberid = isset($this->data['sellerid'])?$this->data['sellerid']:0;
+        $sellepartyid = isset($this->data['sellerid'])?$this->data['sellerid']:0;
         $vendorid = isset($_REQUEST['vendorid'])?$_REQUEST['vendorid']:0;
         $startdate = $this->general_model->convertdate($_REQUEST['startdate']);
         $enddate = $this->general_model->convertdate($_REQUEST['enddate']);
         $status = $_REQUEST['status'];
 
         $this->readdb->select("o.id,o.orderid,o.status,o.type,
-                        o.orderdate,o.createddate as date, o.memberid, 
+                        o.orderdate,o.createddate as date, o.partyid, 
                         seller.id as vendorid,seller.name as vendorname,seller.channelid as vendorchannelid,
-                        seller.membercode as vendorcode,
+                        seller.partycode as vendorcode,
                         (payableamount + IFNULL((SELECT SUM(amount) FROM ".tbl_extrachargemapping." WHERE referenceid=o.id AND type=0),0)) as netamount,approved,addordertype,
-                        o.sellermemberid,
+                        o.sellepartyid,
                         @primarynumber:=IF(seller.isprimarywhatsappno=1,seller.mobile,'') as primarynumber,
                         @secondarynumber:=IF(seller.issecondarywhatsappno=1,seller.secondarymobileno,'') as secondarynumber,
                         IF(@primarynumber='',IF(seller.issecondarywhatsappno=1,CONCAT(seller.secondarycountrycode,seller.secondarymobileno),''),CONCAT(seller.countrycode,@primarynumber)) as whatsappno,
@@ -341,12 +342,12 @@
                 ");
 
         $this->readdb->from($this->_table." as o");
-        $this->readdb->join(tbl_member." as seller","seller.id=o.sellermemberid","LEFT");
+        $this->readdb->join(tbl_party." as seller","seller.id=o.sellerpartyid","LEFT");
         
         $where = '';
-        if($vendorid != 0){
-            $where .= ' AND o.sellermemberid='.$vendorid;
-        }
+        // if($vendorid != 0){
+        //     $where .= ' AND o.sellermemberid='.$vendorid;
+        // }
         if($status != -1){
             $where .= ' AND o.status='.$status;
         }
@@ -1013,7 +1014,7 @@
     }
     function getOrderStatusHistory($orderid){
 
-        $query = $this->readdb->select("os.id,os.orderid,os.status,os.modifieddate,os.type,(IF(os.type=0,(SELECT CONCAT(name,' (','".COMPANY_CODE."',')') FROM ".tbl_user." WHERE id=os.modifiedby),(SELECT CONCAT(name,' (',membercode,')') FROM ".tbl_member." WHERE id=os.modifiedby))) as name,os.modifiedby,(IF(os.type=1,(SELECT channelid FROM ".tbl_member." WHERE id=os.modifiedby),0)) as channelid")
+        $query = $this->readdb->select("os.id,os.orderid,os.status,os.modifieddate,os.type,(IF(os.type=0,(SELECT CONCAT(name,' (','".COMPANY_CODE."',')') FROM ".tbl_user." WHERE id=os.modifiedby),(SELECT CONCAT(name,' (',partycode,')') FROM ".tbl_member." WHERE id=os.modifiedby))) as name,os.modifiedby,(IF(os.type=1,(SELECT channelid FROM ".tbl_member." WHERE id=os.modifiedby),0)) as channelid")
                         ->from(tbl_orderstatuschange." as os")
                         ->where("os.orderid=".$orderid)
                         ->get();    

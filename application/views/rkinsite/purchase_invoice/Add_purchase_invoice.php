@@ -15,7 +15,6 @@
     </div>
 
     <div class="container-fluid">
-                                    
       	<div data-widget-group="group1">
 		  <div class="row">
 		    <div class="col-md-12">
@@ -29,6 +28,5 @@
 		    </div>
 		  </div>
 		</div>
-
     </div> <!-- .container-fluid -->
 </div> <!-- #page-content -->

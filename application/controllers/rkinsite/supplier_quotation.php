@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Quotation extends Admin_Controller {
+class Supplier_Quotation extends Admin_Controller {
 
     public $viewData = array();
     function __construct(){
         parent::__construct();
-        $this->load->model('Quotation_model', 'Quotation');
+        $this->load->model('supplier_quotation_model', 'Supplier_Quotation');
         $this->load->model('Product_file_model', 'Product_file');
         
         $this->load->model('Side_navigation_model');
@@ -14,8 +14,8 @@ class Quotation extends Admin_Controller {
     }
     public function index() {
     
-        $this->viewData['title'] = "Quotation";
-        $this->viewData['module'] = "quotation/Quotation";
+        $this->viewData['title'] = "Supplier_Quotation";
+        $this->viewData['module'] = "supplier_quotation/Supplier_Quotation";
         $this->viewData['VIEW_STATUS'] = "1";
 
         $this->load->model("Channel_model","Channel"); 
@@ -35,17 +35,17 @@ class Quotation extends Admin_Controller {
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_plugin("form-select2","form-select2/select2.css");
         $this->admin_headerlib->add_javascript_plugins("form-select2","form-select2/select2.min.js");
-        $this->admin_headerlib->add_javascript("Quotation", "pages/quotation.js");
+        $this->admin_headerlib->add_javascript("Supplier Quotation", "pages/supplier_quotation.js");
         $this->load->view(ADMINFOLDER.'template',$this->viewData);
     }
-    public function listing() { 
+    public function listing() {
         $edit = explode(',', $this->viewData['submenuvisibility']['submenuedit']);
         $delete = explode(',', $this->viewData['submenuvisibility']['submenudelete']);
         $additionalrights = $this->viewData['submenuvisibility']['assignadditionalrights'];
         $rollid = $this->session->userdata[base_url().'ADMINUSERTYPE'];
         $createddate = $this->general_model->getCurrentDateTime();
 
-        $list = $this->Quotation->get_datatables();
+        $list = $this->Supplier_Quotation->get_datatables();
         
         $this->load->model("Channel_model","Channel"); 
         $channeldata = $this->Channel->getChannelList('notdisplayguestorvendorchannel');
@@ -69,12 +69,12 @@ class Quotation extends Admin_Controller {
             //         $actions .= '<a class="'.edit_class.'" href="'.ADMIN_URL.'quotation/quotation-edit/'. $datarow->id.'/'.'" title="'.edit_title.'">'.edit_text.'</a>';
             //     }
             // }
-            //'.$datarow->membername.'
+            
             if($status == 0){
                 $dropdownmenu = '<button class="btn btn-warning '.STATUS_DROPDOWN_BTN.' btn-raised dropdown-toggle" data-toggle="dropdown" id="btndropdown'.$datarow->id.'">Pending <span class="caret"></span></button>
                         <ul class="dropdown-menu" role="menu">
                               <li id="dropdown-menu">
-                                <a onclick="chagequotationstatus(1,'.$datarow->id.',\''.$datarow->quotationid.'\',&quot;&quot;)">Approved</a>
+                                <a onclick="chagequotationstatus(1,'.$datarow->id.',\''.$datarow->quotationid.'\',&quot;'.$datarow->membername.'&quot;)">Approved</a>
                               </li>
                               <li id="dropdown-menu">
                                 <a onclick="chagequotationstatus(2,'.$datarow->id.',\''.$datarow->quotationid.'\')">Rejected</a>
@@ -104,9 +104,7 @@ class Quotation extends Admin_Controller {
             }
 
             $quotationstatus = '<div class="dropdown" style="float: left;">'.$dropdownmenu.'</div>';
-            $actions .= '<a href="'.ADMIN_URL.'quotation/view-quotation/'. $datarow->id.'/'.'" class="'.view_class.'" title="'.view_title.'" target="_blank">'.view_text.'</a>';
-
-            $actions .= '<a href="'.ADMIN_URL.'quotation/print_quotation/'. $datarow->id.'/'.'" class="'.print_class.'" title="'.print_title.'" target="_blank">'.print_text.'</a>';
+            $actions .= '<a href="'.ADMIN_URL.'supplier_quotation/view-supplier-quotation/'. $datarow->id.'/'.'" class="'.view_class.'" title="'.view_title.'" target="_blank">'.view_text.'</a>';                  
 
             /* if(file_exists(QUOTATION_PATH.$companyname.'-'.$datarow->quotationid.'.pdf')){
                 $actions .= '<a href="'.QUOTATION.$companyname.'-'.$datarow->quotationid.'.pdf" class="'.viewquotation_class.'" title="'.viewquotation_title.'" target="_blank">'.viewquotation_text.'</a>'; 
@@ -117,14 +115,13 @@ class Quotation extends Admin_Controller {
             }
             // if($datarow->sellermemberid == 0){
             //     if($status==1){
-                    // $actions .= '<a href="'.ADMIN_URL.'order/order-add/'.$datarow->id.'" class="btn btn-sm btn-raised btn-primary" title="Add Order"><i class="fa fa-plus"></i></a>';
+            //         $actions .= '<a href="'.ADMIN_URL.'order/order-add/'.$datarow->id.'" class="btn btn-sm btn-raised btn-primary" title="Add Order"><i class="fa fa-plus"></i></a>';
             //     }
                 
             //     $actions .= '<a class="'.duplicatebtn_class.'" href="'.ADMIN_URL.'quotation/quotation-add/'. $datarow->id.'/'.'" title="'.duplicatebtn_title.'">'.duplicatebtn_text.'</a>';
             // }
 
             $actions .= '<a class="'.sendmail_class.'" href="javascipt:void(0)" onclick="sendtransactionpdf('.$datarow->id.',1)" title="'.sendmail_title.'">'.sendmail_text.'</a>';
-            
             // $actions .= '<a class="'.whatsapp_class.'" href="javascipt:void(0)" onclick="sendtransactionpdf('.$datarow->id.',1,1)" title="'.whatsapp_title.'">'.whatsapp_text.'</a>';
             // if($datarow->whatsappno!=''){
             //     $actions .= '<input type="hidden" id="checkwhatsappnumber'. $datarow->id.'" value="'.$datarow->whatsappno.'"><a class="'.whatsapp_class.' checkwhatsapp" id="checkwhatsapp'. $datarow->id.'" target="_blank" href="https://api.whatsapp.com/send?phone='.$datarow->whatsappno.'&text=" title="'.whatsapp_title.'">'.whatsapp_text.'</a>';
@@ -153,6 +150,7 @@ class Quotation extends Admin_Controller {
             // }
             $row[] = $datarow->cname;
             $row[] = $datarow->inquiryno;
+            $row[] = $datarow->quotationno;
 
             // $row[] = '<a href="'.ADMIN_URL.'quotation/view-quotation/'.$datarow->id.'" title="'.viewpdf_title.'" target="_blank">'.$datarow->quotationid.'</a>';
             
@@ -166,25 +164,25 @@ class Quotation extends Admin_Controller {
         }
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->Quotation->count_all(),
-                        "recordsFiltered" => $this->Quotation->count_filtered(),
+                        "recordsTotal" => $this->Supplier_Quotation->count_all(),
+                        "recordsFiltered" => $this->Supplier_Quotation->count_filtered(),
                         "data" => $data,
                         );
         echo json_encode($output);
     }
-    public function quotation_add($id="") {
+    public function supplier_quotation_add($id="") {
         
-        $this->viewData['title'] = "Add Quotation";
-        $this->viewData['module'] = "quotation/Add_quotation";
+        $this->viewData['title'] = "Add Supplier Quotation";
+        $this->viewData['module'] = "supplier_quotation/add_supplier_quotation";
         $this->viewData['VIEW_STATUS'] = "1";
         $this->viewData['multiplememberchannel'] = "1";
         $ADMINID = $this->session->userdata[base_url().'ADMINID'];
         
         if($id!=""){
             /* Add Duplicate Quotation */
-            $this->viewData['quotationdata'] = $this->Quotation->getQuotationDataById($id,'sales');
-            $this->viewData['installmentdata'] = $this->Quotation->getQuotationInstallmentDataByQuotationId($id);
-            $this->viewData['ExtraChargesData'] = $this->Quotation->getExtraChargesDataByReferenceID($id);
+            $this->viewData['quotationdata'] = $this->Supplier_Quotation->getQuotationDataById($id,'sales');
+            $this->viewData['installmentdata'] = $this->Supplier_Quotation->getQuotationInstallmentDataByQuotationId($id);
+            $this->viewData['ExtraChargesData'] = $this->Supplier_Quotation->getExtraChargesDataByReferenceID($id);
             $this->viewData['isduplicate'] = "1";
         }
        
@@ -213,7 +211,7 @@ class Quotation extends Admin_Controller {
         $this->admin_headerlib->add_javascript_plugins("form-select2","form-select2/select2.min.js");
         $this->admin_headerlib->add_plugin("jquery.bootstrap-touchspin.min", "bootstrap-touchspin/jquery.bootstrap-touchspin.min.css");
         $this->admin_headerlib->add_javascript_plugins("jquery.bootstrap-touchspin", "bootstrap-touchspin/jquery.bootstrap-touchspin.js");
-        $this->admin_headerlib->add_javascript("add_quotation", "pages/add_quotation.js");
+        $this->admin_headerlib->add_javascript("add_supplier_quotation", "pages/add_supplier_quotation.js");
         $this->load->view(ADMINFOLDER.'template',$this->viewData);
     }
 
@@ -285,9 +283,9 @@ class Quotation extends Admin_Controller {
             $salespersonid = $PostData['salespersonid'];
         }
 
-        $this->Quotation->_table = tbl_quotation;
-        $this->Quotation->_where = ("quotationid='".$quotationid."'");
-        $Count = $this->Quotation->CountRecords();
+        $this->Supplier_Quotation->_table = tbl_quotation;
+        $this->Supplier_Quotation->_where = ("quotationid='".$quotationid."'");
+        $Count = $this->Supplier_Quotation->CountRecords();
         if($Count==0){
             
                 //"sellermemberid" => $sellermemberid,
@@ -319,7 +317,7 @@ class Quotation extends Admin_Controller {
                 "status" => 0);
             
             $insertdata=array_map('trim',$insertdata);
-            $QuotationId = $this->Quotation->Add($insertdata);
+            $QuotationId = $this->Supplier_Quotation->Add($insertdata);
             //$QuotationId = 10;
             if($QuotationId){
                 $this->general_model->updateTransactionPrefixLastNoByType(0);
@@ -359,9 +357,9 @@ class Quotation extends Admin_Controller {
                             $product = $this->Product->getProductData($memberid,$productid,$memberbasicsalesprice,1);
                             $isvariant = ($product['isuniversal']==0)?1:0;
                             
-                            $this->Quotation->_table = tbl_quotationproducts;
-                            $this->Quotation->_where = ("quotationid=".$QuotationId." AND productid=".$productid." AND price='".$productrate."'");
-                            $Count = $this->Quotation->CountRecords();
+                            $this->Supplier_Quotation->_table = tbl_quotationproducts;
+                            $this->Supplier_Quotation->_where = ("quotationid=".$QuotationId." AND productid=".$productid." AND price='".$productrate."'");
+                            $Count = $this->Supplier_Quotation->CountRecords();
                                 
                             if($Count==0){
                                
@@ -385,8 +383,8 @@ class Quotation extends Admin_Controller {
                     }
                     //print_r($insertData);exit;
                     if(!empty($insertData)){
-                        $this->Quotation->_table = tbl_quotationproducts;
-                        $this->Quotation->add_batch($insertData);
+                        $this->Supplier_Quotation->_table = tbl_quotationproducts;
+                        $this->Supplier_Quotation->add_batch($insertData);
                         
                         $quotationproductsidsarr=array();
                         $first_id = $this->writedb->insert_id();
@@ -414,8 +412,8 @@ class Quotation extends Admin_Controller {
                             }
                         }
                         if(count($insertVariantData)>0){
-                            $this->Quotation->_table = tbl_quotationvariant;
-                            $this->Quotation->add_batch($insertVariantData);
+                            $this->Supplier_Quotation->_table = tbl_quotationvariant;
+                            $this->Supplier_Quotation->add_batch($insertVariantData);
                         }
                     }
 
@@ -445,8 +443,8 @@ class Quotation extends Admin_Controller {
                             }
                         }
                         if(!empty($insertextracharges)){
-                            $this->Quotation->_table = tbl_extrachargemapping;
-                            $this->Quotation->add_batch($insertextracharges);
+                            $this->Supplier_Quotation->_table = tbl_extrachargemapping;
+                            $this->Supplier_Quotation->add_batch($insertextracharges);
                         }
                     }
                 }
@@ -477,8 +475,8 @@ class Quotation extends Admin_Controller {
                                 "modifiedby"=>$addedby);
                     }
                     if(!empty($insertData_installment)){
-                        $this->Quotation->_table = tbl_installment;
-                        $this->Quotation->add_batch($insertData_installment);
+                        $this->Supplier_Quotation->_table = tbl_installment;
+                        $this->Supplier_Quotation->add_batch($insertData_installment);
                     }
                 }
                 $insertstatusdata = array(
@@ -489,8 +487,8 @@ class Quotation extends Admin_Controller {
                     "modifiedby" => $addedby);
                 
                 $insertstatusdata=array_map('trim',$insertstatusdata);
-                $this->Quotation->_table = tbl_quotationstatuschange;  
-                $this->Quotation->Add($insertstatusdata);
+                $this->Supplier_Quotation->_table = tbl_quotationstatuschange;  
+                $this->Supplier_Quotation->Add($insertstatusdata);
 
                 $this->load->model('Fcm_model','Fcm');
                 $fcmquery = $this->Fcm->getFcmDataByMemberId($memberid);
@@ -562,9 +560,9 @@ class Quotation extends Admin_Controller {
         $this->viewData['VIEW_STATUS'] = "1";
         $this->viewData['action'] = 1;
 
-        $this->viewData['quotationdata'] = $this->Quotation->getQuotationDataById($id,'sales');
-        $this->viewData['installmentdata'] = $this->Quotation->getQuotationInstallmentDataByQuotationId($id);
-        $this->viewData['ExtraChargesData'] = $this->Quotation->getExtraChargesDataByReferenceID($id);
+        $this->viewData['quotationdata'] = $this->Supplier_Quotation->getQuotationDataById($id,'sales');
+        $this->viewData['installmentdata'] = $this->Supplier_Quotation->getQuotationInstallmentDataByQuotationId($id);
+        $this->viewData['ExtraChargesData'] = $this->Supplier_Quotation->getExtraChargesDataByReferenceID($id);
         
         $this->load->model('Member_model', 'Member');
         $this->viewData['memberdata'] = $this->Member->getMemberOnFirstLevelUnderCompany();
@@ -682,9 +680,9 @@ class Quotation extends Admin_Controller {
         if(CRM==1){
             $salespersonid = $PostData['salespersonid'];
         }
-        $this->Quotation->_table = tbl_quotation;
-        $this->Quotation->_where = ("id!=".$quotationsid." AND quotationid='".$quotationid."'");
-        $Count = $this->Quotation->CountRecords();
+        $this->Supplier_Quotation->_table = tbl_quotation;
+        $this->Supplier_Quotation->_where = ("id!=".$quotationsid." AND quotationid='".$quotationid."'");
+        $Count = $this->Supplier_Quotation->CountRecords();
         if($Count==0){
            
             $updatedata = array(
@@ -710,8 +708,8 @@ class Quotation extends Admin_Controller {
                 "modifiedby" => $modifiedby);
             
             $updatedata=array_map('trim',$updatedata);
-            $this->Quotation->_where = array('id' => $quotationsid);
-            $this->Quotation->Edit($updatedata);
+            $this->Supplier_Quotation->_where = array('id' => $quotationsid);
+            $this->Supplier_Quotation->Edit($updatedata);
 
             if(!empty($productidarr)){
 
@@ -732,8 +730,8 @@ class Quotation extends Admin_Controller {
                     if(!empty($ProductsData)){
                         foreach ($ProductsData as $row) {
 
-                            $this->Quotation->_table = tbl_quotationproducts;
-                            $this->Quotation->Delete("id=".$row['id']);
+                            $this->Supplier_Quotation->_table = tbl_quotationproducts;
+                            $this->Supplier_Quotation->Delete("id=".$row['id']);
                         }
                     }
                 } 
@@ -748,8 +746,8 @@ class Quotation extends Admin_Controller {
                     if(!empty($MappingData)){
                         foreach ($MappingData as $row) {
 
-                            $this->Quotation->_table = tbl_extrachargemapping;
-                            $this->Quotation->Delete("id=".$row['id']);
+                            $this->Supplier_Quotation->_table = tbl_extrachargemapping;
+                            $this->Supplier_Quotation->Delete("id=".$row['id']);
                         }
                     }
                 } 
@@ -782,13 +780,13 @@ class Quotation extends Admin_Controller {
                         
                         $product = $this->Product->getProductData($memberid,$productid,$memberbasicsalesprice,1);
                         $isvariant = ($product['isuniversal']==0)?1:0;
-                        $this->Quotation->_table = tbl_quotationproducts;
+                        $this->Supplier_Quotation->_table = tbl_quotationproducts;
                        
                         if($quotationproductsid != ""){
                             
-                            $this->Quotation->_table = tbl_quotationproducts;
-                            $this->Quotation->_where = ("id!=".$quotationproductsid." AND quotationid=".$quotationsid." AND productid=".$productid." AND price='".$productrate."'");
-                            $Count = $this->Quotation->CountRecords();
+                            $this->Supplier_Quotation->_table = tbl_quotationproducts;
+                            $this->Supplier_Quotation->_where = ("id!=".$quotationproductsid." AND quotationid=".$quotationsid." AND productid=".$productid." AND price='".$productrate."'");
+                            $Count = $this->Supplier_Quotation->CountRecords();
                             
                             if($Count==0){
                                 
@@ -814,9 +812,9 @@ class Quotation extends Admin_Controller {
                             }
 						}else{
 
-                            $this->Quotation->_table = tbl_quotationproducts;
-                            $this->Quotation->_where = ("quotationid=".$quotationsid." AND productid=".$productid." AND price='".$productrate."'");
-                            $Count = $this->Quotation->CountRecords();
+                            $this->Supplier_Quotation->_table = tbl_quotationproducts;
+                            $this->Supplier_Quotation->_where = ("quotationid=".$quotationsid." AND productid=".$productid." AND price='".$productrate."'");
+                            $Count = $this->Supplier_Quotation->CountRecords();
                                 
                             if($Count==0){
                                 $priceidsarr[] = $priceid;
@@ -839,23 +837,23 @@ class Quotation extends Admin_Controller {
                     }
                 }
                 if(!empty($updateData)){
-                    $this->Quotation->_table = tbl_quotationproducts;
-                    $this->Quotation->edit_batch($updateData,"id");
+                    $this->Supplier_Quotation->_table = tbl_quotationproducts;
+                    $this->Supplier_Quotation->edit_batch($updateData,"id");
                     
                     if(!empty($updatequotationproductsidsarr)){
-                        $this->Quotation->_table = tbl_quotationvariant;
-                        $this->Quotation->Delete(array("quotationid"=>$quotationsid,"quotationproductid IN (".implode(",",$updatequotationproductsidsarr).")"));
+                        $this->Supplier_Quotation->_table = tbl_quotationvariant;
+                        $this->Supplier_Quotation->Delete(array("quotationid"=>$quotationsid,"quotationproductid IN (".implode(",",$updatequotationproductsidsarr).")"));
                     }
                     if(!empty($deletequotationproductsidsarr)){
                         foreach ($deletequotationproductsidsarr as $quotationproductid) {
                             
-                            $this->Quotation->_table = tbl_quotationproducts;
-                            $this->Quotation->Delete("id=".$quotationproductid);
+                            $this->Supplier_Quotation->_table = tbl_quotationproducts;
+                            $this->Supplier_Quotation->Delete("id=".$quotationproductid);
                         }
                     }
                    
                     $this->load->model('Product_combination_model', 'Product_combination');
-                    $this->Quotation->_table = tbl_quotationvariant;
+                    $this->Supplier_Quotation->_table = tbl_quotationvariant;
                     foreach($updatequotationproductsidsarr as $k=>$quotationproductid){
 
                         $variantdata = $this->Product_combination->getProductcombinationByPriceID($updatepriceidsarr[$k]);
@@ -871,12 +869,12 @@ class Quotation extends Admin_Controller {
                         }
                     }
                     if(isset($updateVariantData) && count($updateVariantData)>0){
-                        $this->Quotation->add_batch($updateVariantData);
+                        $this->Supplier_Quotation->add_batch($updateVariantData);
                     }
                 }
                 if(!empty($insertData)){
-                    $this->Quotation->_table = tbl_quotationproducts;
-                    $this->Quotation->add_batch($insertData);
+                    $this->Supplier_Quotation->_table = tbl_quotationproducts;
+                    $this->Supplier_Quotation->add_batch($insertData);
 
                     $quotationproductsidsarr=array();
                     $first_id = $this->writedb->insert_id();
@@ -904,8 +902,8 @@ class Quotation extends Admin_Controller {
                         }
                     }
                     if(!empty($insertVariantData)){
-                        $this->Quotation->_table = tbl_quotationvariant;
-                        $this->Quotation->add_batch($insertVariantData);
+                        $this->Supplier_Quotation->_table = tbl_quotationvariant;
+                        $this->Supplier_Quotation->add_batch($insertVariantData);
                     }
                 }
 
@@ -948,12 +946,12 @@ class Quotation extends Admin_Controller {
                         }
                     }
                     if(!empty($insertextracharges)){
-                        $this->Quotation->_table = tbl_extrachargemapping;
-                        $this->Quotation->add_batch($insertextracharges);
+                        $this->Supplier_Quotation->_table = tbl_extrachargemapping;
+                        $this->Supplier_Quotation->add_batch($insertextracharges);
                     }
                     if(!empty($updateextracharges)){
-                        $this->Quotation->_table = tbl_extrachargemapping;
-                        $this->Quotation->edit_batch($updateextracharges,"id");
+                        $this->Supplier_Quotation->_table = tbl_extrachargemapping;
+                        $this->Supplier_Quotation->edit_batch($updateextracharges,"id");
                     }
                 }
             }
@@ -965,10 +963,10 @@ class Quotation extends Admin_Controller {
             $paymentdatearr = isset($PostData['paymentdate'])?$PostData['paymentdate']:'';
             
             $EMIReceived=array();
-            $this->Quotation->_table = tbl_installment;
-            $this->Quotation->_fields = "GROUP_CONCAT(status) as status";
-            $this->Quotation->_where = array('quotationid' => $quotationsid);
-            $EMIReceived = $this->Quotation->getRecordsById();
+            $this->Supplier_Quotation->_table = tbl_installment;
+            $this->Supplier_Quotation->_fields = "GROUP_CONCAT(status) as status";
+            $this->Supplier_Quotation->_where = array('quotationid' => $quotationsid);
+            $EMIReceived = $this->Supplier_Quotation->getRecordsById();
            
             if(!empty($percentagearr) && $paymenttype==4){
                 $insertinstallmentdata = array();
@@ -1014,24 +1012,24 @@ class Quotation extends Admin_Controller {
                     }
                 }
                 if(count($updateinstallmentdata)>0){
-                    $this->Quotation->edit_batch($updateinstallmentdata,'id');
+                    $this->Supplier_Quotation->edit_batch($updateinstallmentdata,'id');
                     if(count($installmentidids)>0){
-                        $this->Quotation->Delete(array("id not in(".implode(",", $installmentidids).")"=>null,"quotationid"=>$quotationsid));
+                        $this->Supplier_Quotation->Delete(array("id not in(".implode(",", $installmentidids).")"=>null,"quotationid"=>$quotationsid));
                     }
                 }else{
                     if(!in_array('1',explode(",",$EMIReceived['status']))){
-                        $this->Quotation->Delete(array("quotationid"=>$quotationsid));
+                        $this->Supplier_Quotation->Delete(array("quotationid"=>$quotationsid));
                     }
                 }
                 if(count($insertinstallmentdata)>0){
                     if(!in_array('1',explode(",",$EMIReceived['status']))){
-                        $this->Quotation->add_batch($insertinstallmentdata);
+                        $this->Supplier_Quotation->add_batch($insertinstallmentdata);
                     }
                 }
                 
             }else{
                 if(!in_array('1',explode(",",$EMIReceived['status']))){
-                    $this->Quotation->Delete(array("quotationid"=>$quotationsid));
+                    $this->Supplier_Quotation->Delete(array("quotationid"=>$quotationsid));
                 }
             }
 
@@ -1039,8 +1037,8 @@ class Quotation extends Admin_Controller {
                 $this->general_model->addActionLog(2,'Quotation','Edit '.$quotationid.' sales quotation.');
             }
             /***********Re-generate Quotation***********/
-            /* $this->Quotation->_table = tbl_quotation;
-            $this->Quotation->generatequotation($quotationsid); */
+            /* $this->Supplier_Quotation->_table = tbl_quotation;
+            $this->Supplier_Quotation->generatequotation($quotationsid); */
 
             echo 1;
         }else{
@@ -1051,7 +1049,7 @@ class Quotation extends Admin_Controller {
         $PostData = $this->input->post();
         
         $quotationid = $PostData['quotationid'];
-        echo $this->Quotation->generatequotation($quotationid);
+        echo $this->Supplier_Quotation->generatequotation($quotationid);
     }
 
     public function getvariant()
@@ -1062,12 +1060,12 @@ class Quotation extends Admin_Controller {
         echo json_encode($variant);
     }
 
-    public function view_quotation($quotationid)
+    public function view_supplier_quotation($quotationid)
     {
         $this->checkAdminAccessModule('submenu','view',$this->viewData['submenuvisibility']);
-        $this->viewData['title'] = "View Quotation";
-        $this->viewData['module'] = "quotation/View_quotation";
-        $this->viewData['transactiondata'] = $this->Quotation->getQuotationDetails($quotationid);
+        $this->viewData['title'] = "View Supplier Quotation";
+        $this->viewData['module'] = "supplier_quotation/View_supplier_quotation";
+        $this->viewData['transactiondata'] = $this->Supplier_Quotation->getQuotationDetails($quotationid);
         
         $this->viewData['printtype'] = 'quotation';
         $this->viewData['heading'] = 'Quotation';
@@ -1076,47 +1074,12 @@ class Quotation extends Admin_Controller {
         
         $this->load->model('Invoice_setting_model','Invoice_setting');
         // $this->viewData['invoicesettingdata'] = $this->Invoice_setting->getShipperDetails($sellerchannelid);
-        // $this->Quotation->_table = tbl_installment;
-        $this->Quotation->_where = array("quotationid"=>$quotationid);
-        // $this->Quotation->_order = ("date ASC");
-        $this->viewData['installment'] = $this->Quotation->getRecordByID();
+        // $this->Supplier_Quotation->_table = tbl_installment;
+        $this->Supplier_Quotation->_where = array("quotationid"=>$quotationid);
+        // $this->Supplier_Quotation->_order = ("date ASC");
+        $this->viewData['installment'] = $this->Supplier_Quotation->getRecordByID();
        
-        // $this->viewData['quotationstatushistory'] = $this->Quotation->getQuotationStatusHistory($quotationid);
-
-        $this->load->model("Channel_model","Channel"); 
-        $this->viewData['channeldata'] = $this->Channel->getChannelList();
-        
-        if($this->viewData['submenuvisibility']['managelog'] == 1){
-            $this->general_model->addActionLog(4,'Quotation','View '.$this->viewData['transactiondata']['transactiondetail']['quotationid'].' sales quotation details.');
-        }
-
-        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
-        $this->admin_headerlib->add_javascript("jquery.number", "jquery.number.js");
-        $this->admin_headerlib->add_javascript("invoice", "pages/quotation_view.js");
-        $this->load->view(ADMINFOLDER.'template',$this->viewData);
-    }
-
-    public function print_quotation($quotationid)
-    {
-    
-        $this->checkAdminAccessModule('submenu','view',$this->viewData['submenuvisibility']);
-        $this->viewData['title'] = "Print Quotation";
-        $this->viewData['module'] = "quotation/print_quotation";
-        $this->viewData['transactiondata'] = $this->Quotation->getQuotationDetails($quotationid);
-        
-        $this->viewData['printtype'] = 'quotation';
-        $this->viewData['heading'] = 'Quotation';
-        // $sellerchannelid = $this->viewData['transactiondata']['transactiondetail']['sellerchannelid'];
-        // $sellermemberid = $this->viewData['transactiondata']['transactiondetail']['sellermemberid'];
-        
-        $this->load->model('Invoice_setting_model','Invoice_setting');
-        // $this->viewData['invoicesettingdata'] = $this->Invoice_setting->getShipperDetails($sellerchannelid);
-        // $this->Quotation->_table = tbl_installment;
-        $this->Quotation->_where = array("quotationid"=>$quotationid);
-        // $this->Quotation->_order = ("date ASC");
-        $this->viewData['installment'] = $this->Quotation->getRecordByID();
-       
-        // $this->viewData['quotationstatushistory'] = $this->Quotation->getQuotationStatusHistory($quotationid);
+        // $this->viewData['quotationstatushistory'] = $this->Supplier_Quotation->getQuotationStatusHistory($quotationid);
 
         $this->load->model("Channel_model","Channel"); 
         $this->viewData['channeldata'] = $this->Channel->getChannelList();
@@ -1142,7 +1105,7 @@ class Quotation extends Admin_Controller {
         $modifiedby = $this->session->userdata(base_url().'ADMINID'); 
         $modifieddate = $this->general_model->getCurrentDateTime();
         
-        // $companyname = $this->Quotation->getCompanyName();
+        // $companyname = $this->Supplier_Quotation->getCompanyName();
         // $PostData['companyname'] = str_replace(" ", "", strtolower($companyname['businessname']));
 
         $insertstatusdata = array(
@@ -1153,8 +1116,8 @@ class Quotation extends Admin_Controller {
             "modifiedby" => $modifiedby);
         
         $insertstatusdata=array_map('trim',$insertstatusdata);
-        $this->Quotation->_table = tbl_quotationstatuschange;  
-        $this->Quotation->Add($insertstatusdata);
+        $this->Supplier_Quotation->_table = tbl_quotationstatuschange;  
+        $this->Supplier_Quotation->Add($insertstatusdata);
 
         $updateData = array(
             'status'=>$status,
@@ -1164,17 +1127,17 @@ class Quotation extends Admin_Controller {
         if($status==2){
             $updateData['resonforrejection'] = $PostData['resonforrejection'];
         }
-        $this->Quotation->_table = tbl_quotation; 
-        $this->Quotation->_where = array("id" => $quotationId);
-        $updateid = $this->Quotation->Edit($updateData);
+        $this->Supplier_Quotation->_table = tbl_quotation; 
+        $this->Supplier_Quotation->_where = array("id" => $quotationId);
+        $updateid = $this->Supplier_Quotation->Edit($updateData);
         if($updateid) {
 
             /**/
             $createddate  =  $this->general_model->getCurrentDateTime();
             
-            $this->Quotation->_fields="quotationid,memberid,(select name from ".tbl_member." where id=memberid) as name";
-            $this->Quotation->_where=array("id"=>$quotationId);
-            $quotationdetail = $this->Quotation->getRecordsByID();
+            $this->Supplier_Quotation->_fields="quotationid,memberid,(select name from ".tbl_member." where id=memberid) as name";
+            $this->Supplier_Quotation->_where=array("id"=>$quotationId);
+            $quotationdetail = $this->Supplier_Quotation->getRecordsByID();
 
             if(count($quotationdetail)>0){
                 if($this->viewData['submenuvisibility']['managelog'] == 1){
@@ -1247,14 +1210,14 @@ class Quotation extends Admin_Controller {
         }else{
             $updateData['paymentdate']="";
         }
-        $this->Quotation->_table = tbl_installment;
-        $this->Quotation->_where = array("id" => $installmentid);
-        $updateid = $this->Quotation->Edit($updateData);
+        $this->Supplier_Quotation->_table = tbl_installment;
+        $this->Supplier_Quotation->_where = array("id" => $installmentid);
+        $updateid = $this->Supplier_Quotation->Edit($updateData);
         if($updateid!=0) {
             if($this->viewData['submenuvisibility']['managelog'] == 1){
-                $this->Quotation->_fields="(select quotationid from ".tbl_quotation." where id=".tbl_installment.".quotationid) as quotationnumber";
-                $this->Quotation->_where=array("id"=>$installmentid);
-                $quotationdetail = $this->Quotation->getRecordsByID();
+                $this->Supplier_Quotation->_fields="(select quotationid from ".tbl_quotation." where id=".tbl_installment.".quotationid) as quotationnumber";
+                $this->Supplier_Quotation->_where=array("id"=>$installmentid);
+                $quotationdetail = $this->Supplier_Quotation->getRecordsByID();
 
                 $this->general_model->addActionLog(2,'Quotation','Change installment status '.$quotationdetail['quotationnumber'].' on sales quotation.');
             }
@@ -1268,7 +1231,7 @@ class Quotation extends Admin_Controller {
     {
         $PostData = $this->input->post();
         $quotationid = $PostData['id'];
-        $PostData['transactiondata'] = $this->Quotation->getQuotationDetails($quotationid);
+        $PostData['transactiondata'] = $this->Supplier_Quotation->getQuotationDetails($quotationid);
 
         $sellerchannelid = $PostData['transactiondata']['transactiondetail']['sellerchannelid'];
         // $sellermemberid = $PostData['transactiondata']['transactiondetail']['sellermemberid'];

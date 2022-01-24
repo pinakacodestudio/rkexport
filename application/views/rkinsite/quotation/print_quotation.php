@@ -9,7 +9,7 @@
             <li class="active">View <?php echo $this->session->userdata(base_url().'submenuname'); ?></li>
           	</ol>
         </small>
-    </div>
+    </div>   
 
     <div class="container-fluid">        
       	<div data-widget-group="group1">
@@ -31,7 +31,7 @@
                 </div>
 		      </div>
 		    </div> -->
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
                 <div class="panel panel-default border-panel">
                     <div class="panel-body p-n pt-1">
                         <div class="tab-container tab-default mb-n">
@@ -80,7 +80,7 @@
                                                                     <th class="text-left">Status</th>
                                                                 </tr>
                                                             </thead>
-                                                            <!-- <tbody>
+                                                            <tbody>
                                                                 <?php
                                                                 $count=0;
                                                                 foreach ($installment as $ins) {
@@ -122,7 +122,7 @@
                                                                         </td>
                                                                     </tr>
                                                                 <?php } ?>
-                                                            </tbody> -->
+                                                            </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
@@ -239,7 +239,7 @@
                                                                     <th class="text-right">Action</th>
                                                                 </tr>
                                                             </thead>
-                                                            <!-- <tbody>
+                                                            <tbody>
                                                                 <?php
                                                                 $count=0;
                                                                 foreach ($installment as $ins) {
@@ -281,7 +281,7 @@
                                                                         </td>
                                                                     </tr>
                                                                 <?php } ?>
-                                                            </tbody> -->
+                                                            </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
@@ -293,6 +293,39 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div> -->
+            <div>
+                <button class="ms-5" style="width: 40px; float:right; margin: 0 20px 0 0"><i class="fa fa-file-pdf-o"></i></button>
+                <button class="ms-5" style="width: 40px; float:right;"><i class="fa fa-print"></i></button>
+                <button style="width: 80px; float:right;">GoBack</button>
+            </div>
+            
+            <br><br><br>
+            <div class="row">
+                <div class="text-center col-md-4">
+                    <h4>Company Address</h3>
+                </div>
+                <div class="col-md-4">
+                    <p>Shiping Address</p>
+                    <p>Select Approx Delivary Date</p>
+                </div>
+                <div class="col-md-4">
+                    <p>Inquiry No</p>
+                    <p>Inquiry Date</p>
+                    <p>Inquiry Name</p>
+                </div>
+            </div>
+            <br><br><br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-hover table-bordered m-n">
+                        <tr>
+                            <th>product details</th>
+                            <th>Quantity</th>
+                            <th>Priority</th> 
+                        </tr>
+                    </table>
                 </div>
             </div>
 		  </div>

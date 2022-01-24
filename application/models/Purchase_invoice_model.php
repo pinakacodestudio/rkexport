@@ -8,7 +8,7 @@ class Purchase_invoice_model extends Common_model
 	public $_except_fields = array();
 	public $column_order = array(null,'vendorname',null,'i.invoiceno','i.invoicedate','statusname','netamount'); //set column field database for datatable orderable
     
-    public $column_search = array('vendor.name','vendor.membercode','i.invoiceno','i.invoicedate','IFNULL((i.amount + i.taxamount - i.globaldiscount + IFNULL((SELECT SUM(amount) FROM '.tbl_extrachargemapping.' WHERE type=2 AND referenceid=i.id),0)),0)','(SELECT GROUP_CONCAT(o.orderid) FROM '.tbl_orders.' as o WHERE FIND_IN_SET(o.id,i.orderid)>0)'); //set column field database for datatable searchable 
+    public $column_search = array('vendor.name','vendor.membercode','i.invoiceno','i.invoicedate','IFNULL((i.amount + i.taxamount - i.globaldiscount + IFNULL((SELECT SUM(amount) FROM '.tbl_extrachargemapping.' WHERE type=2 AND referenceid=i.id),0)),0)','(SELECT GROUP_CONCAT(o.orderid) FROM '.tbl_purchaseorders.' as o WHERE FIND_IN_SET(o.id,i.orderid)>0)'); //set column field database for datatable searchable 
 	public $order = array('i.id' => 'DESC'); // default order  
 
 	function __construct() {
@@ -405,7 +405,7 @@ class Purchase_invoice_model extends Common_model
                                     o.gstprice
                                     
                                 ");
-        $this->readdb->from(tbl_orders." as o");                           
+        $this->readdb->from(tbl_purchaseorders." as o");                           
         $this->readdb->join(tbl_orderproducts." as op", "op.orderid=o.id", "INNER");
         
         if(!empty($transactionid)){
@@ -458,7 +458,7 @@ class Purchase_invoice_model extends Common_model
                                     ),0) as invoiceqty,
                                     ".$sql_edit."
 
-                                    (SELECT gstprice FROM ".tbl_orders." WHERE id IN (grn.orderid) LIMIT 1) as gstprice
+                                    (SELECT gstprice FROM ".tbl_purchaseorders." WHERE id IN (grn.orderid) LIMIT 1) as gstprice
                                     
                                 ");
         $this->readdb->from(tbl_goodsreceivednotes." as grn");                           
@@ -467,7 +467,7 @@ class Purchase_invoice_model extends Common_model
         if(!empty($transactionid)){
             $this->readdb->join(tbl_transactionproducts." as trp2", "trp2.referenceproductid = trp.id AND trp2.transactiontype=3 AND trp2.transactionid=".$transactionid, "INNER");
         }
-        $this->readdb->join(tbl_memberaddress." as ma","ma.id=(SELECT addressid FROM ".tbl_orders." WHERE id IN (grn.orderid) LIMIT 1)","LEFT");
+        $this->readdb->join(tbl_memberaddress." as ma","ma.id=(SELECT addressid FROM ".tbl_purchaseorders." WHERE id IN (grn.orderid) LIMIT 1)","LEFT");
         $this->readdb->join(tbl_city." as ct","ct.id=ma.cityid","LEFT");
         $this->readdb->join(tbl_province." as pr","pr.id=ct.stateid","LEFT");
         $this->readdb->where("FIND_IN_SET(grn.id, '".$grnid."') AND grn.sellermemberid=".$vendorid." AND grn.memberid=0");

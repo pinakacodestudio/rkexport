@@ -90,29 +90,8 @@
                         <div class="col-sm-6" style="margin: 0 0 0 -10px; width:50rem;">
                            <div class="form-group" id="quotationid_div">
                               <div class="col-sm-12 pr-sm">
-                                 <label for="quotationid" class="control-label">Inquiry No <span class="mandatoryfield">*</span></label>
+                                 <label for="quotationid" class="control-label">Quotation No <span class="mandatoryfield">*</span></label>
                                  <input id="quotationid" type="text" name="quotationid" class="form-control" value="<?php if(!empty($quotationdata['quotationdetail']) && !isset($isduplicate)){ echo $quotationdata['quotationdetail']['quotationid']; }else if(!empty($quotationid)){echo $quotationid; }?>" readonly>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-sm-6">
-                           <div class="form-group" id="inquiryname_div">
-                              <div class="col-sm-12 pl-sm pr-sm">
-                                 <label for="inquiryname" class="control-label">Inquiry Name <span class="mandatoryfield">*</span></label>
-                                 <div class="input-group">
-                                    <input id="inquiryname" type="text" name="inquiryname" value="" class="form-control">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-sm-6">
-                           <div class="form-group" id="quotationdate_div">
-                              <div class="col-sm-12 pl-sm pr-sm">
-                                 <label for="quotationdate" class="control-label">Quotation Date <span class="mandatoryfield">*</span></label>
-                                 <div class="input-group">
-                                    <input id="quotationdate" type="text" name="quotationdate" value="<?php if(!empty($quotationdata['quotationdetail']) && $quotationdata['quotationdetail']['quotationdate']!="0000-00-00"){ echo $this->general_model->displaydate($quotationdata['quotationdetail']['quotationdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate());} ?>" class="form-control" readonly>
-                                    <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
-                                 </div>
                               </div>
                            </div>
                         </div>
@@ -120,10 +99,10 @@
                            <div class="form-group" id="billingaddress_div">
                               <div class="col-sm-12 pr-sm pl-sm">
                                  <label for="billingaddressid" class="control-label">
-                                    Select Billing Address<!--  <span class="mandatoryfield">*</span> -->
+                                    Inquiry No<!--  <span class="mandatoryfield">*</span> -->
                                  </label>
                                  <select id="billingaddressid" name="billingaddressid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="5">
-                                    <option value="0">Select Billing Address</option>
+                                    <option value="0">None</option>
                                     <?php if(isset($Partydata)){ 
                                        foreach($Partydata as $ba){ 
                                        ?>
@@ -135,7 +114,28 @@
                               </div>
                            </div>
                         </div>
+                        <!-- <div class="col-sm-6">
+                           <div class="form-group" id="inquiryname_div">
+                              <div class="col-sm-12 pl-sm pr-sm">
+                                 <label for="inquiryname" class="control-label">Inquiry Name <span class="mandatoryfield">*</span></label>
+                                 <div class="input-group">
+                                    <input id="inquiryname" type="text" name="inquiryname" value="" class="form-control">
+                                 </div>
+                              </div>
+                           </div>
+                        </div> -->
                         <div class="col-sm-6">
+                           <div class="form-group" id="quotationdate_div">
+                              <div class="col-sm-12 pl-sm pr-sm">
+                                 <label for="quotationdate" class="control-label">Inquiry Date <span class="mandatoryfield">*</span></label>
+                                 <div class="input-group">
+                                    <input id="quotationdate" type="text" name="quotationdate" value="<?php if(!empty($quotationdata['quotationdetail']) && $quotationdata['quotationdetail']['quotationdate']!="0000-00-00"){ echo $this->general_model->displaydate($quotationdata['quotationdetail']['quotationdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate());} ?>" class="form-control" readonly>
+                                    <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- <div class="col-sm-6">
                            <div class="form-group" id="shippingaddress_div">
                               <div class="col-sm-12 pl-sm">
                                  <label for="shippingaddressid" class="control-label">Select Shipping Address</label>
@@ -146,12 +146,12 @@
                                     <option value="<?php echo $sa['id']; ?>"><?php echo ucwords($sa['shippingaddress']); ?></option>
                                     <?php }} ?>
                                  </select>
-                                 <!-- <a href="javascript:void(0)" class="mt-sm" style="float: left;" onclick="openmodal(2)"><i class="fa fa-plus"></i> Add New Shipping Address</a> -->
+                                 <a href="javascript:void(0)" class="mt-sm" style="float: left;" onclick="openmodal(2)"><i class="fa fa-plus"></i> Add New Shipping Address</a>
                                  <input type="hidden" name="shippingaddress" id="shippingaddress" value="">
                               </div>
                            </div>
-                        </div>
-                        <div class="col-md-12"  id='addproductitem'>
+                        </div> -->
+                        <div class="col-md-12" style="margin:30px 0px 0px -7px; width:100.3rem" id='addproductitem'>
                            <?php 
                               $cloopdoc = 0;
                               $i=0;
@@ -165,7 +165,7 @@
                                      $doc=$row->doc;
                                      $docname = $row->docname;
                                  ?>
-                           <div id="quotationproductdivs">
+                           <!-- <div id="quotationproductdivs">
                               <table id="quotationproducttable" class="table table-hover table-bordered m-n">
                                  <thead>
                                     <tr>
@@ -419,7 +419,7 @@
                                     <?php } ?>
                                  </tbody>
                               </table>
-                           </div>
+                           </div> -->
                            <?php
                               }
                               }else {
@@ -435,6 +435,8 @@
                                        <th>Category<span class="mandatoryfield">*</span></th>
                                        <th class="">Product <span class="mandatoryfield">*</span></th>
                                        <th class="">Qty <span class="mandatoryfield">*</span></th>
+                                       <th class="">Discount( % ) <span class="mandatoryfield">*</span></th>
+                                       <th class="">Amount <span class="mandatoryfield">*</span></th>
                                        <th class="">Delivery Priarity</th>
                                     </tr>
                                  </thead>
@@ -608,10 +610,28 @@
                                              </div>
                                           </div>
                                        </td>
+
+                                       <td>
+                                          <div class="form-group" id="amount1_div">
+                                             <div class="col-md-12">
+                                                <input type="text" class="form-control amounttprice" id="amount1" name="amount[]" value=""  div-id="1">	
+                                                <input type="hidden" class="producttaxamount" id="producttaxamount1" name="producttaxamount[]" value="" div-id="1">		
+                                             </div>
+                                          </div>
+                                       </td>
+
+                                       <td>
+                                          <div class="form-group" id="amount1_div">
+                                             <div class="col-md-12">
+                                                <input type="text" class="form-control amounttprice" id="amount1" name="amount[]" value=""  div-id="1">	
+                                                <input type="hidden" class="producttaxamount" id="producttaxamount1" name="producttaxamount[]" value="" div-id="1">		
+                                             </div>
+                                          </div>
+                                       </td>
                                        <td>
                                           <div class="form-group">
                                              <div class="col-md-12 pr-n">
-                                                <div class="col-md-12 pr-n">
+                                                <!-- <div class="col-md-12 pr-n"> -->
                                                    <div class="form-group" id="deliverypriority_div">
                                                       <div class="col-md-9">
                                                          <?php
@@ -627,12 +647,13 @@
                                                             <option value="4" <?=($selectedpriority==4)?"selected":""?>>Urgent</option>
                                                          </select>
                                                          <!-- <button type="button" style="float:right; width:3rem; height:3.5rem; margin:10px -35px 0px 0px;" class="addnewproductitem btn-primary"><i class="fa fa-plus"></i></button> -->
-                                                         <div class="col-md-1 p-n" style="float:right; width:3rem; height:3.5rem; margin:10px -35px 0px 0px;">
+
+                                                         <!-- <div class="col-md-1 p-n" style="float:right; width:3rem; height:3.5rem; margin:10px -35px 0px 0px;">
                                                             <a href="javascript:void(0)" onclick="addcountry()" class="btn btn-primary btn-raised p-xs"><i class="material-icons addnewproductitem" title="Add Unit">add</i></a>
-                                                         </div>
+                                                         </div> -->
                                                       </div>
                                                    </div>
-                                                </div>
+                                                <!-- </div> -->
                                              </div>
                                           </div>
                                        </td>
@@ -690,10 +711,10 @@
       <div class="col-sm-3">
          <div class="form-group" id="quotationdate_div">
             <div class="col-sm-12 pl-sm pr-sm">
-               <label for="quotationdate" class="control-label">Select Approx Delivery Date <span class="mandatoryfield">*</span></label>
+               <label for="quotationdate" class="control-label">Discount( % ) <span class="mandatoryfield">*</span></label>
                <div class="input-group">
-                  <input id="quotationdate" type="text" name="quotationdate" value="<?php if(!empty($quotationdata['quotationdetail']) && $quotationdata['quotationdetail']['quotationdate']!="0000-00-00"){ echo $this->general_model->displaydate($quotationdata['quotationdetail']['quotationdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate());} ?>" class="form-control" readonly>
-                  <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
+                  <input id="quotationdate" type="text" name="quotationdate" value="<?php //if(!empty($quotationdata['quotationdetail']) && $quotationdata['quotationdetail']['quotationdate']!="0000-00-00"){ echo $this->general_model->displaydate($quotationdata['quotationdetail']['quotationdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate());} ?>" class="form-control" readonly>
+                  <!-- <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span> -->
                </div>
             </div>
          </div>
@@ -723,7 +744,7 @@
          <div class="form-group" id="paymenttype_div">
             <div class="col-sm-12">
                <input type="hidden" name="oldpaymenttype" id="oldpaymenttype" value="<?php if(!empty($quotationdata['quotationdetail']) && !isset($isduplicate)){ echo $quotationdata['quotationdetail']['paymenttype']; } ?>">
-               <label for="paymenttypeid" class="control-label">Assign to <span class="mandatoryfield">*</span></label>
+               <label for="paymenttypeid" class="control-label">Discount Amount <span class="mandatoryfield">*</span></label>
                <select id="paymenttypeid" name="paymenttypeid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="5">
                   <option value="0">Select Assign to</option>
                   <?php if(isset($Partydata)){ 
@@ -734,7 +755,7 @@
             </div>
          </div>
       </div>
-      <div class="col-sm-3">
+      <!-- <div class="col-sm-3">
          <div class="form-group" id="paymenttype_div">
             <div class="col-sm-12">
                <input type="hidden" name="oldpaymenttype" id="oldpaymenttype" value="<?php if(!empty($quotationdata['quotationdetail']) && !isset($isduplicate)){ echo $quotationdata['quotationdetail']['paymenttype']; } ?>">
@@ -750,7 +771,7 @@
                </select>
             </div>
          </div>
-      </div>
+      </div> -->
       <div class="col-md-12 p-n">
          <div class="col-md-4 p-n">
             <div class="col-md-12 p-n">
@@ -760,7 +781,7 @@
                      if(isset($globaldiscountper)){
                         $discountpercentage = $globaldiscountper;    
                      }
-                     if(isset($globaldiscountamount)){
+                     if(isset($globaldiscountamount)){;
                         $discountamount = $globaldiscountamount;    
                      }
                      $discountminamount = $discountonbillminamount;    
@@ -852,10 +873,10 @@
                <table id="example" class="table table-bordered table-striped" cellspacing="0" style="border: 1px solid #e8e8e8; margin: -50px 0 0 110px;">
                   <tbody>
                      <tr>
-                        <th colspan="2" class="text-center">Quotation Summary (<?=CURRENCY_CODE?>)</th>
+                        <th colspan="2" class="text-center">Total Summary (<?=CURRENCY_CODE?>)</th>
                      </tr>
                      <tr>
-                        <th>Total Of Product</th>
+                        <th>Sub Total</th>
                         <td class="text-right" width="30%">
                            <span id="grossamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; }else{ echo "0.00"; }?></span>
                            <input type="hidden" id="inputgrossamount" name="grossamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; } ?>">
@@ -868,7 +889,7 @@
                            <span id="discountamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['globaldiscount']; }else{ echo "0.00"; }?></span>
                         </td>
                      </tr>
-                     <?php  /*
+                     <?php /* 
                         if(!empty($quotationdata) && !empty($ExtraChargesData)) { ?>
                      <?php for ($i=0; $i < count($ExtraChargesData); $i++) { ?>
                      <!-- <tr class="countcharges" id="countcharges<?php //$i+1?>">                  <th>
@@ -953,14 +974,21 @@
                         </tr> -->
                      <?php } */?>
                      <tr>
-                        <th>Round Off</th>
+                        <th>Tax Amount</th>
                         <td class="text-right">
                            <span id="roundoff">0.00</span>
                            <input type="hidden" id="inputroundoff" name="inputroundoff" value="0.00">
                         </td>
                      </tr>
                      <tr>
-                        <th>Amount Payable</th>
+                        <th>Discount Amount</th>
+                        <th class="text-right">
+                           <span id="netamount" name="netamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }else{ echo "0.00"; } ?></span>
+                           <input type="hidden" id="inputnetamount" name="netamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }?>">
+                        </th>
+                     </tr>
+                     <tr>
+                        <th>Net Total</th>
                         <th class="text-right">
                            <span id="netamount" name="netamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }else{ echo "0.00"; } ?></span>
                            <input type="hidden" id="inputnetamount" name="netamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }?>">

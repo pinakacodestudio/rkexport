@@ -1,6 +1,6 @@
 <?php
 
-class Quotation_model extends Common_model {
+class Supplier_quotation_model extends Common_model {
 
     public $_table = tbl_quotation;
     public $_fields = "*";
@@ -240,7 +240,7 @@ class Quotation_model extends Common_model {
         //m.channelid
         //m2.channelid as sellerchannelid,
         //IFNULL((select channelid from '.tbl_party.' where id=q.addedby),0) as addedbychannelid
-        $this->readdb->select('q.id,q.quotationdate,q.inquiryno,q.status,m3.quotationid,c.companyname as cname,u.name as addbyname,
+        $this->readdb->select('q.id,q.quotationdate,q.inquiryno,q.quotationno,q.status,m3.quotationid,c.companyname as cname,u.name as addbyname,
                         (select sum(finalprice) from '.tbl_quotationproducts.' where quotationid = q.id ) as finalprice,q.createddate as date, q.partyid,m.name as partyname, (q.payableamount + IFNULL((SELECT SUM(amount) FROM '.tbl_extrachargemapping.' WHERE referenceid=q.id AND type=1),0)) as netamount,q.addquotationtype,q.type,
                         m.name as sellerpartyname,
                         m.partycode as partycode,
@@ -757,7 +757,6 @@ class Quotation_model extends Common_model {
                                     CAST((q.payableamount + IFNULL((SELECT SUM(amount) FROM ".tbl_extrachargemapping." WHERE referenceid=q.id AND type=1),0)) AS DECIMAL(14,2)) as payableamount,q.couponcodeamount,q.addquotationtype,
                                     q.resonforrejection,
                                     IFNULL(buyer.name, '') as buyername
-                                
                                 ")
                             
                         ->from($this->_table." as q")

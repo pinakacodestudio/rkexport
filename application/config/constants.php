@@ -783,6 +783,7 @@ define("tbl_branch","branch");
 define("tbl_company","company");
 define("tbl_partycontact","partycontact");
 define("tbl_partydoc","partydoc");
+define("tbl_purchaseorders","purchaseorders");
 
 //import time constant erro 
 define("REWARDSPOINTS","1");

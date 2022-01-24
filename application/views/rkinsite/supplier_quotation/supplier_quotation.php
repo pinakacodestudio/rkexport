@@ -46,7 +46,7 @@
                               <?php } ?>
                             </select>
                           </div>
-                        </div>
+                        </div>  
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
@@ -104,7 +104,7 @@
                 <div class="col-md-6 form-group" style="text-align: right;">
                   <?php 
                     if (strpos($submenuvisibility['submenuadd'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){ ?>
-                      <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>quotation/quotation-add" title=<?=addbtn_title?>><?=addbtn_text;?></a>
+                      <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>supplier_quotation/supplier_quotation_add" title=<?=addbtn_title?>><?=addbtn_text;?></a>
                   <?php
                     } ?>
                     <?php
@@ -124,7 +124,8 @@
                       <th class="width8">Sr. No.</th>
                       <th>Party Name</th>
                       <th>Inquiry No</th>
-                      <th>Inquiry Date</th>
+                      <th>Quotation No</th>
+                      <th>Quotation Date</th>
                       <th>Inquiry Status</th>
                       <th>Added By</th>
                       <th>Actions</th>

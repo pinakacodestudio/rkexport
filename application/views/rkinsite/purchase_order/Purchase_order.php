@@ -19,10 +19,36 @@
                 <div class="panel-body panelcollapse pt-n" style="display: none;">
                   <form action="#" id="memberform" class="form-horizontal">
                     <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-2">
+                        <div class="form-group" id="channelid_div">
+                          <div class="col-sm-12">
+                            <label for="channelid" class="control-label">Select Party</label>
+                            <select id="channelid" name="channelid" class="selectpicker form-control" data-select-on-tab="true" data-size="5">
+                              <option value="0">All Party</option>
+                              <?php foreach($channeldata as $cd){ ?>
+                              <option value="<?php echo $cd['id']; ?>"><?php echo $cd['name']; ?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group" id="channelid_div">
+                          <div class="col-sm-12">
+                            <label for="channelid" class="control-label">Employee</label>
+                            <select id="channelid" name="channelid" class="selectpicker form-control" data-select-on-tab="true" data-size="5">
+                              <option value="0">Name List</option>
+                              <?php foreach($channeldata as $cd){ ?>
+                              <option value="<?php echo $cd['id']; ?>"><?php echo $cd['name']; ?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
                         <div class="form-group">
                           <div class="col-sm-12">
-                            <label for="startdate" class="control-label">Purchase Order Date</label>
+                            <label for="startdate" class="control-label">Date</label>
                             <div class="input-daterange input-group" id="datepicker-range">
                               <input type="text" class="input-small form-control" name="startdate" id="startdate" value="<?php echo $this->general_model->displaydate(date("y-m-d",strtotime("-1 month"))); ?>" placeholder="Start Date" title="Start Date" readonly/>
                               <span class="input-group-addon">to</span>
@@ -34,7 +60,7 @@
                       <div class="col-md-2">
                         <div class="form-group">
                           <div class="col-sm-12">
-                            <label for="status" class="control-label">Select Status</label>
+                            <label for="status" class="control-label">PO Status</label>
                             <select id="status" name="status" class="selectpicker form-control" data-select-on-tab="true" data-size="5">
                               <option value="-1">All Status</option>
                               <option value="0">Pending</option>
@@ -67,7 +93,7 @@
                 <div class="col-md-6 form-group" style="text-align: right;">
                   <?php 
                     if (strpos($submenuvisibility['submenuadd'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){ ?>
-                      <a class="<?=addproductorderbtn_class?>" href="<?=ADMIN_URL?>purchase-order/purchase-product-order-add" title="<?=addproductorderbtn_title?>"><?=addproductorderbtn_text?></a>
+                      <!-- <a class="<?php //addproductorderbtn_class?>" href="<?php //ADMIN_URL?>purchase-order/purchase-product-order-add" title="<?php //addproductorderbtn_title?>"><?php //addproductorderbtn_text?></a> -->
                       <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>purchase-order/purchase-order-add" title=<?=addbtn_title?>><?=addbtn_text;?></a>
                   <?php
                     } ?>
@@ -83,12 +109,13 @@
                   <thead>
                     <tr>            
                       <th class="width8">Sr. No.</th>
-                      <th>Vendor Name</th>
-                      <th>OrderID</th>
-                      <th>Order Date</th>
-                      <th>Order Status</th>
-                      <th>Approved Status</th>
-                      <th class="text-right">Total Amount (<?=CURRENCY_CODE?>)</th>
+                      <th>Party Name</th>
+                      <th>PO ID</th>
+                      <th>Revision</th>
+                      <th>PO Date</th>
+                      <th>PO Status</th>
+                      <th class="text-right">Amount (<?=CURRENCY_CODE?>)</th>
+                      <th>AddedBy</th>
                       <th class="width15">Actions</th>
                       <?php if ($this->session->userdata[base_url().'ADMINUSERTYPE']==1 && strpos($submenuvisibility['submenudelete'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){ ?>
                           <th class="width5">

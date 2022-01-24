@@ -12,12 +12,13 @@ class Purchase_invoice extends Admin_Controller {
         $this->load->model('Purchase_invoice_model', 'Purchase_invoice');
     }
     public function index() {
+        
         $this->checkAdminAccessModule('submenu','view',$this->viewData['submenuvisibility']);
         $this->viewData['title'] = "Purchase Invoice";
         $this->viewData['module'] = "purchase_invoice/Purchase_invoice";
 
-        $this->load->model("Vendor_model","Vendor"); 
-        $this->viewData['vendordata'] = $this->Vendor->getVendorByPurchaseInvoice();
+        // $this->load->model("Vendor_model","Vendor");
+        // $this->viewData['vendordata'] = $this->Vendor->getVendorByPurchaseInvoice();
         
         if($this->viewData['submenuvisibility']['managelog'] == 1){
             $this->general_model->addActionLog(4,'Invoice','View purchase invoice.');
@@ -129,8 +130,8 @@ class Purchase_invoice extends Admin_Controller {
         $this->viewData['title'] = "Add Purchase Invoice";
         $this->viewData['module'] = "purchase_invoice/Add_purchase_invoice";
 
-        $this->load->model('Vendor_model', 'Vendor');
-        $this->viewData['vendordata'] = $this->Vendor->getActiveVendorData();
+        // $this->load->model('Vendor_model', 'Vendor');
+        // $this->viewData['vendordata'] = $this->Vendor->getActiveVendorData();
         
         $companyname = $this->Purchase_invoice->getCompanyName();
         $this->viewData['companyname'] = str_replace(" ", "", strtolower($companyname['businessname']));
@@ -149,8 +150,8 @@ class Purchase_invoice extends Admin_Controller {
 
         }
 
-        $this->load->model('Extra_charges_model', 'Extra_charges');
-        $this->viewData['extrachargesdata'] = $this->Extra_charges->getMemberActiveExtraCharges();
+        // $this->load->model('Extra_charges_model', 'Extra_charges');
+        // $this->viewData['extrachargesdata'] = $this->Extra_charges->getMemberActiveExtraCharges();
 
         $this->viewData['invoiceno'] = $this->general_model->generateTransactionPrefixByType(7);
 

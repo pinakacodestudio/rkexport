@@ -10,7 +10,7 @@ class Purchase_quotation_model extends Common_model {
     public $_detatableorder = array('id'=>'DESC');
 
     public $column_order = array(null,'vendorname','q.quotationid', 'q.quotationdate','quotationstatus','netamount');
-    public $column_search = array('seller.name','seller.membercode','q.quotationid','q.quotationdate','q.status','(payableamount + IFNULL((SELECT SUM(amount) FROM '.tbl_extrachargemapping.' WHERE referenceid=q.id AND type=1),0))');
+    public $column_search = array('seller.partycode','q.quotationid','q.quotationdate','q.status','(payableamount + IFNULL((SELECT SUM(amount) FROM '.tbl_extrachargemapping.' WHERE referenceid=q.id AND type=1),0))');
         
     function __construct() {
         parent::__construct();
@@ -26,39 +26,40 @@ class Purchase_quotation_model extends Common_model {
         }
        }
     function _get_datatables_query(){  
-
+        
         $vendorid = isset($_REQUEST['vendorid'])?$_REQUEST['vendorid']:0;
         $startdate = $this->general_model->convertdate($_REQUEST['startdate']);
         $enddate = $this->general_model->convertdate($_REQUEST['enddate']);
         $status = $_REQUEST['status'];
+
+        //,q.quotationamount
+        // seller.channelid as vendorchannelid,
+        // seller.name as vendorname,
         
-        $this->readdb->select("q.id,q.quotationid,q.quotationdate,q.status,q.quotationamount,
+        $this->readdb->select("q.id,q.quotationid,q.quotationdate,q.status,q.partyid,q.sellerpartyid as vendorid,
                         (select sum(finalprice) from ".tbl_quotationproducts." where quotationid = q.id ) as finalprice,q.createddate as date, 
                         (q.payableamount + IFNULL((SELECT SUM(amount) FROM ".tbl_extrachargemapping." WHERE referenceid=q.id AND type=1),0)) as netamount,q.addquotationtype,
-                        q.memberid,seller.channelid as vendorchannelid,
-                        seller.name as vendorname,
-                        seller.membercode as vendorcode,
-                        q.sellermemberid as vendorid,
+                        seller.partycode as vendorcode,
                         CASE 
                             WHEN q.status=0 THEN 'Pending'
                             WHEN q.status=1 THEN 'Complete'
                             WHEN q.status=2 THEN 'Rejected' 
                             WHEN q.status=3 THEN 'Cancel'
                         END as quotationstatus
-                       
                     ");
         
         $this->readdb->from($this->_table." as q");
-        $this->readdb->join(tbl_member." as seller","seller.id=q.sellermemberid","LEFT");
+        $this->readdb->join(tbl_party." as seller","seller.id=q.sellerpartyid","LEFT");
         
         $where = '';
         if($vendorid != 0){
-            $where .= ' AND q.sellermemberid='.$vendorid;
+            // $where .= ' AND q.sellermemberid='.$vendorid;
         }
         if($status != -1){
             $where .= ' AND q.status='.$status;
         }
-	    $this->readdb->where("(q.quotationdate BETWEEN '".$startdate."' AND '".$enddate."') AND q.memberid=0".$where);
+        
+	    $this->readdb->where("(q.quotationdate BETWEEN '".$startdate."' AND '".$enddate."') AND q.partyid=0".$where);
         $this->readdb->group_by('q.quotationid');
         
         $i = 0;
@@ -139,7 +140,7 @@ class Purchase_quotation_model extends Common_model {
                                     IF((SELECT count(qp.id) FROM ".tbl_quotationproducts." as qp WHERE qp.quotationid=q.id AND qp.discount>0)>0,1,0) as displaydiscountcolumn,q.gstprice
                                 ")
                             ->from($this->_table." as q")
-                            ->join(tbl_member." as m","m.id=q.sellermemberid","LEFT") 
+                            // ->join(tbl_member." as m","m.id=q.sellermemberid","LEFT") 
                             ->join(tbl_memberaddress." as ma","ma.id=q.addressid","LEFT")
                             ->join(tbl_memberaddress." as shipper","shipper.id=q.shippingaddressid","LEFT")
                              ->join(tbl_city." as ct","ct.id=ma.cityid","LEFT")
@@ -212,9 +213,11 @@ class Purchase_quotation_model extends Common_model {
     function getQuotationDataByIdForOrder($id,$type=''){
 
         $quotationdetail['orderdetail'] = $quotationdetail['orderproduct'] = $quotationdetail['orderinstallment'] = array();
-        
-        $query = $this->readdb->select("q.id,q.memberid,q.sellermemberid,q.addressid,q.shippingaddressid,q.quotationdate,q.remarks,q.quotationid as orderid,q.paymenttype,q.taxamount,q.quotationamount as amount,q.payableamount,q.discountamount,q.status,q.type,q.globaldiscount,
-        (SELECT edittaxrate FROM ".tbl_channel." WHERE id IN (SELECT channelid FROM ".tbl_member." WHERE id=q.sellermemberid)) as vendoredittaxrate")
+
+        //q.sellermemberid,
+        //(SELECT edittaxrate FROM ".tbl_channel." WHERE id IN (SELECT channelid FROM ".tbl_member." WHERE id=q.sellermemberid)) as vendoredittaxrate
+
+        $query = $this->readdb->select("q.id,q.memberid,q.addressid,q.shippingaddressid,q.quotationdate,q.remarks,q.quotationid as orderid,q.paymenttype,q.taxamount,q.quotationamount as amount,q.payableamount,q.discountamount,q.status,q.type,q.globaldiscount")
                             ->from($this->_table." as q")
                             ->where("q.id=".$id." AND q.memberid=0")
                             ->get();
@@ -225,7 +228,7 @@ class Purchase_quotation_model extends Common_model {
         }
         
         $quotationdetail['orderdetail'] = array("id"=>$rowdata['id'],
-                                            "vendorid"=>$rowdata['sellermemberid'],
+                                            // "vendorid"=>$rowdata['sellermemberid'],
                                             "addressid"=>$rowdata['addressid'],
                                             "shippingaddressid"=>$rowdata['shippingaddressid'],
                                             "orderdate"=>$rowdata['quotationdate'],
@@ -268,8 +271,10 @@ class Purchase_quotation_model extends Common_model {
 
         $quotationdetail['quotationdetail'] = $quotationdetail['quotationproduct'] = array();
         
-        $query = $this->readdb->select("q.id,q.memberid,q.sellermemberid as vendorid,q.addressid,q.shippingaddressid,q.quotationdate,q.remarks,q.quotationid,q.paymenttype,q.taxamount,q.quotationamount,q.payableamount,q.discountamount,q.status,q.type,q.deliverypriority,q.globaldiscount,
-        (SELECT edittaxrate FROM ".tbl_channel." WHERE id IN (SELECT channelid FROM ".tbl_member." WHERE id=q.sellermemberid)) as vendoredittaxrate")
+        //q.sellermemberid as vendorid,
+        //(SELECT edittaxrate FROM ".tbl_channel." WHERE id IN (SELECT channelid FROM ".tbl_member." WHERE id=q.sellermemberid)) as vendoredittaxrate
+
+        $query = $this->readdb->select("q.id,q.memberid,q.addressid,q.shippingaddressid,q.quotationdate,q.remarks,q.quotationid,q.paymenttype,q.taxamount,q.quotationamount,q.payableamount,q.discountamount,q.status,q.type,q.deliverypriority,q.globaldiscount")
                             ->from($this->_table." as q")
                             ->where("q.id=".$id." AND q.memberid=0")
                             ->get();
@@ -333,7 +338,7 @@ class Purchase_quotation_model extends Common_model {
     function getPurchaseQuotationStatusHistory($quotationid){
 
         
-        $query = $this->readdb->select("qs.id,qs.quotationid,qs.status,qs.modifieddate,qs.type,(IF(qs.type=0,(SELECT CONCAT(name,' (','".COMPANY_CODE."',')') FROM ".tbl_user." WHERE id=qs.modifiedby),(SELECT CONCAT(name,' (',membercode,')') FROM ".tbl_member." WHERE id=qs.modifiedby))) as name,qs.modifiedby,(IF(qs.type=1,(SELECT channelid FROM ".tbl_member." WHERE id=qs.modifiedby),0)) as channelid")
+        $query = $this->readdb->select("qs.id,qs.quotationid,qs.status,qs.modifieddate,qs.type,(IF(qs.type=0,(SELECT CONCAT(name,' (','".COMPANY_CODE."',')') FROM ".tbl_user." WHERE id=qs.modifiedby),(SELECT CONCAT(name,' (',partycode,')') FROM ".tbl_member." WHERE id=qs.modifiedby))) as name,qs.modifiedby,(IF(qs.type=1,(SELECT channelid FROM ".tbl_member." WHERE id=qs.modifiedby),0)) as channelid")
                         ->from(tbl_quotationstatuschange." as qs")
                         ->where("qs.quotationid=".$quotationid)
                         ->get();    

@@ -18,7 +18,7 @@ $(document).ready(function() {
         'serverSide': true,//Feature control DataTables' server-side processing mode.
         // Load data for the table's content from an Ajax source
         "ajax": {
-          "url": SITE_URL+"quotation/listing",
+          "url": SITE_URL+"supplier_quotation/listing",
           "type": "POST",
           "data": function ( data ) { 
             data.channelid = $('#channelid').val();

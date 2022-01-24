@@ -36,7 +36,7 @@ class Purchase_order extends Admin_Controller {
 
         $this->load->model("Channel_model","Channel"); 
         $channeldata = $this->Channel->getChannelList('onlyvendor');
-        
+        exit;
         $list = $this->Purchase_order->get_datatables();
         $data = array();       
         $counter = $_POST['start'];
@@ -189,7 +189,7 @@ class Purchase_order extends Admin_Controller {
             }
             
             $row[] = ++$counter;
-            $row[] = $vendorname;
+            // $row[] = $vendorname;
             $row[] = '<a href="'.ADMIN_URL.'purchase-order/view-purchase-order/'.$datarow->id.'" title="View Purchase Order" target="_blank">'.$datarow->orderid.'</a>';
             $row[] = $this->general_model->displaydate($datarow->orderdate);
             $row[] = $orderstatus; 
@@ -215,7 +215,6 @@ class Purchase_order extends Admin_Controller {
         $this->viewData['addordertype'] = "0";
         $this->viewData['multiplememberchannel'] = "1";
         $ADMINID = $this->session->userdata[base_url().'ADMINID'];
-        
         if($id!="" && $from==""){
             /* Add Quotation as a order */
             $this->load->model('Purchase_quotation_model', 'Purchase_quotation');
@@ -233,14 +232,14 @@ class Purchase_order extends Admin_Controller {
             $this->viewData['installmentdata'] = $this->Purchase_order->getPurchaseOrderInstallmentDataByOrderId($id);
             $this->viewData['isduplicate'] = "1";
         }
-        if($id!="" && $from=="production"){
+        if($id!="" && $from=="production"){ 
             
         }
         $this->load->model('Vendor_model', 'Vendor');
-        $this->viewData['vendordata'] = $this->Vendor->getActiveVendorData('withcodeormobile');
+        // $this->viewData['vendordata'] = $this->Vendor->getActiveVendorData('withcodeormobile');
         $this->viewData['channelsetting'] = array('partialpayment'=>1);
-        // $this->viewData['orderid'] = time().rand(10,99).rand(10,99).rand(10,99).rand(10,99);
-              
+        $this->viewData['orderid'] = time().rand(10,99).rand(10,99).rand(10,99).rand(10,99);
+        
         /* $this->load->model('System_configuration_model', 'System_configuration');
         $discount = $this->System_configuration->getsetting();
         if($discount['discountonbill']==1){
@@ -269,7 +268,7 @@ class Purchase_order extends Admin_Controller {
         } */
         
         $this->load->model('Extra_charges_model', 'Extra_charges');
-        $this->viewData['extrachargesdata'] = $this->Extra_charges->getMemberActiveExtraCharges();
+        // $this->viewData['extrachargesdata'] = $this->Extra_charges->getMemberActiveExtraCharges();
 
         $this->viewData['orderid'] = $this->general_model->generateTransactionPrefixByType(5);
         
@@ -403,7 +402,7 @@ class Purchase_order extends Admin_Controller {
             }
         } */
         
-        $this->Purchase_order->_table = tbl_orders;
+        $this->Purchase_order->_table = tbl_purchaseorders;
         $this->Purchase_order->_where = array("orderid"=>$orderid);
         $Count = $this->Purchase_order->CountRecords();
         if($Count==0){
@@ -785,7 +784,7 @@ class Purchase_order extends Admin_Controller {
                                 'modifiedby'=>$addedby
                             );  
                             
-                            $this->Purchase_order->_table = tbl_orders;
+                            $this->Purchase_order->_table = tbl_purchaseorders;
                             $this->Purchase_order->_where = array("id" => $OrdreId);
                             $this->Purchase_order->Edit($updateData);
                         }
@@ -1148,7 +1147,7 @@ class Purchase_order extends Admin_Controller {
 
                             $updatedata = array("status"=>1,"approved"=>1);
                             $updatedata=array_map('trim',$updatedata);
-                            $this->Purchase_order->_table = tbl_orders;
+                            $this->Purchase_order->_table = tbl_purchaseorders;
                             $this->Purchase_order->_where = array('id' => $OrdreId);
                             $this->Purchase_order->Edit($updatedata);
                         }
@@ -1360,7 +1359,7 @@ class Purchase_order extends Admin_Controller {
 
         } */
 
-        $this->Purchase_order->_table = tbl_orders;
+        $this->Purchase_order->_table = tbl_purchaseorders;
         $this->Purchase_order->_where = ("id!=".$ordersid." AND orderid='".$orderid."'");
         $Count = $this->Purchase_order->CountRecords();
         if($Count==0){
@@ -2127,7 +2126,7 @@ class Purchase_order extends Admin_Controller {
                                     'modifiedby'=>$modifiedby
                                 );  
                                 
-                                $this->Purchase_order->_table = tbl_orders;
+                                $this->Purchase_order->_table = tbl_purchaseorders;
                                 $this->Purchase_order->_where = array("id" => $ordersid);
                                 $this->Purchase_order->Edit($updateData);
                             }
@@ -2319,7 +2318,7 @@ class Purchase_order extends Admin_Controller {
                 
                 duplicate : $orderid = time().rand(10,99).rand(10,99).rand(10,99).rand(10,99);
 
-                $this->Purchase_order->_table = tbl_orders;
+                $this->Purchase_order->_table = tbl_purchaseorders;
                 $this->Purchase_order->_where = ("orderid=".$orderid);
                 $Count = $this->Purchase_order->CountRecords();
                 if($Count==0){
@@ -2596,7 +2595,7 @@ class Purchase_order extends Admin_Controller {
             $updateData['approved'] = 1;
         }
         
-        $this->Purchase_order->_table = tbl_orders;
+        $this->Purchase_order->_table = tbl_purchaseorders;
         $this->Purchase_order->_where = array("id" => $orderId);
         $this->Purchase_order->Edit($updateData);
        
@@ -2629,7 +2628,7 @@ class Purchase_order extends Admin_Controller {
             $updateData['resonforrejection'] = $PostData['resonforrejection'];
         }
 
-        $this->Purchase_order->_table = tbl_orders;
+        $this->Purchase_order->_table = tbl_purchaseorders;
         $this->Purchase_order->_where = array("id" => $orderId);
         $this->Purchase_order->Edit($updateData);
         
@@ -2669,7 +2668,7 @@ class Purchase_order extends Admin_Controller {
         if($IsUpdate!=0) {
 
             if($this->viewData['submenuvisibility']['managelog'] == 1){
-                $this->Order->_fields="(select orderid from ".tbl_orders." where id=".tbl_orderinstallment.".orderid) as ordernumber";
+                $this->Order->_fields="(select orderid from ".tbl_purchaseorders." where id=".tbl_orderinstallment.".orderid) as ordernumber";
                 $this->Order->_where=array("id"=>$installmentid);
                 $orderdetail = $this->Order->getRecordsByID();
                 $this->general_model->addActionLog(2,'Order','Change installment status '.$orderdetail['ordernumber'].' on purchase order.');
@@ -2779,7 +2778,7 @@ class Purchase_order extends Admin_Controller {
         $name = trim($PostData['newmembername']);
         $countrycode = trim($PostData['newcountrycodeid']);
         $mobileno = trim($PostData['newmobileno']);
-        $membercode = trim($PostData['newmembercode']);
+        // $membercode = trim($PostData['newmembercode']);
         $email = trim($PostData['newemail']);
         $gstno = trim($PostData['newgstno']);
         $panno = trim($PostData['newpanno']);
@@ -2793,7 +2792,7 @@ class Purchase_order extends Admin_Controller {
 
         $this->load->model("Member_model","Member"); 
         $this->load->model("Vendor_model","Vendor"); 
-        $this->Vendor->_where = "membercode='".$membercode."'";
+        // $this->Vendor->_where = "membercode='".$membercode."'";
         $Count = $this->Vendor->CountRecords();
         if(!empty($Count)){
             echo json_encode(array("error"=>6)); exit;
@@ -2814,7 +2813,7 @@ class Purchase_order extends Admin_Controller {
                 $adddata = array("parentmemberid"=>0,
                                 "roleid"=>0,
                                 "channelid"=>$channelid,
-                                'membercode'=>$membercode,
+                                // 'membercode'=>$membercode,
                                 "name"=>$name,
                                 "email"=>$email,
                                 "mobile"=>$mobileno,
@@ -2855,8 +2854,8 @@ class Purchase_order extends Admin_Controller {
                                             "modifiedby"=>$addedby);
                     $this->Cash_or_bank->add($cashorbankdata);
 
-                    $text = ucwords($name)." (".$membercode." - ".$mobileno.")";
-                    echo json_encode(array("error"=>1,"id"=>$VendorID,"text"=>$text,"membercode"=>$membercode));
+                    // $text = ucwords($name)." (".$membercode." - ".$mobileno.")";
+                    // echo json_encode(array("error"=>1,"id"=>$VendorID,"text"=>$text,"membercode"=>$membercode));
                 }
             }else{
                 echo json_encode(array("error"=>3));

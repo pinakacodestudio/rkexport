@@ -51,12 +51,12 @@
                                 <li class="">
                                     <a href="#documents" data-toggle="tab" aria-expanded="false">Documents<div class="ripple-container li-line"></div></a>
                                 </li>
-                                <li class="">
+                                <!-- <li class="">
                                     <a href="#order" data-toggle="tab" aria-expanded="false">Order<div class="ripple-container li-line"></div></a>
                                 </li>
                                 <li class="">
                                     <a href="#invoice" data-toggle="tab" aria-expanded="false">Invoice<div class="ripple-container li-line"></div></a>
-                                </li>
+                                </li> -->
                             </ul>
                             <div class="tab-content">  
                                 <div class="tab-pane active" id="quotationdetails">
@@ -74,10 +74,11 @@
                                                                     <th class="text-left">Category</th>
                                                                     <th class="text-left">Product</th>
                                                                     <th class="text-left">Qty</th>
-                                                                    <th class="text-left">Delievery Priority</th>
-                                                                    <th class="text-left">Manage Employee</th>
-                                                                    <th class="text-left">Supplier</th>
-                                                                    <th class="text-left">Status</th>
+                                                                    <th class="text-left">Discount</th>
+                                                                    <th class="text-left">Price</th>
+                                                                    <th class="text-left">Amount</th>
+                                                                    <th class="text-left">Delievery</th>
+                                                                    <th class="text-left">Notes</th>
                                                                 </tr>
                                                             </thead>
                                                             <!-- <tbody>

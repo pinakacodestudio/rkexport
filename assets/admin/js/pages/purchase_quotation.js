@@ -7,7 +7,7 @@ $(document).ready(function() {
         "language": {
           "lengthMenu": "_MENU_"
         },
-        "pageLength": 10,
+        "pageLength": 50,
         "scrollCollapse": true,
         "scrollY": "500px",
         "columnDefs": [{

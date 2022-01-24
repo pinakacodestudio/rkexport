@@ -89,6 +89,7 @@ class Purchase_quotation extends Admin_Controller {
             $actions .= '<a class="'.duplicatebtn_class.'" href="'.ADMIN_URL.'purchase-quotation/purchase-quotation-add/'. $datarow->id.'/'.'" title="'.duplicatebtn_title.'">'.duplicatebtn_text.'</a>';
            
             $row[] = ++$counter;
+
             $channellabel = '';
             $key = array_search($datarow->vendorchannelid, array_column($channeldata, 'id'));
             if(!empty($channeldata) && isset($channeldata[$key])){
@@ -98,11 +99,14 @@ class Purchase_quotation extends Admin_Controller {
             $row[] = $channellabel.'<a href="'.ADMIN_URL.'vendor/vendor-detail/'.$datarow->vendorid.'" title="'.ucwords($datarow->vendorname).'" target="_blank">'.ucwords($datarow->vendorname).' ('.$datarow->vendorcode.')</a>';
            
             $row[] = '<a href="'.ADMIN_URL.'purchase-quotation/view-purchase-quotation/'.$datarow->id.'" title="'.viewpdf_title.'" target="_blank">'.$datarow->quotationid.'</a>';
-            $row[] = ($datarow->quotationdate!="0000-00-00")?$this->general_model->displaydate($datarow->quotationdate):'';
-            $row[] = $quotationstatus;            
+            $row[] = ($datarow->quotationdate!="0000-00-00")?$this->general_model->displaydate
+            ($datarow->quotationdate):'';
+
+            $row[] = $quotationstatus;
             $row[] = number_format(($datarow->netamount), 2, '.', ',');
             $row[] = $actions;
             $row[] = $checkbox;
+            // $row[] = $datarow->quotationdate;
             $data[] = $row;
         }
         $output = array(
@@ -119,7 +123,7 @@ class Purchase_quotation extends Admin_Controller {
         $this->viewData['module'] = "purchase_quotation/Add_purchase_quotation";
         $this->viewData['VIEW_STATUS'] = "1";
         $ADMINID = $this->session->userdata[base_url().'ADMINID'];
-
+        
         if($id!=""){
             /* Add Duplicate Quotation */
             $this->load->model('Purchase_order_model', 'Purchase_order');
@@ -129,7 +133,7 @@ class Purchase_quotation extends Admin_Controller {
             $this->viewData['isduplicate'] = "1";
         }
         $this->load->model('Vendor_model', 'Vendor');
-        $this->viewData['vendordata'] = $this->Vendor->getActiveVendorData('withcodeormobile');
+        // $this->viewData['vendordata'] = $this->Vendor->getActiveVendorData('withcodeormobile');
         
         $this->viewData['quotationtype'] = 1;
         $this->viewData['channelsetting'] = array('partialpayment'=>1);
@@ -164,7 +168,7 @@ class Purchase_quotation extends Admin_Controller {
         } */
         
         $this->load->model('Extra_charges_model', 'Extra_charges');
-        $this->viewData['extrachargesdata'] = $this->Extra_charges->getMemberActiveExtraCharges();
+        // $this->viewData['extrachargesdata'] = $this->Extra_charges->getMemberActiveExtraCharges();
 
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_plugin("form-select2","form-select2/select2.css");
