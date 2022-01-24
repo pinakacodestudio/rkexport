@@ -113,15 +113,7 @@ $(document).ready(function () {
     });
 
 
-    $('body').on('focus', ".date", function () {
-        $(this).datepicker({
-            todayHighlight: true,
-            format: 'dd/mm/yyyy',
-            orientation: "top left",
-            endDate: dateofbirth,
-            clearBtn: true,
-        });
-    });
+
 
     $("#old_receipt_div").hide();
     $('#remove').click(function () {
@@ -488,7 +480,7 @@ function addnewproduct() {
                           <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(' + cloopdoc + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
                       </div>\
                       <div class="col-md-1 addrowbutton pt-md pr-xs">\
-                          <button type="button" class="btn btn-primary btn-raised remove_btn m-n" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
+                          <button type="button" class="btn btn-primary btn-raised m-n" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
                            </div>\
                       </div>\
                   ';
@@ -507,12 +499,15 @@ function addcontectfield(id,countcontactno) {
           <input id="contactno" type="text" name="contactno'+id+'[]" class="form-control"  value="">\
        </div>\
         <div class="form-group col-md-3">\
-            <button type="button"  onclick="addcontectfield('+ id + ','+ countcontactno +')"  class="addprodocitem btn-primary btn-xs" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>\
-            <button type="button" class="btn-danger btn-xs" onclick="removecontect(' + countcontactno + ')"><i class="fa fa-minus"></i></button>\
+            <button type="button"  onclick="addcontectfield('+ id + ','+ countcontactno +')"  class="addprodocitem btn btn-primary btn-raised m-n add_btn" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>\
+            <button type="button" class="btn btn-danger btn-raised m-n remove_btn" onclick="removecontect(' + countcontactno + ')"><i class="fa fa-minus"></i></button>\
         </div>\
     </div>\
  </div>';
 
+ 
+// $(".remove_btn:first").show();
+// $(".add_btn:last").hide();
     $(".addcontectfilelddata"+id+"").after(datahtml);
 
 }
@@ -532,6 +527,7 @@ function removecontect(divid) {
 
 function addnewcontect() {
     var cloopcount2 = $("#cloopcount").val();
+
     cloopcount2++;
     $("#cloopcount").val(cloopcount2);
     var datahtml2 = '<div class="data" id="contectrowdelete_' + cloopcount2 + '">\
@@ -561,7 +557,7 @@ function addnewcontect() {
                         <input id="contactno" type="text" name="contactno' + cloopcount2 + '[]" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="">\
                     </div>\
                     <div class="form-group col-md-2">\
-                        <button type="button" onclick="addcontectfield(' + cloopcount2 + ')" class="addprodocitem btn-primary btn-xs"><i class="fa fa-plus"></i></button>\
+                        <button type="button" onclick="addcontectfield(' + cloopcount2 + ')" class="addprodocitem btn btn-primary btn-raised m-n"><i class="fa fa-plus"></i></button>\
                     </div>\
                  </div>\
             </div>\
@@ -569,7 +565,7 @@ function addnewcontect() {
                 <div class="form-group" id="birthdate_div">\
                     <label for="birthdate" class="col-md-4 control-label">Birth Date</label>\
                     <div class="col-md-8">\
-                        <input id="birthdate" type="text" name="birthdate_' + cloopcount2 + '" class="form-control date" value="" readonly>\
+                        <input id="birthdate" type="text" name="birthdate_' + cloopcount2 + '" class="form-control bdate" value="" readonly>\
                     </div>\
                 </div>\
             </div>\
@@ -590,15 +586,17 @@ function addnewcontect() {
                 </div>\
             </div>\
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
-                <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion(\'contectrowdelete_'+ cloopcount2 + '\')" class="btn-danger">Remove</button>\
-                <div class="form-group" style="float:left; margin:10px 19px 0px 5px;">\
-                <button type="button" class="addpro btn-primary" onclick="addnewcontect()">Add\
+                <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion(\'contectrowdelete_'+ cloopcount2 + '\')" class="btn btn-danger btn-raised remove_btn m-n">Remove</button>\
+                <div class="form-group" style="float:left; margin:0px 19px 0px 5px;">\
+                <button type="button" class="addpro btn btn-primary btn-raised m-n" onclick="addnewcontect()">Add\
                 Data</button>\
                 </div>\
             </div>\
         </div>\
     </div>\
 </div>';
+
+
     $("#addtarget").append(datahtml2);
 }
 

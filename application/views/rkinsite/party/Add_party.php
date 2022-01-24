@@ -294,13 +294,8 @@
                                     </div>
                                     <div class="col-md-1 addrowbutton pt-md pr-xs">
                                        <button type="button" class="btn btn-primary btn-raised remove_btn m-n" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
-                                       
-                                      
                                     </div>
-
-                                  
                               </div>
-
                               <?php
                                  }
                                  }else {
@@ -341,6 +336,7 @@
                                  <div class="col-md-2 col-sm-2">
                                     <div class="form-group" style="float:left; margin:15px 1px 0px 0px;">
                                        <button type="button"  onclick="addnewproduct()" class="btn btn-primary btn-raised remove_btn m-n"><i class="fa fa-plus"></i></button>
+                                       <button type="button" class="btn btn-danger btn-raised m-n remove_btn" onclick="removecontect('')"><i class="fa fa-minus"></i></button>
                                     </div>
                                  </div>
                                 
@@ -395,7 +391,7 @@
                                        <div class="form-group" id="firstname_div">
                                           <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
                                           <div class="col-md-7">
-                                             <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="<?=$firstname?>">
+                                             <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" onkeypress="return onlyAlphabets(event)" value="<?=$firstname?>">
                                           </div>
                                        </div>
                                     </div>
@@ -403,7 +399,7 @@
                                        <div class="form-group" id="lastname_div">
                                           <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
                                           <div class="col-md-7">
-                                             <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="<?php if (isset($partydata)) { echo $lastname; } ?>">
+                                             <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="<?php if (isset($partydata)) { echo $lastname; } ?>" onkeypress="return onlyAlphabets(event)">
                                           </div>
                                        </div>
                                     </div>
@@ -422,8 +418,8 @@
                                                <input id="contactno" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="<?=$item?>">
                                             </div>
                                              <div class="form-group col-md-3">
-                                                <button type="button"  onclick="addcontectfield(<?=$cloopcount?>)" class="addprodocitem btn-primary btn-xs" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>
-                                                <button type="button" class="btn-danger btn-xs" onclick="removecontect(<?=$countcontactno?>)"><i class="fa fa-minus"></i></button>
+                                                <button type="button"  onclick="addcontectfield(<?=$cloopcount?>)" class="addprodocitem btn btn-primary btn-raised remove_btn m-n" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removecontect(<?=$countcontactno?>)"><i class="fa fa-minus"></i></button>
                                              </div>
                                          </div>
                                       </div>
@@ -432,7 +428,7 @@
                                        <div class="form-group" id="birthdate_div">
                                           <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
                                           <div class="col-md-7">
-                                             <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control" value="<?php if (isset($birthdate) && $birthdate!="0000-00-00") { echo $this->general_model->displaydate($birthdate); } ?>" readonly>
+                                             <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control bdate" value="<?php if (isset($birthdate) && $birthdate!="0000-00-00") { echo $this->general_model->displaydate($birthdate); } ?>" readonly>
                                           </div>
                                        </div>
                                     </div>
@@ -440,7 +436,7 @@
                                        <div class="form-group" id="anniversarydate_div">
                                           <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
                                           <div class="col-md-7">
-                                             <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control" value="<?php if (isset($anniversarydate) && $anniversarydate!="0000-00-00") { echo $this->general_model->displaydate($anniversarydate); } ?>" readonly>
+                                             <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control date" value="<?php if (isset($anniversarydate) && $anniversarydate!="0000-00-00") { echo $this->general_model->displaydate($anniversarydate); } ?>" readonly>
                                           </div>
                                        </div>
                                     </div>
@@ -453,9 +449,9 @@
                                        </div>
                                     </div>
                                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                                        <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion('contectrowdelete_<?=$cloopcount?>')" class="btn-danger">Remove</button>
-                                        <div class="form-group" style="float:left; margin:10px 19px 0px 5px;">
-                                          <button type="button" class="addpro btn-primary" onclick="addnewcontect()">Add
+                                        <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion('contectrowdelete_<?=$cloopcount?>')" class="btn btn-danger btn-raised remove_btn m-n">Remove</button>
+                                        <div class="form-group" style="float:left; margin:0px 19px 0px 5px;">
+                                          <button type="button" class="addpro btn btn-primary btn-raised remove_btn m-n" onclick="addnewcontect()">Add
                                           Data</button>
                                         </div>
                                     </div>
@@ -481,7 +477,7 @@
                            <div class="form-group" id="firstname_div">
                               <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
                               <div class="col-md-8">
-                                 <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="">
+                                 <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">
                               </div>
                            </div>
                         </div>
@@ -489,7 +485,7 @@
                            <div class="form-group" id="lastname_div">
                               <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
                               <div class="col-md-8">
-                                 <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="">
+                                 <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">
                               </div>
                            </div>
                         </div>
@@ -500,7 +496,7 @@
                                  <input id="contactno" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="">
                               </div>
                               <div class="form-group col-md-3">
-                                 <button type="button"  onclick="addcontectfield(<?=$cloopcount?>,<?=$countcontactno?>)" style="margin-top: 7px;" class="addprodocitem btn-primary btn-xs"><i class="fa fa-plus"></i></button>
+                                 <button type="button"  onclick="addcontectfield(<?=$cloopcount?>,<?=$countcontactno?>)" style="margin-top: 7px;" class="addprodocitem btn btn-primary btn-raised remove_btn m-n"><i class="fa fa-plus"></i></button>
                              
                               </div>
                            </div>
@@ -509,7 +505,7 @@
                            <div class="form-group" id="birthdate_div">
                               <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
                               <div class="col-md-8">
-                                 <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control" value="" readonly>
+                                 <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control bdate" value="" readonly>
                               </div>
                            </div>
                         </div>
@@ -517,7 +513,7 @@
                            <div class="form-group" id="anniversarydate_div">
                               <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
                               <div class="col-md-8">
-                                 <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control" value="" readonly>
+                                 <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control date" value="" readonly>
                               </div>
                            </div>
                         </div>
@@ -532,7 +528,7 @@
                         <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                               
                               <div class="form-group" style="float:left; margin:10px 19px 0px 5px;">
-                              <button type="button" class="addpro btn-primary" onclick="addnewcontect()">Add
+                              <button type="button" class="addpro btn btn-primary btn-raised remove_btn m-n" onclick="addnewcontect()">Add
                               Data</button>
                               </div>
                         </div>
@@ -667,6 +663,25 @@
    //         $("#adddocrow").append(result); 
    //     }, 'html');
    // });
+
+   $('body').on('focus', ".date", function () {
+        $(this).datepicker({
+            todayHighlight: true,
+            format: 'dd/mm/yyyy',
+            orientation: "top left",
+            clearBtn: true,
+        });
+    });
+
+    $('body').on('focus', ".bdate", function () {
+        $(this).datepicker({
+            todayHighlight: true,
+            format: 'dd/mm/yyyy',
+            orientation: "top left",
+            endDate: dateofbirth,
+            clearBtn: true,
+        });
+    });
 
    function addcountry() {
       var uurl = SITE_URL + "Company/addcompanymodal";

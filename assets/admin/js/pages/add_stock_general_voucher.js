@@ -126,7 +126,7 @@ function getproductprice(divid){
 function addnewproduct(){
 
     var divcount = parseInt($(".countproducts:last").attr("id").match(/\d+/))+1;
-    
+
     producthtml = '<div class="row countproducts" id="countproducts'+divcount+'">\
         <input type="hidden" name="uniqueproduct[]" id="uniqueproduct'+divcount+'">\
         <input type="hidden" name="productrow[]" value="'+divcount+'">\
