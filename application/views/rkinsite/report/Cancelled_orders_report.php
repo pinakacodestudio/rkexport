@@ -18,6 +18,7 @@
                         <form action="#" id="cancelledordersreportform" class="form-horizontal">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <?php /*
                                     <div class="col-md-3 pl-n pr-sm">
                                         <div class="form-group">
                                             <div class="col-md-12">
@@ -54,6 +55,16 @@
                                             </div>
                                         </div>
                                     </div>
+                                    */?>
+                                    <div class="col-md-3 pl-sm pr-sm">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="memberid" class="control-label">Party</label>
+                                                <select id="memberid" name="memberid[]" class="selectpicker form-control" data-select-on-tab="true" data-size="8" data-live-search="true" title="All Member" multiple data-actions-box="true">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-md-1 pl-sm pr-sm">
                                         <div class="form-group">
                                             <div class="col-md-12">
@@ -74,8 +85,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    <div class="col-md-2 pl-n pr-xs">
+                                        <div class="form-group pt-xl">
+                                            <div class="col-md-12">
+                                                <label class="control-label"></label>
+                                                <a class="<?=applyfilterbtn_class;?>" href="javascript:void(0)" onclick="applyFilter()" title=<?=applyfilterbtn_title?>><?=applyfilterbtn_text;?></a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
+                                    <?php /*
                                     <div class="col-md-3 pl-n pr-sm">
                                         <div class="form-group">
                                             <div class="col-md-12">
@@ -89,23 +110,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 pl-sm pr-sm">
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <label for="memberid" class="control-label">Member</label>
-                                                <select id="memberid" name="memberid[]" class="selectpicker form-control" data-select-on-tab="true" data-size="8" data-live-search="true" title="All Member" multiple data-actions-box="true">
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 pl-n pr-xs">
-                                        <div class="form-group pt-xl">
-                                            <div class="col-md-12">
-                                                <label class="control-label"></label>
-                                                <a class="<?=applyfilterbtn_class;?>" href="javascript:void(0)" onclick="applyFilter()" title=<?=applyfilterbtn_title?>><?=applyfilterbtn_text;?></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    */?>
                                 </div>
                             </div> 
                         </form>

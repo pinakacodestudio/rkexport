@@ -529,6 +529,13 @@
                               </div>
                            </div>
                         </div>
+                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                              
+                              <div class="form-group" style="float:left; margin:10px 19px 0px 5px;">
+                              <button type="button" class="addpro btn-primary" onclick="addnewcontect()">Add
+                              Data</button>
+                              </div>
+                        </div>
                         
                      </div>
                      </div>

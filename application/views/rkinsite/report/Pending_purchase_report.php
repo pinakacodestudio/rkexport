@@ -20,7 +20,7 @@
                         <div class="col-md-4">
                           <div class="form-group">
                             <div class="col-md-12 pr-xs">
-                              <label class="control-label">Order Date</label>
+                              <label class="control-label">Quotation Date</label>
                               <div class="input-daterange input-group" id="datepicker-range">
                                   <input type="text" class="input-small form-control" name="startdate" id="startdate" value="<?php echo $this->general_model->displaydate(date("y-m-d",strtotime("-3 month"))); ?>" placeholder="Start Date" title="Start Date" readonly/>
                                   <span class="input-group-addon">to</span>
@@ -29,6 +29,7 @@
                             </div>
                           </div>
                         </div>
+                        <?php /*
                         <div class="col-md-3">
                           <div class="form-group" id="productid_div">
                             <div class="col-md-12 pl-xs pr-xs">
@@ -59,21 +60,51 @@
                             </div>
                           </div>
                         </div>
+                        */?>
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
-                              <label for="vendorid" class="control-label">Vendor</label>
-                              <select id="vendorid" name="vendorid[]" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" data-actions-box="true" title="All Vendor" multiple>
-                                <?php if(!empty($vendordata)){
-                                    foreach($vendordata as $vendor){ ?>
-                                            <option value="<?=$vendor['id']?>"><?=$vendor['name']?></option>
+                              <label for="Partyid" class="control-label">Quotation No</label>
+                              <select id="Partyid" name="Partyid[]" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" data-actions-box="true" title="Select Po No" >
+                              <option value="">Po No</option>
+                                <?php if(!empty($Partydata)){
+                                    foreach($Partydata as $Party){ ?>
+                                        <option value="<?=$Party['id']?>"><?=$Party['name']?></option>
+                                        <option value="">Po No</option>
                                 <?php }
                                 }?>
                               </select>
                             </div>
                           </div>
                         </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <div class="col-md-12 pl-xs pr-xs">
+                              <label for="Partyid" class="control-label">Party</label>
+                              <select id="Partyid" name="Partyid[]" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" data-actions-box="true" title="All Party" multiple>
+                                <?php if(!empty($Partydata)){
+                                    foreach($Partydata as $Party){ ?>
+                                        <option value="<?=$Party['id']?>"><?=$Party['name']?></option>
+                                <?php }
+                                }?>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        
                         <div class="col-md-2">
+                          <div class="form-group">
+                            <div class="col-md-12 pl-xs pr-xs">
+                              <label for="status" class="control-label">Select Status</label>
+                              <select id="status" name="status[]" multiple data-actions-box="true" title="All Status" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
+                                <option value="0">Pending</option>
+                                <option value="1">Complete</option>
+                                <option value="2">Cancel</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
                           <div class="form-group pt-xl">
                             <div class="col-md-12">
                               <label class="control-label"></label>
@@ -111,11 +142,11 @@
                   <thead>
                     <tr>            
                       <th>Sr. No.</th>
-                      <th>Vendor Name</th>
+                      <th>Party Name</th>
                       <th>OrderID</th>
                       <th>Order Date</th>
                       <th>Product Name</th>
-                      <th class="text-right">Order Qty</th>
+                      <!-- <th class="text-right">Order Qty</th> -->
                       <th class="text-right">Received Qty</th>
                       <th class="text-right">Pending Qty</th>
                     </tr>

@@ -10,6 +10,7 @@ class Cancelled_orders_report extends Admin_Controller {
         $this->load->model('Cancelled_orders_report_model', 'Cancelled_orders_report');
     }
     public function index() {
+        $this->checkAdminAccessModule('submenu','view',$this->viewData['submenuvisibility']);
         $this->viewData['title'] = "Cancelled Orders Report";
         $this->viewData['module'] = "report/Cancelled_orders_report";
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");

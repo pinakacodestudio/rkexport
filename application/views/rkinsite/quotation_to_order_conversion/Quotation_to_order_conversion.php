@@ -17,21 +17,40 @@
                   <form action="#" class="form-horizontal">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <label for="startdate" class="control-label">Date</label>
-                                            <div class="input-daterange input-group" id="datepicker-range">
-                                                <input type="text" class="input-small form-control" name="fromdate" id="fromdate" value="<?php echo $this->general_model->displaydate(date("y-m-d",strtotime("-6 month"))); ?>" placeholder="Start Date" title="Start Date" readonly/>
-                                                    <span class="input-group-addon">to</span>
-                                                <input type="text" class="input-small form-control" name="todate" id="todate" value="<?php echo $this->general_model->displaydate($this->general_model->getCurrentDate()); ?>" placeholder="End Date" title="End Date" readonly/>
-                                            </div>
-                                    </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <div class="col-md-12 pl-xs pr-xs">
+                              <label for="datetype" class="control-label">Select Type</label>
+                              <select id="datetype" name="datetype" class="selectpicker form-control" data-select-on-tab="true" data-size="5">
+                                <option value="1">Day Wise</option>
+                                <option value="2" selected>Month Wise</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="startdate" class="control-label">Date</label>
+                                        <div class="input-daterange input-group" id="datepicker-range">
+                                            <input type="text" class="input-small form-control" name="fromdate" id="fromdate" value="<?php echo $this->general_model->displaydate(date("y-m-d",strtotime("-6 month"))); ?>" placeholder="Start Date" title="Start Date" readonly/>
+                                                <span class="input-group-addon">to</span>
+                                            <input type="text" class="input-small form-control" name="todate" id="todate" value="<?php echo $this->general_model->displaydate($this->general_model->getCurrentDate()); ?>" placeholder="End Date" title="End Date" readonly/>
+                                        </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group pt-xxl">
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <div class="col-md-12 pl-xs pr-xs">
+                              <label for="memberid" class="control-label">Select Party</label>
+                              <select id="memberid" name="memberid[]" multiple data-actions-box="true" title="All Party" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                                <div class="form-group" style="margin-top: 33px;">
                                     <div class="col-sm-12">
                                         <label class="control-label"></label>
                                         <a class="<?=applyfilterbtn_class;?>" href="javascript:void(0)" onclick="applyFilter()" title=<?=applyfilterbtn_title?>><?=applyfilterbtn_text;?></a>

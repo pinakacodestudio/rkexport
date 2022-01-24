@@ -13,8 +13,7 @@ class Purchase_report extends Admin_Controller {
     public function index() {
         $this->viewData['title'] = "Purchase Report";
         $this->viewData['module'] = "report/Purchase_report";
-         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
-        $this->admin_headerlib->add_javascript("purchase-report", "pages/purchase_report.js");
+       
         
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_javascript("purchase_report", "pages/purchase_report.js");

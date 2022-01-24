@@ -42,6 +42,7 @@
                             </div>
                           </div>
                         </div>
+                        <?php /*
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
@@ -64,18 +65,17 @@
                               </select>
                             </div>
                           </div>
-                        </div>
+                        </div>    
+                        */ ?>
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
-                              <label for="memberid" class="control-label">Select <?=Member_label?></label>
-                              <select id="memberid" name="memberid[]" multiple data-actions-box="true" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" title="All <?=Member_label?>">
+                              <label for="memberid" class="control-label">Select Party</label>
+                              <select id="memberid" name="memberid[]"  data-actions-box="true" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" title="All Party">
                               </select>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="col-md-12">
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
@@ -88,36 +88,19 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3 pr-n">
+                      </div>
+                 
+                      <div class="col-md-12">
+                        
+                        
+                        <div class="col-md-6">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
-                              <label for="focusedinput" class="control-label mb-sm">Row</label>
-                              <div class="col-md-12 p-n">
-                                <div class="col-md-4 col-xs-4" style="padding-left: 0px;">
-                                    <div class="radio">
-                                    <input type="radio" name="rowtype" id="memberrow" value="1" checked>
-                                    <label for="memberrow"><?=Member_label?></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-8 col-xs-8">
-                                    <div class="radio">
-                                    <input type="radio" name="rowtype" id="datemonthrow" value="0">
-                                    <label for="datemonthrow">Date / Month</label>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <div class="col-md-12 pl-xs pr-xs">
-                              <label for="focusedinput" class="control-label mb-sm">Purchase</label>
+                              <label for="focusedinput" class="control-label mb-sm">Return</label>
                               <div class="col-md-12 p-n">
                                 <div class="col-md-5 col-xs-5" style="padding-left: 0px;">
                                     <div class="radio">
-                                    <input type="radio" name="purhcasetype" id="withreturn" value="1" checked>
-                                    <label for="withreturn">With Return</label>
+                                    <input type="radio" name="purhcasetype" id="withreturn" value="1" checked><label for="withreturn">With Return</label>
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-xs-7 pl-n">
@@ -179,5 +162,6 @@
 
     </div> <!-- .container-fluid -->
 </div> <!-- #page-content -->
+
 
 

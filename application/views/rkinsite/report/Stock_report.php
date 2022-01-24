@@ -20,7 +20,27 @@
                   <form action="#" id="memberform" class="form-horizontal">
                     <div class="row">
                       <div class="col-md-12 p-n">
-                        <div class="col-md-3">
+                      <div class="col-md-3">
+                          <div class="form-group" id="productid_div">
+                            <div class="col-md-12 pl-sm pr-sm">
+                              <label for="status" class="control-label">Select Product</label>
+                              <select id="productid" name="productid" class="selectpicker form-control" data-select-on-tab="true" data-size="8" data-live-search="true" >
+                                <option value="0">All Product</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      <div class="col-md-3">
+                          <div class="form-group">
+                            <div class="col-md-12 pl-sm pr-sm">
+                              <label for="producttype" class="control-label">Attribute</label>
+                              <select id="producttype" name="producttype" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
+                                <option value="">All Attribute</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pr-sm">
                               <label class="control-label">Date</label>
@@ -31,13 +51,13 @@
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-sm pr-sm">
-                              <label for="channelid" class="control-label">Channel</label>
+                              <label for="channelid" class="control-label">Variant</label>
                               <select id="channelid" name="channelid" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
-                                <option value="0">Company</option>
+                                <option value="0">Variant</option>
                                 <?php foreach($channeldata as $cd){
                                     $selected = ""; 
                                     if(!empty($this->session->userdata(base_url().'CHANNEL'))){ 
@@ -57,27 +77,13 @@
                         <div class="col-md-3">
                           <div class="form-group" id="memberid_div">
                             <div class="col-md-12 pl-sm pr-sm">
-                              <label for="memberid" class="control-label">Select <?=Member_label?></label>
+                              <label for="memberid" class="control-label">Select Branch </label>
                               <select id="memberid" name="memberid" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
-                                <option value="0">Select <?=Member_label?></option>
+                                <option value="0">Select Branch</option>
                               </select>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <div class="col-md-12 pr-sm">
-                              <label for="stocktype" class="control-label">Select Stock Type</label>
-                              <select id="stocktype" name="stocktype" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
-                                <option value="0">Overall Product Stock</option>
-                                <option value="1">Variant Wise Product Stock</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        
-                      </div>
-                      <div class="col-md-12 p-n"> 
                         <div class="col-md-3">
                           <div class="form-group" id="productid_div">
                             <div class="col-md-12 pr-sm">
@@ -91,30 +97,6 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3">
-                          <div class="form-group" id="productid_div">
-                            <div class="col-md-12 pl-sm pr-sm">
-                              <label for="status" class="control-label">Select Product</label>
-                              <select id="productid" name="productid" class="selectpicker form-control" data-select-on-tab="true" data-size="8" data-live-search="true" >
-                                <option value="0">All Product</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <div class="col-md-12 pl-sm pr-sm">
-                              <label for="producttype" class="control-label">Product Type</label>
-                              <select id="producttype" name="producttype" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
-                                <option value="">All Product</option>
-                                <option value="0">Regular Product</option>
-                                <option value="1">Offer Product</option>
-                                <option value="2">Raw Product</option>
-                                <option value="3">Semi-Finish Product</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
                         <div class="col-md-2">
                           <div class="form-group mt-xl">
                             <div class="col-md-12">
@@ -124,6 +106,7 @@
                           </div>
                         </div>
                       </div>
+                  
                     </div> 
                   </form>
 								</div>

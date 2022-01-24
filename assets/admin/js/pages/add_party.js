@@ -561,9 +561,9 @@ function addnewcontect() {
                         <input id="contactno" type="text" name="contactno' + cloopcount2 + '[]" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="">\
                     </div>\
                     <div class="form-group col-md-2">\
-                        <button type="button" onclick="addcontectfield(' + cloopcount2 + ')" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>\
+                        <button type="button" onclick="addcontectfield(' + cloopcount2 + ')" class="addprodocitem btn-primary btn-xs"><i class="fa fa-plus"></i></button>\
                     </div>\
-                </div>\
+                 </div>\
             </div>\
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
                 <div class="form-group" id="birthdate_div">\

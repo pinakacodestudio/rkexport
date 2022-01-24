@@ -31,7 +31,7 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
-                              <label class="control-label">Payment Date</label>
+                              <label class="control-label">Transaction Date</label>
                               <div class="input-daterange input-group" id="datepicker-range">
                                   <input type="text" class="input-small form-control" name="startdate" id="startdate" value="<?php echo $this->general_model->displaydate(date("y-m-d",strtotime("-3 month"))); ?>" placeholder="Start Date" title="Start Date" readonly/>
                                   <span class="input-group-addon">to</span>
@@ -173,7 +173,7 @@
                       <th>Payment Type</th>
                       <th>Transaction Charge</th>
                       <th>Payable Amount</th>
-                      <th class="text-right">Total Amount </th>
+                      <th class="text-right">Entry Date</th>
                     </tr>
                   </thead>
                 </table>

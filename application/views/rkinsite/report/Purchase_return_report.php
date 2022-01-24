@@ -1,6 +1,4 @@
-<script>
-  var CURRENCY_CODE = '<?=CURRENCY_CODE?>';
-</script>
+
 <div class="page-content">
     <div class="page-heading">     
       <?php $this->load->view(ADMINFOLDER.'includes/menu_header');?>
@@ -43,6 +41,7 @@
                             </div>
                           </div>
                         </div>
+                        <?php /*
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
@@ -54,18 +53,16 @@
                               </select>
                             </div>
                           </div>
-                        </div>
+                        </div> */?>
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
-                              <label for="memberid" class="control-label">Select <?=Member_label?></label>
-                              <select id="memberid" name="memberid[]" multiple data-actions-box="true" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" title="All <?=Member_label?>">
+                              <label for="memberid" class="control-label">Select Party</label>
+                              <select id="memberid" name="memberid[]" multiple data-actions-box="true" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" title="All Party">
                               </select>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="col-md-12">
                         <div class="col-md-3">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
@@ -78,6 +75,9 @@
                             </div>
                           </div>
                         </div>
+                      </div>
+                      <div class="col-md-12">
+                       
                         <div class="col-md-3 pr-n">
                           <div class="form-group">
                             <div class="col-md-12 pl-xs pr-xs">
