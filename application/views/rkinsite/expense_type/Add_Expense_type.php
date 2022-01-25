@@ -23,9 +23,9 @@
 						<input type="hidden" name="id" value="<?php if(isset($additionalrightsrow)){ echo $additionalrightsrow['id']; } ?>">
 						
 						<div class="form-group" id="paymenttype_div">
-							<label for="expense_type" class="col-sm-4 control-label">Expense Type<span class="mandatoryfield">*</span></label>
+							<label for="Expense_category" class="col-sm-4 control-label">Expense Type<span class="mandatoryfield">*</span></label>
 							<div class="col-sm-6">
-								<input id="expense_type" type="text" name="expense_type" value="<?php if(!empty($additionalrightsrow)){ echo $additionalrightsrow['expense_type']; } ?>" class="form-control">
+								<input id="expense_category" type="text" name="expense_category" value="<?php if(!empty($additionalrightsrow)){ echo $additionalrightsrow['expense_category']; } ?>" class="form-control">
 							</div>
 						</div>
 						

@@ -26,6 +26,7 @@ function getcity() {
     }
 $(document).ready(function () {
     var edit_country = $('#edit_country').val();
+   
     $('#countryid').val(edit_country).trigger('change');
     var base_url = $('#base_url').val();
     var edit_provinceid = $('#edit_provinceid').val();
@@ -480,13 +481,15 @@ function addnewproduct() {
                           <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(' + cloopdoc + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
                       </div>\
                       <div class="col-md-1 addrowbutton pt-md pr-xs">\
-                          <button type="button" class="btn btn-primary btn-raised m-n" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
+                          <button type="button" class="btn btn-primary btn-raised add_btndoc m-n" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
                            </div>\
                       </div>\
                   ';
 
     $("#adddocrow").append(datahtml);
-
+    $(".add_btndoc").hide();
+    $(".add_btndoc:last").show();
+    
 }
 function addcontectfield(id,countcontactno) {
     var countcontactno = $("#countcontactno").val();
@@ -505,20 +508,18 @@ function addcontectfield(id,countcontactno) {
     </div>\
  </div>';
 
- 
-// $(".remove_btn:first").show();
-// $(".add_btn:last").hide();
     $(".addcontectfilelddata"+id+"").after(datahtml);
-
+    $("#contectrowdelete_"+id+" .add_btn").hide();
+    $("#contectrowdelete_"+id+" .add_btn:last").show();
 }
 
 function removecontect(divid) {
+    
     var countcontactno = $("#countcontactno").val();
     countcontactno++;
     $("#countcontactno").val(countcontactno);
-
     $("#contecremove" + divid).remove();
-
+  
     $(".add_btn:last").show();
     if ($(".remove_btn:visible").length == 1) {
         $(".remove_btn:first").hide();
@@ -556,8 +557,9 @@ function addnewcontect() {
                     <div class="col-md-6">\
                         <input id="contactno" type="text" name="contactno' + cloopcount2 + '[]" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="">\
                     </div>\
-                    <div class="form-group col-md-2">\
-                        <button type="button" onclick="addcontectfield(' + cloopcount2 + ')" class="addprodocitem btn btn-primary btn-raised m-n"><i class="fa fa-plus"></i></button>\
+                    <div class="form-group col-md-3">\
+                        <button type="button" onclick="addcontectfield(' + cloopcount2 + ')" class="addprodocitem btn btn-primary add_btn btn-raised m-n"><i class="fa fa-plus"></i></button>\
+                        <button type="button" class="btn btn-danger btn-raised m-n remove_btn" onclick="removecontect(' + cloopcount2 + ')"><i class="fa fa-minus"></i></button>\
                     </div>\
                  </div>\
             </div>\
@@ -586,7 +588,7 @@ function addnewcontect() {
                 </div>\
             </div>\
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
-                <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion(\'contectrowdelete_'+ cloopcount2 + '\')" class="btn btn-danger btn-raised remove_btn m-n">Remove</button>\
+                <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion(\'contectrowdelete_'+ cloopcount2 + '\')" class="btn btn-danger btn-raised  m-n">Remove</button>\
                 <div class="form-group" style="float:left; margin:0px 19px 0px 5px;">\
                 <button type="button" class="addpro btn btn-primary btn-raised m-n" onclick="addnewcontect()">Add\
                 Data</button>\

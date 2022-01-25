@@ -44,7 +44,7 @@
 										<?php foreach($expensecategory as $ec){?>
 											<?php print_r($ec);?>
 											<option value="<?php echo $ec['id']; ?>">
-											<?php echo $ec['expense_type']; ?></option>
+											<?php echo $ec['expense_category']; ?></option>
 										<?php } ?>
 										</select>
 									</div>

@@ -22,7 +22,7 @@ $(document).ready(function() {
         'serverSide': true,//Feature control DataTables' server-side processing mode.
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": SITE_URL+'Expense_type/listing',
+            "url": SITE_URL+'Expense_category/listing',
             "type": "POST",
             "data": function ( data ) {
                 

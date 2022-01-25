@@ -3,7 +3,7 @@ function resetdata(){
     $("#expensecategory_div").removeClass("has-error is-focused");
   
     if(ACTION==0){
-      $('#name').val('');
+      $('#expensecategory').val('');
     }
    
     $('html, body').animate({scrollTop:0},'slow');
@@ -11,8 +11,8 @@ function resetdata(){
   }
   function checkvalidation(addtype=0){
     
-    var name = $("#name").val().trim();
-    
+    var name = $("#expensecategory").val().trim();
+
     var isvalidname  = 0 ;
     
     PNotify.removeAll();
@@ -35,7 +35,7 @@ function resetdata(){
   
       var formData = new FormData($('#expensecategoryform')[0]);
       if(ACTION==0){
-        var uurl = SITE_URL+"expense-category/add-expense-category";
+        var uurl = SITE_URL+"expense-category/expense-category-add";
         
         $.ajax({
           url: uurl,

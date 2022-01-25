@@ -16,11 +16,11 @@
                   <?php 
                     if (strpos(trim($submenuvisibility['submenuadd'],','),$this->session->userdata[base_url().'ADMINUSERTYPE']) !== false){
                   ?>
-                  <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>expense-type/add-expense-type<?=$this->uri->segment(3);?>" title=<?=addbtn_title?>><?=addbtn_text;?></a>
+                  <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>expense-category/add-expense-category<?=$this->uri->segment(3);?>" title=<?=addbtn_title?>><?=addbtn_text;?></a>
                   <?php
                     }if(strpos(trim($submenuvisibility['submenudelete']),$this->session->userdata[base_url().'ADMINUSERTYPE']) !== false){
                   ?>
-                  <a class="<?=deletebtn_class;?>" href="javascript:void(0)" onclick="checkmultipledelete('','Additional Rights','<?php echo ADMIN_URL; ?>expense-type/delete-mul-expense-type')" title=<?=deletebtn_title?>><?=deletebtn_text;?></a>
+                  <a class="<?=deletebtn_class;?>" href="javascript:void(0)" onclick="checkmultipledelete('','Additional Rights','<?php echo ADMIN_URL; ?>expense-category/delete-mul-expense-category')" title=<?=deletebtn_title?>><?=deletebtn_text;?></a>
                   <?php } ?>
                 </div>
               </div>

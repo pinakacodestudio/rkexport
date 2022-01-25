@@ -17,13 +17,13 @@
                 <div class="col-md-6 form-group" style="text-align: right;">
                   <?php 
                     if (strpos($submenuvisibility['submenuadd'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){ ?>
-                      <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>expense-category/expense-category-add" title=<?=addbtn_title?>><?=addbtn_text;?></a>
+                      <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>expense-category/add-expense-category" title=<?=addbtn_title?>><?=addbtn_text;?></a>
                   <?php
                     } ?>
                     <?php
                     if(strpos($submenuvisibility['submenudelete'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){
                   ?>
-                  &nbsp;<a class="<?=deletebtn_class;?> delete-btn-align" href="javascript:void(0)" onclick="checkmultipledelete('<?php echo ADMIN_URL; ?>expense_category/check-expense-category-use','Expense Category','<?php echo ADMIN_URL; ?>expense-category/delete-mulexpense-category')" title=<?=deletebtn_title?>><?=deletebtn_text;?></a>
+                  &nbsp;<a class="<?=deletebtn_class;?> delete-btn-align" href="javascript:void(0)" onclick="checkmultipledelete('<?php echo ADMIN_URL; ?>expense_category/delete-mul-expense-category','Expense Category','<?php echo ADMIN_URL; ?>expense-category/delete-mulexpense-category')" title=<?=deletebtn_title?>><?=deletebtn_text;?></a>
                   <?php } ?>
                   </div>
               </div>

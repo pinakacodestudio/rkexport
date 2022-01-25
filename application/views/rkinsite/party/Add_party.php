@@ -248,8 +248,9 @@
                                  $doc='';
                                  $docname='';
                                  $i=0;
-                                
+                                 
                                  if(isset($party_docdata[0]->id ) && !empty($party_docdata[0]->id ))  {
+                                    $arraycount = count($party_docdata);
                                      foreach ($party_docdata as $row)
                                     {
                                        $i++;
@@ -289,12 +290,13 @@
                                     </div>
                                     <div class="col-md-1 addrowbutton pt-md pr-xs">
                                        <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(<?=$cloopdoc?>)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
-                                       
-                                      
                                     </div>
-                                    <div class="col-md-1 addrowbutton pt-md pr-xs">
-                                       <button type="button" class="btn btn-primary btn-raised remove_btn m-n" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
-                                    </div>
+                                    <?php if($arraycount==$i){ ?>
+
+                                       <div class="col-md-1 addrowbutton pt-md pr-xs ">
+                                          <button type="button" class="btn btn-primary btn-raised remove_btn m-n add_btndoc" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
+                                       </div>
+                                   <?php  } ?>
                               </div>
                               <?php
                                  }
@@ -305,7 +307,7 @@
                                          $cloopdoc = $cloopdoc + 1;
                                  ?>
                                  
-                              <div class="col-md-6 countdocuments pl-sm pr-sm" id="countdocuments">
+                              <div class="col-md-6 countdocuments pl-sm pr-sm" id="countdocuments<?=$cloopdoc?>">
                                  <div class="col-md-5 col-sm-5">
                                      <div class="form-group" id="documentnumber1_div">
                                          <div class="col-md-12 pr-xs pl-xs">
@@ -333,13 +335,14 @@
                                          </div>
                                      </div>
                                  </div>
-                                 <div class="col-md-2 col-sm-2">
-                                    <div class="form-group" style="float:left; margin:15px 1px 0px 0px;">
-                                       <button type="button"  onclick="addnewproduct()" class="btn btn-primary btn-raised remove_btn m-n"><i class="fa fa-plus"></i></button>
-                                       <button type="button" class="btn btn-danger btn-raised m-n remove_btn" onclick="removecontect('')"><i class="fa fa-minus"></i></button>
-                                    </div>
+
+                                 <div class="col-md-1 addrowbutton pt-md pr-xs">
+                                    <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(<?=$cloopdoc?>)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
                                  </div>
-                                
+                                 <div class="col-md-1 addrowbutton pt-md pr-xs">
+                                    <button type="button" class="btn btn-primary btn-raised add_btndoc m-n" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
+                                       </div>
+                                 </div>
                                  </div>
                               <?php
                                  }
@@ -360,13 +363,15 @@
                      </div>
                      <div class="panel-body">
                         <div id="addtarget">
-                           <div class="row">
+                           <div class="row" id="contectrowdelete_1">
                            
                            <?php 
                               $cloopcount = 0;
                               $countcontactno = 0;
                               $i=0;
                               if(isset($party_contactdata[0]->id ) && !empty($party_contactdata[0]->id ))  {
+                            
+                                 $arrycountcontectm = count($party_contactdata);
                                   foreach ($party_contactdata as $row)
                                   {
                                       $i++;
@@ -378,7 +383,8 @@
                                       $birthdate = $row->birthdate;
                                       $anniversarydate = $row->anniversarydate;
                                       $email = $row->email;
-                                    
+
+
                                       ?>
                                        <input type="hidden" name="contectid_<?=$cloopcount?>" value="<?=$con_id?>" id="contectid_<?=$cloopcount?>">
                                        <div class="data" id="contectrowdelete_<?=$cloopcount?>">
@@ -405,11 +411,12 @@
                                     </div>
 
                                    <?php
-                                   $i=0;
+                                   $ii=0;
                                   $contactno=(explode(',',$contactno));
-                                   foreach($contactno as $item){ $i++; $countcontactno++; ?>
+                                  $arrycountcontec = count($contactno);
+                                   foreach($contactno as $item){ $ii++; $countcontactno++; ?>
                                      
-                                      <div class="col-md-4 pl-sm pr-sm visible-md visible-lg <?php if($i==1){
+                                      <div class="col-md-4 pl-sm pr-sm visible-md visible-lg <?php if($ii==1){
                                        echo 'addcontectfilelddata'.$cloopcount;
                                       } ?>" id="contecremove<?=$countcontactno?>">
                                          <div class="form-group" id="contactno_div">
@@ -418,7 +425,10 @@
                                                <input id="contactno" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="<?=$item?>">
                                             </div>
                                              <div class="form-group col-md-3">
-                                                <button type="button"  onclick="addcontectfield(<?=$cloopcount?>)" class="addprodocitem btn btn-primary btn-raised remove_btn m-n" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>
+                                                <?php if($arrycountcontec==$ii){ ?>
+                                                   <button type="button"  onclick="addcontectfield(<?=$cloopcount?>)" class="addprodocitem btn btn-primary btn-raised m-n" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>
+
+                                              <?php } ?>
                                                 <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removecontect(<?=$countcontactno?>)"><i class="fa fa-minus"></i></button>
                                              </div>
                                          </div>
@@ -448,15 +458,20 @@
                                           </div>
                                        </div>
                                     </div>
+
+                                    
                                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                                      
                                         <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion('contectrowdelete_<?=$cloopcount?>')" class="btn btn-danger btn-raised remove_btn m-n">Remove</button>
-                                        <div class="form-group" style="float:left; margin:0px 19px 0px 5px;">
-                                          <button type="button" class="addpro btn btn-primary btn-raised remove_btn m-n" onclick="addnewcontect()">Add
-                                          Data</button>
-                                        </div>
+                                       <?php if($i==$arrycountcontectm){ ?>
+                                          <div class="form-group" style="float:left; margin:0px 19px 0px 5px;">
+                                          <button type="button" class="addpro btn btn-primary btn-raised remove_btn m-n" onclick="addnewcontect()">Add Data</button>
+                                          </div>
+                                       <?php } ?>
+
                                     </div>
-                           
-                                  </div>
+                                      
+                                 </div>
                         
                       
                         <div class="clearfix" style="margin-bottom: 30px;"></div>
@@ -489,14 +504,15 @@
                               </div>
                            </div>
                         </div>
-                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata<?=$cloopcount?>">
+                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata<?=$cloopcount?> " id="contecremove<?=$cloopcount?>">
                            <div class="form-group" id="contactno_div">
                               <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
                               <div class="col-md-6">
                                  <input id="contactno" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="">
                               </div>
                               <div class="form-group col-md-3">
-                                 <button type="button"  onclick="addcontectfield(<?=$cloopcount?>,<?=$countcontactno?>)" style="margin-top: 7px;" class="addprodocitem btn btn-primary btn-raised remove_btn m-n"><i class="fa fa-plus"></i></button>
+                                 <button type="button"  onclick="addcontectfield(<?=$cloopcount?>,<?=$countcontactno?>)" style="margin-top: 7px;" class="addprodocitem btn btn-primary btn-raised add_btn m-n"><i class="fa fa-plus"></i></button>
+                                 <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removecontect('<?=$cloopcount?>')"><i class="fa fa-minus"></i></button>
                              
                               </div>
                            </div>

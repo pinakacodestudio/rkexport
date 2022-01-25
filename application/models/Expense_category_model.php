@@ -1,23 +1,22 @@
 <?php
 
 class Expense_category_model extends Common_model {
-// class Expense_type_model extends Common_model {
 
 	//put your code here
-	public $_table = tbl_expensetype;
+	public $_table = tbl_expensecategory;
 	public $_fields = "*";
 	public $_where = array();
 	public $_except_fields = array();
 	public $order = array('id' => 'DESC');
-	public $column_order = array('id', 'expense_type');
-    public $column_search = array('expense_type');
+	public $column_order = array('id', 'expense_category');
+    public $column_search = array('expense_category');
 	
 	function __construct() {
 		parent::__construct();
 	}
 	
 	function getAdditionalrightsDataByID($ID){
-		$query = $this->readdb->select("id,expense_type")
+		$query = $this->readdb->select("id,expense_category,status")
 							->from($this->_table)
 							->where("id", $ID)
 							->get();
@@ -29,7 +28,7 @@ class Expense_category_model extends Common_model {
 		}	
     }
     function getAdditionalrightsList() {
-        $query = $this->readdb->select("id,expense_type")
+        $query = $this->readdb->select("id,expense_category")
 							->from($this->_table)
 							->get();
 		
@@ -49,7 +48,7 @@ class Expense_category_model extends Common_model {
 	    }
     }
 	function _get_datatables_query(){  
-        $this->readdb->select("id,expense_type,createddate,modifieddate");
+        $this->readdb->select("id,expense_category,status,createddate,modifieddate");
         $this->readdb->from($this->_table." as ar");
         $i = 0;
         foreach ($this->column_search as $item) // loop column 
