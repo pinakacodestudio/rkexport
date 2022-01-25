@@ -1,3 +1,4 @@
+<?php    $productdiscount = 0; ?>
 <script>
     var partialpayment = '<?php if(!empty($channelsetting)){ echo $channelsetting['partialpayment']; } ?>';
     var addressid = <?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['addressid']; }else{ echo "0"; } ?>;
@@ -14,7 +15,8 @@
     var EMIreceived = 0;
     var productoptionhtml = "";
     var salesproducthtml = "";
-    var PRODUCT_DISCOUNT = '<?= PRODUCTDISCOUNT ?>';
+    //var PRODUCT_DISCOUNT = '<?= PRODUCTDISCOUNT ?>';
+ 
 
     var GSTonDiscount = '<?php //if(isset($gstondiscount)){ echo $gstondiscount; } ?>';
     var globaldicountper = '<?php //if(isset($globaldiscountper)){ echo $globaldiscountper; } ?>';
@@ -140,7 +142,7 @@
                                         <th>Select Variant <span class="mandatoryfield">*</span></th>
                                         <th class="width12">Price <span class="mandatoryfield">*</span></th>
                                         <th class="width8">Qty <span class="mandatoryfield">*</span></th>
-                                        <th class="width8" style="<?php if(PRODUCTDISCOUNT==0){ echo "display:none;"; } ?>">Discount</th>
+                                        <th class="width8" style="<?php if($productdiscount==0){ echo "display:none;"; } ?>">Discount</th>
                                         <th class="text-right width8">Tax (%)</th>
                                         <th class="text-right width8">Amount (<?=CURRENCY_CODE?>)</th>
                                         <th class="width8">Action</th>
@@ -209,7 +211,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td <?php if(PRODUCTDISCOUNT==0){ echo "style='display:none;'"; }?>>
+                                                <td <?php if($productdiscount==0){ echo "style='display:none;'"; }?>>
                                                     <div class="form-group" id="discount<?=($i+1)?>_div">
                                                         <div class="col-md-12">
                                                             <label for="discount<?=($i+1)?>" class="control-label">Dis. (%)</label>
@@ -330,7 +332,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td <?php if(PRODUCTDISCOUNT==0){ echo "style='display:none;'"; }?>>
+                                            <td <?php if($productdiscount==0){ echo "style='display:none;'"; }?>>
                                                 <div class="form-group" id="discount1_div">
                                                     <div class="col-md-12">
                                                         <label for="discount1" class="control-label">Dis. (%)</label>
