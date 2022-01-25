@@ -136,15 +136,6 @@ class Payment_receipt extends Admin_Controller {
 		$this->viewData['title'] = "Add Receipt";
 		$this->viewData['module'] = "payment_receipt/Add_payment_receipt";
 
-        /*****Get Member List*****/
-        // $this->load->model('Member_model', 'Member');
-        // $this->viewData['memberdata'] = $this->Member->getMemberOnFirstLevelUnderCompany();
-
-        // $this->load->model('Cash_or_bank_model', 'Cash_or_bank');
-        // $this->viewData['bankdata'] = $this->Cash_or_bank->getBankAccountsByMember(0);
-
-        // $this->viewData['paymentreceiptno'] = $this->Payment_receipt->generatePaymentReceiptNo();
-
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");			
         $this->admin_headerlib->add_javascript("Add_payment_receipt", "pages/add_payment_receipt.js");
 		$this->load->view(ADMINFOLDER.'template',$this->viewData);

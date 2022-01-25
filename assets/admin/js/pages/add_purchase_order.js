@@ -44,6 +44,12 @@ $(document).ready(function() {
         autoclose: true,
         todayBtn:"linked",
     });
+    $('#quotationdate').datepicker({
+        todayHighlight: true,
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        todayBtn:"linked",
+    });
     $('.paymentdate').datepicker({
         todayHighlight: true,
         format: 'dd/mm/yyyy',
@@ -76,9 +82,9 @@ $(document).ready(function() {
         format: 'dd/mm/yyyy',
         todayBtn:"linked",
     });
-    if(ACTION==1 || ISDUPLICATE==1){
-        getbillingaddress();
-    }
+    // if(ACTION==1 || ISDUPLICATE==1){
+    //     getbillingaddress();
+    // }
     if(ACTION==1){
         $("#advancepayment").attr("data-calculate","true");
     }
@@ -2160,11 +2166,11 @@ function validattachmentfile(obj,element,elethis){
 function addnewproduct(){
 
     productoptionhtml = salesproducthtml;
-    if(PRODUCT_DISCOUNT==0){
-        discount = "display:none;";
-    }else{ 
-        discount = "display:block;"; 
-    }
+    // if(PRODUCT_DISCOUNT==0){
+    //     discount = "display:none;";
+    // }else{ 
+    //     discount = "display:block;"; 
+    // }
     var readonly = "readonly";
     if(EDITTAXRATE_CHANNEL==1 && EDITTAXRATE_SYSTEM==1){
         readonly = "";
@@ -3640,4 +3646,93 @@ function addNewVendor(){
             processData: false
         });
     }
+}
+
+function addnewinvoicetransaction(){
+
+    var rowcount = parseInt($(".countinvoice:last").attr("id").match(/\d+/))+1;
+    var datahtml = '<div class="countinvoice" id="countinvoice'+rowcount+'">\
+                    <div class="row m-n">\
+                        <div class="col-md-3">\
+                            <div class="form-group" id="invoice'+rowcount+'_div">\
+                                <div class="col-sm-12">\
+                                    <select id="invoiceid'+rowcount+'" name="category[]" class="selectpicker form-control invoiceid" data-live-search="true" data-select-on-tab="true" data-size="6">\
+                                        <option value="0">Select Category</option>\
+                                    </select>\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-2">\
+                            <div class="form-group" id="invoiceaqmount_div">\
+                                <div class="col-sm-12">\
+                                    <select id="Product" name="Product[]" class="selectpicker form-control " data-live-search="true" data-select-on-tab="true" data-size="6">\
+                                        <option value="0">Select Product </option>\
+                                    </select>\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-2">\
+                            <div class="form-group" id="remainingamount'+rowcount+'_div">\
+                                <div class="col-md-12">\
+                                    <input type="text" id="remainingamount'+rowcount+'" class="form-control text-right remainingamount" value="" readonly>\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-2 pt-md">\
+                            <button type="button" class="btn btn-danger btn-raised remove_invoice_btn m-n" onclick="removetransaction('+rowcount+')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
+                            <button type="button" class="btn btn-primary btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
+                        </div>\
+                    </div>\
+                </div>';
+    
+    $(".remove_invoice_btn:first").show();
+    $(".add_invoice_btn:last").hide();
+    $("#countinvoice"+(rowcount-1)).after(datahtml);
+    
+    $("#invoiceid"+rowcount).selectpicker("refresh");
+
+    /****INVOICE CHANGE EVENT****/
+    // $("#invoiceid"+rowcount).on('change', function (e) {
+    //     var divid = $(this).attr("id").match(/\d+/);
+    //     $("#amountdue"+divid+",#invoiceamount"+divid+",#remainingamount"+divid).val('');
+    //     if(this.value!=0){
+    //         var invoiceamount = $("#invoiceid"+divid+" option:selected").attr("data-invoiceamount");
+
+    //         $("#amountdue"+divid).val(parseFloat(invoiceamount).toFixed(2));
+    //     }
+    //     calculateamount();
+    // });
+
+    /****AMOUNT KEYUP EVENT****/
+    // $("#invoiceamount"+rowcount).on('keyup', function (e) {
+    //     var divid = $(this).attr("id").match(/\d+/);
+    //     var amountdue = $("#amountdue"+divid).val();
+        
+    //     if(amountdue!="" && this.value!=""){
+    //         if(parseFloat(this.value) > parseFloat(amountdue)){
+    //             $(this).val(parseFloat(amountdue).toFixed(2));
+    //         }
+
+    //         var remainingamount = parseFloat(amountdue) - parseFloat(this.value);
+    //         $("#remainingamount"+divid).val(parseFloat(remainingamount).toFixed(2));
+    //     }
+    //     calculateamount();
+    // });
+
+}
+
+function removetransaction(rowid){
+
+    if($('select[name="invoiceid[]"]').length!=1 && ACTION==1 && $('#paymentreceipttransactionsid'+rowid).val()!=null){
+        var removepaymentreceipttransactionsid = $('#removepaymentreceipttransactionsid').val();
+        $('#removepaymentreceipttransactionsid').val(removepaymentreceipttransactionsid+','+$('#paymentreceipttransactionsid'+rowid).val());
+    }
+    $("#countinvoice"+rowid).remove();
+
+    $(".add_invoice_btn:last").show();
+    if ($(".remove_invoice_btn:visible").length == 1) {
+        $(".remove_invoice_btn:first").hide();
+    }
+
+    changenetamounttotal();
 }

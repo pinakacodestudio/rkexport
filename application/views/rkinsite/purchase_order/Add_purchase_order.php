@@ -9,7 +9,7 @@
     oldcombopriceid = [];
     oldprice = [];
     var EMIreceived = 0;
-    var PRODUCT_DISCOUNT = '<?=PRODUCTDISCOUNT?>';
+    var PRODUCT_DISCOUNT = '';<?php //PRODUCTDISCOUNT?>
     var salesproducthtml = "";
 
     var GSTonDiscount = '<?php //if(isset($gstondiscount)){ echo $gstondiscount; } ?>';
@@ -184,6 +184,7 @@
                         </div> -->
                         <br>
 
+                        <?php /*
                         <div class="col-md-12"  id='addproductitem'>
                            <?php 
                               $cloopdoc = 0;
@@ -240,11 +241,11 @@
                                                          <input id="applyoldprice<?=($i+1)?>" type="checkbox" value="0" class="checkradios applyoldprice" checked>
                                                          <?php 
                                                             $oldproductrate = $quotationdata['quotationproduct'][$i]['originalprice'];
-                                                            /* if(PRICE==1){
+                                                             if(PRICE==1){
                                                                 $oldproductrate = $quotationdata['quotationproduct'][$i]['price'];
                                                             }else{
                                                                 $oldproductrate = $quotationdata['quotationproduct'][$i]['pricewithtax'];
-                                                            } */?>
+                                                            } ?>
                                                          <label for="applyoldprice<?=($i+1)?>" class="control-label p-n">Apply Old Quotation Price : <span id="oldpricewithtax<?=($i+1)?>"><?=$oldproductrate?></span></label>
                                                       </div>
                                                    </div>
@@ -503,11 +504,11 @@
                                                          <input id="applyoldprice<?=($i+1)?>" type="checkbox" value="0" class="checkradios applyoldprice" checked>
                                                          <?php 
                                                             $oldproductrate = $quotationdata['quotationproduct'][$i]['originalprice'];
-                                                            /* if(PRICE==1){
+                                                             if(PRICE==1){
                                                                 $oldproductrate = $quotationdata['quotationproduct'][$i]['price'];
                                                             }else{
                                                                 $oldproductrate = $quotationdata['quotationproduct'][$i]['pricewithtax'];
-                                                            } */?>
+                                                            } ?>
                                                          <label for="applyoldprice<?=($i+1)?>" class="control-label p-n">Apply Old Quotation Price : <span id="oldpricewithtax<?=($i+1)?>"><?=$oldproductrate?></span></label>
                                                       </div>
                                                    </div>
@@ -682,7 +683,153 @@
                               } 
                               ?>
                         </div>
+                        */?>
 
+<div class="row" id="invoicedetailsdiv" style="<?php if(isset($paymentreceiptdata) && $paymentreceiptdata['isagainstreference']==2){ echo "display:none;"; }?>">
+                            <!-- <div class="panel-heading"><h2>Invoice Details</h2></div> -->
+                            <div class="row m-n">
+                                <!-- <div class="col-md-3">
+                                    <div class="form-group" id="invoice_div">
+                                        <div class="col-md-12">								
+                                            <label class="control-label" for="invoiceid">Select Invoice <span class="mandatoryfield">*</span></label>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="col-md-3">
+                                    <div class="form-group" id="amountdue_div">
+                                        <div class="col-md-12">								
+                                            <label class="control-label" for="amountdue">Category</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group" id="invoiceamount_div">
+                                        <div class="col-md-12">								
+                                            <label class="control-label" for="invoiceamount">Product  <span class="mandatoryfield">*</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group" id="remainingamount_div">
+                                        <div class="col-md-12">								
+                                            <label class="control-label" for="remainingamount">Qty</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="removepaymentreceipttransactionsid" id="removepaymentreceipttransactionsid">
+                            <?php if(isset($paymentreceiptdata) && !empty($receipttransactionsdata)) { ?>
+                                <?php /* for ($i=0; $i < count($receipttransactionsdata); $i++) { ?>
+                                    <div class="countinvoice" id="countinvoice<?=$i+1?>">
+                                        <input type="hidden" name="paymentreceipttransactionsid[]" value="<?=$receipttransactionsdata[$i]['id']?>" id="paymentreceipttransactionsid<?=$i+1?>">
+                                        <div class="row m-n">
+                                            <div class="col-md-3">
+                                                <div class="form-group" id="invoice<?=$i+1?>_div">
+                                                    <div class="col-md-12">								
+                                                        <select id="invoiceid<?=$i+1?>" name="invoiceid[]" class="selectpicker form-control invoiceid" data-live-search="true" data-select-on-tab="true" data-size="6">
+                                                            <option value="0">Select Invoice</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-2">
+                                                <div class="form-group" id="amountdue<?=$i+1?>_div">
+                                                    <div class="col-md-12">								
+                                                        <input type="text" id="amountdue<?=$i+1?>" class="form-control text-right amountdue" value="" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+        
+                                            <div class="col-md-2">
+                                                <div class="form-group" id="invoiceamount<?=$i+1?>_div">
+                                                    <div class="col-md-12">								
+                                                        <input type="text" id="invoiceamount<?=$i+1?>" class="form-control text-right invoiceamount" name="invoiceamount[]" value="<?php echo number_format($receipttransactionsdata[$i]['amount'],2,'.',''); ?>" onkeypress="return decimal_number_validation(event, this.value, 10)">
+                                                    </div>
+                                                </div>
+                                            </div>
+        
+                                            <div class="col-md-2">
+                                                <div class="form-group" id="remainingamount<?=$i+1?>_div">
+                                                    <div class="col-md-12">								
+                                                        <input type="text" id="remainingamount<?=$i+1?>" class="form-control text-right remainingamount" value="" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 pt-md">
+                                                <?php if($i==0){?>
+                                                    <?php if(count($receipttransactionsdata)>1){ ?>
+                                                        <button type="button" class="btn btn-default btn-raised remove_invoice_btn m-n" onclick="removetransaction(1)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
+                                                    <?php }else { ?>
+                                                        <button type="button" class="btn btn-default btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
+                                                    <?php } ?>
+
+                                                <? }else if($i!=0) { ?>
+                                                    <button type="button" class="btn btn-default btn-raised remove_invoice_btn m-n" onclick="removetransaction(<?=$i+1?>)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
+                                                <? } ?>
+                                                <button type="button" class="btn btn-default btn-raised btn-sm remove_invoice_btn m-n" onclick="removetransaction(<?=$i+1?>)"  style="padding: 3px 8px;display:none;"><i class="fa fa-minus"></i></button>
+                                            
+                                                <button type="button" class="btn btn-default btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button> 
+                                            </div>
+                                        </div>
+                                        <script>
+                                            $(document).ready(function() {
+                                                INVOICEID_ARR.push(<?=$receipttransactionsdata[$i]['invoiceid']?>);
+                                            });
+                                        </script>
+                                    </div>
+                                <?php } */?>
+                            <?php }else{ ?>
+                                <div class="countinvoice" id="countinvoice1">
+                                    <div class="row m-n">
+                                        <!-- <div class="col-md-3">
+                                            <div class="form-group" id="invoice1_div">
+                                                <div class="col-md-12">								
+                                                    <select id="invoiceid1" name="invoiceid[]" class="selectpicker form-control invoiceid" data-live-search="true" data-select-on-tab="true" data-size="6">
+                                                        <option value="0">Select Invoice</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        
+                                        <div class="col-md-3">
+                                            <div class="form-group" id="amountdue1_div">
+                                                <div class="col-md-12">								
+                                                <select id="invoiceid1" name="invoiceid[]" class="selectpicker form-control invoiceid" data-live-search="true" data-select-on-tab="true" data-size="6">
+                                                        <option value="0">Select Category</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                        <div class="col-md-2">
+                                            <div class="form-group" id="invoiceamount1_div">
+                                                <div class="col-md-12">								
+                                                <select id="invoiceid1" name="invoiceid[]" class="selectpicker form-control invoiceid" data-live-search="true" data-select-on-tab="true" data-size="6">
+                                                        <option value="0">Select Product </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                        <div class="col-md-2">
+                                            <div class="form-group" id="remainingamount1_div">
+                                                <div class="col-md-12">								
+                                                    <input type="text" id="remainingamount1" class="form-control text-right remainingamount" value="" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 pt-md">
+                                            <button type="button" class="btn btn-danger btn-raised  remove_invoice_btn m-n" onclick="removetransaction(1)" style="padding: 3px 8px;display:none;"><i class="fa fa-minus"></i></button>
+    
+                                            <button type="button" class="btn btn-primary btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                            <div class="col-sm-12"><hr></div>
+                        </div>
                         <!-- <div id="orderproductdivs">
                             <table id="orderproducttable" class="table table-hover table-bordered m-n">
                                 <thead>

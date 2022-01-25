@@ -114,7 +114,7 @@ class Sales_Invoice extends Admin_Controller
         $this->viewData['VIEW_STATUS'] = "0";
 
         // $this->viewData['productcount'] = $this->Product->CountRecords();
-
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
         $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_bottom_javascripts("jquery-dropzone", "jquery-dropzone.js");

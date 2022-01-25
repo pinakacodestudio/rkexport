@@ -33,7 +33,7 @@
                             <div class="col-md-12">
                               <label for="vendorid" class="control-label">Select Party</label>
                               <select id="vendorid" name="vendorid" class="selectpicker form-control" data-select-on-tab="true" data-size="5" data-live-search="true" >
-                                <option value="-1">All Vendor</option>
+                                <option value="-1">All Party</option>
                                 <?php foreach($vendordata as $vendor){ ?>
                                     <option value="<?php echo $vendor['id']; ?>"><?php echo ucwords($vendor['name']); ?></option>
                                 <?php } ?>

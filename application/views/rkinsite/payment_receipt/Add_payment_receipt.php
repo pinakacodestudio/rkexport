@@ -56,7 +56,7 @@
                                 <div class="form-group" id="paymentreceiptno_div">
                                     <div class="col-md-12">								
                                         <label class="control-label" for="paymentreceiptno">Receipt No. <span class="mandatoryfield">*</span></label>
-                                        <input id="paymentreceiptno" class="form-control" name="paymentreceiptno" value="<?php if(isset($paymentreceiptdata)){ echo $paymentreceiptdata['paymentreceiptno']; }else if(isset($paymentreceiptno)){ echo $paymentreceiptno; }?>" type="text" readonly>
+                                        <input id="paymentreceiptno" class="form-control" name="paymentreceiptno" value="<?php if(isset($paymentreceiptdata)){ echo $paymentreceiptdata['paymentreceiptno']; }else if(isset($paymentreceiptno)){ echo $paymentreceiptno; }?>"  type="text" >
                                     </div>
                                 </div>
                             </div>

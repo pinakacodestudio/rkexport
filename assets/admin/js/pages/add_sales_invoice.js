@@ -26,6 +26,14 @@ function getcity() {
     }
 $(document).ready(function () {
   
+    $('#invoicedate').datepicker({
+        todayHighlight: true,
+        format: 'dd/mm/yyyy',
+        orientation: 'top',
+        autoclose: true,
+        todayBtn: "linked"
+    });
+
     $('#openingdate').datepicker({
         todayHighlight: true,
         format: 'dd/mm/yyyy',
@@ -491,6 +499,8 @@ function addnewcontect() {
 </div>';
     $("#addtarget").append(datahtml2);
 }
+
+
 function addnewextracharges() {
     var extrachargescount = $("#extrachargescount").val();
     extrachargescount++;
@@ -602,3 +612,198 @@ function removeProductdeteile(divid) {
                 Data</button>\
                 </div>\
             </div>\ */}
+
+function addnewinvoicetransaction() {
+
+    var rowcount = parseInt($(".countinvoice:last").attr("id").match(/\d+/)) + 1;
+    var datahtml = '<div class="countinvoice" id="countinvoice' + rowcount + '">\
+                    <div class="row m-n">\
+                        <div class="col-md-2">\
+                            <div class="form-group" id="invoice'+ rowcount + '_div">\
+                                <div class="col-sm-12">\
+                                    <select id="invoiceid'+ rowcount + '" name="invoiceid[]" class="selectpicker form-control invoiceid" data-live-search="true" data-select-on-tab="true" data-size="6">\
+                                        <option value="0">Select Invoice</option>\
+                                    </select>\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-2">\
+                            <div class="form-group" id="product'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <select id="product'+ rowcount + '" name="product[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">\
+                                        <option value="0">Select product</option>\
+                                    </select>\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-2">\
+                            <div class="form-group" id="invoiceamount'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <input type="text" id="invoiceamount'+ rowcount + '" class="form-control invoiceamount text-right" name="invoiceamount[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-1">\
+                            <div class="form-group" id="remainingamount'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <input type="text" id="remainingamount'+ rowcount + '" class="form-control text-right remainingamount" value="" >\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-1">\
+                            <div class="form-group" id="remainingamount'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <input type="text" id="remainingamount'+ rowcount + '" class="form-control text-right remainingamount" value="" >\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-1">\
+                            <div class="form-group" id="remainingamount'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <input type="text" id="remainingamount'+ rowcount + '" class="form-control text-right remainingamount" value="" >\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-1">\
+                            <div class="form-group" id="remainingamount'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <input type="text" id="remainingamount'+ rowcount + '" class="form-control text-right remainingamount" value="" >\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-2 pt-md">\
+                            <button type="button" class="btn btn-danger btn-raised remove_invoice_btn m-n" onclick="removetransaction('+ rowcount + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
+                            <button type="button" class="btn btn-primary btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
+                        </div>\
+                    </div>\
+                </div>';
+
+    $(".remove_invoice_btn:first").show();
+    $(".add_invoice_btn:last").hide();
+    $("#countinvoice" + (rowcount - 1)).after(datahtml);
+
+    $("#invoiceid" + rowcount).selectpicker("refresh");
+    
+    $("#product" + rowcount).selectpicker("refresh");
+
+  
+
+}
+
+function removetransaction(rowid) {
+
+    if ($('select[name="invoiceid[]"]').length != 1 && ACTION == 1 && $('#paymentreceipttransactionsid' + rowid).val() != null) {
+        var removepaymentreceipttransactionsid = $('#removepaymentreceipttransactionsid').val();
+        $('#removepaymentreceipttransactionsid').val(removepaymentreceipttransactionsid + ',' + $('#paymentreceipttransactionsid' + rowid).val());
+    }
+    $("#countinvoice" + rowid).remove();
+
+    $(".add_invoice_btn:last").show();
+    if ($(".remove_invoice_btn:visible").length == 1) {
+        $(".remove_invoice_btn:first").hide();
+    }
+
+    changenetamounttotal();
+}
+
+
+function addnewdoc() {
+
+    var rowcount = parseInt($(".countinvoiceb:last").attr("id").match(/\d+/)) + 1;
+    var datahtml = '<div class="countinvoiceb" id="countinvoiceb' + rowcount + '">\
+                    <div class="row m-n">\
+                        <div class="col-md-3">\
+                            <div class="form-group" id="invoiceamount'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <input type="text" id="invoiceamount'+ rowcount + '" class="form-control invoiceamount"  placeholder="Enter Document Name" name="invoiceamount[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-3 col-sm-3">\
+                          <div class="form-group" id="docfile' + rowcount + '">\
+                              <div class="col-sm-12 pr-xs pl-xs">\
+                                  <input type="hidden" id="isvaliddocfile' + rowcount + '" value="0">\
+                                  <input type="hidden" name="olddocfile[' + rowcount + ']" id="olddocfile' + rowcount + '" value="">\
+                                  <div class="input-group" id="fileupload' + rowcount + '">\
+                                      <span class="input-group-btn" style="padding: 0 0px 0px 0px;">\
+                                          <span class="btn btn-primary btn-raised btn-file">\
+                                          <i class="fa fa-upload"></i>\
+                                              <input type="file" name="olddocfile_' + rowcount + '" class="docfile" id="olddocfile_' + rowcount + '" accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),&apos;docfile' + rowcount + '&apos;)">\
+                                          </span>\
+                                      </span>\
+                                      <input type="text" readonly="" placeholder="Enter File" id="Filetextdocfile' + rowcount + '" class="form-control docfile" name="Filetextdocfile_' + rowcount + '" value="">\
+                                  </div>\
+                              </div>\
+                          </div>\
+                      </div>\
+                        <div class="col-md-2 pt-md">\
+                            <button type="button" class="btn btn-danger btn-raised remove_doc_btn m-n" onclick="removedoc('+ rowcount + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
+                            <button type="button" class="btn btn-primary btn-raised add_doc_btn m-n" onclick="addnewdoc()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
+                        </div>\
+                    </div>\
+                </div>';
+
+    $(".remove_doc_btn:first").show();
+    $(".add_doc_btn:last").hide();
+    $("#countinvoiceb" + (rowcount - 1)).after(datahtml);
+
+}
+function removedoc(rowid) {
+
+    
+    $("#countinvoiceb" + rowid).remove();
+
+    $(".add_doc_btn:last").show();
+    if ($(".remove_doc_btn:visible").length == 1) {
+        $(".remove_doc_btn:first").hide();
+    }
+
+    changenetamounttotal();
+}
+
+
+function addnewex() {
+
+    var rowcount = parseInt($(".countinvoicec:last").attr("id").match(/\d+/)) + 1;
+    var datahtml = '<div class="countinvoicec" id="countinvoicec' + rowcount + '">\
+                    <div class="row m-n">\
+                        <div class="col-md-5">\
+                            <div class="form-group" id="invoiceamount'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <select id="product'+ rowcount + '" name="product[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">\
+                                        <option value="0">Extra Charges</option>\
+                                    </select>\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-3 col-sm-5">\
+                          <div class="form-group" id="docfile' + rowcount + '">\
+                            <div class="col-md-12">\
+                                <input type="text" id="invoiceamount'+ rowcount + '" class="form-control invoiceamount"  placeholder="" name="invoiceamount[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">\
+                            </div>\
+                          </div>\
+                      </div>\
+                        <div class="col-md-3 pt-md">\
+                            <button type="button" class="btn btn-danger btn-raised remove_ex_btn m-n" onclick="removeex('+ rowcount + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
+                            <button type="button" class="btn btn-primary btn-raised add_ex_btn m-n" onclick="addnewex()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
+                        </div>\
+                    </div>\
+                </div>';
+
+    $(".remove_ex_btn:first").show();
+    $(".add_ex_btn:last").hide();
+    $("#countinvoicec" + (rowcount - 1)).after(datahtml);
+    $("#product" + rowcount).selectpicker("refresh");
+}
+function removeex(rowid) {
+
+    
+    $("#countinvoicec" + rowid).remove();
+
+    $(".add_ex_btn:last").show();
+    if ($(".remove_ex_btn:visible").length == 1) {
+        $(".remove_ex_btn:first").hide();
+    }
+
+
+}

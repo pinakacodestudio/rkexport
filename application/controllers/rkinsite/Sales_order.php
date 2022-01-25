@@ -21,21 +21,13 @@ class Sales_order extends Admin_Controller
         $this->viewData['title'] = "Sales Order";
         $this->viewData['module'] = "sales_order/sales_order";
 
-        
-
-        // $this->load->model('Channel_model', 'Channel');
-        // $this->viewData['channeldata'] = $this->Channel->getChannelList('notdisplayguestorvendorchannel');
-
         if ($this->viewData['submenuvisibility']['managelog'] == 1) {
             $this->general_model->addActionLog(4, 'Sales Order', 'View sales order.');
         }
 
-        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");			
         $this->admin_headerlib->add_javascript("Sales_order", "pages/sales_order.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
-
-
-
     }
     public function listing()
     {
@@ -111,7 +103,7 @@ class Sales_order extends Admin_Controller
         $this->viewData['VIEW_STATUS'] = "0";
 
         // $this->viewData['productcount'] = $this->Product->CountRecords();
-
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");	
         $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
         $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_bottom_javascripts("jquery-dropzone", "jquery-dropzone.js");

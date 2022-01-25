@@ -18,19 +18,19 @@
                         <form action="#" id="cancelledordersreportform" class="form-horizontal">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <?php /*
-                                    <div class="col-md-3 pl-n pr-sm">
+                                    <!-- <div class="col-md-3 pl-n pr-sm">
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <label for="countryid" class="control-label">Country</label>
                                                 <select id="countryid" name="countryid[]" class="selectpicker form-control" multiple data-actions-box="true" title="All Country" data-live-search="true" data-size="8">
-                                                    <?php foreach($countrydata as $countryrow){ ?>
-                                                        <option value="<?php echo $countryrow['coid']; ?>"><?php echo $countryrow['countryname']; ?></option>
-                                                    <?php } ?> 
+                                                    <?php // foreach($countrydata as $countryrow){ ?>
+                                                        <option value="<?php //echo $countryrow['coid']; ?>"><?php// echo $countryrow['countryname']; ?></option>
+                                                    <?php //} ?> 
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
+                                    <?php /*
                                     <div class="col-md-3 pl-sm pr-sm">
                                         <div class="form-group">
                                             <div class="col-md-12">
@@ -56,11 +56,13 @@
                                         </div>
                                     </div>
                                     */?>
-                                    <div class="col-md-3 pl-sm pr-sm">
+                                    <div class="col-md-3 pl-n pr-sm">
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <label for="memberid" class="control-label">Party</label>
-                                                <select id="memberid" name="memberid[]" class="selectpicker form-control" data-select-on-tab="true" data-size="8" data-live-search="true" title="All Member" multiple data-actions-box="true">
+                                                <label for="channelid" class="control-label">Select Party</label>
+                                                <select id="channelid" name="channelid" class="selectpicker form-control" data-size='8' data-live-search="true"> 
+                                                    <option value="0">Select Party</option>
+                                                                                     
                                                 </select>
                                             </div>
                                         </div>
@@ -85,15 +87,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-md-2 pl-n pr-xs">
-                                        <div class="form-group pt-xl">
-                                            <div class="col-md-12">
-                                                <label class="control-label"></label>
-                                                <a class="<?=applyfilterbtn_class;?>" href="javascript:void(0)" onclick="applyFilter()" title=<?=applyfilterbtn_title?>><?=applyfilterbtn_text;?></a>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <?php /*
@@ -110,7 +103,24 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-3 pl-sm pr-sm">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="memberid" class="control-label">Member</label>
+                                                <select id="memberid" name="memberid[]" class="selectpicker form-control" data-select-on-tab="true" data-size="8" data-live-search="true" title="All Member" multiple data-actions-box="true">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     */?>
+                                    <div class="col-md-2 pl-n pr-xs">
+                                        <div class="form-group pt-xl">
+                                            <div class="col-md-12">
+                                                <label class="control-label"></label>
+                                                <a class="<?=applyfilterbtn_class;?>" href="javascript:void(0)" onclick="applyFilter()" title=<?=applyfilterbtn_title?>><?=applyfilterbtn_text;?></a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div> 
                         </form>
@@ -136,14 +146,6 @@
                     <div class="panel-body no-padding">
                         <div class="table-responsive">
                             <table id="cancelledordersreporttable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                               <thead>
-                                    <tr>            
-                                      <th class="width8">Sr. No.</th> 
-                                      <th>Party</th>
-                                      <th>Total Cancel Order</th>
-                                      <th>Year</th>
-                                    </tr>
-                            </thead>
                             </table>
                         </div>
                     </div>
@@ -156,5 +158,4 @@
 
     </div> <!-- .container-fluid -->
 </div> <!-- #page-content -->
-
 

@@ -785,6 +785,8 @@ define("tbl_partycontact","partycontact");
 define("tbl_partydoc","partydoc");
 define("tbl_purchaseorders","purchaseorders");
 
+define("PRODUCTDISCOUNT","");
+
 //import time constant erro 
 define("REWARDSPOINTS","1");
 define("NOOFPRODUCT","1");

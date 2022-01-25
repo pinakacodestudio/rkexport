@@ -1154,10 +1154,12 @@
                      <div class="col-md-12 col-xs-12">
                         <?php if (!empty($partydata)) { ?>
                         <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
+                        <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & PRINT" class="btn btn-primary btn-raised">
                         <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & NEW" class="btn btn-primary btn-raised">
                         <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
                         <?php } else { ?>
                         <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
+                        <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & PRINT" class="btn btn-primary btn-raised">
                         <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & NEW" class="btn btn-primary btn-raised">
                         <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
                         <?php } ?>
