@@ -142,17 +142,17 @@
                                  <div class="row">
                                     <div class="col-md-2 pl-sm pr-sm visible-md visible-lg">
                                        <div class="form-group" id="firstname_div">
-                                          <label for="firstname" class="col-md-12 control-label tal">Category <span > *</span></label>
+                                          <label for="firstname" class="col-md-12 control-label tal">Category <span class="mandatoryfield" > *</span></label>
                                        </div>
                                     </div>
                                     <div class="col-md-2 pl-sm pr-sm visible-md visible-lg">
                                        <div class="form-group" id="lastname_div">
-                                          <label for="lastname" class="col-md-12 control-label tal">product <span > *</span></label>
+                                          <label for="lastname" class="col-md-12 control-label tal">product <span class="mandatoryfield"> *</span></label>
                                        </div>
                                     </div>
                                     <div class="col-md-2 pl-sm pr-sm visible-md visible-lg">
                                        <div class="form-group" id="contactno_div">
-                                          <label for="contactno" class="col-md-12 control-label tal">price <span > *</span></label>
+                                          <label for="contactno" class="col-md-12 control-label tal">price <span class="mandatoryfield"> *</span></label>
                                        </div>
                                     </div>
                                     <div class="col-md-1 pl-sm pr-sm visible-md visible-lg">
@@ -172,83 +172,29 @@
                                     </div>
                                     <div class="col-md-2 pl-sm pr-sm visible-md visible-lg">
                                        <div class="form-group" id="email_div">
-                                          <label for="email" class="col-md-12 control-label tal">Amount <span >*</span></label>
+                                          <label for="email" class="col-md-12 control-label tal">Amount <span class="mandatoryfield">*</span></label>
                                        </div>
                                     </div>
                                     <div class="clearfix"></div>
                                     <?php if(isset($paymentreceiptdata) && !empty($receipttransactionsdata)) { ?>
-                                    <?php /* for ($i=0; $i < count($receipttransactionsdata); $i++) { ?>
-                                    <div class="countinvoice" id="countinvoice<?=$i+1?>">
-                                       <input type="hidden" name="paymentreceipttransactionsid[]" value="<?=$receipttransactionsdata[$i]['id']?>" id="paymentreceipttransactionsid<?=$i+1?>">
-                                       <div class="row m-n">
-                                          <div class="col-md-3">
-                                             <div class="form-group" id="invoice<?=$i+1?>_div">
-                                                <div class="col-md-12">
-                                                   <select id="invoiceid<?=$i+1?>" name="invoiceid[]" class="selectpicker form-control invoiceid" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                      <option value="0">Select Invoice</option>
-                                                   </select>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="col-md-2">
-                                             <div class="form-group" id="amountdue<?=$i+1?>_div">
-                                                <div class="col-md-12">								
-                                                   <input type="text" id="amountdue<?=$i+1?>" class="form-control text-right amountdue" value="" readonly>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="col-md-2">
-                                             <div class="form-group" id="invoiceamount<?=$i+1?>_div">
-                                                <div class="col-md-12">								
-                                                   <input type="text" id="invoiceamount<?=$i+1?>" class="form-control text-right invoiceamount" name="invoiceamount[]" value="<?php echo number_format($receipttransactionsdata[$i]['amount'],2,'.',''); ?>" onkeypress="return decimal_number_validation(event, this.value, 10)">
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="col-md-2">
-                                             <div class="form-group" id="remainingamount<?=$i+1?>_div">
-                                                <div class="col-md-12">								
-                                                   <input type="text" id="remainingamount<?=$i+1?>" class="form-control text-right remainingamount" value="" readonly>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="col-md-1 pt-md">
-                                             <?php if($i==0){?>
-                                             <?php if(count($receipttransactionsdata)>1){ ?>
-                                             <button type="button" class="btn btn-default btn-raised remove_invoice_btn m-n" onclick="removetransaction(1)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
-                                             <?php }else { ?>
-                                             <button type="button" class="btn btn-default btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
-                                             <?php } ?>
-                                             <? }else if($i!=0) { ?>
-                                             <button type="button" class="btn btn-default btn-raised remove_invoice_btn m-n" onclick="removetransaction(<?=$i+1?>)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
-                                             <? } ?>
-                                             <button type="button" class="btn btn-default btn-raised btn-sm remove_invoice_btn m-n" onclick="removetransaction(<?=$i+1?>)"  style="padding: 3px 8px;display:none;"><i class="fa fa-minus"></i></button>
-                                             <button type="button" class="btn btn-default btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button> 
-                                          </div>
-                                       </div>
-                                       <script>
-                                          $(document).ready(function() {
-                                              INVOICEID_ARR.push(<?=$receipttransactionsdata[$i]['invoiceid']?>);
-                                          });
-                                       </script>
-                                    </div>
-                                    <?php } */?>
+                                   
                                     <?php }else{ ?>
                                     <div class="countinvoice" id="countinvoice1">
                                        <div class="row m-n">
                                           <div class="col-md-2">
-                                             <div class="form-group" id="invoice1_div">
+                                             <div class="form-group" id="category1_div">
                                                 <div class="col-md-12">
-                                                   <select id="invoiceid1" name="invoiceid[]" class="selectpicker form-control invoiceid" data-live-search="true" data-select-on-tab="true" data-size="6">
+                                                   <select id="category1" name="categoryid[]" class="selectpicker form-control categoryid" data-live-search="true" data-select-on-tab="true" data-size="6">
                                                       <option value="0">Select Category </option>
                                                    </select>
                                                 </div>
                                              </div>
                                           </div>
                                           <div class="col-md-2">
-                                             <div class="form-group" id="amountdue1_div">
+                                             <div class="form-group" id="product1_div">
                                                 <div class="col-md-12">
-                                                   <select id="invoiceid1" name="invoiceid[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                      <option value="0">Select Product  </option>
+                                                   <select id="product1" name="product[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">
+                                                      <option value="0">Select Product</option>
                                                    </select>
                                                 </div>
                                              </div>
@@ -263,7 +209,14 @@
                                           <div class="col-md-1">
                                              <div class="form-group" id="remainingamount1_div">
                                                 <div class="col-md-12">								
-                                                   <input type="text" id="remainingamount1" class="form-control text-right remainingamount" value="" >
+                                                   <input type="text" id="remainingamount1" class="form-control text-right remainingamount" value="" onkeypress="return isNumber(event, this.value, 10)">
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="col-md-1">
+                                             <div class="form-group" id="productdiscount1_div">
+                                                <div class="col-md-12">								
+                                                   <input type="text" id="productdiscount1" class="form-control text-right productdiscount" value="" onkeypress="return decimal_number_validation(event, this.value, 10)" >
                                                 </div>
                                              </div>
                                           </div>
@@ -275,16 +228,9 @@
                                              </div>
                                           </div>
                                           <div class="col-md-1">
-                                             <div class="form-group" id="remainingamount1_div">
+                                             <div class="form-group" id="productamount1_div">
                                                 <div class="col-md-12">								
-                                                   <input type="text" id="remainingamount1" class="form-control text-right remainingamount" value="" >
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="col-md-1">
-                                             <div class="form-group" id="remainingamount1_div">
-                                                <div class="col-md-12">								
-                                                   <input type="text" id="remainingamount1" class="form-control text-right remainingamount" value="" >
+                                                   <input type="text" id="productamount1" class="form-control text-right remainingamount" value="" >
                                                 </div>
                                              </div>
                                           </div>
@@ -299,177 +245,74 @@
                               </div>
                            </div>
                         </div>
-                        <div class="row">
-                           <div class="col-sm-4">
-                              <div class="form-group" id="quotationdate_div">
-                                 <div class="col-sm-12">
-                                    <label for="quotationdate" class="control-label">Select Approx Delivery Date <span class="mandatoryfield">*</span></label>
-                                    <div class="input-group">
-                                       <input id="quotationdate" type="text" name="quotationdate" value="" class="form-control date" readonly>
-                                       <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-sm-4">
-                              <div class="form-group" id="paymenttype_div">
-                                 <div class="col-sm-12">
-                                    <input type="hidden" name="oldpaymenttype" id="oldpaymenttype" value="">
-                                    <label for="paymenttypeid" class="control-label">Discount(%) <span class="mandatoryfield">*</span></label>
-                                    <input id="discount" type="text" name="discount" value="" class="form-control" >
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-sm-4">
-                              <div class="form-group" id="paymenttype_div">
-                                 <div class="col-sm-12">
-                                    <input type="hidden" name="oldpaymenttype" id="oldpaymenttype" value="">
-                                    <label for="paymenttypeid" class="control-label">Discount Amount <span class="mandatoryfield">*</span></label>
-                                    <input id="discount" type="text" name="discountamount" value="" class="form-control" >
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-12 p-n">
-                              <div class="col-md-3">
-                                 <div class="form-group" id="remarks_div">
-                                    <div class="col-sm-12 pr-n">
-                                       <label for="remarks" class="control-label">Remarks</label>
-                                       <textarea id="remarks" name="remarks" class="form-control"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['remarks']; }?></textarea>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-md-9 pull-right p-n">
-                                 <div class="col-md-6 pr-xs">
-                                 </div>
-                                 <div class="col-md-6 pl-xs">
-                                    <input type="hidden" name="removeextrachargemappingid" id="removeextrachargemappingid">
-                                    <table id="example" class="table table-bordered table-striped" cellspacing="0" width="100%" style="border: 1px solid #e8e8e8;">
-                                       <tbody>
-                                          <tr>
-                                             <th colspan="2" class="text-center">Quotation Summary (<?=CURRENCY_CODE?>)</th>
-                                          </tr>
-                                          <tr>
-                                             <th>Total Of Product</th>
-                                             <td class="text-right" width="30%">
-                                                <span id="grossamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; }else{ echo "0.00"; }?></span>
-                                                <input type="hidden" id="inputgrossamount" name="grossamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; } ?>">
-                                             </td>
-                                          </tr>
-                                          <tr id="discountrow" style="display: none;">
-                                             <th>Discount (<span id="discountpercentage"><?php if(!empty($quotationdata['ordquotationdetailrdetail'])){ echo number_format($quotationdata['quotationdetail']['globaldiscount']*100/$quotationdata['quotationdetail']['quotationamount'],2); }else{ echo "0"; }?></span>%)
-                                             </th>
-                                             <td class="text-right">
-                                                <span id="discountamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['globaldiscount']; }else{ echo "0.00"; }?></span>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th>Round Off</th>
-                                             <td class="text-right">
-                                                <span id="roundoff">0.00</span>
-                                                <input type="hidden" id="inputroundoff" name="inputroundoff" value="0.00">
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th>Amount Payable</th>
-                                             <th class="text-right">
-                                                <span id="netamount" name="netamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }else{ echo "0.00"; } ?></span>
-                                                <input type="hidden" id="inputnetamount" name="netamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }?>">
-                                             </th>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
+                        
+
                      </div>
                   </div>
                   <div class="row">
                      <div class="col-sm-4">
-                        <div class="form-group" id="quotationdate_div">
+                        <div class="form-group" id="delivery_div">
                            <div class="col-sm-12">
-                              <label for="quotationdate" class="control-label">Container Supplay Date <span class="mandatoryfield">*</span></label>
+                              <label for="deliverydate" class="control-label">Container Supplay Date <span class="mandatoryfield">*</span></label>
                               <div class="input-group">
-                                 <input id="quotationdate" type="text" name="quotationdate" value="" class="form-control date" readonly>
+                                 <input id="deliverydate" type="text" name="deliverydate" value="" class="form-control date" readonly>
                                  <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
                               </div>
                            </div>
                         </div>
                      </div>
                      <div class="col-sm-4">
-                        <div class="form-group" id="paymenttype_div">
+                        <div class="form-group" id="discount_div">
                            <div class="col-sm-12">
                               <input type="hidden" name="oldpaymenttype" id="oldpaymenttype" value="">
-                              <label for="paymenttypeid" class="control-label">Discount(%) <span class="mandatoryfield">*</span></label>
+                              <label for="discount" class="control-label">Discount(%) <span class="mandatoryfield">*</span></label>
                               <input id="discount" type="text" name="discount" value="" class="form-control" >
                            </div>
                         </div>
                      </div>
                      <div class="col-sm-4">
-                        <div class="form-group" id="paymenttype_div">
+                        <div class="form-group" id="discountamount_div">
                            <div class="col-sm-12">
                               <label for="paymenttypeid" class="control-label">Discount Amount <span class="mandatoryfield">*</span></label>
-                              <input id="discount" type="text" name="discountamount" value="" class="form-control" >
+                              <input id="discountamount" type="text" name="discountamount" value="" class="form-control" >
                            </div>
                         </div>
                      </div>
-                     <!-- <div class="col-sm-4" id="addnewextracharges">
-                        <div class="form-group">
-                           <div class="col-sm-5">
-                              <label for="paymenttypeid" class="control-label">Extra charges <span class="mandatoryfield">*</span></label>
-                              <input id="discount" type="text" name="discountamount" value="" class="form-control" >
-                           </div>
-                           <div class="col-sm-4">
-                              <input id="discount" type="text" name="discountamount" value="" class="form-control" style="margin-top: 30px;">
-                           </div>
-                           <div class="col-md-2 addrowbutton pt-md pr-xs" style="margin-top: 17px;">
-                              <button type="button" class="btn btn-primary btn-raised remove_btn m-n" onclick="addnewextracharges()" style="padding: 3px 8px; "><i class="fa fa-plus"></i></button>
-                           </div>
-                        </div>
-                     </div> -->
+                
 
-
-                     <div class="col-md-6">
+               <div class="col-md-6">
                   <div class="panel panel-default border-panel" id="commonpanel">
-                   
                      <div class="panel-body">
                         <div class="row" id="adddocrow">
                            <div class="clearfix"></div>
                            <?php if(isset($paymentreceiptdata) && !empty($receipttransactionsdata)) { ?>
-                             
-                              <?php }else{ ?>
-                              <div class="countinvoicec" id="countinvoicec1">
-                                 <div class="row m-n">
-                                    
-                                    <div class="col-md-5">
-                                       <div class="form-group" id="invoiceamount1_div">
-                                          <div class="col-md-12">								
-                                             <select id="product'+ rowcount + '" name="product[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                <option value="0">Extra Charges</option>
-                                             </select>
-                                          </div>
+                           <?php }else{ ?>
+                           <div class="countinvoicec" id="countinvoicec1">
+                              <div class="row m-n">
+                                 <div class="col-md-5">
+                                    <div class="form-group" id="invoiceamount1_div">
+                                       <div class="col-md-12">								
+                                          <select id="product'+ rowcount + '" name="product[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">
+                                             <option value="0">Extra Charges</option>
+                                          </select>
                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3">
-                                     
-                                       <div class="col-md-12">
-                                          <input type="text" id="invoiceamount'+ rowcount + '" class="form-control invoiceamount"  placeholder="" name="invoiceamount[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">
-                                       </div>
-                                   
-                                    </div>
-                                   
-                                    <div class="col-md-3 pt-md">
-                                       <button type="button" class="btn btn-danger btn-raised  remove_ex_btn m-n" onclick="removeex(1)" style="padding: 3px 8px;display:none;"><i class="fa fa-minus"></i></button>
-                                       <button type="button" class="btn btn-primary btn-raised add_ex_btn m-n" onclick="addnewex()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
                                     </div>
                                  </div>
+                                 <div class="col-md-3 col-sm-3">
+                                    
+                                    <div class="col-md-12">
+                                       <input type="text" id="invoiceamount'+ rowcount + '" class="form-control invoiceamount"  placeholder="" name="invoiceamount[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">
+                                    </div>
+                                 
+                                 </div>
+                                 
+                                 <div class="col-md-3 pt-md">
+                                    <button type="button" class="btn btn-danger btn-raised  remove_ex_btn m-n" onclick="removeex(1)" style="padding: 3px 8px;display:none;"><i class="fa fa-minus"></i></button>
+                                    <button type="button" class="btn btn-primary btn-raised add_ex_btn m-n" onclick="addnewex()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
+                                 </div>
                               </div>
-                              <?php } ?>
-
-
-
-
-
+                           </div>
+                           <?php } ?>
                         </div>
                      </div>
                   </div>
@@ -550,7 +393,7 @@
                                  <div class="col-md-5">
                                     <div class="form-group">
                                        <div class="col-md-12 pl-xs pr-xs">
-                                          <label class="control-label" style="text-align: left;">Document Name <span class="mandatoryfield">*</span></label>
+                                          <label class="control-label" style="text-align:left;">Document Name <span class="mandatoryfield">*</span></label>
                                        </div>
                                     </div>
                                  </div>
@@ -563,74 +406,17 @@
                                  </div>
                               </div>
                            </div>
-                          
-
-
                            <div class="clearfix"></div>
-                              <?php if(isset($paymentreceiptdata) && !empty($receipttransactionsdata)) { ?>
-                              <?php /* for ($i=0; $i < count($receipttransactionsdata); $i++) { ?>
-                              <div class="countinvoice" id="countinvoice<?=$i+1?>">
-                                 <input type="hidden" name="paymentreceipttransactionsid[]" value="<?=$receipttransactionsdata[$i]['id']?>" id="paymentreceipttransactionsid<?=$i+1?>">
-                                 <div class="row m-n">
-                                    <div class="col-md-3">
-                                       <div class="form-group" id="invoice<?=$i+1?>_div">
-                                          <div class="col-md-12">
-                                             <select id="invoiceid<?=$i+1?>" name="invoiceid[]" class="selectpicker form-control invoiceid" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                <option value="0">Select Invoice</option>
-                                             </select>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                       <div class="form-group" id="amountdue<?=$i+1?>_div">
-                                          <div class="col-md-12">								
-                                             <input type="text" id="amountdue<?=$i+1?>" class="form-control text-right amountdue" value="" readonly>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                       <div class="form-group" id="invoiceamount<?=$i+1?>_div">
-                                          <div class="col-md-12">								
-                                             <input type="text" id="invoiceamount<?=$i+1?>" class="form-control text-right invoiceamount" name="invoiceamount[]" value="<?php echo number_format($receipttransactionsdata[$i]['amount'],2,'.',''); ?>" onkeypress="return decimal_number_validation(event, this.value, 10)">
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                       <div class="form-group" id="remainingamount<?=$i+1?>_div">
-                                          <div class="col-md-12">								
-                                             <input type="text" id="remainingamount<?=$i+1?>" class="form-control text-right remainingamount" value="" readonly>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-1 pt-md">
-                                       <?php if($i==0){?>
-                                       <?php if(count($receipttransactionsdata)>1){ ?>
-                                       <button type="button" class="btn btn-default btn-raised remove_invoice_btn m-n" onclick="removetransaction(1)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
-                                       <?php }else { ?>
-                                       <button type="button" class="btn btn-default btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
-                                       <?php } ?>
-                                       <? }else if($i!=0) { ?>
-                                       <button type="button" class="btn btn-default btn-raised remove_invoice_btn m-n" onclick="removetransaction(<?=$i+1?>)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
-                                       <? } ?>
-                                       <button type="button" class="btn btn-default btn-raised btn-sm remove_invoice_btn m-n" onclick="removetransaction(<?=$i+1?>)"  style="padding: 3px 8px;display:none;"><i class="fa fa-minus"></i></button>
-                                       <button type="button" class="btn btn-default btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button> 
-                                    </div>
-                                 </div>
-                                 <script>
-                                    $(document).ready(function() {
-                                        INVOICEID_ARR.push(<?=$receipttransactionsdata[$i]['invoiceid']?>);
-                                    });
-                                 </script>
-                              </div>
-                              <?php } */?>
+                              <?php if(isset($paymentreceiptdata) && !empty($receipttransactionsdata)){?>
+                             
                               <?php }else{ ?>
                               <div class="countinvoiceb" id="countinvoiceb1">
                                  <div class="row m-n">
                                     
                                     <div class="col-md-3">
-                                       <div class="form-group" id="invoiceamount1_div">
+                                       <div class="form-group" id="documentname1_div">
                                           <div class="col-md-12">								
-                                             <input type="text" id="invoiceamount1" class="form-control text-right invoiceamount" name="invoiceamount[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">
+                                             <input type="text" id="documentname1" placeholder="Enter Document Name" class="form-control invoiceamount" name="documentname[]" value="" >
                                           </div>
                                        </div>
                                     </div>

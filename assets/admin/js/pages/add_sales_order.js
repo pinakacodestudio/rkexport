@@ -94,7 +94,6 @@ function validdocumentfile(obj, element) {
             break;
     }
 }
-
 function include(filename, onload) {
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
@@ -148,119 +147,93 @@ function resetdata() {
 
 function checkvalidation(addtype = 0) {
 
-    var websitename = $("#websitename").val().trim();
-    var companyid = $("#companyid").val().trim();
-    var partycode = $("#partycode").val().trim();
-    var partytypeid = $("#partytypeid").val().trim();
-    var openingdate = $("#openingdate").val().trim();
-    var openingamount = $("#openingamount").val().trim();
-    var password = $("#password").val().trim();
-    // var checkbox4 = $("#checkbox4").val().trim();
+    var party = $("#party").val().trim();
+    var deliverydate = $("#deliverydate").val().trim();
+    var discount = $("#discount").val().trim();
+    var amount = $("#amount").val().trim();
 
-    if ($('#checkbox4').is(":checked")) {
-        checkbox4 = 3;
-    } else {
-        checkbox4 = 0;
-    }
+  
 
-
-    var isvalidwebsitename = isvalidcompanyid = isvalidpartycode = isvalidpartytypeid = isvalidopeningdate = isvalidopeningamount = isvalidpassword = 0;
+    var isvalidparty = isvaliddeliverydate = 0;
 
 
     PNotify.removeAll();
-    if (websitename == '') {
-        $("#websitename_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter website name !', styling: 'fontawesome', delay: '3000', type: 'error' });
+
+    if (party == '' || deliverydate == 0) {
+        $("#party_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please select party !', styling: 'fontawesome', delay: '3000', type: 'error' });
     } else {
-        $("#websitename_div").removeClass("has-error is-focused");
-        isvalidwebsitename = 1;
+        $("#party_div").removeClass("has-error is-focused");
+        isvalidparty = 1;
     }
 
-    if (companyid == '' || companyid == 0) {
-        $("#companyid_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please select company!', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#companyid_div").removeClass("has-error is-focused");
-        isvalidcompanyid = 1;
-    }
+  
+    var c=1;
+    var firstinvoiceid = $('.countinvoice:first').attr('id').match(/\d+/);
+    $('.countinvoice').each(function(){
+        var id = $(this).attr('id').match(/\d+/);
+       
+        if($("#invoiceid"+id).val() > 0 || $("#invoiceid"+id).val() > 0 || $("#invoiceid"+id).val() != "" || $("#qty"+id).val() == 0 || parseInt(id)==parseInt(firstinvoiceid)){
+            if($("#invoiceid"+id).val() == 0){
+                $("#invoice"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(c)+' category !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidinvoiceid = 0;
+            }else {
+                $("#invoice"+id+"_div").removeClass("has-error is-focused");
+            }
 
-    if (gst == '') {
-        $("#gst_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter GST !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else if (gst.length < 10) {
-        $("#gst_div").addClass("has-error is-focused");
-        new PNotify({ title: 'require minimum 14 characters !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#gst_div").removeClass("has-error is-focused");
-        isvalidgst = 1;
-    }
+            if($("#invoiceamount"+id).val() == 0){
+                $("#invoiceamount"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(c)+' price !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidqty = 0;
+            }else {
+                $("#invoiceamount"+id+"_div").removeClass("has-error is-focused");
+            }
 
-    if (partycode == '') {
-        $("#partycode_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter party code !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else if (partycode.length < 2) {
-        $("#partycode_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Party code require minimum 2 characters !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#partycode_div").removeClass("has-error is-focused");
-        isvalidpartycode = 1;
-    }
-
-    if (partytypeid == '' || partytypeid == 0) {
-        $("#partytypeid_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter party type !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#partytypeid_div").removeClass("has-error is-focused");
-        isvalidpartytypeid = 1;
-    }
-
-
-
-    if (pan == 0) {
-        $("#partytype_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter pan !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#partytype_div").removeClass("has-error is-focused");
-        isvalidpan = 1;
-    }
-
-    if (email == '') {
-        $("#email_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter email !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    }
-
-    if (openingdate == '') {
-        $("#openingdate_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter opening date !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#openingdate_div").removeClass("has-error is-focused");
-        isvalidopeningdate = 1;
-    }
-
-    if (openingamount == '') {
-        $("#openingamount_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter opening amount !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#openingamount_div").removeClass("has-error is-focused");
-        isvalidopeningamount = 1;
-    }
-    isvalidpassword = 1;
-
-    if (checkbox4 == 3) {
-        isvalidpassword = 0;
-        if (password == '') {
-            $("#password_div").addClass("has-error is-focused");
-            new PNotify({ title: 'Please enter password !', styling: 'fontawesome', delay: '3000', type: 'error' });
-        } else {
-            $("#password_div").removeClass("has-error is-focused");
-            isvalidpassword = 1;
+            if($("#productamount"+id).val() == 0){
+                $("#productamount"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(c)+' product amount !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidqty = 0;
+            }else {
+                $("#productamount"+id+"_div").removeClass("has-error is-focused");
+            }
+          
+        } else{
+            $("#invoice"+id+"_div").removeClass("has-error is-focused");
+            $("#price"+id+"_div").removeClass("has-error is-focused");
+            $("#invoiceprice"+id+"_div").removeClass("has-error is-focused");
+            $("#qty"+id+"_div").removeClass("has-error is-focused");
         }
+        c++;
+    });
+
+    if (deliverydate == '' || deliverydate == 0) {
+        $("#deliverydate_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please select delivery date !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    } else {
+        $("#deliverydate_div").removeClass("has-error is-focused");
+        isvaliddeliverydate = 1;
     }
 
+    if (discount == '') {
+        $("#discount_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please select delivery date !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    } else {
+        $("#discount_div").removeClass("has-error is-focused");
+        isvaliddeliverydate = 1;
+    }
+
+    if (amount == '') {
+        $("#amount_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please select amount !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    } else {
+        $("#amount_div").removeClass("has-error is-focused");
+        isvaliddeliverydate = 1;
+    }
 
 
     var c = 1;
-    if (isvalidwebsitename && isvalidpartycode && isvalidpartytypeid && isvalidcompanyid && isvalidopeningamount && isvalidpassword == 1) {
+    if (isvalidparty && isvaliddeliverydate == 1) {
         var formData = new FormData($('#party-form')[0]);
         if (ACTION == 0) {
             var uurl = SITE_URL + "party/party-add";
@@ -401,7 +374,6 @@ function addcontectfield(id, countcontactno) {
     $(".addcontectfilelddata" + id + "").after(datahtml);
 
 }
-
 function removecontect(divid) {
     var countcontactno = $("#countcontactno").val();
     countcontactno++;
@@ -414,7 +386,6 @@ function removecontect(divid) {
         $(".remove_btn:first").hide();
     }
 }
-
 function addnewcontect() {
     var cloopcount2 = $("#cloopcount").val();
     cloopcount2++;
@@ -544,7 +515,6 @@ function addnewproductdetails() {
 </div>';
     $("#addtarget").append(datahtml2);
 }
-
 function removeDocument(divid) {
     $("#countdocuments" + divid).remove();
     $(".add_btn:last").show();
@@ -559,18 +529,6 @@ function removeProductdeteile(divid) {
         $(".remove_btn:first").hide();
     }
 }
-
-{/* <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
-                <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion(\'contectrowdelete_'+ cloopcount2 + '\')" class="btn-danger">Remove</button>\
-                <div class="form-group" style="float:left; margin:10px 19px 0px 5px;">\
-                <button type="button" class="addpro btn-primary" onclick="addnewcontect()">Add\
-                Data</button>\
-                </div>\
-            </div>\ */}
-
-           
-            
-
 function addnewinvoicetransaction() {
 
     var rowcount = parseInt($(".countinvoice:last").attr("id").match(/\d+/)) + 1;
@@ -604,7 +562,7 @@ function addnewinvoicetransaction() {
                         <div class="col-md-2">\
                             <div class="form-group" id="remainingamount'+ rowcount + '_div">\
                                 <div class="col-md-12">\
-                                    <input type="text" id="remainingamount'+ rowcount + '" class="form-control text-right remainingamount" value="" >\
+                                    <input type="text" id="remainingamount'+ rowcount + '" class="form-control text-right remainingamount" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">\
                                 </div>\
                             </div>\
                         </div>\

@@ -37,9 +37,6 @@
                                         <label class="control-label" for="Partyid">Select Party <span class="mandatoryfield">*</span></label>
                                         <select id="Partyid" name="Partyid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="6" <?php if(isset($paymentdata)){ echo "disabled"; }?>>
                                             <option value="0">Select Party</option>
-                                            <?php foreach($Partydata as $Party){ ?>
-                                                <option value="<?php echo $Party['id']; ?>" <?php if(isset($paymentdata)){ if($paymentdata['Partyid']==$Party['id']){ echo "selected"; }} ?>><?php echo ucwords($Party['name']); ?></option>
-                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -53,18 +50,18 @@
                                 </div>
                             </div> -->
                             <div class="col-md-4">
-                                <div class="form-group" id="paymentreceiptno_div">
+                                <div class="form-group" id="purchaseno_div">
                                     <div class="col-md-12">								
-                                        <label class="control-label" for="paymentreceiptno">Purchase No. <span class="mandatoryfield">*</span></label>
-                                        <input id="paymentreceiptno" class="form-control" name="paymentreceiptno" value="<?php if(isset($paymentdata)){ echo $paymentdata['paymentreceiptno']; }else if(isset($paymentreceiptno)){ echo $paymentreceiptno; }?>" type="text" readonly>
+                                        <label class="control-label" for="purchaseno">Purchase No. <span class="mandatoryfield">*</span></label>
+                                        <input id="purchaseno" class="form-control" name="purchaseno" value="<?php if(isset($paymentdata)){ echo $paymentdata['purchaseno']; }else if(isset($purchaseno)){ echo $purchaseno; }?>" type="text" readonly>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group" id="paymentreceiptno_div">
+                                <div class="form-group" id="remarks_div">
                                     <div class="col-md-12">								
-                                        <label class="control-label" for="paymentreceiptno">Remarks<span class="mandatoryfield">*</span></label>
-                                        <input id="paymentreceiptno" class="form-control" name="paymentreceiptno" value="" type="text" >
+                                        <label class="control-label" for="remarks">Remarks</label>
+                                        <input id="remarks" class="form-control" name="remarks" value="" type="text" >
                                     </div>
                                 </div>
                             </div>

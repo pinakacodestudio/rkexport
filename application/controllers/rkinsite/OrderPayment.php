@@ -15,10 +15,6 @@ class OrderPayment extends Admin_Controller {
 		$this->viewData['title'] = "Order Payment";
 		$this->viewData['module'] = "orderpayment/Payment";
 
-        // $this->viewData['vendordata'] = $this->Vendor->getVendorByPayment();
-
-        // $this->load->model('Cash_or_bank_model', 'Cash_or_bank');
-        // $this->viewData['bankdata'] = $this->Cash_or_bank->getBankAccountsByMember(0);
 
         if($this->viewData['submenuvisibility']['managelog'] == 1){
             $this->general_model->addActionLog(4,'Order Payment','View payment.');
@@ -30,9 +26,6 @@ class OrderPayment extends Admin_Controller {
     }
     public function listing() {
         $list = $this->Order_Payment->get_datatables();
-
-        // $this->load->model('Channel_model', 'Channel');
-        // $channeldata = $this->Channel->getChannelList('onlyvendor');
 
         $data = array();
 		$counter = $_POST['start'];
@@ -121,13 +114,6 @@ class OrderPayment extends Admin_Controller {
 		$this->checkAdminAccessModule('submenu','add',$this->viewData['submenuvisibility']);
 		$this->viewData['title'] = "Add Order Payment";
 		$this->viewData['module'] = "orderpayment/Add_payment";
-
-        // $this->viewData['vendordata'] = $this->Vendor->getActiveVendorData('withcodeormobile');
-
-        // $this->load->model('Cash_or_bank_model', 'Cash_or_bank');
-        // $this->viewData['bankdata'] = $this->Cash_or_bank->getBankAccountsByMember(0);
-
-        // $this->viewData['paymentreceiptno'] = $this->Order_Payment->generatePaymentReceiptNo();
 
         $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");			
         $this->admin_headerlib->add_javascript("Add_payment", "pages/add_order_payment.js");

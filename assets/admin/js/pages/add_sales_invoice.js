@@ -26,6 +26,14 @@ function getcity() {
     }
 $(document).ready(function () {
   
+
+    $("#productdiscount1").on('keyup', function(e) {
+        var val = $(this).val();
+        if (val > 100) {
+            $('#productdiscount1').val("100.00");
+        }
+    });
+
     $('#invoicedate').datepicker({
         todayHighlight: true,
         format: 'dd/mm/yyyy',
@@ -50,6 +58,16 @@ $(document).ready(function () {
             orientation: "top left",
             endDate: dateofbirth,
             clearBtn: true,
+        });
+    });
+
+    $('body').on('focus', ".pc100", function () {
+       
+        $(this).on('keyup', function(e) {
+            var val = $(this).val();
+            if (val > 100) {
+                $(this).val("100.00");
+            }
         });
     });
 
@@ -152,120 +170,118 @@ function resetdata() {
 }
 
 function checkvalidation(addtype = 0) {
-
-    var websitename = $("#websitename").val().trim();
-    var companyid = $("#companyid").val().trim();
-    var partycode = $("#partycode").val().trim();
-    var partytypeid = $("#partytypeid").val().trim();
-    var openingdate = $("#openingdate").val().trim();
-    var openingamount = $("#openingamount").val().trim();
-    var password = $("#password").val().trim();
-    // var checkbox4 = $("#checkbox4").val().trim();
-
-    if ($('#checkbox4').is(":checked")) {
-        checkbox4 = 3;
-    } else {
-        checkbox4 = 0;
-    }
-
-
-    var isvalidwebsitename = isvalidcompanyid = isvalidpartycode = isvalidpartytypeid = isvalidopeningdate = isvalidopeningamount = isvalidpassword = 0;
-
+    var party = $("#party").val().trim();
+    var discount = $("#discount").val().trim();
+    var deliverydate = $("#deliverydate").val().trim();
+    var discountamount = $("#discountamount").val().trim();
+    
+    var isvalidwebsitename  = isvalidcategory = isvalidproduct = isvalidproductamount = isvaliddocumentname = isvaliddocumentname = 0;
 
     PNotify.removeAll();
-    if (websitename == '') {
-        $("#websitename_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter website name !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    if (party == '' || party == 0) {
+        $("#party_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please select party name !', styling: 'fontawesome', delay: '3000', type: 'error' });
     } else {
-        $("#websitename_div").removeClass("has-error is-focused");
+        $("#party_div").removeClass("has-error is-focused");
         isvalidwebsitename = 1;
     }
 
-    if (companyid == '' || companyid == 0) {
-        $("#companyid_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please select company!', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#companyid_div").removeClass("has-error is-focused");
-        isvalidcompanyid = 1;
-    }
+    var c=1;
+    $('.countinvoice').each(function(){
+        var id = $(this).attr('id').match(/\d+/);
+        if($("#category"+id).val() > 0 || $("#invoiceid"+id).val() > 0 || $("#invoiceid"+id).val() != "" ){
+            if($("#category"+id).val() == 0){
+                $("#category"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(c)+' category !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidcategory = 0;
+            }else {
+                $("#category"+id+"_div").removeClass("has-error is-focused");
+            }
 
-    if (gst == '') {
-        $("#gst_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter GST !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else if (gst.length < 10) {
-        $("#gst_div").addClass("has-error is-focused");
-        new PNotify({ title: 'require minimum 14 characters !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#gst_div").removeClass("has-error is-focused");
-        isvalidgst = 1;
-    }
-
-    if (partycode == '') {
-        $("#partycode_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter party code !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else if (partycode.length < 2) {
-        $("#partycode_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Party code require minimum 2 characters !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#partycode_div").removeClass("has-error is-focused");
-        isvalidpartycode = 1;
-    }
-
-    if (partytypeid == '' || partytypeid == 0) {
-        $("#partytypeid_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter party type !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#partytypeid_div").removeClass("has-error is-focused");
-        isvalidpartytypeid = 1;
-    }
-
-
-
-    if (pan == 0) {
-        $("#partytype_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter pan !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#partytype_div").removeClass("has-error is-focused");
-        isvalidpan = 1;
-    }
-
-    if (email == '') {
-        $("#email_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter email !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    }
-
-    if (openingdate == '') {
-        $("#openingdate_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter opening date !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#openingdate_div").removeClass("has-error is-focused");
-        isvalidopeningdate = 1;
-    }
-
-    if (openingamount == '') {
-        $("#openingamount_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter opening amount !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#openingamount_div").removeClass("has-error is-focused");
-        isvalidopeningamount = 1;
-    }
-    isvalidpassword = 1;
-
-    if (checkbox4 == 3) {
-        isvalidpassword = 0;
-        if (password == '') {
-            $("#password_div").addClass("has-error is-focused");
-            new PNotify({ title: 'Please enter password !', styling: 'fontawesome', delay: '3000', type: 'error' });
-        } else {
-            $("#password_div").removeClass("has-error is-focused");
-            isvalidpassword = 1;
+            if($("#product"+id).val() == 0){
+                $("#product"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(c)+' product  !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidproduct = 0;
+            }else {
+                $("#product"+id+"_div").removeClass("has-error is-focused");
+            }
+            if($("#invoiceamount"+id).val() == 0){
+                $("#invoiceamount"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(c)+' product  !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidproduct = 0;
+            }else {
+                $("#invoiceamount"+id+"_div").removeClass("has-error is-focused");
+            }
+            
+            if($("#productamount"+id).val() == 0){
+                $("#productamount"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(c)+' product amount !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidproductamount = 0;
+            }else {
+                $("#productamount"+id+"_div").removeClass("has-error is-focused");
+            }
+          
+        } else{
+            $("#invoice"+id+"_div").removeClass("has-error is-focused");
+            $("#price"+id+"_div").removeClass("has-error is-focused");
+            $("#invoiceprice"+id+"_div").removeClass("has-error is-focused");
+            
         }
+        c++;
+    });
+
+    var cd=1;
+    
+  
+
+    if (deliverydate == '' ) {
+        $("#delivery_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please enter delivery date !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    } else {
+        $("#delivery_div").removeClass("has-error is-focused");
+        isvaliddeliverydate = 1;
     }
 
+    if (discount == '' ) {
+        $("#discount_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please enter discount !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    } else {
+        $("#discount_div").removeClass("has-error is-focused");
+        isvaliddiscount = 1;
+    }
+
+    if (discountamount == '' ) {
+        $("#discountamount_div").addClass("has-error is-focused");
+        new PNotify({ title: 'Please enter discount amount !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    } else {
+        $("#discountamount_div").removeClass("has-error is-focused");
+        isvaliddiscountamount = 1;
+    }
+
+    $('.countinvoiceb').each(function(){
+        var id = $(this).attr('id').match(/\d+/);
+      
+        if($("#documentname"+id).val() == "" ){
+            if($("#documentname"+id).val() == ""){
+               
+                $("#documentname"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(cd)+' document name !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvaliddocumentname = 0;
+            }else {
+                alert(2);
+                $("#documentname"+id+"_div").removeClass("has-error is-focused");
+            }
+        } else{
+            alert(3);
+            $("#documentname"+id+"_div").removeClass("has-error is-focused");
+        }
+        cd++;
+    });
+  
 
 
     var c = 1;
-    if (isvalidwebsitename && isvalidpartycode && isvalidpartytypeid && isvalidcompanyid && isvalidopeningamount && isvalidpassword == 1) {
+    if (isvalidwebsitename && isvaliddocumentname && isvaliddiscountamount && isvalidproductamount && isvaliddiscountamount && isvaliddocumentname == 1) {
         var formData = new FormData($('#party-form')[0]);
         if (ACTION == 0) {
             var uurl = SITE_URL + "party/party-add";
@@ -555,7 +571,7 @@ function addnewproductdetails() {
             <div class="col-md-1 pl-sm pr-sm visible-md visible-lg">\
                 <div class="form-group" id="birthdate_div">\
                 <div class="col-md-12">\
-                    <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control" value="" readonly>\
+                    <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control pc100" value="" readonly>\
                 </div>\
                 </div>\
             </div>\
@@ -619,10 +635,10 @@ function addnewinvoicetransaction() {
     var datahtml = '<div class="countinvoice" id="countinvoice' + rowcount + '">\
                     <div class="row m-n">\
                         <div class="col-md-2">\
-                            <div class="form-group" id="invoice'+ rowcount + '_div">\
+                            <div class="form-group" id="category'+ rowcount + '_div">\
                                 <div class="col-sm-12">\
-                                    <select id="invoiceid'+ rowcount + '" name="invoiceid[]" class="selectpicker form-control invoiceid" data-live-search="true" data-select-on-tab="true" data-size="6">\
-                                        <option value="0">Select Invoice</option>\
+                                    <select id="category'+ rowcount + '" name="category[]" class="selectpicker form-control invoiceid" data-live-search="true" data-select-on-tab="true" data-size="6">\
+                                        <option value="0">Select Category</option>\
                                     </select>\
                                 </div>\
                             </div>\
@@ -653,21 +669,21 @@ function addnewinvoicetransaction() {
                         <div class="col-md-1">\
                             <div class="form-group" id="remainingamount'+ rowcount + '_div">\
                                 <div class="col-md-12">\
-                                    <input type="text" id="remainingamount'+ rowcount + '" class="form-control text-right remainingamount" value="" >\
+                                    <input type="text" id="remainingamount'+ rowcount + '" class="form-control text-right remainingamount pc100" value="" onkeypress="return decimal_number_validation(event, this.value, 10)" >\
                                 </div>\
                             </div>\
                         </div>\
                         <div class="col-md-1">\
                             <div class="form-group" id="remainingamount'+ rowcount + '_div">\
                                 <div class="col-md-12">\
-                                    <input type="text" id="remainingamount'+ rowcount + '" class="form-control text-right remainingamount" value="" >\
+                                    <input type="text" id="remainingamount'+ rowcount + '" class="form-control text-right remainingamount" value=""  >\
                                 </div>\
                             </div>\
                         </div>\
                         <div class="col-md-1">\
-                            <div class="form-group" id="remainingamount'+ rowcount + '_div">\
+                            <div class="form-group" id="productamount'+ rowcount + '_div">\
                                 <div class="col-md-12">\
-                                    <input type="text" id="remainingamount'+ rowcount + '" class="form-control text-right remainingamount" value="" >\
+                                    <input type="text" id="productamount'+ rowcount + '" class="form-control text-right " value="" onkeypress="return decimal_number_validation(event, this.value, 10)">\
                                 </div>\
                             </div>\
                         </div>\
@@ -685,8 +701,10 @@ function addnewinvoicetransaction() {
     $("#invoiceid" + rowcount).selectpicker("refresh");
     
     $("#product" + rowcount).selectpicker("refresh");
+    $("#category" + rowcount).selectpicker("refresh");
 
-  
+   
+
 
 }
 
@@ -713,9 +731,9 @@ function addnewdoc() {
     var datahtml = '<div class="countinvoiceb" id="countinvoiceb' + rowcount + '">\
                     <div class="row m-n">\
                         <div class="col-md-3">\
-                            <div class="form-group" id="invoiceamount'+ rowcount + '_div">\
+                            <div class="form-group" id="documentname'+ rowcount + '_div">\
                                 <div class="col-md-12">\
-                                    <input type="text" id="invoiceamount'+ rowcount + '" class="form-control invoiceamount"  placeholder="Enter Document Name" name="invoiceamount[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">\
+                                    <input type="text" id="documentname'+ rowcount + '" class="form-control documentname"  placeholder="Enter Document Name" name="documentname[]" value="" >\
                                 </div>\
                             </div>\
                         </div>\

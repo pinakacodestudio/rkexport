@@ -171,7 +171,6 @@ function validateYouTubeUrl(url) {
 }
 
 function decimal_number_validation(event, value, len = 5, lastdigitslen = 2) {
-alert(value);
     var present = 0;
     var count = 0;
 
@@ -1358,3 +1357,4 @@ function printdocument(html) {
     }, 500);
 
 }
+

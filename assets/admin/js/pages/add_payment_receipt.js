@@ -111,48 +111,7 @@ function calculateamount(){
     });
     $("#amount").val(parseFloat(amount).toFixed(2));
 }
-/* function getMemberBankAccounts(){
-    $('#cashorbankid')
-        .find('option')
-        .remove()
-        .end()
-        .append('<option value="0">Select Cash / Bank Account</option>')
-        .val('0')
-    ;
-    
-    $('#cashorbankid').selectpicker('refresh');
-  
-    var memberid = $("#memberid").val();
-    
-    if(memberid!=0){
-      var uurl = SITE_URL+"cash-or-bank/getMemberBankAccounts";
-      
-      $.ajax({
-        url: uurl,
-        type: 'POST',
-        data: {memberid:String(memberid)},
-        dataType: 'json',
-        async: false,
-        success: function(response){
-                
-            for(var i = 0; i < response.length; i++) {
-    
-                $('#cashorbankid').append($('<option>', { 
-                    value: response[i]['id'],
-                    text : response[i]['bankname']
-                }));
-            }
-            if(cashorbankid!=0){
-                $('#cashorbankid').val(cashorbankid);
-            }
-        },
-        error: function(xhr) {
-        //alert(xhr.responseText);
-        },
-      });
-    }
-    $('#cashorbankid').selectpicker('refresh');
-} */
+
 function getPaymentReceiptInvoice(divid=""){
     
     var element = $('select.invoiceid');
@@ -342,7 +301,8 @@ function checkvalidation(addtype=0){
     var paymentreceiptno = $("#paymentreceiptno").val().trim();
     var cashorbankid = $("#cashorbankid").val();    
     var method = $("#method").val();    
-    var amount = $("#amount").val();    
+    var amount = $("#amount").val();  
+   
     var isagainstreference = $("input[name=isagainstreference]:checked").val();    
   
     var isvalidmemberid = isvalidtransactiondate = isvalidpaymentreceiptno = isvalidcashorbankid = isvalidmethod = isvalidamount = isvalidinvoiceid = isvalidinvoiceamount = isvalidduplicateinvoice = 1;
@@ -351,7 +311,7 @@ function checkvalidation(addtype=0){
     
     if(memberid==0) {
         $("#member_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please select '+member_label+' !',styling: 'fontawesome',delay: '3000',type: 'error'});
+        new PNotify({title: 'Please select Party !',styling: 'fontawesome',delay: '3000',type: 'error'});
         isvalidmemberid = 0;
     } else {
         $("#member_div").removeClass("has-error is-focused");
@@ -394,6 +354,42 @@ function checkvalidation(addtype=0){
         $("#amount_div").removeClass("has-error is-focused");
     }
     
+
+    var c=1;
+    var firstinvoiceid = $('.countinvoice:first').attr('id').match(/\d+/);
+    $('.countinvoice').each(function(){
+        var id = $(this).attr('id').match(/\d+/);
+       
+        if($("#invoiceid"+id).val() > 0 || $("#invoiceid"+id).val() > 0 || $("#invoiceid"+id).val() != "" || $("#qty"+id).val() == 0 || parseInt(id)==parseInt(firstinvoiceid)){
+            if($("#invoiceid"+id).val() == 0){
+                $("#invoice"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(c)+' invoice !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidinvoiceid = 0;
+            }else {
+                $("#invoice"+id+"_div").removeClass("has-error is-focused");
+            }
+
+            if($("#invoiceamount"+id).val() == 0){
+                $("#invoiceamount"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(c)+' amount !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidqty = 0;
+            }else {
+                $("#invoiceamount"+id+"_div").removeClass("has-error is-focused");
+            }
+            
+           
+          
+        } else{
+            $("#invoice"+id+"_div").removeClass("has-error is-focused");
+            $("#price"+id+"_div").removeClass("has-error is-focused");
+            $("#invoiceprice"+id+"_div").removeClass("has-error is-focused");
+            $("#qty"+id+"_div").removeClass("has-error is-focused");
+        }
+        c++;
+    });
+
+
+
     if(isagainstreference==1){
         var c=1;
         var firstid = $('.countinvoice:first').attr('id').match(/\d+/);

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     $('#transactiondate').datepicker({
         todayHighlight: true,
         format: 'dd/mm/yyyy',
@@ -45,7 +44,7 @@ $(document).ready(function() {
         });
     }
     /****VENDOR CHANGE EVENT****/
-    $('#vendorid').on('change', function (e) {
+    $('#Partyid').on('change', function (e) {
         getPurchaseInvoiceByVendor();
     });
 
@@ -126,15 +125,15 @@ function getPurchaseInvoiceByVendor(divid=""){
     
     element.selectpicker('refresh');
   
-    var vendorid = (ACTION==0)?$("#vendorid").val():VendorID;
+    var Partyid = (ACTION==0)?$("#Partyid").val():Partyid;
     var type = $("input[name='isagainstreference']:checked").val();
 
-    if(vendorid!=0 && type == 1){
+    if(Partyid!=0 && type == 1){
       var uurl = SITE_URL+"purchase-invoice/getPurchaseInvoiceByVendor";
      
-      var param = {vendorid:String(vendorid)}; 
+      var param = {Partyid:String(Partyid)}; 
       if(ACTION==1 && $("#paymentreceiptid").val()!=""){
-        param = {vendorid:String(vendorid),paymentreceiptid:String($("#paymentreceiptid").val())}
+        param = {Partyid:String(Partyid),paymentreceiptid:String($("#paymentreceiptid").val())}
       }
       $.ajax({
         url: uurl,
@@ -255,7 +254,6 @@ function removetransaction(rowid){
 
     changenetamounttotal();
 }
-
 function resetdata(){
  
   $("#vendor_div").removeClass("has-error is-focused");
@@ -267,7 +265,7 @@ function resetdata(){
 
   if(ACTION==0)
   {
-    $('#vendorid').val(0);
+    $('#Partyid').val(0);
     $('#cashorbankid').val(0);
     $('#method').val(0);
     $('#amount').val('');
@@ -292,66 +290,59 @@ function resetdata(){
   $('.selectpicker').selectpicker('refresh');
   $('html, body').animate({scrollTop:0},'slow');  
 }
-
 function checkvalidation(addtype=0){
 
-    var vendorid = $("#vendorid").val();
-    var transactiondate = $("#transactiondate").val();
-    var paymentreceiptno = $("#paymentreceiptno").val().trim();
-    var cashorbankid = $("#cashorbankid").val();    
-    var method = $("#method").val();    
-    var amount = $("#amount").val();    
+    var Partyid = $("#Partyid").val();
+    var purchaseno = $("#purchaseno").val();
+    var cashorbankid = $("#cashorbankid").val();
+    var method = $("#method").val();
+    var amount = $("#amount").val();
+
+ 
     var isagainstreference = $("input[name=isagainstreference]:checked").val();    
   
-    var isvalidvendorid = isvalidtransactiondate = isvalidpaymentreceiptno = isvalidcashorbankid = isvalidmethod = isvalidamount = isvalidinvoiceid = isvalidinvoiceamount = isvalidduplicateinvoice = 1;
+    var isvalidPartyid = isvalidtransactiondate = isvalidpaymentreceiptno  = 1;
 
     PNotify.removeAll();
     
-    if(vendorid==0) {
-        $("#vendor_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please select vendor !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        isvalidvendorid = 0;
+    if(Partyid==0) {
+        $("#Party_div").addClass("has-error is-focused");
+        new PNotify({title: 'Please select Party !',styling: 'fontawesome',delay: '3000',type: 'error'});
+        isvalidPartyid = 0;
     } else {
-        $("#vendor_div").removeClass("has-error is-focused");
+        $("#Party_div").removeClass("has-error is-focused");
     }
-    if(transactiondate==""){
-        $("#transactiondate_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please select transaction date !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        isvalidtransactiondate = 0;
+    if(purchaseno==""){
+        $("#purchaseno_div").addClass("has-error is-focused");
+        new PNotify({title: 'Please select purchase no !',styling: 'fontawesome',delay: '3000',type: 'error'});
+        isvalidpurchaseno = 0;
     } else {
-        $("#transactiondate_div").removeClass("has-error is-focused");
+        $("#purchaseno_div").removeClass("has-error is-focused");
     }
-
-    if(paymentreceiptno==""){
-        $("#paymentreceiptno_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please enter payment receipt no. !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        isvalidpaymentreceiptno = 0;
-    }else{
-        $("#paymentreceiptno_div").removeClass("has-error is-focused");
-    }
-    if(cashorbankid==0) {
+    if(cashorbankid=="" || cashorbankid==0){
         $("#cashorbankid_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please select cash / bank account !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        isvalidcashorbankid = 0;
+        new PNotify({title: 'Please select Cash / Bank Account !',styling: 'fontawesome',delay: '3000',type: 'error'});
+        isvalidpurchaseno = 0;
     } else {
         $("#cashorbankid_div").removeClass("has-error is-focused");
     }
- 
-    if(method==0) {
+    if(method=="" || method==0){
         $("#method_div").addClass("has-error is-focused");
         new PNotify({title: 'Please select method !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        isvalidmethod = 0;
+        isvalidpurchaseno = 0;
     } else {
         $("#method_div").removeClass("has-error is-focused");
     }
-    if(amount=="") {
+    if(amount=="" ){
         $("#amount_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please enter amount !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        isvalidamount = 0;
+        new PNotify({title: 'Please select amount !',styling: 'fontawesome',delay: '3000',type: 'error'});
+        isvalidpurchaseno = 0;
     } else {
         $("#amount_div").removeClass("has-error is-focused");
     }
-    
+
+   
+   
     if(isagainstreference==1){
         var c=1;
         var firstid = $('.countinvoice:first').attr('id').match(/\d+/);
@@ -403,7 +394,7 @@ function checkvalidation(addtype=0){
         }
     }
 
-    if(isvalidvendorid==1 && isvalidtransactiondate==1 && isvalidpaymentreceiptno==1 && isvalidcashorbankid==1 && isvalidmethod==1 && isvalidamount==1 && isvalidinvoiceid==1 && isvalidinvoiceamount==1 && isvalidduplicateinvoice == 1){
+    if(isvalidPartyid==1 && isvalidtransactiondate==1 && isvalidpaymentreceiptno==1 && isvalidcashorbankid==1 && isvalidmethod==1 && isvalidamount==1 && isvalidinvoiceid==1 && isvalidinvoiceamount==1 && isvalidduplicateinvoice == 1){
             
         var formData = new FormData($('#paymentform')[0]);
         if(ACTION == 0){    
