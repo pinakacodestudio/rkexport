@@ -77,9 +77,7 @@
                                         <label for="vendorid" class="control-label">Select Vendor <span class="mandatoryfield">*</span></label>
                                         <select id="vendorid" name="vendorid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="5" <?php if(!empty($quotationdata) && !isset($isduplicate)){ echo "disabled"; } ?>>
                                             <option value="0">Select Vendor</option>
-                                            <?php foreach($vendordata as $vendor){ ?>
-                                                <option data-code="<?=$vendor['membercode']?>" data-billingid="<?=$vendor['billingaddressid']?>" data-shippingid="<?=$vendor['shippingaddressid']?>" value="<?php echo $vendor['id']; ?>" <?php if(!empty($quotationdata['quotationdetail'])){ if($quotationdata['quotationdetail']['vendorid']==$vendor['id']){ echo "selected"; }} ?>><?php echo ucwords($vendor['name']); ?></option>
-                                            <?php } ?>
+                                            
                                         </select>
                                     </div>
                                     <?php if(isset($multiplememberchannel) && $multiplememberchannel==1){?>
@@ -148,7 +146,7 @@
                                         <th class="width8">Action</th>
                                     </tr>
                                 </thead>      
-                                <tbody>
+                                <tbody id="productdataforpurchase">
                                     <?php if(!empty($quotationdata) && !empty($quotationdata['quotationproduct'])) { ?>
                                         <input type="hidden" name="removequotationproductid" id="removequotationproductid">
                                         

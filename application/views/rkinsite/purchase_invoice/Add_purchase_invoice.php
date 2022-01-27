@@ -3,7 +3,7 @@
 </script>
 <div class="page-content">
     <div class="page-heading">            
-        <h1><?php if(isset($invoicedata)){ echo 'Edit'; }else{ echo 'Add'; } ?> Purchase <?=$this->session->userdata(base_url().'submenuname');?></h1>
+        <h1><?php if(isset($invoicedata)){ echo 'Edit'; }else{ echo 'Add'; } ?>  <?=$this->session->userdata(base_url().'submenuname');?></h1>
         <small>
           	<ol class="breadcrumb">                        
             <li><a href="<?php echo base_url(); ?><?php echo ADMINFOLDER; ?>dashboard">Dashboard</a></li>

@@ -1,3 +1,4 @@
+<?php    $productdiscount = 0; ?>
 <script>
    var partialpayment = '<?php if(!empty($channelsetting)){ echo $channelsetting['partialpayment']; } ?>';
    var addressid = <?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['addressid']; }else{ echo "0"; } ?>;
@@ -150,212 +151,460 @@
                         */?>
                      
 
-                   
+                                    
+                  <?php /*
+                              <div class="">
+                                 <div class="col-md-12">
+                                    <div class="panel panel-default border-panel" id="conect_countdocuments1">
+                                       
+                                       <div class="panel-body">
+                                          <div id="addtarget">
+                                             <div class="row">
+                                                <div class="col-md-2">
+                                                   <div class="form-group" id="firstname_div">
+                                                      <label for="firstname" class="col-md-12 control-label tal">Category <span class="mandatoryfield"> *</span></label>
+                                                   </div>
+                                                </div>
+                                                <div class="col-md-2 p-n">
+                                                   <div class="form-group" id="lastname_div">
+                                                      <label for="lastname" class="col-md-12 control-label tal">product <span  class="mandatoryfield"> *</span></label>
+                                                   </div>
+                                                </div>
+                                                <div class="col-md-2  ">
+                                                   <div class="form-group" id="lastname_div">
+                                                      <label for="lastname" class="col-md-12 control-label tal">Price <span  class="mandatoryfield"> *</span></label>
+                                                   </div>
+                                                </div>
+                                                
+                                                <div class="col-md-1 p-n">
+                                                   <div class="form-group" id="birthdate_div">
+                                                      <label for="birthdate" class="col-md-12 control-label tal">qty </label>
+                                                   </div>
+                                                </div>
+                                                <div class="col-md-1  ">
+                                                   <div class="form-group" id="contactno_div">
+                                                      <label for="contactno" class="col-md-12 control-label tal">Discount  <span class="mandatoryfield" > *</span></label>
+                                                   </div>
+                                                </div>
+                                                <div class="col-md-1 p-n">
+                                                   <div class="form-group" id="contactno_div">
+                                                      <label for="contactno" class="col-md-12 control-label tal">Amount  <span class="mandatoryfield" > *</span></label>
+                                                   </div>
+                                                </div>
+                                                <div class="col-md-2 ">
+                                                   <div class="form-group" id="contactno_div">
+                                                      <label for="contactno" class="col-md-12 control-label tal">Delivery  <span class="mandatoryfield" > *</span></label>
+                                                   </div>
+                                                </div>
+                                             
+                                                <div class="clearfix"></div>
+                                                <?php if(isset($paymentreceiptdata) && !empty($receipttransactionsdata)){?>
+                                             
+                                                <?php }else{ ?>
+                                                <div class="countcategory" id="countcategory1">
+                                                   <div class="row m-n">
+                                                      <div class="col-md-2">
+                                                         <div class="form-group" id="category1_div">
+                                                            <div class="col-md-12">
+                                                               <select id="categoryid1" name="categoryid[]" class="selectpicker form-control categoryid" data-live-search="true" data-select-on-tab="true" data-size="6">
+                                                                  <option value="0">Select Category </option>
+                                                               </select>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                      <div class="col-md-2 p-n">
+                                                         <div class="form-group" id="productid1_div">
+                                                            <div class="col-md-12">
+                                                               <select id="productid1" name="productid[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">
+                                                                  <option value="0">Select Product</option>
+                                                               </select>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                      <div class="col-md-2">
+                                                         <div class="form-group" id="productid1_div">
+                                                            <div class="col-md-12">
+                                                               <select id="productid1" name="productid[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">
+                                                                  <option value="0">Select Price</option>
+                                                               </select>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                      <div class="col-md-1 p-n">
+                                                         <div class="form-group" id="pqty1_div">
+                                                            <div class="col-md-12">								
+                                                               <input type="text" id="pqty1" class="form-control" name="pqty[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                      <div class="col-md-1">
+                                                         <div class="form-group" id="deliverypriarity1_div">
+                                                            <div class="col-md-12">								
+                                                               <input type="text" id="deliverypriarity1" class="form-control text-right deliverypriarity" value="" onkeypress="return decimal_number_validation(event, this.value, 10)" >
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                      <div class="col-md-1 p-n">
+                                                         <div class="form-group" id="deliverypriarity1_div">
+                                                            <div class="col-md-12">								
+                                                               <input type="text" id="deliverypriarity1" class="form-control text-right deliverypriarity" value="" onkeypress="return decimal_number_validation(event, this.value, 10)" >
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                      <div class="col-md-2">
+                                                         <div class="form-group" id="deliveryday1_div">
+                                                            <div class="col-md-12">
+                                                               <select id="deliverydayid1" name="deliverydayid[]" class="selectpicker form-control deliverydayid" data-live-search="true" data-select-on-tab="true" data-size="6">
+                                                                  <option value="0">Select Delivery Day</option>
+                                                                  <option value="1">1 Day</option>
+                                                               </select>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                      <div class="col-md-1 pt-md">
+                                                         <button type="button" class="btn btn-danger btn-raised  remove_invoice_btn m-n" onclick="removetransaction(1)" style="padding: 3px 8px;display:none;"><i class="fa fa-minus"></i></button>
+                                                         <button type="button" class="btn btn-primary btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <?php } ?>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <!-- <div class="col-sm-4">
+                                          <div class="form-group" id="deliverydate_div">
+                                             <div class="col-sm-12">
+                                                <label for="deliverydate" class="control-label">Select Approx Delivery Date <span class="mandatoryfield">*</span></label>
+                                                <div class="input-group">
+                                                   <input id="deliverydate" type="text" name="deliverydate" value="" class="form-control date" readonly>
+                                                   <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div> -->
+                                       <div class="col-sm-4">
+                                          <div class="form-group" id="discount_div">
+                                             <div class="col-sm-12">
+                                                <input type="hidden" name="olddiscount" id="olddiscount" value="">
+                                                <label for="discountid" class="control-label">Discount(%) <span class="mandatoryfield">*</span></label>
+                                                <input id="discount" type="text" name="discount" value="" class="form-control" onkeypress="return decimal_number_validation(event, this.value, 10)">
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="col-sm-4">
+                                          <div class="form-group" id="amount_div">
+                                             <div class="col-sm-12">
+                                                <input type="hidden" name="oldamount" id="oldamount" value="">
+                                                <label for="amountid" class="control-label">Amount <span class="mandatoryfield">*</span></label>
+                                                <input id="amount" type="text" onkeypress="return decimal_number_validation(event, this.value, 10)" name="discountamount" value="" class="form-control" >
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-12 p-n">
+                                          <div class="col-md-3">
+                                             <div class="form-group" id="remarks_div">
+                                                <div class="col-sm-12 pr-n">
+                                                   <label for="remarks" class="control-label">Remarks</label>
+                                                   <textarea id="remarks" name="remarks" class="form-control"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['remarks']; }?></textarea>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="col-md-9 pull-right p-n">
+                                             <div class="col-md-6 pr-xs">
+                                             </div>
+                                             <div class="col-md-6 pl-xs">
+                                                <input type="hidden" name="removeextrachargemappingid" id="removeextrachargemappingid">
+                                                <table id="example" class="table table-bordered table-striped" cellspacing="0" width="100%" style="border: 1px solid #e8e8e8;">
+                                                   <tbody>
+                                                      <tr>
+                                                         <th colspan="2" class="text-center">Quotation Summary (<?=CURRENCY_CODE?>)</th>
+                                                      </tr>
+                                                      <tr>
+                                                         <th>Total Of Product</th>
+                                                         <td class="text-right" width="30%">
+                                                            <span id="grossamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; }else{ echo "0.00"; }?></span>
+                                                            <input type="hidden" id="inputgrossamount" name="grossamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; } ?>">
+                                                         </td>
+                                                      </tr>
+                                                      <tr id="discountrow" style="display: none;">
+                                                         <th>Discount (<span id="discountpercentage"><?php if(!empty($quotationdata['ordquotationdetailrdetail'])){ echo number_format($quotationdata['quotationdetail']['globaldiscount']*100/$quotationdata['quotationdetail']['quotationamount'],2); }else{ echo "0"; }?></span>%)
+                                                         </th>
+                                                         <td class="text-right">
+                                                            <span id="discountamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['globaldiscount']; }else{ echo "0.00"; }?></span>
+                                                         </td>
+                                                      </tr>
+                                                      <tr>
+                                                         <th>Round Off</th>
+                                                         <td class="text-right">
+                                                            <span id="roundoff">0.00</span>
+                                                            <input type="hidden" id="inputroundoff" name="inputroundoff" value="0.00">
+                                                         </td>
+                                                      </tr>
+                                                      <tr>
+                                                         <th>Amount Payable</th>
+                                                         <th class="text-right">
+                                                            <span id="netamount" name="netamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }else{ echo "0.00"; } ?></span>
+                                                            <input type="hidden" id="inputnetamount" name="netamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }?>">
+                                                         </th>
+                                                      </tr>
+                                                   </tbody>
+                                                </table>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                  */?>
 
-            <div class="">
-               <div class="col-md-12">
-                  <div class="panel panel-default border-panel" id="conect_countdocuments1">
-                     
-                     <div class="panel-body">
-                        <div id="addtarget">
-                           <div class="row">
-                              <div class="col-md-2">
-                                 <div class="form-group" id="firstname_div">
-                                    <label for="firstname" class="col-md-12 control-label tal">Category <span class="mandatoryfield"> *</span></label>
-                                 </div>
-                              </div>
-                              <div class="col-md-2 p-n">
-                                 <div class="form-group" id="lastname_div">
-                                    <label for="lastname" class="col-md-12 control-label tal">product <span  class="mandatoryfield"> *</span></label>
-                                 </div>
-                              </div>
-                              <div class="col-md-2  ">
-                                 <div class="form-group" id="lastname_div">
-                                    <label for="lastname" class="col-md-12 control-label tal">Price <span  class="mandatoryfield"> *</span></label>
-                                 </div>
-                              </div>
-                              
-                              <div class="col-md-1 p-n">
-                                 <div class="form-group" id="birthdate_div">
-                                    <label for="birthdate" class="col-md-12 control-label tal">qty </label>
-                                 </div>
-                              </div>
-                              <div class="col-md-1  ">
-                                 <div class="form-group" id="contactno_div">
-                                    <label for="contactno" class="col-md-12 control-label tal">Discount  <span class="mandatoryfield" > *</span></label>
-                                 </div>
-                              </div>
-                              <div class="col-md-1 p-n">
-                                 <div class="form-group" id="contactno_div">
-                                    <label for="contactno" class="col-md-12 control-label tal">Amount  <span class="mandatoryfield" > *</span></label>
-                                 </div>
-                              </div>
-                              <div class="col-md-2 ">
-                                 <div class="form-group" id="contactno_div">
-                                    <label for="contactno" class="col-md-12 control-label tal">Delivery  <span class="mandatoryfield" > *</span></label>
-                                 </div>
-                              </div>
-                             
-                              <div class="clearfix"></div>
-                              <?php if(isset($paymentreceiptdata) && !empty($receipttransactionsdata)){?>
-                            
-                              <?php }else{ ?>
-                              <div class="countcategory" id="countcategory1">
-                                 <div class="row m-n">
-                                    <div class="col-md-2">
-                                       <div class="form-group" id="category1_div">
-                                          <div class="col-md-12">
-                                             <select id="categoryid1" name="categoryid[]" class="selectpicker form-control categoryid" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                <option value="0">Select Category </option>
-                                             </select>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2 p-n">
-                                       <div class="form-group" id="productid1_div">
-                                          <div class="col-md-12">
-                                             <select id="productid1" name="productid[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                <option value="0">Select Product</option>
-                                             </select>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                       <div class="form-group" id="productid1_div">
-                                          <div class="col-md-12">
-                                             <select id="productid1" name="productid[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                <option value="0">Select Price</option>
-                                             </select>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-1 p-n">
-                                       <div class="form-group" id="pqty1_div">
-                                          <div class="col-md-12">								
-                                             <input type="text" id="pqty1" class="form-control" name="pqty[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-1">
-                                       <div class="form-group" id="deliverypriarity1_div">
-                                          <div class="col-md-12">								
-                                             <input type="text" id="deliverypriarity1" class="form-control text-right deliverypriarity" value="" onkeypress="return decimal_number_validation(event, this.value, 10)" >
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-1 p-n">
-                                       <div class="form-group" id="deliverypriarity1_div">
-                                          <div class="col-md-12">								
-                                             <input type="text" id="deliverypriarity1" class="form-control text-right deliverypriarity" value="" onkeypress="return decimal_number_validation(event, this.value, 10)" >
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                       <div class="form-group" id="deliveryday1_div">
-                                          <div class="col-md-12">
-                                             <select id="deliverydayid1" name="deliverydayid[]" class="selectpicker form-control deliverydayid" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                <option value="0">Select Delivery Day</option>
-                                                <option value="1">1 Day</option>
-                                             </select>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-1 pt-md">
-                                       <button type="button" class="btn btn-danger btn-raised  remove_invoice_btn m-n" onclick="removetransaction(1)" style="padding: 3px 8px;display:none;"><i class="fa fa-minus"></i></button>
-                                       <button type="button" class="btn btn-primary btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
-                                    </div>
-                                 </div>
-                              </div>
-                              <?php } ?>
-                           </div>
+               <div class="row">
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <!-- <div class="col-sm-4">
-                        <div class="form-group" id="deliverydate_div">
-                           <div class="col-sm-12">
-                              <label for="deliverydate" class="control-label">Select Approx Delivery Date <span class="mandatoryfield">*</span></label>
-                              <div class="input-group">
-                                 <input id="deliverydate" type="text" name="deliverydate" value="" class="form-control date" readonly>
-                                 <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
-                              </div>
-                           </div>
-                        </div>
-                     </div> -->
-                     <div class="col-sm-4">
-                        <div class="form-group" id="discount_div">
-                           <div class="col-sm-12">
-                              <input type="hidden" name="olddiscount" id="olddiscount" value="">
-                              <label for="discountid" class="control-label">Discount(%) <span class="mandatoryfield">*</span></label>
-                              <input id="discount" type="text" name="discount" value="" class="form-control" onkeypress="return decimal_number_validation(event, this.value, 10)">
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-sm-4">
-                        <div class="form-group" id="amount_div">
-                           <div class="col-sm-12">
-                              <input type="hidden" name="oldamount" id="oldamount" value="">
-                              <label for="amountid" class="control-label">Amount <span class="mandatoryfield">*</span></label>
-                              <input id="amount" type="text" onkeypress="return decimal_number_validation(event, this.value, 10)" name="discountamount" value="" class="form-control" >
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-12 p-n">
-                        <div class="col-md-3">
-                           <div class="form-group" id="remarks_div">
-                              <div class="col-sm-12 pr-n">
-                                 <label for="remarks" class="control-label">Remarks</label>
-                                 <textarea id="remarks" name="remarks" class="form-control"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['remarks']; }?></textarea>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-9 pull-right p-n">
-                           <div class="col-md-6 pr-xs">
-                           </div>
-                           <div class="col-md-6 pl-xs">
-                              <input type="hidden" name="removeextrachargemappingid" id="removeextrachargemappingid">
-                              <table id="example" class="table table-bordered table-striped" cellspacing="0" width="100%" style="border: 1px solid #e8e8e8;">
-                                 <tbody>
+                        <div id="quotationproductdivs">
+                        <table id="quotationproducttable" class="table table-hover table-bordered m-n">
+                                <thead>
                                     <tr>
-                                       <th colspan="2" class="text-center">Quotation Summary (<?=CURRENCY_CODE?>)</th>
+                                        <th>Category <span class="mandatoryfield">*</span></th>
+                                        <th>Product <span class="mandatoryfield">*</span></th>
+                                        <th class="width12">Price <span class="mandatoryfield">*</span></th>
+                                        <th class="width8">Qty <span class="mandatoryfield">*</span></th>
+                                        <th class="width8" style="<?php if($productdiscount==0){ echo "display:none;"; } ?>">Discount</th>
+                                        <th class="text-right width8">Amount (<?=CURRENCY_CODE?>)</th>
+                                        <th class="text-right width8">Delivery</th>
+                                        <th class="width8">Action</th>
                                     </tr>
-                                    <tr>
-                                       <th>Total Of Product</th>
-                                       <td class="text-right" width="30%">
-                                          <span id="grossamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; }else{ echo "0.00"; }?></span>
-                                          <input type="hidden" id="inputgrossamount" name="grossamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; } ?>">
-                                       </td>
-                                    </tr>
-                                    <tr id="discountrow" style="display: none;">
-                                       <th>Discount (<span id="discountpercentage"><?php if(!empty($quotationdata['ordquotationdetailrdetail'])){ echo number_format($quotationdata['quotationdetail']['globaldiscount']*100/$quotationdata['quotationdetail']['quotationamount'],2); }else{ echo "0"; }?></span>%)
-                                       </th>
-                                       <td class="text-right">
-                                          <span id="discountamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['globaldiscount']; }else{ echo "0.00"; }?></span>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <th>Round Off</th>
-                                       <td class="text-right">
-                                          <span id="roundoff">0.00</span>
-                                          <input type="hidden" id="inputroundoff" name="inputroundoff" value="0.00">
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <th>Amount Payable</th>
-                                       <th class="text-right">
-                                          <span id="netamount" name="netamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }else{ echo "0.00"; } ?></span>
-                                          <input type="hidden" id="inputnetamount" name="netamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }?>">
-                                       </th>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                           </div>
+                                </thead>      
+                                <tbody id="productdataforpurchase">
+                                    <?php if(!empty($quotationdata) && !empty($quotationdata['quotationproduct'])) { ?>
+                                        <input type="hidden" name="removequotationproductid" id="removequotationproductid">
+                                        
+                                        <?php for ($i=0; $i < count($quotationdata['quotationproduct']); $i++) { ?>
+                                            <tr class="countproducts" id="quotationproductdiv<?=($i+1)?>">
+                                                <td>
+                                                    <input type="hidden" name="quotationproductsid[]" value="<?=(!isset($isduplicate))?$quotationdata['quotationproduct'][$i]['id']:""?>" id="quotationproductsid<?=$i+1?>">
+                                                    <input type="hidden" name="producttax[]" value="<?=$quotationdata['quotationproduct'][$i]['tax']?>" id="producttax<?=$i+1?>">
+                                                    <input type="hidden" name="productrate[]" value="<?=$quotationdata['quotationproduct'][$i]['price']?>" id="productrate<?=$i+1?>">
+                                                    <input type="hidden" name="originalprice[]" value="<?=$quotationdata['quotationproduct'][$i]['originalprice']?>" id="originalprice<?=$i+1?>">
+                                                    <input type="hidden" name="uniqueproduct[]" value="<?=$quotationdata['quotationproduct'][$i]['productid']."_".$quotationdata['quotationproduct'][$i]['priceid']?>" id="uniqueproduct<?=$i+1?>">
+                                                    <input type="hidden" name="referencetype[]" id="referencetype<?=$i+1?>" value="<?=$quotationdata['quotationproduct'][$i]['referencetype']?>">
+                                                    <div class="form-group" id="product<?=($i+1)?>_div">
+                                                        <div class="col-sm-12">
+                                                            <select id="productid<?=($i+1)?>" name="productid[]" data-width="90%" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="8" div-id="<?=($i+1)?>">
+                                                                <option value="0">Select Product</option>
+                                                                <?php /* foreach($productdata as $product){ ?>
+                                                                <option value="<?php echo $product['id']; ?>" <?php if($quotationdata['quotationproduct'][$i]['productid']==$product['id']){ echo "selected"; } ?>><?php echo $product['name']; ?></option>
+                                                                <?php } */ ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group" id="price<?=($i+1)?>_div">
+                                                        <div class="col-md-12">
+                                                            <select id="priceid<?=($i+1)?>" name="priceid[]" data-width="90%" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="<?=($i+1)?>">
+                                                                <option value="">Select Variant</option>
+                                                            </select>
+                                                            <div class="form-group m-n p-n" id="applyoldprice<?=($i+1)?>_div">
+                                                                <div class="col-sm-12">
+                                                                    <div class="checkbox pt-n pl-xs text-left">
+                                                                        <input id="applyoldprice<?=($i+1)?>" type="checkbox" value="0" class="checkradios applyoldprice" checked>   
+                                                                        <label for="applyoldprice<?=($i+1)?>" class="control-label p-n">Apply Old Quotation Price : <span id="oldpricewithtax<?=($i+1)?>"><?=$quotationdata['quotationproduct'][$i]['pricewithtax']?></span></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group" id="comboprice<?=($i+1)?>_div">
+                                                        <div class="col-sm-12">
+                                                            <select id="combopriceid<?=($i+1)?>" name="combopriceid[]" data-width="150px" class="selectpicker form-control combopriceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="<?=($i+1)?>">
+                                                                <option value="">Price</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" id="actualprice<?=($i+1)?>_div">
+                                                        <div class="col-sm-12">
+                                                            <label for="actualprice<?=($i+1)?>" class="control-label">Rate (<?=CURRENCY_CODE?>)</label>
+                                                            <input type="text" class="form-control actualprice text-right" id="actualprice<?=($i+1)?>" name="actualprice[]" value="<?=$quotationdata['quotationproduct'][$i]['originalprice']?>" onkeypress="return decimal_number_validation(event, this.value);" style="display: block;" div-id="<?=($i+1)?>">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group" id="qty<?=($i+1)?>_div">
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control qty" id="qty<?=($i+1)?>" name="qty[]" value="<?=$quotationdata['quotationproduct'][$i]['quantity']?>" onkeypress="<?=(MANAGE_DECIMAL_QTY==1?'return decimal_number_validation(event, this.value,8);':'return isNumber(event);')?>" style="display: block;" div-id="<?=($i+1)?>">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td <?php if($productdiscount==0){ echo "style='display:none;'"; }?>>
+                                                    <div class="form-group" id="discount<?=($i+1)?>_div">
+                                                        <div class="col-md-12">
+                                                            <label for="discount<?=($i+1)?>" class="control-label">Dis. (%)</label>
+                                                            <input type="text" class="form-control discount" id="discount<?=($i+1)?>" name="discount[]" value="<?=$quotationdata['quotationproduct'][$i]['discount']?>" div-id="<?=($i+1)?>" onkeypress="return decimal_number_validation(event, this.value)">
+                                                            <input type="hidden" value="<?=$quotationdata['quotationproduct'][$i]['discount']?>" id="orderdiscount<?=$i+1?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" id="discountinrs<?=($i+1)?>_div">
+                                                        <div class="col-md-12">
+                                                            <label for="discountinrs<?=($i+1)?>" class="control-label">Dis. (<?=CURRENCY_CODE?>)</label>
+                                                            <input type="text" class="form-control discountinrs" id="discountinrs<?=($i+1)?>" name="discountinrs[]" value="" div-id="<?=($i+1)?>" onkeypress="return decimal_number_validation(event, this.value)">	
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group" id="tax<?=($i+1)?>_div">
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control text-right tax" id="tax<?=($i+1)?>" name="tax[]" value="<?=$quotationdata['quotationproduct'][$i]['tax']?>" div-id="<?=($i+1)?>" onkeypress="return decimal_number_validation(event, this.value)" <?php 
+                                                            if($quotationdata['quotationdetail']['vendoredittaxrate']==1 && EDITTAXRATE==1){ 
+                                                                echo ""; 
+                                                            }else{ 
+                                                                echo "readonly"; 
+                                                            }?>>	
+                                                            <input type="hidden" value="<?=$quotationdata['quotationproduct'][$i]['tax']?>" id="ordertax<?=$i+1?>">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group" id="amount<?=($i+1)?>_div">
+                                                        <div class="col-md-12">
+                                                        <input type="text" class="form-control amounttprice" id="amount<?=($i+1)?>" name="amount[]" value="" readonly="" div-id="<?=($i+1)?>">
+                                                        <input type="hidden" class="producttaxamount" id="producttaxamount<?=($i+1)?>" name="producttaxamount[]" value="" div-id="<?=($i+1)?>">		
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group pt-sm">
+                                                        <div class="col-md-12 pr-n">
+                                                            <?php if($i==0){?>
+                                                            <?php if(count($quotationdata['quotationproduct'])>1){ ?>
+                                                                <button type="button" class="btn btn-default btn-raised  add_remove_btn_product" onclick="removeproduct(1)" style="padding: 5px 10px;"><i class="fa fa-minus"></i></button>
+                                                            <?php }else { ?>
+                                                                <button type="button" class="btn btn-default btn-raised  add_remove_btn" onclick="addnewproduct()" style="padding: 5px 10px;"><i class="fa fa-plus"></i></button>
+                                                            <?php } ?>
+
+                                                        <?php }else if($i!=0) { ?>
+                                                            <button type="button" class="btn btn-default btn-raised  add_remove_btn_product" onclick="removeproduct(<?=$i+1?>)" style="padding: 5px 10px;"><i class="fa fa-minus"></i></button>
+                                                        <?php } ?>
+                                                        <button type="button" class="btn btn-default btn-raised btn-sm add_remove_btn_product" onclick="removeproduct(<?=$i+1?>)"  style="padding: 5px 10px;display:none;"><i class="fa fa-minus"></i></button>
+                                                    
+                                                        <button type="button" class="btn btn-default btn-raised  add_remove_btn" onclick="addnewproduct()" style="padding: 5px 10px;"><i class="fa fa-plus"></i></button>  
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <script type="text/javascript">
+                                                $(document).ready(function() {
+                                                    oldproductid.push(<?=$quotationdata['quotationproduct'][$i]['productid']?>);
+                                                    oldpriceid.push(<?=$quotationdata['quotationproduct'][$i]['priceid']?>);
+                                                    oldtax.push(<?=$quotationdata['quotationproduct'][$i]['tax']?>);
+                                                    productdiscount.push(<?=$quotationdata['quotationproduct'][$i]['discount']?>);
+                                                    oldcombopriceid.push(<?=$quotationdata['quotationproduct'][$i]['referenceid']?>);
+                                                    oldprice.push(<?=$quotationdata['quotationproduct'][$i]['originalprice']?>);
+
+                                                    $("#qty<?=$i+1?>").TouchSpin(touchspinoptions);
+                                                    getproduct(<?=$i+1?>);
+                                                    getproductprice(<?=$i+1?>);
+                                                    getmultiplepricebypriceid(<?=$i+1?>);
+                                                    calculatediscount(<?=$i+1?>);
+                                                    changeproductamount(<?=$i+1?>);
+                                                });
+                                            </script>
+                                        <?php } ?>
+                                    <?php }else{ ?>
+                                        <tr class="countproducts" id="quotationproductdiv1">
+                                            <td>
+                                                <input type="hidden" name="producttax[]" id="producttax1">
+                                                <input type="hidden" name="productrate[]" id="productrate1">
+                                                <input type="hidden" name="originalprice[]" id="originalprice1">
+                                                <input type="hidden" name="uniqueproduct[]" id="uniqueproduct1">
+                                                <input type="hidden" name="referencetype[]" id="referencetype1">
+                                                <div class="form-group" id="product1_div">
+                                                    <div class="col-sm-12">
+                                                        <select id="productid1" name="productid[]" data-width="90%" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="8" div-id="1">
+                                                            <option value="0">Select Product</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group" id="price1_div">
+                                                    <div class="col-md-12">
+                                                        <select id="priceid1" name="priceid[]" data-width="90%" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
+                                                            <option value="">Select Variant</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group" id="actualprice1_div">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control actualprice text-right" id="actualprice1" name="actualprice[]" value="" onkeypress="return decimal_number_validation(event, this.value)" style="display: block;" div-id="1">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group" id="qty1_div">
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control qty" id="qty1" name="qty[]" value="" maxlength="6" onkeypress="<?=(MANAGE_DECIMAL_QTY==1?'return decimal_number_validation(event, this.value,8);':'return isNumber(event);')?>" style="display: block;" div-id="1">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td <?php if($productdiscount==0){ echo "style='display:none;'"; }?>>
+                                                <div class="form-group" id="discount1_div">
+                                                    <div class="col-md-12">
+                                                        <label for="discount1" class="control-label">Dis. (%)</label>
+                                                        <input type="text" class="form-control discount" id="discount1" name="discount[]" value="" div-id="1" onkeypress="return decimal_number_validation(event, this.value)">
+                                                        <input type="hidden" value="" id="orderdiscount1">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" id="discountinrs1_div">
+                                                    <div class="col-md-12">
+                                                        <label for="discountinrs1" class="control-label">Dis. (<?=CURRENCY_CODE?>)</label>
+                                                        <input type="text" class="form-control discount" id="discount1" name="discount[]" value="" div-id="1" onkeypress="return decimal_number_validation(event, this.value)">
+                                                        <input type="hidden" value="" id="orderdiscount1">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group" id="tax1_div">
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control text-right tax" id="tax1" name="tax[]" value="" div-id="1" onkeypress="return decimal_number_validation(event, this.value)" readonly>	
+                                                        <input type="hidden" value="" id="ordertax1">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group" id="amount1_div">
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control amounttprice" id="amount1" name="amount[]" value="" readonly="" div-id="1">	
+                                                        <input type="hidden" class="producttaxamount" id="producttaxamount1" name="producttaxamount[]" value="" div-id="1">		
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group pt-sm">
+                                                    <div class="col-md-12 pr-n">
+                                                    <button type="button" class="btn btn-default btn-raised  add_remove_btn_product" onclick="removeproduct(1)" style="padding: 5px 10px;display: none;"><i class="fa fa-minus"></i></button>		               
+                                                <button type="button" class="btn btn-default btn-raised  add_remove_btn" onclick="addnewproduct()" style="padding: 5px 10px;"><i class="fa fa-plus"></i></button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                        </table>
                         </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                        </div>
+
 
 
 
