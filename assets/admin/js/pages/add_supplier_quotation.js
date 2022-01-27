@@ -1,3 +1,4 @@
+var salesproducthtml ='';
 $(document).ready(function() {   
 
     
@@ -2074,6 +2075,95 @@ function resetdata(){
     }
     
 }
+
+function addnewproduct(){
+
+    productoptionhtml = salesproducthtml;
+    // if(PRODUCT_DISCOUNT==0){
+    //     discount = "display:none;";
+    // }else{ 
+    //     discount = "display:block;"; 
+    // }
+    var readonly = "readonly";
+    // if(EDITTAXRATE_CHANNEL==1 && EDITTAXRATE_SYSTEM==1){
+    //     readonly = "";
+    // }
+    divcount = parseInt($(".amounttprice:last").attr("div-id"))+1;
+    producthtml = '<tr class="countproducts" id="quotationproductdiv'+divcount+'">\
+        <td>\
+            <input type="hidden" name="producttax[]" id="producttax'+divcount+'">\
+            <input type="hidden" name="productrate[]" id="productrate'+divcount+'">\
+            <input type="hidden" name="originalprice[]" id="originalprice'+divcount+'">\
+            <input type="hidden" name="uniqueproduct[]" id="uniqueproduct'+divcount+'">\
+            <input type="hidden" name="referencetype[]" id="referencetype'+divcount+'">\
+            <div class="form-group" id="product'+divcount+'_div">\
+                <div class="col-sm-12">\
+                    <select id="productid'+divcount+'" name="productid[]" data-width="90%" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="8" div-id="'+divcount+'">\
+                        <option value="0">Select Product</option>\
+                        '+productoptionhtml+'\
+                    </select>\
+                </div>\
+            </div>\
+        </td>\
+        <td>\
+            <div class="form-group" id="comboprice'+divcount+'_div">\
+                <div class="col-sm-12">\
+                    <select id="combopriceid'+divcount+'" name="combopriceid[]" data-width="150px" class="selectpicker form-control combopriceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="'+divcount+'">\
+                        <option value="">Price</option>\
+                    </select>\
+                </div>\
+            </div>\
+            <div class="form-group" id="actualprice'+divcount+'_div">\
+                <div class="col-sm-12">\
+                    <label for="actualprice'+divcount+'" class="control-label">Rate ('+CURRENCY_CODE+')</label>\
+                    <input type="text" class="form-control actualprice text-right" id="actualprice'+divcount+'" name="actualprice[]" value="" onkeypress="return decimal_number_validation(event, this.value)" style="display: block;" div-id="'+divcount+'">\
+                </div>\
+            </div>\
+        </td>\
+        <td>\
+            <div class="form-group" id="qty'+divcount+'_div">\
+                <div class="col-md-12">\
+                    <input type="text" class="form-control qty" id="qty'+divcount+'" name="qty[]" value="" onkeypress="'+(MANAGE_DECIMAL_QTY==1?"return decimal_number_validation(event, this.value,8);":"return isNumber(event);")+'" style="display: block;" div-id="'+divcount+'">\
+                </div>\
+            </div>\
+        </td>\
+        <td>\
+            <div class="form-group" id="tax'+divcount+'_div">\
+                <div class="col-sm-12">\
+                    <input type="text" class="form-control text-right tax" id="tax'+divcount+'" name="tax[]" value="" div-id="'+divcount+'" '+readonly+'>	\
+                    <input type="hidden" value="" id="ordertax'+divcount+'">\
+                </div>\
+            </div>\
+        </td>\
+        <td>\
+            <div class="form-group" id="amount'+divcount+'_div">\
+                <div class="col-sm-12">\
+                    <input type="text" class="form-control amounttprice" id="amount'+divcount+'" name="amount[]" value="" readonly="" div-id="'+divcount+'">\
+                    <input type="hidden" class="producttaxamount" id="producttaxamount'+divcount+'" name="producttaxamount[]" value="" div-id="'+divcount+'">\
+                </div>\
+            </div>\
+        </td>\
+        <td>\
+            <div class="form-group pt-sm">\
+                <div class="col-sm-12 pr-n">\
+                    <button type = "button" class = "btn btn-default btn-raised  add_remove_btn_product" onclick = "removeproduct('+divcount+')" style="padding: 5px 10px;"> <i class = "fa fa-minus"></i></button> \
+                    <button type="button" class="btn btn-default btn-raised  add_remove_btn" onclick="addnewproduct()" style="padding: 5px 10px;"><i class="fa fa-plus"></i></button> \
+                </div>\
+            </div>\
+        </td>\
+    </div>';
+
+    $(".add_remove_btn_product:first").show();
+    $(".add_remove_btn:last").hide();
+    $("#quotationproducttable tbody").append(producthtml);
+
+    $("#qty"+divcount).TouchSpin(touchspinoptions);
+
+    $(".selectpicker").selectpicker("refresh");
+
+
+}
+
 function checkvalidation(){
     
     var memberid = $("#memberid").val();
@@ -2340,5 +2430,63 @@ function checkvalidation(){
               processData: false
             });
         }
+    }
+}
+
+
+function addattachfile(){
+
+    var rowcount = parseInt($(".countfiles:last").attr("id").match(/\d+/))+1;
+    var element = "file"+rowcount;
+    var datahtml = '<div class="col-md-6 p-n countfiles" id="countfiles'+rowcount+'">\
+                        <div class="col-md-7">\
+                            <div class="form-group" id="file'+rowcount+'_div">\
+                                <div class="col-md-12 pl-n">\
+                                    <div class="input-group" id="fileupload'+rowcount+'">\
+                                        <span class="input-group-btn" style="padding: 0 0px 0px 0px;">\
+                                            <span class="btn btn-primary btn-raised btn-file"><i class="fa fa-upload"></i>\
+                                                <input type="file" name="file'+rowcount+'" class="file" id="file'+rowcount+'" accept=".bmp,.bm,.gif,.ico,.jfif,.jfif-tbnl,.jpe,.jpeg,.jpg,.pbm,.png,.svf,.tif,.tiff,.wbmp,.x-png,.doc,.docx,.pdf" onchange="validattachmentfile($(this),&apos;'+element+'&apos;,this)">\
+                                            </span>\
+                                        </span>\
+                                        <input type="text" readonly="" id="Filetext'+rowcount+'" class="form-control" name="Filetext[]" value="">\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-3">\
+                            <div class="form-group" id="fileremarks'+rowcount+'_div">\
+                                <input type="text" class="form-control" name="fileremarks'+rowcount+'" id="fileremarks'+rowcount+'" value="">\
+                            </div>\
+                        </div>\
+                        <div class="col-md-2 pl-sm pr-sm mt-md">\
+                            <button type="button" class="btn btn-default btn-raised remove_file_btn m-n" onclick="removeattachfile('+rowcount+')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
+                            <button type="button" class="btn btn-default btn-raised add_file_btn m-n" onclick="addattachfile()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
+                        </div>\
+                    </div>';
+    
+    $(".remove_file_btn:first").show();
+    $(".add_file_btn:last").hide();
+    $("#countfiles"+(rowcount-1)).after(datahtml);
+    if($(".countfiles").length == 1){
+        $("#filesheading2").hide();
+    }else{
+        $("#filesheading2").show();
+    }
+}
+function removeattachfile(rowid){
+
+    if($('.countfiles').length!=1 && ACTION==1 && $('#transactionattachmentid'+rowid).val()!=null){
+        var removetransactionattachmentid = $('#removetransactionattachmentid').val();
+        $('#removetransactionattachmentid').val(removetransactionattachmentid+','+$('#transactionattachmentid'+rowid).val());
+    }
+    $("#countfiles"+rowid).remove();
+    if($(".countfiles").length == 1){
+        $("#filesheading2").hide();
+    }else{
+        $("#filesheading2").show();
+    }
+    $(".add_file_btn:last").show();
+    if ($(".remove_file_btn:visible").length == 1) {
+        $(".remove_file_btn:first").hide();
     }
 }

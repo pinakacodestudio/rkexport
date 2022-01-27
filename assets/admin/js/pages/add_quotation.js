@@ -528,6 +528,61 @@ $(document).ready(function () {
     getcity($('#provinceid').val());
 
 });
+
+function addnewdoc() {
+
+    var rowcount = parseInt($(".countinvoiceb:last").attr("id").match(/\d+/)) + 1;
+    var datahtml = '<div class="countinvoiceb" id="countinvoiceb' + rowcount + '">\
+                    <div class="row m-n">\
+                        <div class="col-md-3">\
+                            <div class="form-group" id="invoiceamount'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <input type="text" id="invoiceamount'+ rowcount + '" class="form-control invoiceamount"  placeholder="Enter Document Name" name="invoiceamount[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-3 col-sm-3">\
+                          <div class="form-group" id="docfile' + rowcount + '">\
+                              <div class="col-sm-12 pr-xs pl-xs">\
+                                  <input type="hidden" id="isvaliddocfile' + rowcount + '" value="0">\
+                                  <input type="hidden" name="olddocfile[' + rowcount + ']" id="olddocfile' + rowcount + '" value="">\
+                                  <div class="input-group" id="fileupload' + rowcount + '">\
+                                      <span class="input-group-btn" style="padding: 0 0px 0px 0px;">\
+                                          <span class="btn btn-primary btn-raised btn-file">\
+                                          <i class="fa fa-upload"></i>\
+                                              <input type="file" name="olddocfile_' + rowcount + '" class="docfile" id="olddocfile_' + rowcount + '" accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),&apos;docfile' + rowcount + '&apos;)">\
+                                          </span>\
+                                      </span>\
+                                      <input type="text" readonly="" placeholder="Enter File" id="Filetextdocfile' + rowcount + '" class="form-control docfile" name="Filetextdocfile_' + rowcount + '" value="">\
+                                  </div>\
+                              </div>\
+                          </div>\
+                      </div>\
+                        <div class="col-md-2 pt-md">\
+                            <button type="button" class="btn btn-danger btn-raised remove_doc_btn m-n" onclick="removedoc('+ rowcount + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
+                            <button type="button" class="btn btn-primary btn-raised add_doc_btn m-n" onclick="addnewdoc()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
+                        </div>\
+                    </div>\
+                </div>';
+
+    $(".remove_doc_btn:first").show();
+    $(".add_doc_btn:last").hide();
+    $("#countinvoiceb" + (rowcount - 1)).after(datahtml);
+
+}
+function removedoc(rowid) {
+
+    
+    $("#countinvoiceb" + rowid).remove();
+
+    $(".add_doc_btn:last").show();
+    if ($(".remove_doc_btn:visible").length == 1) {
+        $(".remove_doc_btn:first").hide();
+    }
+
+  
+}
+
 function updatematchprice(divid, type = 0) {
     var qty = $("#qty" + divid).val();
     var pricetype = $("#priceid" + divid + " option:selected").attr('data-pricetype');
@@ -643,7 +698,7 @@ function addnewinvoicetransaction() {
                                 </div>\
                             </div>\
                         </div>\
-                        <div class="col-md-2">\
+                        <div class="col-md-2 p-n">\
                             <div class="form-group" id="productid'+ rowcount + '_div">\
                                 <div class="col-md-12">\
                                     <select id="productid'+ rowcount + '" name="product[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">\
@@ -653,6 +708,29 @@ function addnewinvoicetransaction() {
                             </div>\
                         </div>\
                         <div class="col-md-2">\
+                            <div class="form-group" id="priceid'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <select id="priceid'+ rowcount + '" name="priceid[]" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="6">\
+                                        <option value="0">Select Price</option>\
+                                    </select>\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-1 p-n">\
+                            <div class="form-group" id="qty'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <input type="text" id="qty'+ rowcount + '" class="form-control qty text-right" name="qty[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-1 ">\
+                            <div class="form-group" id="qty'+ rowcount + '_div">\
+                                <div class="col-md-12">\
+                                    <input type="text" id="qty'+ rowcount + '" class="form-control qty text-right" name="qty[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="col-md-1 p-n">\
                             <div class="form-group" id="qty'+ rowcount + '_div">\
                                 <div class="col-md-12">\
                                     <input type="text" id="qty'+ rowcount + '" class="form-control qty text-right" name="qty[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">\
@@ -662,11 +740,14 @@ function addnewinvoicetransaction() {
                         <div class="col-md-2">\
                             <div class="form-group" id="deliverypriarity'+ rowcount + '_div">\
                                 <div class="col-md-12">\
-                                    <input type="text" id="deliverypriarity'+ rowcount + '" class="form-control text-right deliverypriarity" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">\
+                                    <select id="deliverydayid'+ rowcount + '" name="deliverydayid[]" class="selectpicker form-control deliverydayid" data-live-search="true" data-select-on-tab="true" data-size="6">\
+                                        <option value="0">Select Delivery Day</option>\
+                                        <option value="1">1 Day</option>\
+                                    </select>\
                                 </div>\
                             </div>\
                         </div>\
-                        <div class="col-md-2 pt-md">\
+                        <div class="col-md-1 pt-md">\
                             <button type="button" class="btn btn-danger btn-raised remove_invoice_btn m-n" onclick="removetransaction('+ rowcount + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
                             <button type="button" class="btn btn-primary btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
                         </div>\
@@ -679,6 +760,8 @@ function addnewinvoicetransaction() {
 
     $("#categoryid" + rowcount).selectpicker("refresh");
     $("#productid" + rowcount).selectpicker("refresh");
+    $("#priceid" + rowcount).selectpicker("refresh");
+    $("#deliverydayid" + rowcount).selectpicker("refresh");
 
 
 
@@ -1340,55 +1423,6 @@ function getmultiplepricebypriceid(divid) {
     $('#combopriceid' + divid).selectpicker('refresh');
 }
 
-function addnewproduct() {
-    var cloopdoc = $("#cloopdoc").val();
-    cloopdoc++;
-    $("#cloopdoc").val(cloopdoc);
-    var datahtml = '<div class="col-md-12">\
-    <div class="col-sm-12 countdocuments pl-sm pr-sm" id="countdocuments' + cloopdoc + '">\
-                      <input type="hidden" name="doc_id_' + cloopdoc + '" value="0" id="doc_id_' + cloopdoc + '">\
-                      <div class="col-md-5 col-sm-5">\
-                          <div class="form-group" id="documentnumber_' + cloopdoc + '">\
-                              <div class="col-sm-12 pr-xs pl-xs">\
-                                  <input id="documentname_' + cloopdoc + '" name="documentname_' + cloopdoc + '" placeholder="Enter Document Name" class="form-control documentnumber">\
-                              </div>\
-                          </div>\
-                      </div>\
-                      <div class="col-md-5 col-sm-5">\
-                          <div class="form-group" id="docfile' + cloopdoc + '">\
-                              <div class="col-sm-12 pr-xs pl-xs">\
-                                  <input type="hidden" id="isvaliddocfile' + cloopdoc + '" value="0">\
-                                  <input type="hidden" name="olddocfile[' + cloopdoc + ']" id="olddocfile' + cloopdoc + '" value="">\
-                                  <div class="input-group" id="fileupload' + cloopdoc + '">\
-                                      <span class="input-group-btn" style="padding: 0 0px 0px 0px;">\
-                                          <span class="btn btn-primary btn-raised btn-file">\
-                                          <i class="fa fa-upload"></i>\
-                                              <input type="file" name="olddocfile_' + cloopdoc + '" class="docfile" id="olddocfile_' + cloopdoc + '" accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),&apos;docfile' + cloopdoc + '&apos;)">\
-                                          </span>\
-                                      </span>\
-                                      <input type="text" readonly="" placeholder="Enter File" id="Filetextdocfile' + cloopdoc + '" class="form-control docfile" name="Filetextdocfile_' + cloopdoc + '" value="">\
-                                  </div>\
-                              </div>\
-                          </div>\
-                      </div>\
-                      <div class="col-md-1 addrowbutton pt-md pr-xs">\
-                          <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(' + cloopdoc + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
-                      </div>\
-                      </div>\
-                  </div>';
-
-    $("#adddocrow").append(datahtml);
-}
-
-function removeDocument(divid) {
-
-    $("#countdocuments" + divid).remove();
-
-    $(".add_btn:last").show();
-    if ($(".remove_btn:visible").length == 1) {
-        $(".remove_btn:first").show();
-    }
-}
 
 function removeproduct(divid) {
 
@@ -2270,6 +2304,24 @@ function checkvalidation() {
         i++;
     });
 
+    var i = 1;
+    $('.countinvoiceb').each(function () {
+        var id = $(this).attr('id').match(/\d+/);
+        if ( ($("#invoiceamount" + id).val() == "" )) {
+            if ($("#invoiceamount" + id).val() == '') {
+                $("#invoiceamount" + id + "_div").addClass("has-error is-focused");
+                new PNotify({ title: 'Please select ' + (i) + ' Document !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                isvalidextrachargesid = 0;
+            } else {
+                $("#extracharges" + id + "_div").removeClass("has-error is-focused");
+            }
+        } else {
+            $("#extracharges" + id + "_div").removeClass("has-error is-focused");
+            $("#productid" + id + "_div").removeClass("has-error is-focused");
+        }
+        i++;
+    });
+
    
     if (isvalidpartyid == 1 && isvalidbillingaddressid == 1) {
 
@@ -2344,7 +2396,4 @@ function checkvalidation() {
             });
         }
     }
-
-
-
 }

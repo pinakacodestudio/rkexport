@@ -2204,39 +2204,9 @@ function addnewproduct(){
             </div>\
         </td>\
         <td>\
-            <div class="form-group" id="comboprice'+divcount+'_div">\
-                <div class="col-sm-12">\
-                    <select id="combopriceid'+divcount+'" name="combopriceid[]" data-width="150px" class="selectpicker form-control combopriceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="'+divcount+'">\
-                        <option value="">Price</option>\
-                    </select>\
-                </div>\
-            </div>\
-            <div class="form-group" id="actualprice'+divcount+'_div">\
-                <div class="col-sm-12">\
-                    <label for="actualprice'+divcount+'" class="control-label">Rate ('+CURRENCY_CODE+')</label>\
-                    <input type="text" class="form-control actualprice text-right" id="actualprice'+divcount+'" name="actualprice[]" value="" onkeypress="return decimal_number_validation(event, this.value, 8)" style="display: block;" div-id="'+divcount+'">\
-                </div>\
-            </div>\
-        </td>\
-        <td>\
             <div class="form-group" id="qty'+divcount+'_div">\
                 <div class="col-md-12">\
                     <input type="text" class="form-control qty" id="qty'+divcount+'" name="qty[]" value="" onkeypress="'+(MANAGE_DECIMAL_QTY==1?"return decimal_number_validation(event, this.value,8);":"return isNumber(event);")+'" style="display: block;" div-id="'+divcount+'">\
-                </div>\
-            </div>\
-        </td>\
-        <td style="'+discount+'">\
-            <div class="form-group" id="discount'+divcount+'_div">\
-                <div class="col-md-12">\
-                <label for="discount'+divcount+'" class="control-label">Dis. (%)</label>\
-                    <input type="text" class="form-control discount" id="discount'+divcount+'" name="discount[]" value="" div-id="'+divcount+'" onkeypress="return decimal_number_validation(event, this.value)">\
-                    <input type="hidden" value="" id="orderdiscount'+divcount+'">\
-                </div>\
-            </div>\
-            <div class="form-group" id="discount'+divcount+'_div">\
-                <div class="col-md-12">\
-                <label for="discountinrs'+divcount+'" class="control-label">Dis. ('+CURRENCY_CODE+')</label>\
-                <input type="text" class="form-control discountinrs" id="discountinrs'+divcount+'" name="discountinrs[]" value="" div-id="'+divcount+'" onkeypress="return decimal_number_validation(event, this.value)">\
                 </div>\
             </div>\
         </td>\
@@ -2268,7 +2238,7 @@ function addnewproduct(){
 
     $(".add_remove_btn_product:first").show();
     $(".add_remove_btn:last").hide();
-    $("#orderproducttable tbody").append(producthtml);
+    $("#quotationproducttable tbody").append(producthtml);
 
     disabledform();
 
@@ -2889,29 +2859,27 @@ function resetdata(){
 }
 function checkvalidation(){
     
-    var vendorid = $("#vendorid").val();
+    var partyid = $("#partyid").val();
     var billingaddressid = $("#billingaddressid").val();
     var shippingaddressid = $("#shippingaddressid").val();
-    var orderid = $("#orderid").val().trim();
     var orderdate = $("#orderdate").val();
+    var podate = $("#podate").val();
+    var poid = $("#poid").val();
     
-    var paymenttypeid = $("#paymenttypeid").val().trim();
-    var transactionid = $("#transactionid").val().trim();
-    var transactionproof = $('#textfile').val().trim();
-    var noofinstallment = $('#noofinstallment').val().trim();
     var percentage = $("input[name='percentage[]']").map(function(){return $(this).val();}).get();
     
-    var isvalidvendorid = isvalidorderid = isvalidpaymenttype = 0;
-    var isvalidproductid = isvalidpriceid = isvalidcombopriceid = isvalidqty = isvalidamount = isvalidtransactionid = isvalidtransactionproof = isvalidinstallment = isvalidbillingaddressid = isvalidshippingaddressid = isvalidorderdate = isvalidduplicatecharges = isvalidextrachargesid = isvalidextrachargeamount = isvaliduniqueproducts = isvalidactualprice = isvalidinvoiceno = 1;
+    var isvalidpartyid = isvalidorderid = isvalidpaymenttype = 0;
+    var isvalidproductid = isvalidpriceid = isvalidcombopriceid = isvalidqty = isvalidamount = isvalidtransactionid = isvalidtransactionproof = isvalidinstallment = isvalidbillingaddressid = isvalidshippingaddressid = isvalidorderdate = isvalidduplicatecharges = isvalidextrachargesid = isvalidextrachargeamount = isvaliduniqueproducts = isvalidactualprice = isvalidinvoiceno  = 
+    isvalidpoid = isvalidpodate = isvalidpartyid = 1;
 
     PNotify.removeAll();
     
-    if(vendorid == 0){
-        $("#vendor_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please select vendor !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        isvalidvendorid = 0;
+    if(partyid == 0){
+        $("#party_div").addClass("has-error is-focused");
+        new PNotify({title: 'Please select Party !',styling: 'fontawesome',delay: '3000',type: 'error'});
+        isvalidpartyid = 0;
     }else {
-        isvalidvendorid = 1;
+        isvalidpartyid = 1;
     }
     if(billingaddressid == 0){
         $("#billingaddress_div").addClass("has-error is-focused");
@@ -2927,13 +2895,13 @@ function checkvalidation(){
     }else {
         $("#shippingaddress_div").removeClass("has-error is-focused");
     }
-    if(orderid == ''){
-        $("#orderid_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please enter order ID !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        isvalidorderid = 0;
-    }else {
-        isvalidorderid = 1;
-    }
+    // if(orderid == ''){
+    //     $("#orderid_div").addClass("has-error is-focused");
+    //     new PNotify({title: 'Please enter order ID !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    //     isvalidorderid = 0;
+    // }else {
+    //     isvalidorderid = 1;
+    // }
     if(orderdate == ''){
         $("#orderdate_div").addClass("has-error is-focused");
         new PNotify({title: 'Please select order date !',styling: 'fontawesome',delay: '3000',type: 'error'});
@@ -2941,12 +2909,29 @@ function checkvalidation(){
     }else {
         $("#orderdate_div").removeClass("has-error is-focused");
     }
+
+    if(poid == ''){
+        $("#poid_div").addClass("has-error is-focused");
+        new PNotify({title: 'Please select po id !',styling: 'fontawesome',delay: '3000',type: 'error'});
+        isvalidorderdate = 0;
+    }else {
+        $("#poid_div").removeClass("has-error is-focused");
+    }
+
+    if(podate == ''){
+        $("#podate_div").addClass("has-error is-focused");
+        new PNotify({title: 'Please select po date !',styling: 'fontawesome',delay: '3000',type: 'error'});
+        isvalidpodate = 0;
+    }else {
+        $("#podate_div").removeClass("has-error is-focused");
+    }
+
     var c=1;
-    var firstproduct = $('.countproducts:first').attr('id').match(/\d+/);
+    // var firstproduct = $('.countproducts:first').attr('id').match(/\d+/);
     $('.countproducts').each(function(){
         var id = $(this).attr('id').match(/\d+/);
-       
-        if($("#productid"+id).val() > 0 || $("#priceid"+id).val() != "" || $("#combopriceid"+id).val() != "" || $("#actualprice"+id).val() != "" || $("#qty"+id).val() == 0 || $("#amount"+id).val() > 0 || parseInt(id)==parseInt(firstproduct)){
+    
+        if($("#productid"+id).val() != '' || $("#priceid"+id).val() != "" || $("#qty"+id).val() == "" || $("#amount"+id).val() != '' ){
             if($("#productid"+id).val() == 0){
                 $("#product"+id+"_div").addClass("has-error is-focused");
                 new PNotify({title: 'Please select '+(c)+' product !',styling: 'fontawesome',delay: '3000',type: 'error'});
@@ -2956,45 +2941,19 @@ function checkvalidation(){
             }
             if($("#priceid"+id).val() == "" || $("#priceid"+id+" option:selected").text() == "Select Variant"){
                 $("#price"+id+"_div").addClass("has-error is-focused");
-                new PNotify({title: 'Please select '+(c)+' variant !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                new PNotify({title: 'Please select '+(c)+' price !',styling: 'fontawesome',delay: '3000',type: 'error'});
                 isvalidpriceid = 0;
             }else {
                 $("#price"+id+"_div").removeClass("has-error is-focused");
             }
-            if($("#combopriceid"+id).val() == ""){
-                $("#comboprice"+id+"_div").addClass("has-error is-focused");
-                new PNotify({title: 'Please select '+(c)+' price !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                isvalidcombopriceid = 0;
-            }else {
-                $("#comboprice"+id+"_div").removeClass("has-error is-focused");
-            }
-            if($("#actualprice"+id).val() == ""){
-                $("#actualprice"+id+"_div").addClass("has-error is-focused");
-                new PNotify({title: 'Please enter '+(c)+' actual price !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                isvalidactualprice = 0;
-            }else {
-                $("#actualprice"+id+"_div").removeClass("has-error is-focused");
-            }
-            if($("#qty"+id).val() == 0){
+            
+           
+            if($("#qty"+id).val() == " "){
                 $("#qty"+id+"_div").addClass("has-error is-focused");
                 new PNotify({title: 'Please select '+(c)+' quantity !',styling: 'fontawesome',delay: '3000',type: 'error'});
                 isvalidqty = 0;
-            }/* else if(parseInt($("#qty"+id).val()) > 0 && $("#priceid"+id).val() != ""){
-                
-                var minimumorderqty = $("#priceid"+id+" option:selected").attr('data-minimumorderqty');
-                var maximumorderqty = $("#priceid"+id+" option:selected").attr('data-maximumorderqty');
-                
-                if(parseInt(minimumorderqty) > 0 && parseInt($("#qty"+id).val()) < parseInt(minimumorderqty)){
-                    new PNotify({title: 'Minimum '+parseInt(minimumorderqty)+' quantity required for '+(c)+' product !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                    $("#qty"+id+"_div").addClass("has-error is-focused");
-                    isvalidqty = 0;
-                }
-                if(parseInt(maximumorderqty) > 0 && parseInt($("#qty"+id).val()) > parseInt(maximumorderqty)){
-                    new PNotify({title: 'Maximum '+parseInt(maximumorderqty)+' quantity allow for '+(c)+' product !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                    $("#qty"+id+"_div").addClass("has-error is-focused");
-                    isvalidqty = 0;
-                }
-            } */else {
+            }
+            else {
                 $("#qty"+id+"_div").removeClass("has-error is-focused");
             }
             if($("#amount"+id).val() == 0){
@@ -3015,26 +2974,26 @@ function checkvalidation(){
         c++;
     });
 
-    var products = $('input[name="uniqueproduct[]"]');
-    var values = [];
-    for(j=0;j<products.length;j++) {
-        var uniqueproducts = products[j];
-        var id = uniqueproducts.id.match(/\d+/);
+    // var products = $('input[name="uniqueproduct[]"]');
+    // var values = [];
+    // for(j=0;j<products.length;j++) {
+    //     var uniqueproducts = products[j];
+    //     var id = uniqueproducts.id.match(/\d+/);
         
-        if(uniqueproducts.value!="" && $("#productid"+id[0]).val()!=0 && ($("#priceid"+id[0]).val()!="" && $("#priceid"+id[0]+" option:selected").text()!="Select Variant")){
-            if(values.indexOf(uniqueproducts.value)>-1) {
-                $("#product"+id[0]+"_div,#price"+id[0]+"_div").addClass("has-error is-focused");
-                new PNotify({title: 'Please select '+(j+1)+' is different product & price !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                isvaliduniqueproducts = 0;
-            }
-            else{ 
-                values.push(uniqueproducts.value);
-                if($("#productid"+id[0]).val()!=0 && ($("#priceid"+id[0]).val()!="" && $("#priceid"+id[0]+" option:selected").text()!="Select Variant")){
-                    $("#product"+id[0]+"_div,#price"+id[0]+"_div").removeClass("has-error is-focused");
-                }
-            }
-        }
-    }
+    //     if(uniqueproducts.value!="" && $("#productid"+id[0]).val()!=0 && ($("#priceid"+id[0]).val()!="" && $("#priceid"+id[0]+" option:selected").text()!="Select Variant")){
+    //         if(values.indexOf(uniqueproducts.value)>-1) {
+    //             $("#product"+id[0]+"_div,#price"+id[0]+"_div").addClass("has-error is-focused");
+    //             new PNotify({title: 'Please select '+(j+1)+' is different product & price !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    //             isvaliduniqueproducts = 0;
+    //         }
+    //         else{ 
+    //             values.push(uniqueproducts.value);
+    //             if($("#productid"+id[0]).val()!=0 && ($("#priceid"+id[0]).val()!="" && $("#priceid"+id[0]+" option:selected").text()!="Select Variant")){
+    //                 $("#product"+id[0]+"_div,#price"+id[0]+"_div").removeClass("has-error is-focused");
+    //             }
+    //         }
+    //     }
+    // }
 
     var i=1;
     $('.countcharges').each(function(){
@@ -3056,55 +3015,49 @@ function checkvalidation(){
             }else {
                 $("#extrachargeamount"+id+"_div").removeClass("has-error is-focused");
             }
+            
+           
+
         } else{
             $("#extracharges"+id+"_div").removeClass("has-error is-focused");
-            $("#extrachargeamount"+id+"_div").removeClass("has-error is-focused");
+            $("#qty"+id+"_div").removeClass("has-error is-focused");
         }
         i++;
     });
 
-    var selects_charges = $('select[name="extrachargesid[]"]');
-    var values = [];
-    for(j=0;j<selects_charges.length;j++) {
-        var selectscharges = selects_charges[j];
-        var id = selectscharges.id.match(/\d+/);
+    // var selects_charges = $('select[name="extrachargesid[]"]');
+    // var values = [];
+    // for(j=0;j<selects_charges.length;j++) {
+    //     var selectscharges = selects_charges[j];
+    //     var id = selectscharges.id.match(/\d+/);
         
-        if(selectscharges.value!=0){
-            if(values.indexOf(selectscharges.value)>-1) {
-                $("#extracharges"+id[0]+"_div").addClass("has-error is-focused");
-                new PNotify({title: 'Please select '+(j+1)+' is different extra charges !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                isvalidduplicatecharges = 0;
-            }
-            else{ 
-                values.push(selectscharges.value);
-                if($("#extrachargesid"+id[0]).val()!=0){
-                $("#extracharges"+id[0]+"_div").removeClass("has-error is-focused");
-                }
-            }
-        }
-    }
+    //     if(selectscharges.value!=0){
+    //         if(values.indexOf(selectscharges.value)>-1) {
+    //             $("#extracharges"+id[0]+"_div").addClass("has-error is-focused");
+    //             new PNotify({title: 'Please select '+(j+1)+' is different extra charges !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    //             isvalidduplicatecharges = 0;
+    //         }
+    //         else{ 
+    //             values.push(selectscharges.value);
+    //             if($("#extrachargesid"+id[0]).val()!=0){
+    //             $("#extracharges"+id[0]+"_div").removeClass("has-error is-focused");
+    //             }
+    //         }
+    //     }
+    // }
 
-    if(ACTION==0){
-        var invoiceno = $("#invoiceno").val().trim();
-        if(invoiceno == 0 && $("#generateinvoice").prop('checked') == true){
-            $("#invoiceno_div").addClass("has-error is-focused");
-            new PNotify({title: 'Please enter invoice number !',styling: 'fontawesome',delay: '3000',type: 'error'});
-            isvalidinvoiceno = 0;
-        }else{
-            $("#invoiceno_div").removeClass("has-error is-focused");
-        }
-    }
-    if(paymenttypeid == 0){
-        $("#paymenttype_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please select payment type !',styling: 'fontawesome',delay: '3000',type: 'error'});
-        isvalidpaymenttype = 0;
-        $("#transactionid_div").removeClass("has-error is-focused");
-    }else {
-        isvalidpaymenttype = 1;
-        if(paymenttypeid!=3){
-            $("#transactionid_div").removeClass("has-error is-focused");
-        }
-    }
+
+    // if(paymenttypeid == 0){
+    //     $("#paymenttype_div").addClass("has-error is-focused");
+    //     new PNotify({title: 'Please select payment type !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    //     isvalidpaymenttype = 0;
+    //     $("#transactionid_div").removeClass("has-error is-focused");
+    // }else {
+    //     isvalidpaymenttype = 1;
+    //     if(paymenttypeid!=3){
+    //         $("#transactionid_div").removeClass("has-error is-focused");
+    //     }
+    // }
     /* if(paymenttypeid == 3){
         if(transactionid == ""){
             $("#transactionid_div").addClass("has-error is-focused");
@@ -3117,25 +3070,25 @@ function checkvalidation(){
             isvalidtransactionproof = 0;
         }
     } */
-    if(paymenttypeid == 4){
-        if(percentage.length == 0){
-            //$("#transactionid_div").addClass("has-error is-focused");
-            new PNotify({title: 'Please generate installment !',styling: 'fontawesome',delay: '3000',type: 'error'});
-            isvalidinstallment = 0;
-        }
-    }
+    // if(paymenttypeid == 4){
+    //     if(percentage.length == 0){
+    //         //$("#transactionid_div").addClass("has-error is-focused");
+    //         new PNotify({title: 'Please generate installment !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    //         isvalidinstallment = 0;
+    //     }
+    // }
     
-    var minimumorderamount = $("#vendorid option:selected").attr("data-minimumorderamount");
-    var payableamount = $("#inputnetamount").val();
+    // var minimumorderamount = $("#vendorid option:selected").attr("data-minimumorderamount");
+    // var payableamount = $("#inputnetamount").val();
     
-    var isvalidminimumorderamount = 0;
-    if(parseFloat(minimumorderamount) > 0 && payableamount!="" && parseFloat(payableamount) < parseFloat(minimumorderamount)){
-        new PNotify({title: 'Require minimum order amount is '+format.format(parseFloat(minimumorderamount))+' '+CURRENCY_CODE+' !',styling: 'fontawesome',delay: '3000',type: 'error'});
-    }else{
-        isvalidminimumorderamount = 1;
-    }
+    // var isvalidminimumorderamount = 0;
+    // if(parseFloat(minimumorderamount) > 0 && payableamount!="" && parseFloat(payableamount) < parseFloat(minimumorderamount)){
+    //     new PNotify({title: 'Require minimum order amount is '+format.format(parseFloat(minimumorderamount))+' '+CURRENCY_CODE+' !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    // }else{
+    //     isvalidminimumorderamount = 1;
+    // }
 
-    if(isvalidvendorid == 1 && isvalidbillingaddressid ==1 && isvalidorderid == 1 && isvalidproductid == 1 && isvalidpriceid == 1 && isvalidcombopriceid == 1 && isvalidactualprice==1 && isvalidqty == 1 && isvalidamount == 1 && isvalidpaymenttype == 1 && isvalidtransactionid == 1 && isvalidtransactionproof == 1 && isvalidinstallment == 1 && isvalidshippingaddressid == 1 && isvalidorderdate == 1 && isvalidextrachargesid == 1 && isvalidextrachargeamount == 1 && isvalidduplicatecharges == 1 && isvaliduniqueproducts == 1 && isvalidminimumorderamount == 1 && isvalidinvoiceno == 1){
+    if( isvalidbillingaddressid ==1 && isvalidorderid == 1 && isvalidproductid == 1 && isvalidpriceid == 1 && isvalidcombopriceid == 1 && isvalidactualprice==1 && isvalidqty == 1 && isvalidamount == 1 && isvalidpaymenttype == 1 && isvalidtransactionid == 1 && isvalidtransactionproof == 1 && isvalidinstallment == 1 && isvalidshippingaddressid == 1 && isvalidorderdate == 1 && isvalidextrachargesid == 1 && isvalidextrachargeamount == 1 && isvalidduplicatecharges == 1 && isvaliduniqueproducts == 1 && isvalidminimumorderamount == 1 && isvalidinvoiceno == 1){
         
         var formData = new FormData($('#purchaseorderform')[0]);
         if(ACTION==0){

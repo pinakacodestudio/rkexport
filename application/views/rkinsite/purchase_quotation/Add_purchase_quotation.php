@@ -15,7 +15,7 @@
     var EMIreceived = 0;
     var productoptionhtml = "";
     var salesproducthtml = "";
-    //var PRODUCT_DISCOUNT = '<?= PRODUCTDISCOUNT ?>';
+    var PRODUCT_DISCOUNT = '<?= PRODUCTDISCOUNT ?>';
  
 
     var GSTonDiscount = '<?php //if(isset($gstondiscount)){ echo $gstondiscount; } ?>';

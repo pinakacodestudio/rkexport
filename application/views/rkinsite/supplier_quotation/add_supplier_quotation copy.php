@@ -24,7 +24,10 @@
    var discountminamount = '<?php //if(isset($discountonbillminamount)){ echo $discountonbillminamount; }else{ echo -1; } ?>';
    
    var extrachargeoptionhtml = "";
-
+   <?php foreach($extrachargesdata as $extracharges){ ?>
+       extrachargeoptionhtml+='<option data-tax="<?php echo $extracharges['tax']; ?>" data-type="<?php echo $extracharges['amounttype']; ?>" data-amount="<?php echo $extracharges['defaultamount']; ?>" value="<?php echo $extracharges['id']; ?>"><?php echo $extracharges['extrachargename']; ?></option>';
+   <?php } ?>
+   
    var EDITTAXRATE_SYSTEM = '<?=EDITTAXRATE?>';
    var EDITTAXRATE_CHANNEL = '<?php if(!empty($quotationdata) && isset($quotationdata['quotationdetail']['memberedittaxrate'])){ echo $quotationdata['quotationdetail']['memberedittaxrate']; }?>';
 </script>
@@ -64,10 +67,10 @@
                      <div class="row">
                         <input type="hidden" id="oldmemberid" name="oldmemberid" value="<?php if(!empty($quotationdata) && !isset($isduplicate)){ echo $quotationdata['quotationdetail']['memberid']; } ?>">
                         <div class="col-sm-6">
-                           <div class="form-group" id="partyid_div">
+                           <div class="form-group" id="member_div">
                               <div class="col-sm-<?php if(isset($multiplememberchannel) && $multiplememberchannel==1){ echo "10 pr-n"; }else{ echo "12 pr-sm"; }?>" style="margin: 0px 0px 0px -7px;">
-                                 <label for="partyid" class="control-label">Select Party <span class="mandatoryfield">*</span></label>
-                                 <select id="partyid" name="partyid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="8" <?php if(!empty($quotationdata) && !isset($isduplicate)){ echo "disabled"; } ?>>
+                                 <label for="memberid" class="control-label">Select Party <span class="mandatoryfield">*</span></label>
+                                 <select id="memberid" name="memberid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="8" <?php if(!empty($quotationdata) && !isset($isduplicate)){ echo "disabled"; } ?>>
                                     <option value="0">Select Party</option>
                                     <?php /* foreach($Partydata as $party){ ?>
                                     <option value="<?=$party['id']?>"><?=$party['id']?></option>
@@ -75,51 +78,31 @@
                                  </select>
                               </div>
                               <?php if(isset($multiplememberchannel) && $multiplememberchannel==1){?>
-                    
+                              <!-- <div class="col-sm-2" style="padding-top: 28px !important;">
+                                 <a href="javascript:void(0)"class="btn btn-primary btn-raised"><i class="fa fa-plus" title="Add <?php Member_label?>"></i></a>
+                                 </div> -->
                               <div class="col-md-1 p-n" style="padding-top: 28px !important; margin:0 0 0 7px;">
                                  <a href="javascript:void(0)" onclick="addcountry()" class="btn btn-primary btn-raised p-xs"><i class="material-icons" title="Add Unit">add</i></a>
                               </div>
                               <?php } ?>
                            </div>
                         </div>
-                        <div class="col-sm-6" style="margin: 0 0 0 -10px;">
+                        <div class="col-sm-6" style="margin: 0 0 0 -10px; width:50rem;">
                            <div class="form-group" id="quotationid_div">
                               <div class="col-sm-12 pr-sm">
-                                 <label for="quotationid" class="control-label">Inquiry No <span class="mandatoryfield">*</span></label>
+                                 <label for="quotationid" class="control-label">Quotation No <span class="mandatoryfield">*</span></label>
                                  <input id="quotationid" type="text" name="quotationid" class="form-control" value="<?php if(!empty($quotationdata['quotationdetail']) && !isset($isduplicate)){ echo $quotationdata['quotationdetail']['quotationid']; }else if(!empty($quotationid)){echo $quotationid; }?>" readonly>
                               </div>
                            </div>
                         </div>
                         <div class="col-sm-6">
-                           <div class="form-group" id="inquiryname_div">
-                              <div class="col-sm-12 pl-sm pr-sm">
-                                 <label for="inquiryname" class="control-label">Inquiry No <span class="mandatoryfield">*</span></label>
-                                 <div class="input-group">
-                                    <input id="inquiryname" type="text" name="inquiryname" value="" class="form-control">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-sm-6">
-                           <div class="form-group" id="inquiry_div">
-                              <div class="col-sm-12 pl-sm pr-sm">
-                                 <label for="inquirydate" class="control-label">Inquiry Date <span class="mandatoryfield">*</span></label>
-                                 <div class="input-group">
-                                    <input id="inquirydate" type="text" name="inquirydate" value="<?php if(!empty($quotationdata['quotationdetail']) && $quotationdata['quotationdetail']['quotationdate']!="0000-00-00"){ echo $this->general_model->displaydate($quotationdata['quotationdetail']['quotationdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate());} ?>" class="form-control" readonly>
-                                    <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <?php /*
-                        <div class="col-sm-6">
                            <div class="form-group" id="billingaddress_div">
                               <div class="col-sm-12 pr-sm pl-sm">
                                  <label for="billingaddressid" class="control-label">
-                                    Select Billing Address<!--  <span class="mandatoryfield">*</span> -->
+                                    Inquiry No<!--  <span class="mandatoryfield">*</span> -->
                                  </label>
                                  <select id="billingaddressid" name="billingaddressid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="5">
-                                    <option value="0">Select Billing Address</option>
+                                    <option value="0">None</option>
                                     <?php if(isset($Partydata)){ 
                                        foreach($Partydata as $ba){ 
                                        ?>
@@ -131,7 +114,28 @@
                               </div>
                            </div>
                         </div>
+                        <!-- <div class="col-sm-6">
+                           <div class="form-group" id="inquiryname_div">
+                              <div class="col-sm-12 pl-sm pr-sm">
+                                 <label for="inquiryname" class="control-label">Inquiry Name <span class="mandatoryfield">*</span></label>
+                                 <div class="input-group">
+                                    <input id="inquiryname" type="text" name="inquiryname" value="" class="form-control">
+                                 </div>
+                              </div>
+                           </div>
+                        </div> -->
                         <div class="col-sm-6">
+                           <div class="form-group" id="quotationdate_div">
+                              <div class="col-sm-12 pl-sm pr-sm">
+                                 <label for="quotationdate" class="control-label">Inquiry Date <span class="mandatoryfield">*</span></label>
+                                 <div class="input-group">
+                                    <input id="quotationdate" type="text" name="quotationdate" value="<?php if(!empty($quotationdata['quotationdetail']) && $quotationdata['quotationdetail']['quotationdate']!="0000-00-00"){ echo $this->general_model->displaydate($quotationdata['quotationdetail']['quotationdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate());} ?>" class="form-control" readonly>
+                                    <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- <div class="col-sm-6">
                            <div class="form-group" id="shippingaddress_div">
                               <div class="col-sm-12 pl-sm">
                                  <label for="shippingaddressid" class="control-label">Select Shipping Address</label>
@@ -142,227 +146,534 @@
                                     <option value="<?php echo $sa['id']; ?>"><?php echo ucwords($sa['shippingaddress']); ?></option>
                                     <?php }} ?>
                                  </select>
-                                 <!-- <a href="javascript:void(0)" class="mt-sm" style="float: left;" onclick="openmodal(2)"><i class="fa fa-plus"></i> Add New Shipping Address</a> -->
+                                 <a href="javascript:void(0)" class="mt-sm" style="float: left;" onclick="openmodal(2)"><i class="fa fa-plus"></i> Add New Shipping Address</a>
                                  <input type="hidden" name="shippingaddress" id="shippingaddress" value="">
                               </div>
                            </div>
-                        </div>
-                        */?>
-                     
-
-                   
-
-            <div class="">
-               <div class="col-md-12">
-                  <div class="panel panel-default border-panel" id="conect_countdocuments1">
-                     
-                     <div class="panel-body">
-                        <div id="addtarget">
-                           <div class="row">
-                              <div class="col-md-2">
-                                 <div class="form-group" id="firstname_div">
-                                    <label for="firstname" class="col-md-12 control-label tal">Category <span class="mandatoryfield"> *</span></label>
-                                 </div>
-                              </div>
-                              <div class="col-md-2 p-n">
-                                 <div class="form-group" id="lastname_div">
-                                    <label for="lastname" class="col-md-12 control-label tal">product <span  class="mandatoryfield"> *</span></label>
-                                 </div>
-                              </div>
-                              <div class="col-md-2  ">
-                                 <div class="form-group" id="lastname_div">
-                                    <label for="lastname" class="col-md-12 control-label tal">Price <span  class="mandatoryfield"> *</span></label>
-                                 </div>
-                              </div>
+                        </div> -->
+                        <div class="col-md-12" style="margin:30px 0px 0px -7px; width:100.3rem" id='addproductitem'>
+                           <?php 
+                              $cloopdoc = 0;
+                              $i=0;
                               
-                              <div class="col-md-1 p-n">
-                                 <div class="form-group" id="birthdate_div">
-                                    <label for="birthdate" class="col-md-12 control-label tal">qty </label>
-                                 </div>
-                              </div>
-                              <div class="col-md-1  ">
-                                 <div class="form-group" id="contactno_div">
-                                    <label for="contactno" class="col-md-12 control-label tal">Discount  <span class="mandatoryfield" > *</span></label>
-                                 </div>
-                              </div>
-                              <div class="col-md-1 p-n">
-                                 <div class="form-group" id="contactno_div">
-                                    <label for="contactno" class="col-md-12 control-label tal">Amount  <span class="mandatoryfield" > *</span></label>
-                                 </div>
-                              </div>
-                              <div class="col-md-2 ">
-                                 <div class="form-group" id="contactno_div">
-                                    <label for="contactno" class="col-md-12 control-label tal">Delivery  <span class="mandatoryfield" > *</span></label>
-                                 </div>
-                              </div>
-                             
-                              <div class="clearfix"></div>
-                              <?php if(isset($paymentreceiptdata) && !empty($receipttransactionsdata)){?>
-                            
-                              <?php }else{ ?>
-                              <div class="countcategory" id="countcategory1">
-                                 <div class="row m-n">
-                                    <div class="col-md-2">
-                                       <div class="form-group" id="category1_div">
-                                          <div class="col-md-12">
-                                             <select id="categoryid1" name="categoryid[]" class="selectpicker form-control categoryid" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                <option value="0">Select Category </option>
-                                             </select>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2 p-n">
-                                       <div class="form-group" id="productid1_div">
-                                          <div class="col-md-12">
-                                             <select id="productid1" name="productid[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                <option value="0">Select Product</option>
-                                             </select>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                       <div class="form-group" id="productid1_div">
-                                          <div class="col-md-12">
-                                             <select id="productid1" name="productid[]" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                <option value="0">Select Price</option>
-                                             </select>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-1 p-n">
-                                       <div class="form-group" id="pqty1_div">
-                                          <div class="col-md-12">								
-                                             <input type="text" id="pqty1" class="form-control" name="pqty[]" value="" onkeypress="return decimal_number_validation(event, this.value, 10)">
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-1">
-                                       <div class="form-group" id="deliverypriarity1_div">
-                                          <div class="col-md-12">								
-                                             <input type="text" id="deliverypriarity1" class="form-control text-right deliverypriarity" value="" onkeypress="return decimal_number_validation(event, this.value, 10)" >
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-1 p-n">
-                                       <div class="form-group" id="deliverypriarity1_div">
-                                          <div class="col-md-12">								
-                                             <input type="text" id="deliverypriarity1" class="form-control text-right deliverypriarity" value="" onkeypress="return decimal_number_validation(event, this.value, 10)" >
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                       <div class="form-group" id="deliveryday1_div">
-                                          <div class="col-md-12">
-                                             <select id="deliverydayid1" name="deliverydayid[]" class="selectpicker form-control deliverydayid" data-live-search="true" data-select-on-tab="true" data-size="6">
-                                                <option value="0">Select Delivery Day</option>
-                                                <option value="1">1 Day</option>
-                                             </select>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-1 pt-md">
-                                       <button type="button" class="btn btn-danger btn-raised  remove_invoice_btn m-n" onclick="removetransaction(1)" style="padding: 3px 8px;display:none;"><i class="fa fa-minus"></i></button>
-                                       <button type="button" class="btn btn-primary btn-raised add_invoice_btn m-n" onclick="addnewinvoicetransaction()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
-                                    </div>
-                                 </div>
-                              </div>
-                              <?php } ?>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <!-- <div class="col-sm-4">
-                        <div class="form-group" id="deliverydate_div">
-                           <div class="col-sm-12">
-                              <label for="deliverydate" class="control-label">Select Approx Delivery Date <span class="mandatoryfield">*</span></label>
-                              <div class="input-group">
-                                 <input id="deliverydate" type="text" name="deliverydate" value="" class="form-control date" readonly>
-                                 <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
-                              </div>
-                           </div>
-                        </div>
-                     </div> -->
-                     <div class="col-sm-4">
-                        <div class="form-group" id="discount_div">
-                           <div class="col-sm-12">
-                              <input type="hidden" name="olddiscount" id="olddiscount" value="">
-                              <label for="discountid" class="control-label">Discount(%) <span class="mandatoryfield">*</span></label>
-                              <input id="discount" type="text" name="discount" value="" class="form-control" onkeypress="return decimal_number_validation(event, this.value, 10)">
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-sm-4">
-                        <div class="form-group" id="amount_div">
-                           <div class="col-sm-12">
-                              <input type="hidden" name="oldamount" id="oldamount" value="">
-                              <label for="amountid" class="control-label">Amount <span class="mandatoryfield">*</span></label>
-                              <input id="amount" type="text" onkeypress="return decimal_number_validation(event, this.value, 10)" name="discountamount" value="" class="form-control" >
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-12 p-n">
-                        <div class="col-md-3">
-                           <div class="form-group" id="remarks_div">
-                              <div class="col-sm-12 pr-n">
-                                 <label for="remarks" class="control-label">Remarks</label>
-                                 <textarea id="remarks" name="remarks" class="form-control"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['remarks']; }?></textarea>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-9 pull-right p-n">
-                           <div class="col-md-6 pr-xs">
-                           </div>
-                           <div class="col-md-6 pl-xs">
-                              <input type="hidden" name="removeextrachargemappingid" id="removeextrachargemappingid">
-                              <table id="example" class="table table-bordered table-striped" cellspacing="0" width="100%" style="border: 1px solid #e8e8e8;">
+                              if(isset($party_docdata[0]->id ) && !empty($party_docdata[0]->id ))  {
+                                  foreach ($party_docdata as $row)
+                                 {
+                                     $i++;
+                                     $cloopdoc = $cloopdoc + 1;
+                                     $doc_id = $row->id;
+                                     $doc=$row->doc;
+                                     $docname = $row->docname;
+                                 ?>
+                           <!-- <div id="quotationproductdivs">
+                              <table id="quotationproducttable" class="table table-hover table-bordered m-n">
+                                 <thead>
+                                    <tr>
+                                       <th>Category<span class="mandatoryfield">*</span></th>
+                                       <th class="">Product <span class="mandatoryfield">*</span></th>
+                                       <th class="">Qty <span class="mandatoryfield">*</span></th>
+                                       <th class="">Delivery Priarity</th>
+                                    </tr>
+                                 </thead>
                                  <tbody>
-                                    <tr>
-                                       <th colspan="2" class="text-center">Quotation Summary (<?=CURRENCY_CODE?>)</th>
-                                    </tr>
-                                    <tr>
-                                       <th>Total Of Product</th>
-                                       <td class="text-right" width="30%">
-                                          <span id="grossamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; }else{ echo "0.00"; }?></span>
-                                          <input type="hidden" id="inputgrossamount" name="grossamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; } ?>">
+                                    <?php if(!empty($quotationdata) && !empty($quotationdata['quotationproduct'])) { ?>
+                                    <input type="hidden" name="removequotationproductid" id="removequotationproductid">
+                                    <?php for ($i=0; $i < count($quotationdata['quotationproduct']); $i++) { ?>
+                                    <tr class="countproducts" id="quotationproductdiv<?=($i+1)?>">
+                                       <td>
+                                          <input type="hidden" name="quotationproductsid[]" value="<?=(!isset($isduplicate))?$quotationdata['quotationproduct'][$i]['id']:""?>" id="quotationproductsid<?=$i+1?>">
+                                          <input type="hidden" name="producttax[]" value="<?=$quotationdata['quotationproduct'][$i]['tax']?>" id="producttax<?=$i+1?>">
+                                          <input type="hidden" name="productrate[]" value="<?=$quotationdata['quotationproduct'][$i]['price']?>" id="productrate<?=$i+1?>">
+                                          <input type="hidden" name="originalprice[]" value="<?=$quotationdata['quotationproduct'][$i]['originalprice']?>" id="originalprice<?=$i+1?>">
+                                          <input type="hidden" name="uniqueproduct[]" value="<?=$quotationdata['quotationproduct'][$i]['productid']."_".$quotationdata['quotationproduct'][$i]['priceid']?>" id="uniqueproduct<?=$i+1?>">
+                                          <input type="hidden" name="referencetype[]" id="referencetype<?=$i+1?>" value="<?=$quotationdata['quotationproduct'][$i]['referencetype']?>">
+                                          <div class="form-group" id="product<?=($i+1)?>_div">
+                                             <div class="col-sm-12">
+                                                <select id="productid<?=($i+1)?>" name="productid[]" data-width="90%" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="8" div-id="<?=($i+1)?>">
+                                                   <option value="0">Select Product</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="price<?=($i+1)?>_div">
+                                             <div class="col-md-12">
+                                                <select id="priceid<?=($i+1)?>" name="priceid[]" data-width="90%" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="<?=($i+1)?>">
+                                                   <option value="">Select Variant</option>
+                                                </select>
+                                                <div class="form-group m-n p-n" id="applyoldprice<?=($i+1)?>_div">
+                                                   <div class="col-sm-12">
+                                                      <div class="checkbox pt-n pl-xs text-left">
+                                                         <input id="applyoldprice<?=($i+1)?>" type="checkbox" value="0" class="checkradios applyoldprice" checked>
+                                                         <?php 
+                                                            $oldproductrate = $quotationdata['quotationproduct'][$i]['originalprice'];
+                                                            /* if(PRICE==1){
+                                                                $oldproductrate = $quotationdata['quotationproduct'][$i]['price'];
+                                                            }else{
+                                                                $oldproductrate = $quotationdata['quotationproduct'][$i]['pricewithtax'];
+                                                            } */?>
+                                                         <label for="applyoldprice<?=($i+1)?>" class="control-label p-n">Apply Old Quotation Price : <span id="oldpricewithtax<?=($i+1)?>"><?=$oldproductrate?></span></label>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="comboprice<?=($i+1)?>_div">
+                                             <div class="col-sm-12">
+                                                <select id="combopriceid<?=($i+1)?>" name="combopriceid[]" data-width="150px" class="selectpicker form-control combopriceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="<?=($i+1)?>">
+                                                   <option value="">Price</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                          <div class="form-group" id="actualprice<?=($i+1)?>_div">
+                                             <div class="col-sm-12">
+                                                <label for="actualprice<?=($i+1)?>" class="control-label">Rate (<?=CURRENCY_CODE?>)</label>
+                                                <!-- <input type="text" class="form-control actualprice text-right" id="actualprice<?php //($i+1)?>" name="actualprice[]" value="<?php //$quotationdata['quotationproduct'][$i]['originalprice']?>" onkeypress="return decimal_number_validation(event, this.value, 8);" style="display: block;" div-id="<?php //($i+1)?>"> -->
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="qty<?=($i+1)?>_div">
+                                             <div class="col-md-12">
+                                                <input type="text" class="form-control qty" id="qty<?=($i+1)?>" name="qty[]" value="<?=$quotationdata['quotationproduct'][$i]['quantity']?>" onkeypress="<?=(MANAGE_DECIMAL_QTY==1?'return decimal_number_validation(event, this.value,8);':'return isNumber(event);')?>" style="display: block;" div-id="<?=($i+1)?>">
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="discount<?=($i+1)?>_div" style="<?php if(PRODUCTDISCOUNT==0){ echo "display:none;"; }else{ echo "display:block;"; } ?>">
+                                             <div class="col-sm-12">
+                                                <input type="text" class="form-control discount" id="discount<?=($i+1)?>" name="discount[]" value="<?=$quotationdata['quotationproduct'][$i]['discount']?>" div-id="<?=($i+1)?>" onkeypress="return decimal_number_validation(event, this.value)">	
+                                                <input type="hidden" value="<?=$quotationdata['quotationproduct'][$i]['discount']?>" id="orderdiscount<?=$i+1?>">
+                                             </div>
+                                          </div>
+                                          <div class="form-group" id="discountinrs<?=($i+1)?>_div" style="<?php if(PRODUCTDISCOUNT==0){ echo "display:none;"; }else{ echo "display:block;"; } ?>">
+                                             <div class="col-sm-12">
+                                                <input type="text" class="form-control discountinrs" id="discountinrs<?=($i+1)?>" name="discountinrs[]" value="" div-id="<?=($i+1)?>" onkeypress="return decimal_number_validation(event, this.value)">	
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="tax<?=($i+1)?>_div">
+                                             <div class="col-sm-12">
+                                                <!-- <input type="text" class="form-control text-right tax" id="tax<?=($i+1)?>" name="tax[]" value="<?php //$quotationdata['quotationproduct'][$i]['tax']?>" div-id="<?=($i+1)?>" onkeypress="return decimal_number_validation(event, this.value)" <?php 
+                                                   //if($quotationdata['quotationdetail']['memberedittaxrate']==1 && EDITTAXRATE==1){ 
+                                                   // echo ""; 
+                                                   //}else{ 
+                                                   // echo "readonly"; 
+                                                   // }?>>	
+                                                   <input type="hidden" value="<?php //$quotationdata['quotationproduct'][$i]['tax']?>" id="ordertax<?php //$i+1?>"> -->
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="amount<?=($i+1)?>_div">
+                                             <div class="col-sm-12">
+                                                <input type="text" class="form-control amounttprice" id="amount<?=($i+1)?>" name="amount[]" value="" readonly="" div-id="<?=($i+1)?>">
+                                                <input type="hidden" class="producttaxamount" id="producttaxamount<?=($i+1)?>" name="producttaxamount[]" value="" div-id="<?=($i+1)?>">		
+                                                <span class="material-input"></span>
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group pt-sm">
+                                             <div class="col-sm-12 pr-n">
+                                                <?php if($i==0){?>
+                                                <?php if(count($quotationdata['quotationproduct'])>1){ ?>
+                                                <button type="button" class="btn btn-default btn-raised  add_remove_btn_product" onclick="removeproduct(1)" style="padding: 5px 10px;"><i class="fa fa-minus"></i></button>
+                                                <?php }else { ?>
+                                                <button type="button" class="btn btn-default btn-raised  add_remove_btn" onclick="addnewproduct()" style="padding: 5px 10px;"><i class="fa fa-plus"></i></button>
+                                                <?php } ?>
+                                                <?php }else if($i!=0) { ?>
+                                                <button type="button" class="btn btn-default btn-raised  add_remove_btn_product" onclick="removeproduct(<?=$i+1?>)" style="padding: 5px 10px;"><i class="fa fa-minus"></i></button>
+                                                <?php } ?>
+                                                <button type="button" class="btn btn-default btn-raised btn-sm add_remove_btn_product" onclick="removeproduct(<?=$i+1?>)"  style="padding: 5px 10px;display:none;"><i class="fa fa-minus"></i></button>
+                                                <button type="button" class="btn btn-default btn-raised  add_remove_btn" onclick="addnewproduct()" style="padding: 5px 10px;"><i class="fa fa-plus"></i></button>  
+                                             </div>
+                                          </div>
                                        </td>
                                     </tr>
-                                    <tr id="discountrow" style="display: none;">
-                                       <th>Discount (<span id="discountpercentage"><?php if(!empty($quotationdata['ordquotationdetailrdetail'])){ echo number_format($quotationdata['quotationdetail']['globaldiscount']*100/$quotationdata['quotationdetail']['quotationamount'],2); }else{ echo "0"; }?></span>%)
-                                       </th>
-                                       <td class="text-right">
-                                          <span id="discountamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['globaldiscount']; }else{ echo "0.00"; }?></span>
+                                    <script type="text/javascript">
+                                       $(document).ready(function() {
+                                           oldproductid.push(<?=$quotationdata['quotationproduct'][$i]['productid']?>);
+                                           oldpriceid.push(<?=$quotationdata['quotationproduct'][$i]['priceid']?>);
+                                           oldtax.push(<?=$quotationdata['quotationproduct'][$i]['tax']?>);
+                                           productdiscount.push(<?=$quotationdata['quotationproduct'][$i]['discount']?>);
+                                           oldcombopriceid.push(<?=$quotationdata['quotationproduct'][$i]['referenceid']?>);
+                                           oldprice.push(<?=$quotationdata['quotationproduct'][$i]['originalprice']?>);
+                                       
+                                           $("#qty<?=$i+1?>").TouchSpin(touchspinoptions);
+                                           getproduct(<?=$i+1?>);
+                                           getproductprice(<?=$i+1?>);
+                                           getmultiplepricebypriceid(<?=$i+1?>);
+                                           calculatediscount(<?=$i+1?>);
+                                           changeproductamount(<?=$i+1?>);
+                                       });
+                                    </script>
+                                    <?php } ?>
+                                    <?php }else{ ?>
+                                    <tr class="countproducts" id="quotationproductdiv1">
+                                       <td>
+                                          <input type="hidden" name="producttax[]" id="producttax1">
+                                          <input type="hidden" name="productrate[]" id="productrate1">
+                                          <input type="hidden" name="originalprice[]" id="originalprice1">
+                                          <input type="hidden" name="uniqueproduct[]" id="uniqueproduct1">
+                                          <input type="hidden" name="referencetype[]" id="referencetype1">
+                                          <div class="form-group" id="product1_div">
+                                             <div class="col-sm-12">
+                                                <select id="productid1" name="productid[]" data-width="90%" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
+                                                   <option value="0">Select Product</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <!-- <td>
+                                          <div class="form-group" id="price1_div">
+                                              <div class="col-md-12">
+                                                  <select id="priceid1" name="priceid[]" data-width="90%" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
+                                                      <option value="">Select Variant</option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                          </td> -->
+                                       <td>
+                                          <div class="form-group" id="comboprice1_div">
+                                             <div class="col-sm-12">
+                                                <select id="combopriceid1" name="combopriceid[]" data-width="150px" class="selectpicker form-control combopriceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
+                                                   <option value="">Price</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                          <!-- <div class="form-group" id="actualprice1_div">
+                                             <div class="col-sm-12">
+                                                 <label for="actualprice1" class="control-label">Rate (<?=CURRENCY_CODE?>)</label>
+                                                 <input type="text" class="form-control actualprice text-right" id="actualprice1" name="actualprice[]" value="" onkeypress="return decimal_number_validation(event, this.value, 8)" style="display: block;" div-id="1">
+                                             </div>
+                                             </div> -->
+                                       </td>
+                                       <!-- <td>
+                                          <div class="form-group" id="qty1_div">
+                                              <div class="col-md-12">
+                                                  <input type="text" class="form-control qty" id="qty1" name="qty[]" value="" onkeypress="<?php //(MANAGE_DECIMAL_QTY==1?'return decimal_number_validation(event, this.value,8);':'return isNumber(event);')?>" style="display: block;" div-id="1">
+                                              </div>
+                                          </div>
+                                          </td> -->
+                                       <!-- <td <?php //if(PRODUCTDISCOUNT==0){ echo "style='display:none;'"; } ?>>
+                                          <div class="form-group" id="discount1_div">
+                                              <div class="col-md-12">
+                                                  <label for="discount1" class="control-label">Dis. (%)</label>
+                                                  <input type="text" class="form-control discount" id="discount1" name="discount[]" value="" div-id="1" onkeypress="return decimal_number_validation(event, this.value)">	
+                                                  <input type="hidden" value="" id="orderdiscount1">
+                                              </div>
+                                          </div>
+                                          <div class="form-group" id="discountinrs1_div"> 
+                                              <div class="col-md-12">
+                                                  <label for="discountinrs1" class="control-label">Dis. (<?php //CURRENCY_CODE?>)</label>
+                                                  <input type="text" class="form-control discountinrs" id="discountinrs1" name="discountinrs[]" value="" div-id="1" onkeypress="return decimal_number_validation(event, this.value)">	
+                                              </div>
+                                          </div>
+                                          </td> -->
+                                       <!-- <td>
+                                          <div class="form-group" id="tax1_div"> 
+                                              <div class="col-md-12">
+                                                  <input type="text" class="form-control text-right tax" id="tax1" name="tax[]" value="" div-id="1" onkeypress="return decimal_number_validation(event, this.value)" readonly>	
+                                                  <input type="hidden" value="" id="ordertax1">
+                                              </div>
+                                          </div>
+                                          </td> -->
+                                       <td>
+                                          <div class="form-group" id="amount1_div">
+                                             <div class="col-md-12">
+                                                <input type="text" class="form-control amounttprice" id="amount1" name="amount[]" value=""  div-id="1">	
+                                                <input type="hidden" class="producttaxamount" id="producttaxamount1" name="producttaxamount[]" value="" div-id="1">		
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group">
+                                             <div class="col-md-12 pr-n">
+                                                <!-- <button type="button" class="btn btn-default btn-raised  add_remove_btn_product" onclick="removeproduct(1)" style="padding: 5px 10px;display: none;"><i class="fa fa-minus"></i></button>		                -->
+                                                <div class="col-md-12 pr-n">
+                                                   <div class="form-group" id="deliverypriority_div">
+                                                      <div class="col-md-9">
+                                                         <?php
+                                                            $selectedpriority = 1;
+                                                            if(!empty($quotationdata['quotationdetail'])){
+                                                                $selectedpriority = $quotationdata['quotationdetail']['deliverypriority'];
+                                                            } 
+                                                            ?>
+                                                         <select id="deliverypriority" name="deliverypriority" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="5">
+                                                            <option value="1" <?=($selectedpriority==1)?"selected":""?>>Medium</option>
+                                                            <option value="2" <?=($selectedpriority==2)?"selected":""?>>High</option>
+                                                            <option value="3" <?=($selectedpriority==3)?"selected":""?>>Low</option>
+                                                            <option value="4" <?=($selectedpriority==4)?"selected":""?>>Urgent</option>
+                                                         </select>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
                                        </td>
                                     </tr>
+                                    <?php } ?>
+                                 </tbody>
+                              </table>
+                           </div> -->
+                           <?php
+                              }
+                              }else {
+                                  $count = 1;
+                                  $cloopdoc = 0;
+                                  while ($count > $cloopdoc) {
+                                      $cloopdoc = $cloopdoc + 1;
+                              ?>
+                           <div id="quotationproductdivs mb-5">
+                              <table id="quotationproducttable" class="panel panel-default border-panel table table-hover table-bordered m-n">
+                                 <thead>
                                     <tr>
-                                       <th>Round Off</th>
-                                       <td class="text-right">
-                                          <span id="roundoff">0.00</span>
-                                          <input type="hidden" id="inputroundoff" name="inputroundoff" value="0.00">
+                                       <th>Category<span class="mandatoryfield">*</span></th>
+                                       <th class="">Product <span class="mandatoryfield">*</span></th>
+                                       <th class="">Qty <span class="mandatoryfield">*</span></th>
+                                       <th class="">Discount( % ) <span class="mandatoryfield">*</span></th>
+                                       <th class="">Amount <span class="mandatoryfield">*</span></th>
+                                       <th class="">Delivery Priarity</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <?php if(!empty($quotationdata) && !empty($quotationdata['quotationproduct'])) { ?>
+                                    <input type="hidden" name="removequotationproductid" id="removequotationproductid">
+                                    <?php for ($i=0; $i < count($quotationdata['quotationproduct']); $i++) { ?>
+                                    <tr class="countproducts" id="quotationproductdiv<?=($i+1)?>">
+                                       <td>
+                                          <input type="hidden" name="quotationproductsid[]" value="<?=(!isset($isduplicate))?$quotationdata['quotationproduct'][$i]['id']:""?>" id="quotationproductsid<?=$i+1?>">
+                                          <input type="hidden" name="producttax[]" value="<?=$quotationdata['quotationproduct'][$i]['tax']?>" id="producttax<?=$i+1?>">
+                                          <input type="hidden" name="productrate[]" value="<?=$quotationdata['quotationproduct'][$i]['price']?>" id="productrate<?=$i+1?>">
+                                          <input type="hidden" name="originalprice[]" value="<?=$quotationdata['quotationproduct'][$i]['originalprice']?>" id="originalprice<?=$i+1?>">
+                                          <input type="hidden" name="uniqueproduct[]" value="<?=$quotationdata['quotationproduct'][$i]['productid']."_".$quotationdata['quotationproduct'][$i]['priceid']?>" id="uniqueproduct<?=$i+1?>">
+                                          <input type="hidden" name="referencetype[]" id="referencetype<?=$i+1?>" value="<?=$quotationdata['quotationproduct'][$i]['referencetype']?>">
+                                          <div class="form-group" id="product<?=($i+1)?>_div">
+                                             <div class="col-sm-12">
+                                                <select id="productid<?=($i+1)?>" name="productid[]" data-width="90%" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="8" div-id="<?=($i+1)?>">
+                                                   <option value="0">Select Product</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="price<?=($i+1)?>_div">
+                                             <div class="col-md-12">
+                                                <select id="priceid<?=($i+1)?>" name="priceid[]" data-width="90%" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="<?=($i+1)?>">
+                                                   <option value="">Select Variant</option>
+                                                </select>
+                                                <div class="form-group m-n p-n" id="applyoldprice<?=($i+1)?>_div">
+                                                   <div class="col-sm-12">
+                                                      <div class="checkbox pt-n pl-xs text-left">
+                                                         <input id="applyoldprice<?=($i+1)?>" type="checkbox" value="0" class="checkradios applyoldprice" checked>
+                                                         <?php 
+                                                            $oldproductrate = $quotationdata['quotationproduct'][$i]['originalprice'];
+                                                            /* if(PRICE==1){
+                                                                $oldproductrate = $quotationdata['quotationproduct'][$i]['price'];
+                                                            }else{
+                                                                $oldproductrate = $quotationdata['quotationproduct'][$i]['pricewithtax'];
+                                                            } */?>
+                                                         <label for="applyoldprice<?=($i+1)?>" class="control-label p-n">Apply Old Quotation Price : <span id="oldpricewithtax<?=($i+1)?>"><?=$oldproductrate?></span></label>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="comboprice<?=($i+1)?>_div">
+                                             <div class="col-sm-12">
+                                                <select id="combopriceid<?=($i+1)?>" name="combopriceid[]" data-width="150px" class="selectpicker form-control combopriceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="<?=($i+1)?>">
+                                                   <option value="">Price</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                          <div class="form-group" id="actualprice<?=($i+1)?>_div">
+                                             <div class="col-sm-12">
+                                                <label for="actualprice<?=($i+1)?>" class="control-label">Rate (<?=CURRENCY_CODE?>)</label>
+                                                <!-- <input type="text" class="form-control actualprice text-right" id="actualprice<?php //($i+1)?>" name="actualprice[]" value="<?php //$quotationdata['quotationproduct'][$i]['originalprice']?>" onkeypress="return decimal_number_validation(event, this.value, 8);" style="display: block;" div-id="<?php //($i+1)?>"> -->
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="qty<?=($i+1)?>_div">
+                                             <div class="col-md-12">
+                                                <input type="text" class="form-control qty" id="qty<?=($i+1)?>" name="qty[]" value="<?=$quotationdata['quotationproduct'][$i]['quantity']?>" onkeypress="<?=(MANAGE_DECIMAL_QTY==1?'return decimal_number_validation(event, this.value,8);':'return isNumber(event);')?>" style="display: block;" div-id="<?=($i+1)?>">
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="discount<?=($i+1)?>_div" style="<?php if(PRODUCTDISCOUNT==0){ echo "display:none;"; }else{ echo "display:block;"; } ?>">
+                                             <div class="col-sm-12">
+                                                <input type="text" class="form-control discount" id="discount<?=($i+1)?>" name="discount[]" value="<?=$quotationdata['quotationproduct'][$i]['discount']?>" div-id="<?=($i+1)?>" onkeypress="return decimal_number_validation(event, this.value)">	
+                                                <input type="hidden" value="<?=$quotationdata['quotationproduct'][$i]['discount']?>" id="orderdiscount<?=$i+1?>">
+                                             </div>
+                                          </div>
+                                          <div class="form-group" id="discountinrs<?=($i+1)?>_div" style="<?php if(PRODUCTDISCOUNT==0){ echo "display:none;"; }else{ echo "display:block;"; } ?>">
+                                             <div class="col-sm-12">
+                                                <input type="text" class="form-control discountinrs" id="discountinrs<?=($i+1)?>" name="discountinrs[]" value="" div-id="<?=($i+1)?>" onkeypress="return decimal_number_validation(event, this.value)">	
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="tax<?=($i+1)?>_div">
+                                             <div class="col-sm-12">
+                                                <!-- <input type="text" class="form-control text-right tax" id="tax<?=($i+1)?>" name="tax[]" value="<?php //$quotationdata['quotationproduct'][$i]['tax']?>" div-id="<?=($i+1)?>" onkeypress="return decimal_number_validation(event, this.value)" <?php 
+                                                   //if($quotationdata['quotationdetail']['memberedittaxrate']==1 && EDITTAXRATE==1){ 
+                                                   // echo ""; 
+                                                   //}else{ 
+                                                   // echo "readonly"; 
+                                                   // }?>>	
+                                                   <input type="hidden" value="<?php //$quotationdata['quotationproduct'][$i]['tax']?>" id="ordertax<?php //$i+1?>"> -->
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="amount<?=($i+1)?>_div">
+                                             <div class="col-sm-12">
+                                                <input type="text" class="form-control amounttprice" id="amount<?=($i+1)?>" name="amount[]" value="" readonly="" div-id="<?=($i+1)?>">
+                                                <input type="hidden" class="producttaxamount" id="producttaxamount<?=($i+1)?>" name="producttaxamount[]" value="" div-id="<?=($i+1)?>">		
+                                                <span class="material-input"></span>
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group pt-sm">
+                                             <div class="col-sm-12 pr-n">
+                                                <?php if($i==0){?>
+                                                <?php if(count($quotationdata['quotationproduct'])>1){ ?>
+                                                <button type="button" class="btn btn-default btn-raised  add_remove_btn_product" onclick="removeproduct(1)" style="padding: 5px 10px;"><i class="fa fa-minus"></i></button>
+                                                <?php }else { ?>
+                                                <button type="button" class="btn btn-default btn-raised  add_remove_btn" onclick="addnewproduct()" style="padding: 5px 10px;"><i class="fa fa-plus"></i></button>
+                                                <?php } ?>
+                                                <?php }else if($i!=0) { ?>
+                                                <button type="button" class="btn btn-default btn-raised  add_remove_btn_product" onclick="removeproduct(<?=$i+1?>)" style="padding: 5px 10px;"><i class="fa fa-minus"></i></button>
+                                                <?php } ?>
+                                                <button type="button" class="btn btn-default btn-raised btn-sm add_remove_btn_product" onclick="removeproduct(<?=$i+1?>)"  style="padding: 5px 10px;display:none;"><i class="fa fa-minus"></i></button>
+                                                <button type="button" class="btn btn-default btn-raised  add_remove_btn" onclick="addnewproduct()" style="padding: 5px 10px;"><i class="fa fa-plus"></i></button>  
+                                             </div>
+                                          </div>
                                        </td>
                                     </tr>
-                                    <tr>
-                                       <th>Amount Payable</th>
-                                       <th class="text-right">
-                                          <span id="netamount" name="netamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }else{ echo "0.00"; } ?></span>
-                                          <input type="hidden" id="inputnetamount" name="netamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }?>">
-                                       </th>
+                                    <script type="text/javascript">
+                                       $(document).ready(function() {
+                                           oldproductid.push(<?=$quotationdata['quotationproduct'][$i]['productid']?>);
+                                           oldpriceid.push(<?=$quotationdata['quotationproduct'][$i]['priceid']?>);
+                                           oldtax.push(<?=$quotationdata['quotationproduct'][$i]['tax']?>);
+                                           productdiscount.push(<?=$quotationdata['quotationproduct'][$i]['discount']?>);
+                                           oldcombopriceid.push(<?=$quotationdata['quotationproduct'][$i]['referenceid']?>);
+                                           oldprice.push(<?=$quotationdata['quotationproduct'][$i]['originalprice']?>);
+                                       
+                                           $("#qty<?=$i+1?>").TouchSpin(touchspinoptions);
+                                           getproduct(<?=$i+1?>);
+                                           getproductprice(<?=$i+1?>);
+                                           getmultiplepricebypriceid(<?=$i+1?>);
+                                           calculatediscount(<?=$i+1?>);
+                                           changeproductamount(<?=$i+1?>);
+                                       });
+                                    </script>
+                                    <?php } ?>
+                                    <?php }else{ ?>
+                                    <tr class="countproducts" id="quotationproductdiv1">
+                                       <td>
+                                          <input type="hidden" name="producttax[]" id="producttax1">
+                                          <input type="hidden" name="productrate[]" id="productrate1">
+                                          <input type="hidden" name="originalprice[]" id="originalprice1">
+                                          <input type="hidden" name="uniqueproduct[]" id="uniqueproduct1">
+                                          <input type="hidden" name="referencetype[]" id="referencetype1">
+                                          <div class="form-group" id="product1_div">
+                                             <div class="col-sm-12">
+                                                <select id="productid1" name="productid[]" data-width="90%" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
+                                                   <option value="0">Select Product</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="comboprice1_div">
+                                             <div class="col-sm-12">
+                                                <select id="combopriceid1" name="combopriceid[]" data-width="150px" class="selectpicker form-control combopriceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
+                                                   <option value="">Price</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group" id="amount1_div">
+                                             <div class="col-md-12">
+                                                <input type="text" class="form-control amounttprice" id="amount1" name="amount[]" value=""  div-id="1">	
+                                                <input type="hidden" class="producttaxamount" id="producttaxamount1" name="producttaxamount[]" value="" div-id="1">		
+                                             </div>
+                                          </div>
+                                       </td>
+
+                                       <td>
+                                          <div class="form-group" id="amount1_div">
+                                             <div class="col-md-12">
+                                                <input type="text" class="form-control amounttprice" id="amount1" name="amount[]" value=""  div-id="1">	
+                                                <input type="hidden" class="producttaxamount" id="producttaxamount1" name="producttaxamount[]" value="" div-id="1">		
+                                             </div>
+                                          </div>
+                                       </td>
+
+                                       <td>
+                                          <div class="form-group" id="amount1_div">
+                                             <div class="col-md-12">
+                                                <input type="text" class="form-control amounttprice" id="amount1" name="amount[]" value=""  div-id="1">	
+                                                <input type="hidden" class="producttaxamount" id="producttaxamount1" name="producttaxamount[]" value="" div-id="1">		
+                                             </div>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="form-group">
+                                             <div class="col-md-12 pr-n">
+                                                <!-- <div class="col-md-12 pr-n"> -->
+                                                   <div class="form-group" id="deliverypriority_div">
+                                                      <div class="col-md-9">
+                                                         <?php
+                                                            $selectedpriority = 1;
+                                                            if(!empty($quotationdata['quotationdetail'])){
+                                                                $selectedpriority = $quotationdata['quotationdetail']['deliverypriority'];
+                                                            } 
+                                                            ?>
+                                                         <select id="deliverypriority" name="deliverypriority" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="5">
+                                                            <option value="1" <?=($selectedpriority==1)?"selected":""?>>Medium</option>
+                                                            <option value="2" <?=($selectedpriority==2)?"selected":""?>>High</option>
+                                                            <option value="3" <?=($selectedpriority==3)?"selected":""?>>Low</option>
+                                                            <option value="4" <?=($selectedpriority==4)?"selected":""?>>Urgent</option>
+                                                         </select>
+                                                         <!-- <button type="button" style="float:right; width:3rem; height:3.5rem; margin:10px -35px 0px 0px;" class="addnewproductitem btn-primary"><i class="fa fa-plus"></i></button> -->
+
+                                                         <!-- <div class="col-md-1 p-n" style="float:right; width:3rem; height:3.5rem; margin:10px -35px 0px 0px;">
+                                                            <a href="javascript:void(0)" onclick="addcountry()" class="btn btn-primary btn-raised p-xs"><i class="material-icons addnewproductitem" title="Add Unit">add</i></a>
+                                                         </div> -->
+                                                      </div>
+                                                   </div>
+                                                <!-- </div> -->
+                                             </div>
+                                          </div>
+                                       </td>
                                     </tr>
+                                    <?php } ?>
                                  </tbody>
                               </table>
                            </div>
+                           <?php
+                              }
+                              } 
+                              ?>
                         </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-
-
+                        <div class="col-md-1 p-n" style="float:left; width:3rem; height:3.5rem; margin:20px 0px 0px 10px;">
+                           <a href="javascript:void(0)" onclick="addcountry()" class="btn btn-primary btn-raised p-xs"><i class="material-icons addnewproductitem" title="Add Unit">add</i></a>
+                        </div>
                         <?php /*
                            <div class="col-sm-2">
                                <div class="form-group" id="salesperson_div">
-                                   <div class="col-sm-12 ">
+                                   <div class="col-sm-12 pl-sm pr-sm">
                                        <label for="salespersonid" class="control-label">Select Sales Person</label>
                                        <select id="salespersonid" name="salespersonid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="5">
                                            <option value="0">Select Sales Person</option>
@@ -396,20 +707,19 @@
          <hr>
       </div>
       </div> -->
-      <?php /*
    <div class="row">
       <div class="col-sm-3">
          <div class="form-group" id="quotationdate_div">
             <div class="col-sm-12 pl-sm pr-sm">
-               <label for="quotationdate" class="control-label">Select Approx Delivery Date <span class="mandatoryfield">*</span></label>
+               <label for="quotationdate" class="control-label">Discount( % ) <span class="mandatoryfield">*</span></label>
                <div class="input-group">
-                  <input id="quotationdate" type="text" name="quotationdate" value="<?php if(!empty($quotationdata['quotationdetail']) && $quotationdata['quotationdetail']['quotationdate']!="0000-00-00"){ echo $this->general_model->displaydate($quotationdata['quotationdetail']['quotationdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate());} ?>" class="form-control" readonly>
-                  <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span>
+                  <input id="quotationdate" type="text" name="quotationdate" value="<?php //if(!empty($quotationdata['quotationdetail']) && $quotationdata['quotationdetail']['quotationdate']!="0000-00-00"){ echo $this->general_model->displaydate($quotationdata['quotationdetail']['quotationdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate());} ?>" class="form-control" readonly>
+                  <!-- <span class="btn btn-default datepicker_calendar_button"><i class="fa fa-calendar fa-lg"></i></span> -->
                </div>
             </div>
          </div>
       </div>
-     
+      <?php /*
          <div class="col-sm-3">
              <div class="form-group" id="assignto_div">
                  <div class="col-sm-12 pl-sm pr-sm">
@@ -429,12 +739,12 @@
                   </div>
                </div>
             </div>
-      
+      */?>
       <div class="col-sm-3">
          <div class="form-group" id="paymenttype_div">
             <div class="col-sm-12">
                <input type="hidden" name="oldpaymenttype" id="oldpaymenttype" value="<?php if(!empty($quotationdata['quotationdetail']) && !isset($isduplicate)){ echo $quotationdata['quotationdetail']['paymenttype']; } ?>">
-               <label for="paymenttypeid" class="control-label">Assign to <span class="mandatoryfield">*</span></label>
+               <label for="paymenttypeid" class="control-label">Discount Amount <span class="mandatoryfield">*</span></label>
                <select id="paymenttypeid" name="paymenttypeid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="5">
                   <option value="0">Select Assign to</option>
                   <?php if(isset($Partydata)){ 
@@ -445,7 +755,7 @@
             </div>
          </div>
       </div>
-      <div class="col-sm-3">
+      <!-- <div class="col-sm-3">
          <div class="form-group" id="paymenttype_div">
             <div class="col-sm-12">
                <input type="hidden" name="oldpaymenttype" id="oldpaymenttype" value="<?php if(!empty($quotationdata['quotationdetail']) && !isset($isduplicate)){ echo $quotationdata['quotationdetail']['paymenttype']; } ?>">
@@ -461,25 +771,25 @@
                </select>
             </div>
          </div>
-      </div>
+      </div> -->
       <div class="col-md-12 p-n">
          <div class="col-md-4 p-n">
             <div class="col-md-12 p-n">
                <?php 
                   $discountpercentage =  $discountamount = $discountminamount = "";
-                   if(isset($discountonbillminamount) && $discountonbillminamount>=0){
+                  /* if(isset($discountonbillminamount) && $discountonbillminamount>=0){
                      if(isset($globaldiscountper)){
                         $discountpercentage = $globaldiscountper;    
                      }
-                     if(isset($globaldiscountamount)){
+                     if(isset($globaldiscountamount)){;
                         $discountamount = $globaldiscountamount;    
                      }
                      $discountminamount = $discountonbillminamount;    
-                  } 
+                  } */
                   
                   if(!empty($quotationdata['quotationdetail'])){ 
                      if($quotationdata['quotationdetail']['globaldiscount'] > 0){
-                         if(isset($gstondiscount) && $gstondiscount==1){ 
+                        /* if(isset($gstondiscount) && $gstondiscount==1){ 
                               $discountper = $quotationdata['quotationdetail']['globaldiscount']*100/ ($quotationdata['quotationdetail']['quotationamount']); 
                         }else{
                               $discountper = $quotationdata['quotationdetail']['globaldiscount']*100/ ($quotationdata['quotationdetail']['quotationamount'] + $quotationdata['quotationdetail']['taxamount']); 
@@ -487,7 +797,7 @@
                         
                         if($discountper!=0){
                               $discountpercentage = number_format($discountper,2); 
-                        } 
+                        } */
                   
                         $discountper = $quotationdata['quotationdetail']['globaldiscount']*100/ ($quotationdata['quotationdetail']['quotationamount'] + $quotationdata['quotationdetail']['taxamount']); 
                         $discountpercentage = number_format($discountper,2); 
@@ -563,10 +873,10 @@
                <table id="example" class="table table-bordered table-striped" cellspacing="0" style="border: 1px solid #e8e8e8; margin: -50px 0 0 110px;">
                   <tbody>
                      <tr>
-                        <th colspan="2" class="text-center">Quotation Summary (<?=CURRENCY_CODE?>)</th>
+                        <th colspan="2" class="text-center">Total Summary (<?=CURRENCY_CODE?>)</th>
                      </tr>
                      <tr>
-                        <th>Total Of Product</th>
+                        <th>Sub Total</th>
                         <td class="text-right" width="30%">
                            <span id="grossamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; }else{ echo "0.00"; }?></span>
                            <input type="hidden" id="inputgrossamount" name="grossamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['quotationamount']; } ?>">
@@ -579,7 +889,7 @@
                            <span id="discountamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['globaldiscount']; }else{ echo "0.00"; }?></span>
                         </td>
                      </tr>
-                     <?php  /*
+                     <?php /* 
                         if(!empty($quotationdata) && !empty($ExtraChargesData)) { ?>
                      <?php for ($i=0; $i < count($ExtraChargesData); $i++) { ?>
                      <!-- <tr class="countcharges" id="countcharges<?php //$i+1?>">                  <th>
@@ -662,16 +972,23 @@
                         </td>
                         
                         </tr> -->
-                     
+                     <?php } */?>
                      <tr>
-                        <th>Round Off</th>
+                        <th>Tax Amount</th>
                         <td class="text-right">
                            <span id="roundoff">0.00</span>
                            <input type="hidden" id="inputroundoff" name="inputroundoff" value="0.00">
                         </td>
                      </tr>
                      <tr>
-                        <th>Amount Payable</th>
+                        <th>Discount Amount</th>
+                        <th class="text-right">
+                           <span id="netamount" name="netamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }else{ echo "0.00"; } ?></span>
+                           <input type="hidden" id="inputnetamount" name="netamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }?>">
+                        </th>
+                     </tr>
+                     <tr>
+                        <th>Net Total</th>
                         <th class="text-right">
                            <span id="netamount" name="netamount"><?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }else{ echo "0.00"; } ?></span>
                            <input type="hidden" id="inputnetamount" name="netamount" value="<?php if(!empty($quotationdata['quotationdetail'])){ echo $quotationdata['quotationdetail']['payableamount']; }?>">
@@ -682,7 +999,6 @@
             </div>
          </div>
       </div>
-
       <div class="row">
          <div class="col-sm-6" style="margin: -40px 0 40px 10px;">
             <div class="form-group" id="remarks_div">
@@ -693,84 +1009,138 @@
             </div>
          </div>
       </div>
-
-     */ ?>
-      
    </div>
 
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="panel panel-default border-panel" id="commonpanel">
-                     <div class="panel-heading">
-                        <h2>Document Detail</h2>
+   <div class="row">
+      <div class="col-md-12">
+         <div class="panel panel-default border-panel" id="commonpanel">
+            <div class="panel-heading">
+               <h2>Document Detail</h2>
+            </div>
+            <div class="panel-body no-padding">
+               <div class="row" id="adddocrow">
+                  <div class="col-md-12">
+                     <div class="col-md-12 pl-sm pr-sm visible-md visible-lg">
+                        <div class="col-md-5">
+                           <div class="form-group">
+                              <div class="col-md-12 pl-xs pr-xs">
+                                 <label class="control-label" style="text-align: left;">Document Name <span class="mandatoryfield">*</span></label>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-5">
+                           <div class="form-group">
+                              <div class="col-md-12 pl-xs pr-xs">
+                                 <label class="control-label">File</label>
+                              </div>
+                           </div>
+                        </div>
                      </div>
-                     <div class="panel-body">
-                        <div class="row" id="adddocrow">
-                           <div class="col-md-12">
-                              <div class="col-md-6 pl-sm pr-sm visible-md visible-lg">
-                                 <div class="col-md-5">
-                                    <div class="form-group">
-                                       <div class="col-md-12 pl-xs pr-xs">
-                                          <label class="control-label" style="text-align: left;">Document Name <span class="mandatoryfield">*</span></label>
-                                       </div>
-                                    </div>
+                  </div>
+                  <div class="col-md-12">
+                     <?php 
+                        $cloopdoc = 0;
+                        $doc_id='';
+                        $doc='';
+                        $docname='';
+                        $i=0;
+                        
+                        if(isset($party_docdata[0]->id ) && !empty($party_docdata[0]->id ))  {
+                              foreach ($party_docdata as $row)
+                           {
+                              $i++;
+                              $cloopdoc = $cloopdoc + 1;
+                              $doc_id = $row->id;
+                              $doc=$row->doc;
+                              $docname = $row->docname;
+                        ?>
+
+                     <input type="hidden" name="doc_id_<?=$cloopdoc?>" value="<?=$doc_id?>" id="doc_id_<?=$cloopdoc?>">
+                     <div class="col-md-12">
+                        <div class="col-sm-12 countdocuments pl-sm pr-sm" id="countdocuments<?=$cloopdoc?>">
+                     
+                           <div class="col-md-5 col-sm-5">
+                              <div class="form-group" id="documentnumber_<?=$cloopdoc?>">
+                                 <div class="col-sm-12 pr-xs pl-xs">
+                                    <input id="documentname_<?=$cloopdoc?>" value="<?=$docname?>" name="documentname_<?=$cloopdoc?>" placeholder="Enter Document Name" class="form-control documentnumber">
                                  </div>
-                                 <div class="col-md-5">
-                                    <div class="form-group">
-                                       <div class="col-md-12 pl-xs pr-xs">
-                                          <label class="control-label">File</label>
-                                       </div>
+                              </div>
+                           </div>
+                           <div class="col-md-5 col-sm-5">
+                              <div class="form-group" id="docfile<?=$cloopdoc?>">
+                                 <div class="col-sm-12 pr-xs pl-xs">
+                                    <input type="hidden" id="isvaliddocfile<?=$cloopdoc?>" value="0">
+                                    <input type="hidden" name="olddocfile_<?=$cloopdoc?>" id="olddocfile<?=$cloopdoc?>" value="">
+                                    <div class="input-group" id="fileupload<?=$cloopdoc?>">
+                                       <span class="input-group-btn" style="padding: 0 0px 0px 0px;">
+                                             <span class="btn btn-primary btn-raised btn-file">
+                                             <i class="fa fa-upload"></i>
+                                                <input type="file" name="olddocfile_<?=$cloopdoc?>" class="docfile" id="olddocfile_<?=$cloopdoc?>" accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),&apos;docfile<?=$cloopdoc?>&apos;)">
+                                             </span>
+                                       </span>
+                                       <input type="text" readonly="" placeholder="Enter File" id="Filetextdocfile<?=$cloopdoc?>" class="form-control docfile" name="Filetextdocfile_<?=$cloopdoc?>" value="<?=$doc?>">
                                     </div>
                                  </div>
                               </div>
                            </div>
-                          
-
-
-                           <div class="clearfix"></div>
-                              <?php if(isset($paymentreceiptdata) && !empty($receipttransactionsdata)){ ?>
-                             
-                              <?php }else{ ?>
-                              <div class="countinvoiceb" id="countinvoiceb1">
-                                 <div class="row m-n">
-                                    
-                                    <div class="col-md-3">
-                                       <div class="form-group" id="invoiceamount1_div">
-                                          <div class="col-md-12">								
-                                             <input type="text" id="invoiceamount1" class="form-control invoiceamount" name="invoiceamount[]" value="">
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3">
-                                       <div class="form-group" id="docfile' + rowcount + '">
-                                             <div class="col-sm-12 pr-xs pl-xs">
-                                                <input type="hidden" id="isvaliddocfile' + rowcount + '" value="0">
-                                                <input type="hidden" name="olddocfile[' + rowcount + ']" id="olddocfile' + rowcount + '" value="">
-                                                <div class="input-group" id="fileupload' + rowcount + '">
-                                                   <span class="input-group-btn" style="padding: 0 0px 0px 0px;">
-                                                         <span class="btn btn-primary btn-raised btn-file">
-                                                         <i class="fa fa-upload"></i>
-                                                            <input type="file" name="olddocfile_' + rowcount + '" class="docfile" id="olddocfile_' + rowcount + '" accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),&apos;docfile' + rowcount + '&apos;)">
-                                                         </span>
-                                                   </span>
-                                                   <input type="text" readonly="" placeholder="Enter File" id="Filetextdocfile' + rowcount + '" class="form-control docfile" name="Filetextdocfile_' + rowcount + '" value="">
-                                                </div>
-                                             </div>
-                                       </div>
-                                    </div>
-                                   
-                                    <div class="col-md-1 pt-md">
-                                       <button type="button" class="btn btn-danger btn-raised  remove_doc_btn m-n" onclick="removedoc(1)" style="padding: 3px 8px;display:none;"><i class="fa fa-minus"></i></button>
-                                       <button type="button" class="btn btn-primary btn-raised add_doc_btn m-n" onclick="addnewdoc()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>
-                                    </div>
-                                 </div>
-                              </div>
-                              <?php } ?>
+                        <div class="col-md-1 addrowbutton pt-md pr-xs">
+                           <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(<?=$cloopdoc?>)" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>
                         </div>
                      </div>
                   </div>
+
+                     <?php
+                        }
+                        }else {
+                              $count = 1;
+                              $cloopdoc = 0;
+                              while ($count > $cloopdoc) {
+                                 $cloopdoc = $cloopdoc + 1;
+                        ?>
+                     <div class="col-md-12 countdocuments pl-sm pr-sm" id="countdocuments">
+                        <div class="col-md-5 col-sm-5">
+                              <div class="form-group" id="documentnumber1_div">
+                                 <div class="col-md-12 pr-xs pl-xs">
+                                    <input id="documentnumber_<?=$cloopdoc?>" name="documentname_<?=$cloopdoc?>" placeholder="Enter Document Number" class="form-control documentrow documentnumber">
+                                 </div>
+                              </div>
+                        </div>
+                        <div class="col-md-5 col-sm-5">
+                              <div class="form-group" id="docfile1_div">
+                                 <div class="col-md-12 pr-xs pl-xs">
+                                    <input type="hidden" id="isvaliddocfile1" value="0"> 
+                                    <input type="hidden" name="olddocfile_<?=$cloopdoc?>" id="olddocfile1" value=""> 
+                                    <div class="input-group" id="fileupload1">
+                                          <span class="input-group-btn" style="padding: 0 0px 0px 0px;">
+                                             <span class="btn btn-primary btn-raised btn-file"><i
+                                                      class="fa fa-upload"></i>
+                                                <input type="file" name="docfile_<?=$cloopdoc?>"
+                                                      class="docfile" id="docfile1"
+                                                      accept=".png,.jpeg,.jpg,.bmp,.gif,.pdf" onchange="validdocumentfile($(this),'docfile1')">
+                                             </span>
+                                          </span>
+                                          <input type="text" readonly="" id="Filetext_<?=$cloopdoc?>"
+                                             class="form-control documentrow docfile" placeholder="Enter File" name="Filetextdocfile" value="">
+                                    </div>
+                                 </div>
+                              </div>
+                        </div>
+                        
+                        </div>
+                     <?php
+                        }
+                        } 
+                        ?>
+                  </div>
                </div>
+               <div class="form-group" style="float:left; margin:0px 50px 20px 20px;">
+                     <button type="button"  onclick="addnewproduct()" class="addprodocitem btn-primary"><i class="fa fa-plus"></i></button>
+               </div>
+               <input type="hidden" name="cloopdoc" id="cloopdoc" value="<?php echo $cloopdoc; ?>">
             </div>
+         </div>
+      </div>
+   </div>
 
    <div class="row">
       <div class="col-md-12 col-xs-12">
@@ -784,10 +1154,12 @@
                      <div class="col-md-12 col-xs-12">
                         <?php if (!empty($partydata)) { ?>
                         <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
+                        <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & PRINT" class="btn btn-primary btn-raised">
                         <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & NEW" class="btn btn-primary btn-raised">
                         <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
                         <?php } else { ?>
                         <input type="button" id="submit" onclick="checkvalidation()" name="submit" value="SAVE" class="btn btn-primary btn-raised">
+                        <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & PRINT" class="btn btn-primary btn-raised">
                         <input type="button" id="submit" onclick="checkvalidation(1)" name="submit" value="SAVE & NEW" class="btn btn-primary btn-raised">
                         <input type="reset" name="reset" value="RESET" class="btn btn-info btn-raised">
                         <?php } ?>

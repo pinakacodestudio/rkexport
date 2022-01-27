@@ -495,6 +495,9 @@ $headerData = $this->admin_headerlib->data();
                 color :<?= $TABLE_HEADER_COLOR ?>;
             }
 
+            .tal{
+                text-align: left !important;
+            }
             /* End Table Header Color CSS */
 
             
