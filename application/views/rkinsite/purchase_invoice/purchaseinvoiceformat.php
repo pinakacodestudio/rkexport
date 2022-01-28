@@ -26,7 +26,7 @@ $decimalformat = ',';
 
 <form class="form-horizontal" id="purchaseinvoiceform" name="purchaseinvoiceform">
     <input type="hidden" id="invoiceid" name="invoiceid" value="<?php if(isset($invoicedata)){ echo $invoicedata['id']; } ?>">
-    <input type="hidden" id="oldorderid" name="oldorderid" value="<?php if(isset($orderid)){ echo $orderid; } ?>">
+    <input type="hidden" id="oldpoid" name="oldpoid" value="<?php if(isset($poid)){ echo $poid; } ?>">
     <input type="hidden" id="oldvendorid" name="oldvendorid" value="<?php if(isset($vendorid)){ echo $vendorid; } ?>">
 
     <div class="row mb-xs">
@@ -46,10 +46,10 @@ $decimalformat = ',';
                     </div>
                 </div> -->
                 <div class="col-sm-6">
-                    <div class="form-group" id="member_div">
+                    <div class="form-group" id="party_div">
                         <div class="col-sm-<?php if(isset($multiplememberchannel) && $multiplememberchannel==1){ echo "10 pr-n"; }else{ echo "12 pr-sm"; }?>" style="margin: 0px 0px 0px -7px;">
-                            <label for="memberid" class="control-label">Select Party <span class="mandatoryfield">*</span></label>
-                            <select id="memberid" name="memberid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="8" <?php if(!empty($quotationdata) && !isset($isduplicate)){ echo "disabled"; } ?>>
+                            <label for="partyid" class="control-label">Select Party <span class="mandatoryfield">*</span></label>
+                            <select id="partyid" name="partyid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="8" <?php if(!empty($quotationdata) && !isset($isduplicate)){ echo "disabled"; } ?>>
                             <option value="0">Party List</option>
                             <?php /* foreach($Partydata as $party){ ?>
                             <option value="<?=$party['id']?>"><?=$party['id']?></option>
@@ -89,35 +89,26 @@ $decimalformat = ',';
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="form-group" id="billingaddress_div">
+                    <div class="form-group" id="receiveby_div">
                         <div class="col-sm-12 pl-sm pr-sm">
-                            <label for="billingaddressid" class="control-label">Receive By<span class="mandatoryfield">*</span></label>
-                            <select id="billingaddressid" name="billingaddressid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="5">
+                            <label for="receivebyid" class="control-label">Receive By<span class="mandatoryfield">*</span></label>
+                            <select id="receivebyid" name="receivebyid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="5">
                                 <option value="0">Employee List</option>
                             </select>
                             <!-- <a href="javascript:void(0)" class="mt-sm" style="float: left;" onclick="openmodal(1)"><i class="fa fa-plus"></i> Add New Billing Address</a>
-                            <input type="hidden" name="billingaddress" id="billingaddress" value=""> -->
+                            <input type="hidden" name="receivebyid" id="receivebyid" value=""> -->
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-sm-6">
-                    <div class="form-group" id="billingaddress_div">
-                        <div class="col-sm-12 pl-sm">
-                            <label for="billingaddressid" class="control-label">Purchase Invoice No.<span class="mandatoryfield">*</span></label>
-                            <select id="billingaddressid" name="billingaddressid" class="selectpicker form-control" data-live-search="true" data-select-on-tab="true" data-size="8" title="Select Billing Address">
-                            </select>
-                            <input type="hidden" name="billingaddress" id="billingaddress" value="">
-                        </div>
-                    </div>
-                </div> -->
+             
                 <div class="clearfix"></div>
                 
                 <div class="col-sm-6">
-                    <div class="form-group" id="orderid_div">
+                    <div class="form-group" id="poid_div">
                         <div class="col-sm-12 pl-sm pr-sm">
-                            <label for="orderid" class="control-label">PO ID <span class="mandatoryfield">*</span></label>
-                            <input id="orderid" type="text" name="orderid" class="form-control" value="<?php if(!empty($orderdata['orderdetail']) && !isset($isduplicate)){ echo $orderdata['orderdetail']['orderid']; }else if(!empty($orderid)){ echo $orderid; } ?>" readonly>
-                            <input id="ordernumber" type="hidden" value="<?php if(!empty($orderdata['orderdetail']) && !isset($isduplicate)){ echo $orderdata['orderdetail']['orderid']; }else if(!empty($orderid)){ echo $orderid; } ?>">
+                            <label for="poid" class="control-label">PO ID <span class="mandatoryfield">*</span></label>
+                            <input id="poid" type="text" name="poid" class="form-control" value="<?php if(!empty($orderdata['orderdetail']) && !isset($isduplicate)){ echo $orderdata['orderdetail']['poid']; }else if(!empty($poid)){ echo $poid; } ?>" readonly>
+                            <input id="ordernumber" type="hidden" value="<?php if(!empty($orderdata['orderdetail']) && !isset($isduplicate)){ echo $orderdata['orderdetail']['poid']; }else if(!empty($poid)){ echo $poid; } ?>">
                             <!-- <div class="checkbox">
                                 <input id="editordernumber" type="checkbox" value="1" name="editordernumber" class="checkradios">
                                 <label for="editordernumber">Edit Order ID</label>
@@ -144,18 +135,18 @@ $decimalformat = ',';
                     </div>
                 </div> -->
                 <div class="col-sm-6">
-                    <div class="form-group" id="invoicedate_div">
+                    <div class="form-group" id="recievedate_div">
                         <div class="col-sm-12 pl-sm pr-sm">
-                            <label for="invoicedate" class="control-label">Recieve Date <span class="mandatoryfield">*</span></label>
-                            <input id="invoicedate" type="text" name="invoicedate" value="<?php if(isset($invoicedata)){ echo $this->general_model->displaydate($invoicedata['invoicedate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" class="form-control date" readonly>
+                            <label for="recievedate" class="control-label">Recieve Date <span class="mandatoryfield">*</span></label>
+                            <input id="recievedate" type="text" name="recievedate" value="<?php if(isset($invoicedata)){ echo $this->general_model->displaydate($invoicedata['recievedate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" class="form-control date" readonly>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="form-group" id="invoicedate_div">
+                    <div class="form-group" id="payment_due_div">
                         <div class="col-sm-12 pl-sm pr-sm">
                             <label for="invoicedate" class="control-label">Payment due Date <span class="mandatoryfield">*</span></label>
-                            <input id="invoicedate" type="text" name="invoicedate" value="<?php if(isset($invoicedata)){ echo $this->general_model->displaydate($invoicedata['invoicedate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" class="form-control date" readonly>
+                            <input id="payment_due" type="text" name="invoicedate" value="<?php if(isset($invoicedata)){ echo $this->general_model->displaydate($invoicedata['invoicedate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" class="form-control date" readonly>
                         </div>
                     </div>
                 </div>
@@ -615,9 +606,9 @@ $decimalformat = ',';
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="form-group" id="qty1_div">
+                                                <div class="form-group" id="tax_div">
                                                     <div class="col-md-12">
-                                                        <input type="text" class="form-control qty" id="qty1" name="qty[]" value="" maxlength="6" onkeypress="<?=(MANAGE_DECIMAL_QTY==1?'return decimal_number_validation(event, this.value,8);':'return isNumber(event);')?>" style="display: block;" div-id="1">
+                                                        <input type="text" class="form-control tax" id="tax1" name="tax[]" value="" maxlength="6" onkeypress="<?=(MANAGE_DECIMAL_QTY==1?'return decimal_number_validation(event, this.value,8);':'return isNumber(event);')?>" style="display: block;" div-id="1">
                                                     </div>
                                                 </div>
                                             </td>
@@ -847,14 +838,10 @@ $decimalformat = ',';
                             <div class="col-sm-6 pr-xs">
                                 <div class="form-group p-n" id="extracharges_0_1_div">
                                     <div class="col-sm-12">
-                                        <!-- <div class="col-sm-12"> -->
+                                       
                                             <label for="invoicedate" class="control-label">Invoice Date <span class="mandatoryfield">*</span></label>
-                                            <input id="invoicedate" type="text" name="invoicedate" value="<?php if(isset($invoicedata)){ echo $this->general_model->displaydate($invoicedata['invoicedate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" class="form-control" readonly>
-                                        <!-- </div> -->
-
-                                        <!-- <input type="hidden" name="orderextrachargestax[0][]" id="orderextrachargestax_0_1" class="orderextrachargestax" value="">
-                                        <input type="hidden" name="orderextrachargesname[0][]" id="orderextrachargesname_0_1" class="orderextrachargesname" value="">
-                                        <input type="hidden" name="orderextrachargepercentage[0][]" id="orderextrachargepercentage_0_1" class="orderextrachargepercentage" value=""> -->
+                                            <input id="invoicedate" type="text" name="invoicedate" class="form-control data" value="<?php if(isset($invoicedata)){ echo $this->general_model->displaydate($invoicedata['invoicedate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>"  readonly>
+                                        
                                     </div>
                                 </div>
                             </div>

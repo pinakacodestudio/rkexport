@@ -475,3 +475,96 @@ function checkvalidation(addtype=0){
         }
     }
 }
+
+function addnewproduct(){
+
+    // productoptionhtml = salesproducthtml;
+    // if(PRODUCT_DISCOUNT==0){
+    //     discount = "display:none;";
+    // }else{ 
+    //     discount = "display:block;"; 
+    // }
+    // var readonly = "readonly";
+    // if(EDITTAXRATE_CHANNEL==1 && EDITTAXRATE_SYSTEM==1){
+    //     readonly = "";
+    // }
+    divcount = parseInt($(".amounttprice:last").attr("div-id"))+1;
+    producthtml = '<tr class="countproducts" id="quotationproductdiv'+divcount+'">\
+        <td>\
+            <input type="hidden" name="producttax[]" id="producttax'+divcount+'">\
+            <input type="hidden" name="productrate[]" id="productrate'+divcount+'">\
+            <input type="hidden" name="originalprice[]" id="originalprice'+divcount+'">\
+            <input type="hidden" name="uniqueproduct[]" id="uniqueproduct'+divcount+'">\
+            <input type="hidden" name="referencetype[]" id="referencetype'+divcount+'">\
+            <div class="form-group" id="product'+divcount+'_div">\
+                <div class="col-sm-12">\
+                    <select id="productid'+divcount+'" name="productid[]" data-width="90%" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="8" div-id="'+divcount+'">\
+                        <option value="0">Select Purchase Invoice</option>\
+                    </select>\
+                </div>\
+            </div>\
+        </td>\
+        <td>\
+            <div class="form-group" id="comboprice'+divcount+'_div">\
+                <div class="col-sm-12">\
+                    <select id="combopriceid'+divcount+'" name="combopriceid[]" data-width="150px" class="selectpicker form-control combopriceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="'+divcount+'">\
+                        <option value="">Price</option>\
+                    </select>\
+                </div>\
+            </div>\
+            <div class="form-group" id="actualprice'+divcount+'_div">\
+                <div class="col-sm-12">\
+                    <label for="actualprice'+divcount+'" class="control-label">Rate ('+CURRENCY_CODE+')</label>\
+                    <input type="text" class="form-control actualprice text-right" id="actualprice'+divcount+'" name="actualprice[]" value="" onkeypress="return decimal_number_validation(event, this.value)" style="display: block;" div-id="'+divcount+'">\
+                </div>\
+            </div>\
+        </td>\
+        <td>\
+            <div class="form-group" id="amount'+divcount+'_div">\
+                <div class="col-sm-12">\
+                    <input type="text" class="form-control amounttprice" id="amount'+divcount+'" name="amount[]" value="" readonly="" div-id="'+divcount+'">\
+                    <input type="hidden" class="producttaxamount" id="producttaxamount'+divcount+'" name="producttaxamount[]" value="" div-id="'+divcount+'">\
+                </div>\
+            </div>\
+        </td>\
+        <td>\
+            <div class="form-group" id="amount'+divcount+'_div">\
+                <div class="col-sm-12">\
+                    <input type="text" class="form-control amounttprice" id="amount'+divcount+'" name="amount[]" value="" readonly="" div-id="'+divcount+'">\
+                    <input type="hidden" class="producttaxamount" id="producttaxamount'+divcount+'" name="producttaxamount[]" value="" div-id="'+divcount+'">\
+                </div>\
+            </div>\
+        </td>\
+        <td>\
+            <div class="form-group pt-sm">\
+                <div class="col-sm-12 pr-n">\
+                    <button type = "button" class = "btn btn-default btn-raised  add_remove_btn_product" onclick = "removeproduct('+divcount+')" style="padding: 5px 10px;"> <i class = "fa fa-minus"></i></button> \
+                    <button type="button" class="btn btn-default btn-raised  add_remove_btn" onclick="addnewproduct()" style="padding: 5px 10px;"><i class="fa fa-plus"></i></button> \
+                </div>\
+            </div>\
+        </td>\
+    </div>';
+
+    $(".add_remove_btn_product:first").show();
+    $(".add_remove_btn:last").hide();
+    $("#quotationproducttable tbody").append(producthtml);
+
+    // $("#qty"+divcount).TouchSpin(touchspinoptions);
+
+    $(".selectpicker").selectpicker("refresh");
+}
+function removeproduct(divid){
+
+    if($('select[name="productid[]"]').length!=1 && ACTION==1 && $('#quotationproductsid'+divid).val()!=null){
+        var removequotationproductid = $('#removequotationproductid').val();
+        $('#removequotationproductid').val(removequotationproductid+','+$('#quotationproductsid'+divid).val());
+    }
+    $("#quotationproductdiv"+divid).remove();
+
+    $(".add_remove_btn:last").show();
+    if ($(".add_remove_btn_product:visible").length == 1) {
+        $(".add_remove_btn_product:first").hide();
+    }
+    changeproductamount(divid);
+    changeextrachargesamount();
+}

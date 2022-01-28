@@ -13,11 +13,7 @@ $(document).ready(function() {
     format: 'dd/mm/yyyy',
     todayBtn:"linked",
   });
-  $('#invoicedate').datepicker({
-    todayHighlight: true,
-    format: 'dd/mm/yyyy',
-    todayBtn:"linked",
-  });
+
   /****VENDOR CHANGE EVENT****/
   $('#vendorid').on('change', function (e) {
       // getVendorSalesOrder();
@@ -1318,31 +1314,73 @@ function resetdata(){
 
 function checkvalidation(btntype=''){
   
+  var partyid = $('#partyid').val();
   var invoiceid = $('#invoiceid').val();
-  var vendorid = $('#vendorid').val();
   var grnid = $('#grnid').val();
   var billingaddressid = $('#billingaddressid').val();
   var shippingaddressid = $('#shippingaddressid').val();
+  var poid = $('#poid').val();
   var invoiceno = $("#invoiceno").val();
   var invoicedate = $('#invoicedate').val();
+  var recievedate = $('#recievedate').val();
+  var receiveby = $('#receiveby').val();
+  var payment_due = $('#payment_due').val();
   
-  var isvalidvendorid = isvalidgrnid = isvalidproductcount = isvalidbillingaddressid = isvalidshippingaddressid = isvalidinvoiceno = isvalidinvoicedate = isvalidextrachargesid = isvalidextrachargeamount = isvalidduplicatecharges = 1;
+  var isvalidvendorid = 
+  isvalidgrnid = 
+  isvalidproductcount = 
+  isvalidbillingaddressid = 
+  isvalidshippingaddressid = 
+  isvalidinvoiceno = 
+  isvalidinvoicedate = 
+  isvalidextrachargesid = 
+  isvalidextrachargeamount = 
+  isvalidduplicatecharges = 
+  isvalidpartyid =
+  isvalidreceiveby  =
+  isvalidrecievedate =
+  isvalidpayment_due_div 
+  = 1;
   PNotify.removeAll();
 
-  if(vendorid == 0){
-    $("#vendor_div").addClass("has-error is-focused");
-    new PNotify({title: "Please select vendor !",styling: 'fontawesome',delay: '3000',type: 'error'});
-    isvalidvendorid = 0;
+  if(partyid == 0){
+    $("#party_div").addClass("has-error is-focused");
+    new PNotify({title: "Please select Party  !",styling: 'fontawesome',delay: '3000',type: 'error'});
+    isvalidpartyid = 0;
   }else{
-    $("#vendor_div").removeClass("has-error is-focused");
+    $("#party_div").removeClass("has-error is-focused");
   }
   if(grnid == 0 || grnid == null){
     $("#grnid_div").addClass("has-error is-focused");
-    new PNotify({title: "Please select orders !",styling: 'fontawesome',delay: '3000',type: 'error'});
+    new PNotify({title: "Please select branch !",styling: 'fontawesome',delay: '3000',type: 'error'});
     isvalidgrnid = 0;
   }else{
     $("#grnid_div").removeClass("has-error is-focused");
   }
+
+  if(receiveby == 0 || receiveby == null){
+    $("#receiveby_div").addClass("has-error is-focused");
+    new PNotify({title: "Please select Receive By !",styling: 'fontawesome',delay: '3000',type: 'error'});
+    isvalidreceiveby = 0;
+  }else{
+    $("#receiveby_div").removeClass("has-error is-focused");
+  }
+
+  if(receiveby == 0 || receiveby == null){
+    $("#receiveby_div").addClass("has-error is-focused");
+    new PNotify({title: "Please select Receive By !",styling: 'fontawesome',delay: '3000',type: 'error'});
+    isvalidreceiveby = 0;
+  }else{
+    $("#receiveby_div").removeClass("has-error is-focused");
+  }
+  if(poid == ''){
+    $("#poid_div").addClass("has-error is-focused");
+    new PNotify({title: "Please select  !",styling: 'fontawesome',delay: '3000',type: 'error'});
+    isvalidreceiveby = 0;
+  }else{
+    $("#poid_div").removeClass("has-error is-focused");
+  }
+
   if(invoiceno == ""){
     $("#invoiceno_div").addClass("has-error is-focused");
     new PNotify({title: "Please enter invoice number !",styling: 'fontawesome',delay: '3000',type: 'error'});
@@ -1357,20 +1395,36 @@ function checkvalidation(btntype=''){
   }else{
     $("#invoicedate_div").removeClass("has-error is-focused");
   }
-  if(billingaddressid == "" || billingaddressid == null){
-    $("#billingaddress_div").addClass("has-error is-focused");
-    new PNotify({title: "Please select billing address !",styling: 'fontawesome',delay: '3000',type: 'error'});
-    isvalidbillingaddressid = 0;
+  if(recievedate == ""){
+    $("#recievedate_div").addClass("has-error is-focused");
+    new PNotify({title: "Please select invoice date !",styling: 'fontawesome',delay: '3000',type: 'error'});
+    isvalidrecievedate = 0;
   }else{
-    $("#billingaddress_div").removeClass("has-error is-focused");
+    $("#recievedate_div").removeClass("has-error is-focused");
   }
-  if(shippingaddressid == "" || shippingaddressid == null){
-    $("#shippingaddress_div").addClass("has-error is-focused");
-    new PNotify({title: "Please select shipping address !",styling: 'fontawesome',delay: '3000',type: 'error'});
-    isvalidshippingaddressid = 0;
+  if(payment_due == ""){
+    $("#payment_due_div").addClass("has-error is-focused");
+    new PNotify({title: "Please select invoice date !",styling: 'fontawesome',delay: '3000',type: 'error'});
+    isvalidpayment_due_div = 0;
   }else{
-    $("#shippingaddress_div").removeClass("has-error is-focused");
+    $("#payment_due_div").removeClass("has-error is-focused");
   }
+
+  // if(billingaddressid == "" || billingaddressid == null){
+  //   $("#billingaddress_div").addClass("has-error is-focused");
+  //   new PNotify({title: "Please select billing address !",styling: 'fontawesome',delay: '3000',type: 'error'});
+  //   isvalidbillingaddressid = 0;
+  // }else{
+  //   $("#billingaddress_div").removeClass("has-error is-focused");
+  // }
+
+  // if(shippingaddressid == "" || shippingaddressid == null){
+  //   $("#shippingaddress_div").addClass("has-error is-focused");
+  //   new PNotify({title: "Please select shipping address !",styling: 'fontawesome',delay: '3000',type: 'error'});
+  //   isvalidshippingaddressid = 0;
+  // }else{
+  //   $("#shippingaddress_div").removeClass("has-error is-focused");
+  // }
   if($('.countproducts').length == 0){
     isvalidproductcount==0;
     new PNotify({title: "Please add at least one product !",styling: 'fontawesome',delay: '3000',type: 'error'});
@@ -1407,34 +1461,40 @@ function checkvalidation(btntype=''){
     });
     i++;
   });
-  var k=1;
-  $('.countorders').each(function(){
-    var grnid = $(this).attr('id');
-    
-    var selects_charges = $('select[name="orderextrachargesid['+grnid+'][]"]');
-    var values = [];
-    for(j=0;j<selects_charges.length;j++) {
-        var selectscharges = selects_charges[j];
-        var id = selectscharges.id.split("_");
-        var divid = id[2];
+  var c=1;
+    $('.countproducts').each(function(){
+        var id = $(this).attr('id').match(/\d+/);
+        if($("#productid"+id).val() > 0  || $("#invoiceid"+id).val() != "" ){
+            if($("#productid"+id).val() == 0){
+                $("#product"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(c)+' product !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidcategory = 0;
+            }else {
+                $("#product"+id+"_div").removeClass("has-error is-focused");
+            }
 
-        if(selectscharges.value!=0){
-            if(values.indexOf(selectscharges.value)>-1) {
-                $("#extracharges_"+grnid+"_"+divid+"_div").addClass("has-error is-focused");
-                new PNotify({title: 'Please select '+(j+1)+' is different extra charge !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                isvalidduplicatecharges = 0;
+            if($("#qty"+id).val() == ""){
+                $("#qty"+id+"_div").addClass("has-error is-focused");
+                new PNotify({title: 'Please select '+(c)+' qty !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                isvalidcategory = 0;
+            }else {
+                $("#qty"+id+"_div").removeClass("has-error is-focused");
             }
-            else{ 
-                values.push(selectscharges.value);
-                if($("#orderextrachargesid_"+grnid+"_"+divid).val()!=0){
-                $("#extracharges_"+grnid+"_"+divid+"_div").removeClass("has-error is-focused");
-                }
-            }
+
+        } else {
+            $("#invoice"+id+"_div").removeClass("has-error is-focused");
+            $("#price"+id+"_div").removeClass("has-error is-focused");
+            $("#invoiceprice"+id+"_div").removeClass("has-error is-focused");
         }
-    }
-    k++;
-  });
-  if(isvalidvendorid == 1 && isvalidgrnid == 1 && isvalidproductcount == 1 && isvalidbillingaddressid == 1 && isvalidshippingaddressid == 1 && isvalidinvoiceno == 1 && isvalidinvoicedate == 1 && isvalidextrachargesid == 1 && isvalidextrachargeamount == 1 && isvalidduplicatecharges == 1){
+        c++;
+    });
+ 
+  if(isvalidpartyid==1 
+    && isvalidduplicatecharges == 1
+    && isvalidreceiveby == 1
+    && isvalidrecievedate == 1
+    && isvalidpayment_due_div == 1
+    ){
     
     var formData = new FormData($('#purchaseinvoiceform')[0]);
     if(invoiceid==''){
@@ -1513,9 +1573,9 @@ function addnewproduct(){
           </div>\
       </td>\
       <td>\
-          <div class="form-group" id="actualprice'+divcount+'_div">\
+          <div class="form-group" id="qty'+divcount+'_div">\
               <div class="col-sm-12">\
-                  <input type="text" class="form-control actualprice text-right" id="actualprice'+divcount+'" name="actualprice[]" value="" onkeypress="return decimal_number_validation(event, this.value)" style="display: block;" div-id="'+divcount+'">\
+                  <input type="text" class="form-control actualprice text-right" id="qty'+divcount+'" name="actualprice[]" value="" onkeypress="return decimal_number_validation(event, this.value)" style="display: block;" div-id="'+divcount+'">\
               </div>\
           </div>\
       </td>\
@@ -1595,7 +1655,7 @@ function addnewproduct(){
   $(".add_remove_btn:last").hide();
   $("#quotationproducttable tbody").append(producthtml);
 
-  $("#qty"+divcount).TouchSpin(touchspinoptions);
+  // $("#qty"+divcount).TouchSpin(touchspinoptions);
 
   $(".selectpicker").selectpicker("refresh");
 }
