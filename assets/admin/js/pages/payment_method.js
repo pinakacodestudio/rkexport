@@ -1,17 +1,44 @@
 
 $(document).ready(function() {
-
-    $('#paymentmethodtable').DataTable({
+    loadpopover();
+    //list('admissioninquirystatustable', 'Admissioninquirystatus/listing', [-1,-2]);
+    oTable = $('#paymenttypetable').DataTable
+      ({
+        //"processing": true,//Feature control the processing indicator.
         "language": {
-            "lengthMenu": "_MENU_"
+          "lengthMenu": "_MENU_"
         },
-        "columnDefs": [ {
-          "targets": [-1,-2],
-          "orderable": false
-        } ],
-        responsive: true,
-    });
-
+        
+        "pageLength": 10,
+        "columnDefs": [{
+          'orderable': false,
+          'targets': [-1,-2,0]
+        }],
+        drawCallback: function () {
+          loadpopover();
+        },
+        "order": [], //Initial no order.
+        'serverSide': true,//Feature control DataTables' server-side processing mode.
+        // Load data for the table's content from an Ajax source
+        "ajax": {
+            "url": SITE_URL+'Payment-method/listing',
+            "type": "POST",
+            "data": function ( data ) {
+                
+            },
+            beforeSend: function(){
+              $('.mask').show();
+              $('#loader').show();
+            },
+            error: function(xhr) {
+              // alert(xhr.responseText);
+            },
+            complete: function(){
+              $('.mask').hide();
+              $('#loader').hide();
+            },
+        },
+      });
     $('.dataTables_filter input').attr('placeholder','Search...');
 
 
@@ -22,39 +49,4 @@ $(document).ready(function() {
 
     $('.panel-footer').append($(".dataTable+.row"));
     $('.dataTables_paginate>ul.pagination').addClass("pull-right pagination-md");
-   
 });
-
-function updateactiveplan(){
-    var paymentmethod = $("#displayinapp").val();
-
-    if(paymentmethod!=0){
-        var uurl = SITE_URL+"payment-method/changePaymentMethodInApp";
-        $.ajax({
-            url: uurl,
-            type: 'POST',
-            data: {paymentmethod:String(paymentmethod)},
-            dataType: 'json',
-            async: false,
-            beforeSend: function(){
-                $('.mask').show();
-                $('#loader').show();
-            },
-            success: function(response){
-                if(response==1){
-                    new PNotify({title: "Payment method for app successfully updated.",styling: 'fontawesome',delay: '3000',type: 'success'});
-                }
-            },
-            error: function(xhr) {
-            //alert(xhr.responseText);
-            },
-            complete: function(){
-                $('.mask').hide();
-                $('#loader').hide();
-            },
-        });
-    }else{
-        $("#displayinapp_div").addClass("has-error is-focused");
-        new PNotify({title: 'Please select payment method !',styling: 'fontawesome',delay: '3000',type: 'error'});
-    }
-}

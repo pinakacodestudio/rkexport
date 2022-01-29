@@ -509,7 +509,7 @@ define('tbl_customer', "customer");
 define('tbl_memberaddress', "memberaddress");
 define('tbl_vouchercodeused', "vouchercodeused");
 define('tbl_socialmedia', "socialmedia");
-define('tbl_orders', "orders");
+define('tbl_order', "order");
 define('tbl_orderproduct', "orderproduct");
 define('tbl_customeremailverification', "customeremailverification");
 define('tbl_smstemplate', "smstemplate");

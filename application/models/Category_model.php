@@ -6,13 +6,13 @@ class Category_model extends Common_model {
 	public $_fields = "*";
 	public $_where = array();
 	public $_except_fields = array();
-	public $_order = array('pc1.priority' => 'ASC');
+	public $order = array('pc1.priority' => 'ASC');
 
 	//set column field database for datatable orderable
 	public $column_order = array(null, 'pc1.name',"pc1.maincategoryname",'pc1.createddate');
 
 	//set column field database for datatable searchable 
-	public $column_search = array('pc1.name',"((select name from ".tbl_productcategory." as pc2 where pc2.id=pc1.maincategoryid))",'DATE_FORMAT(pc1.createddate, "%d/%m/%Y %H:%i:%s")');
+	public $column_search = array('pc1.name',"((select name from ".tbl_productcategory." as pc2 where pc2.id=pc1.maincategoryid))",'DATE_FORMAT(pc1.createddate, "%d %M %Y %H:%i %s")');
 
 	function __construct() {
 		parent::__construct();

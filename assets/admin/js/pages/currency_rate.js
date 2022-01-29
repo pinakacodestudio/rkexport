@@ -12,7 +12,7 @@ $(document).ready(function() {
         "pageLength": 10,
         "columnDefs": [{
           'orderable': false,
-          'targets': [0,-1,-2,-3]
+          'targets': [0,-1,-2]
         }],
         drawCallback: function () {
           loadpopover();
@@ -21,7 +21,7 @@ $(document).ready(function() {
         'serverSide': true,//Feature control DataTables' server-side processing mode.
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": SITE_URL+'Currency_rate/listing',
+            "url": SITE_URL+'Currency-rate/listing',
             "type": "POST",
             "data": function ( data ) {
                 

@@ -3,7 +3,7 @@
 class Sales_order_model extends Common_model {
 
 	//put your code here
-	public $_table = tbl_orders;
+	public $_table = tbl_order;
 	public $_fields = "*";
 	public $_where = array();
 	public $_except_fields = array();
@@ -18,7 +18,7 @@ class Sales_order_model extends Common_model {
 	function getSalesPersonProductCommission($orderid){
 	
 		$query = $this->readdb->select("SUM(price*quantity*commission/100) as commissionamount,(SELECT name FROM user WHERE id=salespersonid) as salesperson")
-					->from(tbl_orderproducts)
+					->from(tbl_orderproduct)
 					->where("orderid=".$orderid." AND salespersonid != 0")
 					->group_by("salespersonid")
 					->get();
@@ -51,28 +51,21 @@ class Sales_order_model extends Common_model {
         $status = isset($_REQUEST['status'])?$_REQUEST['status']:'-1';
         $fromdate = $this->general_model->convertdate($_REQUEST['fromdate']);
         $todate = $this->general_model->convertdate($_REQUEST['todate']);
+		//o.orderid,buyer.name as buyername,buyer.membercode as buyercode,buyer.channelid as buyerchannelid, o.status,IF(o.salespersonid!=0,(@netamount*o.commission/100),0) as commissionamount 
 
-        $this->readdb->select("o.id,o.orderid,
-                        buyer.id as buyerid,buyer.name as buyername,buyer.membercode as buyercode,
-                        buyer.channelid as buyerchannelid,
-						o.orderdate,
-						@netamount:=(payableamount + IFNULL((SELECT SUM(amount) FROM ".tbl_extrachargemapping." WHERE referenceid=o.id AND type=0),0)) as netamount,
+		//buyer.id as buyerid, IFNULL((SELECT name FROM ".tbl_user." WHERE id=o.salespersonid),'') as salespersonname
 
-                        o.salespersonid,o.commission,o.commissionwithgst,
-                        o.status,o.remarks,
-						IFNULL((SELECT name FROM ".tbl_user." WHERE id=o.salespersonid),'') as salespersonname,
-						
-						IF(o.salespersonid!=0,(@netamount*o.commission/100),0) as commissionamount
-                    ");
+		//@netamount:=(payableamount + IFNULL((SELECT SUM(amount) FROM ".tbl_extrachargemapping." WHERE referenceid=o.id AND type=0),0)) as netamount, o.salespersonid,o.commission,o.commissionwithgst,
+        $this->readdb->select("o.id,o.remarks,");
         
         $this->readdb->from($this->_table." as o");
-        $this->readdb->join(tbl_member." as buyer","buyer.id=o.memberid","INNER");
+        $this->readdb->join(tbl_member." as buyer","buyer.id=o.partyid","INNER");
 
-        $this->readdb->where("o.memberid!=0 AND ((o.salespersonid!=0 OR o.id IN (SELECT orderid FROM ".tbl_orderproducts." WHERE salespersonid!=0))) AND ((o.salespersonid = ".$salespersonid." OR ".$salespersonid."=0 OR o.id IN (SELECT orderid FROM ".tbl_orderproducts." WHERE (salespersonid=".$salespersonid." OR ".$salespersonid."=0))))");
-        $this->readdb->where("(buyer.channelid = ".$channelid." OR ".$channelid."=0)");
-        $this->readdb->where("(o.status = ".$status." OR '".$status."'='-1')");
+        // $this->readdb->where("o.memberid!=0 AND ((o.salespersonid!=0 OR o.id IN (SELECT orderid FROM ".tbl_orderproduct." WHERE salespersonid!=0))) AND ((o.salespersonid = ".$salespersonid." OR ".$salespersonid."=0 OR o.id IN (SELECT orderid FROM ".tbl_orderproduct." WHERE (salespersonid=".$salespersonid." OR ".$salespersonid."=0))))");
+        // $this->readdb->where("(buyer.channelid = ".$channelid." OR ".$channelid."=0)");
+        // $this->readdb->where("(o.status = ".$status." OR '".$status."'='-1')");
 
-        $this->readdb->where("(o.orderdate BETWEEN '".$fromdate."' AND '".$todate."')");
+        $this->readdb->where("(o.podate BETWEEN '".$fromdate."' AND '".$todate."')");
 
 		$i = 0;
 		foreach ($this->column_search as $item) // loop column 
@@ -104,6 +97,14 @@ class Sales_order_model extends Common_model {
 			$order = $this->order;
 			$this->readdb->order_by(key($order), $order[key($order)]);
 		}
+	}
+	function getpartydata(){
+        $this->readdb->select("c.id,c.companyname as name");
+        // $this->readdb->from(tbl_party." as p");
+        $this->readdb->from(tbl_company." as c");
+        // $this->readdb->join(tbl_company." as c","p.companyid=c.id","LEFT");
+		$readdb = $this->readdb->get();
+		return $readdb->result();
 	}
 
 	function get_datatables() {

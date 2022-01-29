@@ -1,10 +1,30 @@
 <?php    $productdiscount = 0; ?><?php 
+
+
    $DOCUMENT_TYPE_DATA = '';
    if(!empty($documenttypedata)){
    foreach($documenttypedata as $documenttype){
        $DOCUMENT_TYPE_DATA .= '<option value="'.$documenttype['id'].'">'.$documenttype['documenttype'].'</option>';
    } 
    }
+   $PRODUCT_CETEGORY_DATA = '';
+ 
+   if(!empty($categorydorpdowndata)){
+      foreach($categorydorpdowndata as $categorydorpdown){
+         $PRODUCT_CETEGORY_DATA .= '<option value="'.$categorydorpdown['id'].'">'.$categorydorpdown['name'].'</option>';
+      } 
+   }
+   $PRODUCT_DORPDOWN_DATA = '';
+ 
+   // echo '<pre>';
+   // print_r($productdorpdowndata);
+   // exit;
+   if(!empty($productdorpdowndata)){
+      foreach($productdorpdowndata as $productdorpdown){
+         $PRODUCT_DORPDOWN_DATA .= '<option value="'.$productdorpdown['id'].'">'.$productdorpdown['name'].'</option>';
+      } 
+   }
+  
    $LICENCE_TYPE_DATA = '';
    if(!empty($this->Licencetype)){
    foreach($this->Licencetype as $k=>$val){
@@ -16,6 +36,8 @@
 <script>
    var DOCUMENT_TYPE_DATA = '<?=$DOCUMENT_TYPE_DATA?>';
    var LICENCE_TYPE_DATA = '<?=$LICENCE_TYPE_DATA?>';
+   var PRODUCT_CETEGORY_DATA = '<?=$PRODUCT_CETEGORY_DATA?>';
+   var PRODUCT_DORPDOWN_DATA = '<?=$PRODUCT_DORPDOWN_DATA?>';
    
    var countryid = '<?php if(isset($partydata)) { echo $partydata['countryid']; }else { echo '0'; } ?>';
    var provinceid = '<?php if(isset($partydata)) { echo $partydata['provinceid']; }else { echo '0'; } ?>';
@@ -55,11 +77,13 @@
                   <div class="form-group" id="party_div">
                      <label for="party" class="col-md-4 control-label">Party <span class="mandatoryfield">*</span></label>
                      <div class="col-md-7">
+                        
+                       
                         <select id="party" name="party" class="selectpicker form-control" data-live-search="true" data-size="5">
                            <option value="0">Select Party</option>
-                           <?php foreach ($Companydata as $Companyrow) { ?>
-                           <option value="<?php echo $Companyrow['id']; ?>" 
-                              <?php if (isset($partydata) && $partydata['party'] == $Companyrow['id']) { echo "selected"; } ?>><?php echo $Companyrow['companyname']; ?>
+                           <?php foreach ($Partydorpdowndata as $Party) { ?>
+                           <option value="<?php echo $Party->id; ?>" 
+                              ><?php echo $Party->name; ?>
                            </option>
                            <?php } ?>
                         </select>
@@ -329,7 +353,7 @@
                                                 <td>
                                                     <div class="form-group" id="price<?=($i+1)?>_div">
                                                         <div class="col-md-12">
-                                                            <select id="priceid<?=($i+1)?>" name="priceid[]" data-width="90%" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="<?=($i+1)?>">
+                                                            <select id="priceid<?=($i+1)?>" name="priceid[]" data-width="90%" class="selectpicker form-control priceid productdropdowan" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="<?=($i+1)?>">
                                                                 <option value="">Select Variant</option>
                                                             </select>
                                                             <div class="form-group m-n p-n" id="applyoldprice<?=($i+1)?>_div">
@@ -447,27 +471,29 @@
                                                 <input type="hidden" name="originalprice[]" id="originalprice1">
                                                 <input type="hidden" name="uniqueproduct[]" id="uniqueproduct1">
                                                 <input type="hidden" name="referencetype[]" id="referencetype1">
-                                                <div class="form-group" id="product1_div">
+                                                <div class="form-group" id="cetegory1_div">
                                                     <div class="col-sm-12">
-                                                        <select id="productid1" name="productid[]" data-width="90%" class="selectpicker form-control productid" data-live-search="true" data-select-on-tab="true" data-size="8" div-id="1">
+                                                        <select id="cetegory1" name="cetegory[]" data-width="90%" class="selectpicker form-control cetegory" data-live-search="true" data-select-on-tab="true" data-size="8" div-id="1">
                                                             <option value="0">Select Cetegory</option>
+                                                            <?=$PRODUCT_CETEGORY_DATA?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group" id="product1_div">
+                                                    <div class="col-md-12">
+                                                        <select id="product1" name="product1[]" data-width="90%" onchange="getprice(1)" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
+                                                            <option value="">Select Product</option>
+                                                            <?=$PRODUCT_DORPDOWN_DATA?>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="form-group" id="price1_div">
-                                                    <div class="col-md-12">
-                                                        <select id="priceid1" name="priceid[]" data-width="90%" class="selectpicker form-control priceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
-                                                            <option value="">Select Product</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group" id="comboprice1_div">
                                                     <div class="col-sm-12">
-                                                        <select id="combopriceid1" name="combopriceid[]" data-width="150px" class="selectpicker form-control combopriceid" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
+                                                        <select id="price1" name="price1[]" data-width="150px" class="selectpicker form-control price1" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
                                                             <option value="">Price</option>
                                                         </select>
                                                     </div>
@@ -505,7 +531,8 @@
                                             <td>
                                                 <div class="form-group" id="tax1_div">
                                                     <div class="col-md-12">
-                                                        <input type="text" class="form-control text-right tax" id="tax1" name="tax[]" value="" div-id="1" onkeypress="return decimal_number_validation(event, this.value)" readonly>	
+                                                        <input type="text" class="form-control text-right tax" id="tax1" name="tax[]" value="" div-id="1" onkeypress="return decimal_number_validation(event, this.value)"  >	
+                                                        <!-- onclick="countamount()" -->
                                                         <input type="hidden" value="" id="ordertax1">
                                                     </div>
                                                 </div>
@@ -513,7 +540,7 @@
                                             <td>
                                                 <div class="form-group" id="amount1_div">
                                                     <div class="col-md-12">
-                                                        <input type="text" class="form-control amounttprice" id="amount1" name="amount[]" value="" readonly="" div-id="1">	
+                                                        <input type="text" class="form-control amounttprice" id="amount1" name="amount[]" value="" div-id="1">	
                                                         <input type="hidden" class="producttaxamount" id="producttaxamount1" name="producttaxamount[]" value="" div-id="1">		
                                                     </div>
                                                 </div>
@@ -590,7 +617,7 @@
                                                             </span>
                                                         </span>
                                                         <input type="text" readonly="" id="Filetext<?=$i+1?>"
-                                                            class="form-control" name="Filetext[]" value="<?=$quotationattachment[$i]['filename']?>">
+                                                            class="form-control" name="Filetext[]" value=""><?php //$quotationattachment[$i]['filename']?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -772,6 +799,38 @@
    
       });
    }
+
+
+   function getprice(id){
+      var pid = $("#product" + id).val();
+      var uurl = SITE_URL + "Sales_order/Productpricesdorpdowndata/"+pid;
+      $.ajax({
+         url: uurl,
+         type: 'POST',
+         dataType: 'json',
+         beforeSend: function() {
+            // $('.mask').show();
+            // $('#loader').show();
+         },
+         success: function(response) {
+            var option = ' <option value="0">Select Price</option>';
+            $.each(response, function (index, data) {
+               option += '<option value="' + data['id'] + '">' + data['price'] + '</option>';
+            });
+            $('#price'+id).html(option);
+            $(".selectpicker").selectpicker("refresh");
+         },
+         error: function(xhr) {
+            //alert(xhr.responseText);
+         },
+         complete: function() {
+            $('.mask').hide();
+            $('#loader').hide();
+         },
+      });
+   }
+
+
    $(document).ready(function() {
       $('#checkbox1').on('change', function() {
          var checked = this.checked
@@ -796,6 +855,7 @@
          }
          
       });
+
       $('#checkbox3').on('change', function() {
          var checked = this.checked
          if(checked==true){

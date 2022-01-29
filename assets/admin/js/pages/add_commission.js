@@ -136,3 +136,10 @@ function checkvalidation(addtype = 0) {
         }
     }
 }
+
+$("#commission").on('keyup', function(e) {
+    var val = $(this).val();
+    if (val > 100) {
+        $('#commission').val("100.00");
+    }
+});

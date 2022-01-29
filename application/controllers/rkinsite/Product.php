@@ -1135,6 +1135,7 @@ class  Product extends Admin_Controller
                 $update_price[] = array(
                     "id" => $row,
                     /* "price"=>$price, */
+                    "price"=>$PostData['price'][$key],
                     "stock" => (int)$PostData['stock'][$key],
                     // "pointsforseller" => $PostData['pointsforseller'][$key],
                     // "pointsforbuyer" => $PostData['pointsforbuyer'][$key],

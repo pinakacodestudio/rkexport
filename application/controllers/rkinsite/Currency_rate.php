@@ -44,7 +44,7 @@ class Currency_rate extends Admin_Controller
             $checkbox = '';
             //Edit Button
             if (in_array($rollid, $edit)) {
-                $actions .= '<a class="' . edit_class . '" href="' . ADMIN_URL . 'currency-rate/edit_currency_rate/' . $datarow->id . '/' . '" title="' . edit_title . '">' . edit_text . '</a>';
+                $actions .= '<a class="' . edit_class . '" href="' . ADMIN_URL . 'currency-rate/edit-currency-rate/' . $datarow->id . '/' . '" title="' . edit_title . '">' . edit_text . '</a>';
             }
             //Delete and Enable/Disable Button
             if (in_array($rollid, $delete)) {

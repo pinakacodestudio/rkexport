@@ -10,336 +10,192 @@ class Payment_method extends Admin_Controller {
 		$this->load->model('Payment_method_model','Payment_method');
 	}
 	public function index() {
-		$this->checkAdminAccessModule('submenu','view',$this->viewData['submenuvisibility']);
+
 		$this->viewData['title'] = "Payment Method";
 		$this->viewData['module'] = "payment_method/Payment_method";
-        $this->viewData['paymentmethoddata'] = $this->Payment_method->getPaymentMethodData();
-        $activeplandata = $this->Payment_method->getActivePaymentMethodUseInApp();
 
-        $this->viewData['activeplan'] = !empty($activeplandata)?$activeplandata['paymentgatewaytype']:"0";
-        
         if($this->viewData['submenuvisibility']['managelog'] == 1){
-            $this->general_model->addActionLog(4,'Payment Method','View payment method.');
-        }
-		
+            $this->general_model->addActionLog(4,'Payment method','View payment method.');
+		}
+
 		$this->admin_headerlib->add_javascript("payment_method","pages/payment_method.js");
 		$this->load->view(ADMINFOLDER.'template',$this->viewData);
 	}
-	
-	public function payment_method_add() {
-		$this->checkAdminAccessModule('submenu','add',$this->viewData['submenuvisibility']);
-		$this->viewData['title'] = "Add Payment Method";
-		$this->viewData['module'] = "payment_method/Add_payment_method";
+	public function listing() {
 
-		$this->admin_headerlib->add_javascript("add_payment_method","pages/add_payment_method.js");
-		$this->load->view(ADMINFOLDER.'template',$this->viewData);
-    }
+		$edit = explode(',', $this->viewData['submenuvisibility']['submenuedit']);
+        $delete = explode(',', $this->viewData['submenuvisibility']['submenudelete']);
+        $rollid = $this->session->userdata[base_url().'ADMINUSERTYPE'];
+        $createddate = $this->general_model->getCurrentDateTime();
+        $list = $this->Payment_method->get_datatables();
 
-	public function payment_method_edit($id) {
-		$this->checkAdminAccessModule('submenu','edit',$this->viewData['submenuvisibility']);
-		$this->viewData['title'] = "Edit Payment Method";
-		$this->viewData['module'] = "payment_method/Add_payment_method";
-		$this->viewData['action'] = "1";//Edit
+        $data = array();       
+        $counter = $_POST['start'];
+        $pokemon_doc = new DOMDocument();
+        foreach ($list as $datarow) { 
+        	$row = array();
+        	$actions = '';
+            $checkbox = '';
+            //Edit Button
+            if(in_array($rollid, $edit)) {
+                $actions .= '<a class="'.edit_class.'" href="'.ADMIN_URL.'payment-method/edit-payment-method/'. $datarow->id.'/'.'" title="'.edit_title.'">'.edit_text.'</a>';
+            }
+            //Delete and Enable/Disable Button
+            if(in_array($rollid, $delete)) {
+                $actions.='<a class="'.delete_class.'" href="javascript:void(0)" title="'.delete_title.'" onclick=deleterow('.$datarow->id.',"","Additional-rights","'.ADMIN_URL.'payment-method/delete-mul-payment-method") >'.delete_text.'</a>';
 
-        $this->viewData['paymentmethoddata'] = $this->Payment_method->getPaymentMethodDataByID($id);
-
-        $this->load->model('Payment_gateway_model', 'Payment_gateway');
-        $this->Payment_gateway->_table = tbl_paymentgateway;
-        $this->Payment_gateway->_where = array('paymentmethodid' => $id);
-        $paymentgatewaydata = $this->Payment_gateway->getRecordByID();
-
-        if(!empty($paymentgatewaydata)){
-            $this->viewData['paymentgatewaytype'] = $paymentgatewaydata[0]['paymentgatewaytype'];
+                $checkbox = '<div class="checkbox"><input id="deletecheck'.$datarow->id.'" onchange="singlecheck(this.id)" type="checkbox" value="'.$datarow->id.'" name="deletecheck'.$datarow->id.'" class="checkradios">
+                            <label for="deletecheck'.$datarow->id.'"></label></div>';
+            }
+            
+            
+        	$row[] = ++$counter;
+            $row[] = $datarow->paymentmethod;
+            $row[] = $this->general_model->displaydatetime($datarow->createddate);
+            $row[] = $actions;
+            $row[] = $checkbox;
+            $data[] = $row;
         }
-        $this->viewData['paymentgatewaydata'] = array();
-     
-        foreach ($paymentgatewaydata as $row) {
-            $this->viewData['paymentgatewaydata'][$row['field']] = $row['value'];
-        }
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->Payment_method->count_all(),
+                        "recordsFiltered" => $this->Payment_method->count_filtered(),
+                        "data" => $data,
+                        );
+        echo json_encode($output);  
+	}
+	public function add_payment_method() {
+		
+		$this->viewData['title'] = "Add Payment method";
+		$this->viewData['module'] = "payment_method/Add_payment_method";
 
 		$this->admin_headerlib->add_javascript("add_payment_method","pages/add_payment_method.js");
 		$this->load->view(ADMINFOLDER.'template',$this->viewData);
 	}
-	public function add_payment_method(){
+	public function edit_payment_method($id) {
+		
+		$this->viewData['title'] = "Edit Payment method";
+		$this->viewData['module'] = "payment_method/Add_payment_method";
+		$this->viewData['action'] = "1";//Edit
+
+		//Get Admission Inquiry Status Data By ID
+		$this->viewData['paymentmethoddata'] = $this->Payment_method->getpaymentmethoddataByID($id);
+		
+		$this->admin_headerlib->add_javascript("add_payment_method","pages/add_payment_method.js");
+		$this->load->view(ADMINFOLDER.'template',$this->viewData);
+
+	}
+	public function payment_method_add() {
+
 		$PostData = $this->input->post();
-     
-        $createddate = $this->general_model->getCurrentDateTime();
-        $addedby = $this->session->userdata(base_url() . 'ADMINID');
 
-        $name = $PostData['paymentmethod'];
-        $displayinfront = (isset($PostData['displayinfront']))?1:0;
-        $status = $PostData['status'];
+		$createddate = $this->general_model->getCurrentDateTime();
+		$addedby = $this->session->userdata(base_url().'ADMINID');
+		
+		
+		$paymentmethod = $PostData['paymentmethod'];
 
-        $this->Payment_method->_where = ("name='" . trim($name) . "' AND channelid=0 AND memberid=0 ");
-        $Count = $this->Payment_method->CountRecords();
+        $this->form_validation->set_rules('paymentmethod', 'Payment method', 'required');
+		
+		$json = array();
 
-        if ($Count == 0) {
-
-            if(!is_dir(PAYMENT_METHOD_LOGO_PATH)){
-                @mkdir(PAYMENT_METHOD_LOGO_PATH);
-            }
-            if($_FILES["logo"]['name'] != ''){
-                if($_FILES["logo"]['size'] != '' && $_FILES["logo"]['size'] >= UPLOAD_MAX_FILE_SIZE){
-                    echo 5;	// FILE SIZE IS LARGE
-                    exit;
-                }
-                $logo = uploadFile('logo','PAYMENT_METHOD_LOGO', PAYMENT_METHOD_LOGO_PATH, 'jpeg|png|jpg|JPEG|PNG|JPG|ico', '', 0, PAYMENT_METHOD_LOGO_LOCAL_PATH);
-                if($logo !== 0){
-                    if($logo==2){
-                        echo 3;//file not uploaded
-                        exit;
-                    }
-                } else {
-                    echo 4; //INVALID IMAGE TYPE
-                    exit;
-                }   
-            } else {
-                $logo = '';
-            }
-
-            $insertdata = array(
-                "name" => $name,
-                "displayinfront" => $displayinfront,
-                "logo" => $logo,
-                "status" => $status,
-                "createddate" => $createddate,
-                "modifieddate" => $createddate,
-                "addedby" => $addedby,
-                "modifiedby" => $addedby
-            );
-
-            $insertdata=array_map('trim',$insertdata);
-            $Add = $this->Payment_method->Add($insertdata);
-            if ($Add) {
-                if($this->viewData['submenuvisibility']['managelog'] == 1){
-                    $this->general_model->addActionLog(1,'Payment Method','Add new '.$name.' payment method.');
-                }
-                echo 1;
-            } else {
-                echo 0;
-            }
-        } else {
-            echo 2;
-        }
-    }
-    
-    public function update_payment_method(){
-		$PostData = $this->input->post();
-        $modifieddate = $this->general_model->getCurrentDateTime();
-		$modifiedby = $this->session->userdata(base_url().'ADMINID');
-     
-        $paymentmethodid = $PostData['paymentmethodid'];
-        $name = $PostData['paymentmethod'];
-        $paymentgatewaytype = $PostData['paymentgatewaytype'];
-        $displayinfront = (isset($PostData['displayinfront']))?1:0;
-        $status = $PostData['status'];
-
-        $this->Payment_method->_where = "id!='".$paymentmethodid."' AND name='".$name."' AND channelid=0 AND memberid=0";
-		$Count = $this->Payment_method->CountRecords();
-		if($Count==0){
-
-            $oldlogo = trim($PostData['oldlogo']);
-            $removeoldlogo = trim($PostData['removeoldlogo']);
-            if($_FILES["logo"]['name'] != ''){
-                if(!is_dir(PAYMENT_METHOD_LOGO_PATH)){
-                    @mkdir(PAYMENT_METHOD_LOGO_PATH);
-                }
-                if($_FILES["logo"]['size'] != '' && $_FILES["logo"]['size'] >= UPLOAD_MAX_FILE_SIZE){
-                    echo 5;	// FILE SIZE IS LARGE
-                    exit;
-                }
-                if(!empty($oldlogo)){
-                    $logo = reuploadfile('logo','PAYMENT_METHOD_LOGO', $oldlogo, PAYMENT_METHOD_LOGO_PATH, 'jpeg|png|jpg|JPEG|PNG|JPG|ico', '', 0, PAYMENT_METHOD_LOGO_LOCAL_PATH);
-                }else{
-                    $logo = uploadFile('logo','PAYMENT_METHOD_LOGO', PAYMENT_METHOD_LOGO_PATH, 'jpeg|png|jpg|JPEG|PNG|JPG|ico', '', 0, PAYMENT_METHOD_LOGO_LOCAL_PATH);
-                }
-                if($logo !== 0){
-                    if($logo==2){
-                        echo 3;//file not uploaded
-                        exit;
-                    }
-                } else {
-                    echo 4; //INVALID IMAGE TYPE
-                    exit;
-                }   
-            }else if($_FILES["logo"]['name'] == '' && $oldlogo ==''){
-                $logo = '';
-            }elseif($removeoldlogo=='1'){
-                unlinkfile('PAYMENT_METHOD_LOGO', $oldlogo, PAYMENT_METHOD_LOGO_PATH);
-                $logo ='';
-            }else{
-                $logo = $oldlogo;
-            }
-
-            $updatedata = array(
-                "name" => $PostData['paymentmethod'],
-                "displayinfront" => $displayinfront,
-                "logo" => $logo,
-                "paymentmode" => (isset($PostData['paymentmode']))?$PostData['paymentmode']:0,
-                "status" => $PostData['status'],
-                "modifieddate" => $modifieddate,
-                "modifiedby" => $modifiedby
-            );
+        if ($this->form_validation->run() == FALSE) {
+        	$validationError = implode('<br>', $this->form_validation->error_array());
+        	$json = array('error'=>3, 'message'=>$validationError);
+	    }else{
             
-            $updatedata=array_map('trim',$updatedata);
-            $this->Payment_method->_where = array("id"=>$paymentmethodid);
-            $Edit = $this->Payment_method->Edit($updatedata);
-            if($Edit){
+         
+                $this->Payment_method->_where = ("paymentmethod='".$paymentmethod."'");
+                $Count = $this->Payment_method->CountRecords();
                 
-                if(!empty($paymentgatewaytype)){
-                    $updateData = array();
-                    $this->load->model('Payment_gateway_model', 'Payment_gateway');
-                    $this->Payment_gateway->_table = tbl_paymentgateway;
-                    $this->Payment_gateway->_where = array('paymentmethodid' => $paymentmethodid,"paymentgatewaytype"=>$paymentgatewaytype);
-                    $paymentgatewaydata = $this->Payment_gateway->getRecordByID();
-
-                    if($paymentgatewaytype == 1 || $paymentgatewaytype == 3){
-                        
-                        foreach($paymentgatewaydata as $row){
-
-                            if($row['field'] == "merchantid"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['merchantid']);
-
-                            }else if($row['field'] == "merchantkey"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['merchantkey']);
-                           
-                            }else if($row['field'] == "merchantsalt"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['merchantsalt']);
-                           
-                            }else if($row['field'] == "authheader"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['authheader']);
-                            }
+                if($Count==0){
+                    
+                    $insertdata = array("paymentmethod"=>$paymentmethod,
+                                "createddate"=>$createddate,
+                                "addedby"=>$addedby,
+                                "modifieddate"=>$createddate,
+                                "modifiedby"=>$addedby);
+                    $insertdata=array_map('trim',$insertdata);
+                    
+                 $Add = $this->Payment_method->Add($insertdata);
+                    if($Add){
+                        if($this->viewData['submenuvisibility']['managelog'] == 1){
+                            $this->general_model->addActionLog(1,'Payment method','Add new payment method.');
                         }
-                    }else if($paymentgatewaytype == 2){
-                        
-                        foreach($paymentgatewaydata as $row){
-
-                            if($row['field'] == "merchantid"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['merchantid']);
-
-                            }else if($row['field'] == "merchantkey"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['merchantkey']);
-                           
-                            }else if($row['field'] == "merchantwebsiteforweb"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['merchantwebsiteforweb']);
-                           
-                            }else if($row['field'] == "merchantwebsiteforapp"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['merchantwebsiteforapp']);
-                           
-                            }else if($row['field'] == "channelidforweb"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['channelidforweb']);
-                           
-                            }else if($row['field'] == "channelidforapp"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['channelidforapp']);
-                            
-                            }else if($row['field'] == "industrytypeid"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['industrytypeid']);
-                            }
-                        }
-                    }else if($paymentgatewaytype == 4){
-                        
-                        foreach($paymentgatewaydata as $row){
-
-                            if($row['field'] == "keyid"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['keyid']);
-
-                            }else if($row['field'] == "keysecret"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['keysecret']);
-                           
-                            }else if($row['field'] == "orderurl"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['orderurl']);
-                           
-                            }else if($row['field'] == "checkouturl"){
-                                $updateData[] = array('id'=>$row['id'],'value'=>$PostData['checkouturl']);
-                           
-                            }
-                        }
+                        $json = 1; //Rights successfully added.
+                    }else{
+                        $json = 0; //Rights not added.
                     }
-
-                    if(!empty($updateData)){
-                        $this->Payment_gateway->edit_batch($updateData, "id");
-                    }
+                }else{
+                    $json = 2; //Rights already exist.
                 }
-                if($this->viewData['submenuvisibility']['managelog'] == 1){
-                    $this->general_model->addActionLog(2,'Payment Method','Edit '.$PostData['paymentmethod'].' payment method.');
-                }
-                echo 1;
-            }else{
-                echo 0;
-            }
-        }else{
-            echo 2;
-        }
-    }
-    
-    public function payment_method_enable_disable() {
-        $this->checkAdminAccessModule('submenu','edit',$this->viewData['submenuvisibility']);
-        $PostData = $this->input->post();
-
-        $modifieddate = $this->general_model->getCurrentDateTime();
-        $updatedata = array("status" => $PostData['val'], "modifieddate" => $modifieddate, "modifiedby" => $this->session->userdata(base_url() . 'ADMINID'));
-        $this->Payment_method->_where = array("id" => $PostData['id']);
-        $this->Payment_method->Edit($updatedata);
-
-        if($this->viewData['submenuvisibility']['managelog'] == 1){
-            $this->Payment_method->_where = array("id"=>$PostData['id']);
-            $data = $this->Payment_method->getRecordsById();
-            $msg = ($PostData['val']==0?"Disable":"Enable").' '.$data['name'].' payment method.';
-            
-            $this->general_model->addActionLog(2,'Payment Method', $msg);
-        }
-        echo $PostData['id'];
-    }
-
-    /* public function check_payment_method_use(){
-        $this->checkAdminAccessModule('submenu','delete',$this->viewData['submenuvisibility']);
-        $PostData = $this->input->post();
-        $ids = explode(",",$PostData['ids']);
-        $count = 0;
-        foreach($ids as $row){
-            $query = $this->db->query("SELECT id FROM ".tbl_paymentmethod." WHERE 
-                    id IN (SELECT paymentgetwayid FROM ".tbl_transaction." WHERE paymentgetwayid = '".$row."')
-                ");
-
-            if($query->num_rows() > 0){
-                $count++;
-            }
-        }
-        echo $count;
-    } */
-
-    public function delete_mul_payment_method(){
-        $PostData = $this->input->post();
-        $ids = explode(",",$PostData['ids']);
-        $count = 0;
-        foreach($ids as $row){
            
+			
+		}
+		echo json_encode($json);
+	}
+	public function update_payment_method() {
+
+		$PostData = $this->input->post();
+		$modifieddate = $this->general_model->getCurrentDateTime();
+		$modifiedby = $this->session->userdata(base_url().'ADMINID');
+
+		$id = $PostData['id'];
+		$paymentmethod = $PostData['paymentmethod'];
+
+		$this->form_validation->set_rules('paymentmethod', 'Payment method', 'required');
+        
+
+		$json = array();
+        if ($this->form_validation->run() == FALSE) {
+        	$validationError = implode('<br>', $this->form_validation->error_array());
+        	$json = array('error'=>3, 'message'=>$validationError);
+	    }else{
+         
+                $this->Payment_method->_where = ("id!=".$id." AND paymentmethod='".$paymentmethod."'");
+
+                $Count = $this->Payment_method->CountRecords();
+            
+                if ($Count==0) {
+                    $updatedata = array(
+                        "paymentmethod"=>$paymentmethod,
+                        "modifieddate"=>$modifieddate,
+                        "modifiedby"=>$modifiedby
+                    );
+
+                    $updatedata=array_map('trim', $updatedata);
+
+                    $this->Payment_method->_where = array("id"=>$id);
+                    $Edit = $this->Payment_method->Edit($updatedata);
+                    if ($Edit) {
+                        if($this->viewData['submenuvisibility']['managelog'] == 1){
+                            $this->general_model->addActionLog(2,'Payment method','Edit '.$paymentmethod.' payment method.');
+                        }
+                        $json = 1; //Rights successfully updated.
+                    } else {
+                        $json = 0; //Rights not updated.
+                    }
+                } else {
+                    $json = 2; //Rights already exist.
+                }
+          
+		}
+		echo json_encode($json);
+	}
+	public function delete_mul_payment_method(){
+		$PostData = $this->input->post();
+		$ids = explode(",",$PostData['ids']);
+		$count = 0;
+		foreach($ids as $row){
             if($this->viewData['submenuvisibility']['managelog'] == 1){
+
                 $this->Payment_method->_where = array("id"=>$row);
                 $data = $this->Payment_method->getRecordsById();
-                
-                $this->general_model->addActionLog(3,'Payment Method','Delete '.$data['name'].' payment method.');
+            
+                $this->general_model->addActionLog(3,'Payment method','Delete '.$data['name'].' payment method.');
             }
-            $this->Payment_method->Delete(array("id"=>$row));    
-        }
-    }
-
-    public function changePaymentMethodInApp(){
-        $PostData = $this->input->post();
-        $modifieddate = $this->general_model->getCurrentDateTime();
-        $modifiedby = $this->session->userdata(base_url().'ADMINID');
-        $paymentmethod = $PostData['paymentmethod'];
-        
-        $updatedata = array("displayinapp" => 0,"modifieddate" => $modifieddate,"modifiedby" => $modifiedby);
-        $updatedata=array_map('trim',$updatedata);
-        $this->Payment_method->_where = ("id IN (SELECT paymentmethodid FROM ".tbl_paymentgateway." GROUP BY paymentmethodid)");
-        $this->Payment_method->Edit($updatedata);
-        
-        $updatedata = array("displayinapp" => 1,"modifieddate" => $modifieddate,"modifiedby" => $modifiedby);
-        $updatedata=array_map('trim',$updatedata);
-        $this->Payment_method->_where = ("id IN (SELECT paymentmethodid FROM ".tbl_paymentgateway." WHERE paymentgatewaytype='".$paymentmethod."' GROUP BY paymentmethodid)");
-        
-        $this->Payment_method->Edit($updatedata);
-        echo 1;
-    }
+  			$this->Payment_method->Delete(array("id"=>$row));
+		}
+	}
 }
+?>

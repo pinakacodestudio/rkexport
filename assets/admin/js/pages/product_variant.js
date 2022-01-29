@@ -518,139 +518,69 @@ function checkvalidation() {
         $.each(allvariant_arr, function(index1, value1) {
             if (index != index1) {
                 if (arr_diff(value, value1).length == 0) {
-                    samevariant = 1;
+                    samevariant = 0;
                 }
             }
         })
     });
-    if (samevariant == 1) {
-        new PNotify({ title: 'Please select different variants for all prices!', styling: 'fontawesome', delay: '3000', type: 'error' });
-        return false;
-    }
-    $(".variantids select").each(function() {
-        if ($(this).val() == 0) {
-            varianterror = "Please select all variants";
-            checkvariant = 0;
-        }
-        variantids_arr.push($(this).val());
-    });
-    if (attributeerror != "") {
-        checkattribute = 0;
-        new PNotify({ title: 'Please select all attributes !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    }
-    if (varianterror != "") {
-        checkvariant = 0;
-        new PNotify({ title: 'Please select all variants !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    }
-
-    var c = 1;
-    // $('.productvariantdiv').each(function() {
-    //     var divid = $(this).attr('id').match(/\d+/);
-
-    //     if ($("#singleqty" + divid).is(":checked")) {
-    //         if ($("#price" + divid).val() == 0) {
-    //             $("#price_div" + divid).addClass("has-error is-focused");
-    //             new PNotify({ title: 'Please enter ' + (c) + ' price !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    //             isvalidprice = 0;
-    //         } else {
-    //             $("#price_div" + divid).removeClass("has-error is-focused");
-    //         }
-    //     } else {
-    //         var firstRowId = parseInt($('.countmultipleprice' + divid + ':first').attr('id').split("_")[2]);
-    //         $('.countmultipleprice' + divid).each(function(index) {
-    //             var id = parseInt($(this).attr('id').split("_")[2]);
-    //             var eleID = "_" + divid + "_" + id;
-
-    //             var variantprice = $("#variantprice" + eleID).val();
-    //             var variantqty = $("#variantqty" + eleID).val();
-
-
-
-    //             if ((variantprice != "" && variantprice != 0) || (variantqty != "" && variantqty != 0) || parseInt(id) == parseInt(firstRowId)) {
-
-    //                 if (variantprice == 0) {
-    //                     $("#variantprice_div" + eleID).addClass("has-error is-focused");
-    //                     new PNotify({ title: 'Please enter ' + (c) + ' variant ' + (index + 1) + ' price !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    //                     isvalidvariantprice = 0;
-    //                 } else {
-    //                     $("#variantprice_div" + eleID).removeClass("has-error is-focused");
-    //                 }
-    //                 if (variantqty == 0) {
-    //                     $("#variantqty_div" + eleID).addClass("has-error is-focused");
-    //                     new PNotify({ title: 'Please enter ' + (c) + ' variant ' + (index + 1) + ' quantity !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    //                     isvalidvariantqty = 0;
-    //                 } else {
-    //                     $("#variantqty_div" + eleID).removeClass("has-error is-focused");
-    //                 }
-    //             } else {
-    //                 $("#variantprice_div" + eleID).removeClass("has-error is-focused");
-    //                 $("#variantqty_div" + eleID).removeClass("has-error is-focused");
-    //             }
-
-    //         });
+    // if (samevariant == 1) {
+    //     new PNotify({ title: 'Please select different variants for all prices!', styling: 'fontawesome', delay: '3000', type: 'error' });
+    //     return false;
+    // }
+    // $(".variantids select").each(function() {
+    //     if ($(this).val() == 0) {
+    //         varianterror = "Please select all variants";
+    //         checkvariant = 0;
     //     }
-    //     if ($("#stock" + divid).val() == 0) {
-    //         $("#stock_div" + divid).addClass("has-error is-focused");
-    //         new PNotify({ title: 'Please enter ' + (c) + ' stock !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    //         isvalidstock = 0;
-    //     } else {
-    //         $("#stock_div" + divid).removeClass("has-error is-focused");
-    //     }
-
-    //     if ($("#sku" + divid).val() == "") {
-    //         $("#sku_div" + divid).addClass("has-error is-focused");
-    //         new PNotify({ title: 'Please enter ' + (c) + ' variant SKU !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    //         isvalidsku = 0;
-    //     } else {
-    //         $("#sku_div" + divid).removeClass("has-error is-focused");
-    //     }
-
-    //     if ($("#barcode" + divid).val() == "") {
-    //         $("#barcode_div" + divid).addClass("has-error is-focused");
-    //         new PNotify({ title: 'Please enter or generate ' + (c) + ' variant barcode !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    //         isvalidbarcode = 0;
-    //     } else {
-    //         $("#barcode_div" + divid).removeClass("has-error is-focused");
-    //     }
-    //     c++;
+    //     variantids_arr.push($(this).val());
     // });
+    // if (attributeerror != "") {
+    //     checkattribute = 0;
+    //     new PNotify({ title: 'Please select all attributes !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    // }
+    // if (varianterror != "") {
+    //     checkvariant = 0;
+    //     new PNotify({ title: 'Please select all variants !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    // }
 
-    var input_barcode = $('.barcode');
-    var values = [];
-    for (j = 0; j < input_barcode.length; j++) {
-        var inputbarcode = input_barcode[j];
-        var id = inputbarcode.id.match(/\d+/);
+    // var c = 1;
 
-        if (inputbarcode.value != '') {
-            if (values.indexOf(inputbarcode.value) > -1) {
-                $("#barcode_div" + id).addClass("has-error is-focused");
-                new PNotify({ title: 'Please enter or generate unique barcode in ' + (j + 1) + ' variant !', styling: 'fontawesome', delay: '3000', type: 'error' });
-                isvaliduniquebarcode = 0;
-            } else {
-                values.push(inputbarcode.value);
-                $("#barcode_div" + id).removeClass("has-error is-focused");
-            }
-        }
-    }
-    var input_sku = $('.sku');
-    var values = [];
-    for (j = 0; j < input_sku.length; j++) {
-        var inputsku = input_sku[j];
-        var id = inputsku.id.match(/\d+/);
+    // var input_barcode = $('.barcode');
+    // var values = [];
+    // for (j = 0; j < input_barcode.length; j++) {
+    //     var inputbarcode = input_barcode[j];
+    //     var id = inputbarcode.id.match(/\d+/);
 
-        if (inputsku.value != '') {
-            if (values.indexOf(inputsku.value) > -1) {
-                $("#sku_div" + id).addClass("has-error is-focused");
-                new PNotify({ title: 'Please enter unique SKU in ' + (j + 1) + ' variant !', styling: 'fontawesome', delay: '3000', type: 'error' });
-                isvaliduniquesku = 0;
-            } else {
-                values.push(inputsku.value);
-                $("#sku_div" + id).removeClass("has-error is-focused");
-            }
-        }
-    }
+    //     if (inputbarcode.value != '') {
+    //         if (values.indexOf(inputbarcode.value) > -1) {
+    //             $("#barcode_div" + id).addClass("has-error is-focused");
+    //             new PNotify({ title: 'Please enter or generate unique barcode in ' + (j + 1) + ' variant !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    //             isvaliduniquebarcode = 0;
+    //         } else {
+    //             values.push(inputbarcode.value);
+    //             $("#barcode_div" + id).removeClass("has-error is-focused");
+    //         }
+    //     }
+    // }
+    // var input_sku = $('.sku');
+    // var values = [];
+    // for (j = 0; j < input_sku.length; j++) {
+    //     var inputsku = input_sku[j];
+    //     var id = inputsku.id.match(/\d+/);
 
-    if (checkattribute == 1 && checkvariant == 1 && isvalidprice == 1 && isvalidstock == 1 && isvaliduniquebarcode == 1 && isvalidbarcode == 1 && isvalidsku == 1 && isvaliduniquesku == 1 && isvalidvariantprice == 1 && isvalidvariantqty == 1) {
+    //     if (inputsku.value != '') {
+    //         if (values.indexOf(inputsku.value) > -1) {
+    //             $("#sku_div" + id).addClass("has-error is-focused");
+    //             new PNotify({ title: 'Please enter unique SKU in ' + (j + 1) + ' variant !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    //             isvaliduniquesku = 0;
+    //         } else {
+    //             values.push(inputsku.value);
+    //             $("#sku_div" + id).removeClass("has-error is-focused");
+    //         }
+    //     }
+    // }
+
+    if (checkattribute == 1 && checkvariant == 1 && isvalidprice == 1 && isvalidstock == 1  && isvalidvariantprice == 1 && isvalidvariantqty == 1) {
 
         var formData = new FormData($('#productvariantform')[0]);
         var uurl = SITE_URL + "product/add-product-variant";

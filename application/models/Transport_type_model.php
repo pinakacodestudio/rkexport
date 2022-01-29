@@ -8,7 +8,7 @@ class Transport_type_model extends Common_model {
 	public $_where = array();
 	public $_except_fields = array();
 	public $_order = array('id' => 'DESC');
-	public $column_order = array('id', 'type');
+	public $column_order = array('id','type','createddate');
     public $column_search = array('type');
 	
 	function __construct() {

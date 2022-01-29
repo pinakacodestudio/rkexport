@@ -50,7 +50,7 @@
                   <div class="row">
                      <div class="col-md-6">
                         <div class="form-group" id="websitename_div">
-                           <label class="col-md-4 col-sm-4 control-label" for="websitename">Website Name<span class="mandatoryfield"></span></label>
+                           <label class="col-md-4 col-sm-4 control-label" for="websitename">Website Name<span class="mandatoryfield"> *</span></label>
                            <div class="col-md-8 col-sm-8">
                               <input type="text" id="websitename" class="form-control" name="websitename" value="<?php if(isset($partydata)){ echo $partydata['websitename']; }  ?>">
                            </div>
@@ -104,7 +104,7 @@
                      */?>
                      <div class="col-md-6">
                         <div class="form-group" id="partycode_div">
-                           <label for="partycode" class="col-md-4 col-sm-4 control-label">Party Code<span class="mandatoryfield"></span></label>
+                           <label for="partycode" class="col-md-4 col-sm-4 control-label">Party Code<span class="mandatoryfield"> *</span></label>
                            <div class="col-md-8">
                                  <input id="partycode" type="text" name="partycode" value="<?php if(isset($partydata)){ echo $partydata['partycode']; } ?>" class="form-control">
                             
@@ -145,11 +145,12 @@
                         </div>
                      </div>
                      
-                     <div class="col-md-6">
-                        <input type="checkbox" value="1" class="" style="margin-left:22px;" id="checkbox4" /> <label> Is Login</label>
+                     <div class="checkbox col-md-6" style="padding-left: 60px;">
+                        <input type="checkbox" value="1" class="" style="margin-left:22px;" id="checkbox4" /> <label for="checkbox4"> Is Login</label>
                         
                      </div>
 
+                  
                   </div>
                   <div class="row">
                      <div class="col-md-6">
@@ -190,13 +191,13 @@
                   </div>
                </div>
                <div class="col-md-4">
-                  <div class="form-group" id="shippingaddress_div">
+                  <div class="form-group" id="shippingaddress_div" style="margin-left:80px;">
                      <label for="shippingaddress" class="col-md-4 control-label">Shipping Address</label>
                      <div class="col-md-8">
                         <textarea class="form-control" id="shippingaddress" name="shippingaddress"><?php if (isset($partydata)) { echo $partydata['shippingaddress']; } ?></textarea>
                      </div>
-                     <div class="col-md-12">
-                        <input type="checkbox" class="" style="margin-left:22px;" id="checkbox1" /> Same As Billing Address
+                     <div class="checkbox col-md-12">
+                        <input type="checkbox"  style="margin-left:22px;" id="checkbox1" /><label for="checkbox1"> Same As Billing Address</label>
                      </div>
                   </div>
                </div>
@@ -206,13 +207,15 @@
                      <div class="col-md-8">
                         <textarea class="form-control" id="courieraddress" name="courieraddress"><?php if (isset($partydata)) { echo $partydata['courieraddress']; } ?></textarea>
                      </div>
-                     <div class="col-md-12">
-                        <input type="checkbox" class="" style="margin-left:22px;" id="checkbox2" /> Same As Billing Address
+                     <div class="checkbox col-md-12 " style="margin-left:55px;">
+                        <input type="checkbox" class=""  id="checkbox2" /><label for="checkbox2"> Same As Billing Address </label>
                      </div>
-                     <div class="col-md-12 mt-5">
-                        <input type="checkbox" class="" style="margin-left:22px;" id="checkbox3" /> Same As Shipping Address
+                     <div class="checkbox col-md-12 mt-5"  style="margin-left:55px;">
+                        <input type="checkbox" class="" style="margin-left:22px;" id="checkbox3" /><label for="checkbox3"> Same As Shipping Address</label>
                      </div>
 
+
+                    
                   </div>
                </div>
             </div>
@@ -229,7 +232,7 @@
                                  <div class="col-md-5">
                                     <div class="form-group">
                                        <div class="col-md-12 pl-xs pr-xs">
-                                          <label class="control-label" style="text-align: left;">Document Name <span class="mandatoryfield">*</span></label>
+                                          <label class="control-label" style="text-align: left;">Document Name <span class="mandatoryfield"></span></label>
                                        </div>
                                     </div>
                                  </div>
@@ -355,11 +358,12 @@
                   </div>
                </div>
             </div>
+            <?php /*
             <div class="row">
                <div class="col-md-12">
                   <div class="panel panel-default border-panel" id="conect_countdocuments1">
                      <div class="panel-heading">
-                        <h2>Contact Detail</h2>
+                        <h2>Contact Detail 1</h2>
                      </div>
                      <div class="panel-body">
                         <div id="addtarget">
@@ -388,11 +392,7 @@
                                       ?>
                                        <input type="hidden" name="contectid_<?=$cloopcount?>" value="<?=$con_id?>" id="contectid_<?=$cloopcount?>">
                                        <div class="data" id="contectrowdelete_<?=$cloopcount?>">
-                                       
-                                       
                                       <div class="clearfix"></div>
-                          
-                           
                                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                        <div class="form-group" id="firstname_div">
                                           <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
@@ -458,26 +458,21 @@
                                           </div>
                                        </div>
                                     </div>
-
-                                    
                                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                       
-                                        <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion('contectrowdelete_<?=$cloopcount?>')" class="btn btn-danger btn-raised remove_btn m-n">Remove</button>
+                                        <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion('contectrowdelete_<?=$cloopcount?>')" class="btn btn-danger btn-raised remove_btn m-n"><i class="fa fa-minus"></i></button>
                                        <?php if($i==$arrycountcontectm){ ?>
                                           <div class="form-group" style="float:left; margin:0px 19px 0px 5px;">
-                                          <button type="button" class="addpro btn btn-primary btn-raised remove_btn m-n" onclick="addnewcontect()">Add Data</button>
+                                          <button type="button" class="addpro btn btn-primary btn-raised remove_btn m-n" onclick="addnewcontect()"><i class="fa fa-plus"></i></button>
                                           </div>
                                        <?php } ?>
 
                                     </div>
                                       
                                  </div>
-                        
-                      
-                        <div class="clearfix" style="margin-bottom: 30px;"></div>
-                       
-                        <div class="clearfix"></div>
-                        <?php
+                                 <div class="clearfix" style="margin-bottom: 30px;"></div>
+                                 <div class="clearfix"></div>
+                              <?php
                            }
                            }else {
                                $count = 1;
@@ -568,7 +563,219 @@
                   </div>
                   
                </div>
-            
+            */?>
+
+                     <?php 
+                     $cloopcount = 0;
+                     $countcontactno = 0;
+                     $i=0;
+                     if(isset($party_contactdata[0]->id ) && !empty($party_contactdata[0]->id ))  {
+                     
+                        $arrycountcontectm = count($party_contactdata);
+                         foreach ($party_contactdata as $row)
+                         {
+                             $i++;
+                             $cloopcount = $cloopcount + 1;
+                             $con_id = $row->id;
+                             $firstname = $row->firstname;
+                             $lastname = $row->lastname;
+                             $contactno = $row->contactno;
+                             $birthdate = $row->birthdate;
+                             $anniversarydate = $row->anniversarydate;
+                             $email = $row->email;
+                     
+                     
+                             ?>
+
+<div class="row">
+   <div class="col-md-12">
+      <div class="panel panel-default border-panel" id="conect_countdocuments1">
+        
+    
+         <div class="panel-body" style="padding-top:0px;" id="contecremove<?=$countcontactno?>">
+            <div id="addtarget">
+               <div class="row" id="contectrowdelete_1">
+               
+                  <div class="panel-heading">
+                     <h2>Contact Detail <?=$cloopcount?></h2>
+                     <div style="float:right; margin:0px 0px 0px 5px;">
+                        <button type="button" onclick="removecontectpaertion('contectrowdelete_<?=$cloopcount?>')" class="btn btn-danger btn-raised remove_btn m-n"><i class="fa fa-minus"></i></button>
+                           <?php if($i==$arrycountcontectm){ ?>
+                           <div class="form-group" style="float:left; margin:0px 5px 0px 5px;">
+                              <button type="button" class="addpro btn btn-primary btn-raised remove_btn m-n" onclick="addnewcontect()"><i class="fa fa-plus"></i></button>
+                           </div>
+                           <?php } ?>
+                        </div>
+                  </div>
+                  <input type="hidden" name="contectid_<?=$cloopcount?>" value="<?=$con_id?>" id="contectid_<?=$cloopcount?>">
+                  <div class="data" id="contectrowdelete_<?=$cloopcount?>">
+                     <div class="clearfix"></div>
+                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                        <div class="form-group" id="firstname_div">
+                           <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
+                           <div class="col-md-7">
+                              <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" onkeypress="return onlyAlphabets(event)" value="<?=$firstname?>">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                        <div class="form-group" id="lastname_div">
+                           <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
+                           <div class="col-md-7">
+                              <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="<?php if (isset($partydata)) { echo $lastname; } ?>" onkeypress="return onlyAlphabets(event)">
+                           </div>
+                        </div>
+                     </div>
+                     <?php
+                        $ii=0;
+                        $contactno=(explode(',',$contactno));
+                        $arrycountcontec = count($contactno);
+                        foreach($contactno as $item){ $ii++; $countcontactno++; ?>
+                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg <?php if($ii==1){
+                        echo 'addcontectfilelddata'.$cloopcount;
+                        } ?>" >
+                        <div class="form-group" id="contactno_div">
+                           <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
+                           <div class="col-md-6">
+                              <input id="contactno" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="<?=$item?>">
+                           </div>
+                           <div class="form-group col-md-3">
+                              <?php if($arrycountcontec==$ii){ ?>
+                              <button type="button"  onclick="addcontectfield(<?=$cloopcount?>)" class="addprodocitem btn btn-primary btn-raised m-n" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>
+                              <?php } ?>
+                              <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removecontect(<?=$countcontactno?>)"><i class="fa fa-minus"></i></button>
+                           </div>
+                        </div>
+                     </div>
+                     <?php } ?>
+                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                        <div class="form-group" id="birthdate_div">
+                           <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
+                           <div class="col-md-7">
+                              <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control bdate" value="<?php if (isset($birthdate) && $birthdate!="0000-00-00") { echo $this->general_model->displaydate($birthdate); } ?>" readonly>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                        <div class="form-group" id="anniversarydate_div">
+                           <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
+                           <div class="col-md-7">
+                              <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control date" value="<?php if (isset($anniversarydate) && $anniversarydate!="0000-00-00") { echo $this->general_model->displaydate($anniversarydate); } ?>" readonly>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                        <div class="form-group" id="email_div">
+                           <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
+                           <div class="col-md-7">
+                              <input id="email" type="text" name="email_<?=$cloopcount?>" class="form-control" value="<?php if (isset($email)) { echo $email; } ?>">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                        <?php /*
+                        <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion('contectrowdelete_<?=$cloopcount?>')" class="btn btn-danger btn-raised remove_btn m-n"><i class="fa fa-minus"></i></button>
+                        <?php if($i==$arrycountcontectm){ ?>
+                        <div class="form-group" style="float:left; margin:0px 19px 0px 5px;">
+                           <button type="button" class="addpro btn btn-primary btn-raised remove_btn m-n" onclick="addnewcontect()"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <?php } */?>
+                     </div>
+                  </div>
+                  <div class="clearfix" ></div>
+                  <div class="clearfix"></div>
+                  <?php
+                     }
+                     }else {
+                         $count = 1;
+                         $cloopcount = 0;
+                         $countcontactno = 0;
+                         while ($count > $cloopcount) {
+                             $cloopcount = $cloopcount + 1;
+                             $countcontactno = $countcontactno + 1;
+                     ?>
+
+                  <div class="panel-heading">
+                     <h2>Contact Detail <?=$cloopcount?></h2>
+
+                     
+                     <div class="form-group" style="float:right;margin: -10px 19px -13px 5px;">
+                        <button type="button" class="addpro btn btn-primary btn-raised remove_btn m-n" onclick="addnewcontect()"><i class="fa fa-plus"></i></button>
+                     </div>
+                 
+
+                  </div>
+
+                  <input type="hidden" name="contectid_<?=$cloopcount?>" value="" id="contectid_<?=$cloopcount?>">
+                  <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                     <div class="form-group" id="firstname_div">
+                        <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
+                        <div class="col-md-8">
+                           <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                     <div class="form-group" id="lastname_div">
+                        <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
+                        <div class="col-md-8">
+                           <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata<?=$cloopcount?> " id="contecremove<?=$cloopcount?>">
+                     <div class="form-group" id="contactno_div">
+                        <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
+                        <div class="col-md-6">
+                           <input id="contactno" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="">
+                        </div>
+                        <div class="form-group col-md-3">
+                           <button type="button"  onclick="addcontectfield(<?=$cloopcount?>,<?=$countcontactno?>)" style="margin-top: 7px;" class="addprodocitem btn btn-primary btn-raised add_btn m-n"><i class="fa fa-plus"></i></button>
+                           <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removecontect('<?=$cloopcount?>')"><i class="fa fa-minus"></i></button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                     <div class="form-group" id="birthdate_div">
+                        <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
+                        <div class="col-md-8">
+                           <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control bdate" value="" readonly>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                     <div class="form-group" id="anniversarydate_div">
+                        <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
+                        <div class="col-md-8">
+                           <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control date" value="" readonly>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
+                     <div class="form-group" id="email_div">
+                        <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
+                        <div class="col-md-8">
+                           <input id="email" type="text" name="email_<?=$cloopcount?>" class="form-control" value="">
+                        </div>
+                     </div>
+                  </div>
+                  
+               </div>
+            </div>
+            <div class="clearfix"></div>
+            <?php
+               }
+               } 
+               ?>                       
+         </div>
+      </div>
+      <input type="hidden" name="cloopcount" id="cloopcount" value="<?php echo $cloopcount; ?>">
+      <input type="hidden" name="countcontactno" id="countcontactno" value="<?=$countcontactno?>">
+   </div>
+</div>
+
+
+
       <div class="row">
    <div class="col-md-12">
       <div class="panel panel-default border-panel" id="commonpanel">

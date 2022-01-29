@@ -26,33 +26,33 @@ if (ACTION == 1 && $('#oldlogo').val() != '') {
             $('html, body').animate({ scrollTop: 0 }, 'slow');
         } else {
             $('#paymentmethod').val('');
-            $('#paymenttype').val('')
+            
         }
 
-        $("#paymentmethod_div").removeClass("has-error is-focused");
-        $("#merchantid_div").removeClass("has-error is-focused");
-        $("#merchantkey_div").removeClass("has-error is-focused");
-        $("#merchantsalt_div").removeClass("has-error is-focused");
-        $("#authheader_div").removeClass("has-error is-focused");
-        $("#merchantwebsiteforweb_div").removeClass("has-error is-focused");
-        $("#merchantwebsiteforapp_div").removeClass("has-error is-focused");
-        $("#channelidforweb_div").removeClass("has-error is-focused");
-        $("#channelidforapp_div").removeClass("has-error is-focused");
-        $("#industrytypeid_div").removeClass("has-error is-focused");
+        // $("#paymentmethod_div").removeClass("has-error is-focused");
+        // $("#merchantid_div").removeClass("has-error is-focused");
+        // $("#merchantkey_div").removeClass("has-error is-focused");
+        // $("#merchantsalt_div").removeClass("has-error is-focused");
+        // $("#authheader_div").removeClass("has-error is-focused");
+        // $("#merchantwebsiteforweb_div").removeClass("has-error is-focused");
+        // $("#merchantwebsiteforapp_div").removeClass("has-error is-focused");
+        // $("#channelidforweb_div").removeClass("has-error is-focused");
+        // $("#channelidforapp_div").removeClass("has-error is-focused");
+        // $("#industrytypeid_div").removeClass("has-error is-focused");
 
-        var $imageupload = $('.imageupload');
-        if ($('#oldlogo').val() != '') {
-            $('#paymentmethodlogo img').attr('src', PAYMENT_METHOD_LOGO + $('#oldlogo').val());
-            $imageupload.imageupload({
-                url: SITE_URL,
-                type: '1'
-            });
-        } else {
-            $imageupload.imageupload({
-                url: SITE_URL,
-                type: '0'
-            });
-        }
+        // var $imageupload = $('.imageupload');
+        // if ($('#oldlogo').val() != '') {
+        //     $('#paymentmethodlogo img').attr('src', PAYMENT_METHOD_LOGO + $('#oldlogo').val());
+        //     $imageupload.imageupload({
+        //         url: SITE_URL,
+        //         type: '1'
+        //     });
+        // } else {
+        //     $imageupload.imageupload({
+        //         url: SITE_URL,
+        //         type: '0'
+        //     });
+        // }
 
 
 
@@ -78,7 +78,7 @@ function checkvalidation() {
         $("#paymentmethod").focus();
         isvalidpaymentmethod = 0;
     } else {
-        if (paymentmethod.length < 2) {
+        if (paymentmethod.length < 3) {
             $("#paymentmethod_div").addClass("has-error is-focused");
             new PNotify({ title: 'Minmum 2 characters require for payment method !', styling: 'fontawesome', delay: '3000', type: 'error' });
             $("#paymentmethod").focus();
@@ -207,7 +207,7 @@ function checkvalidation() {
 
         var formData = new FormData($('#paymentmethodform')[0]);
         if (ACTION == 0) {
-            var uurl = SITE_URL + "payment-method/add-payment-method";
+            var uurl = SITE_URL + "payment-method/payment-method-add";
 
             $.ajax({
                 url: uurl,
@@ -222,6 +222,7 @@ function checkvalidation() {
                     if (response == 1) {
                         new PNotify({ title: "Payment method successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
                         resetdata();
+                        setTimeout(function() { window.location = SITE_URL + "payment-method"; }, 500);
                     } else if (response == 2) {
                         new PNotify({ title: 'Payment method already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                         $("#paymentmethod_div").addClass("has-error is-focused");
@@ -259,9 +260,10 @@ function checkvalidation() {
                     $('#loader').show();
                 },
                 success: function(response) {
+                   
                     if (response == 1) {
                         new PNotify({ title: "Payment method successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
-                        setTimeout(function() { window.location = SITE_URL + "payment-method"; }, 1500);
+                        setTimeout(function() { window.location = SITE_URL + "payment-method"; }, 500);
                     } else if (response == 2) {
                         new PNotify({ title: 'Payment method already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (response == 3) {

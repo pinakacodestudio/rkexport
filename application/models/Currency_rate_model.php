@@ -8,8 +8,8 @@ class Currency_rate_model extends Common_model {
 	public $_where = array();
 	public $_except_fields = array();
 	public $_order = array('id' => 'DESC');
-	public $column_order = array(null, 'currency','value','date');
-    public $column_search = array('currency','value','date');
+	public $column_order = array(null, 'currency','value','date','createddate');
+    public $column_search = array('createddate','DATE_FORMAT(createddate,"%d %M %Y %H:%i %s")','DATE_FORMAT(createddate,"%Y %H:%i %s")','DATE_FORMAT(date,"%d/%M/%Y")','DATE_FORMAT(createddate,"%H:%i %s")','currency','value','date');
 	
 	function __construct() {
 		parent::__construct();
@@ -54,6 +54,7 @@ class Currency_rate_model extends Common_model {
         $i = 0;
         foreach ($this->column_search as $item) // loop column 
         {
+          
             if($_POST['search']['value']) // if datatable send POST for search
             {
                 

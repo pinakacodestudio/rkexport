@@ -17,20 +17,18 @@ function removecontectpaertion(id) {
 
 var edit_cityid = $('#edit_cityid').val();
 function getcity() {
-  
- 
-        if (edit_cityid) {
-            $(".selectpicker").selectpicker("refresh");
-            $('.editcityadd').selectpicker('val', edit_cityid);
-        }
+    if (edit_cityid) {
+        $(".selectpicker").selectpicker("refresh");
+        $('.editcityadd').selectpicker('val', edit_cityid);
     }
+}
 $(document).ready(function () {
     var edit_country = $('#edit_country').val();
-   
+
     $('#countryid').val(edit_country).trigger('change');
     var base_url = $('#base_url').val();
     var edit_provinceid = $('#edit_provinceid').val();
-    
+
 
     if (edit_provinceid != '') {
 
@@ -49,13 +47,13 @@ $(document).ready(function () {
                 $('#stateid').html(option);
                 $(".selectpicker").selectpicker("refresh");
                 $('#stateid').val(edit_provinceid).trigger('change')
-               
+
             }
         });
 
     }
 
-   
+
 
     $('.countryid').change(function () {
         var country = $(this).val();
@@ -73,10 +71,10 @@ $(document).ready(function () {
                     option += '<option value="' + data['id'] + '">' + data['statename'] + '</option>';
                 });
                 $('#stateid').html(option);
-                $(".selectpicker").selectpicker("refresh");
+               
 
                 $('#stateid').val(edit_country).trigger('change')
-      
+
             }
         });
     });
@@ -489,37 +487,37 @@ function addnewproduct() {
     $("#adddocrow").append(datahtml);
     $(".add_btndoc").hide();
     $(".add_btndoc:last").show();
-    
+
 }
-function addcontectfield(id,countcontactno) {
+function addcontectfield(id, countcontactno) {
     var countcontactno = $("#countcontactno").val();
     countcontactno++;
     $("#countcontactno").val(countcontactno);
-    var datahtml = '<div class="col-md-4 pl-sm pr-sm visible-md visible-lg" id="contecremove'+countcontactno+'">\
+    var datahtml = '<div class="col-md-4 pl-sm pr-sm visible-md visible-lg" id="contecremove' + countcontactno + '">\
     <div class="form-group" id="contactno_div">\
        <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
        <div class="col-md-6">\
-          <input id="contactno" type="text" name="contactno'+id+'[]" class="form-control"  value="">\
+          <input id="contactno" type="text" name="contactno'+ id + '[]" class="form-control"  value="">\
        </div>\
         <div class="form-group col-md-3">\
-            <button type="button"  onclick="addcontectfield('+ id + ','+ countcontactno +')"  class="addprodocitem btn btn-primary btn-raised m-n add_btn" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>\
+            <button type="button"  onclick="addcontectfield('+ id + ',' + countcontactno + ')"  class="addprodocitem btn btn-primary btn-raised m-n add_btn" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>\
             <button type="button" class="btn btn-danger btn-raised m-n remove_btn" onclick="removecontect(' + countcontactno + ')"><i class="fa fa-minus"></i></button>\
         </div>\
     </div>\
  </div>';
 
-    $(".addcontectfilelddata"+id+"").after(datahtml);
-    $("#contectrowdelete_"+id+" .add_btn").hide();
-    $("#contectrowdelete_"+id+" .add_btn:last").show();
+    $(".addcontectfilelddata" + id + "").after(datahtml);
+    $("#contectrowdelete_" + id + " .add_btn").hide();
+    $("#contectrowdelete_" + id + " .add_btn:last").show();
 }
 
 function removecontect(divid) {
-    
+
     var countcontactno = $("#countcontactno").val();
     countcontactno++;
     $("#countcontactno").val(countcontactno);
     $("#contecremove" + divid).remove();
-  
+
     $(".add_btn:last").show();
     if ($(".remove_btn:visible").length == 1) {
         $(".remove_btn:first").hide();
@@ -533,6 +531,15 @@ function addnewcontect() {
     $("#cloopcount").val(cloopcount2);
     var datahtml2 = '<div class="data" id="contectrowdelete_' + cloopcount2 + '">\
     <div class="row">\
+    <div class="panel-heading">\
+        <h2>Contact Detail ' + cloopcount2 + '</h2>\
+        <div style="float:right; margin:0px 0px 0px 5px;">\
+            <button type="button" class="addpro btn btn-primary btn-raised m-n" onclick="addnewcontect()"><i class="fa fa-plus"></i></button>\
+            <button type="button"  onclick="removecontectpaertion(\'contectrowdelete_'+ cloopcount2 + '\')" class="btn btn-danger btn-raised  m-n"><i class="fa fa-minus"></i></button>\
+            <div class="form-group" style="float:left; margin:0px 0px 0px 5px;">\
+            </div>\
+        </div>\
+    </div>\
     <div class="clearfix"></div>\
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
             <input type="hidden" name="contectid_' + cloopcount2 + '" value="0" id="contectid_' + cloopcount2 + '">\
@@ -588,16 +595,10 @@ function addnewcontect() {
                 </div>\
             </div>\
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
-                <button type="button" style="float:left; margin:10px 19px 0px 20px;" onclick="removecontectpaertion(\'contectrowdelete_'+ cloopcount2 + '\')" class="btn btn-danger btn-raised  m-n">Remove</button>\
-                <div class="form-group" style="float:left; margin:0px 19px 0px 5px;">\
-                <button type="button" class="addpro btn btn-primary btn-raised m-n" onclick="addnewcontect()">Add\
-                Data</button>\
-                </div>\
             </div>\
         </div>\
     </div>\
 </div>';
-
 
     $("#addtarget").append(datahtml2);
 }
@@ -611,3 +612,5 @@ function removeDocument(divid) {
         $(".remove_btn:first").hide();
     }
 }
+
+

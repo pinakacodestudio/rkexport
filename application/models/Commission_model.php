@@ -8,8 +8,8 @@ class Commission_model extends Common_model {
 	public $_where = array();
 	public $_except_fields = array();
 	public $_order = array('id' => 'DESC');
-	public $column_order = array(null,'commission','date');
-    public $column_search = array('commission,date');
+	public $column_order = array(null,'commission','date','createddate');
+    public $column_search = array('commission','date');
 	
 	function __construct() {
 		parent::__construct();
@@ -54,6 +54,7 @@ class Commission_model extends Common_model {
         $i = 0;
         foreach ($this->column_search as $item) // loop column 
         {
+            // print_r($_POST['search']['value']);exit;
             if($_POST['search']['value']) // if datatable send POST for search
             {
                 

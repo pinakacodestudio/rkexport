@@ -15,7 +15,7 @@
                   <?php 
                     if (strpos(trim($submenuvisibility['submenuadd'],','),$this->session->userdata[base_url().'ADMINUSERTYPE']) !== false){
                   ?>
-                  <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>currency_rate/add-currency_rate/<?=$this->uri->segment(3);?>" title=<?=addbtn_title?>><?=addbtn_text;?></a>
+                  <a class="<?=addbtn_class;?>" href="<?=ADMIN_URL?>currency-rate/add-currency-rate/<?=$this->uri->segment(3);?>" title=<?=addbtn_title?>><?=addbtn_text;?></a>
                   <?php
                     }if(strpos(trim($submenuvisibility['submenudelete']),$this->session->userdata[base_url().'ADMINUSERTYPE']) !== false){
                   ?>

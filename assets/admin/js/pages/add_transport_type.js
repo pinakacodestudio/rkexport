@@ -13,6 +13,7 @@ function resetdata() {
 }
 
 function checkvalidation(addtype = 0) {
+    
     var name = $('#type').val().trim();
     var isvalidname = 0;
     PNotify.removeAll();
@@ -20,7 +21,10 @@ function checkvalidation(addtype = 0) {
         $("#paymenttype_div").addClass("has-error is-focused");
         new PNotify({ title: 'Please enter transport type !', styling: 'fontawesome', delay: '3000', type: 'error' });
         isvalidname = 0;
-    } else {
+    } else if(name.length < 3){
+        $("#partytype_div").addClass("has-error is-focused");
+        new PNotify({title: 'Transport type require minimum 3 character !',styling: 'fontawesome',delay: '3000',type: 'error'});
+    }else{
         $("#paymenttype_div").removeClass("has-error is-focused");
         isvalidname = 1;
     }
@@ -84,7 +88,12 @@ function checkvalidation(addtype = 0) {
                     var data = JSON.parse(response);
                     if (data['error'] == 1) {
                         new PNotify({ title: "transport type successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
-                        setTimeout(function() { window.location = SITE_URL + "transport-type"; }, 1500);
+                        if (addtype == 1) {
+                            resetdata();
+                            setTimeout(function() { window.location = SITE_URL + "Transport-type/add-transport-type"; }, 1500);
+                        } else {
+                            setTimeout(function() { window.location = SITE_URL + "transport-type"; }, 1500);
+                        }
                     } else if (data['error'] == 2) {
                         new PNotify({ title: 'transport type already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 3) {

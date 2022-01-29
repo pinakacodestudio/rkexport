@@ -30,7 +30,7 @@
                       <th class="width8">Sr. No.</th>
                       <th>Commission</th>
                       <th>Date</th>
-                      <th class="width15 text-right">Entry Date</th>
+                      <th class="width15">Entry Date</th>
                       <th class="width12">Action</th>
                       <th class="width5">
                         <div class="checkbox">

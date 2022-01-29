@@ -31,7 +31,7 @@
               <table id="categorytable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                   <tr>
-                    <th>Sr. No.</th>
+                    <th class="width8">Sr. No.</th>
                     <th>Category Name</th>
                     <th class="width12">Entry Date</th>
                     <th class="width12">Actions</th>
