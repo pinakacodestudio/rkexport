@@ -114,6 +114,7 @@ class Common_model extends CI_Model {
 
 		$query = $this->readdb->query("SHOW COLUMNS FROM " . $this->_table);
 
+
 		foreach ($query->result() as $row) {
 			$table_fields[$row->Field] = $row->Field;
 		}
