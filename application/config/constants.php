@@ -509,8 +509,9 @@ define('tbl_customer', "customer");
 define('tbl_memberaddress', "memberaddress");
 define('tbl_vouchercodeused', "vouchercodeused");
 define('tbl_socialmedia', "socialmedia");
-define('tbl_order', "order");
+define('tbl_sorder',"sorder");
 define('tbl_orderproduct', "orderproduct");
+define('tbl_orderdocument', "orderdocument");
 define('tbl_customeremailverification', "customeremailverification");
 define('tbl_smstemplate', "smstemplate");
 define('tbl_attribute', "attribute");
@@ -784,6 +785,7 @@ define("tbl_company","company");
 define("tbl_partycontact","partycontact");
 define("tbl_partydoc","partydoc");
 define("tbl_purchaseorders","purchaseorders");
+define("tbl_orders","orders");
 
 define("PRODUCTDISCOUNT","");
 

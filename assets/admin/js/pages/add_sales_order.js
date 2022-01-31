@@ -24,9 +24,9 @@ function getcity() {
     }
 }
 
-function countamount(){
-alert(111);
-}
+// function countamount(){
+// alert(111);
+// }
 
 $(document).ready(function() {
 
@@ -159,8 +159,9 @@ function resetdata() {
 }
 
 function checkvalidation(addtype = 0) {
+    
     var party = $("#party").val().trim();
-    var isvalidparty = isvaliddeliverydate = 0;
+    var isvalidparty  =isvalidcetegory=isvalidproduct=isvalidprice=isvalidqty= 1;
     PNotify.removeAll();
 
     if (party == '' || party == 0) {
@@ -171,19 +172,17 @@ function checkvalidation(addtype = 0) {
             delay: '3000',
             type: 'error'
         });
+        isvalidparty = 0;
     } else {
         $("#party_div").removeClass("has-error is-focused");
-        isvalidparty = 1;
+       
     }
     var c = 1;
-
+  
     $('.countproducts').each(function() {
         var id = $(this).attr('id').match(/\d+/);
-
         if ($("#cetegory" + id).val() != "") {
-
             if ($("#cetegory" + id).val() == 0) {
-
                 $("#cetegory" + id + "_div").addClass("has-error is-focused");
                 new PNotify({
                     title: 'Please select ' + (c) + ' product !',
@@ -241,12 +240,13 @@ function checkvalidation(addtype = 0) {
         }
         c++;
     });
-
+  
     var c = 1;
-    if (isvalidparty && isvaliddeliverydate && isvalidcetegory && isvalidproduct && isvalidprice && isvalidqty == 1) {
+    if (isvalidparty && isvalidcetegory && isvalidproduct && isvalidprice && isvalidqty == 1) {
         var formData = new FormData($('#party-form')[0]);
+  
         if (ACTION == 0) {
-            var uurl = SITE_URL + "party/party-add";
+            var uurl = SITE_URL + "Sales_order/Sales-order-add";
             $.ajax({
                 url: uurl,
                 type: 'POST',
@@ -258,7 +258,7 @@ function checkvalidation(addtype = 0) {
                 success: function(response) {
                     if (response == 1) {
                         new PNotify({
-                            title: "Party successfully added.",
+                            title: "Sales order successfully added.",
                             styling: 'fontawesome',
                             delay: '3000',
                             type: 'success'
@@ -267,7 +267,7 @@ function checkvalidation(addtype = 0) {
                             resetdata();
                         } else {
                             setTimeout(function() {
-                                window.location = SITE_URL + "Party";
+                                window.location = SITE_URL + "Sales-order";
                             }, 1500);
                         }
                     } else if (response == 2) {
@@ -297,8 +297,8 @@ function checkvalidation(addtype = 0) {
                 processData: false
             });
         } else {
-
-            var uurl = SITE_URL + "party/update-party";
+       
+            var uurl = SITE_URL + "Sales_order/update-party";
 
             $.ajax({
                 url: uurl,

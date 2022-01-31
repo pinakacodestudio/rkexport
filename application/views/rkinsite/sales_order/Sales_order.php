@@ -91,8 +91,14 @@
                       <th>PO No</th>
                       <th>Amount</th>
                       <th>Added By</th>
-                      <th>Status</th>
+                      <!-- <th>Status</th> -->
                       <th>Action </th>
+                      <th class="width5">
+                        <div class="checkbox">
+                          <input id="deletecheckall" onchange="allchecked()" type="checkbox" value="all">
+                          <label for="deletecheckall"></label>
+                        </div>
+                      </th>   
                     </tr>
                   </thead>
                   <tbody>

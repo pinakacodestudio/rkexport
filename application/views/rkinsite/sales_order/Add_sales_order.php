@@ -94,34 +94,34 @@
                   </div>
                </div>
                <div class="col-md-6">
-                  <div class="form-group" id="gst_div">
+                  <div class="form-group" id="pono_div">
                      <label class="col-md-4 col-sm-4 control-label" for="gst">Client PO No<span class="mandatoryfield"></span></label>
                      <div class="col-md-8 col-sm-8">
-                        <input type="text" id="gst" class="form-control" name="gst" value="<?php if(isset($partydata)){ echo $partydata['gst']; }  ?>">
+                        <input type="text" id="pono" class="form-control" name="pono" value="<?php if(isset($partydata)){ echo $partydata['gst']; }  ?>">
                      </div>
                   </div>
                </div>
                <div class="col-md-6">
-                  <div class="form-group" id="pan_div">
-                     <label class="col-md-4 col-sm-4 control-label" for="pan">Inquiry No<span class="mandatoryfield"></span></label>
+                  <div class="form-group" id="inquiryno_div">
+                     <label class="col-md-4 col-sm-4 control-label" for="inquiryno">Inquiry No<span class="mandatoryfield"></span></label>
                      <div class="col-md-8 col-sm-8">
-                        <input type="text" id="pan" class="form-control" name="pan" value="<?php if(isset($partydata)){ echo $partydata['pan']; }  ?>">
+                        <input type="text" id="inquiryno" class="form-control" name="inquiryno" value="<?php if(isset($partydata)){ echo $partydata['pan']; }  ?>">
                      </div>
                   </div>
                </div>
                <div class="col-md-6">
-                  <div class="form-group" id="partycode_div">
-                     <label for="partycode" class="col-md-4 col-sm-4 control-label">Po Date<span class="mandatoryfield"></span></label>
+                  <div class="form-group" id="podate_div">
+                     <label for="podate" class="col-md-4 col-sm-4 control-label">Po Date<span class="mandatoryfield"></span></label>
                      <div class="col-md-8">
-                        <input id="partycode" type="text" name="partycode" value="<?php if(isset($partydata)){ echo $partydata['partycode']; } ?>" class="form-control date" readonly>
+                        <input id="podate" type="text" name="podate" value="<?php if(isset($partydata)){ echo $partydata['podate']; } ?>" class="form-control date" readonly>
                      </div>
                   </div>
                </div>
                <div class="col-md-6">
-                  <div class="form-group" id="pan_div">
-                     <label class="col-md-4 col-sm-4 control-label" for="pan">Order No<span class="mandatoryfield"></span></label>
+                  <div class="form-group" id="orderno_div">
+                     <label class="col-md-4 col-sm-4 control-label" for="orderno">Order No<span class="mandatoryfield"></span></label>
                      <div class="col-md-8 col-sm-8">
-                        <input type="text" id="pan" class="form-control" name="pan" value="<?php if(isset($partydata)){ echo $partydata['pan']; }  ?>">
+                        <input type="text" id="orderno" class="form-control" name="orderno" value="<?php if(isset($partydata)){ echo $partydata['pan']; }  ?>">
                      </div>
                   </div>
                </div>
@@ -483,7 +483,7 @@
                                             <td>
                                                 <div class="form-group" id="product1_div">
                                                     <div class="col-md-12">
-                                                        <select id="product1" name="product1[]" data-width="90%" onchange="getprice(1)" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
+                                                        <select id="product1" name="product[]" data-width="90%" onchange="getprice(1)" class="selectpicker form-control product" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
                                                             <option value="">Select Product</option>
                                                             <?=$PRODUCT_DORPDOWN_DATA?>
                                                         </select>
@@ -493,7 +493,7 @@
                                             <td>
                                                 <div class="form-group" id="price1_div">
                                                     <div class="col-sm-12">
-                                                        <select id="price1" name="price1[]" data-width="150px" class="selectpicker form-control price1" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
+                                                        <select id="price1" name="price[]" data-width="150px" class="selectpicker form-control price1" data-live-search="true" data-select-on-tab="true" data-size="5" div-id="1">
                                                             <option value="">Price</option>
                                                         </select>
                                                     </div>
@@ -529,11 +529,11 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="form-group" id="tax1_div">
+                                                <div class="form-group" id="discount1_div">
                                                     <div class="col-md-12">
-                                                        <input type="text" class="form-control text-right tax" id="tax1" name="tax[]" value="" div-id="1" onkeypress="return decimal_number_validation(event, this.value)"  >	
+                                                        <input type="text" class="form-control text-right discount" id="discount1" name="discount[]" value="" div-id="1" onkeypress="return decimal_number_validation(event, this.value)"  >	
                                                         <!-- onclick="countamount()" -->
-                                                        <input type="hidden" value="" id="ordertax1">
+                                                        <input type="hidden" value="" id="orderdiscount1">
                                                     </div>
                                                 </div>
                                             </td>
@@ -802,8 +802,9 @@
 
 
    function getprice(id){
+
       var pid = $("#product" + id).val();
-      var uurl = SITE_URL + "Sales_order/Productpricesdorpdowndata/"+pid;
+      var uurl = SITE_URL + "Sales-order/Productpricesdorpdowndata/"+pid;
       $.ajax({
          url: uurl,
          type: 'POST',

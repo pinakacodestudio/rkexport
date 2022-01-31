@@ -25,61 +25,94 @@ class Sales_order extends Admin_Controller
             $this->general_model->addActionLog(4, 'Sales Order', 'View sales order.');
         }
 
-        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");			
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_javascript("Sales_order", "pages/sales_order.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
     public function listing()
     {
-       
+
+        $edit = explode(',', $this->viewData['submenuvisibility']['submenuedit']);
+        $delete = explode(',', $this->viewData['submenuvisibility']['submenudelete']);
+        $rollid = $this->session->userdata[base_url() . 'ADMINUSERTYPE'];
+
+
+
         $list = $this->Sales_order->get_datatables();
 
         $data = array();
         $counter = $_POST['start'];
+        // echo '<pre>';
+        // print_r($list);exit;
         foreach ($list as $datarow) {
+
             $row = array();
             $view = "";
             $channellabel = "";
-            
-            $status = "";
-            if ($datarow->status == 0) {
-                $status = '<button class="btn btn-warning ' . STATUS_DROPDOWN_BTN . ' btn-raised">Pending</button>';
-            } else if ($datarow->status == 1) {
-                $status = '<button class="btn btn-success ' . STATUS_DROPDOWN_BTN . ' btn-raised">Complete</button>';
-            } else if ($datarow->status == 2) {
-                $status = '<button class="btn btn-danger ' . STATUS_DROPDOWN_BTN . ' btn-raised">Cancel</button>';
-            } else if ($datarow->status == 3) {
-                $status = '<button class="btn btn-info ' . STATUS_DROPDOWN_BTN . ' btn-raised">Partially</button>';
-            }
+            $Action = $checkbox = '';
+            // $status = "";
+            // if ($datarow->status == 0) {
+            //     $status = '<button class="btn btn-warning ' . STATUS_DROPDOWN_BTN . ' btn-raised">Pending</button>';
+            // } else if ($datarow->status == 1) {
+            //     $status = '<button class="btn btn-success ' . STATUS_DROPDOWN_BTN . ' btn-raised">Complete</button>';
+            // } else if ($datarow->status == 2) {
+            //     $status = '<button class="btn btn-danger ' . STATUS_DROPDOWN_BTN . ' btn-raised">Cancel</button>';
+            // } else if ($datarow->status == 3) {
+            //     $status = '<button class="btn btn-info ' . STATUS_DROPDOWN_BTN . ' btn-raised">Partially</button>';
+            // }
 
-            if ($datarow->remarks != "") {
-                $remarks = '<span id="orderremarks' . $datarow->id . '" style="display:none;">' . $datarow->remarks . '</span><a href="javascript:void(0)" onclick="viewreason(' . $datarow->id . ')">View</a>';
-            } else {
-                $remarks = "";
-            }
+            // if ($datarow->remarks != "") {
+            //     $remarks = '<span id="orderremarks' . $datarow->id . '" style="display:none;">' . $datarow->remarks . '</span><a href="javascript:void(0)" onclick="viewreason(' . $datarow->id . ')">View</a>';
+            // } else {
+            //     $remarks = "";
+            // }
 
-            if ($datarow->salespersonid != 0) {
-                $commissionamounttext = numberFormat($datarow->commissionamount, 2, '.', ',');
-            }
-            $commissionamount = number_format($datarow->commissionamount, 2, '.', '');
-            $commissiondata = $this->Sales_order->getSalesPersonProductCommission($datarow->id);
-            if (!empty($commissiondata)) {
-                $str = "";
-                foreach ($commissiondata as $comm) {
-                    $commissionamount += number_format($comm['commissionamount'], 2, '.', '');
-                    $str .= '<p>' . ucwords($comm['salesperson']) . " - " . CURRENCY_CODE . " " . numberFormat($comm['commissionamount'], 2, '.', ',') . "</p>";
-                }
-                $commissionamounttext = '<a title="Commission" class="popoverButton a-without-link" data-trigger="hover" data-container="body" data-toggle="popover" data-content="' . $str . '">' . numberFormat($commissionamount, 2, '.', ',') . '</a>';
-            }
+            // if ($datarow->salespersonid != 0) {
+            //     $commissionamounttext = numberFormat($datarow->commissionamount, 2, '.', ',');
+            // }
+            // $commissionamount = number_format($datarow->commissionamount, 2, '.', '');
+            // $commissiondata = $this->Sales_order->getSalesPersonProductCommission($datarow->id);
+            // if (!empty($commissiondata)) {
+            //     $str = "";
+            //     foreach ($commissiondata as $comm) {
+            //         $commissionamount += number_format($comm['commissionamount'], 2, '.', '');
+            //         $str .= '<p>' . ucwords($comm['salesperson']) . " - " . CURRENCY_CODE . " " . numberFormat($comm['commissionamount'], 2, '.', ',') . "</p>";
+            //     }
+            //     $commissionamounttext = '<a title="Commission" class="popoverButton a-without-link" data-trigger="hover" data-container="body" data-toggle="popover" data-content="' . $str . '">' . numberFormat($commissionamount, 2, '.', ',') . '</a>';
+            // }
 
-            $row[] = '<a href="' . ADMIN_URL . 'order/view-order/' . $datarow->id . '" title="View Order" target="_blank">' . $datarow->orderid . '</a>';
-            $row[] = '<a href="' . ADMIN_URL . 'member/member-detail/' . $datarow->buyerid . '" title="' . ucwords($datarow->buyername) . '" target="_blank">' . $channellabel . " " . ucwords($datarow->buyername) . ' (' . $datarow->buyercode . ')</a>';
-            $row[] = $this->general_model->displaydate($datarow->orderdate);
-            $row[] = numberFormat($datarow->netamount, 2, '.', ',');
+            // $row[] = '<a href="' . ADMIN_URL . 'order/view-order/' . $datarow->id . '" title="View Order" target="_blank">' . $datarow->orderid . '</a>';
+            // $row[] = '<a href="' . ADMIN_URL . 'member/member-detail/' . $datarow->buyerid . '" title="' . ucwords($datarow->buyername) . '" target="_blank">' . $channellabel . " " . ucwords($datarow->buyername) . ' (' . $datarow->buyercode . ')</a>';
+            // $row[] = $this->general_model->displaydate($datarow->orderdate);
+            // $row[] = numberFormat($datarow->netamount, 2, '.', ',');
             // $row[] = $commissionamounttext;
-            $row[] = ($datarow->salespersonid != 0) ? ucwords($datarow->salespersonname) : "-";
-            $row[] = $status;
-            $row[] = $remarks;
+            // $row[] = ($datarow->salespersonid != 0) ? ucwords($datarow->salespersonname) : "-";
+            // $row[] = $status;
+            // $row[] = $remarks;
+
+            $Action = $checkbox = '';
+
+            if (in_array($rollid, $edit)) {
+                $Action .= '<a class="' . edit_class . '" href="' . ADMIN_URL . 'Sales-order/Sales-order-edit/' . $datarow->id . '" title=' . edit_title . '>' . edit_text . '</a>';
+            }
+            if (in_array($rollid, $delete)) {
+                $Action .= '<a class="' . delete_class . '" href="javascript:void(0)" title="' . delete_title . '" onclick=deleterow(' . $datarow->id . ',"' . ADMIN_URL . 'Sales-order/check-party-use","Party","' . ADMIN_URL . 'Sales-order/delete-mul-party") >' . delete_text . '</a>';
+
+                $checkbox = '<div class="checkbox"><input value="' . $datarow->id . '" type="checkbox" class="checkradios" name="check' . $datarow->id . '" id="check' . $datarow->id . '" onchange="singlecheck(this.id)"><label for="check' . $datarow->id . '"></label></div>';
+            }
+            // $Action .= '<a class="' . view_class . '" href="' . ADMIN_URL . 'party/view-party/' . $datarow->id . '" title=' . view_title . ' target="_blank">' . view_text . '</a>';
+
+
+            $row[] = ++$counter;
+            $row[] = $datarow->companyname;
+            $row[] = $datarow->inquiryno;
+            $row[] = $datarow->clientpono;
+            $row[] = $datarow->dicountamount;
+            $row[] = $datarow->username;
+            $row[] = $Action;
+            $row[] = $checkbox;
+
+          
             $data[] = $row;
         }
         $output = array(
@@ -93,23 +126,23 @@ class Sales_order extends Admin_Controller
 
     public function add_Sales_order()
     {
-        
+
         $this->checkAdminAccessModule('submenu', 'add', $this->viewData['submenuvisibility']);
         $this->viewData = $this->getAdminSettings('submenu', 'Sales_order');
         $this->viewData['title'] = "Add Sales Order";
         $this->viewData['module'] = "sales_order/Add_sales_order";
         $this->viewData['VIEW_STATUS'] = "0";
-      
+
         $this->load->model('Party_model', 'Party');
         $this->viewData['Partydorpdowndata'] = $this->Sales_order->getpartydata();
-       
+
         $this->load->model('Category_model', 'category');
         $this->viewData['categorydorpdowndata'] = $this->category->getRecordByID();
-        
+
         $this->load->model('Product_model', 'product');
         $this->viewData['productdorpdowndata'] = $this->product->getRecordByID();
-       
-        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");	
+
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
         $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_bottom_javascripts("jquery-dropzone", "jquery-dropzone.js");
@@ -118,455 +151,216 @@ class Sales_order extends Admin_Controller
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
 
-    public function purchase_quotation_add($id="") {
-        $this->checkAdminAccessModule('submenu','add',$this->viewData['submenuvisibility']);
+    public function purchase_quotation_add($id = "")
+    {
+        $this->checkAdminAccessModule('submenu', 'add', $this->viewData['submenuvisibility']);
         $this->viewData['title'] = "Add Purchase Quotation";
         $this->viewData['module'] = "purchase_quotation/Add_purchase_quotation";
         $this->viewData['VIEW_STATUS'] = "1";
-        $ADMINID = $this->session->userdata[base_url().'ADMINID'];
-        
-        if($id!=""){
+        $ADMINID = $this->session->userdata[base_url() . 'ADMINID'];
+
+        if ($id != "") {
             /* Add Duplicate Quotation */
             $this->load->model('Purchase_order_model', 'Purchase_order');
             $this->viewData['quotationdata'] = $this->Purchase_quotation->getPurchaseQuotationDataById($id);
             $this->viewData['installmentdata'] = $this->Purchase_quotation->getQuotationInstallmentDataByQuotationId($id);
-            $this->viewData['ExtraChargesData'] = $this->Purchase_quotation->getExtraChargesDataByReferenceID($id);            
+            $this->viewData['ExtraChargesData'] = $this->Purchase_quotation->getExtraChargesDataByReferenceID($id);
             $this->viewData['isduplicate'] = "1";
         }
         $this->load->model('Vendor_model', 'Vendor');
         // $this->viewData['vendordata'] = $this->Vendor->getActiveVendorData('withcodeormobile');
-        
+
         $this->viewData['quotationtype'] = 1;
-        $this->viewData['channelsetting'] = array('partialpayment'=>1);
-        
+        $this->viewData['channelsetting'] = array('partialpayment' => 1);
+
         $this->viewData['quotationid'] = $this->general_model->generateTransactionPrefixByType(6);
 
         /* $this->load->model('System_configuration_model', 'System_configuration');
         $discount = $this->System_configuration->getsetting();
         if($discount['discountonbill']==1){
-            $startdate = $discount['discountonbillstartdate'];
-            $enddate = $discount['discountonbillenddate'];
-            $currentdate = $this->general_model->getCurrentDate();
-            $this->viewData['gstondiscount']= $discount['gstondiscount'];
+        $startdate = $discount['discountonbillstartdate'];
+        $enddate = $discount['discountonbillenddate'];
+        $currentdate = $this->general_model->getCurrentDate();
+        $this->viewData['gstondiscount']= $discount['gstondiscount'];
 
-            if($startdate=='0000-00-00' && $enddate=='0000-00-00'){
-                $this->viewData['discountonbillminamount'] = $discount['discountonbillminamount'];
-                if($discount['discountonbilltype']==1){
-                    $this->viewData['globaldiscountper']= $discount['discountonbillvalue'];
-                }else {
-                    $this->viewData['globaldiscountamount']= $discount['discountonbillvalue'];
-                }
-            }else{
-                if($currentdate >= $startdate && $currentdate <= $enddate){
-                    $this->viewData['discountonbillminamount'] = $discount['discountonbillminamount'];
-                    if($discount['discountonbilltype']==1){
-                        $this->viewData['globaldiscountper']= $discount['discountonbillvalue'];
-                    }else {
-                        $this->viewData['globaldiscountamount']= $discount['discountonbillvalue'];
-                    }
-                }
-            }
+        if($startdate=='0000-00-00' && $enddate=='0000-00-00'){
+        $this->viewData['discountonbillminamount'] = $discount['discountonbillminamount'];
+        if($discount['discountonbilltype']==1){
+        $this->viewData['globaldiscountper']= $discount['discountonbillvalue'];
+        }else {
+        $this->viewData['globaldiscountamount']= $discount['discountonbillvalue'];
+        }
+        }else{
+        if($currentdate >= $startdate && $currentdate <= $enddate){
+        $this->viewData['discountonbillminamount'] = $discount['discountonbillminamount'];
+        if($discount['discountonbilltype']==1){
+        $this->viewData['globaldiscountper']= $discount['discountonbillvalue'];
+        }else {
+        $this->viewData['globaldiscountamount']= $discount['discountonbillvalue'];
+        }
+        }
+        }
         } */
-        
+
         $this->load->model('Extra_charges_model', 'Extra_charges');
         // $this->viewData['extrachargesdata'] = $this->Extra_charges->getMemberActiveExtraCharges();
 
-        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
-        $this->admin_headerlib->add_plugin("form-select2","form-select2/select2.css");
-        $this->admin_headerlib->add_javascript_plugins("form-select2","form-select2/select2.min.js");
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
+        $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_plugin("jquery.bootstrap-touchspin.min", "bootstrap-touchspin/jquery.bootstrap-touchspin.min.css");
         $this->admin_headerlib->add_javascript_plugins("jquery.bootstrap-touchspin", "bootstrap-touchspin/jquery.bootstrap-touchspin.js");
         $this->admin_headerlib->add_javascript("add_purchase_quotation", "pages/add_purchase_quotation.js");
-        $this->load->view(ADMINFOLDER.'template',$this->viewData);
+        $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
-    public function add_purchase_quotation() {
+    public function Sales_order_add()
+    {
+        $this->checkAdminAccessModule('submenu', 'add', $this->viewData['submenuvisibility']);
         $PostData = $this->input->post();
-        $this->load->model('Stock_report_model', 'Stock');  
         $createddate = $this->general_model->getCurrentDateTime();
-        $addedby = $this->session->userdata(base_url().'ADMINID');
+        $addedby = $this->session->userdata(base_url() . 'ADMINID');
+
+        $party = $PostData['party'];
+        $pono = $PostData['pono'];
+        $inquiryno = $PostData['inquiryno'];
+        // $podate = $PostData['podate'];
+        $podate = $this->general_model->convertdate($PostData['podate']);
+        $orderno = $PostData['orderno'];
+        // $inquiryno = $PostData['inquiryno'];
+        // $voucherdate = $this->general_model->convertdate($PostData['voucherdate']);
+
+        // $this->load->model('Sales_order_model', 'salesorder');
+
+        // $this->Sales_invoice->_where = array('inquiryno' => $inquiryno);
+        // $Count = $this->Sales_invoice->CountRecords();
+
         $json = array();
-        if(isset($PostData['isduplicate']) && $PostData['isduplicate']==1){
-            //$PostData['vendorid'] = $PostData['oldvendorid'];
-        }
-        $vendorid = $PostData['vendorid'];
-        $addquotationtype = "1";//by_purchase
-    
-        $addressid = $PostData['billingaddressid'];
-        $shippingaddressid = $PostData['shippingaddressid'];
-        $quotationid = $PostData['quotationid'];
-        $quotationdate = ($PostData['quotationdate']!="")?$this->general_model->convertdate($PostData['quotationdate']):'';
-        $remarks = $PostData['remarks'];
-        $overalldiscountpercent = $PostData['overalldiscountpercent'];
-        
-        $discountpercentage = $PostData['overalldiscountpercent'];
-        $overalldiscountamount = $PostData['overalldiscountamount'];
-        $taxamount = $PostData['inputtotaltaxamount'];
-        $totalgrossamount = $PostData['totalgrossamount'];
-        $netamount = $PostData['netamount'];
-        $paymenttype = $PostData['paymenttypeid']; //$paymenttype = 1-COD,2-Advance Payment,3-Partial Payment
-        
-        $productidarr = $PostData['productid'];
-        $priceidarr = $PostData['priceid'];
-        $actualpricearr = $PostData['actualprice'];
-        $qtyarr = $PostData['qty'];
-        $taxarr = isset($PostData['tax'])?$PostData['tax']:'';
-        $discountarr = $PostData['discount'];
-        $amountarr = $PostData['amount'];
-        $deliverypriority =  $PostData['deliverypriority'];
-        $referencetypearr = isset($PostData['referencetype'])?$PostData['referencetype']:""; 
-        $combopriceidarr = isset($PostData['combopriceid'])?$PostData['combopriceid']:""; 
+        // if($Count==0){
 
-        $percentagearr = isset($PostData['percentage'])?$PostData['percentage']:'';
-        $installmentamountarr = isset($PostData['installmentamount'])?$PostData['installmentamount']:'';
-        $installmentdatearr = isset($PostData['installmentdate'])?$PostData['installmentdate']:'';
-        $paymentdatearr = isset($PostData['paymentdate'])?$PostData['paymentdate']:'';
-        $deliverytype = isset($PostData['deliverytype'])?$PostData['deliverytype']:0;
-    
-        $extrachargesidarr = (isset($PostData['extrachargesid']))?$PostData['extrachargesid']:'';
-        $extrachargestaxarr = (isset($PostData['extrachargestax']))?$PostData['extrachargestax']:'';
-        $extrachargeamountarr = (isset($PostData['extrachargeamount']))?$PostData['extrachargeamount']:'';
-        $extrachargesnamearr = (isset($PostData['extrachargesname']))?$PostData['extrachargesname']:'';
-        $extrachargepercentagearr = (isset($PostData['extrachargepercentage']))?$PostData['extrachargepercentage']:'';
+        $InsertData = array('partyid' => $party,
+            'clientpono' => $pono,
+            'inquiryno' => $inquiryno,
+            'podate' => $podate,
+            'orderno' => $orderno,
+            'createddate' => $createddate,
+            'addedby' => $addedby,
+            'modifieddate' => $createddate,
+            'modifiedby' => $addedby,
+        );
 
-        if(!empty($extrachargesidarr)){
-            $totalgrossamount = ($totalgrossamount - (array_sum($extrachargeamountarr) - array_sum($extrachargestaxarr)));
-            $taxamount = ($taxamount - array_sum($extrachargestaxarr));
-            $netamount = ($netamount - array_sum($extrachargeamountarr));
-        }else{
-            $totalgrossamount = $totalgrossamount;
-        }
-        $this->Purchase_quotation->_table = tbl_quotation;
-        $this->Purchase_quotation->_where = ("quotationid='".$quotationid."'");
-        $Count = $this->Purchase_quotation->CountRecords();
+        $Sales_orderid = $this->Sales_order->Add($InsertData);
 
-        if($Count==0){
-            if(!is_dir(TRANSACTION_ATTACHMENT_PATH)){
-                @mkdir(TRANSACTION_ATTACHMENT_PATH);
-            }
-    
-            if(!empty($_FILES)){                        
-                foreach ($_FILES as $key => $value) {
-                    $id = preg_replace('/[^0-9]/', '', $key);
-                    if(strpos($key, 'file') !== false && $_FILES['file'.$id]['name']!=''){
-                        if($_FILES['file'.$id]['size'] != '' && $_FILES['file'.$id]['size'] >= UPLOAD_MAX_FILE_SIZE){
-                            $json = array('error'=>-3,"id"=>$id);
-                            echo json_encode($json);
-                            exit;
-                        }
-                        $file = uploadFile('file'.$id, 'TRANSACTION_ATTACHMENT', TRANSACTION_ATTACHMENT_PATH, '*', '', 1, TRANSACTION_ATTACHMENT_LOCAL_PATH,'','',0);
-                        if($file !== 0){
-                            if($file == 2){
-                                $json = array('error'=>-2,'message'=>$id." File not upload !","id"=>$id);
-                                echo json_encode($json);
-                                exit;
-                            }
-                        }else{
-                            $json = array('error'=>-2,'message'=>$id." File type does not valid !","id"=>$id);
-                            echo json_encode($json);
-                            exit;
-                        }           
+        if ($Sales_orderid) {
+            $this->general_model->updateTransactionPrefixLastNoByType(4);
+            $cetegoryArr = $PostData['cetegory'];
+            if (!empty($cetegoryArr)) {
+                $insertData = $inserttransactionproductstock = array();
+                foreach ($cetegoryArr as $i => $cetegory) {
+
+                    $cetegory = $PostData['cetegory'][$i];
+                    $product = $PostData['product'][$i];
+                    $price = $PostData['price'][$i];
+                    $actualprice = $PostData['actualprice'][$i];
+                    $qty = $PostData['qty'][$i];
+
+                    if (!empty($cetegory) && !empty($product) && !empty($price)) {
+                        $insertData2 = array(
+                            "orderid" => $Sales_orderid,
+                            "categoryid" => $cetegory,
+                            "productid" => $product,
+                            "price" => $price,
+                            "actualprice" => $actualprice,
+                            "qty" => $qty,
+                            'createddate' => $createddate,
+                            'addedby' => $addedby,
+                            'modifieddate' => $createddate,
+                            'modifiedby' => $addedby,
+                        );
+                        $this->Sales_order->_table = tbl_orderproduct;
+                        $SalesorderID = $this->Sales_order->Add($insertData2);
+                      
+
+                    
                     }
                 }
-            } 
-            $insertdata = array(
-                "memberid" => 0,
-                "sellermemberid" => $vendorid,
-                "addressid" => $addressid,
-                "shippingaddressid" => $shippingaddressid,
-                "remarks" => $remarks,
-                "quotationid" => $quotationid,
-                "quotationdate" => $quotationdate,
-                "paymenttype" => $paymenttype,
-                "taxamount" => $taxamount,
-                "quotationamount" => $totalgrossamount,
-                "payableamount" => $netamount,
-                "discountpercentage" => $discountpercentage,
-                "discountamount" => 0,
-                "globaldiscount" => $overalldiscountamount,
-                "addquotationtype" => $addquotationtype,
-                'deliverypriority'=>$deliverypriority,
-                "type" => 0,
-                "status" => 0,
-                "gstprice" => PRICE,
-                "createddate" => $createddate,
-                "modifieddate" => $createddate,
-                "addedby" =>$addedby,
-                "modifiedby" => $addedby
+               
+                if (!empty($inserttransactionproductstock)) {
+                    $this->Stock_general_voucher->_table = tbl_transactionproductstockmapping;
+                    $this->Stock_general_voucher->Add_batch($inserttransactionproductstock);
+                }
+            }
+           
+             echo 1;
+        } else {
+            echo json_encode(array("error" => 0));
+        }
+
+       
+        foreach ($_FILES as $key => $value) {
+            $id = preg_replace('/[^0-9]/', '', $key);
+            $fileremarks = $PostData['fileremarks'.$id];
+            if (isset($_FILES['file' . $id]['name']) && $_FILES['file' . $id]['name'] != '') {
+            $file = uploadFile('file' . $id, 'PRODUCT', PRODUCT_PATH, '*', '', 0, PRODUCT_LOCAL_PATH, '', '', 0);
+            if ($file === 0) {
+                echo 3; //INVALID image FILE TYPE
+                exit;
+            }
+            $insertData2 = array(
+                "orderid" => $Sales_orderid,
+                "documentfile" => $file,
+                "documentname" => $fileremarks,
+                'createddate' => $createddate,
+                'addedby' => $addedby,
+                'modifieddate' => $createddate,
+                'modifiedby' => $addedby,
             );
-            
-            $insertdata=array_map('trim',$insertdata);
-            $QuotationId = $this->Purchase_quotation->Add($insertdata);
-            if($QuotationId){
-                $this->general_model->updateTransactionPrefixLastNoByType(6);
-                if(!empty($productidarr)){
-
-                    $insertData = $priceidsarr = array();
-                    $this->load->model('Product_model', 'Product');
-                    
-                    foreach($productidarr as $index=>$productid){
-                        
-                        $priceid = trim($priceidarr[$index]);
-                        $actualprice = trim($actualpricearr[$index]);
-                        $qty = trim($qtyarr[$index]);
-                        $productrate = trim($PostData['productrate'][$index]);
-                        $originalprice = trim($PostData['originalprice'][$index]);
-                        $tax = (!empty($taxarr))?trim($taxarr[$index]):'';
-                        $amount = trim($amountarr[$index]);
-                        $referencetype = !empty($referencetypearr[$index])?$referencetypearr[$index]:"";
-                        $combopriceid = !empty($combopriceidarr[$index])?$combopriceidarr[$index]:"";
-
-                        if(isset($discountarr[$index])){
-                            $discount = trim($discountarr[$index]);
-                        }else{
-                            $discount = 0;
-                        }
-                        
-                        if($productid!=0 && $qty!='' && $amount>0){
-                            $product = array();
-                            $product = $this->Product->getProductData($vendorid,$productid);
-                            $isvariant = ($product['isuniversal']==0)?1:0;
-                            if($addquotationtype==1){
-                                $tax = $product['tax'];
-                            }
-                            $this->Purchase_quotation->_table = tbl_quotationproducts;
-                            $this->Purchase_quotation->_where = ("quotationid=".$QuotationId." AND productid=".$productid." AND price='".$productrate."'");
-                            $Count = $this->Purchase_quotation->CountRecords();
-                                
-                            if($Count==0){
-                               
-                                $priceidsarr[] = $priceid;
-
-                                $insertData[] = array("quotationid"=>$QuotationId,
-                                        "productid" => $productid,
-                                        "quantity" => $qty,
-                                        "price" => $productrate,
-                                        "originalprice" => $actualprice,
-                                        "referencetype" => $referencetype,
-                                        "referenceid" => $combopriceid,
-                                        "hsncode" => $product['hsncode'],
-                                        "tax" => $tax,
-                                        "isvariant" => $isvariant,
-                                        "discount" => $discount,
-                                        "finalprice" => $amount,
-                                        "name" => $product['name']);
-                            }
-                        }
-                    }
-                    if(!empty($insertData)){
-                        $this->Purchase_quotation->_table = tbl_quotationproducts;
-                        $this->Purchase_quotation->add_batch($insertData);
-                        
-                        $quotationproductsidsarr=array();
-                        $first_id = $this->writedb->insert_id();
-                        $last_id = $first_id + (count($insertData)-1);
-                        
-                        for($id=$first_id;$id<=$last_id;$id++){
-                            $quotationproductsidsarr[]=$id;
-                        }
-
-                        $this->load->model('Product_combination_model', 'Product_combination');
-                        $insertVariantData = array();
-                        
-                        foreach($quotationproductsidsarr as $k=>$quotationproductsid){
-
-                            $variantdata = $this->Product_combination->getProductcombinationByPriceID($priceidsarr[$k]);
-                            
-                            foreach($variantdata as $variant){
-
-                                $insertVariantData[] = array("quotationid"=>$QuotationId,
-                                                        "priceid" => $priceidsarr[$k],
-                                                        "quotationproductid" => $quotationproductsid,
-                                                        "variantid" => $variant['variantid'],
-                                                        "variantname" => $variant['variantname'],
-                                                        "variantvalue" => $variant['variantvalue']);
-                            }
-                        }
-                        if(count($insertVariantData)>0){
-                            $this->Purchase_quotation->_table = tbl_quotationvariant;
-                            $this->Purchase_quotation->add_batch($insertVariantData);
-                        }
-                    }
-                    if(!empty($extrachargesidarr)){
-                        $insertextracharges = array();
-                        foreach($extrachargesidarr as $index=>$extrachargesid){
-
-                            if($extrachargesid > 0){
-                                
-                                $extrachargesname = trim($extrachargesnamearr[$index]);
-                                $extrachargestax = trim($extrachargestaxarr[$index]);
-                                $extrachargeamount = trim($extrachargeamountarr[$index]);
-                                $extrachargepercentage = trim($extrachargepercentagearr[$index]);
-                                if($extrachargeamount > 0){
-
-                                    $insertextracharges[] = array("type"=>1,
-                                                            "referenceid" => $QuotationId,
-                                                            "extrachargesid" => $extrachargesid,
-                                                            "extrachargesname" => $extrachargesname,
-                                                            "taxamount" => $extrachargestax,
-                                                            "amount" => $extrachargeamount,
-                                                            "extrachargepercentage" => $extrachargepercentage,
-                                                            "createddate" => $createddate,
-                                                            "addedby" => $addedby                                                   
-                                                        );
-                                }
-                            }
-                        }
-                        if(!empty($insertextracharges)){
-                            $this->Purchase_quotation->_table = tbl_extrachargemapping;
-                            $this->Purchase_quotation->add_batch($insertextracharges);
-                        }
-                    }
-                }
-                if(!empty($percentagearr) && $paymenttype==4){
-                    $insertData_installment = array();
-
-                    foreach($percentagearr as $index=>$percentage){
-                        
-                        $installmentamount = trim($installmentamountarr[$index]);
-                        $installmentdate = $installmentdatearr[$index]!=''?$this->general_model->convertdate(trim($installmentdatearr[$index])):'';
-                        $paymentdate = $paymentdatearr[$index]!=''?$this->general_model->convertdate(trim($paymentdatearr[$index])):'';
-                       
-                        if(isset($PostData['installmentstatus'.($index+1)]) && !empty($PostData['installmentstatus'.($index+1)])){
-                            $status=1;
-                        }else{
-                            $status=0;
-                        }
-                       
-                        $insertData_installment[] = array("quotationid"=>$QuotationId,
-                                "percentage" => $percentage,
-                                "amount" => $installmentamount,
-                                "date" => $installmentdate,
-                                "paymentdate" => $paymentdate,
-                                "status" => $status,
-                                "createddate" => $createddate,
-                                "modifieddate" => $createddate,
-                                "addedby" => $addedby,
-                                "modifiedby"=>$addedby);
-                    }
-                    if(!empty($insertData_installment)){
-                        $this->Purchase_quotation->_table = tbl_installment;
-                        $this->Purchase_quotation->add_batch($insertData_installment);
-                    }
-                }
-                $insertstatusdata = array(
-                    "quotationid" => $QuotationId,
-                    "status" => 0,
-                    "type" => 1,
-                    "modifieddate" => $createddate,
-                    "modifiedby" => $addedby);
-                
-                $insertstatusdata=array_map('trim',$insertstatusdata);
-                $this->Purchase_quotation->_table = tbl_quotationstatuschange;  
-                $this->Purchase_quotation->Add($insertstatusdata);
-
-                $insertquotationattachmentdata = array();
-                if(!empty($_FILES)){ 
-                    
-                    foreach ($_FILES as $key => $value) {
-                        $id = preg_replace('/[^0-9]/', '', $key);
-                        if(strpos($key, 'file') !== false && $_FILES['file'.$id]['name']!=''){
-                            
-                            $file = uploadFile('file'.$id, 'TRANSACTION_ATTACHMENT', TRANSACTION_ATTACHMENT_PATH, '*', '', 1, TRANSACTION_ATTACHMENT_LOCAL_PATH);
-                            if($file !== 0 && $file !== 2){
-                                $fileremarks = $PostData['fileremarks'.$id];
-                                $insertquotationattachmentdata[] = array(
-                                    "transactionid"=>$QuotationId,
-                                    'transactiontype'=>1,
-                                    "filename"=>$file,
-                                    "remarks"=>$fileremarks,
-                                    "createddate"=>$createddate,
-                                    "modifieddate"=>$createddate,
-                                    "addedby"=>$addedby,
-                                    "modifiedby"=>$addedby
-                                );
-                            }           
-                        }
-                    }
-                }
-                if(!empty($insertquotationattachmentdata)){
-                    $this->Purchase_quotation->_table = tbl_transactionattachment;
-                    $this->Purchase_quotation->add_batch($insertquotationattachmentdata);
-                }
-
-                if($this->viewData['submenuvisibility']['managelog'] == 1){
-                    $this->general_model->addActionLog(1,'Quotation','Add new '.$quotationid.' purchase quotation.');
-                }
-                $json = array('error'=>1);
-            }else{
-                $json = array('error'=>0);
+            $this->Sales_order->_table = tbl_orderdocument;
+            $SalesorderID = $this->Sales_order->Add($insertData2);
             }
-        }else{
-           $json = array('error'=>2);
         }
-        echo json_encode($json);
+       
     }
-    public function purchase_quotation_edit($id) {
-        $this->checkAdminAccessModule('submenu','edit',$this->viewData['submenuvisibility']);
+    public function Sales_order_edit($id)
+    {
+        $this->checkAdminAccessModule('submenu', 'edit', $this->viewData['submenuvisibility']);
         $this->viewData['title'] = "Edit Purchase Quotation";
         $this->viewData['module'] = "purchase_quotation/Add_purchase_quotation";
         $this->viewData['VIEW_STATUS'] = "1";
         $this->viewData['action'] = 1;
 
-        $this->load->model('Purchase_order_model','Purchase_order');
-        $this->viewData['quotationdata'] = $this->Purchase_quotation->getPurchaseQuotationDataById($id);
-        $this->viewData['installmentdata'] = $this->Purchase_quotation->getQuotationInstallmentDataByQuotationId($id);
-        $this->viewData['ExtraChargesData'] = $this->Purchase_quotation->getExtraChargesDataByReferenceID($id);            
-        $this->viewData['quotationattachment'] = $this->Purchase_order->getTransactionAttachmentDataByTransactionId($id,1);
+        // $this->load->model('Extra_charges_model', 'Extra_charges');
+        $this->viewData['salesorderdata'] = $this->Sales_order->getRecordByID();
 
-        $this->load->model('Vendor_model', 'Vendor');
-        $this->viewData['vendordata'] = $this->Vendor->getActiveVendorData('withcodeormobile');                        
-        $this->viewData['channelsetting'] = array('partialpayment'=>1); 
-        
-        /* $this->load->model('System_configuration_model', 'System_configuration');
-        $discount = $this->System_configuration->getsetting();
-        if($discount['discountonbill']==1){
-            $startdate = $discount['discountonbillstartdate'];
-            $enddate = $discount['discountonbillenddate'];
-            $currentdate = $this->general_model->getCurrentDate();
-            $this->viewData['gstondiscount']= $discount['gstondiscount'];
-            
-            if($startdate=='0000-00-00' && $enddate=='0000-00-00'){
-                $this->viewData['discountonbillminamount'] = $discount['discountonbillminamount'];
-                if($discount['discountonbilltype']==1){
-                    $this->viewData['globaldiscountper']= $discount['discountonbillvalue'];
-                }else {
-                    $this->viewData['globaldiscountamount']= $discount['discountonbillvalue'];
-                }
-            }else{
-                if($currentdate >= $startdate && $currentdate <= $enddate){
-                    $this->viewData['discountonbillminamount'] = $discount['discountonbillminamount'];
-                    if($discount['discountonbilltype']==1){
-                        $this->viewData['globaldiscountper']= $discount['discountonbillvalue'];
-                    }else {
-                        $this->viewData['globaldiscountamount']= $discount['discountonbillvalue'];
-                    }
-                }
-            }
-        } */
-        
-        $this->load->model('Extra_charges_model', 'Extra_charges');
-        $this->viewData['extrachargesdata'] = $this->Extra_charges->getMemberActiveExtraCharges();
+        $this->load->model('Party_model', 'Party');
+        $this->viewData['Partydorpdowndata'] = $this->Sales_order->getpartydata();
 
-        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
-        $this->admin_headerlib->add_plugin("form-select2","form-select2/select2.css");
-        $this->admin_headerlib->add_javascript_plugins("form-select2","form-select2/select2.min.js");
+        $this->load->model('Category_model', 'category');
+        $this->viewData['categorydorpdowndata'] = $this->category->getRecordByID();
+
+        $this->load->model('Product_model', 'product');
+        $this->viewData['productdorpdowndata'] = $this->product->getRecordByID();
+
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_plugin("form-select2", "form-select2/select2.css");
+        $this->admin_headerlib->add_javascript_plugins("form-select2", "form-select2/select2.min.js");
         $this->admin_headerlib->add_plugin("jquery.bootstrap-touchspin.min", "bootstrap-touchspin/jquery.bootstrap-touchspin.min.css");
         $this->admin_headerlib->add_javascript_plugins("jquery.bootstrap-touchspin", "bootstrap-touchspin/jquery.bootstrap-touchspin.js");
         $this->admin_headerlib->add_javascript("add_purchase_quotation", "pages/add_purchase_quotation.js");
-        $this->load->view(ADMINFOLDER.'template',$this->viewData);              
+        $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
-    public function update_purchase_quotation() {
+    public function update_purchase_quotation()
+    {
         $PostData = $this->input->post();
         $modifieddate = $this->general_model->getCurrentDateTime();
-        $modifiedby = $this->session->userdata(base_url().'ADMINID');
-        $this->load->model('Stock_report_model', 'Stock');  
+        $modifiedby = $this->session->userdata(base_url() . 'ADMINID');
+        $this->load->model('Stock_report_model', 'Stock');
         $json = array();
         $quotationsid = $PostData['quotationsid'];
         $vendorid = $PostData['oldvendorid'];
         $addressid = $PostData['billingaddressid'];
         $shippingaddressid = $PostData['shippingaddressid'];
         $quotationid = $PostData['quotationid'];
-        $quotationdate = ($PostData['quotationdate']!="")?$this->general_model->convertdate($PostData['quotationdate']):'';
+        $quotationdate = ($PostData['quotationdate'] != "") ? $this->general_model->convertdate($PostData['quotationdate']) : '';
         $remarks = $PostData['remarks'];
         $overalldiscountpercent = $PostData['overalldiscountpercent'];
 
@@ -575,70 +369,70 @@ class Sales_order extends Admin_Controller
         $taxamount = $PostData['inputtotaltaxamount'];
         $totalgrossamount = $PostData['totalgrossamount'];
         $netamount = $PostData['netamount'];
-        $deliverypriority =  $PostData['deliverypriority'];
+        $deliverypriority = $PostData['deliverypriority'];
 
-        $extrachargemappingidarr = (isset($PostData['extrachargemappingid']))?$PostData['extrachargemappingid']:'';
-        $extrachargesidarr = (isset($PostData['extrachargesid']))?$PostData['extrachargesid']:'';
-        $extrachargestaxarr = (isset($PostData['extrachargestax']))?$PostData['extrachargestax']:'';
-        $extrachargeamountarr = (isset($PostData['extrachargeamount']))?$PostData['extrachargeamount']:'';
-        $extrachargesnamearr = (isset($PostData['extrachargesname']))?$PostData['extrachargesname']:'';
-        $extrachargepercentagearr = (isset($PostData['extrachargepercentage']))?$PostData['extrachargepercentage']:'';
+        $extrachargemappingidarr = (isset($PostData['extrachargemappingid'])) ? $PostData['extrachargemappingid'] : '';
+        $extrachargesidarr = (isset($PostData['extrachargesid'])) ? $PostData['extrachargesid'] : '';
+        $extrachargestaxarr = (isset($PostData['extrachargestax'])) ? $PostData['extrachargestax'] : '';
+        $extrachargeamountarr = (isset($PostData['extrachargeamount'])) ? $PostData['extrachargeamount'] : '';
+        $extrachargesnamearr = (isset($PostData['extrachargesname'])) ? $PostData['extrachargesname'] : '';
+        $extrachargepercentagearr = (isset($PostData['extrachargepercentage'])) ? $PostData['extrachargepercentage'] : '';
 
         $productidarr = $PostData['productid'];
         $priceidarr = $PostData['priceid'];
         $actualpricearr = $PostData['actualprice'];
         $qtyarr = $PostData['qty'];
-        $taxarr = isset($PostData['tax'])?$PostData['tax']:'';
+        $taxarr = isset($PostData['tax']) ? $PostData['tax'] : '';
         $discountarr = $PostData['discount'];
         $amountarr = $PostData['amount'];
         $paymenttype = $PostData['paymenttypeid']; //$paymenttype = 1-COD,3-Advance Payment,4-Partial Payment
-        $referencetypearr = isset($PostData['referencetype'])?$PostData['referencetype']:""; 
-        $combopriceidarr = isset($PostData['combopriceid'])?$PostData['combopriceid']:""; 
+        $referencetypearr = isset($PostData['referencetype']) ? $PostData['referencetype'] : "";
+        $combopriceidarr = isset($PostData['combopriceid']) ? $PostData['combopriceid'] : "";
 
-        if(!empty($extrachargesidarr)){
+        if (!empty($extrachargesidarr)) {
             $totalgrossamount = ($totalgrossamount - (array_sum($extrachargeamountarr) - array_sum($extrachargestaxarr)));
             $taxamount = ($taxamount - array_sum($extrachargestaxarr));
             $netamount = ($netamount - array_sum($extrachargeamountarr));
-        }else{
+        } else {
             $totalgrossamount = $totalgrossamount;
         }
 
-        $quotationproductsidarr = isset($PostData['quotationproductsid'])?$PostData['quotationproductsid']:'';
+        $quotationproductsidarr = isset($PostData['quotationproductsid']) ? $PostData['quotationproductsid'] : '';
 
         $this->Purchase_quotation->_table = tbl_quotation;
-        $this->Purchase_quotation->_where = ("id!='".$quotationsid."' AND quotationid='".$quotationid."'");
+        $this->Purchase_quotation->_where = ("id!='" . $quotationsid . "' AND quotationid='" . $quotationid . "'");
         $Count = $this->Purchase_quotation->CountRecords();
-        if($Count==0){
-           
-            if(!is_dir(TRANSACTION_ATTACHMENT_PATH)){
+        if ($Count == 0) {
+
+            if (!is_dir(TRANSACTION_ATTACHMENT_PATH)) {
                 @mkdir(TRANSACTION_ATTACHMENT_PATH);
             }
-    
-            if(!empty($_FILES)){
-                        
+
+            if (!empty($_FILES)) {
+
                 foreach ($_FILES as $key => $value) {
                     $id = preg_replace('/[^0-9]/', '', $key);
-                    if(strpos($key, 'file') !== false && $_FILES['file'.$id]['name']!=''){
-                        if($_FILES['file'.$id]['size'] != '' && $_FILES['file'.$id]['size'] >= UPLOAD_MAX_FILE_SIZE){
-                            $json = array('error'=>-3,"id"=>$id);
+                    if (strpos($key, 'file') !== false && $_FILES['file' . $id]['name'] != '') {
+                        if ($_FILES['file' . $id]['size'] != '' && $_FILES['file' . $id]['size'] >= UPLOAD_MAX_FILE_SIZE) {
+                            $json = array('error' => -3, "id" => $id);
                             echo json_encode($json);
                             exit;
                         }
-                        $file = uploadFile('file'.$id, 'TRANSACTION_ATTACHMENT', TRANSACTION_ATTACHMENT_PATH, '*', '', 1, TRANSACTION_ATTACHMENT_LOCAL_PATH,'','',0);
-                        if($file !== 0){
-                            if($file == 2){
-                                $json = array('error'=>-2,'message'=>$id." File not upload !","id"=>$id);
+                        $file = uploadFile('file' . $id, 'TRANSACTION_ATTACHMENT', TRANSACTION_ATTACHMENT_PATH, '*', '', 1, TRANSACTION_ATTACHMENT_LOCAL_PATH, '', '', 0);
+                        if ($file !== 0) {
+                            if ($file == 2) {
+                                $json = array('error' => -2, 'message' => $id . " File not upload !", "id" => $id);
                                 echo json_encode($json);
                                 exit;
                             }
-                        }else{
-                            $json = array('error'=>-2,'message'=>$id." File type does not valid !","id"=>$id);
+                        } else {
+                            $json = array('error' => -2, 'message' => $id . " File type does not valid !", "id" => $id);
                             echo json_encode($json);
                             exit;
-                        }           
+                        }
                     }
                 }
-            } 
+            }
             $updatedata = array(
                 "sellermemberid" => $vendorid,
                 "quotationid" => $quotationid,
@@ -653,422 +447,423 @@ class Sales_order extends Admin_Controller
                 "discountpercentage" => $discountpercentage,
                 "discountamount" => 0,
                 "globaldiscount" => $overalldiscountamount,
-                'deliverypriority'=>$deliverypriority,
+                'deliverypriority' => $deliverypriority,
                 "gstprice" => PRICE,
                 "modifieddate" => $modifieddate,
                 "modifiedby" => $modifiedby);
-            
-            $updatedata=array_map('trim',$updatedata);
+
+            $updatedata = array_map('trim', $updatedata);
             $this->Purchase_quotation->_where = array('id' => $quotationsid);
             $isupdate = $this->Purchase_quotation->Edit($updatedata);
 
-            if($isupdate){
-                if(!empty($productidarr)){
+            if ($isupdate) {
+                if (!empty($productidarr)) {
                     $insertData = $updateData = array();
                     $priceidsarr = $updatepriceidsarr = $updatequotationproductsidsarr = $deletequotationproductsidsarr = array();
                     $this->load->model('Product_model', 'Product');
-                    
-                    if(isset($PostData['removequotationproductid']) && $PostData['removequotationproductid']!=''){
-                        
+
+                    if (isset($PostData['removequotationproductid']) && $PostData['removequotationproductid'] != '') {
+
                         $this->readdb->select("id");
                         $this->readdb->from(tbl_quotationproducts);
-                        $this->readdb->where("FIND_IN_SET(id,'".implode(',',array_filter(explode(",",$PostData['removequotationproductid'])))."')>0");
+                        $this->readdb->where("FIND_IN_SET(id,'" . implode(',', array_filter(explode(",", $PostData['removequotationproductid']))) . "')>0");
                         $query = $this->readdb->get();
                         $ProductsData = $query->result_array();
 
-                        if(!empty($ProductsData)){
+                        if (!empty($ProductsData)) {
                             foreach ($ProductsData as $row) {
 
                                 $this->Purchase_quotation->_table = tbl_quotationproducts;
-                                $this->Purchase_quotation->Delete("id=".$row['id']);
+                                $this->Purchase_quotation->Delete("id=" . $row['id']);
                             }
                         }
-                    } 
-                    if(isset($PostData['removeextrachargemappingid']) && $PostData['removeextrachargemappingid']!=''){
-                        
+                    }
+                    if (isset($PostData['removeextrachargemappingid']) && $PostData['removeextrachargemappingid'] != '') {
+
                         $this->readdb->select("id");
                         $this->readdb->from(tbl_extrachargemapping);
-                        $this->readdb->where("FIND_IN_SET(id,'".implode(',',array_filter(explode(",",$PostData['removeextrachargemappingid'])))."')>0");
+                        $this->readdb->where("FIND_IN_SET(id,'" . implode(',', array_filter(explode(",", $PostData['removeextrachargemappingid']))) . "')>0");
                         $query = $this->readdb->get();
                         $MappingData = $query->result_array();
 
-                        if(!empty($MappingData)){
+                        if (!empty($MappingData)) {
                             foreach ($MappingData as $row) {
 
                                 $this->Purchase_quotation->_table = tbl_extrachargemapping;
-                                $this->Purchase_quotation->Delete("id=".$row['id']);
+                                $this->Purchase_quotation->Delete("id=" . $row['id']);
                             }
                         }
-                    } 
-                    foreach($productidarr as $index=>$productid){
-                    
+                    }
+                    foreach ($productidarr as $index => $productid) {
+
                         $priceid = trim($priceidarr[$index]);
                         $qty = trim($qtyarr[$index]);
                         $discount = trim($discountarr[$index]);
                         $productrate = trim($PostData['productrate'][$index]);
                         $originalprice = trim($PostData['originalprice'][$index]);
                         $amount = trim($amountarr[$index]);
-                        $tax = (!empty($taxarr))?trim($taxarr[$index]):'';
+                        $tax = (!empty($taxarr)) ? trim($taxarr[$index]) : '';
                         $actualprice = trim($actualpricearr[$index]);
-                        $referencetype = !empty($referencetypearr[$index])?$referencetypearr[$index]:"";
-                        $combopriceid = !empty($combopriceidarr[$index])?$combopriceidarr[$index]:"";
+                        $referencetype = !empty($referencetypearr[$index]) ? $referencetypearr[$index] : "";
+                        $combopriceid = !empty($combopriceidarr[$index]) ? $combopriceidarr[$index] : "";
 
-                        if(isset($quotationproductsidarr[$index]) && !empty($quotationproductsidarr[$index])){
+                        if (isset($quotationproductsidarr[$index]) && !empty($quotationproductsidarr[$index])) {
                             $quotationproductsid = trim($quotationproductsidarr[$index]);
-                        }else{
+                        } else {
                             $quotationproductsid = "";
                         }
-    
-                        if($productid!=0 && $qty!='' && $amount>0){
-                            
-                            $product = $this->Product->getProductData($vendorid,$productid);
-                            $isvariant = ($product['isuniversal']==0)?1:0;
+
+                        if ($productid != 0 && $qty != '' && $amount > 0) {
+
+                            $product = $this->Product->getProductData($vendorid, $productid);
+                            $isvariant = ($product['isuniversal'] == 0) ? 1 : 0;
                             $this->Purchase_quotation->_table = tbl_quotationproducts;
-                           
-                            if($quotationproductsid != ""){
-                                
+
+                            if ($quotationproductsid != "") {
+
                                 $this->Purchase_quotation->_table = tbl_quotationproducts;
-                                $this->Purchase_quotation->_where = ("id!=".$quotationproductsid." AND quotationid=".$quotationsid." AND productid=".$productid." AND price='".$productrate."'");
+                                $this->Purchase_quotation->_where = ("id!=" . $quotationproductsid . " AND quotationid=" . $quotationsid . " AND productid=" . $productid . " AND price='" . $productrate . "'");
                                 $Count = $this->Purchase_quotation->CountRecords();
-                                
-                                if($Count==0){
-                                    
-                                    $updatequotationproductsidsarr[] = $quotationproductsid; 
+
+                                if ($Count == 0) {
+
+                                    $updatequotationproductsidsarr[] = $quotationproductsid;
                                     $updatepriceidsarr[] = $priceid;
-                                    
-                                    $updateData[] = array("id"=>$quotationproductsid,
-                                                        "productid" => $productid,
-                                                        "quantity" => $qty,
-                                                        "price" => $productrate,
-                                                        "originalprice" => $actualprice,
-                                                        "referencetype" => $referencetype,
-                                                        "referenceid" => $combopriceid,
-                                                        "hsncode" => $product['hsncode'],
-                                                        "tax" => $tax,
-                                                        "isvariant" => $isvariant,
-                                                        "discount" => $discount,
-                                                        "finalprice" => $amount,
-                                                        "name" => $product['name']);
-        
-                                }else{
-                                    $deletequotationproductsidsarr[] = $quotationproductsid; 
+
+                                    $updateData[] = array("id" => $quotationproductsid,
+                                        "productid" => $productid,
+                                        "quantity" => $qty,
+                                        "price" => $productrate,
+                                        "originalprice" => $actualprice,
+                                        "referencetype" => $referencetype,
+                                        "referenceid" => $combopriceid,
+                                        "hsncode" => $product['hsncode'],
+                                        "tax" => $tax,
+                                        "isvariant" => $isvariant,
+                                        "discount" => $discount,
+                                        "finalprice" => $amount,
+                                        "name" => $product['name']);
+
+                                } else {
+                                    $deletequotationproductsidsarr[] = $quotationproductsid;
                                 }
-                            }else{
-    
+                            } else {
+
                                 $this->Purchase_quotation->_table = tbl_quotationproducts;
-                                $this->Purchase_quotation->_where = ("quotationid=".$quotationsid." AND productid=".$productid." AND price='".$productrate."'");
+                                $this->Purchase_quotation->_where = ("quotationid=" . $quotationsid . " AND productid=" . $productid . " AND price='" . $productrate . "'");
                                 $Count = $this->Purchase_quotation->CountRecords();
-                                    
-                                if($Count==0){
+
+                                if ($Count == 0) {
                                     $priceidsarr[] = $priceid;
-                                    
-                                    $insertData[] = array("quotationid"=>$quotationsid,
-                                                            "productid" => $productid,
-                                                            "quantity" => $qty,
-                                                            "price" => $productrate,
-                                                            "originalprice" => $actualprice,
-                                                            "referencetype" => $referencetype,
-                                                            "referenceid" => $combopriceid,
-                                                            "hsncode" => $product['hsncode'],
-                                                            "tax" => $tax,
-                                                            "isvariant" => $isvariant,
-                                                            "discount" => $discount,
-                                                            "finalprice" => $amount,
-                                                            "name" => $product['name']);
+
+                                    $insertData[] = array("quotationid" => $quotationsid,
+                                        "productid" => $productid,
+                                        "quantity" => $qty,
+                                        "price" => $productrate,
+                                        "originalprice" => $actualprice,
+                                        "referencetype" => $referencetype,
+                                        "referenceid" => $combopriceid,
+                                        "hsncode" => $product['hsncode'],
+                                        "tax" => $tax,
+                                        "isvariant" => $isvariant,
+                                        "discount" => $discount,
+                                        "finalprice" => $amount,
+                                        "name" => $product['name']);
                                 }
                             }
                         }
                     }
-                    if(!empty($updateData)){
+                    if (!empty($updateData)) {
                         $this->Purchase_quotation->_table = tbl_quotationproducts;
-                        $this->Purchase_quotation->edit_batch($updateData,"id");
-                        
-                        if(!empty($updatequotationproductsidsarr)){
+                        $this->Purchase_quotation->edit_batch($updateData, "id");
+
+                        if (!empty($updatequotationproductsidsarr)) {
                             $this->Purchase_quotation->_table = tbl_quotationvariant;
-                            $this->Purchase_quotation->Delete(array("quotationid"=>$quotationsid,"quotationproductid IN (".implode(",",$updatequotationproductsidsarr).")"));
+                            $this->Purchase_quotation->Delete(array("quotationid" => $quotationsid, "quotationproductid IN (" . implode(",", $updatequotationproductsidsarr) . ")"));
                         }
-                        if(!empty($deletequotationproductsidsarr)){
+                        if (!empty($deletequotationproductsidsarr)) {
                             foreach ($deletequotationproductsidsarr as $quotationproductid) {
-                                
+
                                 $this->Purchase_quotation->_table = tbl_quotationproducts;
-                                $this->Purchase_quotation->Delete("id=".$quotationproductid);
+                                $this->Purchase_quotation->Delete("id=" . $quotationproductid);
                             }
                         }
-                       
+
                         $this->load->model('Product_combination_model', 'Product_combination');
                         $this->Purchase_quotation->_table = tbl_quotationvariant;
-                        foreach($updatequotationproductsidsarr as $k=>$quotationproductid){
-    
+                        foreach ($updatequotationproductsidsarr as $k => $quotationproductid) {
+
                             $variantdata = $this->Product_combination->getProductcombinationByPriceID($updatepriceidsarr[$k]);
-                            
-                            foreach($variantdata as $variant){
-    
-                                $updateVariantData[] = array("quotationid"=>$quotationsid,
-                                                        "priceid" => $updatepriceidsarr[$k],
-                                                        "quotationproductid" => $quotationproductid,
-                                                        "variantid" => $variant['variantid'],
-                                                        "variantname" => $variant['variantname'],
-                                                        "variantvalue" => $variant['variantvalue']);
+
+                            foreach ($variantdata as $variant) {
+
+                                $updateVariantData[] = array("quotationid" => $quotationsid,
+                                    "priceid" => $updatepriceidsarr[$k],
+                                    "quotationproductid" => $quotationproductid,
+                                    "variantid" => $variant['variantid'],
+                                    "variantname" => $variant['variantname'],
+                                    "variantvalue" => $variant['variantvalue']);
                             }
                         }
-                        if(isset($updateVariantData) && count($updateVariantData)>0){
+                        if (isset($updateVariantData) && count($updateVariantData) > 0) {
                             $this->Purchase_quotation->add_batch($updateVariantData);
                         }
                     }
-                    if(!empty($insertData)){
+                    if (!empty($insertData)) {
                         $this->Purchase_quotation->_table = tbl_quotationproducts;
                         $this->Purchase_quotation->add_batch($insertData);
-    
-                        $quotationproductsidsarr=array();
+
+                        $quotationproductsidsarr = array();
                         $first_id = $this->writedb->insert_id();
-                        $last_id = $first_id + (count($insertData)-1);
-                        
-                        for($id=$first_id;$id<=$last_id;$id++){
-                            $quotationproductsidsarr[]=$id;
+                        $last_id = $first_id + (count($insertData) - 1);
+
+                        for ($id = $first_id; $id <= $last_id; $id++) {
+                            $quotationproductsidsarr[] = $id;
                         }
-    
+
                         $this->load->model('Product_combination_model', 'Product_combination');
                         $insertVariantData = array();
-                        
-                        foreach($quotationproductsidsarr as $k=>$quotationproductid){
-    
+
+                        foreach ($quotationproductsidsarr as $k => $quotationproductid) {
+
                             $variantdata = $this->Product_combination->getProductcombinationByPriceID($priceidsarr[$k]);
-                            
-                            foreach($variantdata as $variant){
-    
-                                $insertVariantData[] = array("quotationid"=>$quotationsid,
-                                                        "priceid" => $priceidsarr[$k],
-                                                        "quotationproductid" => $quotationproductid,
-                                                        "variantid" => $variant['variantid'],
-                                                        "variantname" => $variant['variantname'],
-                                                        "variantvalue" => $variant['variantvalue']);
+
+                            foreach ($variantdata as $variant) {
+
+                                $insertVariantData[] = array("quotationid" => $quotationsid,
+                                    "priceid" => $priceidsarr[$k],
+                                    "quotationproductid" => $quotationproductid,
+                                    "variantid" => $variant['variantid'],
+                                    "variantname" => $variant['variantname'],
+                                    "variantvalue" => $variant['variantvalue']);
                             }
                         }
-                        if(!empty($insertVariantData)){
+                        if (!empty($insertVariantData)) {
                             $this->Purchase_quotation->_table = tbl_quotationvariant;
                             $this->Purchase_quotation->add_batch($insertVariantData);
                         }
                     }
-                    if(!empty($extrachargesidarr)){
+                    if (!empty($extrachargesidarr)) {
                         $insertextracharges = $updateextracharges = array();
-                        foreach($extrachargesidarr as $index=>$extrachargesid){
-    
-                            if($extrachargesid > 0){
-                                
+                        foreach ($extrachargesidarr as $index => $extrachargesid) {
+
+                            if ($extrachargesid > 0) {
+
                                 $extrachargesname = trim($extrachargesnamearr[$index]);
                                 $extrachargestax = trim($extrachargestaxarr[$index]);
                                 $extrachargeamount = trim($extrachargeamountarr[$index]);
                                 $extrachargepercentage = trim($extrachargepercentagearr[$index]);
-                                $extrachargemappingid = (!empty($extrachargemappingidarr[$index]))?trim($extrachargemappingidarr[$index]):'';
-                                
-                                if($extrachargeamount > 0){
-    
-                                    if($extrachargemappingid!=""){
-                                    
-                                        $updateextracharges[] = array("id"=>$extrachargemappingid,
-                                                                "extrachargesid" => $extrachargesid,
-                                                                "extrachargesname" => $extrachargesname,
-                                                                "taxamount" => $extrachargestax,
-                                                                "amount" => $extrachargeamount,
-                                                                "extrachargepercentage" => $extrachargepercentage
-                                                            );
-                                    }else{
-                                        $insertextracharges[] = array("type"=>1,
-                                                                "referenceid" => $quotationsid,
-                                                                "extrachargesid" => $extrachargesid,
-                                                                "extrachargesname" => $extrachargesname,
-                                                                "taxamount" => $extrachargestax,
-                                                                "amount" => $extrachargeamount,
-                                                                "extrachargepercentage" => $extrachargepercentage,
-                                                                "createddate" => $modifieddate,
-                                                                "addedby" => $modifiedby
-                                                            );
+                                $extrachargemappingid = (!empty($extrachargemappingidarr[$index])) ? trim($extrachargemappingidarr[$index]) : '';
+
+                                if ($extrachargeamount > 0) {
+
+                                    if ($extrachargemappingid != "") {
+
+                                        $updateextracharges[] = array("id" => $extrachargemappingid,
+                                            "extrachargesid" => $extrachargesid,
+                                            "extrachargesname" => $extrachargesname,
+                                            "taxamount" => $extrachargestax,
+                                            "amount" => $extrachargeamount,
+                                            "extrachargepercentage" => $extrachargepercentage,
+                                        );
+                                    } else {
+                                        $insertextracharges[] = array("type" => 1,
+                                            "referenceid" => $quotationsid,
+                                            "extrachargesid" => $extrachargesid,
+                                            "extrachargesname" => $extrachargesname,
+                                            "taxamount" => $extrachargestax,
+                                            "amount" => $extrachargeamount,
+                                            "extrachargepercentage" => $extrachargepercentage,
+                                            "createddate" => $modifieddate,
+                                            "addedby" => $modifiedby,
+                                        );
                                     }
                                 }
                             }
                         }
-                        if(!empty($insertextracharges)){
+                        if (!empty($insertextracharges)) {
                             $this->Purchase_quotation->_table = tbl_extrachargemapping;
                             $this->Purchase_quotation->add_batch($insertextracharges);
                         }
-                        if(!empty($updateextracharges)){
+                        if (!empty($updateextracharges)) {
                             $this->Purchase_quotation->_table = tbl_extrachargemapping;
-                            $this->Purchase_quotation->edit_batch($updateextracharges,"id");
+                            $this->Purchase_quotation->edit_batch($updateextracharges, "id");
                         }
                     }
                 }
-                $percentagearr = isset($PostData['percentage'])?$PostData['percentage']:'';
-                $installmentamountarr = isset($PostData['installmentamount'])?$PostData['installmentamount']:'';
-                $installmentdatearr = isset($PostData['installmentdate'])?$PostData['installmentdate']:'';
-                $paymentdatearr = isset($PostData['paymentdate'])?$PostData['paymentdate']:'';
-                
-                $EMIReceived=array();
+                $percentagearr = isset($PostData['percentage']) ? $PostData['percentage'] : '';
+                $installmentamountarr = isset($PostData['installmentamount']) ? $PostData['installmentamount'] : '';
+                $installmentdatearr = isset($PostData['installmentdate']) ? $PostData['installmentdate'] : '';
+                $paymentdatearr = isset($PostData['paymentdate']) ? $PostData['paymentdate'] : '';
+
+                $EMIReceived = array();
                 $this->Purchase_quotation->_table = tbl_installment;
                 $this->Purchase_quotation->_fields = "GROUP_CONCAT(status) as status";
                 $this->Purchase_quotation->_where = array('quotationid' => $quotationsid);
                 $EMIReceived = $this->Purchase_quotation->getRecordsById();
 
-                if(!empty($percentagearr) && $paymenttype==4){
+                if (!empty($percentagearr) && $paymenttype == 4) {
                     $insertinstallmentdata = array();
                     $updateinstallmentdata = array();
-                    if(!in_array('1',explode(",",$EMIReceived['status']))){
-                        foreach($percentagearr as $k=>$percentage){
-                            
+                    if (!in_array('1', explode(",", $EMIReceived['status']))) {
+                        foreach ($percentagearr as $k => $percentage) {
+
                             $installmentamount = trim($installmentamountarr[$k]);
-                            $installmentdate = $installmentdatearr[$k]!=''?$this->general_model->convertdate(trim($installmentdatearr[$k])):'';
-                            $paymentdate = $paymentdatearr[$k]!=''?$this->general_model->convertdate(trim($paymentdatearr[$k])):'';
-                            
-                            if(isset($PostData['installmentstatus'.($k+1)]) && !empty($PostData['installmentstatus'.($k+1)])){
-                                $status=1;
-                            }else{
-                                $status=0;
+                            $installmentdate = $installmentdatearr[$k] != '' ? $this->general_model->convertdate(trim($installmentdatearr[$k])) : '';
+                            $paymentdate = $paymentdatearr[$k] != '' ? $this->general_model->convertdate(trim($paymentdatearr[$k])) : '';
+
+                            if (isset($PostData['installmentstatus' . ($k + 1)]) && !empty($PostData['installmentstatus' . ($k + 1)])) {
+                                $status = 1;
+                            } else {
+                                $status = 0;
                             }
-                            if(isset($PostData['installmentid'][$k+1])){
-                                $installmentidids[] = $PostData['installmentid'][$k+1];
-                            
+                            if (isset($PostData['installmentid'][$k + 1])) {
+                                $installmentidids[] = $PostData['installmentid'][$k + 1];
+
                                 $updateinstallmentdata[] = array(
-                                    "id"=>$PostData['installmentid'][$k+1],
-                                    "quotationid"=>$quotationsid,
-                                    "percentage"=>$percentage,
+                                    "id" => $PostData['installmentid'][$k + 1],
+                                    "quotationid" => $quotationsid,
+                                    "percentage" => $percentage,
                                     "amount" => $installmentamount,
                                     "date" => $installmentdate,
                                     "paymentdate" => $paymentdate,
-                                    'status'=>$status,
-                                    'modifieddate'=>$modifieddate,
-                                    'modifiedby'=>$modifiedby);
-                            }else{
+                                    'status' => $status,
+                                    'modifieddate' => $modifieddate,
+                                    'modifiedby' => $modifiedby);
+                            } else {
                                 $insertinstallmentdata[] = array(
-                                        "quotationid"=>$quotationsid,
-                                        "percentage"=>$percentage,
-                                        "amount" => $installmentamount,
-                                        "date" => $installmentdate,
-                                        "paymentdate" => $paymentdate,
-                                        "status" => $status,
-                                        "createddate" => $modifieddate,
-                                        "modifieddate" => $modifieddate,
-                                        "addedby" => $modifiedby,
-                                        "modifiedby"=>$modifiedby);
+                                    "quotationid" => $quotationsid,
+                                    "percentage" => $percentage,
+                                    "amount" => $installmentamount,
+                                    "date" => $installmentdate,
+                                    "paymentdate" => $paymentdate,
+                                    "status" => $status,
+                                    "createddate" => $modifieddate,
+                                    "modifieddate" => $modifieddate,
+                                    "addedby" => $modifiedby,
+                                    "modifiedby" => $modifiedby);
                             }
                         }
                     }
-                    if(count($updateinstallmentdata)>0){
-                        $this->Purchase_quotation->edit_batch($updateinstallmentdata,'id');
-                        if(count($installmentidids)>0){
-                            $this->Purchase_quotation->Delete(array("id not in(".implode(",", $installmentidids).")"=>null,"quotationid"=>$quotationsid));
+                    if (count($updateinstallmentdata) > 0) {
+                        $this->Purchase_quotation->edit_batch($updateinstallmentdata, 'id');
+                        if (count($installmentidids) > 0) {
+                            $this->Purchase_quotation->Delete(array("id not in(" . implode(",", $installmentidids) . ")" => null, "quotationid" => $quotationsid));
                         }
-                    }else{
-                        if(!in_array('1',explode(",",$EMIReceived['status']))){
-                            $this->Purchase_quotation->Delete(array("quotationid"=>$quotationsid));
+                    } else {
+                        if (!in_array('1', explode(",", $EMIReceived['status']))) {
+                            $this->Purchase_quotation->Delete(array("quotationid" => $quotationsid));
                         }
                     }
-                    if(count($insertinstallmentdata)>0){
-                        if(!in_array('1',explode(",",$EMIReceived['status']))){
+                    if (count($insertinstallmentdata) > 0) {
+                        if (!in_array('1', explode(",", $EMIReceived['status']))) {
                             $this->Purchase_quotation->add_batch($insertinstallmentdata);
                         }
                     }
-                    
-                }else{
-                    if(!in_array('1',explode(",",$EMIReceived['status']))){
-                        $this->Purchase_quotation->Delete(array("quotationid"=>$quotationsid));
+
+                } else {
+                    if (!in_array('1', explode(",", $EMIReceived['status']))) {
+                        $this->Purchase_quotation->Delete(array("quotationid" => $quotationsid));
                     }
                 }
-                if(isset($PostData['removetransactionattachmentid']) && $PostData['removetransactionattachmentid']!=''){
-                    
+                if (isset($PostData['removetransactionattachmentid']) && $PostData['removetransactionattachmentid'] != '') {
+
                     $FileData = $this->readdb->select("id,filename")
-                                        ->from(tbl_transactionattachment)
-                                        ->where("FIND_IN_SET(id,'".implode(',',array_filter(explode(",",$PostData['removetransactionattachmentid'])))."')>0")
-                                        ->get()->result_array();
-                    
-                    if(!empty($FileData)){
+                        ->from(tbl_transactionattachment)
+                        ->where("FIND_IN_SET(id,'" . implode(',', array_filter(explode(",", $PostData['removetransactionattachmentid']))) . "')>0")
+                        ->get()->result_array();
+
+                    if (!empty($FileData)) {
                         foreach ($FileData as $row) {
-                            unlinkfile("TRANSACTION_ATTACHMENT",$row['filename'], TRANSACTION_ATTACHMENT_PATH);
+                            unlinkfile("TRANSACTION_ATTACHMENT", $row['filename'], TRANSACTION_ATTACHMENT_PATH);
                             $this->Purchase_quotation->_table = tbl_transactionattachment;
-                            $this->Purchase_quotation->Delete(array('id'=>$row['id']));
+                            $this->Purchase_quotation->Delete(array('id' => $row['id']));
                         }
                     }
                 }
-                if(!empty($_FILES)){
+                if (!empty($_FILES)) {
                     $insertquotationattachmentdata = $updatequotationattachmentdata = array();
                     foreach ($_FILES as $key => $value) {
 
                         $id = preg_replace('/[^0-9]/', '', $key);
-                        
-                        if(strpos($key, 'file') !== false){
-                            if(!isset($PostData['transactionattachmentid'.$id])){
-        
-                                if($_FILES['file'.$id]['name']!=''){
-                                    $file = uploadFile('file'.$id, 'TRANSACTION_ATTACHMENT', TRANSACTION_ATTACHMENT_PATH, '*', '', 1, TRANSACTION_ATTACHMENT_LOCAL_PATH);
-                                    if($file !== 0 && $file !== 2){
-                                        $fileremarks = $PostData['fileremarks'.$id];
-                                        $insertquotationattachmentdata[] = array("transactionid"=>$quotationsid,
-                                                                                'transactiontype'=>1,
-                                                                                "filename"=>$file,
-                                                                                "remarks"=>$fileremarks,
-                                                                                "createddate"=>$modifieddate,
-                                                                                "modifieddate"=>$modifieddate,
-                                                                                "addedby"=>$modifiedby,
-                                                                                "modifiedby"=>$modifiedby
-                                                                            );
-                                    }      
-                                }    
-                            }else if(isset($PostData['transactionattachmentid'.$id])){
-        
+
+                        if (strpos($key, 'file') !== false) {
+                            if (!isset($PostData['transactionattachmentid' . $id])) {
+
+                                if ($_FILES['file' . $id]['name'] != '') {
+                                    $file = uploadFile('file' . $id, 'TRANSACTION_ATTACHMENT', TRANSACTION_ATTACHMENT_PATH, '*', '', 1, TRANSACTION_ATTACHMENT_LOCAL_PATH);
+                                    if ($file !== 0 && $file !== 2) {
+                                        $fileremarks = $PostData['fileremarks' . $id];
+                                        $insertquotationattachmentdata[] = array("transactionid" => $quotationsid,
+                                            'transactiontype' => 1,
+                                            "filename" => $file,
+                                            "remarks" => $fileremarks,
+                                            "createddate" => $modifieddate,
+                                            "modifieddate" => $modifieddate,
+                                            "addedby" => $modifiedby,
+                                            "modifiedby" => $modifiedby,
+                                        );
+                                    }
+                                }
+                            } else if (isset($PostData['transactionattachmentid' . $id])) {
+
                                 $this->Purchase_quotation->_table = tbl_transactionattachment;
                                 $this->Purchase_quotation->_fields = "id,filename";
-                                $this->Purchase_quotation->_where = "id=".$PostData['transactionattachmentid'.$id];
+                                $this->Purchase_quotation->_where = "id=" . $PostData['transactionattachmentid' . $id];
                                 $FileData = $this->Purchase_quotation->getRecordsByID();
-        
-                                $fileremarks = $PostData['fileremarks'.$id];
-                                if($_FILES['file'.$id]['name'] != ''){
 
-                                    $file = reuploadFile('file'.$id, 'TRANSACTION_ATTACHMENT', $FileData['filename'], TRANSACTION_ATTACHMENT_PATH, '*', '', 1, TRANSACTION_ATTACHMENT_LOCAL_PATH);
-                                    if($file !== 0 && $file !== 2){
-                                        
+                                $fileremarks = $PostData['fileremarks' . $id];
+                                if ($_FILES['file' . $id]['name'] != '') {
+
+                                    $file = reuploadFile('file' . $id, 'TRANSACTION_ATTACHMENT', $FileData['filename'], TRANSACTION_ATTACHMENT_PATH, '*', '', 1, TRANSACTION_ATTACHMENT_LOCAL_PATH);
+                                    if ($file !== 0 && $file !== 2) {
+
                                         $updatequotationattachmentdata[] = array(
-                                            "id"=>$PostData['transactionattachmentid'.$id],
-                                            "filename"=>$file,
-                                            "remarks"=>$fileremarks,
-                                            "modifieddate"=>$modifieddate,
-                                            "modifiedby"=>$modifiedby
+                                            "id" => $PostData['transactionattachmentid' . $id],
+                                            "filename" => $file,
+                                            "remarks" => $fileremarks,
+                                            "modifieddate" => $modifieddate,
+                                            "modifiedby" => $modifiedby,
                                         );
-                                    } 
-                                }else{
+                                    }
+                                } else {
 
                                     $updatequotationattachmentdata[] = array(
-                                        "id"=>$PostData['transactionattachmentid'.$id],
-                                        "remarks"=>$fileremarks,
-                                        "modifieddate"=>$modifieddate,
-                                        "modifiedby"=>$modifiedby
+                                        "id" => $PostData['transactionattachmentid' . $id],
+                                        "remarks" => $fileremarks,
+                                        "modifieddate" => $modifieddate,
+                                        "modifiedby" => $modifiedby,
                                     );
                                 }
                             }
                         }
                     }
-                    
-                     if(!empty($insertquotationattachmentdata)){
-                         $this->Purchase_quotation->_table = tbl_transactionattachment;
-                         $this->Purchase_quotation->add_batch($insertquotationattachmentdata);
-                     }
-                     if(!empty($updatequotationattachmentdata)){
-                         $this->Purchase_quotation->_table = tbl_transactionattachment;
-                         $this->Purchase_quotation->edit_batch($updatequotationattachmentdata, "id");
-                     }
+
+                    if (!empty($insertquotationattachmentdata)) {
+                        $this->Purchase_quotation->_table = tbl_transactionattachment;
+                        $this->Purchase_quotation->add_batch($insertquotationattachmentdata);
+                    }
+                    if (!empty($updatequotationattachmentdata)) {
+                        $this->Purchase_quotation->_table = tbl_transactionattachment;
+                        $this->Purchase_quotation->edit_batch($updatequotationattachmentdata, "id");
+                    }
                 }
-                if($this->viewData['submenuvisibility']['managelog'] == 1){
-                    $this->general_model->addActionLog(2,'Quotation','Edit '.$quotationid.' purchase quotation.');
+                if ($this->viewData['submenuvisibility']['managelog'] == 1) {
+                    $this->general_model->addActionLog(2, 'Quotation', 'Edit ' . $quotationid . ' purchase quotation.');
                 }
-                $json = array('error'=>1);
-            }else{
-                $json = array('error'=>0);
+                $json = array('error' => 1);
+            } else {
+                $json = array('error' => 0);
             }
-        }else{
-            $json = array('error'=>2);
+        } else {
+            $json = array('error' => 2);
         }
         echo json_encode($json);
     }
-    public function regeneratequotation(){
+    public function regeneratequotation()
+    {
         $PostData = $this->input->post();
-        
+
         $quotationid = $PostData['quotationid'];
         echo $this->Purchase_quotation->generatequotation($quotationid);
     }
@@ -1081,78 +876,78 @@ class Sales_order extends Admin_Controller
     }
     public function view_purchase_quotation($quotationid)
     {
-        $this->checkAdminAccessModule('submenu','view',$this->viewData['submenuvisibility']);
+        $this->checkAdminAccessModule('submenu', 'view', $this->viewData['submenuvisibility']);
         $this->viewData['title'] = "View Purchase Quotation";
         $this->viewData['module'] = "purchase_quotation/View_purchase_quotation";
 
-        $this->load->model("Purchase_order_model","Purchase_order");
+        $this->load->model("Purchase_order_model", "Purchase_order");
         $this->viewData['transactiondata'] = $this->Purchase_quotation->getPurchaseQuotationDetails($quotationid);
-        $this->viewData['transactionattachment'] = $this->Purchase_order->getTransactionAttachmentDataByTransactionId($quotationid,1);
+        $this->viewData['transactionattachment'] = $this->Purchase_order->getTransactionAttachmentDataByTransactionId($quotationid, 1);
         $this->viewData['printtype'] = 'quotation';
         $this->viewData['heading'] = 'Purchase Quotation';
-        
-        $this->load->model('Invoice_setting_model','Invoice_setting');
+
+        $this->load->model('Invoice_setting_model', 'Invoice_setting');
         $this->viewData['invoicesettingdata'] = $this->Invoice_setting->getShipperDetails();
         $this->Purchase_quotation->_table = tbl_installment;
-        $this->Purchase_quotation->_where = array("quotationid"=>$quotationid);
+        $this->Purchase_quotation->_where = array("quotationid" => $quotationid);
         $this->Purchase_quotation->_order = ("date ASC");
         $this->viewData['installment'] = $this->Purchase_quotation->getRecordByID();
-       
+
         $this->viewData['quotationstatushistory'] = $this->Purchase_quotation->getPurchaseQuotationStatusHistory($quotationid);
 
-        $this->load->model("Channel_model","Channel"); 
+        $this->load->model("Channel_model", "Channel");
         $this->viewData['channeldata'] = $this->Channel->getChannelList();
-       
-        if($this->viewData['submenuvisibility']['managelog'] == 1){
-            $this->general_model->addActionLog(4,'Quotation','View '.$this->viewData['transactiondata']['transactiondetail']['quotationid'].' purchase quotation details.');
+
+        if ($this->viewData['submenuvisibility']['managelog'] == 1) {
+            $this->general_model->addActionLog(4, 'Quotation', 'View ' . $this->viewData['transactiondata']['transactiondetail']['quotationid'] . ' purchase quotation details.');
         }
 
-        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker","bootstrap-datepicker/bootstrap-datepicker.js");
+        $this->admin_headerlib->add_javascript_plugins("bootstrap-datepicker", "bootstrap-datepicker/bootstrap-datepicker.js");
         $this->admin_headerlib->add_javascript("jquery.number", "jquery.number.js");
         $this->admin_headerlib->add_javascript("view_purchase_quotation", "pages/view_purchase_quotation.js");
-        $this->load->view(ADMINFOLDER.'template',$this->viewData);
+        $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
     public function update_status()
     {
         $PostData = $this->input->post();
         $status = $PostData['status'];
         $quotationId = $PostData['quotationId'];
-        $modifiedby = $this->session->userdata(base_url().'ADMINID'); 
+        $modifiedby = $this->session->userdata(base_url() . 'ADMINID');
         $modifieddate = $this->general_model->getCurrentDateTime();
-        
+
         $insertstatusdata = array(
             "quotationid" => $quotationId,
             "status" => $status,
             "type" => 0,
             "modifieddate" => $modifieddate,
             "modifiedby" => $modifiedby);
-        
-        $insertstatusdata=array_map('trim',$insertstatusdata);
-        $this->Purchase_quotation->_table = tbl_quotationstatuschange;  
+
+        $insertstatusdata = array_map('trim', $insertstatusdata);
+        $this->Purchase_quotation->_table = tbl_quotationstatuschange;
         $this->Purchase_quotation->Add($insertstatusdata);
 
         $updateData = array(
-            'status'=>$status,
-            'modifieddate' => $modifieddate, 
-            'modifiedby'=>$modifiedby
-        );  
-        if($status==2){
+            'status' => $status,
+            'modifieddate' => $modifieddate,
+            'modifiedby' => $modifiedby,
+        );
+        if ($status == 2) {
             $updateData['resonforrejection'] = $PostData['resonforrejection'];
         }
-        $this->Purchase_quotation->_table = tbl_quotation; 
+        $this->Purchase_quotation->_table = tbl_quotation;
         $this->Purchase_quotation->_where = array("id" => $quotationId);
         $isupdate = $this->Purchase_quotation->Edit($updateData);
-        
-        if($isupdate) {
-            if($this->viewData['submenuvisibility']['managelog'] == 1){
-                $this->Purchase_quotation->_fields="quotationid";
-                $this->Purchase_quotation->_where=array("id"=>$quotationId);
+
+        if ($isupdate) {
+            if ($this->viewData['submenuvisibility']['managelog'] == 1) {
+                $this->Purchase_quotation->_fields = "quotationid";
+                $this->Purchase_quotation->_where = array("id" => $quotationId);
                 $quotationdetail = $this->Purchase_quotation->getRecordsByID();
-    
-                $this->general_model->addActionLog(2,'Quotation','Change status '.$quotationdetail['quotationid'].' on purchase quotation.');
+
+                $this->general_model->addActionLog(2, 'Quotation', 'Change status ' . $quotationdetail['quotationid'] . ' on purchase quotation.');
             }
-            echo 1;    
-        }else{
+            echo 1;
+        } else {
             echo 0;
         }
     }
@@ -1160,64 +955,116 @@ class Sales_order extends Admin_Controller
     {
         $PostData = $this->input->post();
         $modifieddate = $this->general_model->getCurrentDateTime();
-        $modifiedby = $this->session->userdata(base_url().'ADMINID'); 
+        $modifiedby = $this->session->userdata(base_url() . 'ADMINID');
         $status = $PostData['status'];
         $installmentid = $PostData['installmentid'];
 
         $updateData = array(
-            'status'=>$status,
-            'modifieddate' => $modifieddate, 
-            'modifiedby'=>$modifiedby
-        );  
-        if($PostData['status']==1){
-            $updateData['paymentdate']=$this->general_model->getCurrentDate();
-        }else{
-            $updateData['paymentdate']="";
+            'status' => $status,
+            'modifieddate' => $modifieddate,
+            'modifiedby' => $modifiedby,
+        );
+        if ($PostData['status'] == 1) {
+            $updateData['paymentdate'] = $this->general_model->getCurrentDate();
+        } else {
+            $updateData['paymentdate'] = "";
         }
         $this->Purchase_quotation->_table = tbl_installment;
         $this->Purchase_quotation->_where = array("id" => $installmentid);
         $IsUpdate = $this->Purchase_quotation->Edit($updateData);
-        if($IsUpdate!=0) {
-            if($this->viewData['submenuvisibility']['managelog'] == 1){
-                $this->Purchase_quotation->_fields="(select quotationid from ".tbl_quotation." where id=".tbl_installment.".quotationid) as quotationnumber";
-                $this->Purchase_quotation->_where=array("id"=>$installmentid);
+        if ($IsUpdate != 0) {
+            if ($this->viewData['submenuvisibility']['managelog'] == 1) {
+                $this->Purchase_quotation->_fields = "(select quotationid from " . tbl_quotation . " where id=" . tbl_installment . ".quotationid) as quotationnumber";
+                $this->Purchase_quotation->_where = array("id" => $installmentid);
                 $quotationdetail = $this->Purchase_quotation->getRecordsByID();
 
-                $this->general_model->addActionLog(2,'Quotation','Change installment status '.$quotationdetail['quotationnumber'].' on purchase quotation.');
+                $this->general_model->addActionLog(2, 'Quotation', 'Change installment status ' . $quotationdetail['quotationnumber'] . ' on purchase quotation.');
             }
-            echo 1;    
-        }else{
+            echo 1;
+        } else {
             echo 0;
         }
     }
 
-    public function printPurchaseQuotationInvoice() {
+    public function printPurchaseQuotationInvoice()
+    {
         $PostData = $this->input->post();
         $quotationid = $PostData['id'];
-        $this->load->model("Purchase_order_model","Purchase_order");
+        $this->load->model("Purchase_order_model", "Purchase_order");
         $PostData['transactiondata'] = $this->Purchase_quotation->getPurchaseQuotationDetails($quotationid);
 
-        $this->load->model('Invoice_setting_model','Invoice_setting');
+        $this->load->model('Invoice_setting_model', 'Invoice_setting');
         $PostData['invoicesettingdata'] = $this->Invoice_setting->getShipperDetails();
         $PostData['printtype'] = "quotation";
         $PostData['heading'] = "Purchase Quotation";
         $PostData['hideonprint'] = '1';
 
-        $html['content'] = $this->load->view(ADMINFOLDER."purchase_quotation/Printpurchasequotationformat.php",$PostData,true);
-        
-        if($this->viewData['submenuvisibility']['managelog'] == 1){
-            $this->general_model->addActionLog(0,'Quotation','Print '.$PostData['transactiondata']['transactiondetail']['quotationid'].' purchase quotation details.');
+        $html['content'] = $this->load->view(ADMINFOLDER . "purchase_quotation/Printpurchasequotationformat.php", $PostData, true);
+
+        if ($this->viewData['submenuvisibility']['managelog'] == 1) {
+            $this->general_model->addActionLog(0, 'Quotation', 'Print ' . $PostData['transactiondata']['transactiondetail']['quotationid'] . ' purchase quotation details.');
         }
-        echo json_encode($html); 
+        echo json_encode($html);
     }
-    public function Productpricesdorpdowndata($pid) {
+    public function Productpricesdorpdowndata($pid)
+    {
         $this->load->model('Productprices_model', 'Productprices');
         $this->viewData['Productpricesdorpdowndata'] = $this->Productprices->getProductpriceByProductID($pid);
-        if(isset($this->viewData['Productpricesdorpdowndata'])>0){
-            echo json_encode($this->viewData['Productpricesdorpdowndata']); 
-        }else{
-            echo json_encode(0); 
+        if (isset($this->viewData['Productpricesdorpdowndata']) > 0) {
+            echo json_encode($this->viewData['Productpricesdorpdowndata']);
+        } else {
+            echo json_encode(0);
         }
     }
+
+    public function check_party_use()
+    {
+        $PostData = $this->input->post();
+        $ids = explode(",", $PostData['ids']);
+        $count = 0;
+        // use for check data available or not in other table
+        foreach ($ids as $row) {
+            // $count++;
+            /* $query = $this->db->query("SELECT id FROM ".tbl_documenttype." WHERE
+        id IN (SELECT vehicleid FROM ".tbl_insurance." WHERE vehicleid = $row) OR id IN (SELECT vehicleid FROM ".tbl_vehiclepollutioncertificate." WHERE vehicleid = $row) OR id IN (SELECT vehicleid FROM ".tbl_vehicleregistrationcertificate." WHERE vehicleid = $row) OR id IN (SELECT vehicleid FROM ".tbl_vehicletax." WHERE vehicleid = $row) ");
+        //OR id IN (SELECT vehicleid FROM ".tbl_vehicleroute." WHERE vehicleid = $row)
+        if($query->num_rows() > 0){
+        } */
+        }
+        echo $count;
+    }
+
+    public function delete_mul_party()
+    {
+
+        $this->checkAdminAccessModule('submenu', 'delete', $this->viewData['submenuvisibility']);
+        $PostData = $this->input->post();
+        $ids = explode(",", $PostData['ids']);
+        $count = 0;
+        $this->load->model('Document_model', 'Document');
+        foreach ($ids as $row) {
+
+            $this->Sales_order->_where = array("id" => $row);
+            $data = $this->Sales_order->getRecordsById();
+
+            if ($this->viewData['submenuvisibility']['managelog'] == 1) {
+                $this->general_model->addActionLog(3, 'Sales_order', 'Delete ' . $data['firstname'] . ' ' . $data['lastname'] . ' Sales_order.');
+            }
+
+            $this->Document->_where = array("referencetype" => 1, "referenceid" => $row);
+            $documents = $this->Document->getRecordsById();
+
+            if (!empty($documents)) {
+                foreach ($documents as $document) {
+                    if ($document['documentfile'] != "") {
+                        unlinkfile("DOCUMENT", $document['documentfile'], DOCUMENT_PATH);
+                    }
+                }
+            }
+            $this->Document->Delete(array("referencetype" => 1, "referenceid" => $row));
+            $this->Sales_order->Delete(array("id" => $row));
+        }
+    }
+
 
 }

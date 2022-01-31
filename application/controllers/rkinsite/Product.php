@@ -352,6 +352,8 @@ class  Product extends Admin_Controller
         if (!is_dir(CATALOG_PATH)) {
             @mkdir(CATALOG_PATH);
         }
+        // echo '<pre>';
+        // print_r($_FILES);exit;
         foreach ($_FILES as $key => $value) {
             $id = preg_replace('/[^0-9]/', '', $key);
             if (isset($_FILES['productfile' . $id]['name']) && $_FILES['productfile' . $id]['name'] != '') {
