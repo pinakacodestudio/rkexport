@@ -298,7 +298,7 @@ function checkvalidation(addtype = 0) {
             });
         } else {
        
-            var uurl = SITE_URL + "Sales_order/update-party";
+            var uurl = SITE_URL + "Sales-order/update-sales-order";
 
             $.ajax({
                 url: uurl,
