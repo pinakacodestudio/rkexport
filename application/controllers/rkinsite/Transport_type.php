@@ -66,7 +66,7 @@ class Transport_type extends Admin_Controller {
 	}
 	public function add_transport_type() {
 		
-		$this->viewData['title'] = "Add Additional Rights";
+		$this->viewData['title'] = "Add Transport Type";
 		$this->viewData['module'] = "transport_type/Add_transport_type";
 
 		$this->admin_headerlib->add_javascript("add_transport_type","pages/add_transport_type.js");
@@ -74,7 +74,7 @@ class Transport_type extends Admin_Controller {
 	}
 	public function edit_transport_type($id) {
 		
-		$this->viewData['title'] = "Edit Additional Rights";
+		$this->viewData['title'] = "Edit Transport Type";
 		$this->viewData['module'] = "transport_type/Add_transport_type";
 		$this->viewData['action'] = "1";//Edit
 

@@ -30,3 +30,14 @@ $client['dbconnectionreader'] = 'localhost';
 $client['dbconnectionwriter'] = 'localhost';
 $portaldetail['rkexport.jjasani.com'] = $client;
 //end - preview
+
+
+//start - preview
+$client['folder'] = 'export';
+$client['dbname'] = 'rkexport';
+$client['dbuser'] = 'root';
+$client['dbpassword'] = '';
+$client['dbconnectionreader'] = 'localhost';
+$client['dbconnectionwriter'] = 'localhost';
+$portaldetail['192.168.100.8'] = $client;
+//end - preview

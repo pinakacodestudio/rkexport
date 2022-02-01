@@ -13,6 +13,12 @@ function removedata(id) {
 
 function removecontectpaertion(id) {
     $('#' + id).remove();
+    $(".addpro").hide();
+    $(".addpro:last").show();
+    $(".removepro").show();
+    if ($(".removepro:visible").length == 1) {
+        $(".removepro:first").hide();
+    }
 }
 
 var edit_cityid = $('#edit_cityid').val();
@@ -28,8 +34,7 @@ $(document).ready(function () {
     $('#countryid').val(edit_country).trigger('change');
     var base_url = $('#base_url').val();
     var edit_provinceid = $('#edit_provinceid').val();
-
-
+    
     if (edit_provinceid != '') {
 
         var uurl = base_url + "rkinsite/Party/getstate";
@@ -218,15 +223,8 @@ function include(filename, onload) {
     };
     head.appendChild(script);
 }
-function removeproduct(divid) {
 
-    $("#countdocuments" + divid).remove();
 
-    $(".add_btn:last").show();
-    if ($(".remove_btn:visible").length == 1) {
-        $(".remove_btn:first").hide();
-    }
-}
 function resetdata() {
     $("#voucherno_div").removeClass("has-error is-focused");
     $("#voucherdate_div").removeClass("has-error is-focused");
@@ -268,7 +266,6 @@ function checkvalidation(addtype = 0) {
     } else {
         checkbox4 = 0;
     }
-
 
     var isvalidwebsitename = isvalidcompanyid = isvalidpartycode = isvalidpartytypeid = isvalidopeningdate = isvalidopeningamount = isvalidpassword = 0;
 
@@ -335,21 +332,22 @@ function checkvalidation(addtype = 0) {
         new PNotify({ title: 'Please enter email !', styling: 'fontawesome', delay: '3000', type: 'error' });
     }
 
-    if (openingdate == '') {
-        $("#openingdate_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter opening date !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#openingdate_div").removeClass("has-error is-focused");
-        isvalidopeningdate = 1;
-    }
+    // if (openingdate == '') {
+    //     $("#openingdate_div").addClass("has-error is-focused");
+    //     new PNotify({ title: 'Please enter opening date !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    // } else {
+    //     $("#openingdate_div").removeClass("has-error is-focused");
+    //     isvalidopeningdate = 1;
+    // }
 
-    if (openingamount == '') {
-        $("#openingamount_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter opening amount !', styling: 'fontawesome', delay: '3000', type: 'error' });
-    } else {
-        $("#openingamount_div").removeClass("has-error is-focused");
-        isvalidopeningamount = 1;
-    }
+    // if (openingamount == '') {
+    //     $("#openingamount_div").addClass("has-error is-focused");
+    //     new PNotify({ title: 'Please enter opening amount !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    // } else {
+    //     $("#openingamount_div").removeClass("has-error is-focused");
+    //     isvalidopeningamount = 1;
+    // }
+    
     isvalidpassword = 1;
 
     if (checkbox4 == 3) {
@@ -366,7 +364,8 @@ function checkvalidation(addtype = 0) {
 
 
     var c = 1;
-    if (isvalidwebsitename && isvalidpartycode && isvalidpartytypeid && isvalidcompanyid && isvalidopeningamount && isvalidpassword == 1) {
+    if (isvalidwebsitename && isvalidpartycode && isvalidpartytypeid && isvalidcompanyid && isvalidpassword == 1) {
+        
         var formData = new FormData($('#party-form')[0]);
         if (ACTION == 0) {
             var uurl = SITE_URL + "party/party-add";
@@ -476,7 +475,7 @@ function addnewproduct() {
                           </div>\
                       </div>\
                       <div class="col-md-1 addrowbutton pt-md pr-xs">\
-                          <button type="button" class="btn btn-danger btn-raised remove_btn m-n" onclick="removeDocument(' + cloopdoc + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
+                          <button type="button" class="btn btn-danger btn-raised remove_btndoc m-n" onclick="removeDocument(' + cloopdoc + ')" style="padding: 3px 8px;"><i class="fa fa-minus"></i></button>\
                       </div>\
                       <div class="col-md-1 addrowbutton pt-md pr-xs">\
                           <button type="button" class="btn btn-primary btn-raised add_btndoc m-n" onclick="addnewproduct()" style="padding: 3px 8px;"><i class="fa fa-plus"></i></button>\
@@ -488,7 +487,31 @@ function addnewproduct() {
     $(".add_btndoc").hide();
     $(".add_btndoc:last").show();
 
+    $(".add_btndoc:last").show();
+    $(".remove_btndoc").show();
+    if ($(".remove_btndoc:visible").length == 1) {
+        $(".remove_btndoc:first").hide();
+    }
+
 }
+
+
+function removeDocument(divid) {
+
+    $("#countdocuments" + divid).remove();
+
+    $(".add_btndoc").hide();
+    $(".add_btndoc:last").show();
+    if ($(".remove_btndoc:visible").length == 1) {
+        $(".remove_btndoc:first").hide();
+    }
+}
+
+$(".add_btndoc:last").show();
+if ($(".remove_btndoc:visible").length == 1) {
+    $(".remove_btndoc:first").hide();
+}
+
 function addcontectfield(id, countcontactno) {
     var countcontactno = $("#countcontactno").val();
     countcontactno++;
@@ -496,46 +519,71 @@ function addcontectfield(id, countcontactno) {
     var datahtml = '<div class="col-md-4 pl-sm pr-sm visible-md visible-lg" id="contecremove' + countcontactno + '">\
     <div class="form-group" id="contactno_div">\
        <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
-       <div class="col-md-6">\
+       <div class="col-md-4">\
           <input id="contactno" type="text" name="contactno'+ id + '[]" class="form-control"  value="">\
        </div>\
-        <div class="form-group col-md-3">\
+        <div class="form-group col-md-4">\
             <button type="button"  onclick="addcontectfield('+ id + ',' + countcontactno + ')"  class="addprodocitem btn btn-primary btn-raised m-n add_btn" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>\
-            <button type="button" class="btn btn-danger btn-raised m-n remove_btn" onclick="removecontect(' + countcontactno + ')"><i class="fa fa-minus"></i></button>\
+            <button type="button" class="btn btn-danger btn-raised m-n removeprodocitem" onclick="removecontect('+ id + ',' + countcontactno + ')"><i class="fa fa-minus"></i></button>\
         </div>\
     </div>\
  </div>';
 
     $(".addcontectfilelddata" + id + "").after(datahtml);
-    $("#contectrowdelete_" + id + " .add_btn").hide();
-    $("#contectrowdelete_" + id + " .add_btn:last").show();
+    $("#contectrowdelete_" + id + " .addprodocitem").hide();
+    $("#contectrowdelete_" + id + " .addprodocitem:last").show();
+
+    $("#contectrowdelete_" + id + " .removeprodocitem").show();
+    if ($("#contectrowdelete_" + id + " .removeprodocitem:visible").length == 1) {
+        $("#contectrowdelete_" + id + " .removeprodocitem:first").hide();
+    }
+    
+}
+var cloopcount = $('#cloopcount').val();
+var i = 0;
+while(i<cloopcount){
+    var id = i;
+    $("#contectrowdelete_" + id + " .addprodocitem").hide();
+    $("#contectrowdelete_" + id + " .addprodocitem:last").show();
+
+    $("#contectrowdelete_" + id + " .removeprodocitem").show();
+    if ($("#contectrowdelete_" + id + " .removeprodocitem:visible").length == 1) {
+        $("#contectrowdelete_" + id + " .removeprodocitem:first").hide();
+    }
+    i++;
 }
 
-function removecontect(divid) {
+function removecontect(id,divid) {
 
     var countcontactno = $("#countcontactno").val();
     countcontactno++;
     $("#countcontactno").val(countcontactno);
     $("#contecremove" + divid).remove();
 
-    $(".add_btn:last").show();
-    if ($(".remove_btn:visible").length == 1) {
-        $(".remove_btn:first").hide();
+    $("#contectrowdelete_" + id + " .addprodocitem").hide();
+    $("#contectrowdelete_" + id + " .addprodocitem:last").show();
+
+    $("#contectrowdelete_" + id + " .removeprodocitem").show();
+    if ($("#contectrowdelete_" + id + " .removeprodocitem:visible").length == 1) {
+        $("#contectrowdelete_" + id + " .removeprodocitem:first").hide();
     }
 }
 
 function addnewcontect() {
     var cloopcount2 = $("#cloopcount").val();
+    var countcontactno2 = $("#countcontactno").val();
 
     cloopcount2++;
+    countcontactno2++;
     $("#cloopcount").val(cloopcount2);
+    $("#countcontactno").val(countcontactno2);
     var datahtml2 = '<div class="data" id="contectrowdelete_' + cloopcount2 + '">\
     <div class="row">\
     <div class="panel-heading">\
         <h2>Contact Detail ' + cloopcount2 + '</h2>\
         <div style="float:right; margin:0px 0px 0px 5px;">\
             <button type="button" class="addpro btn btn-primary btn-raised m-n" onclick="addnewcontect()"><i class="fa fa-plus"></i></button>\
-            <button type="button"  onclick="removecontectpaertion(\'contectrowdelete_'+ cloopcount2 + '\')" class="btn btn-danger btn-raised  m-n"><i class="fa fa-minus"></i></button>\
+            <button type="button"  onclick="removecontectpaertion(\'contectrowdelete_'+ cloopcount2 + '\')" class="btn btn-danger btn-raised removepro m-n"><i class="fa fa-minus"></i></button>\
             <div class="form-group" style="float:left; margin:0px 0px 0px 5px;">\
             </div>\
         </div>\
@@ -558,15 +606,15 @@ function addnewcontect() {
                     </div>\
                 </div>\
             </div>\
-            <div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata' + cloopcount2 + '">\
+            <div id="contecremove'+countcontactno2+'" class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata' + cloopcount2 + '">\
                 <div class="form-group" id="contactno_div">\
                     <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
-                    <div class="col-md-6">\
+                    <div class="col-md-4">\
                         <input id="contactno" type="text" name="contactno' + cloopcount2 + '[]" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="">\
                     </div>\
-                    <div class="form-group col-md-3">\
-                        <button type="button" onclick="addcontectfield(' + cloopcount2 + ')" class="addprodocitem btn btn-primary add_btn btn-raised m-n"><i class="fa fa-plus"></i></button>\
-                        <button type="button" class="btn btn-danger btn-raised m-n remove_btn" onclick="removecontect(' + cloopcount2 + ')"><i class="fa fa-minus"></i></button>\
+                    <div class="form-group col-md-4">\
+                        <button type="button" onclick="addcontectfield(' + cloopcount2 + ','+countcontactno2+')" class="addprodocitem btn btn-primary add_btn btn-raised m-n"><i class="fa fa-plus"></i></button>\
+                        <button type="button" class="btn btn-danger btn-raised m-n removeprodocitem" onclick="removecontect(' + cloopcount2 + ','+countcontactno2+')"><i class="fa fa-minus"></i></button>\
                     </div>\
                  </div>\
             </div>\
@@ -601,16 +649,27 @@ function addnewcontect() {
 </div>';
 
     $("#addtarget").append(datahtml2);
-}
 
-function removeDocument(divid) {
+    $(".addpro").hide();
+    $(".addpro:last").show();
+    $(".removepro").show();
+    if ($(".removepro:visible").length == 1) {
+        $(".removepro:first").hide();
+    }
 
-    $("#countdocuments" + divid).remove();
+    $("#contectrowdelete_" + cloopcount2 + " .addprodocitem").hide();
+    $("#contectrowdelete_" + cloopcount2 + " .addprodocitem:last").show();
 
-    $(".add_btn:last").show();
-    if ($(".remove_btn:visible").length == 1) {
-        $(".remove_btn:first").hide();
+    $("#contectrowdelete_" + cloopcount2 + " .removeprodocitem").show();
+    if ($("#contectrowdelete_" + cloopcount2 + " .removeprodocitem:visible").length == 1) {
+        $("#contectrowdelete_" + cloopcount2 + " .removeprodocitem:first").hide();
     }
 }
 
 
+$(".addpro").hide();
+$(".addpro:last").show();
+$(".removepro").show();
+if ($(".removepro:visible").length == 1) {
+    $(".removepro:first").hide();
+}
