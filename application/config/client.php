@@ -39,5 +39,5 @@ $client['dbuser'] = 'root';
 $client['dbpassword'] = '';
 $client['dbconnectionreader'] = 'localhost';
 $client['dbconnectionwriter'] = 'localhost';
-$portaldetail['192.168.100.8'] = $client;
+$portaldetail['192.168.100.4'] = $client;
 //end - preview

@@ -260,6 +260,7 @@ function checkvalidation(addtype = 0) {
     var openingamount = $("#openingamount").val().trim();
     var password = $("#password").val().trim();
     // var checkbox4 = $("#checkbox4").val().trim();
+    var cloopcount = $("#cloopcount").val().trim();
 
     if ($('#checkbox4').is(":checked")) {
         checkbox4 = 3;
@@ -267,7 +268,7 @@ function checkvalidation(addtype = 0) {
         checkbox4 = 0;
     }
 
-    var isvalidwebsitename = isvalidcompanyid = isvalidpartycode = isvalidpartytypeid = isvalidopeningdate = isvalidopeningamount = isvalidpassword = 0;
+    var isvalidwebsitename = isvalidcompanyid = isvalidpartycode = isvalidpartytypeid = isvalidopeningdate = isvalidopeningamount = isvalidpassword = isvalidcontect = 0;
 
 
     PNotify.removeAll();
@@ -327,9 +328,35 @@ function checkvalidation(addtype = 0) {
         isvalidpan = 1;
     }
 
-    if (email == '') {
-        $("#email_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter email !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    // if (email == '') {
+    //     $("#email_div").addClass("has-error is-focused");
+    //     new PNotify({ title: 'Please enter email !', styling: 'fontawesome', delay: '3000', type: 'error' });
+    // }
+
+    var gocount = 1;
+    while(gocount <= cloopcount){
+        
+        if($("#firstname_"+gocount)){
+
+            var firstname = $("#firstname_"+gocount).val();
+            var lastname = $("#lastname_"+gocount).val();
+            var email = $("#email_"+gocount).val();
+        
+            if(firstname == ''){
+                $("#firstname_"+gocount).addClass("has-error is-focused");
+                new PNotify({ title: 'Please enter first name !', styling: 'fontawesome', delay: '3000', type: 'error' });
+            }
+            if(lastname == ''){
+                $("#lastname_"+gocount).addClass("has-error is-focused");
+                new PNotify({ title: 'Please enter last name !', styling: 'fontawesome', delay: '3000', type: 'error' });
+            }
+            if(email == ''){
+                $("#email_"+gocount).addClass("has-error is-focused");
+                new PNotify({ title: 'Please enter email !', styling: 'fontawesome', delay: '3000', type: 'error' });
+            }
+            break;
+        }
+        gocount++;
     }
 
     // if (openingdate == '') {
@@ -516,7 +543,7 @@ function addcontectfield(id, countcontactno) {
     var countcontactno = $("#countcontactno").val();
     countcontactno++;
     $("#countcontactno").val(countcontactno);
-    var datahtml = '<div class="col-md-4 pl-sm pr-sm visible-md visible-lg" id="contecremove' + countcontactno + '">\
+    var datahtml = '<div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata'+id+'" id="contecremove' + countcontactno + '">\
     <div class="form-group" id="contactno_div">\
        <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
        <div class="col-md-4">\
@@ -541,7 +568,7 @@ function addcontectfield(id, countcontactno) {
 }
 var cloopcount = $('#cloopcount').val();
 var i = 0;
-while(i<cloopcount){
+while(i<=cloopcount){
     var id = i;
     $("#contectrowdelete_" + id + " .addprodocitem").hide();
     $("#contectrowdelete_" + id + " .addprodocitem:last").show();

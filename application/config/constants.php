@@ -35,7 +35,7 @@ define("MEMBERFRONTFOLDER", "member/");
 	
 if($portal == 'localhost'){
 	define('DOMAIN_URL', 'http://' . $_SERVER['HTTP_HOST'].'/rkexportphase1/');
-}else if($portal == '192.168.100.8'){
+}else if($portal == '192.168.100.4'){
 	define('DOMAIN_URL', 'http://' . $_SERVER['HTTP_HOST'].'/rkexportphase1/');
 }else{
 	define('DOMAIN_URL', 'http://' . $_SERVER['HTTP_HOST'].'/');

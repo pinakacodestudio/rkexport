@@ -12,6 +12,9 @@
    } 
    }
    $cloop=1;
+   $cloopcount = 1;
+   $countcontactno = 1;
+
    ?>
 <script>
    var DOCUMENT_TYPE_DATA = '<?=$DOCUMENT_TYPE_DATA?>';
@@ -401,17 +404,17 @@
                                           <div class="clearfix"></div>
                                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                              <div class="form-group" id="firstname_div">
-                                                <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
+                                                <label for="firstname_<?=$cloopcount?>" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
                                                 <div class="col-md-7">
-                                                   <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" onkeypress="return onlyAlphabets(event)" value="<?=$firstname?>">
+                                                   <input id="firstname_<?=$cloopcount?>" type="text" name="firstname_<?=$cloopcount?>" class="form-control" onkeypress="return onlyAlphabets(event)" value="<?=$firstname?>">
                                                 </div>
                                              </div>
                                           </div>
                                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                              <div class="form-group" id="lastname_div">
-                                                <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
+                                                <label for="lastname_<?=$cloopcount?>" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
                                                 <div class="col-md-7">
-                                                   <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="<?php if (isset($partydata)) { echo $lastname; } ?>" onkeypress="return onlyAlphabets(event)">
+                                                   <input id="lastname_<?=$cloopcount?>" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="<?php if (isset($partydata)) { echo $lastname; } ?>" onkeypress="return onlyAlphabets(event)">
                                                 </div>
                                              </div>
                                           </div>
@@ -424,9 +427,9 @@
                                              echo 'addcontectfilelddata'.$cloopcount;
                                              } ?>" >
                                              <div class="form-group" id="contactno_div">
-                                                <label for="contactno" class="col-md-4 control-label">Contact No<span class="mandatoryfield">*</span></label>
+                                                <label for="contactno_<?=$cloopcount?>" class="col-md-4 control-label">Contact No<span class="mandatoryfield">*</span></label>
                                                 <div class="col-md-4">
-                                                   <input id="contactno" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="<?=$item?>">
+                                                   <input id="contactno_<?=$cloopcount?>" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="<?=$item?>" onkeypress="return isNumber(event)" maxlength="10">
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                    <?php if($arrycountcontec==$ii){ ?>
@@ -439,25 +442,25 @@
                                           <?php } ?>
                                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                              <div class="form-group" id="birthdate_div">
-                                                <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
+                                                <label for="birthdate_<?=$cloopcount?>" class="col-md-4 control-label">Birth Date</label>
                                                 <div class="col-md-7">
-                                                   <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control bdate" value="<?php if (isset($birthdate) && $birthdate!="0000-00-00") { echo $this->general_model->displaydate($birthdate); } ?>" readonly>
+                                                   <input id="birthdate_<?=$cloopcount?>" type="text" name="birthdate_<?=$cloopcount?>" class="form-control bdate" value="<?php if (isset($birthdate) && $birthdate!="0000-00-00") { echo $this->general_model->displaydate($birthdate); } ?>" readonly>
                                                 </div>
                                              </div>
                                           </div>
                                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                              <div class="form-group" id="anniversarydate_div">
-                                                <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
+                                                <label for="anniversarydate_<?=$cloopcount?>" class="col-md-4 control-label">Anniversary Date</label>
                                                 <div class="col-md-7">
-                                                   <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control date" value="<?php if (isset($anniversarydate) && $anniversarydate!="0000-00-00") { echo $this->general_model->displaydate($anniversarydate); } ?>" readonly>
+                                                   <input id="anniversarydate_<?=$cloopcount?>" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control date" value="<?php if (isset($anniversarydate) && $anniversarydate!="0000-00-00") { echo $this->general_model->displaydate($anniversarydate); } ?>" readonly>
                                                 </div>
                                              </div>
                                           </div>
                                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                              <div class="form-group" id="email_div">
-                                                <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
+                                                <label for="email_<?=$cloopcount?>" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
                                                 <div class="col-md-7">
-                                                   <input id="email" type="text" name="email_<?=$cloopcount?>" class="form-control" value="<?php if (isset($email)) { echo $email; } ?>">
+                                                   <input id="email_<?=$cloopcount?>" type="text" name="email_<?=$cloopcount?>" class="form-control" value="<?php if (isset($email)) { echo $email; } ?>">
                                                 </div>
                                              </div>
                                           </div>
@@ -493,25 +496,25 @@
                                        <input type="hidden" name="contectid_<?=$cloopcount?>" value="" id="contectid_<?=$cloopcount?>">
                                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                           <div class="form-group" id="firstname_div">
-                                             <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
+                                             <label for="firstname_<?=$cloopcount?>" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
                                              <div class="col-md-8">
-                                                <input id="firstname" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">
+                                                <input id="firstname_<?=$cloopcount?>" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">
                                              </div>
                                           </div>
                                        </div>
                                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                           <div class="form-group" id="lastname_div">
-                                             <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
+                                             <label for="lastname_<?=$cloopcount?>" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
                                              <div class="col-md-8">
-                                                <input id="lastname" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">
+                                                <input id="lastname_<?=$cloopcount?>" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">
                                              </div>
                                           </div>
                                        </div>
                                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata<?=$cloopcount?> " id="contecremove<?= $cloopcount; ?>"  >
                                           <div class="form-group" id="contactno_div">
-                                             <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
+                                             <label for="contactno_<?=$cloopcount?>" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
                                              <div class="col-md-4">
-                                                <input id="contactno" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="">
+                                                <input id="contactno_<?=$cloopcount?>" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="" onkeypress="return isNumber(event)" maxlength="10">
                                              </div>
                                              <div class="form-group col-md-4">
                                                 <button type="button"  onclick="addcontectfield(<?=$cloopcount?>,<?=$countcontactno?>)" style="margin-top: 7px;" class="addprodocitem btn btn-primary btn-raised add_btn m-n"><i class="fa fa-plus"></i></button>
@@ -521,25 +524,25 @@
                                        </div>
                                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                           <div class="form-group" id="birthdate_div">
-                                             <label for="birthdate" class="col-md-4 control-label">Birth Date</label>
+                                             <label for="birthdate_<?=$cloopcount?>" class="col-md-4 control-label">Birth Date</label>
                                              <div class="col-md-8">
-                                                <input id="birthdate" type="text" name="birthdate_<?=$cloopcount?>" class="form-control bdate" value="" readonly>
+                                                <input id="birthdate_<?=$cloopcount?>" type="text" name="birthdate_<?=$cloopcount?>" class="form-control bdate" value="" readonly>
                                              </div>
                                           </div>
                                        </div>
                                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                           <div class="form-group" id="anniversarydate_div">
-                                             <label for="anniversarydate" class="col-md-4 control-label">Anniversary Date</label>
+                                             <label for="anniversarydate_<?=$cloopcount?>" class="col-md-4 control-label">Anniversary Date</label>
                                              <div class="col-md-8">
-                                                <input id="anniversarydate" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control date" value="" readonly>
+                                                <input id="anniversarydate_<?=$cloopcount?>" type="text" name="anniversarydate_<?=$cloopcount?>" class="form-control date" value="" readonly>
                                              </div>
                                           </div>
                                        </div>
                                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
                                           <div class="form-group" id="email_div">
-                                             <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
+                                             <label for="email_<?=$cloopcount?>" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
                                              <div class="col-md-8">
-                                                <input id="email" type="text" name="email_<?=$cloopcount?>" class="form-control" value="">
+                                                <input id="email_<?=$cloopcount?>" type="text" name="email_<?=$cloopcount?>" class="form-control" value="">
                                              </div>
                                           </div>
                                        </div>
@@ -554,7 +557,7 @@
                            </div>
                               </div>              
                            
-                           <input type="hidden" name="cloopcount" id="cloopcount" value="<?php echo $cloopcount; ?>">
+                           <input type="hidden" name="cloopcount" id="cloopcount" value="<?= $cloopcount; ?>">
                            <input type="hidden" name="countcontactno" id="countcontactno" value="<?=$countcontactno?>">
                       
                            </div>       
