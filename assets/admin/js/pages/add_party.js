@@ -30,6 +30,9 @@ function getcity() {
 }
 $(document).ready(function () {
     var edit_country = $('#edit_country').val();
+    if(edit_country==""){
+        edit_country = 0;
+    }
 
     $('#countryid').val(edit_country).trigger('change');
     var base_url = $('#base_url').val();
