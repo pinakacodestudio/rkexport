@@ -30,7 +30,7 @@
                         <tr>
                           <th class="width8">Sr. No.</th>
                           <th>Branch Name</th>
-                          <th>Firm</th>
+                          <!-- <th>Firm</th> -->
                           <th>Address</th>
                           <th>State</th>
                           <th>City</th>
@@ -53,7 +53,7 @@
                           <tr>
                             <td><?php echo $srno; ?></td>
                             <td><?php echo $row['branchname']; ?></td>
-                            <td><?php echo $row['company']; ?></td>
+                            <!-- <td><?php echo $row['company']; ?></td> -->
                             <td><?php echo $row['address']; ?></td>
                             <td><?php echo $row['province']; ?></td>
                             <td><?php echo $row['city']; ?></td>

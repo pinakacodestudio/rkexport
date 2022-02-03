@@ -58,7 +58,11 @@ class General_model extends CI_Model {
         return date($output_format,strtotime(str_replace('/', '-',$date)));
     }
     function displaydate($date,$output_format = 'd/m/Y'){
-        return date($output_format,strtotime(str_replace('/', '-',$date)));
+        if($date!=""){
+            return date($output_format,strtotime(str_replace('/', '-',$date)));
+        }else{
+            return "";
+        }
     }
     function convertdatetime($datetime){
         return date('Y-m-d H:i:s',strtotime(str_replace('/', '-',$datetime)));

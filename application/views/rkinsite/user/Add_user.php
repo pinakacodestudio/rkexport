@@ -83,7 +83,7 @@
 								<div class="form-group" id="date_div">
 									<div class="col-sm-12">
 										<label class="control-label" for="date">Join Date </label>
-										    <input id="joindate" name="joindate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['joindate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
+										    <input id="joindate" name="joindate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['joindate']); } ?>" readonly>
 									</div>
 								</div>
 								<div class="form-group" id="address_div">
@@ -172,7 +172,7 @@
 								<div class="form-group" id="date_div">
 									<div class="col-sm-12">
 										<label class="control-label" for="date">Birth Date </label>
-										    <input id="birthdate" name="birthdate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['birthdate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
+										    <input id="birthdate" name="birthdate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['birthdate']); } ?>" readonly>
 									</div>
 								</div>
 							
@@ -269,7 +269,7 @@
 									<div class="form-group" id="date_div">
 									<div class="col-sm-12">
 										<label class="control-label" for="anniversarydate">Anniversary Date </label>
-										    <input id="anniversarydate" name="anniversarydate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['anniversarydate']); }else{ echo $this->general_model->displaydate($this->general_model->getCurrentDate()); } ?>" readonly>
+										    <input id="anniversarydate" name="anniversarydate"  type="text" class="form-control col-sm-6" value="<?php if(isset($userdata)){ echo $this->general_model->displaydate($userdata['anniversarydate']); } ?>" readonly>
 									</div>
 								</div>
 									

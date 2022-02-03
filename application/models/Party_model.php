@@ -199,7 +199,7 @@ class Party_model extends Common_model {
         $partytypeid = (isset($_REQUEST['partytypeid']))?$_REQUEST['partytypeid']:0;
         $cityid = (isset($_REQUEST['cityid']))?$_REQUEST['cityid']:0;
         
-        $this->readdb->select('p.id,p.websitename,p.partycode,pt.partytype as partytypename,p.cityid,p.provinceid,p.createddate,p.companyid,t4.companyname,(select contactno from '.tbl_partycontact.' where id=p.id LIMIT 1) as contactdetails,c.name as cityname');
+        $this->readdb->select('p.id,p.websitename,p.partycode,pt.partytype as partytypename,p.cityid,p.provinceid,p.createddate,p.companyid,t4.companyname,(select GROUP_CONCAT(contactno) from '.tbl_partycontact.' where partyid=p.id group by partyid) as contactdetails,c.name as cityname');
 
         $this->readdb->from($this->_table." as p");
         $this->readdb->join(tbl_partytype." as pt","p.partytypeid=pt.id","LEFT");

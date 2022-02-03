@@ -6,7 +6,9 @@ $(document).ready(function() {
     format: 'dd/mm/yyyy',
     orientation: 'top',
     autoclose: true,
-    todayBtn: "linked"
+    todayBtn: "linked",
+    defaultDate: -1
+
 });
 $("#old_receipt_div").hide();
 
@@ -223,7 +225,7 @@ function checkvalidation(){
       isvalidpassword = 1;
     }
   }
-  if(isvalidname==1 && isvalidmobileno==1 && isvalidemail==1 && isvalidpassword==1 && isvaliduserroleid && isvalidpartycode==isvalidbranchid== 1){
+  if(isvalidname==1 && isvalidmobileno==1 && isvalidemail==1 && isvalidpassword==1 && isvaliduserroleid == 1 && isvalidpartycode== 1 && isvalidbranchid== 1){
     var formData = new FormData($('#userform')[0]);
     if(ACTION==0){
       var uurl = SITE_URL+"user/add-user";

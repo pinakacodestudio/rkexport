@@ -55,10 +55,18 @@ class Party extends Admin_Controller
             }
             $Action .= '<a class="' . view_class . '" href="' . ADMIN_URL . 'party/view-party/' . $datarow->id . '" title=' . view_title . ' target="_blank">' . view_text . '</a>';
 
+            $contactarr = explode(',',$datarow->contactdetails);
+            $contactstring = array();
+            foreach($contactarr as  $carr){
+                $contactstring []='<a href="tel:'.$carr.'">'.$carr.'</a>';
+            }
+
+            $contactstring = implode(' , ',$contactstring);
+
             $row[] = ++$counter;
             $row[] = $datarow->companyname;
             $row[] = $datarow->partytypename;
-            $row[] = $datarow->contactdetails;
+            $row[] = $contactstring;
             $row[] = $datarow->cityname;
             $row[] = $this->general_model->displaydatetime($datarow->createddate);
             $row[] = $Action;
@@ -295,6 +303,9 @@ class Party extends Admin_Controller
         $gst = $PostData['gst'];
         $pan = $PostData['pan'];
         $password = $PostData['password'];
+        if($password != ""){
+            $password = $this->general_model->encryptIt($password);
+        }
         $partytypeid = $PostData['partytypeid'];
         $countryid = $PostData['countryid'];
         $stateid = $PostData['stateid'];
@@ -313,7 +324,7 @@ class Party extends Admin_Controller
             "gst" => $gst,
             "pan" => $pan,
             "partytypeid" => $partytypeid,
-            "password" => $this->general_model->encryptIt($password),
+            "password" => $password,
             "countryid" => $countryid,
             "provinceid" => $stateid,
             "cityid" => $cityid,

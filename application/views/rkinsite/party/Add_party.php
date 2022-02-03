@@ -148,9 +148,17 @@
                         </div>
                      </div>
                      
+                     <?php 
+                     $isloginchecked = "";
+                     if(isset($partydata)){
+                        echo $partydata['password'];
+                           if($partydata['password'] != ""){
+                              $isloginchecked = "checked";
+                           }
+                        }
+                     ?>
                      <div class="checkbox col-md-6" style="padding-left: 60px;">
-                        <input type="checkbox" value="1" class="" style="margin-left:22px;" id="checkbox4" /> <label for="checkbox4"> Is Login</label>
-                        
+                        <input type="checkbox" value="1" class="" name="islogin" style="margin-left:22px;" id="checkbox4" <?= $isloginchecked ?>/> <label for="checkbox4"> Is Login</label>
                      </div>
 
                   
@@ -403,7 +411,7 @@
                                        <div class="data" id="contectrowdelete_<?=$cloopcount?>">
                                           <div class="clearfix"></div>
                                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                                             <div class="form-group" id="firstname_div">
+                                             <div class="form-group" id="firstname_<?= $cloopcount ?>_div">
                                                 <label for="firstname_<?=$cloopcount?>" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
                                                 <div class="col-md-7">
                                                    <input id="firstname_<?=$cloopcount?>" type="text" name="firstname_<?=$cloopcount?>" class="form-control" onkeypress="return onlyAlphabets(event)" value="<?=$firstname?>">
@@ -411,7 +419,7 @@
                                              </div>
                                           </div>
                                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                                             <div class="form-group" id="lastname_div">
+                                             <div class="form-group" id="lastname_<?= $cloopcount ?>_div">
                                                 <label for="lastname_<?=$cloopcount?>" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
                                                 <div class="col-md-7">
                                                    <input id="lastname_<?=$cloopcount?>" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="<?php if (isset($partydata)) { echo $lastname; } ?>" onkeypress="return onlyAlphabets(event)">
@@ -426,7 +434,7 @@
                                           <div id="contecremove<?=  $countcontactno ?>" class="col-md-4 pl-sm pr-sm visible-md visible-lg <?php if($ii==1){
                                              echo 'addcontectfilelddata'.$cloopcount;
                                              } ?>" >
-                                             <div class="form-group" id="contactno_div">
+                                             <div class="form-group" id="contactno_<?= $cloopcount ?>_div">
                                                 <label for="contactno_<?=$cloopcount?>" class="col-md-4 control-label">Contact No<span class="mandatoryfield">*</span></label>
                                                 <div class="col-md-4">
                                                    <input id="contactno_<?=$cloopcount?>" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="<?=$item?>" onkeypress="return isNumber(event)" maxlength="10">
@@ -457,7 +465,7 @@
                                              </div>
                                           </div>
                                           <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                                             <div class="form-group" id="email_div">
+                                             <div class="form-group" id="email_<?= $cloopcount ?>_div">
                                                 <label for="email_<?=$cloopcount?>" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
                                                 <div class="col-md-7">
                                                    <input id="email_<?=$cloopcount?>" type="text" name="email_<?=$cloopcount?>" class="form-control" value="<?php if (isset($email)) { echo $email; } ?>">
@@ -495,7 +503,7 @@
 
                                        <input type="hidden" name="contectid_<?=$cloopcount?>" value="" id="contectid_<?=$cloopcount?>">
                                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                                          <div class="form-group" id="firstname_div">
+                                          <div class="form-group" id="firstname_<?= $cloopcount ?>_div">
                                              <label for="firstname_<?=$cloopcount?>" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>
                                              <div class="col-md-8">
                                                 <input id="firstname_<?=$cloopcount?>" type="text" name="firstname_<?=$cloopcount?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">
@@ -503,7 +511,7 @@
                                           </div>
                                        </div>
                                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                                          <div class="form-group" id="lastname_div">
+                                          <div class="form-group" id="lastname_<?= $cloopcount ?>_div">
                                              <label for="lastname_<?=$cloopcount?>" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>
                                              <div class="col-md-8">
                                                 <input id="lastname_<?=$cloopcount?>" type="text" name="lastname_<?=$cloopcount?>" class="form-control" value="" onkeypress="return onlyAlphabets(event)">
@@ -511,7 +519,7 @@
                                           </div>
                                        </div>
                                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata<?=$cloopcount?> " id="contecremove<?= $cloopcount; ?>"  >
-                                          <div class="form-group" id="contactno_div">
+                                          <div class="form-group" id="contactno_<?= $cloopcount ?>_div">
                                              <label for="contactno_<?=$cloopcount?>" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
                                              <div class="col-md-4">
                                                 <input id="contactno_<?=$cloopcount?>" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="" onkeypress="return isNumber(event)" maxlength="10">
@@ -539,7 +547,7 @@
                                           </div>
                                        </div>
                                        <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">
-                                          <div class="form-group" id="email_div">
+                                          <div class="form-group" id="email_<?= $cloopcount ?>_div">
                                              <label for="email_<?=$cloopcount?>" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>
                                              <div class="col-md-8">
                                                 <input id="email_<?=$cloopcount?>" type="text" name="email_<?=$cloopcount?>" class="form-control" value="">
@@ -766,9 +774,14 @@
          if(checked==true){
             $("#password_div").show();
          }else if(checked==false){
+            $("#password").val('');
             $("#password_div").hide();
          }
       });
+
+      if($('#checkbox4').is(":checked")){
+         $("#password_div").show();
+      }
 
       $('#checkbox3').on('change', function() {
          var checked = this.checked

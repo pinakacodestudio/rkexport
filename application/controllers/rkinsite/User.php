@@ -55,10 +55,11 @@ class User extends Admin_Controller {
 		$this->viewData['Branchdata'] = $this->Branch->getRecordByID();
 
 		$this->load->model('City_model','City');
-		$this->viewData['Citydata'] = $this->City->getRecordByID();
-		
+		$this->viewData['Citydata'] = array();
+
 		$this->load->model('Province_model','Province');
-		$this->viewData['statedata'] = $this->Province->getRecordByID();
+		$this->viewData['statedata'] = array();
+		
 
 		$this->load->model('Country_model','Country');
 		$this->viewData['Countrydata'] = $this->Country->getRecordByID();

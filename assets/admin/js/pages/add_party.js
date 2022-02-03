@@ -262,7 +262,7 @@ function checkvalidation(addtype = 0) {
     var openingdate = $("#openingdate").val().trim();
     var openingamount = $("#openingamount").val().trim();
     var password = $("#password").val().trim();
-    // var checkbox4 = $("#checkbox4").val().trim();
+    var checkbox4 = $("#checkbox4").val().trim();
     var cloopcount = $("#cloopcount").val().trim();
 
     if ($('#checkbox4').is(":checked")) {
@@ -343,23 +343,59 @@ function checkvalidation(addtype = 0) {
 
             var firstname = $("#firstname_"+gocount).val();
             var lastname = $("#lastname_"+gocount).val();
+            var contact = $("input[name='contactno"+gocount+"[]']").val();
             var email = $("#email_"+gocount).val();
         
             if(firstname == ''){
-                $("#firstname_"+gocount).addClass("has-error is-focused");
+                $("#firstname_"+gocount+"_div").addClass("has-error is-focused");
                 new PNotify({ title: 'Please enter first name !', styling: 'fontawesome', delay: '3000', type: 'error' });
             }
             if(lastname == ''){
-                $("#lastname_"+gocount).addClass("has-error is-focused");
+                $("#lastname_"+gocount+"_div").addClass("has-error is-focused");
                 new PNotify({ title: 'Please enter last name !', styling: 'fontawesome', delay: '3000', type: 'error' });
             }
-            if(email == ''){
-                $("#email_"+gocount).addClass("has-error is-focused");
-                new PNotify({ title: 'Please enter email !', styling: 'fontawesome', delay: '3000', type: 'error' });
+            if(contact == ''){
+                $("#contactno_"+gocount+"_div").addClass("has-error is-focused");
+                new PNotify({ title: 'Please enter contact no. !', styling: 'fontawesome', delay: '3000', type: 'error' });
             }
+            if(email == ''){
+                if(!ValidateEmail(email)){
+                    $("#email_"+gocount+"_div").addClass("has-error is-focused");
+                    new PNotify({title: 'Please enter valid email address !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                    isvalidemail = 0;
+                }else{
+                    $("#email_"+gocount+"_div").removeClass("has-error is-focused");
+                    isvalidemail = 1;
+                    isvalidcontect=1;
+                }
+            }
+
             break;
         }
         gocount++;
+    }
+
+    if(isvalidcontect==1){
+        var gocount = 1;
+        while(gocount <= cloopcount){
+            
+            if($("#firstname_"+gocount)){
+
+                var email = $("#email_"+gocount).val();
+            
+                if(email == ''){
+                    if(!ValidateEmail(email)){
+                        $("#email_"+gocount+"_div").addClass("has-error is-focused");
+                        new PNotify({title: 'Please enter valid email address !',styling: 'fontawesome',delay: '3000',type: 'error'});
+                        isvalidemail = 0;
+                    }else{
+                        $("#email_"+gocount+"_div").removeClass("has-error is-focused");
+                        isvalidemail = 1;
+                    }
+                }
+            }
+            gocount++;
+        }
     }
 
     // if (openingdate == '') {
@@ -386,15 +422,21 @@ function checkvalidation(addtype = 0) {
             $("#password_div").addClass("has-error is-focused");
             new PNotify({ title: 'Please enter password !', styling: 'fontawesome', delay: '3000', type: 'error' });
         } else {
+        if(CheckPassword(password)==false){
+            $("#password_div").addClass('has-error is-focused');
+            new PNotify({title: 'Please enter password between 6 to 20 characters which contain at least one alphabetic, numeric & special character !',styling: 'fontawesome',delay: '3000',type: 'error'});
+            isvalidpassword = 0;
+            }else { 
             $("#password_div").removeClass("has-error is-focused");
             isvalidpassword = 1;
+            }
         }
     }
 
 
 
     var c = 1;
-    if (isvalidwebsitename && isvalidpartycode && isvalidpartytypeid && isvalidcompanyid && isvalidpassword == 1) {
+    if (isvalidwebsitename && isvalidpartycode && isvalidpartytypeid && isvalidcompanyid && isvalidcontect && isvalidpassword == 1) {
         
         var formData = new FormData($('#party-form')[0]);
         if (ACTION == 0) {
@@ -547,7 +589,7 @@ function addcontectfield(id, countcontactno) {
     countcontactno++;
     $("#countcontactno").val(countcontactno);
     var datahtml = '<div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata'+id+'" id="contecremove' + countcontactno + '">\
-    <div class="form-group" id="contactno_div">\
+    <div class="form-group" id="contactno_'+ id + '_div">\
        <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
        <div class="col-md-4">\
           <input id="contactno" type="text" name="contactno'+ id + '[]" class="form-control"  value="">\
@@ -621,7 +663,7 @@ function addnewcontect() {
     <div class="clearfix"></div>\
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
             <input type="hidden" name="contectid_' + cloopcount2 + '" value="0" id="contectid_' + cloopcount2 + '">\
-                <div class="form-group" id="firstname_div">\
+                <div class="form-group" id="firstname_' + cloopcount2 + '_div">\
                     <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>\
                     <div class="col-md-8">\
                         <input id="firstname" type="text" name="firstname_' + cloopcount2 + '" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
@@ -629,7 +671,7 @@ function addnewcontect() {
                 </div>\
             </div>\
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
-                <div class="form-group" id="lastname_div">\
+                <div class="form-group" id="lastname_' + cloopcount2 + '_div">\
                     <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>\
                     <div class="col-md-8">\
                         <input id="lastname" type="text" name="lastname_' + cloopcount2 + '" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
@@ -637,7 +679,7 @@ function addnewcontect() {
                 </div>\
             </div>\
             <div id="contecremove'+countcontactno2+'" class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata' + cloopcount2 + '">\
-                <div class="form-group" id="contactno_div">\
+                <div class="form-group" id="contactno_' + cloopcount2 + '_div">\
                     <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
                     <div class="col-md-4">\
                         <input id="contactno" type="text" name="contactno' + cloopcount2 + '[]" class="form-control" onkeypress="return isNumber(event)" maxlength="10" value="">\
@@ -665,7 +707,7 @@ function addnewcontect() {
                 </div>\
             </div>\
             <div class="col-md-4 pl-sm pr-sm visible-md visible-lg">\
-                <div class="form-group" id="email_div">\
+                <div class="form-group" id="email_' + cloopcount2 + '_div">\
                     <label for="email" class="col-md-4 control-label">Email <span class="mandatoryfield">*</span></label>\
                     <div class="col-md-8">\
                         <input id="email" type="text" name="email_' + cloopcount2 + '" class="form-control" value="">\
