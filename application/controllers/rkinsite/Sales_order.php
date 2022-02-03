@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Sales_order extends Admin_Controller
+class Sales_Order extends Admin_Controller
 {
 
     public $viewData = array();
@@ -15,6 +15,7 @@ class Sales_order extends Admin_Controller
         $this->load->model('Side_navigation_model', 'Side_navigation');
         $this->viewData = $this->getAdminSettings('submenu', 'Sales_order');
     }
+ 
     public function index()
     {
         $this->viewData = $this->getAdminSettings('submenu', 'Sales_order');
@@ -29,6 +30,7 @@ class Sales_order extends Admin_Controller
         $this->admin_headerlib->add_javascript("Sales_order", "pages/sales_order.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
+ 
     public function listing()
     {
 
@@ -119,7 +121,7 @@ class Sales_order extends Admin_Controller
         );
         echo json_encode($output);
     }
-
+    
     public function add_Sales_order()
     {
 
@@ -146,7 +148,6 @@ class Sales_order extends Admin_Controller
         $this->admin_headerlib->add_bottom_javascripts("sales_order", "pages/add_sales_order.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
-
     
     public function Sales_order_add()
     {
@@ -251,6 +252,7 @@ class Sales_order extends Admin_Controller
         }
 
     }
+    
     public function Sales_order_edit($id)
     {
         $this->checkAdminAccessModule('submenu', 'edit', $this->viewData['submenuvisibility']);
@@ -291,6 +293,7 @@ class Sales_order extends Admin_Controller
         $this->admin_headerlib->add_javascript("sales_order", "pages/add_sales_order.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
+    
     public function update_sales_order()
     {
         
@@ -390,6 +393,7 @@ class Sales_order extends Admin_Controller
         }
 
     }
+    
     public function regeneratequotation()
     {
         $PostData = $this->input->post();
@@ -397,6 +401,7 @@ class Sales_order extends Admin_Controller
         $quotationid = $PostData['quotationid'];
         echo $this->Purchase_quotation->generatequotation($quotationid);
     }
+    
     public function getvariant()
     {
         $PostData = $this->input->post();
@@ -404,6 +409,7 @@ class Sales_order extends Admin_Controller
         $variant = $this->Variant->getVariantDataByAttributeID($PostData['attributeid']);
         echo json_encode($variant);
     }
+    
     public function view_purchase_quotation($quotationid)
     {
         $this->checkAdminAccessModule('submenu', 'view', $this->viewData['submenuvisibility']);
@@ -437,6 +443,7 @@ class Sales_order extends Admin_Controller
         $this->admin_headerlib->add_javascript("view_purchase_quotation", "pages/view_purchase_quotation.js");
         $this->load->view(ADMINFOLDER . 'template', $this->viewData);
     }
+    
     public function update_status()
     {
         $PostData = $this->input->post();
@@ -515,6 +522,7 @@ class Sales_order extends Admin_Controller
             echo 0;
         }
     }
+
     public function printPurchaseQuotationInvoice()
     {
         $PostData = $this->input->post();
@@ -535,6 +543,7 @@ class Sales_order extends Admin_Controller
         }
         echo json_encode($html);
     }
+    
     public function Productpricesdorpdowndata($pid)
     {
         $this->load->model('Productprices_model', 'Productprices');
@@ -545,6 +554,7 @@ class Sales_order extends Admin_Controller
             echo json_encode(0);
         }
     }
+    
     public function check_party_use()
     {
         $PostData = $this->input->post();
@@ -561,6 +571,7 @@ class Sales_order extends Admin_Controller
         }
         echo $count;
     }
+    
     public function delete_mul_party()
     {
 
