@@ -345,7 +345,6 @@ function checkvalidation(addtype = 0) {
         if($("#contectrowdelete_"+gocount).length == 1){
             totalcontact++;
 
-            alert(gocount);
             var firstname = $("#firstname_"+gocount).val();
             var lastname = $("#lastname_"+gocount).val();
             var contact = $("input[name='contactno" + gocount + "[]']");
