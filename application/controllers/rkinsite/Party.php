@@ -211,7 +211,13 @@ class Party extends Admin_Controller
             $lastname = $this->input->post('lastname_' . $i);
            
             $birthdate = $this->input->post('birthdate_' . $i);
+            if($birthdate != ''){
+                $birthdate = $this->general_model->convertdate($birthdate);
+            }
             $anniversarydate = $this->input->post('anniversarydate_' . $i);
+            if($anniversarydate != ''){
+                $this->general_model->convertdate($anniversarydate);
+            }
             $email = $this->input->post('email_' . $i);
             $contectid = $this->input->post('contectid_' . $i);
             $contactsnoarry ="";
@@ -225,8 +231,8 @@ class Party extends Admin_Controller
                     'firstname' => $firstname,
                     'lastname' => $lastname,
                     'contactno' => $contactsnoarry,
-                    'birthdate' => $this->general_model->convertdate($birthdate),
-                    'anniversarydate' => $this->general_model->convertdate($anniversarydate),
+                    'birthdate' => $birthdate,
+                    'anniversarydate' => $anniversarydate,
                     'email' => $email,
                     'createddate' => $createddate,
                     'modifieddate' => $createddate,
@@ -349,7 +355,15 @@ class Party extends Admin_Controller
             $firstname = $this->input->post('firstname_' . $i);
             $lastname = $this->input->post('lastname_' . $i);
             $birthdate = $this->input->post('birthdate_' . $i);
+            if($birthdate != ""){
+                $birthdate = $this->general_model->convertdate($birthdate);
+            }
+
             $anniversarydate = $this->input->post('anniversarydate_' . $i);
+            if($anniversarydate != ""){
+                $anniversarydate = $this->general_model->convertdate($anniversarydate);
+            }
+            
             $email = $this->input->post('email_' . $i);
             $contactsnoarry ="";
           
@@ -365,8 +379,8 @@ class Party extends Admin_Controller
                         'firstname' => $firstname,
                         'lastname' => $lastname,
                         'contactno' => $contactsnoarry,
-                        'birthdate' => $this->general_model->convertdate($birthdate),
-                        'anniversarydate' => $this->general_model->convertdate($anniversarydate),
+                        'birthdate' => $birthdate,
+                        'anniversarydate' => $anniversarydate,
                         'email' => $email,
                         'modifieddate' => $createddate,
                         'modifiedby' => $addedby,

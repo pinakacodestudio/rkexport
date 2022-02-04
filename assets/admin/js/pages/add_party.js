@@ -253,6 +253,7 @@ function resetdata() {
     $('html, body').animate({ scrollTop: 0 }, 'slow');
 }
 
+
 function checkvalidation(addtype = 0) {
 
     var websitename = $("#websitename").val().trim();
@@ -336,67 +337,81 @@ function checkvalidation(addtype = 0) {
     //     new PNotify({ title: 'Please enter email !', styling: 'fontawesome', delay: '3000', type: 'error' });
     // }
 
-    var gocount = 1;
+    var gocount = 0;
+    var totalcontact = actualcontact = 0;
     while(gocount <= cloopcount){
-        
-        if($("#firstname_"+gocount)){
+        var isvalidfirstname = isvalidlastname = isvalidcontact = isvalidemail = 0;
+        gocount++;
+        if($("#contectrowdelete_"+gocount).length == 1){
+            totalcontact++;
 
+            alert(gocount);
             var firstname = $("#firstname_"+gocount).val();
             var lastname = $("#lastname_"+gocount).val();
-            var contact = $("input[name='contactno"+gocount+"[]']").val();
+            var contact = $("input[name='contactno" + gocount + "[]']");
             var email = $("#email_"+gocount).val();
-        
-            if(firstname == ''){
+            
+
+            if(firstname == '' || firstname == 'undefined' ){
                 $("#firstname_"+gocount+"_div").addClass("has-error is-focused");
                 new PNotify({ title: 'Please enter first name !', styling: 'fontawesome', delay: '3000', type: 'error' });
+            }else {
+                $("#firstname_"+gocount+"_div").removeClass("has-error is-focused");
+                isvalidfirstname = 1;
             }
-            if(lastname == ''){
+
+            if(lastname == '' || lastname == 'undefined'){
                 $("#lastname_"+gocount+"_div").addClass("has-error is-focused");
                 new PNotify({ title: 'Please enter last name !', styling: 'fontawesome', delay: '3000', type: 'error' });
+            }else {
+                $("#lastname_"+gocount+"_div").removeClass("has-error is-focused");
+                isvalidlastname = 1;
             }
-            if(contact == ''){
-                $("#contactno_"+gocount+"_div").addClass("has-error is-focused");
-                new PNotify({ title: 'Please enter contact no. !', styling: 'fontawesome', delay: '3000', type: 'error' });
+           
+            var contactrec = contactval = 0;
+            $.each(contact, function(index, ele) {
+                contactrec++;
+                if ($(ele).val().trim().length < 10) {
+                    $(ele).parent().closest('div.form-group').addClass("has-error is-focused");
+                    new PNotify({ title: 'Please enter contact number !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                }else{
+                    $(ele).parent().closest('div.form-group').removeClass("has-error is-focused");
+                    contactval++;
+                }
+            });
+
+            if(contactrec == contactval){
+                isvalidcontact = 1;
             }
+            
             if(email == ''){
+                  $("#email_"+gocount+"_div").addClass("has-error is-focused");
+                    new PNotify({title: 'Please enter valid email address !',styling: 'fontawesome',delay: '3000',type: 'error'});
+            }
+
+            if(email != ''){
                 if(!ValidateEmail(email)){
                     $("#email_"+gocount+"_div").addClass("has-error is-focused");
                     new PNotify({title: 'Please enter valid email address !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                    isvalidemail = 0;
                 }else{
                     $("#email_"+gocount+"_div").removeClass("has-error is-focused");
                     isvalidemail = 1;
-                    isvalidcontect=1;
                 }
             }
 
-            break;
-        }
-        gocount++;
-    }
-
-    if(isvalidcontect==1){
-        var gocount = 1;
-        while(gocount <= cloopcount){
-            
-            if($("#firstname_"+gocount)){
-
-                var email = $("#email_"+gocount).val();
-            
-                if(email == ''){
-                    if(!ValidateEmail(email)){
-                        $("#email_"+gocount+"_div").addClass("has-error is-focused");
-                        new PNotify({title: 'Please enter valid email address !',styling: 'fontawesome',delay: '3000',type: 'error'});
-                        isvalidemail = 0;
-                    }else{
-                        $("#email_"+gocount+"_div").removeClass("has-error is-focused");
-                        isvalidemail = 1;
-                    }
-                }
+            if(isvalidfirstname == 1 && isvalidlastname == 1 && isvalidcontact == 1 && isvalidemail == 1){
+                actualcontact++;
             }
-            gocount++;
+
         }
+       
     }
+
+    if(totalcontact == actualcontact){
+        isvalidcontect = 1;
+    }
+
+    
 
     // if (openingdate == '') {
     //     $("#openingdate_div").addClass("has-error is-focused");
@@ -589,10 +604,10 @@ function addcontectfield(id, countcontactno) {
     countcontactno++;
     $("#countcontactno").val(countcontactno);
     var datahtml = '<div class="col-md-4 pl-sm pr-sm visible-md visible-lg addcontectfilelddata'+id+'" id="contecremove' + countcontactno + '">\
-    <div class="form-group" id="contactno_'+ id + '_div">\
+    <div class="form-group" class="contactno_'+ id + '_div">\
        <label for="contactno" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>\
        <div class="col-md-4">\
-          <input id="contactno" type="text" name="contactno'+ id + '[]" class="form-control"  value="">\
+          <input id="contactno" type="text" name="contactno'+ id + '[]" class="form-control"  value="" onkeypress="return isNumber(event)" minlength="10">\
        </div>\
         <div class="form-group col-md-4">\
             <button type="button"  onclick="addcontectfield('+ id + ',' + countcontactno + ')"  class="addprodocitem btn btn-primary btn-raised m-n add_btn" style="margin-top: 7px;"><i class="fa fa-plus"></i></button>\
@@ -601,7 +616,7 @@ function addcontectfield(id, countcontactno) {
     </div>\
  </div>';
 
-    $(".addcontectfilelddata" + id + "").after(datahtml);
+    $(".addcontectfilelddata" + id + ":last").after(datahtml);
     $("#contectrowdelete_" + id + " .addprodocitem").hide();
     $("#contectrowdelete_" + id + " .addprodocitem:last").show();
 

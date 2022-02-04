@@ -437,7 +437,7 @@
                                              <div class="form-group" id="contactno_<?= $cloopcount ?>_div">
                                                 <label for="contactno_<?=$cloopcount?>" class="col-md-4 control-label">Contact No<span class="mandatoryfield">*</span></label>
                                                 <div class="col-md-4">
-                                                   <input id="contactno_<?=$cloopcount?>" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="<?=$item?>" onkeypress="return isNumber(event)" maxlength="10">
+                                                   <input id="contactno_<?=$cloopcount?>" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="<?=$item?>" onkeypress="return isNumber(event)" minlength="10">
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                    <?php if($arrycountcontec==$ii){ ?>
@@ -522,7 +522,7 @@
                                           <div class="form-group" id="contactno_<?= $cloopcount ?>_div">
                                              <label for="contactno_<?=$cloopcount?>" class="col-md-4 control-label">Contact No <span class="mandatoryfield"> *</span></label>
                                              <div class="col-md-4">
-                                                <input id="contactno_<?=$cloopcount?>" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="" onkeypress="return isNumber(event)" maxlength="10">
+                                                <input id="contactno_<?=$cloopcount?>" type="text" name="contactno<?=$cloopcount?>[]" class="form-control"  value="" onkeypress="return isNumber(event)" minlength="10">
                                              </div>
                                              <div class="form-group col-md-4">
                                                 <button type="button"  onclick="addcontectfield(<?=$cloopcount?>,<?=$countcontactno?>)" style="margin-top: 7px;" class="addprodocitem btn btn-primary btn-raised add_btn m-n"><i class="fa fa-plus"></i></button>

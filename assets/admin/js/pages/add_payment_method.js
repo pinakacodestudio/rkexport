@@ -63,7 +63,7 @@ if (ACTION == 1 && $('#oldlogo').val() != '') {
     }
 }
 
-function checkvalidation() {
+function checkvalidation(addtype=0) {
 
     var paymentmethod = $("#paymentmethod").val().trim();
     var paymentgatewaytype = $("#paymentgatewaytype").val();
@@ -221,8 +221,14 @@ function checkvalidation() {
                 success: function(response) {
                     if (response == 1) {
                         new PNotify({ title: "Payment method successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
-                        resetdata();
-                        setTimeout(function() { window.location = SITE_URL + "payment-method"; }, 500);
+                        if(addtype==1){
+                            resetdata();
+                            $('#paymentmethod').val('');
+                        }else{
+                            resetdata();
+                            setTimeout(function() { window.location = SITE_URL + "payment-method"; }, 500);
+                        }
+                        
                     } else if (response == 2) {
                         new PNotify({ title: 'Payment method already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                         $("#paymentmethod_div").addClass("has-error is-focused");
