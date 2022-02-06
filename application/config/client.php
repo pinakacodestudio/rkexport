@@ -23,9 +23,9 @@ $portaldetail['localhost'] = $client;
 
 //start - preview
 $client['folder'] = '';
-$client['dbname'] = 'jjasani_rkexport';
-$client['dbuser'] = 'jjasani_rkexportuser';
-$client['dbpassword'] = 'w&b?lhv)[F2o';
+$client['dbname'] = 'u193768258_rkexport';
+$client['dbuser'] = 'u193768258_rkexport';
+$client['dbpassword'] = '0[KR]|zA4awz';
 $client['dbconnectionreader'] = 'localhost';
 $client['dbconnectionwriter'] = 'localhost';
 $portaldetail['rkexport.jjasani.com'] = $client;
