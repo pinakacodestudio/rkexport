@@ -53,7 +53,7 @@
                   <div class="row">
                      <div class="col-md-6">
                         <div class="form-group" id="websitename_div">
-                           <label class="col-md-4 col-sm-4 control-label" for="websitename">Website Name<span class="mandatoryfield"> *</span></label>
+                           <label class="col-md-4 col-sm-4 control-label" for="websitename">Party Name<span class="mandatoryfield"> *</span></label>
                            <div class="col-md-8 col-sm-8">
                               <input type="text" id="websitename" class="form-control" name="websitename" value="<?php if(isset($partydata)){ echo $partydata['websitename']; }  ?>">
                            </div>
@@ -83,7 +83,7 @@
                         <div class="form-group" id="gst_div">
                            <label class="col-md-4 col-sm-4 control-label" for="gst">Gst Number<span class="mandatoryfield"></span></label>
                            <div class="col-md-8 col-sm-8">
-                              <input type="text" id="gst" class="form-control" name="gst" value="<?php if(isset($partydata)){ echo $partydata['gst']; }  ?>">
+                              <input type="text" id="gst" class="form-control" name="gst" value="<?php if(isset($partydata)){ echo $partydata['gst']; }  ?>" onkeypress="return alphanumeric(event)">
                            </div>
                         </div>
                      </div>
@@ -91,7 +91,7 @@
                         <div class="form-group" id="pan_div">
                            <label class="col-md-3 col-sm-3 control-label" for="pan">Pan Number<span class="mandatoryfield"></span></label>
                            <div class="col-md-9 col-sm-9">
-                              <input type="text" id="pan" class="form-control" name="pan" value="<?php if(isset($partydata)){ echo $partydata['pan']; }  ?>">
+                              <input type="text" id="pan" class="form-control" name="pan" value="<?php if(isset($partydata)){ echo $partydata['pan']; }  ?>" onkeypress="return alphanumeric(event)">
                            </div>
                         </div>
                      </div>
@@ -323,7 +323,7 @@
                                  <div class="col-md-5 col-sm-5">
                                      <div class="form-group" id="documentnumber1_div">
                                          <div class="col-md-12 pr-xs pl-xs">
-                                             <input id="documentnumber_<?=$cloopdoc?>" name="documentname_<?=$cloopdoc?>" placeholder="Enter Document Number" class="form-control documentrow documentnumber">
+                                             <input id="documentnumber_<?=$cloopdoc?>" name="documentname_<?=$cloopdoc?>" placeholder="Enter Document Name" class="form-control documentrow documentnumber">
                                          </div>
                                      </div>
                                  </div>
@@ -584,7 +584,7 @@
                                  <div class="form-group" id="openingdate_div">
                                     <label for="openingdate" class="col-md-5 control-label">Opening Balance Date</label>
                                     <div class="col-md-7">
-                                       <input id="openingdate" type="text" name="openingdate" readonly class="form-control" value="<?php if (isset($partydata)) { echo $partydata['openingdate']; } ?>" onkeypress="return onlyAlphabets(event)">
+                                       <input id="openingdate" type="text" name="openingdate" readonly class="form-control" value="<?php if (isset($partydata)) { echo $this->general_model->displaydate($partydata['openingdate']); } ?>" onkeypress="return onlyAlphabets(event)">
                                     </div>
                                  </div>
                               </div>

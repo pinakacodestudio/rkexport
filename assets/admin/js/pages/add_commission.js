@@ -112,8 +112,12 @@ function checkvalidation(addtype = 0) {
                     console.log(response);
                     var data = JSON.parse(response);
                     if (data['error'] == 1) {
-                        new PNotify({ title: "Successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
-                        setTimeout(function() { window.location = SITE_URL + "Commission"; }, 1500);
+                        new PNotify({ title: "Commission successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
+                        if(addtype==1){
+                            setTimeout(function() {window.location=SITE_URL+"Commission/add-commission"; }, 1500);
+                          }else{
+                            setTimeout(function() { window.location=SITE_URL+"Commission"; }, 1500);
+                          }
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 4) {

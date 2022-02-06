@@ -58,7 +58,7 @@ class General_model extends CI_Model {
         return date($output_format,strtotime(str_replace('/', '-',$date)));
     }
     function displaydate($date,$output_format = 'd/m/Y'){
-        if($date!=""){
+        if($date!="" && $date != "0000-00-00"){
             return date($output_format,strtotime(str_replace('/', '-',$date)));
         }else{
             return "";

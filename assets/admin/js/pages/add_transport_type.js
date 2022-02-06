@@ -45,20 +45,20 @@ function checkvalidation(addtype = 0) {
                 success: function(response) {
                     var data = JSON.parse(response);
                     if (data['error'] == 1) {
-                        new PNotify({ title: "transport type successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
+                        new PNotify({ title: "Transport type successfully added.", styling: 'fontawesome', delay: '3000', type: 'success' });
                         if (addtype == 1) {
                             resetdata();
                         } else {
                             setTimeout(function() { window.location = SITE_URL + "Transport_type"; }, 500);
                         }
                     } else if (data['error'] == 2) {
-                        new PNotify({ title: 'transport type already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Transport type already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 4) {
                         new PNotify({ title: 'This transport type not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else {
-                        new PNotify({ title: 'transport type not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Transport type not added !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
                 error: function(xhr) {
@@ -87,7 +87,7 @@ function checkvalidation(addtype = 0) {
                 success: function(response) {
                     var data = JSON.parse(response);
                     if (data['error'] == 1) {
-                        new PNotify({ title: "transport type successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
+                        new PNotify({ title: "Transport type successfully updated.", styling: 'fontawesome', delay: '1500', type: 'success' });
                         if (addtype == 1) {
                             resetdata();
                             setTimeout(function() { window.location = SITE_URL + "Transport-type/add-transport-type"; }, 1500);
@@ -95,13 +95,13 @@ function checkvalidation(addtype = 0) {
                             setTimeout(function() { window.location = SITE_URL + "transport-type"; }, 1500);
                         }
                     } else if (data['error'] == 2) {
-                        new PNotify({ title: 'transport type already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Transport type already exists !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 3) {
                         new PNotify({ title: data['message'], styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else if (data['error'] == 4) {
                         new PNotify({ title: 'This transport type not available in portal !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     } else {
-                        new PNotify({ title: 'transport type not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
+                        new PNotify({ title: 'Transport type not updated !', styling: 'fontawesome', delay: '3000', type: 'error' });
                     }
                 },
                 error: function(xhr) {

@@ -53,30 +53,27 @@
 										<input id="mobileno" type="text" name="mobileno" value="<?php if(isset($userdata)){ echo $userdata['mobileno']; } ?>" class="form-control" maxlength="12" onkeypress="return isNumber(event)" tabindex="5">
 									</div>
 								</div>
-								<div class="form-group" id="workforchannelid_div">
-									<div class="col-sm-12">
-										<label class="control-label" for="workforchannelid">Work for</label>
-										<select id="workforchannelid" name="workforchannelid[]" class="selectpicker form-control" data-select-on-tab="true" data-size="5" tabindex="8" title="Select Work for" data-actions-box="true" multiple>
-											<?php foreach($channeldata as $channel){ ?>
-											<option value="<?php echo $channel['id']; ?>" <?php if(isset($userdata)){ if(in_array($channel['id'], explode(",",$userdata['workforchannelid']))){ echo 'selected'; } }  ?>><?php echo $channel['name']; ?></option>
-											<?php } ?>
-										</select>
-									</div>
-								</div>
+								
 								
 
 								<div class="form-group" id="Department_div">
 									<div class="col-sm-12">
-										<label class="control-label" for="Department">Department <a href="<?php echo base_url().ADMINFOLDER?>Department" class="stepy-finish btn-primary btn btn-raised" target="_blank" title="VIEW"><i class="fa fa-plus" aria-hidden="true"></i></a></label>
-										<select class="form-control selectpicker" id="Department" name="Departmentid" data-live-search="true" data-select-on-tab="true" data-size="5">
-											<option value="0">Select Department</option>
-											<?php foreach ($Departmentdata as $Departmentrow) { ?>        
-												<option value="<?php echo $Departmentrow['id'];?>" <?php if(!empty($userdata))
-												{if($userdata['departmentid']==$Departmentrow['id']){echo "selected";}} ?> >
-												<?php echo ucwords($Departmentrow['name']);?></option>
-											<?php } ?>
-										</select>  
-										
+										<label class="control-label" for="Department">Department </label>
+										<div>
+											<div class="col-sm-10" style="padding: 0px;">
+												<select class="form-control selectpicker" id="Department" name="Departmentid" data-live-search="true" data-select-on-tab="true" data-size="5">
+													<option value="0">Select Department</option>
+													<?php foreach ($Departmentdata as $Departmentrow) { ?>        
+													<option value="<?php echo $Departmentrow['id'];?>" <?php if(!empty($userdata))
+													{if($userdata['departmentid']==$Departmentrow['id']){echo "selected";}} ?> >
+													<?php echo ucwords($Departmentrow['name']);?></option>
+												<?php } ?>
+											</select>  
+											</div>											
+											<div class="col-sm-2 mt-sm pl-sm" style="padding-right: 0px;">
+												<a href="<?php echo base_url().ADMINFOLDER?>Department" class="stepy-finish btn-primary btn btn-raised" target="_blank" title="VIEW"><i class="fa fa-plus" aria-hidden="true"></i></a>
+											</div>
+										</div>
 									</div>
 									
 								</div>
@@ -110,24 +107,40 @@
 							
 								<div class="form-group" id="branch_div">
 									<div class="col-sm-12">
-										<label class="control-label" for="branchid">Branch Name <span class="mandatoryfield">*</span><a href="<?php echo base_url().ADMINFOLDER?>branch" class="stepy-finish btn-primary btn btn-raised" target="_blank" title="VIEW"><i class="fa fa-plus" aria-hidden="true"></i></a></label>
-										<select id="branchid" name="branchid" class="selectpicker form-control" data-select-on-tab="true" data-size="5" tabindex="8">
-											<option value="0">Select Branch</option>
-											<?php foreach($Branchdata as $Branch){ ?>
-											<option value="<?php echo $Branch['id']; ?>" <?php if(isset($userdata)){ if($userdata['branchid'] == $Branch['id']){ echo 'selected'; } }  ?>><?php echo $Branch['branchname']; ?></option>
-											<?php } ?>
-										</select>
+										<label class="control-label" for="branchid">Branch Name <span class="mandatoryfield">*</span></label>
+										
+										<div>
+											<div class="col-sm-10" style="padding: 0px;">
+												<select id="branchid" name="branchid" class="selectpicker form-control" data-select-on-tab="true" data-size="5" tabindex="8">
+													<option value="0">Select Branch</option>
+													<?php foreach($Branchdata as $Branch){ ?>
+													<option value="<?php echo $Branch['id']; ?>" <?php if(isset($userdata)){ if($userdata['branchid'] == $Branch['id']){ echo 'selected'; } }  ?>><?php echo $Branch['branchname']; ?></option>
+												<?php } ?>
+											</select>
+											</div>											
+											<div class="col-sm-2 mt-sm pl-sm" style="padding-right: 0px;">
+												<a href="<?php echo base_url().ADMINFOLDER?>branch" class="stepy-finish btn-primary btn btn-raised" target="_blank" title="VIEW"><i class="fa fa-plus" aria-hidden="true"></i></a>
+											</div>
+										</div>
 									</div>
 								</div>
+								
+
 								<div class="form-group" id="userrole_div">
-									<div class="col-sm-12">
-										<label class="control-label">Gender <span class="mandatoryfield">*</span></label><br>
-										<label class="radio-inline">
-										<input type="radio" name="gender" value="1" checked <?php if(isset($userdata['gender'])){ if($userdata['gender']==1){echo 'checked';}} ?> >Male
-										</label>
-										<label class="radio-inline">
-										<input type="radio" name="gender" value="0" <?php if(isset($userdata['gender'])){ if($userdata['gender']!=1){echo 'checked';}} ?>>Female
-										</label>
+									<label for="focusedinput" class="col-md-12 control-label" style="text-align:left">Gender <span class="mandatoryfield">*</span></label>
+									<div class="col-md-8">
+										<div class="col-md-4 col-xs-4" style="padding-left: 0px;">
+											<div class="radio">
+											<input type="radio" name="gender" id="gendermale" value="1" checked <?php if(isset($userdata['gender'])){ if($userdata['gender']==1){echo 'checked';}} ?> >
+											<label for="gendermale">Male</label>
+											</div>
+										</div>
+										<div class="col-md-4 col-xs-4">
+											<div class="radio">
+											<input type="radio" name="gender" id="genderfemale" value="0" <?php if(isset($userdata['gender'])){ if($userdata['gender']!=1){echo 'checked';}} ?>>
+											<label for="genderfemale" >Female</label>
+											</div>
+										</div>
 									</div>
 								</div>
 							

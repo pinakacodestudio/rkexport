@@ -116,7 +116,8 @@ $(document).ready(function () {
         format: 'dd/mm/yyyy',
         orientation: 'top',
         autoclose: true,
-        todayBtn: "linked"
+        todayBtn: "linked",
+        clearBtn: true,
     });
 
 
@@ -278,7 +279,7 @@ function checkvalidation(addtype = 0) {
     PNotify.removeAll();
     if (websitename == '') {
         $("#websitename_div").addClass("has-error is-focused");
-        new PNotify({ title: 'Please enter website name !', styling: 'fontawesome', delay: '3000', type: 'error' });
+        new PNotify({ title: 'Please enter party name !', styling: 'fontawesome', delay: '3000', type: 'error' });
     } else {
         $("#websitename_div").removeClass("has-error is-focused");
         isvalidwebsitename = 1;
