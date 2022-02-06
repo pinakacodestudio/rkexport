@@ -680,7 +680,7 @@ function addnewcontect() {
                 <div class="form-group" id="firstname_' + cloopcount2 + '_div">\
                     <label for="firstname" class="col-md-4 control-label">First Name <span class="mandatoryfield"> *</span></label>\
                     <div class="col-md-8">\
-                        <input id="firstname" type="text" name="firstname_' + cloopcount2 + '" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
+                        <input id="firstname_' + cloopcount2 + '" type="text" name="firstname_' + cloopcount2 + '" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
                     </div>\
                 </div>\
             </div>\
@@ -688,7 +688,7 @@ function addnewcontect() {
                 <div class="form-group" id="lastname_' + cloopcount2 + '_div">\
                     <label for="lastname" class="col-md-4 control-label">Last Name <span class="mandatoryfield"> *</span></label>\
                     <div class="col-md-8">\
-                        <input id="lastname" type="text" name="lastname_' + cloopcount2 + '" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
+                        <input id="lastname_' + cloopcount2 + '" type="text" name="lastname_' + cloopcount2 + '" class="form-control" value="" onkeypress="return onlyAlphabets(event)">\
                     </div>\
                 </div>\
             </div>\

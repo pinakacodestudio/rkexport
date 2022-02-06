@@ -151,7 +151,7 @@
                      <?php 
                      $isloginchecked = "";
                      if(isset($partydata)){
-                        echo $partydata['password'];
+                       
                            if($partydata['password'] != ""){
                               $isloginchecked = "checked";
                            }

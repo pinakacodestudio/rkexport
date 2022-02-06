@@ -68,7 +68,7 @@ class Branch extends Admin_Controller{
                 "address"=>$address,
                 "services"=>$services,
                 "provinceid"=>$provinceid,
-                "status"=>1,
+                "status"=>$PostData['status'],
                 "cityid"=>$cityid,
                 "createddate"=>$createddate,
                 "modifieddate"=>$createddate,
@@ -111,6 +111,7 @@ class Branch extends Admin_Controller{
             "services"=>$services,
             "provinceid"=>$provinceid,
             "cityid"=>$cityid,
+            "status"=>$PostData['status'],
             "modifieddate"=>$modifieddate,
             "modifiedby"=>$modifiedby
         );

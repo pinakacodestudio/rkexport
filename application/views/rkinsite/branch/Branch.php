@@ -62,10 +62,14 @@
                             <td>
                               <?php if (strpos($submenuvisibility['submenuedit'], ',' . $this->session->userdata[base_url() . 'ADMINUSERTYPE'] . ',') !== false) { ?>
                                 <a class="<?= edit_class; ?> m-n" href="<?= ADMIN_URL ?>branch/edit-branch/<?php echo $row['id']; ?>" title=<?= edit_title ?>><?= edit_text; ?></a>
-                                <?php if ($row['status'] == 1) { ?>
-                                  <span id="span<?= $row['id']; ?>"><a href="javascript:void(0)" onclick="enabledisable(0,<?= $row['id']; ?>,'<?= ADMIN_URL; ?>branch/branch-enable-disable','<?= disable_title ?>','<?= disable_class ?>','<?= enable_class ?>','<?= disable_title ?>','<?= enable_title ?>','<?= disable_text ?>','<?= enable_text ?>')" class="<?= disable_class ?> m-n" title="<?= disable_title ?>"><?= stripslashes(disable_text) ?></a></span>
-                                <?php } else { ?>
-                                  <span id="span<?= $row['id']; ?>"><a href="javascript:void(0)" onclick="enabledisable(1,<?= $row['id']; ?>,'<?= ADMIN_URL; ?>branch/branch-enable-disable','<?= enable_title ?>','<?= disable_class ?>','<?= enable_class ?>','<?= disable_title ?>','<?= enable_title ?>','<?= disable_text ?>','<?= enable_text ?>')" class="<?= enable_class ?> m-n" title="<?= enable_title ?>"><?= stripslashes(enable_text) ?></a></span>
+                                <?php if ($row['status'] == 1) { 
+                                  echo '<span id="span'.$row['id'].'"><a href="javascript:void(0)" onclick="enabledisable(0,'.$row['id'].',\''.ADMIN_URL.'branch/branch-enable-disable\',\''.disable_title.'\',\''.disable_class.'\',\''.enable_class.'\',\''.disable_title.'\',\''.enable_title.'\',\''.disable_text.'\',\''.enable_text.'\')" class="'.enable_class.'" title="'.enable_title.'">'.stripslashes(enable_text).'</a></span>';
+                                  ?>
+                                  
+                                <?php } else { 
+                                  echo '<span id="span'.$row['id'].'"><a href="javascript:void(0)" onclick="enabledisable(1,'.$row['id'].',\''.ADMIN_URL.'branch/branch-enable-disable\',\''.enable_title.'\',\''.disable_class.'\',\''.enable_class.'\',\''.disable_title.'\',\''.enable_title.'\',\''.disable_text.'\',\''.enable_text.'\')" class="'.disable_class.'" title="'.disable_title.'">'.stripslashes(disable_text).'</a></span>';
+                                  ?>
+                                 
                                 <?php } ?>
                               <?php }
                               if (strpos($submenuvisibility['submenudelete'], ',' . $this->session->userdata[base_url() . 'ADMINUSERTYPE'] . ',') !== false) { ?>

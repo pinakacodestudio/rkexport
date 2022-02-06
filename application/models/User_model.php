@@ -242,7 +242,6 @@ class User_model extends Common_model {
 					->join(tbl_country.' as t6', 't1.countryid = t6.id', 'left')
 					->join(tbl_department.' as t7', 't1.departmentid = t7.id', 'left')
 					->where("t1.id=",$id)
-					->where("t2.status=",1)
 					->order_by("t1.id DESC")
 					->limit(1)
 					->get();

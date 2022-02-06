@@ -64,6 +64,7 @@ function checkvalidation(action){
             if(response==1){
               new PNotify({title: "Employee role successfully added !",styling: 'fontawesome',delay: '3000',type: 'success'});
               resetdata();
+              setTimeout(function() { window.location=SITE_URL+"user-role"; }, 1500);
             }else if(response==2){
               new PNotify({title: 'Employee role already exists !',styling: 'fontawesome',delay: '3000',type: 'error'});
             }else if(response==3){

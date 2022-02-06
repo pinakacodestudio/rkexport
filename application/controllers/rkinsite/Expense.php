@@ -116,9 +116,6 @@ class Expense extends Admin_Controller{
         }
         $this->viewData['userdata'] = $this->User->getUserListData($where);
 
-        // $this->Expensecategory->_where = array("status"=>1);
-        // $this->viewData['expensecategory'] = $this->Expensecategory->getRecordByID();
-
         $this->load->model('Expense_category_model', 'Expensecategory');
         $this->viewData['expensecategory'] = $this->Expensecategory->getRecordByID();
 

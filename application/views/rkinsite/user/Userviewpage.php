@@ -33,7 +33,7 @@
                     Name
                     </div>
                     <div class="col-md-3 br2">
-                    <?=$list['name']?>
+                    
                     <?php if($list['name']!=''){ echo $list['name']; }else{ echo "-";} ?>
                     </div>
                     <div class="col-md-3">

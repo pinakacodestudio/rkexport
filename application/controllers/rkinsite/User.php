@@ -52,7 +52,7 @@ class User extends Admin_Controller {
 		$this->viewData['designationdata'] = $this->Designation->getActiveDesignationList();
 
 		$this->load->model('Branch_model','Branch');
-		$this->viewData['Branchdata'] = $this->Branch->getRecordByID();
+		$this->viewData['Branchdata'] = $this->Branch->getActiveBranchData();
 
 		$this->load->model('City_model','City');
 		$this->viewData['Citydata'] = array();
@@ -65,7 +65,7 @@ class User extends Admin_Controller {
 		$this->viewData['Countrydata'] = $this->Country->getRecordByID();
 
 		$this->load->model('Department_model','Department');
-		$this->viewData['Departmentdata'] = $this->Department->getRecordByID();
+		$this->viewData['Departmentdata'] = $this->Department->getActiveDepartmentList();
 	
 		$where=array();
 		if (isset($this->viewData['submenuvisibility']['submenuviewalldata']) && strpos($this->viewData['submenuvisibility']['submenuviewalldata'], ',' . $this->session->userdata[base_url() . 'ADMINUSERTYPE'] . ',') === false) {
@@ -242,7 +242,7 @@ class User extends Admin_Controller {
 		$this->viewData['designationdata'] = $this->Designation->getActiveDesignationList();
 
 		$this->load->model('Branch_model','Branch');
-		$this->viewData['Branchdata'] = $this->Branch->getRecordByID();
+		$this->viewData['Branchdata'] = $this->Branch->getActiveBranchData();
 
 		$this->load->model('City_model','City');
 		$this->viewData['Citydata'] = $this->City->getRecordByID();
@@ -254,7 +254,7 @@ class User extends Admin_Controller {
 		$this->viewData['Countrydata'] = $this->Country->getRecordByID();
 
 		$this->load->model('Department_model','Department');
-		$this->viewData['Departmentdata'] = $this->Department->getRecordByID();
+		$this->viewData['Departmentdata'] = $this->Department->getActiveDepartmentList();
 
 		$where=array();
 		if (isset($this->viewData['submenuvisibility']['submenuviewalldata']) && strpos($this->viewData['submenuvisibility']['submenuviewalldata'], ',' . $this->session->userdata[base_url() . 'ADMINUSERTYPE'] . ',') === false) {
@@ -626,6 +626,7 @@ class User extends Admin_Controller {
 		$this->viewData['title'] = "Employee View";
 		$this->viewData['module'] = "user/Userviewpage";
 		$this->viewData['list'] = $this->User->get_data_tables($id);
+		
 
 		$ADMINUSERTYPE = $this->session->userdata(base_url().'ADMINUSERTYPE');
 		$ADMINID = $this->session->userdata(base_url().'ADMINID');

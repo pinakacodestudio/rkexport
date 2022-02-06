@@ -42,8 +42,7 @@
 										<select class="selectpicker form-control" id="expensecategory" name="expensecategory"  data-size="5" data-select-on-tab="true" data-live-search="true">
 										<option value="0">Select Category</option>
 										<?php foreach($expensecategory as $ec){?>
-											<?php print_r($ec);?>
-											<option value="<?php echo $ec['id']; ?>">
+											<option value="<?php echo $ec['id']; ?>" <?php if(isset($expense_data)){ if($expense_data['expensecategoryid'] == $ec['id']){ echo 'selected'; } } ?>>
 											<?php echo $ec['expense_category']; ?></option>
 										<?php } ?>
 										</select>

@@ -46,6 +46,23 @@
                                                 <textarea class="form-control" id="services" name="services"><?php if(isset($branch)){ echo $branch['services'];}?></textarea>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="focusedinput" class="col-sm-4 control-label">Activate</label>
+                                            <div class="col-sm-8">
+                                                <div class="col-sm-3 col-xs-6" style="padding-left: 0px;">
+                                                    <div class="radio">
+                                                    <input type="radio" name="status" id="yes" value="1" <?php if(isset($branch) && $branch['status']==1){ echo 'checked'; }else{ echo 'checked'; }?>>
+                                                    <label for="yes">Yes</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-6" style="padding-left: 0px;">
+                                                    <div class="radio">
+                                                    <input type="radio" name="status" id="no" value="0" <?php if(isset($branch) && $branch['status']==0){ echo 'checked'; }?>>
+                                                    <label for="no">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group" id="address_div">
@@ -83,6 +100,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="form-group">
                                     <label for="focusedinput" class="col-md-4 col-sm-4 control-label"></label>
                                     <div class="col-md-8 col-sm-8">

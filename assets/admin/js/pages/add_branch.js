@@ -7,7 +7,7 @@ $(document).ready(function(){
           .find('option')
           .remove()
           .end()
-          .append('<option value="">Select '+State+'</option>')
+          .append('<option value="">Select State</option>')
           .val('0')
       ;
       $('#cityid')
@@ -93,7 +93,7 @@ function checkvalidation(addtype = 0){
       new PNotify({title: 'Email not valid !',styling: 'fontawesome',delay: '3000',type: 'error'});
   }else {
       $("#email_div").removeClass("has-error is-focused");
-      isvalidbranchname = 1;
+      isavalidemail = 1;
   }
   if(address == ""){
       $("#address_div").addClass("has-error is-focused");
@@ -129,7 +129,7 @@ function checkvalidation(addtype = 0){
 
   
   
-  if(isvalidbranchname == 1 && isvalidaddress == 1 && isvalidcountryid == 1 && isvalidprovinceid == 1 && isvalidcityid == 1){
+  if(isvalidbranchname == 1 && isavalidemail==1 && isvalidaddress == 1 && isvalidcountryid == 1 && isvalidprovinceid == 1 && isvalidcityid == 1){
       
     var formData = new FormData($('#form-branch')[0]);
     if(ACTION==0){

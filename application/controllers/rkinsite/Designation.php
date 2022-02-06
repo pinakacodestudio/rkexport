@@ -36,11 +36,15 @@ class Designation extends Admin_Controller
       }
       if(strpos($this->viewData['submenuvisibility']['submenuedit'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){
           if($Designation->status==1){
-              $Action .= '<span id="span'.$Designation->id.'"><a href="javascript:void(0)" onclick="enabledisable(0,'.$Designation->id.',\''.ADMIN_URL.'designation/designation_enabledisable\',\''.disable_title.'\',\''.disable_class.'\',\''.enable_class.'\',\''.disable_title.'\',\''.enable_title.'\',\''.disable_text.'\',\''.enable_text.'\')" class="'.disable_class.'" title="'.disable_title.'">'.stripslashes(disable_text).'</a></span>';
+            $Action .= '<span id="span'.$Designation->id.'"><a href="javascript:void(0)" onclick="enabledisable(0,'.$Designation->id.',\''.ADMIN_URL.'designation/designation_enabledisable\',\''.disable_title.'\',\''.disable_class.'\',\''.enable_class.'\',\''.disable_title.'\',\''.enable_title.'\',\''.disable_text.'\',\''.enable_text.'\')" class="'.enable_class.'" title="'.enable_title.'">'.stripslashes(enable_text).'</a></span>';
           }
           else{
-              $Action .='<span id="span'.$Designation->id.'"><a href="javascript:void(0)" onclick="enabledisable(1,'.$Designation->id.',\''.ADMIN_URL.'designation/designation_enabledisable\',\''.enable_title.'\',\''.disable_class.'\',\''.enable_class.'\',\''.disable_title.'\',\''.enable_title.'\',\''.disable_text.'\',\''.enable_text.'\')" class="'.enable_class.'" title="'.enable_title.'">'.stripslashes(enable_text).'</a></span>';
+
+              $Action .= '<span id="span'.$Designation->id.'"><a href="javascript:void(0)" onclick="enabledisable(1,'.$Designation->id.',\''.ADMIN_URL.'designation/designation_enabledisable\',\''.enable_title.'\',\''.disable_class.'\',\''.enable_class.'\',\''.disable_title.'\',\''.enable_title.'\',\''.disable_text.'\',\''.enable_text.'\')" class="'.disable_class.'" title="'.disable_title.'">'.stripslashes(disable_text).'</a></span>';
+
+            
           }
+          
       }
 
       if(strpos($this->viewData['submenuvisibility']['submenudelete'],','.$this->session->userdata[base_url().'ADMINUSERTYPE'].',') !== false){                

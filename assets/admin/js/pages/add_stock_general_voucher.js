@@ -22,7 +22,6 @@ $(document).ready(function() {
     var divid = $(this).attr("div-id");
     $('#price'+divid).val("");
     var productid = (this.value!=0)?this.value:0;
-    alert(productid);
     var uniqueproduct = (productid!="" && productid!=0)?productid+"_0_0.00":"";
     $("#uniqueproduct"+divid).val(uniqueproduct);
     

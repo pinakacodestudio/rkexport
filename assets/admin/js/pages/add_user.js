@@ -1,3 +1,12 @@
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+birthyear = today.getFullYear() - 15;
+
+today = dd + '/' + mm + '/' + yyyy;
+dateofbirth = dd + '/' + mm + '/' + birthyear;
+
 $(document).ready(function() {
   
   
@@ -7,7 +16,7 @@ $(document).ready(function() {
     orientation: 'top',
     autoclose: true,
     todayBtn: "linked",
-    defaultDate: -1
+    clearBtn: true,
 
 });
 $("#old_receipt_div").hide();
@@ -17,7 +26,9 @@ $("#old_receipt_div").hide();
     format: 'dd/mm/yyyy',
     orientation: 'top',
     autoclose: true,
-    todayBtn: "linked"
+    endDate: dateofbirth,
+    todayBtn: "linked",
+    clearBtn: true,
 });
 
 $("#old_receipt_div").hide();
@@ -26,7 +37,8 @@ $("#old_receipt_div").hide();
     format: 'dd/mm/yyyy',
     orientation: 'top',
     autoclose: true,
-    todayBtn: "linked"
+    todayBtn: "linked",
+    clearBtn: true,
 });
 $("#old_receipt_div").hide();
 

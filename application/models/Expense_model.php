@@ -30,7 +30,7 @@ class Expense_model extends Common_model {
 
 	function _get_datatables_query(){	
 		
-		$this->db->select("e.id,employeeid,(select name from ".tbl_user." where id=employeeid)as employeename,expensecategoryid,(select expense_type from ".tbl_expensecategory." where id=expensecategoryid)as expensecategoryname,date,reason,amount,remarks,e.status as estatus,receipt");
+		$this->db->select("e.id,employeeid,(select name from ".tbl_user." where id=employeeid)as employeename,expensecategoryid,(select expense_category from ".tbl_expensecategory." where id=expensecategoryid)as expensecategoryname,date,reason,amount,remarks,e.status as estatus,receipt");
 	    $this->db->from($this->_table." as e");
 		$this->db->join(tbl_expensecategory." as ec",'e.expensecategoryid=ec.id');
 		
