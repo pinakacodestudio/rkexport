@@ -12,7 +12,6 @@ class About extends MY_Controller {
        
         if ($this->input->server("REQUEST_METHOD") == 'POST' && !empty($this->input->post())) {
             $this->PostData = $this->input->post();
-
             if (isset($this->PostData['apikey'])) {
                 $apikey = $this->PostData['apikey'];
                 if ($apikey == '' || $apikey != APIKEY) {
@@ -29,19 +28,13 @@ class About extends MY_Controller {
     }
 
     function getabout() {
-
-
-               $key= array_search('Infrastructure', $this->contenttype); 
-                          
-                            
-                  (string)$key=(bool)$key;
-                     $Data['isinfrastructure']=$key;
-                if(empty($Data)) {
-                    ws_response('fail', EMPTY_DATA);
-                } else {
-                    ws_response('success', '', '',$Data);
-                }
-            
-            
+        $key= array_search('Infrastructure', $this->contenttype); 
+        (string)$key=(bool)$key;
+        $Data['isinfrastructure']=$key;
+        if(empty($Data)) {
+            ws_response('fail', EMPTY_DATA);
+        } else {
+            ws_response('success', '', '',$Data);
         }
-   }
+    }
+}
